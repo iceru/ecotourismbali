@@ -12,7 +12,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Arial', ...defaultTheme.fontFamily.sans],
+                sans: ['Arial 2', ...defaultTheme.fontFamily.sans],
             },
         },
     },
