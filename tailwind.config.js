@@ -10,10 +10,26 @@ module.exports = {
     ],
 
     theme: {
+        container: {
+            center: true,
+            screens: {
+                sm: '567px',
+                md: '768px',
+                lg: '992px',
+                xl: '1100px',
+                '2xl': '1400px',
+            },
+        },
         extend: {
             fontFamily: {
-                sans: ['Arial 2', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'primary': '#1F656C',
+                'secondary': '#7BB052',
+                'lightSecondary': '#D8E8CC',
+                'lightPrimary': '#D2E0E2',
+            }
         },
     },
 
