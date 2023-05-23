@@ -14,4 +14,9 @@ class Module extends Model
     {
         return $this->hasMany(MemberModule::class, 'module_id');
     }
+    
+    public function pre_test_question(): HasMany
+    {
+        return $this->hasMany(PreTestQuestion::class, 'module_id');
+    }
 }
