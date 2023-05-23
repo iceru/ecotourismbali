@@ -31,6 +31,11 @@ class Member extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function business_type(): BelongsTo
+    {
+        return $this->belongsTo(BusinessType::class, 'business_type_id');
+    }
+
     public function member_slider(): HasMany
     {
         return $this->hasMany(MemberSlider::class, 'member_id');
