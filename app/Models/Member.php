@@ -40,4 +40,14 @@ class Member extends Model
     {
         return $this->hasMany(MemberPayment::class, 'member_id');
     }
+
+    public function member_assessment(): HasMany
+    {
+        return $this->hasMany(MemberAssessment::class, 'member_id');
+    }
+
+    public function member_assessment_answer(): HasMany
+    {
+        return $this->hasMany(MemberAssessmentAnswer::class, 'member_id');
+    }
 }
