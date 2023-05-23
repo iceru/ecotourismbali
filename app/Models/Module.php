@@ -19,4 +19,9 @@ class Module extends Model
     {
         return $this->hasMany(PreTestQuestion::class, 'module_id');
     }
+    
+    public function post_test_question(): HasMany
+    {
+        return $this->hasMany(PostTestQuestion::class, 'module_id');
+    }
 }
