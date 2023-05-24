@@ -113,7 +113,7 @@ export default function Login({ status, canResetPassword }) {
                                 Log in
                             </PrimaryButton>
                             <div>
-                                Not a member?
+                                Not a member?&nbsp;
                                 <Link
                                     href="/register"
                                     className="font-bold text-primary"
