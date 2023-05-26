@@ -11,7 +11,7 @@ import {
 function MemberLayout({ children }) {
   return (
     <div className="flex bg-lightPrimary p-6 gap-6">
-      <div className="min-h-screen bg-white shadow-md rounded-2xl w-1/4 p-6">
+      <div className="min-h-screen bg-white drop-shadow-admin rounded-2xl w-1/4 p-6">
         <div className="logo mb-12">
           <img src={Logo} alt="Eco Tourism Bali" />
         </div>
@@ -57,7 +57,7 @@ function MemberLayout({ children }) {
         </nav>
       </div>
       <div className="w-3/4">
-        <div className="flex justify-between items-center bg-white shadow-md rounded-2xl mb-6 px-6 py-4">
+        <div className="flex justify-between items-center bg-white drop-shadow-admin rounded-2xl mb-6 px-6 py-4">
           <div>
             <PrimaryButton>Collapse</PrimaryButton>
           </div>

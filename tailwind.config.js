@@ -31,6 +31,9 @@ module.exports = {
         lightPrimary: '#D2E0E2',
         etbGray: '#353535',
       },
+      dropShadow: {
+        'admin': '0px 0px 8px 2px rgba(0, 0, 0, 0.05)'
+      },
     },
   },
 
