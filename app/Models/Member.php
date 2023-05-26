@@ -26,6 +26,11 @@ class Member extends Model
         return $this->belongsTo(Badge::class, 'badge_id');
     }
 
+    public function verified_badge(): BelongsTo
+    {
+        return $this->belongsTo(VerifiedBadge::class, 'verified_badge_id');
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
