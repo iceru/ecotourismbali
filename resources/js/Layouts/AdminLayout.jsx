@@ -4,14 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFileClipboard,
   faHome,
+  faLongArrowAltLeft,
   faPencilRuler,
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import AdminSection from '@/Components/AdminSection';
 
 function AdminLayout({ children }) {
+  const { t } = useTranslation();
   return (
-    <div className="flex bg-lightSecondary p-6 gap-6">
-      <div className="min-h-screen bg-white shadow-md rounded-2xl w-1/4 p-6">
+    <div className="flex bg-lightSecondary p-6 gap-6 min-h-screen">
+      <AdminSection addClass="hidden lg:block lg:w-1/4">
         <div className="logo mb-12">
           <img src={Logo} alt="Eco Tourism Bali" />
         </div>
@@ -20,56 +24,59 @@ function AdminLayout({ children }) {
             <li>
               <a href="#">
                 <FontAwesomeIcon
-                  className="fa-fw mr-2 text-primary"
+                  className="fa-fw mr-2 text-secondary"
                   icon={faHome}
                 />
-                Home
+                {t('home')}
               </a>
             </li>
             <li>
               <a href="#">
                 <FontAwesomeIcon
-                  className="fa-fw mr-2 text-primary"
+                  className="fa-fw mr-2 text-secondary"
                   icon={faUsers}
                 />
-                Members
+                {t('member')}
               </a>
             </li>
             <li>
               <a href="#">
                 <FontAwesomeIcon
-                  className="fa-fw mr-2 text-primary"
+                  className="fa-fw mr-2 text-secondary"
                   icon={faPencilRuler}
                 />
-                Assessment
+                {t('assessment')}
               </a>
             </li>
             <li>
               <a href="#">
                 <FontAwesomeIcon
-                  className="fa-fw mr-2 text-primary"
+                  className="fa-fw mr-2 text-secondary"
                   icon={faFileClipboard}
                 />
-                Modules
+                {t('module_test')}
               </a>
             </li>
           </ul>
         </nav>
-      </div>
+      </AdminSection>
       <div className="w-3/4">
-        <div className="flex justify-between items-center bg-white shadow-md rounded-2xl mb-6 px-6 py-4">
+        <div className="flex justify-between items-center bg-white drop-shadow-admin rounded-2xl mb-6 px-6 py-4">
           <div>
-            <PrimaryButton>Collapse</PrimaryButton>
+            <PrimaryButton>
+              <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-2" />
+              {t('collapse')}
+            </PrimaryButton>
           </div>
           <div className="flex gap-4 items-center">
             <div>
               <h5>
                 Hello, <strong>Admin</strong>
               </h5>
-              <div className="text-primary">Administrator</div>
+              <div className="text-secondary">Administrator</div>
             </div>
             <div>
-              <PrimaryButton>Logout</PrimaryButton>
+              <PrimaryButton>{t('logout')}</PrimaryButton>
             </div>
           </div>
         </div>
