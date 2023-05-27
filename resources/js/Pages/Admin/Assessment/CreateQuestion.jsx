@@ -7,62 +7,80 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
+import BackTo from '../Components/BackTo';
 
-function CreateAssessment() {
+function CreateQuestion() {
   const { t } = useTranslation();
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
-    description: '',
+    question_no: '',
+    question: '',
+    title: '',
     image: '',
   });
 
-  const headerTable = [
-    'ID',
-    'Name',
-    'Description',
-    'Image',
-    'Question',
-    'Action',
-  ];
+  const headerTable = ['ID', 'Question No', 'Title', 'Question', 'Action'];
+
   return (
     <AdminLayout>
+      <BackTo title="back_to_list_assessment" link="/admin/assessment/create" />
+      <AdminSection addClass="mb-6">
+        <h4 className="font-bold text-lg">
+          Komponen A. Konservasi Sumber Daya
+        </h4>
+      </AdminSection>
       <AdminSection addClass="grid gap-6 mb-6">
-        <TitleSection title="create_assessment_title" />
+        <TitleSection title="create_question_title" />
         <form className="lg:w-3/4 grid gap-6">
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="name" value={t('form_label_name')} />
+              <InputLabel
+                htmlFor="question_no"
+                value={t('form_label_question_no')}
+              />
             </div>
             <div className="w-3/4">
               <TextInput
-                id="name"
-                name="name"
-                type="text"
-                value={data.name}
+                id="question_no"
+                name="question_no"
+                type="number"
+                value={data.question_no}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('name', e.target.value)}
+                onChange={e => setData('question_no', e.target.value)}
               />
             </div>
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="description"
-                value={t('form_label_description')}
-              />
+              <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
             <div className="w-3/4">
               <TextInput
-                id="description"
-                name="description"
+                id="title"
+                name="title"
                 type="text"
-                typeForm="textarea"
-                value={data.description}
+                value={data.title}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('description', e.target.value)}
+                onChange={e => setData('title', e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="question" value={t('form_label_question')} />
+            </div>
+            <div className="w-3/4">
+              <TextInput
+                id="question"
+                name="question"
+                type="text"
+                typeForm="textarea"
+                value={data.question}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('question', e.target.value)}
               />
             </div>
           </div>
@@ -84,11 +102,11 @@ function CreateAssessment() {
         </form>
       </AdminSection>
       <AdminSection addClass="grid gap-6">
-        <TitleSection title="list_assessment_title" />
+        <TitleSection title="list_question_title" />
         <Table header={headerTable} />
       </AdminSection>
     </AdminLayout>
   );
 }
 
-export default CreateAssessment;
+export default CreateQuestion;

@@ -63,7 +63,7 @@ function AdminLayout({ children }) {
       <div className="w-3/4">
         <div className="flex justify-between items-center bg-white drop-shadow-admin rounded-2xl mb-6 px-6 py-4">
           <div>
-            <PrimaryButton>
+            <PrimaryButton type="lightSecondary">
               <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-2" />
               {t('collapse')}
             </PrimaryButton>
@@ -76,7 +76,7 @@ function AdminLayout({ children }) {
               <div className="text-secondary">Administrator</div>
             </div>
             <div>
-              <PrimaryButton>{t('logout')}</PrimaryButton>
+              <PrimaryButton type="danger">{t('logout')}</PrimaryButton>
             </div>
           </div>
         </div>

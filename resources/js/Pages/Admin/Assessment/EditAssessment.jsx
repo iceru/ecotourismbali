@@ -8,6 +8,7 @@ import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
+import BackTo from '../Components/BackTo';
 
 function EditAssessment() {
   const { t } = useTranslation();
@@ -20,10 +21,7 @@ function EditAssessment() {
 
   return (
     <AdminLayout>
-      <Link href="/admin/assessment/create" className="mb-6 flex items-center">
-        <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-2" />
-        {t('back_to_list_assessment')}
-      </Link>
+      <BackTo title="back_to_list_assessment" link="/admin/assessment/create" />
       <AdminSection addClass="grid gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />
         <form className="lg:w-3/4 grid gap-6">

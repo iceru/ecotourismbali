@@ -7,71 +7,80 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
+import BackTo from '../Components/BackTo';
 
-function CreateAssessment() {
+function CreateOption() {
   const { t } = useTranslation();
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
-    description: '',
-    image: '',
+    option: '',
+    point: '',
+    option_no: '',
   });
 
-  const headerTable = [
-    'ID',
-    'Name',
-    'Description',
-    'Image',
-    'Question',
-    'Action',
-  ];
+  const headerTable = ['ID', 'Question No', 'Title', 'Question', 'Action'];
+
   return (
     <AdminLayout>
+      <BackTo
+        title="back_to_list_question"
+        link="/admin/assessment/question/create"
+      />
+      <AdminSection addClass="mb-6">
+        <h4 className="font-bold text-lg">Question 1</h4>
+      </AdminSection>
       <AdminSection addClass="grid gap-6 mb-6">
-        <TitleSection title="create_assessment_title" />
+        <TitleSection title="create_option_title" />
         <form className="lg:w-3/4 grid gap-6">
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="name" value={t('form_label_name')} />
-            </div>
-            <div className="w-3/4">
-              <TextInput
-                id="name"
-                name="name"
-                type="text"
-                value={data.name}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('name', e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel
-                htmlFor="description"
-                value={t('form_label_description')}
+                htmlFor="option_no"
+                value={t('form_label_option_no')}
               />
             </div>
             <div className="w-3/4">
               <TextInput
-                id="description"
-                name="description"
-                type="text"
-                typeForm="textarea"
-                value={data.description}
+                id="option_no"
+                name="option_no"
+                type="number"
+                value={data.option_no}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('description', e.target.value)}
+                onChange={e => setData('option_no', e.target.value)}
               />
             </div>
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="image" value={t('form_label_image')} />
+              <InputLabel htmlFor="option" value={t('form_label_option')} />
             </div>
             <div className="w-3/4">
-              <input type="file" name="image" id="image" />
+              <TextInput
+                id="option"
+                name="option"
+                type="text"
+                value={data.option}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('option', e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="point" value={t('form_label_point')} />
+            </div>
+            <div className="w-3/4">
+              <TextInput
+                id="point"
+                name="point"
+                type="text"
+                value={data.point}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('point', e.target.value)}
+              />
             </div>
           </div>
           <PrimaryButton
@@ -84,11 +93,11 @@ function CreateAssessment() {
         </form>
       </AdminSection>
       <AdminSection addClass="grid gap-6">
-        <TitleSection title="list_assessment_title" />
+        <TitleSection title="list_option_title" />
         <Table header={headerTable} />
       </AdminSection>
     </AdminLayout>
   );
 }
 
-export default CreateAssessment;
+export default CreateOption;
