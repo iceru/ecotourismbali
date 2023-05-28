@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
+use App\Http\Controllers\BusinessTypeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,11 +41,20 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     })->name('member.dashboard');
 });
 
+// route below this must be move into middleware auth with role:admin after we have user admin
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
 Route::post('/assessment', [AssessmentController::class, 'store'])->name('assessment.store');
 Route::get('/assessment/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
 Route::patch('/assessment', [AssessmentController::class, 'update'])->name('assessment.update');
 Route::delete('/assessment', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
+
+Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
+Route::post('/business-type', [BusinessTypeController::class, 'store'])->name('business_type.store');
+Route::get('/business-type/{id}', [BusinessTypeController::class, 'edit'])->name('business_type.edit');
+Route::patch('/business-type', [BusinessTypeController::class, 'update'])->name('business_type.update');
+Route::delete('/business-type', [BusinessTypeController::class, 'destroy'])->name('business_type.destroy');
+// route above this must be move into middleware auth with role:admin after we have user admin
+
 Route::middleware(['auth', 'role:administrator'])->group(function () {
     //
 });
