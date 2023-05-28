@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
+use App\Http\Controllers\AssessmentQuestionController;
 use App\Http\Controllers\BusinessTypeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,12 @@ Route::post('/business-type', [BusinessTypeController::class, 'store'])->name('b
 Route::get('/business-type/{id}', [BusinessTypeController::class, 'edit'])->name('business_type.edit');
 Route::patch('/business-type', [BusinessTypeController::class, 'update'])->name('business_type.update');
 Route::delete('/business-type', [BusinessTypeController::class, 'destroy'])->name('business_type.destroy');
+
+Route::get('/assessment/{id}/question', [AssessmentQuestionController::class, 'index'])->name('assessment_question.index');
+Route::post('/assessment/{id}/question', [AssessmentQuestionController::class, 'store'])->name('assessment_question.store');
+Route::get('/assessment/question/{id}', [AssessmentQuestionController::class, 'edit'])->name('assessment_question.edit');
+Route::patch('/assessment/{id}/question', [AssessmentQuestionController::class, 'update'])->name('assessment_question.update');
+Route::delete('/assessment/{id}/question', [AssessmentQuestionController::class, 'destroy'])->name('assessment_question.destroy');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {

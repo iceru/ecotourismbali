@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Assessment;
+use App\Models\AssessmentQuestion;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+
+class AssessmentQuestionController extends Controller
+{
+    public function index($id)
+    {
+        return Inertia::render('Admin/AssessmentQuestion/CreateBusinessType', [
+            'assessment_question' => AssessmentQuestion::where('assessment_id', $id)->get(),
+            'assessment' => Assessment::find($id),
+        ]);
+    }
+
+    public function store($id, Request $request)
+    {
+        $assessment_question = new AssessmentQuestion;
+
+        $request->validate([
+            'title' => 'required',
+            'question' => 'required',
+            'question_no' => 'required|integer',
+        ]);
+
+        $assessment_question->title = $request->title;
+        $assessment_question->question = $request->question;
+        $assessment_question->question_no = $request->question_no;
+        
+        $assessment = Assessment::find($id);
+        $assessment_question->assessment_id = $assessment->id;
+
+        $assessment_question->save();
+
+        return Redirect::route('assessment_question.index');
+    }
+
+    public function edit($id)
+    {
+        $assessment_question = AssessmentQuestion::find($id);
+        $assessment = Assessment::find($assessment_question->assessment_id);
+
+        return Inertia::render('Admin/AssessmentQuestion/EditAssessmentQuestion', [
+            'assessment_question' => $assessment_question,
+            'assessment' => $assessment,
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $assessment_question = AssessmentQuestion::find($request->id);
+
+        $request->validate([
+            'title' => 'required',
+            'question' => 'required',
+            'question_no' => 'required|integer',
+        ]);
+
+        $assessment_question->title = $request->title;
+        $assessment_question->question = $request->question;
+        $assessment_question->question_no = $request->question_no;
+        
+        $assessment = Assessment::find($id);
+        $assessment_question->assessment_id = $assessment->id;
+
+        $assessment_question->save();
+
+        return Redirect::route('assessment_question.index');
+    }
+
+    public function destroy(Request $request)
+    {
+        $assessment_question = AssessmentQuestion::find($request->id);
+        $assessment_question->delete();
+
+        return Redirect::route('assessment_question.index');
+    }
+}
