@@ -36,7 +36,7 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     Route::get('/member/dashboard', function () {
         return Inertia::render('Member/MemberDashboard');
     })->name('member.dashboard');
@@ -44,10 +44,10 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 
 // route below this must be move into middleware auth with role:admin after we have user admin
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
-Route::post('/assessment', [AssessmentController::class, 'store'])->name('assessment.store');
-Route::get('/assessment/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
-Route::patch('/assessment', [AssessmentController::class, 'update'])->name('assessment.update');
-Route::delete('/assessment', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
+Route::post('/assessment/store', [AssessmentController::class, 'store'])->name('assessment.store');
+Route::get('/assessment/edit/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
+Route::patch('/assessment/update/{id}', [AssessmentController::class, 'update'])->name('assessment.update');
+Route::delete('/assessment/delete/{id}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
 
 Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
 Route::post('/business-type', [BusinessTypeController::class, 'store'])->name('business_type.store');
@@ -66,4 +66,4 @@ Route::middleware(['auth', 'role:administrator'])->group(function () {
     //
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

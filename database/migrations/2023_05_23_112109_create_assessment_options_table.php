@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('assessment_options', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title');
-            $table->string('question');
+            $table->string('option_no');
+            $table->string('option');
             $table->integer('point');
-            
+
             $table->unsignedBigInteger('assessment_question_id');
             $table->foreign('assessment_question_id')->references('id')->on('assessment_questions')->onDelete('restrict');
         });

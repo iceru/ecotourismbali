@@ -1,4 +1,35 @@
-export default function Table({ header, data }) {
+import { Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+
+export default function Table({
+  header,
+  data,
+  selectedData,
+  tableButtons,
+  tableActions,
+}) {
+  const { delete: destroy, processing } = useForm();
+
+  const { t } = useTranslation();
+
+  const buttonColor = color => {
+    switch (color) {
+      case 'submit':
+        return 'bg-green-500 hover:bg-green-600 active:bg-green-600';
+      case 'danger':
+        return 'bg-red-500 hover:bg-red-600 active:bg-red-600';
+      case 'info':
+        return 'bg-blue-500 hover:bg-blue-600 active:bg-blue-600';
+      default:
+        return 'bg-gray-500 hover:bg-gray-600 active:bg-gray-600';
+    }
+  };
+
+  const deleteData = (e, id, routeData) => {
+    e.preventDefault();
+    destroy(route(routeData, id));
+  };
+
   return (
     <div className="">
       <div className="flex flex-col">
@@ -49,54 +80,70 @@ export default function Table({ header, data }) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                      1
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                      Jone Doe
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                      jonne62@gmail.com
-                    </td>
-                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                      <a
-                        className="text-green-500 hover:text-green-700"
-                        href="#"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                      <a className="text-red-500 hover:text-red-700" href="#">
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                      1
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                      Jone Doe
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                      jonne62@gmail.com
-                    </td>
-                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                      <a
-                        className="text-green-500 hover:text-green-700"
-                        href="#"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                      <a className="text-red-500 hover:text-red-700" href="#">
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
+                  {data.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        {selectedData.map((column, index) => {
+                          return (
+                            <td
+                              key={index}
+                              className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
+                            >
+                              {item[column]}
+                            </td>
+                          );
+                        })}
+                        {tableButtons.map((button, index) => {
+                          return (
+                            <td
+                              key={index}
+                              className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
+                            >
+                              <button className="px-3 py-2 mr-2 text-sm font-medium leading-5 text-etbGray transition-colors duration-150 bg-lightSecondary border border-transparent rounded-lg hover:opacity-80 focus:outline-none focus:shadow-outline-green">
+                                {t(button.label)}
+                              </button>
+                            </td>
+                          );
+                        })}
+
+                        {tableActions && (
+                          <td className="grid gap-2 py-3 items-center">
+                            {tableActions.map((action, index) => {
+                              return action.type === 'delete' ? (
+                                <form
+                                  onSubmit={e =>
+                                    deleteData(e, item.id, action.route)
+                                  }
+                                >
+                                  <button
+                                    disabled={processing}
+                                    key={index}
+                                    className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
+                                      action.color
+                                    )}`}
+                                  >
+                                    {t(action.label)}
+                                  </button>
+                                </form>
+                              ) : (
+                                <Link
+                                  href={`${action.link}${
+                                    action.withId ? '/' + item.id : ''
+                                  }`}
+                                  key={index}
+                                  className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
+                                    action.color
+                                  )}`}
+                                >
+                                  {t(action.label)}
+                                </Link>
+                              );
+                            })}
+                          </td>
+                        )}
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

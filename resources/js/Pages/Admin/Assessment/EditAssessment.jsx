@@ -2,44 +2,48 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Link, useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
+import BackTo from '../Components/BackTo';
 
 function EditAssessment() {
   const { t } = useTranslation();
 
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
-    description: '',
+  const { assessment } = usePage().props;
+
+  const { data, setData, patch, processing, errors } = useForm({
+    title: assessment.title || '',
+    description: assessment.description || '',
     image: '',
   });
 
+  const submit = e => {
+    e.preventDefault();
+
+    patch(route('assessment.update', assessment.id));
+  };
+
   return (
     <AdminLayout>
-      <Link href="/admin/assessment/create" className="mb-6 flex items-center">
-        <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-2" />
-        {t('back_to_list_assessment')}
-      </Link>
+      <BackTo title="back_to_list_assessment" link="/assessment" />
       <AdminSection addClass="grid gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />
-        <form className="lg:w-3/4 grid gap-6">
+        <form className="lg:w-3/4 grid gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="name" value={t('form_label_name')} />
+              <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
             <div className="w-3/4">
               <TextInput
-                id="name"
-                name="name"
+                id="title"
+                name="title"
                 type="text"
-                value={data.name}
+                value={data.title}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('name', e.target.value)}
+                onChange={e => setData('title', e.target.value)}
               />
             </div>
           </div>
@@ -68,7 +72,12 @@ function EditAssessment() {
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
             <div className="w-3/4">
-              <input type="file" name="image" id="image" />
+              <input
+                type="file"
+                name="image"
+                id="image"
+                onChange={e => setData('image', e.target.files[0])}
+              />
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>
