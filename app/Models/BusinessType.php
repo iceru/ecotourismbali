@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BusinessType extends Model
 {
+    protected $table = 'business_types';
+
     public function member(): HasMany
     {
         return $this->hasMany(Member::class, 'business_type_id');
