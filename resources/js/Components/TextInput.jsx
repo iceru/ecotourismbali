@@ -30,6 +30,7 @@ export default forwardRef(function TextInput(
     />
   ) : (
     <textarea
+      {...props}
       type={type}
       className={
         'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm ' +
@@ -37,6 +38,6 @@ export default forwardRef(function TextInput(
       }
       rows={7}
       ref={input}
-    ></textarea>
+    />
   );
 });

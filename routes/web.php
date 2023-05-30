@@ -41,10 +41,10 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 });
 
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
-Route::post('/assessment', [AssessmentController::class, 'store'])->name('assessment.store');
-Route::get('/assessment/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
-Route::patch('/assessment', [AssessmentController::class, 'update'])->name('assessment.update');
-Route::delete('/assessment', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
+Route::post('/assessment/store', [AssessmentController::class, 'store'])->name('assessment.store');
+Route::get('/assessment/edit/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
+Route::patch('/assessment/update/{id}', [AssessmentController::class, 'update'])->name('assessment.update');
+Route::delete('/assessment/delete/{id}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
 Route::middleware(['auth', 'role:administrator'])->group(function () {
     //
 });

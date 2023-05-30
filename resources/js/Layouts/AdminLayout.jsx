@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
+import { Link } from '@inertiajs/react';
 
 function AdminLayout({ children }) {
   const { t } = useTranslation();
@@ -40,13 +41,13 @@ function AdminLayout({ children }) {
               </a>
             </li>
             <li>
-              <a href="#">
+              <Link href="/assessment">
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
                   icon={faPencilRuler}
                 />
                 {t('assessment')}
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#">

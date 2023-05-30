@@ -2,48 +2,113 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
+import SelectInput from '@/Components/SelectInput';
 
-function CreateAssessment() {
+function CreateAssessment({ assessment }) {
   const { t } = useTranslation();
+  const { flash } = usePage().props;
+
+  const options = [
+    {
+      value: 1,
+      label: 'Test',
+    },
+    {
+      value: 2,
+      label: 'Tes 2t',
+    },
+  ];
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
+    title: '',
     description: '',
-    image: '',
+    image: null,
+    business_type: null,
   });
 
   const headerTable = [
     'ID',
-    'Name',
+    'Title',
     'Description',
     'Image',
+    'Business Type',
     'Question',
     'Action',
   ];
+
+  const selectedData = [
+    'id',
+    'title',
+    'description',
+    'image',
+    'business_type_id',
+  ];
+
+  const tableButtons = [
+    {
+      label: 'add_question',
+      link: 'assessment/question',
+      withId: true,
+    },
+  ];
+
+  const tableActions = [
+    {
+      label: 'edit_button',
+      link: 'assessment/edit',
+      withId: true,
+      color: 'info',
+    },
+    {
+      label: 'delete_button',
+      route: 'assessment.destroy',
+      withId: true,
+      color: 'danger',
+      type: 'delete',
+    },
+  ];
+
+  const submit = e => {
+    e.preventDefault();
+
+    post(route('assessment.store'), {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  };
+
   return (
     <AdminLayout>
       <AdminSection addClass="grid gap-6 mb-6">
         <TitleSection title="create_assessment_title" />
-        <form className="lg:w-3/4 grid gap-6">
+        {flash.success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+            <strong className="font-bold mr-2">Success!</strong>
+            <span className="inline">{flash.success}</span>
+          </div>
+        )}
+        <form className="lg:w-3/4 grid gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="name" value={t('form_label_name')} />
+              <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
             <div className="w-3/4">
               <TextInput
-                id="name"
-                name="name"
+                id="title"
+                name="title"
                 type="text"
-                value={data.name}
+                value={data.title}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('name', e.target.value)}
+                onChange={e => setData('title', e.target.value)}
               />
+              <span className="text-red-600">{errors.title}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -57,13 +122,34 @@ function CreateAssessment() {
               <TextInput
                 id="description"
                 name="description"
-                type="text"
                 typeForm="textarea"
                 value={data.description}
                 className="block w-full"
                 isFocused={true}
+                rows={8}
                 onChange={e => setData('description', e.target.value)}
               />
+              <span className="text-red-600">{errors.description}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="business_type"
+                value={t('form_label_business_type')}
+              />
+            </div>
+            <div className="w-3/4">
+              <SelectInput
+                id="business_type"
+                name="business_type"
+                value={data.business_type}
+                options={options}
+                placeholder="select_business_type"
+                className="w-full"
+                onChange={e => setData('business_type', e.target.value)}
+              />
+              <span className="text-red-600">{errors.business_type}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -71,7 +157,14 @@ function CreateAssessment() {
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
             <div className="w-3/4">
-              <input type="file" name="image" id="image" />
+              <input
+                type="file"
+                name="image"
+                id="image"
+                className="block"
+                onChange={e => setData('image', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.image}</span>
             </div>
           </div>
           <PrimaryButton
@@ -85,7 +178,13 @@ function CreateAssessment() {
       </AdminSection>
       <AdminSection addClass="grid gap-6">
         <TitleSection title="list_assessment_title" />
-        <Table header={headerTable} />
+        <Table
+          header={headerTable}
+          data={assessment}
+          selectedData={selectedData}
+          tableButtons={tableButtons}
+          tableActions={tableActions}
+        />
       </AdminSection>
     </AdminLayout>
   );

@@ -22,23 +22,27 @@ class AssessmentController extends Controller
         $assessment = new Assessment;
 
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'required',
+            'business_type' => 'required',
             'image' => 'required|image',
         ]);
 
-        if ($request->hasFile('key')) {
+        $filename = null;
+
+        if ($request->hasFile('image')) {
             $extension = $request->file('image')->extension();
-            $filename = $request->name.'_'.time().'.'.$extension;
-            $path = $request->file('image')->storeAs('public/assessments', $filename);
+            $filename = $request->title . '_' . time() . '.' . $extension;
+            $request->file('image')->storeAs('public/assessments', $filename);
         }
 
-        $assessment->title = $request->name;
+        $assessment->title = $request->title;
         $assessment->description = $request->description;
-        $assessment->image = $request->image;
+        $assessment->image = $filename;
+        $assessment->business_type_id = $request->business_type;
         $assessment->save();
 
-        return Redirect::route('assessment.index');
+        return Redirect::route('assessment.index')->with('success', 'Assessment created successfully.');
     }
 
     public function edit($id)
@@ -53,20 +57,23 @@ class AssessmentController extends Controller
         $assessment = Assessment::find($request->id);
 
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'required',
-            'image' => 'required|image',
+            'image' => 'nullable',
         ]);
 
-        if ($request->hasFile('key')) {
+        $filename = null;
+
+        if ($request->hasFile('image')) {
             $extension = $request->file('image')->extension();
-            $filename = $request->name.'_'.time().'.'.$extension;
-            $path = $request->file('image')->storeAs('public/assessments', $filename);
+            $filename = $request->title . '_' . time() . '.' . $extension;
+            $request->file('image')->storeAs('public/assessments', $filename);
+
+            $assessment->image = $filename;
         }
 
-        $assessment->title = $request->name;
+        $assessment->title = $request->title;
         $assessment->description = $request->description;
-        $assessment->image = $request->image;
         $assessment->save();
 
         return Redirect::route('assessment.index');
@@ -75,7 +82,7 @@ class AssessmentController extends Controller
     public function destroy(Request $request)
     {
         $assessment = Assessment::find($request->id);
-        Storage::disk('public')->delete('assessments/'.$assessment->image);
+        Storage::disk('public')->delete('assessments/' . $assessment->image);
 
         $assessment->delete();
 
