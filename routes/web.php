@@ -50,16 +50,16 @@ Route::patch('/assessment/update/{id}', [AssessmentController::class, 'update'])
 Route::delete('/assessment/delete/{id}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
 
 Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
-Route::post('/business-type', [BusinessTypeController::class, 'store'])->name('business_type.store');
-Route::get('/business-type/{id}', [BusinessTypeController::class, 'edit'])->name('business_type.edit');
-Route::patch('/business-type', [BusinessTypeController::class, 'update'])->name('business_type.update');
-Route::delete('/business-type', [BusinessTypeController::class, 'destroy'])->name('business_type.destroy');
+Route::post('/business-type/store', [BusinessTypeController::class, 'store'])->name('business_type.store');
+Route::get('/business-type/edit/{id}', [BusinessTypeController::class, 'edit'])->name('business_type.edit');
+Route::patch('/business-type/update/{id}', [BusinessTypeController::class, 'update'])->name('business_type.update');
+Route::delete('/business-type/delete/{id}', [BusinessTypeController::class, 'destroy'])->name('business_type.destroy');
 
 Route::get('/assessment/{id}/question', [AssessmentQuestionController::class, 'index'])->name('assessment_question.index');
-Route::post('/assessment/{id}/question', [AssessmentQuestionController::class, 'store'])->name('assessment_question.store');
-Route::get('/assessment/question/{id}', [AssessmentQuestionController::class, 'edit'])->name('assessment_question.edit');
-Route::patch('/assessment/{id}/question', [AssessmentQuestionController::class, 'update'])->name('assessment_question.update');
-Route::delete('/assessment/{id}/question', [AssessmentQuestionController::class, 'destroy'])->name('assessment_question.destroy');
+Route::post('/assessment/{id}/question/store', [AssessmentQuestionController::class, 'store'])->name('assessment_question.store');
+Route::get('/assessment/question/edit/{id}', [AssessmentQuestionController::class, 'edit'])->name('assessment_question.edit');
+Route::patch('/assessment/question/update/{id}', [AssessmentQuestionController::class, 'update'])->name('assessment_question.update');
+Route::delete('/assessment/question/delete/{id}', [AssessmentQuestionController::class, 'destroy'])->name('assessment_question.destroy');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
