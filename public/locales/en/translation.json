@@ -36,6 +36,12 @@
   "list_option_title": "Option List",
 
   "select_business_type": "Select Business Type",
+  "add_business_type": "Add Business Type",
+
+  "create_business_title": "Create Type Business",
+  "edit_business_title": "Edit Business Type",
+  "list_business_title": "Business Type List",
+  "back_to_list_business": "Back to List of Business Type",
 
   "form_label_name": "Name",
   "form_label_title": "Title",
@@ -51,5 +57,16 @@
 
   "detail_button": "Detail",
   "edit_button": "Edit",
-  "delete_button": "Delete"
+  "delete_button": "Delete",
+
+  "member_locked_title": "Your Membership is still locked",
+  "member_locked_text": "To activate your membership, please click button below and proceed for payment",
+  "member_locked_button": "Click here to Activate Membership",
+
+  "welcome_member": "Welcome to the Member Dashboard",
+  "edit_profile": "Edit Your Profile",
+  "start_learning": "Start Learning",
+
+  "confirm_delete": "Are you sure want to delete this data?",
+  "search": "Search"
 }

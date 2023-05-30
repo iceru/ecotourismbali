@@ -2,27 +2,16 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
 import SelectInput from '@/Components/SelectInput';
 
-function CreateAssessment({ assessment }) {
+function CreateAssessment({ assessment, business_type }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
-
-  const options = [
-    {
-      value: 1,
-      label: 'Test',
-    },
-    {
-      value: 2,
-      label: 'Tes 2t',
-    },
-  ];
 
   const { data, setData, post, processing, errors, reset } = useForm({
     title: '',
@@ -85,7 +74,7 @@ function CreateAssessment({ assessment }) {
 
   return (
     <AdminLayout>
-      <AdminSection addClass="grid gap-6 mb-6">
+      <AdminSection className="grid gap-6 mb-6">
         <TitleSection title="create_assessment_title" />
         {flash.success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
@@ -144,11 +133,19 @@ function CreateAssessment({ assessment }) {
                 id="business_type"
                 name="business_type"
                 value={data.business_type}
-                options={options}
+                options={business_type}
                 placeholder="select_business_type"
                 className="w-full"
+                labelData="name"
+                valueData="id"
                 onChange={e => setData('business_type', e.target.value)}
               />
+              <Link
+                className="mt-2 block text-sm text-primary font-semibold"
+                href="/business-type"
+              >
+                {t('add_business_type')}
+              </Link>
               <span className="text-red-600">{errors.business_type}</span>
             </div>
           </div>
@@ -176,7 +173,7 @@ function CreateAssessment({ assessment }) {
           </PrimaryButton>
         </form>
       </AdminSection>
-      <AdminSection addClass="grid gap-6">
+      <AdminSection className="grid gap-6">
         <TitleSection title="list_assessment_title" />
         <Table
           header={headerTable}

@@ -27,7 +27,7 @@ export default function Table({
 
   const deleteData = (e, id, routeData) => {
     e.preventDefault();
-    destroy(route(routeData, id));
+    confirm(t('confirm_delete')) && destroy(route(routeData, id));
   };
 
   return (
@@ -37,7 +37,7 @@ export default function Table({
           <div className="mb-6">
             <div className="relative max-w-xs">
               <label htmlFor="hs-table-search" className="sr-only">
-                Search
+                {t('search')}
               </label>
               <input
                 type="text"
@@ -80,7 +80,7 @@ export default function Table({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {data.map((item, index) => {
+                  {data?.map((item, index) => {
                     return (
                       <tr key={index}>
                         {selectedData.map((column, index) => {
@@ -93,21 +93,22 @@ export default function Table({
                             </td>
                           );
                         })}
-                        {tableButtons.map((button, index) => {
-                          return (
-                            <td
-                              key={index}
-                              className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
-                            >
-                              <button className="px-3 py-2 mr-2 text-sm font-medium leading-5 text-etbGray transition-colors duration-150 bg-lightSecondary border border-transparent rounded-lg hover:opacity-80 focus:outline-none focus:shadow-outline-green">
-                                {t(button.label)}
-                              </button>
-                            </td>
-                          );
-                        })}
+                        {tableButtons &&
+                          tableButtons?.map((button, index) => {
+                            return (
+                              <td
+                                key={index}
+                                className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
+                              >
+                                <button className="px-3 py-2 mr-2 text-sm font-medium leading-5 text-etbGray transition-colors duration-150 bg-lightSecondary border border-transparent rounded-lg hover:opacity-80 focus:outline-none focus:shadow-outline-green">
+                                  {t(button.label)}
+                                </button>
+                              </td>
+                            );
+                          })}
 
                         {tableActions && (
-                          <td className="grid gap-2 py-3 items-center">
+                          <td className="grid gap-2 py-3 px-2 items-center">
                             {tableActions.map((action, index) => {
                               return action.type === 'delete' ? (
                                 <form
@@ -118,7 +119,7 @@ export default function Table({
                                   <button
                                     disabled={processing}
                                     key={index}
-                                    className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
+                                    className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
                                       action.color
                                     )}`}
                                   >
@@ -131,7 +132,7 @@ export default function Table({
                                     action.withId ? '/' + item.id : ''
                                   }`}
                                   key={index}
-                                  className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
+                                  className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
                                     action.color
                                   )}`}
                                 >
