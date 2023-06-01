@@ -41,7 +41,8 @@ function CreateAssessment({ assessment, business_type }) {
   const tableButtons = [
     {
       label: 'add_question',
-      link: 'assessment/question',
+      link: 'assessment/',
+      link2: '/question',
       withId: true,
     },
   ];
@@ -181,6 +182,7 @@ function CreateAssessment({ assessment, business_type }) {
           selectedData={selectedData}
           tableButtons={tableButtons}
           tableActions={tableActions}
+          pathImage="assessments/"
         />
       </AdminSection>
     </AdminLayout>

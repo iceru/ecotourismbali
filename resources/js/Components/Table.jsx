@@ -7,6 +7,7 @@ export default function Table({
   selectedData,
   tableButtons,
   tableActions,
+  pathImage,
 }) {
   const { delete: destroy, processing } = useForm();
 
@@ -89,7 +90,13 @@ export default function Table({
                               key={index}
                               className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
                             >
-                              {item[column]}
+                              {column === 'image' ? (
+                                <img
+                                  src={`/storage/${pathImage}${item[column]}`}
+                                />
+                              ) : (
+                                item[column]
+                              )}
                             </td>
                           );
                         })}
@@ -100,9 +107,12 @@ export default function Table({
                                 key={index}
                                 className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
                               >
-                                <button className="px-3 py-2 mr-2 text-sm font-medium leading-5 text-etbGray transition-colors duration-150 bg-lightSecondary border border-transparent rounded-lg hover:opacity-80 focus:outline-none focus:shadow-outline-green">
+                                <Link
+                                  href={button.link + item.id + button.link2}
+                                  className="px-3 py-2 mr-2 text-sm font-medium leading-5 text-etbGray transition-colors duration-150 bg-lightSecondary border border-transparent rounded-lg hover:opacity-80 focus:outline-none focus:shadow-outline-green"
+                                >
                                   {t(button.label)}
-                                </button>
+                                </Link>
                               </td>
                             );
                           })}
