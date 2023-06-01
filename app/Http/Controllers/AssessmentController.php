@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assessment;
+use App\Models\BusinessType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,7 @@ class AssessmentController extends Controller
     {
         return Inertia::render('Admin/Assessment/CreateAssessment', [
             'assessment' => Assessment::all(),
+            'business_type' => BusinessType::all(),
         ]);
     }
 

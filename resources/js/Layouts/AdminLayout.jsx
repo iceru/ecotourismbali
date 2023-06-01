@@ -10,13 +10,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 function AdminLayout({ children }) {
   const { t } = useTranslation();
+  const { url } = usePage();
   return (
     <div className="flex bg-lightSecondary p-6 gap-6 min-h-screen">
-      <AdminSection addClass="hidden lg:block lg:w-1/4">
+      <AdminSection className="hidden lg:block lg:w-1/4">
         <div className="logo mb-12">
           <img src={Logo} alt="Eco Tourism Bali" />
         </div>
@@ -41,7 +42,10 @@ function AdminLayout({ children }) {
               </a>
             </li>
             <li>
-              <Link href="/assessment">
+              <Link
+                href="/assessment"
+                className={url.startsWith('/assessment') ? 'font-bold' : ''}
+              >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
                   icon={faPencilRuler}

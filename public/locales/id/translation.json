@@ -29,13 +29,15 @@
   "create_question_title": "Buat Pertanyaan",
   "edit_question_title": "Ubah Pertanyaan",
   "list_question_title": "Daftar Pertanyaan",
-  "back_to_list_question": "Kembali ke Daftar Pertanyaan",
+  "back_to_question": "Kembali ke Pertanyaan",
 
   "create_option_title": "Buat Opsi",
   "edit_option_title": "Ubah Opsi",
   "list_option_title": "Daftar Opsi",
+  "add_option": "Tambah Opsi",
 
   "select_business_type": "Pilih Jenis Bisnis",
+  "add_business_type": "Tambah Jenis Bisnis",
 
   "form_label_name": "Nama",
   "form_label_title": "Judul",
@@ -51,5 +53,16 @@
 
   "detail_button": "Detail",
   "edit_button": "Ubah",
-  "delete_button": "Hapus"
+  "delete_button": "Hapus",
+
+  "member_locked_title": "Akun Anda Terkunci",
+  "member_locked_text": "Untuk mengaktifkan keanggotaan Anda, silakan klik tombol di bawah ini dan lanjutkan pembayaran",
+  "member_locked_button": "Aktifkan Keanggotaan",
+
+  "welcome_member": "Selamat Datang ke Member Dashboard!",
+  "edit_profile": "Ubah Profil",
+  "start_learning": "Mulai Belajar",
+
+  "confirm_delete": "Apakah Anda yakin ingin menghapus data ini?",
+  "search": "Cari"
 }
