@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\AssessmentQuestionController;
 use App\Http\Controllers\BusinessTypeController;
+use App\Http\Controllers\MemberAssessment;
+use App\Http\Controllers\MemberController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,24 +30,16 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/member/locked', function () {
-    return Inertia::render('Member/MemberDashboard');
-})->name('member');
-
 Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/member/dashboard', function () {
-        return Inertia::render('Member/MemberDashboard');
-    })->name('member.dashboard');
+    Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
+    Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
 });
+
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
 
 // route below this must be move into middleware auth with role:admin after we have user admin
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');

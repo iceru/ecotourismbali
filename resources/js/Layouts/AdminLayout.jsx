@@ -42,13 +42,16 @@ function AdminLayout({ children }) {
         <nav className="navigation text-etbGray">
           <ul className="grid gap-6">
             <li>
-              <a href="#">
+              <Link
+                href="/dashboard"
+                className={url.startsWith('/dashboard') ? 'font-bold' : ''}
+              >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
                   icon={faHome}
                 />
                 {t('home')}
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#">
@@ -136,7 +139,14 @@ function AdminLayout({ children }) {
               <div className="text-secondary">Administrator</div>
             </div>
             <div>
-              <PrimaryButton type="danger">{t('logout')}</PrimaryButton>
+              <PrimaryButton
+                as="link"
+                type="danger"
+                href={route('logout')}
+                method="post"
+              >
+                {t('logout')}
+              </PrimaryButton>
             </div>
           </div>
         </div>

@@ -40,7 +40,12 @@ export default function Register() {
           <div className="mb-8">
             <h3 className="font-bold text-2xl mb-3">{t('register_welcome')}</h3>
             <p className="mb-2">{t('register_welcome_text')}</p>
-            <p>{t('register_welcome_text2')}</p>
+            <p>
+              {t('register_welcome_text2')}
+              <span className="text-primary font-semibold ml-1">
+                <Link href={route('login')}>{t('login_here')}</Link>
+              </span>
+            </p>
           </div>
           <form onSubmit={submit}>
             <div>
