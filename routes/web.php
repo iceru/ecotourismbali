@@ -35,8 +35,10 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
+    Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
+
+    Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
 });
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
