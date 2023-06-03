@@ -4,14 +4,17 @@
   "register_welcome": "Register as a Member",
   "register_welcome_text": "Fill the information to continue register",
   "register_welcome_text2": "Already a Member?",
+  "login_here": "Login Here",
 
   "collapse": "Collapse",
   "logout": "Logout",
   "submit": "Submit",
+  "next": "Next",
 
   "home": "Home",
   "member": "Member",
   "assessment": "Assessment",
+  "my_assessment": "Self Assessment",
   "payment": "Payment",
   "module_test": "Module & Test",
   "my_profile": "My Profile",
@@ -69,5 +72,20 @@
   "start_learning": "Start Learning",
 
   "confirm_delete": "Are you sure want to delete this data?",
-  "search": "Search"
+  "search": "Search",
+
+  "eligible_assessment": "You are eligible to do an assessment. Remaining Attempt(s): {{ number }}",
+  "business_info": "Business Information Page",
+  "label_business_name": "What is your business name",
+  "label_business_location": "Where is your business located?",
+  "label_website": "What is your business website?",
+  "label_name": "What's your name?",
+  "label_job_title": "What is your Title or Position in the Business? (Job Title)",
+  "label_email": "What is your email address?",
+  "label_phone": "What is your Whatsapp number?",
+
+  "no_assessment": "You haven't done a Self Assessment",
+  "your_assessment": "Your Self Assessment Badge is {{ badge }}",
+  "start_assessment": "Take a Self Assessment",
+  "learn_more_assessment": "Learn More about Self Assessment"
 }

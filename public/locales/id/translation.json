@@ -4,18 +4,22 @@
   "register_welcome": "Daftar sebagai Member",
   "register_welcome_text": "Isi informasi untuk melanjutkan pendaftaran",
   "register_welcome_text2": "Sudah menjadi Member?",
+  "login_here": "Masuk disini",
+
 
   "collapse": "Sembunyikan",
   "logout": "Keluar",
   "submit": "Kirim",
+  "next": "Lanjutkan",
 
   "home": "Beranda",
   "member": "Member",
   "assessment": "Penilaian",
+  "my_assessment": "Penilaian Mandiri",
   "payment": "Pembayaran",
   "module_test": "Modul & Tes",
   "my_profile": "Profil Saya",
-  "e_learning": "E-Learning",
+  "e_learning": "Pembelajaran",
 
   "create_assessment_title": "Buat Penilaian",
   "edit_assessment_title": "Ubah Penilaian",
@@ -50,7 +54,6 @@
   "form_label_option_no": "Nomor Opsi",
   "form_label_point": "Poin",
   "form_label_business_type": "Jenis Bisnis",
-
   "detail_button": "Detail",
   "edit_button": "Ubah",
   "delete_button": "Hapus",
@@ -59,10 +62,25 @@
   "member_locked_text": "Untuk mengaktifkan keanggotaan Anda, silakan klik tombol di bawah ini dan lanjutkan pembayaran",
   "member_locked_button": "Aktifkan Keanggotaan",
 
-  "welcome_member": "Selamat Datang ke Member Dashboard!",
+  "welcome_member": "Selamat Datang ke Laman Utama Member",
   "edit_profile": "Ubah Profil",
   "start_learning": "Mulai Belajar",
 
   "confirm_delete": "Apakah Anda yakin ingin menghapus data ini?",
-  "search": "Cari"
+  "search": "Cari",
+
+  "eligible_assessment": "Anda masih berhak melakukan penilaian. Percobaan yang Tersisa: {{ number }}",
+  "business_info": "Halaman Informasi Bisnis",
+  "label_business_name": "Apakah nama bisnis Anda?",
+  "label_business_location": "Dimana lokasi bisnis Anda?",
+  "label_website": "Apakah nama website bisnis Anda?",
+  "label_name": "Nama Anda?",
+  "label_job_title": "Apakah Jabatan atau Posisi Anda di Bisnis Tersebut? (Titel Pekerjaan)",
+  "label_email": "Alamat Email Anda?",
+  "label_phone": "Nomor Whatsapp Anda?",
+
+  "no_assessment": "Anda belum melakukan Penilaian Mandiri",
+  "your_assessment": "Badge Penilaian Mandiri Anda adalah {{ badge }}",
+  "start_assessment": "Lakukan Penilaian Mandiri Sekarang",
+  "learn_more_assessment": "Pelajari lebih lanjut mengenai Penilaian Mandiri"
 }
