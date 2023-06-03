@@ -27,14 +27,14 @@ function EditVerifiedBadge() {
   return (
     <AdminLayout>
       <BackTo title="back_to_list_verified_badge" link="/verified-badge" />
-      <AdminSection className="grid gap-6 mb-6">
+      <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_verified_badge_title" />
-        <form className="lg:w-3/4 grid gap-6" onSubmit={submit}>
+        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="name" value={t('form_label_name')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="name"
                 name="name"
@@ -50,7 +50,7 @@ function EditVerifiedBadge() {
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <input
                 type="file"
                 name="image"

@@ -40,7 +40,7 @@ function MemberLayout({ children, state }) {
           <img src={Logo} alt="Eco Tourism Bali" />
         </div>
         <nav className="navigation text-etbGray">
-          <ul className="grid gap-6">
+          <ul className="flex flex-col gap-6">
             <li>
               <Link
                 href={state === 'locked' ? '#' : route('member.dashboard')}

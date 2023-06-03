@@ -31,9 +31,9 @@ function EditQuestion() {
         title="back_to_question"
         link={`/assessment/${assessment.id}/question`}
       />
-      <AdminSection className="grid gap-6 mb-6">
+      <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />
-        <form className="lg:w-3/4 grid gap-6" onSubmit={submit}>
+        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel
@@ -41,7 +41,7 @@ function EditQuestion() {
                 value={t('form_label_question_no')}
               />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="question_no"
                 name="question_no"
@@ -57,7 +57,7 @@ function EditQuestion() {
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="title"
                 name="title"
@@ -73,7 +73,7 @@ function EditQuestion() {
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="question" value={t('form_label_question')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="question"
                 name="question"

@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
 
-function TitleSection({ title }) {
+function TitleSection({ title, className }) {
   const { t } = useTranslation();
 
   return (
     <div>
-      <div className="font-bold text-xl">{t(title)}</div>
+      <div className={`font-bold text-xl ${className}`}>{t(title)}</div>
     </div>
   );
 }

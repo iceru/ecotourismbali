@@ -28,14 +28,14 @@ function EditAssessment() {
   return (
     <AdminLayout>
       <BackTo title="back_to_list_assessment" link="/assessment" />
-      <AdminSection className="grid gap-6 mb-6">
+      <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />
-        <form className="lg:w-3/4 grid gap-6" onSubmit={submit}>
+        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="title"
                 name="title"
@@ -54,7 +54,7 @@ function EditAssessment() {
                 value={t('form_label_description')}
               />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="description"
                 name="description"
@@ -71,7 +71,7 @@ function EditAssessment() {
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <input
                 type="file"
                 name="image"
