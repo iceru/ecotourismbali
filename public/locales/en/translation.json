@@ -14,7 +14,7 @@
   "home": "Home",
   "member": "Member",
   "assessment": "Assessment",
-  "my_assessment": "My Assessment",
+  "my_assessment": "Self Assessment",
   "payment": "Payment",
   "module_test": "Module & Test",
   "my_profile": "My Profile",
@@ -82,5 +82,10 @@
   "label_name": "What's your name?",
   "label_job_title": "What is your Title or Position in the Business? (Job Title)",
   "label_email": "What is your email address?",
-  "label_phone": "What is your Whatsapp number?"
+  "label_phone": "What is your Whatsapp number?",
+
+  "no_assessment": "You haven't done a Self Assessment",
+  "your_assessment": "Your Self Assessment Badge is {{ badge }}",
+  "start_assessment": "Take a Self Assessment",
+  "learn_more_assessment": "Learn More about Self Assessment"
 }

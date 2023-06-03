@@ -15,10 +15,11 @@
   "home": "Beranda",
   "member": "Member",
   "assessment": "Penilaian",
+  "my_assessment": "Penilaian Mandiri",
   "payment": "Pembayaran",
   "module_test": "Modul & Tes",
   "my_profile": "Profil Saya",
-  "e_learning": "E-Learning",
+  "e_learning": "Pembelajaran",
 
   "create_assessment_title": "Buat Penilaian",
   "edit_assessment_title": "Ubah Penilaian",
@@ -61,7 +62,7 @@
   "member_locked_text": "Untuk mengaktifkan keanggotaan Anda, silakan klik tombol di bawah ini dan lanjutkan pembayaran",
   "member_locked_button": "Aktifkan Keanggotaan",
 
-  "welcome_member": "Selamat Datang ke Member Dashboard",
+  "welcome_member": "Selamat Datang ke Laman Utama Member",
   "edit_profile": "Ubah Profil",
   "start_learning": "Mulai Belajar",
 
@@ -76,5 +77,10 @@
   "label_name": "Nama Anda?",
   "label_job_title": "Apakah Jabatan atau Posisi Anda di Bisnis Tersebut? (Titel Pekerjaan)",
   "label_email": "Alamat Email Anda?",
-  "label_phone": "Nomor Whatsapp Anda?"
+  "label_phone": "Nomor Whatsapp Anda?",
+
+  "no_assessment": "Anda belum melakukan Penilaian Mandiri",
+  "your_assessment": "Badge Penilaian Mandiri Anda adalah {{ badge }}",
+  "start_assessment": "Lakukan Penilaian Mandiri Sekarang",
+  "learn_more_assessment": "Pelajari lebih lanjut mengenai Penilaian Mandiri"
 }

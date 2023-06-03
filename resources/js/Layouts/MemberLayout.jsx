@@ -43,7 +43,7 @@ function MemberLayout({ children, state }) {
           <ul className="grid gap-6">
             <li>
               <Link
-                href={route('member.dashboard')}
+                href={state === 'locked' ? '#' : route('member.dashboard')}
                 className={
                   url.startsWith('/member/dashboard') ? 'font-bold' : ''
                 }
