@@ -3,6 +3,7 @@ import Logo from '../../images/logo.png';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faAward,
   faFileClipboard,
   faHome,
   faLongArrowAltLeft,
@@ -82,6 +83,18 @@ function AdminLayout({ children }) {
                 />
                 {t('module_test')}
               </a>
+            </li>
+            <li>
+              <Link
+                href="/badge"
+                className={url.startsWith('/badge') ? 'font-bold' : ''}
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faAward}
+                />
+                {t('badge')}
+              </Link>
             </li>
           </ul>
         </nav>

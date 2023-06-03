@@ -93,6 +93,7 @@ export default function Table({
                               {column === 'image' ? (
                                 <img
                                   src={`/storage/${pathImage}${item[column]}`}
+                                  className="max-h-24"
                                 />
                               ) : (
                                 item[column]
@@ -118,7 +119,7 @@ export default function Table({
                           })}
 
                         {tableActions && (
-                          <td className="grid gap-2 py-3 px-2 items-center">
+                          <td>
                             {tableActions.map((action, index) => {
                               return action.type === 'delete' ? (
                                 <form
@@ -129,7 +130,7 @@ export default function Table({
                                   <button
                                     disabled={processing}
                                     key={index}
-                                    className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
+                                    className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full mt-2 text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
                                       action.color
                                     )}`}
                                   >

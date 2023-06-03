@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\AssessmentQuestionController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\BusinessTypeController;
 use App\Http\Controllers\MemberAssessment;
 use App\Http\Controllers\MemberController;
@@ -61,6 +62,12 @@ Route::post('/assessment/{id}/question/store', [AssessmentQuestionController::cl
 Route::get('/assessment/question/edit/{id}', [AssessmentQuestionController::class, 'edit'])->name('assessment_question.edit');
 Route::patch('/assessment/question/update/{id}', [AssessmentQuestionController::class, 'update'])->name('assessment_question.update');
 Route::delete('/assessment/question/delete/{id}', [AssessmentQuestionController::class, 'destroy'])->name('assessment_question.destroy');
+
+Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
+Route::post('/badge/store', [BadgeController::class, 'store'])->name('badge.store');
+Route::get('/badge/edit/{id}', [BadgeController::class, 'edit'])->name('badge.edit');
+Route::patch('/badge/update/{id}', [BadgeController::class, 'update'])->name('badge.update');
+Route::delete('/badge/delete/{id}', [BadgeController::class, 'destroy'])->name('badge.destroy');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
