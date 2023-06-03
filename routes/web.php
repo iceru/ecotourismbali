@@ -8,6 +8,7 @@ use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\BusinessTypeController;
 use App\Http\Controllers\MemberAssessment;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\VerifiedBadgeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -68,6 +69,12 @@ Route::post('/badge/store', [BadgeController::class, 'store'])->name('badge.stor
 Route::get('/badge/edit/{id}', [BadgeController::class, 'edit'])->name('badge.edit');
 Route::patch('/badge/update/{id}', [BadgeController::class, 'update'])->name('badge.update');
 Route::delete('/badge/delete/{id}', [BadgeController::class, 'destroy'])->name('badge.destroy');
+
+Route::get('/verified-badge', [VerifiedBadgeController::class, 'index'])->name('verified_badge.index');
+Route::post('/verified-badge/store', [VerifiedBadgeController::class, 'store'])->name('verified_badge.store');
+Route::get('/verified-badge/edit/{id}', [VerifiedBadgeController::class, 'edit'])->name('verified_badge.edit');
+Route::patch('/verified-badge/update/{id}', [VerifiedBadgeController::class, 'update'])->name('verified_badge.update');
+Route::delete('/verified-badge/delete/{id}', [VerifiedBadgeController::class, 'destroy'])->name('verified_badge.destroy');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {

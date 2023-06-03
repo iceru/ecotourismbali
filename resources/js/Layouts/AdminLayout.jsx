@@ -25,7 +25,6 @@ function AdminLayout({ children }) {
   function changeLanguage(code) {
     if (i18n.language !== code) {
       i18n.changeLanguage(code);
-      setLanguage(code);
     }
   }
   return (
@@ -94,6 +93,18 @@ function AdminLayout({ children }) {
                   icon={faAward}
                 />
                 {t('badge')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/verified-badge"
+                className={url.startsWith('/verified-badge') ? 'font-bold' : ''}
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faAward}
+                />
+                {t('verified_badge')}
               </Link>
             </li>
           </ul>
