@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAward,
+  faBars,
   faFileClipboard,
   faHome,
-  faLongArrowAltLeft,
   faPencilRuler,
+  faTimes,
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
@@ -15,12 +16,16 @@ import AdminSection from '@/Components/AdminSection';
 import { Link, usePage } from '@inertiajs/react';
 import enImg from '../../images/en.png';
 import idImg from '../../images/id.png';
+import { useMediaQuery } from 'react-responsive';
 
 function AdminLayout({ children }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 1000px)',
+  });
 
-  const [sideActive, setSideActive] = useState(true);
+  const [sideActive, setSideActive] = useState(isDesktop);
 
   function changeLanguage(code) {
     if (i18n.language !== code) {
@@ -28,19 +33,25 @@ function AdminLayout({ children }) {
     }
   }
   return (
-    <div className="flex bg-lightSecondary gap-6 p-6 min-h-screen">
+    <div className="flex bg-lightSecondary gap-4 p-3 lg:gap-6 lg:p-6 min-h-screen">
       <AdminSection
-        className={`transition ${
+        className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-auto ${
           !sideActive
             ? '-translate-x-[120%] hidden p-0 opacity-0'
-            : 'translate-x-0 block lg:w-1/4 p-6 opacity-100'
+            : 'translate-x-0 !block lg:block lg:w-1/4 p-4 lg:p-6 opacity-100'
         }`}
       >
         <div className="logo mb-12">
           <img src={Logo} alt="Eco Tourism Bali" />
         </div>
+        <div
+          className="block lg:hidden absolute text-secondary right-6 top-6 text-2xl"
+          onClick={() => setSideActive(false)}
+        >
+          <FontAwesomeIcon icon={faTimes} />
+        </div>
         <nav className="navigation text-etbGray">
-          <ul className="grid gap-6">
+          <ul className="flex flex-col gap-6">
             <li>
               <Link
                 href="/dashboard"
@@ -110,16 +121,16 @@ function AdminLayout({ children }) {
           </ul>
         </nav>
       </AdminSection>
-      <div className={`${!sideActive ? 'w-screen' : 'w-3/4'}`}>
-        <div className="flex justify-between items-center bg-white drop-shadow-admin rounded-2xl mb-6 px-6 py-4">
-          <div className="flex items-center">
+      <div className={`${!sideActive ? 'w-full' : 'lg:w-3/4'}`}>
+        <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
+          <div className="flex items-center order-2 lg:order-1 w-full justify-between lg:w-auto lg:justify-start">
             <PrimaryButton
               type="lightSecondary"
               className="mr-4"
               onClick={() => setSideActive(!sideActive)}
             >
-              <FontAwesomeIcon icon={faLongArrowAltLeft} className="mr-2" />
-              {t('collapse')}
+              <FontAwesomeIcon icon={faBars} className="mr-2" />
+              {t('menu')}
             </PrimaryButton>
             <div className="flex items-center gap-3">
               <div
@@ -155,7 +166,7 @@ function AdminLayout({ children }) {
               </div>
             </div>
           </div>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center justify-between mb-4 lg:mb-0 lg:justify-start w-full lg:w-auto order-1 lg:order-2">
             <div>
               <h5>
                 Hello, <strong>Admin</strong>
@@ -173,7 +184,7 @@ function AdminLayout({ children }) {
               </PrimaryButton>
             </div>
           </div>
-        </div>
+        </AdminSection>
         <div>{children}</div>
       </div>
     </div>

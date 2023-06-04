@@ -75,7 +75,7 @@ function CreateAssessment({ assessment, business_type }) {
 
   return (
     <AdminLayout>
-      <AdminSection className="grid gap-6 mb-6">
+      <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="create_assessment_title" />
         {flash.success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
@@ -83,12 +83,12 @@ function CreateAssessment({ assessment, business_type }) {
             <span className="inline">{flash.success}</span>
           </div>
         )}
-        <form className="lg:w-3/4 grid gap-6" onSubmit={submit}>
+        <form className="lg:w-3/4 flex flex-col gap-6 w-full" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="title"
                 name="title"
@@ -108,7 +108,7 @@ function CreateAssessment({ assessment, business_type }) {
                 value={t('form_label_description')}
               />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="description"
                 name="description"
@@ -129,7 +129,7 @@ function CreateAssessment({ assessment, business_type }) {
                 value={t('form_label_business_type')}
               />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <SelectInput
                 id="business_type"
                 name="business_type"
@@ -154,7 +154,7 @@ function CreateAssessment({ assessment, business_type }) {
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <input
                 type="file"
                 name="image"
@@ -174,8 +174,8 @@ function CreateAssessment({ assessment, business_type }) {
           </PrimaryButton>
         </form>
       </AdminSection>
-      <AdminSection className="grid gap-6">
-        <TitleSection title="list_assessment_title" />
+      <AdminSection>
+        <TitleSection title="list_assessment_title" className="mb-5" />
         <Table
           header={headerTable}
           data={assessment}

@@ -49,7 +49,7 @@ function CreateBusinessType({ business_type }) {
 
   return (
     <AdminLayout>
-      <AdminSection className="grid gap-6 mb-6">
+      <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="create_business_title" />
         {flash.success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
@@ -57,12 +57,12 @@ function CreateBusinessType({ business_type }) {
             <span className="inline">{flash.success}</span>
           </div>
         )}
-        <form className="lg:w-3/4 grid gap-6" onSubmit={submit}>
+        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="name" value={t('form_label_name')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="name"
                 name="name"
@@ -84,7 +84,7 @@ function CreateBusinessType({ business_type }) {
           </PrimaryButton>
         </form>
       </AdminSection>
-      <AdminSection className="grid gap-6">
+      <AdminSection className="flex flex-col gap-6">
         <TitleSection title="list_business_title" />
         <Table
           header={headerTable}
