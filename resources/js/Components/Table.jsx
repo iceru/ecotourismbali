@@ -8,6 +8,7 @@ export default function Table({
   tableButtons,
   tableActions,
   pathImage,
+  customData,
 }) {
   const { delete: destroy, processing } = useForm();
 
@@ -66,7 +67,7 @@ export default function Table({
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  {header.map((item, index) => {
+                  {header?.map((item, index) => {
                     return (
                       <th
                         key={index}
@@ -83,7 +84,7 @@ export default function Table({
                 {data?.map((item, index) => {
                   return (
                     <tr key={index}>
-                      {selectedData.map((column, index) => {
+                      {selectedData?.map((column, index) => {
                         return (
                           <td
                             key={index}
@@ -94,8 +95,12 @@ export default function Table({
                                 src={`/storage/${pathImage}${item[column]}`}
                                 className="max-h-24"
                               />
-                            ) : (
+                            ) : customData?.selected === column ? (
+                              customData?.data()
+                            ) : item[column] ? (
                               item[column]
+                            ) : (
+                              '-'
                             )}
                           </td>
                         );

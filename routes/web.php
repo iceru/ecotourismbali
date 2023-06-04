@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\AssessmentQuestionController;
@@ -75,6 +76,10 @@ Route::post('/verified-badge/store', [VerifiedBadgeController::class, 'store'])-
 Route::get('/verified-badge/edit/{id}', [VerifiedBadgeController::class, 'edit'])->name('verified_badge.edit');
 Route::patch('/verified-badge/update/{id}', [VerifiedBadgeController::class, 'update'])->name('verified_badge.update');
 Route::delete('/verified-badge/delete/{id}', [VerifiedBadgeController::class, 'destroy'])->name('verified_badge.destroy');
+
+Route::get('/member/index', [AdminMemberController::class, 'index'])->name('member.index');
+Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('member.detail');
+
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
