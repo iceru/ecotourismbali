@@ -25,7 +25,6 @@ function AdminLayout({ children }) {
     query: '(min-width: 1000px)',
   });
 
-  const sideState = isDesktop ? true : false;
   const [sideActive, setSideActive] = useState(isDesktop);
 
   function changeLanguage(code) {
@@ -124,7 +123,7 @@ function AdminLayout({ children }) {
       </AdminSection>
       <div className={`${!sideActive ? 'w-full' : 'lg:w-3/4'}`}>
         <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
-          <div className="flex items-center order-2 lg:order-1 w-full justify-between lg:w-auto justify-start">
+          <div className="flex items-center order-2 lg:order-1 w-full justify-between lg:w-auto lg:justify-start">
             <PrimaryButton
               type="lightSecondary"
               className="mr-4"
