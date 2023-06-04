@@ -34,7 +34,7 @@ function MemberLayout({ children, state }) {
     }
   }
   return (
-    <div className="flex bg-lightPrimary p-3 gap-4 lg:p-6 lg:gap-6 min-h-screen">
+    <div className="flex bg-lightPrimary p-3 gap-4 lg:p-6 lg:gap-6 min-h-screen bg-opacity-70">
       <AdminSection
         className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-auto ${
           !sideActive

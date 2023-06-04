@@ -33,7 +33,7 @@ function AdminLayout({ children }) {
     }
   }
   return (
-    <div className="flex bg-lightSecondary gap-4 p-3 lg:gap-6 lg:p-6 min-h-screen">
+    <div className="flex bg-lightSecondary gap-4 p-3 lg:gap-6 lg:p-6 min-h-screen bg-opacity-70">
       <AdminSection
         className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-auto ${
           !sideActive
@@ -65,13 +65,16 @@ function AdminLayout({ children }) {
               </Link>
             </li>
             <li>
-              <a href="#">
+              <Link
+                href={route('member.index')}
+                className={url.startsWith('/member') ? 'font-bold' : ''}
+              >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
                   icon={faUsers}
                 />
                 {t('member')}
-              </a>
+              </Link>
             </li>
             <li>
               <Link
