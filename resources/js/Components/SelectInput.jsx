@@ -2,7 +2,16 @@ import { forwardRef, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default forwardRef(function SelectInput(
-  { options, placeholder, className = '', isFocused = false, value, ...props },
+  {
+    options,
+    placeholder,
+    className = '',
+    isFocused = false,
+    value,
+    labelData = 'label',
+    valueData = 'value',
+    ...props
+  },
   ref
 ) {
   const input = ref ? ref : useRef();
@@ -26,7 +35,7 @@ export default forwardRef(function SelectInput(
     >
       {placeholder && <option>{t(placeholder)}</option>}
       {options?.map(option => (
-        <option value={option.value}>{option.label}</option>
+        <option value={option[valueData]}>{option[labelData]}</option>
       ))}
     </select>
   );

@@ -8,62 +8,41 @@ import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import BackTo from '../Components/BackTo';
 
-function EditAssessment() {
+function EditVerifiedBadge() {
   const { t } = useTranslation();
 
-  const { assessment } = usePage().props;
+  const { badge } = usePage().props;
 
   const { data, setData, patch, processing, errors } = useForm({
-    title: assessment.title || '',
-    description: assessment.description || '',
+    name: badge.name || '',
     image: '',
   });
 
   const submit = e => {
     e.preventDefault();
 
-    patch(route('assessment.update', assessment.id));
+    patch(route('verified_badge.update', badge.id));
   };
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_assessment" link="/assessment" />
+      <BackTo title="back_to_list_verified_badge" link="/verified-badge" />
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="edit_assessment_title" />
+        <TitleSection title="edit_verified_badge_title" />
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="title" value={t('form_label_title')} />
+              <InputLabel htmlFor="name" value={t('form_label_name')} />
             </div>
             <div className="lg:w-3/4">
               <TextInput
-                id="title"
-                name="title"
+                id="name"
+                name="name"
                 type="text"
-                value={data.title}
+                value={data.name}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('title', e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="description"
-                value={t('form_label_description')}
-              />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="description"
-                name="description"
-                type="text"
-                typeForm="textarea"
-                value={data.description}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('description', e.target.value)}
+                onChange={e => setData('name', e.target.value)}
               />
             </div>
           </div>
@@ -89,4 +68,4 @@ function EditAssessment() {
   );
 }
 
-export default EditAssessment;
+export default EditVerifiedBadge;
