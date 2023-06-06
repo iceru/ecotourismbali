@@ -65,6 +65,12 @@ Route::get('/assessment/question/edit/{id}', [AssessmentQuestionController::clas
 Route::patch('/assessment/question/update/{id}', [AssessmentQuestionController::class, 'update'])->name('assessment_question.update');
 Route::delete('/assessment/question/delete/{id}', [AssessmentQuestionController::class, 'destroy'])->name('assessment_question.destroy');
 
+Route::get('/assessment/{id}/option', [AssessmentOptionController::class, 'index'])->name('assessment_option.index');
+Route::post('/assessment/{id}/option/store', [AssessmentOptionController::class, 'store'])->name('assessment_option.store');
+Route::get('/assessment/option/edit/{id}', [AssessmentOptionController::class, 'edit'])->name('assessment_option.edit');
+Route::patch('/assessment/option/update/{id}', [AssessmentOptionController::class, 'update'])->name('assessment_option.update');
+Route::delete('/assessment/option/delete/{id}', [AssessmentOptionController::class, 'destroy'])->name('assessment_option.destroy');
+
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 Route::post('/badge/store', [BadgeController::class, 'store'])->name('badge.store');
 Route::get('/badge/edit/{id}', [BadgeController::class, 'edit'])->name('badge.edit');
