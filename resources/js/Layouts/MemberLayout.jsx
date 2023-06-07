@@ -10,7 +10,7 @@ import {
   faUser,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import AdminSection from '@/Components/AdminSection';
 import { useTranslation } from 'react-i18next';
 import enImg from '../../images/en.png';
@@ -35,6 +35,7 @@ function MemberLayout({ children, state }) {
   }
   return (
     <div className="flex bg-lightPrimary p-3 gap-4 lg:p-6 lg:gap-6 min-h-screen bg-opacity-70">
+      <Head title="Member" />
       <AdminSection
         className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-auto ${
           !sideActive

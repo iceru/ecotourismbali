@@ -13,7 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
-import { Link, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import enImg from '../../images/en.png';
 import idImg from '../../images/id.png';
 import { useMediaQuery } from 'react-responsive';
@@ -34,6 +34,7 @@ function AdminLayout({ children }) {
   }
   return (
     <div className="flex bg-lightSecondary gap-4 p-3 lg:gap-6 lg:p-6 min-h-screen bg-opacity-70">
+      <Head title="Administrator" />
       <AdminSection
         className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-auto ${
           !sideActive
