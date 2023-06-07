@@ -9,6 +9,7 @@ use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\BusinessTypeController;
 use App\Http\Controllers\MemberAssessment;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\VerifiedBadgeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,9 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/member-list', [MemberListController::class, 'index'])->name('member-list');
+
 Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -44,9 +48,9 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
 });
 
+// route below this must be move into middleware auth with role:admin after we have user admin
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
 
-// route below this must be move into middleware auth with role:admin after we have user admin
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
 Route::post('/assessment/store', [AssessmentController::class, 'store'])->name('assessment.store');
 Route::get('/assessment/edit/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
