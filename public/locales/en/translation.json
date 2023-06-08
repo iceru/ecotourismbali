@@ -4,18 +4,27 @@
   "register_welcome": "Register as a Member",
   "register_welcome_text": "Fill the information to continue register",
   "register_welcome_text2": "Already a Member?",
+  "already_registered": "Already registered?",
+  "login_here": "Login Here",
 
-  "collapse": "Collapse",
+  "menu": "Menu",
   "logout": "Logout",
   "submit": "Submit",
+  "next": "Next",
 
   "home": "Home",
   "member": "Member",
   "assessment": "Assessment",
+  "my_assessment": "Self Assessment",
   "payment": "Payment",
   "module_test": "Module & Test",
   "my_profile": "My Profile",
   "e_learning": "E-Learning",
+  "badge": "Badge",
+  "verified_badge": "Verified Badge",
+
+  "list_of_members": "List of Members",
+  "back_to_list_members": "Back to List of Members",
 
   "create_assessment_title": "Create Assessment",
   "edit_assessment_title": "Edit Assessment",
@@ -28,14 +37,31 @@
   "create_question_title": "Create Question",
   "edit_question_title": "Edit Question",
   "list_question_title": "Question List",
-  "back_to_list_question": "Back to List of Question",
+  "back_to_question": "Back to Question",
   "add_question": "Add Question",
 
   "create_option_title": "Create Option",
   "edit_option_title": "Edit Option",
   "list_option_title": "Option List",
+  "add_option": "Add Option",
+
+  "create_badge_title": "Create Badge",
+  "edit_badge_title": "Edit Badge",
+  "list_badge_title": "Badge List",
+  "back_to_list_badge": "Back to List of Badge",
+
+  "create_verified_badge_title": "Create Verified Badge",
+  "edit_verified_badge_title": "Edit Verified Badge",
+  "list_verified_badge_title": "Verified Badge List",
+  "back_to_list_verified_badge": "Back to List of Verified Badge",
 
   "select_business_type": "Select Business Type",
+  "add_business_type": "Add Business Type",
+
+  "create_business_title": "Create Type Business",
+  "edit_business_title": "Edit Business Type",
+  "list_business_title": "Business Type List",
+  "back_to_list_business": "Back to List of Business Type",
 
   "form_label_name": "Name",
   "form_label_title": "Title",
@@ -51,5 +77,54 @@
 
   "detail_button": "Detail",
   "edit_button": "Edit",
-  "delete_button": "Delete"
+  "delete_button": "Delete",
+
+  "member_locked_title": "Your Membership is still locked",
+  "member_locked_text": "To activate your membership, please click button below and proceed for payment",
+  "member_locked_button": "Click here to Activate Membership",
+
+  "welcome_member": "Welcome to the Member Dashboard",
+  "edit_profile": "Edit Your Profile",
+  "start_learning": "Start Learning",
+
+  "confirm_delete": "Are you sure want to delete this data?",
+  "search": "Search",
+
+  "eligible_assessment": "You are eligible to do an assessment. Remaining Attempt(s): {{ number }}",
+  "business_info": "Business Information Page",
+  "label_business_name": "What is your business name",
+  "label_business_location": "Where is your business located?",
+  "label_website": "What is your business website?",
+  "label_name": "What's your name?",
+  "label_job_title": "What is your Title or Position in the Business? (Job Title)",
+  "label_email": "What is your email address?",
+  "label_phone": "What is your Whatsapp number?",
+
+  "no_assessment": "You haven't done a Self Assessment",
+  "your_assessment": "Your Self Assessment Badge is {{ badge }}",
+  "start_assessment": "Take a Self Assessment",
+  "learn_more_assessment": "Learn More about Self Assessment",
+
+  "total_module": "Total Module",
+  "total_members": "Total Members",
+
+  "guide_book": "Guide Book",
+  "guide_book_text": "Download the latest version of the guide book",
+  "download_guide_book": "Download Here",
+
+  "website": "Website",
+  "address": "Address",
+  "phone": "Phone",
+  "email": "Email",
+  "business_name": "Business Name",
+  "category": "Category",
+  "program": "Program",
+  "assessment_attempt": "Assessment Attempts",
+  "status": "Status",
+  "assessment_expire": "Assessment Expire",
+  "description": "Description",
+
+  "filter": "Filter",
+  "keyword": "Keyword",
+  "sort": "Sort"
 }

@@ -29,9 +29,9 @@ function CreateOption() {
       <AdminSection addClass="mb-6">
         <h4 className="font-bold text-lg">Question 1</h4>
       </AdminSection>
-      <AdminSection addClass="grid gap-6 mb-6">
+      <AdminSection addClass="flex flex-col gap-6 mb-6">
         <TitleSection title="create_option_title" />
-        <form className="lg:w-3/4 grid gap-6">
+        <form className="lg:w-3/4 flex flex-col gap-6">
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel
@@ -39,7 +39,7 @@ function CreateOption() {
                 value={t('form_label_option_no')}
               />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="option_no"
                 name="option_no"
@@ -55,7 +55,7 @@ function CreateOption() {
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="option" value={t('form_label_option')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="option"
                 name="option"
@@ -71,7 +71,7 @@ function CreateOption() {
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="point" value={t('form_label_point')} />
             </div>
-            <div className="w-3/4">
+            <div className="lg:w-3/4">
               <TextInput
                 id="point"
                 name="point"
@@ -92,7 +92,7 @@ function CreateOption() {
           </PrimaryButton>
         </form>
       </AdminSection>
-      <AdminSection addClass="grid gap-6">
+      <AdminSection addClass="flex flex-col gap-6">
         <TitleSection title="list_option_title" />
         <Table header={headerTable} />
       </AdminSection>

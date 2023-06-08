@@ -1,9 +1,16 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\AssessmentQuestionController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\BusinessTypeController;
+use App\Http\Controllers\MemberAssessment;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberListController;
+use App\Http\Controllers\VerifiedBadgeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,21 +35,22 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/member-list', [MemberListController::class, 'index'])->name('member-list');
 
 Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/member/dashboard', function () {
-        return Inertia::render('Member/MemberDashboard');
-    })->name('member.dashboard');
+    Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
+    Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
+
+    Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
 });
 
 // route below this must be move into middleware auth with role:admin after we have user admin
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
+
 Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
 Route::post('/assessment/store', [AssessmentController::class, 'store'])->name('assessment.store');
 Route::get('/assessment/edit/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
@@ -66,6 +74,22 @@ Route::post('/assessment/{id}/option/store', [AssessmentOptionController::class,
 Route::get('/assessment/option/edit/{id}', [AssessmentOptionController::class, 'edit'])->name('assessment_option.edit');
 Route::patch('/assessment/option/update/{id}', [AssessmentOptionController::class, 'update'])->name('assessment_option.update');
 Route::delete('/assessment/option/delete/{id}', [AssessmentOptionController::class, 'destroy'])->name('assessment_option.destroy');
+
+Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
+Route::post('/badge/store', [BadgeController::class, 'store'])->name('badge.store');
+Route::get('/badge/edit/{id}', [BadgeController::class, 'edit'])->name('badge.edit');
+Route::patch('/badge/update/{id}', [BadgeController::class, 'update'])->name('badge.update');
+Route::delete('/badge/delete/{id}', [BadgeController::class, 'destroy'])->name('badge.destroy');
+
+Route::get('/verified-badge', [VerifiedBadgeController::class, 'index'])->name('verified_badge.index');
+Route::post('/verified-badge/store', [VerifiedBadgeController::class, 'store'])->name('verified_badge.store');
+Route::get('/verified-badge/edit/{id}', [VerifiedBadgeController::class, 'edit'])->name('verified_badge.edit');
+Route::patch('/verified-badge/update/{id}', [VerifiedBadgeController::class, 'update'])->name('verified_badge.update');
+Route::delete('/verified-badge/delete/{id}', [VerifiedBadgeController::class, 'destroy'])->name('verified_badge.destroy');
+
+Route::get('/member/index', [AdminMemberController::class, 'index'])->name('member.index');
+Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('member.detail');
+
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {

@@ -1,8 +1,9 @@
+import Guest from '@/Layouts/GuestLayout';
 import React from 'react';
 
 function MemberIndex() {
   return (
-    <div>
+    <Guest>
       <h1>Members Index</h1>
       <div>
         <ul className="flex justify-between items-center">
@@ -39,7 +40,7 @@ function MemberIndex() {
           </ul>
         </div>
       </div>
-    </div>
+    </Guset>
   );
 }
 

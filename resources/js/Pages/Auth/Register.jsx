@@ -40,7 +40,12 @@ export default function Register() {
           <div className="mb-8">
             <h3 className="font-bold text-2xl mb-3">{t('register_welcome')}</h3>
             <p className="mb-2">{t('register_welcome_text')}</p>
-            <p>{t('register_welcome_text2')}</p>
+            <p>
+              {t('register_welcome_text2')}
+              <span className="text-primary font-semibold ml-1">
+                <Link href={route('login')}>{t('login_here')}</Link>
+              </span>
+            </p>
           </div>
           <form onSubmit={submit}>
             <div>
@@ -117,17 +122,14 @@ export default function Register() {
               />
             </div>
 
-            <div className="flex items-center justify-end mt-4">
+            <div className="flex items-center justify-between mt-6">
+              <PrimaryButton disabled={processing}>Register</PrimaryButton>
               <Link
                 href={route('login')}
                 className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Already registered?
+                {t('already_registered')}
               </Link>
-
-              <PrimaryButton className="ml-4" disabled={processing}>
-                Register
-              </PrimaryButton>
             </div>
           </form>
         </div>
