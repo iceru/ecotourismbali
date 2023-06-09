@@ -32,7 +32,7 @@ function CreateQuestion({ assess_question, assessment }) {
   const tableButtons = [
     {
       label: 'add_option',
-      link: 'assessment/',
+      link: '/assessment/',
       link2: '/option',
       withId: true,
     },

@@ -6,47 +6,23 @@ import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
-import Table from '@/Components/Table';
 import BackTo from '../Components/BackTo';
 
-function CreateOption({ assessment_option, assessment_question }) {
+function EditQuestion() {
   const { t } = useTranslation();
-  const { flash } = usePage().props;
 
-  const { data, setData, post, processing, errors, reset } = useForm({
-    option: '',
-    point: '',
-    option_no: '',
+  const { assessment_option, assessment_question } = usePage().props;
+
+  const { data, setData, patch, processing } = useForm({
+    option_no: assessment_option.option_no || '',
+    option: assessment_option.option || '',
+    point: assessment_option.point || '',
   });
-
-  const headerTable = ['ID', 'Option No', 'Option', 'Point', 'Action'];
-
-  const selectedData = ['id', 'option_no', 'option', 'point'];
-
-  const tableActions = [
-    {
-      label: 'edit_button',
-      link: '/assessment/option/edit',
-      withId: true,
-      color: 'info',
-    },
-    {
-      label: 'delete_button',
-      route: 'assessment_option.destroy',
-      withId: true,
-      color: 'danger',
-      type: 'delete',
-    },
-  ];
 
   const submit = e => {
     e.preventDefault();
 
-    post(route('assessment_option.store', assessment_question.id), {
-      onSuccess: () => {
-        reset();
-      },
-    });
+    patch(route('assessment_option.update', assessment_option.id));
   };
 
   return (
@@ -55,17 +31,8 @@ function CreateOption({ assessment_option, assessment_question }) {
         title="back_to_question"
         link={`/assessment/${assessment_question.id}/question`}
       />
-      <AdminSection className="mb-6">
-        <h4 className="font-bold text-lg">{assessment_question.title}</h4>
-      </AdminSection>
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="create_option_title" />
-        {flash.success && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-            <strong className="font-bold mr-2">Success!</strong>
-            <span className="inline">{flash.success}</span>
-          </div>
-        )}
+        <TitleSection title="edit_assessment_title" />
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
@@ -78,7 +45,7 @@ function CreateOption({ assessment_option, assessment_question }) {
               <TextInput
                 id="option_no"
                 name="option_no"
-                type="number"
+                type="text"
                 value={data.option_no}
                 className="block w-full"
                 isFocused={true}
@@ -95,6 +62,7 @@ function CreateOption({ assessment_option, assessment_question }) {
                 id="option"
                 name="option"
                 type="text"
+                typeForm="textarea"
                 value={data.option}
                 className="block w-full"
                 isFocused={true}
@@ -110,7 +78,7 @@ function CreateOption({ assessment_option, assessment_question }) {
               <TextInput
                 id="point"
                 name="point"
-                type="number"
+                type="text"
                 value={data.point}
                 className="block w-full"
                 isFocused={true}
@@ -118,26 +86,13 @@ function CreateOption({ assessment_option, assessment_question }) {
               />
             </div>
           </div>
-          <PrimaryButton
-            type="secondary"
-            className="w-fit"
-            disabled={processing}
-          >
+          <PrimaryButton className="w-fit" disabled={processing}>
             {t('submit')}
           </PrimaryButton>
         </form>
-      </AdminSection>
-      <AdminSection addClass="flex flex-col gap-6">
-        <TitleSection title="list_option_title" className="mb-6" />
-        <Table
-          header={headerTable}
-          data={assessment_option}
-          tableActions={tableActions}
-          selectedData={selectedData}
-        />
       </AdminSection>
     </AdminLayout>
   );
 }
 
-export default CreateOption;
+export default EditQuestion;
