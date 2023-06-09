@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssessmentController;
+use App\Http\Controllers\AssessmentOptionController;
 use App\Http\Controllers\AssessmentQuestionController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\BusinessTypeController;
