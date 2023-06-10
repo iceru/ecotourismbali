@@ -1,0 +1,233 @@
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import AdminLayout from '@/Layouts/AdminLayout';
+import { useForm, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+import TitleSection from '../Components/TitleSection';
+import AdminSection from '@/Components/AdminSection';
+import Table from '@/Components/Table';
+
+function CreateModule({ module }) {
+  const { t } = useTranslation();
+  const { flash } = usePage().props;
+
+  const { data, setData, post, processing, errors, reset } = useForm({
+    title: '',
+    description: '',
+    image: null,
+    content: null,
+    video: '',
+    attachment: null,
+    author: '',
+  });
+
+  const headerTable = [
+    'ID',
+    'Title',
+    'Description',
+    'Image',
+    'Content',
+    'Video',
+    'Attachment',
+    'Author',
+    'Post Test',
+    'Pre Test',
+    'Action',
+  ];
+
+  const selectedData = [
+    'id',
+    'title',
+    'description',
+    'image',
+    'content',
+    'video',
+    'attachment',
+    'author',
+  ];
+
+  const tableButtons = [
+    {
+      label: 'add_pre_test',
+      link: 'module/',
+      link2: '/pre-test',
+      withId: true,
+    },
+    {
+      label: 'add_post_test',
+      link: 'module/',
+      link2: '/post-test',
+      withId: true,
+    },
+  ];
+
+  const tableActions = [
+    {
+      label: 'edit_button',
+      link: 'module/edit',
+      withId: true,
+      color: 'info',
+    },
+    {
+      label: 'delete_button',
+      route: 'module.destroy',
+      withId: true,
+      color: 'danger',
+      type: 'delete',
+    },
+  ];
+
+  const submit = e => {
+    e.preventDefault();
+
+    post(route('module.store'), {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  };
+
+  return (
+    <AdminLayout>
+      <AdminSection className="flex flex-col gap-6 mb-6">
+        <TitleSection title="create_module_title" />
+        {flash.success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+            <strong className="font-bold mr-2">Success!</strong>
+            <span className="inline">{flash.success}</span>
+          </div>
+        )}
+        <form className="lg:w-3/4 flex flex-col gap-6 w-full" onSubmit={submit}>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="title" value={t('form_label_title')} />
+            </div>
+            <div className="lg:w-3/4">
+              <TextInput
+                id="title"
+                name="title"
+                type="text"
+                value={data.title}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('title', e.target.value)}
+              />
+              <span className="text-red-600">{errors.title}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="description"
+                value={t('form_label_description')}
+              />
+            </div>
+            <div className="lg:w-3/4">
+              <TextInput
+                id="description"
+                name="description"
+                typeForm="textarea"
+                value={data.description}
+                className="block w-full"
+                isFocused={true}
+                rows={8}
+                onChange={e => setData('description', e.target.value)}
+              />
+              <span className="text-red-600">{errors.description}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="image" value={t('form_label_image')} />
+            </div>
+            <div className="lg:w-3/4">
+              <input
+                type="file"
+                name="image"
+                id="image"
+                className="block"
+                onChange={e => setData('image', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.image}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="video" value={t('form_label_video')} />
+            </div>
+            <div className="lg:w-3/4">
+              <TextInput
+                id="video"
+                name="video"
+                typeForm="textarea"
+                value={data.video}
+                className="block w-full"
+                isFocused={true}
+                rows={8}
+                onChange={e => setData('video', e.target.value)}
+              />
+              <span className="text-red-600">{errors.video}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="attachment"
+                value={t('form_label_attachment')}
+              />
+            </div>
+            <div className="lg:w-3/4">
+              <input
+                type="file"
+                name="attachment"
+                id="attachment"
+                className="block"
+                onChange={e => setData('attachment', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.attachment}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="author" value={t('form_label_author')} />
+            </div>
+            <div className="lg:w-3/4">
+              <TextInput
+                id="author"
+                name="author"
+                typeForm="textarea"
+                value={data.author}
+                className="block w-full"
+                isFocused={true}
+                rows={8}
+                onChange={e => setData('author', e.target.value)}
+              />
+              <span className="text-red-600">{errors.author}</span>
+            </div>
+          </div>
+          <PrimaryButton
+            type="secondary"
+            className="w-fit"
+            disabled={processing}
+          >
+            {t('submit')}
+          </PrimaryButton>
+        </form>
+      </AdminSection>
+      <AdminSection>
+        <TitleSection title="list_module_title" className="mb-5" />
+        <Table
+          header={headerTable}
+          data={module}
+          selectedData={selectedData}
+          tableButtons={tableButtons}
+          tableActions={tableActions}
+          pathImage="modules/"
+        />
+      </AdminSection>
+    </AdminLayout>
+  );
+}
+
+export default CreateModule;

@@ -20,9 +20,7 @@ return new class extends Migration
             $table->string('content');
             $table->string('video');
             $table->string('attachment');
-            $table->string('resource_person');
-            $table->integer('pre_total_question');
-            $table->integer('post_total_question');
+            $table->string('author');
         });
     }
 
