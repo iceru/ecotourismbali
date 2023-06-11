@@ -13,7 +13,7 @@ function EditBadge() {
 
   const { badge } = usePage().props;
 
-  const { data, setData, patch, processing, errors } = useForm({
+  const { data, setData, post, processing, errors } = useForm({
     name: badge.name || '',
     image: '',
   });
@@ -21,7 +21,7 @@ function EditBadge() {
   const submit = e => {
     e.preventDefault();
 
-    patch(route('badge.update', badge.id));
+    post(route('badge.update', badge.id));
   };
 
   return (

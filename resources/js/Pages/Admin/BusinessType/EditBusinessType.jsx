@@ -13,14 +13,14 @@ function EditBusinessType() {
 
   const { business_type } = usePage().props;
 
-  const { data, setData, patch, processing } = useForm({
+  const { data, setData, post, processing } = useForm({
     name: business_type.name || '',
   });
 
   const submit = e => {
     e.preventDefault();
 
-    patch(route('business_type.update', business_type.id));
+    post(route('business_type.update', business_type.id));
   };
 
   return (

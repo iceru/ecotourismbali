@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "develop": "concurrently --kill-others \"vite\" \"php artisan serve\""
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
@@ -11,6 +12,7 @@
         "@vitejs/plugin-react": "^3.0.0",
         "autoprefixer": "^10.4.12",
         "axios": "^1.1.2",
+        "concurrently": "^8.2.0",
         "eslint": "^8.41.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-prettier": "^4.2.1",

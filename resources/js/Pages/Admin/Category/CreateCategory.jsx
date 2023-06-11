@@ -2,13 +2,14 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
+import SelectInput from '@/Components/SelectInput';
 
-function CreateProgram({ program }) {
+function CreateCategory({ category }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
@@ -17,20 +18,20 @@ function CreateProgram({ program }) {
     image: null,
   });
 
-  const headerTable = ['ID', 'Name', 'Image', 'Action'];
+  const headerTable = ['ID', 'Name', 'Action'];
 
-  const selectedData = ['id', 'name', 'image'];
+  const selectedData = ['id', 'name'];
 
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'program/edit',
+      link: 'category/edit',
       withId: true,
       color: 'info',
     },
     {
       label: 'delete_button',
-      route: 'program.destroy',
+      route: 'category.destroy',
       withId: true,
       color: 'danger',
       type: 'delete',
@@ -40,7 +41,7 @@ function CreateProgram({ program }) {
   const submit = e => {
     e.preventDefault();
 
-    post(route('program.store'), {
+    post(route('category.store'), {
       onSuccess: () => {
         reset();
       },
@@ -50,7 +51,7 @@ function CreateProgram({ program }) {
   return (
     <AdminLayout>
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="create_program_title" />
+        <TitleSection title="create_category_title" />
         {flash.success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
             <strong className="font-bold mr-2">Success!</strong>
@@ -75,21 +76,6 @@ function CreateProgram({ program }) {
               <span className="text-red-600">{errors.name}</span>
             </div>
           </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="image" value={t('form_label_image')} />
-            </div>
-            <div className="lg:w-3/4">
-              <input
-                type="file"
-                name="image"
-                id="image"
-                className="block"
-                onChange={e => setData('image', e.target.files[0])}
-              />
-              <span className="text-red-600">{errors.image}</span>
-            </div>
-          </div>
           <PrimaryButton
             type="secondary"
             className="w-fit"
@@ -100,17 +86,17 @@ function CreateProgram({ program }) {
         </form>
       </AdminSection>
       <AdminSection className="flex flex-col gap-6">
-        <TitleSection title="list_program_title" />
+        <TitleSection title="list_category_title" />
         <Table
           header={headerTable}
-          data={program}
+          data={category}
           selectedData={selectedData}
           tableActions={tableActions}
-          pathImage="programs/"
+          pathImage="categories/"
         />
       </AdminSection>
     </AdminLayout>
   );
 }
 
-export default CreateProgram;
+export default CreateCategory;

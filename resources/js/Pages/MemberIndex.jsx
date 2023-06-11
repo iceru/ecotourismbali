@@ -40,7 +40,7 @@ function MemberIndex() {
           </ul>
         </div>
       </div>
-    </Guset>
+    </Guest>
   );
 }
 

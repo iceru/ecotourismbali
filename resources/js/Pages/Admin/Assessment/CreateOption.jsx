@@ -2,15 +2,16 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
 import BackTo from '../Components/BackTo';
 
-function CreateOption() {
+function CreateOption({ assessment_option, assessment_question }) {
   const { t } = useTranslation();
+  const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
     option: '',
@@ -18,20 +19,54 @@ function CreateOption() {
     option_no: '',
   });
 
-  const headerTable = ['ID', 'Question No', 'Title', 'Question', 'Action'];
+  const headerTable = ['ID', 'Option No', 'Option', 'Point', 'Action'];
+
+  const selectedData = ['id', 'option_no', 'option', 'point'];
+
+  const tableActions = [
+    {
+      label: 'edit_button',
+      link: '/assessment/option/edit',
+      withId: true,
+      color: 'info',
+    },
+    {
+      label: 'delete_button',
+      route: 'assessment_option.destroy',
+      withId: true,
+      color: 'danger',
+      type: 'delete',
+    },
+  ];
+
+  const submit = e => {
+    e.preventDefault();
+
+    post(route('assessment_option.store', assessment_question.id), {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  };
 
   return (
     <AdminLayout>
       <BackTo
-        title="back_to_list_question"
-        link="/admin/assessment/question/create"
+        title="back_to_question"
+        link={`/assessment/${assessment_question.id}/question`}
       />
-      <AdminSection addClass="mb-6">
-        <h4 className="font-bold text-lg">Question 1</h4>
+      <AdminSection className="mb-6">
+        <h4 className="font-bold text-lg">{assessment_question.title}</h4>
       </AdminSection>
-      <AdminSection addClass="flex flex-col gap-6 mb-6">
+      <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="create_option_title" />
-        <form className="lg:w-3/4 flex flex-col gap-6">
+        {flash.success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+            <strong className="font-bold mr-2">Success!</strong>
+            <span className="inline">{flash.success}</span>
+          </div>
+        )}
+        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel
@@ -75,7 +110,7 @@ function CreateOption() {
               <TextInput
                 id="point"
                 name="point"
-                type="text"
+                type="number"
                 value={data.point}
                 className="block w-full"
                 isFocused={true}
@@ -93,8 +128,13 @@ function CreateOption() {
         </form>
       </AdminSection>
       <AdminSection addClass="flex flex-col gap-6">
-        <TitleSection title="list_option_title" />
-        <Table header={headerTable} />
+        <TitleSection title="list_option_title" className="mb-6" />
+        <Table
+          header={headerTable}
+          data={assessment_option}
+          tableActions={tableActions}
+          selectedData={selectedData}
+        />
       </AdminSection>
     </AdminLayout>
   );
