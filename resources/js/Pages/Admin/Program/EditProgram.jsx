@@ -7,64 +7,49 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import BackTo from '../Components/BackTo';
+import { useEffect } from 'react';
 
-function EditAssessment() {
+function EditProgram() {
   const { t } = useTranslation();
 
-  const { assessment } = usePage().props;
+  const { program } = usePage().props;
 
   const { data, setData, post, processing, errors } = useForm({
-    title: assessment.title || '',
-    description: assessment.description || '',
-    image: '',
+    name: program.name || '',
+    image: null,
   });
 
   const submit = e => {
     e.preventDefault();
 
-    post(route('assessment.update', assessment.id));
+    post(route('program.update', program.id));
   };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_assessment" link="/assessment" />
+      <BackTo title="back_to_list_program" link="/program" />
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="edit_assessment_title" />
+        <TitleSection title="edit_program_title" />
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="title" value={t('form_label_title')} />
+              <InputLabel htmlFor="name" value={t('form_label_name')} />
             </div>
             <div className="lg:w-3/4">
               <TextInput
-                id="title"
-                name="title"
+                id="name"
+                name="name"
                 type="text"
-                value={data.title}
+                value={data.name}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('title', e.target.value)}
+                onChange={e => setData('name', e.target.value)}
               />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="description"
-                value={t('form_label_description')}
-              />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="description"
-                name="description"
-                type="text"
-                typeForm="textarea"
-                value={data.description}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('description', e.target.value)}
-              />
+              <span className="text-red-600">{errors.name}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -79,6 +64,7 @@ function EditAssessment() {
                 onChange={e => setData('image', e.target.files[0])}
               />
             </div>
+            <span className="text-red-600">{errors.image}</span>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>
             {t('submit')}
@@ -89,4 +75,4 @@ function EditAssessment() {
   );
 }
 
-export default EditAssessment;
+export default EditProgram;
