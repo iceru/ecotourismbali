@@ -7,7 +7,9 @@ import {
   faBars,
   faFileClipboard,
   faHome,
+  faListAlt,
   faPencilRuler,
+  faTasks,
   faTimes,
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
@@ -90,13 +92,40 @@ function AdminLayout({ children }) {
               </Link>
             </li>
             <li>
-              <a href="#">
+              <Link
+                href="/module"
+                className={url.startsWith('/module') ? 'font-bold' : ''}
+              >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
                   icon={faFileClipboard}
                 />
                 {t('module_test')}
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/category"
+                className={url.startsWith('/category') ? 'font-bold' : ''}
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faListAlt}
+                />
+                {t('category')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/program"
+                className={url.startsWith('/program') ? 'font-bold' : ''}
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faTasks}
+                />
+                {t('program')}
+              </Link>
             </li>
             <li>
               <Link

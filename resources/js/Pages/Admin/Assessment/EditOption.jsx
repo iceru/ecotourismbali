@@ -13,7 +13,7 @@ function EditQuestion() {
 
   const { assessment_option, assessment_question } = usePage().props;
 
-  const { data, setData, patch, processing } = useForm({
+  const { data, setData, post, processing } = useForm({
     option_no: assessment_option.option_no || '',
     option: assessment_option.option || '',
     point: assessment_option.point || '',
@@ -22,7 +22,7 @@ function EditQuestion() {
   const submit = e => {
     e.preventDefault();
 
-    patch(route('assessment_option.update', assessment_option.id));
+    post(route('assessment_option.update', assessment_option.id));
   };
 
   return (

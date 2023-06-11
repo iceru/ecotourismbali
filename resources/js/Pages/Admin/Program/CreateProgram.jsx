@@ -6,29 +6,60 @@ import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
-import BackTo from '../Components/BackTo';
+import Table from '@/Components/Table';
+import { useEffect } from 'react';
 
-function EditVerifiedBadge() {
+function CreateProgram({ program }) {
   const { t } = useTranslation();
+  const { flash } = usePage().props;
 
-  const { badge } = usePage().props;
-
-  const { data, setData, post, processing, errors } = useForm({
-    name: badge.name || '',
-    image: '',
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: '',
+    image: null,
   });
+
+  const headerTable = ['ID', 'Name', 'Image', 'Action'];
+
+  const selectedData = ['id', 'name', 'image'];
+
+  const tableActions = [
+    {
+      label: 'edit_button',
+      link: 'program/edit',
+      withId: true,
+      color: 'info',
+    },
+    {
+      label: 'delete_button',
+      route: 'program.destroy',
+      withId: true,
+      color: 'danger',
+      type: 'delete',
+    },
+  ];
 
   const submit = e => {
     e.preventDefault();
 
-    post(route('verified_badge.update', badge.id));
+    post(route('program.store'), {
+      onSuccess: () => {
+        reset();
+      },
+    });
   };
-
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_verified_badge" link="/verified-badge" />
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="edit_verified_badge_title" />
+        <TitleSection title="create_program_title" />
+        {flash.success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+            <strong className="font-bold mr-2">Success!</strong>
+            <span className="inline">{flash.success}</span>
+          </div>
+        )}
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
@@ -44,6 +75,7 @@ function EditVerifiedBadge() {
                 isFocused={true}
                 onChange={e => setData('name', e.target.value)}
               />
+              <span className="text-red-600">{errors.name}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -55,17 +87,33 @@ function EditVerifiedBadge() {
                 type="file"
                 name="image"
                 id="image"
+                className="block"
                 onChange={e => setData('image', e.target.files[0])}
               />
+              <span className="text-red-600">{errors.image}</span>
             </div>
           </div>
-          <PrimaryButton className="w-fit" disabled={processing}>
+          <PrimaryButton
+            type="secondary"
+            className="w-fit"
+            disabled={processing}
+          >
             {t('submit')}
           </PrimaryButton>
         </form>
+      </AdminSection>
+      <AdminSection className="flex flex-col gap-6">
+        <TitleSection title="list_program_title" />
+        <Table
+          header={headerTable}
+          data={program}
+          selectedData={selectedData}
+          tableActions={tableActions}
+          pathImage="programs/"
+        />
       </AdminSection>
     </AdminLayout>
   );
 }
 
-export default EditVerifiedBadge;
+export default CreateProgram;

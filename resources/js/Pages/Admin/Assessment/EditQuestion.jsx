@@ -13,7 +13,7 @@ function EditQuestion() {
 
   const { assess_question, assessment } = usePage().props;
 
-  const { data, setData, patch, processing } = useForm({
+  const { data, setData, post, processing } = useForm({
     question_no: assess_question.question_no || '',
     title: assess_question.title || '',
     question: assess_question.question || '',
@@ -22,7 +22,7 @@ function EditQuestion() {
   const submit = e => {
     e.preventDefault();
 
-    patch(route('assessment_question.update', assess_question.id));
+    post(route('assessment_question.update', assess_question.id));
   };
 
   return (
