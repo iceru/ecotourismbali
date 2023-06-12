@@ -24,4 +24,12 @@ class MemberController extends Controller
             'user' => User::find(Auth::id()),
         ]);
     }
+
+    public function profile()
+    {
+        return Inertia::render('Member/MemberProfile', [
+            'member' => User::find(Auth::id())->with('member'),
+            'user' => User::find(Auth::id()),
+        ]);
+    }
 }

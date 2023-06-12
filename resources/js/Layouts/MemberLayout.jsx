@@ -71,7 +71,12 @@ function MemberLayout({ children, state }) {
             {state !== 'locked' && (
               <>
                 <li>
-                  <Link href="#">
+                  <Link
+                    href={route('member.profile')}
+                    className={
+                      url.startsWith('/member/profile') ? 'font-bold' : ''
+                    }
+                  >
                     <FontAwesomeIcon
                       className="fa-fw mr-2 text-primary"
                       icon={faUser}

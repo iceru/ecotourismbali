@@ -47,6 +47,7 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
     Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
+    Route::get('/member/profile', [MemberController::class, 'profile'])->name('member.profile');
 
     Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
 });
