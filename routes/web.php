@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemberAssessment;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberListController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\VerifiedBadgeController;
 use Illuminate\Foundation\Application;
@@ -106,6 +107,11 @@ Route::delete('/program/delete/{id}', [ProgramController::class, 'destroy'])->na
 Route::get('/member/index', [AdminMemberController::class, 'index'])->name('member.index');
 Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('member.detail');
 
+Route::get('/module', [ModuleController::class, 'index'])->name('module.index');
+Route::post('/module/store', [ModuleController::class, 'store'])->name('module.store');
+Route::get('/module/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
+Route::patch('/module/update/{id}', [ModuleController::class, 'update'])->name('module.update');
+Route::delete('/module/delete/{id}', [ModuleController::class, 'destroy'])->name('module.destroy');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
