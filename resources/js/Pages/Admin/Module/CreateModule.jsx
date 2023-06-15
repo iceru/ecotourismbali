@@ -44,7 +44,7 @@ function CreateModule({ module }) {
     'content',
     'video',
     'attachment',
-    'author',
+    'resource_person',
   ];
 
   const tableButtons = [
@@ -84,6 +84,9 @@ function CreateModule({ module }) {
     post(route('module.store'), {
       onSuccess: () => {
         reset();
+      },
+      onError: error => {
+        console.log(error);
       },
     });
   };
@@ -139,6 +142,60 @@ function CreateModule({ module }) {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="video" value={t('form_label_video')} />
+            </div>
+            <div className="lg:w-3/4">
+              <TextInput
+                id="video"
+                name="video"
+                value={data.video}
+                className="block w-full"
+                isFocused={true}
+                rows={8}
+                onChange={e => setData('video', e.target.value)}
+              />
+              <span className="text-red-600">{errors.video}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="resource_person"
+                value={t('form_label_author')}
+              />
+            </div>
+            <div className="lg:w-3/4">
+              <TextInput
+                id="resource_person"
+                name="resource_person"
+                value={data.resource_person}
+                className="block w-full"
+                isFocused={true}
+                rows={8}
+                onChange={e => setData('resource_person', e.target.value)}
+              />
+              <span className="text-red-600">{errors.resource_person}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="content" value={t('form_label_content')} />
+            </div>
+            <div className="lg:w-3/4">
+              <TextInput
+                id="content"
+                name="content"
+                value={data.content}
+                className="block w-full"
+                isFocused={true}
+                rows={8}
+                onChange={e => setData('content', e.target.value)}
+              />
+              <span className="text-red-600">{errors.content}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
             <div className="lg:w-3/4">
@@ -150,24 +207,6 @@ function CreateModule({ module }) {
                 onChange={e => setData('image', e.target.files[0])}
               />
               <span className="text-red-600">{errors.image}</span>
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="video" value={t('form_label_video')} />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="video"
-                name="video"
-                typeForm="textarea"
-                value={data.video}
-                className="block w-full"
-                isFocused={true}
-                rows={8}
-                onChange={e => setData('video', e.target.value)}
-              />
-              <span className="text-red-600">{errors.video}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -186,24 +225,6 @@ function CreateModule({ module }) {
                 onChange={e => setData('attachment', e.target.files[0])}
               />
               <span className="text-red-600">{errors.attachment}</span>
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="author" value={t('form_label_author')} />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="author"
-                name="author"
-                typeForm="textarea"
-                value={data.author}
-                className="block w-full"
-                isFocused={true}
-                rows={8}
-                onChange={e => setData('author', e.target.value)}
-              />
-              <span className="text-red-600">{errors.author}</span>
             </div>
           </div>
           <PrimaryButton

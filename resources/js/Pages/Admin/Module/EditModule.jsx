@@ -16,9 +16,9 @@ function EditAssessment() {
   const { data, setData, patch, processing, errors } = useForm({
     title: module.title || '',
     description: module.description || '',
-    description: module.content || '',
-    description: module.video || '',
-    description: module.author || '',
+    content: module.content || '',
+    video: module.video || '',
+    resource_person: module.resource_person || '',
     image: '',
     attachment: '',
   });
@@ -73,14 +73,20 @@ function EditAssessment() {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="image" value={t('form_label_image')} />
+              <InputLabel
+                htmlFor="resource_person"
+                value={t('form_label_author')}
+              />
             </div>
             <div className="lg:w-3/4">
-              <input
-                type="file"
-                name="image"
-                id="image"
-                onChange={e => setData('image', e.target.files[0])}
+              <TextInput
+                id="resource_person"
+                name="resource_person"
+                type="text"
+                value={data.resource_person}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('resource_person', e.target.value)}
               />
             </div>
           </div>
@@ -118,6 +124,19 @@ function EditAssessment() {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="image" value={t('form_label_image')} />
+            </div>
+            <div className="lg:w-3/4">
+              <input
+                type="file"
+                name="image"
+                id="image"
+                onChange={e => setData('image', e.target.files[0])}
+              />
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="attachment"
                 value={t('form_label_attachment')}
@@ -129,22 +148,6 @@ function EditAssessment() {
                 name="attachment"
                 id="attachment"
                 onChange={e => setData('attachment', e.target.files[0])}
-              />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="author" value={t('form_label_author')} />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="author"
-                name="author"
-                type="text"
-                value={data.author}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('author', e.target.value)}
               />
             </div>
           </div>

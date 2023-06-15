@@ -8,7 +8,7 @@ import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
 
-function CreateProgram({ program }) {
+function CreateBadge({ badge }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
@@ -24,13 +24,13 @@ function CreateProgram({ program }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'program/edit',
+      link: 'badge/edit',
       withId: true,
       color: 'info',
     },
     {
       label: 'delete_button',
-      route: 'program.destroy',
+      route: 'badge.destroy',
       withId: true,
       color: 'danger',
       type: 'delete',
@@ -40,7 +40,7 @@ function CreateProgram({ program }) {
   const submit = e => {
     e.preventDefault();
 
-    post(route('program.store'), {
+    post(route('badge.store'), {
       onSuccess: () => {
         reset();
       },
@@ -50,7 +50,7 @@ function CreateProgram({ program }) {
   return (
     <AdminLayout>
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="create_program_title" />
+        <TitleSection title="create_badge_title" />
         {flash.success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
             <strong className="font-bold mr-2">Success!</strong>
@@ -100,17 +100,17 @@ function CreateProgram({ program }) {
         </form>
       </AdminSection>
       <AdminSection className="flex flex-col gap-6">
-        <TitleSection title="list_program_title" />
+        <TitleSection title="list_badge_title" />
         <Table
           header={headerTable}
-          data={program}
+          data={badge}
           selectedData={selectedData}
           tableActions={tableActions}
-          pathImage="programs/"
+          pathImage="badges/"
         />
       </AdminSection>
     </AdminLayout>
   );
 }
 
-export default CreateProgram;
+export default CreateBadge;
