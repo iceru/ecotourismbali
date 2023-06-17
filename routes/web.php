@@ -53,6 +53,8 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
 
     Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
+    Route::get('/member/assessment/start', [MemberAssessment::class, 'start'])->name('member.assessment.start');
+    Route::post('/member/assessment/store/{id}/{userId}', [MemberAssessment::class, 'store'])->name('member.assessment.store');
 });
 
 // route below this must be move into middleware auth with role:admin after we have user admin
