@@ -65,12 +65,9 @@ class AssessmentQuestionController extends Controller
         $assessment_question->question = $request->question;
         $assessment_question->question_no = $request->question_no;
 
-        $assessment = Assessment::find($id);
-        $assessment_question->assessment_id = $assessment->id;
-
         $assessment_question->save();
 
-        return Redirect::route('assessment_question.index', $assessment->id);
+        return Redirect::route('assessment_question.index', $assessment_question->assessment->id);
     }
 
     public function destroy(Request $request)

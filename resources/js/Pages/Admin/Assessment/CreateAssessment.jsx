@@ -8,11 +8,13 @@ import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
 import SelectInput from '@/Components/SelectInput';
+import { useState, useEffect } from 'react';
+import 'react-quill/dist/quill.snow.css';
+import Editor from '../Components/Editor';
 
 function CreateAssessment({ assessment, business_type }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
-
   const { data, setData, post, processing, errors, reset } = useForm({
     title: '',
     description: '',
@@ -69,9 +71,50 @@ function CreateAssessment({ assessment, business_type }) {
     post(route('assessment.store'), {
       onSuccess: () => {
         reset();
+        setValue('');
       },
     });
   };
+
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    setData('description', value);
+  }, [value]);
+
+  // const imageHandler = e => {
+  //   const editor = quillRef.current.getEditor();
+  //   console.log(editor);
+  //   const input = document.createElement('input');
+  //   input.setAttribute('type', 'file');
+  //   input.setAttribute('accept', 'image/*');
+  //   input.click();
+
+  //   input.onchange = async () => {
+  //     const file = input.files[0];
+  //     if (/^image\//.test(file.type)) {
+  //       const formData = new FormData();
+  //       formData.append('image', file);
+  //       const res = await ImageUpload(formData); // upload data into server or aws or cloudinary
+  //       const url = res?.data?.url;
+  //       editor.insertEmbed(editor.getSelection(), 'image', url);
+  //     } else {
+  //       ErrorToast('You could only upload images.');
+  //     }
+  //   };
+  // };
+
+  // const ImageUpload = async formData => {
+  //   // console.log(JSON.parse(file));
+  //   axios({
+  //     method: 'post',
+  //     url: route('admin.upload'),
+  //     data: {
+  //       formData,
+  //     },
+  //     headers: { 'Content-Type': 'multipart/form-data' },
+  //   });
+  // };
 
   return (
     <AdminLayout>
@@ -83,12 +126,12 @@ function CreateAssessment({ assessment, business_type }) {
             <span className="inline">{flash.success}</span>
           </div>
         )}
-        <form className="lg:w-3/4 flex flex-col gap-6 w-full" onSubmit={submit}>
+        <form className=" flex flex-col gap-6 w-full" onSubmit={submit}>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="title"
                 name="title"
@@ -102,34 +145,25 @@ function CreateAssessment({ assessment, business_type }) {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="description"
                 value={t('form_label_description')}
               />
             </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="description"
-                name="description"
-                typeForm="textarea"
-                value={data.description}
-                className="block w-full"
-                isFocused={true}
-                rows={8}
-                onChange={e => setData('description', e.target.value)}
-              />
+            <div className="lg:w-4/5">
+              <Editor onChange={setValue} value={value} />
               <span className="text-red-600">{errors.description}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="business_type"
                 value={t('form_label_business_type')}
               />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <SelectInput
                 id="business_type"
                 name="business_type"
@@ -151,10 +185,10 @@ function CreateAssessment({ assessment, business_type }) {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <input
                 type="file"
                 name="image"
@@ -182,6 +216,7 @@ function CreateAssessment({ assessment, business_type }) {
           selectedData={selectedData}
           tableButtons={tableButtons}
           tableActions={tableActions}
+          descHtml="description"
           pathImage="assessments/"
         />
       </AdminSection>
