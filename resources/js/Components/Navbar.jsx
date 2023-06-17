@@ -26,7 +26,7 @@ function Navbar() {
   }
   return (
     <>
-      <div className="border border-gray-400">
+      {/* <div className="border border-gray-400">
         <div className="container flex justify-between py-[7px]">
           <div className="flex items-center text-[#b0b0b0] text-[12px]">
             <div className="flex mr-6 items-center">
@@ -110,7 +110,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <nav className="flex bg-white justify-between items-center py-[7px] max-w-[1300px] px-3 mx-auto">
         <div className="logo">
           <img src={Logo} alt="Eco Tourism Bali" className="w-[80px]" />

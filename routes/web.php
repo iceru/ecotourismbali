@@ -48,6 +48,8 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
     Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
     Route::get('/member/profile', [MemberController::class, 'profile'])->name('member.profile');
+    Route::get('/member/profile/edit/{id}', [MemberController::class, 'editProfile'])->name('member.profile.edit');
+    Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
 
     Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
 });

@@ -20,6 +20,7 @@ import { useMediaQuery } from 'react-responsive';
 function MemberLayout({ children, state }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
+  const { auth } = usePage().props;
 
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
@@ -160,12 +161,19 @@ function MemberLayout({ children, state }) {
           <div className="flex gap-4 items-center justify-between mb-4 lg:mb-0 lg:justify-start w-full lg:w-auto order-1 lg:order-2">
             <div>
               <h5>
-                Hello, <strong>Member 1</strong>
+                Hello, <strong>{auth.user.name}</strong>
               </h5>
               <div className="text-primary text-sm font-semibold">Member</div>
             </div>
             <div>
-              <PrimaryButton>{t('logout')}</PrimaryButton>
+              <PrimaryButton
+                as="link"
+                type="danger"
+                href={route('logout')}
+                method="post"
+              >
+                {t('logout')}
+              </PrimaryButton>
             </div>
           </div>
         </AdminSection>
