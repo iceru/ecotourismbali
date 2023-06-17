@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import BackTo from '../Components/BackTo';
+import { useState, useEffect } from 'react';
+import 'react-quill/dist/quill.snow.css';
+import Editor from '../Components/Editor';
 
 function EditQuestion() {
   const { t } = useTranslation();
@@ -25,6 +28,12 @@ function EditQuestion() {
     post(route('assessment_question.update', assess_question.id));
   };
 
+  const [value, setValue] = useState(assess_question.question);
+
+  useEffect(() => {
+    setData('question', value);
+  }, [value]);
+
   return (
     <AdminLayout>
       <BackTo
@@ -33,15 +42,15 @@ function EditQuestion() {
       />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />
-        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
+        <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="question_no"
                 value={t('form_label_question_no')}
               />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="question_no"
                 name="question_no"
@@ -54,10 +63,10 @@ function EditQuestion() {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="title"
                 name="title"
@@ -70,20 +79,11 @@ function EditQuestion() {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="question" value={t('form_label_question')} />
             </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="question"
-                name="question"
-                type="text"
-                typeForm="textarea"
-                value={data.question}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('question', e.target.value)}
-              />
+            <div className="lg:w-4/5">
+              <Editor onChange={setValue} value={value} />
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>
