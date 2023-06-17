@@ -51,6 +51,7 @@ class AssessmentController extends Controller
     {
         return Inertia::render('Admin/Assessment/EditAssessment', [
             'assessment' => Assessment::find($id),
+            'business_type' => BusinessType::all(),
         ]);
     }
 

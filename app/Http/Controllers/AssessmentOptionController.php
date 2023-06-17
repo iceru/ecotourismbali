@@ -15,7 +15,7 @@ class AssessmentOptionController extends Controller
     {
         return Inertia::render('Admin/Assessment/CreateOption', [
             'assessment_option' => AssessmentOption::where('assessment_question_id', $id)->get(),
-            'assessment_question' => AssessmentQuestion::find($id),
+            'assessment_question' => AssessmentQuestion::where('id', $id)->with('assessment')->first(),
         ]);
     }
 
@@ -66,12 +66,9 @@ class AssessmentOptionController extends Controller
         $assessment_option->option = $request->option;
         $assessment_option->point = $request->point;
 
-        $assessment_question = AssessmentQuestion::find($id);
-        $assessment_option->assessment_question_id = $assessment_question->id;
-
         $assessment_option->save();
 
-        return Redirect::route('assessment_option.index', $id);
+        return Redirect::route('assessment_option.index', $assessment_option->assessment_question_id);
     }
 
     public function destroy(Request $request)

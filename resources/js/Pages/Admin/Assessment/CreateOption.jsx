@@ -19,9 +19,9 @@ function CreateOption({ assessment_option, assessment_question }) {
     option_no: '',
   });
 
-  const headerTable = ['ID', 'Option No', 'Option', 'Point', 'Action'];
+  const headerTable = ['Option No', 'Option', 'Point', 'Action'];
 
-  const selectedData = ['id', 'option_no', 'option', 'point'];
+  const selectedData = ['option_no', 'option', 'point'];
 
   const tableActions = [
     {
@@ -49,11 +49,13 @@ function CreateOption({ assessment_option, assessment_question }) {
     });
   };
 
+  console.log(assessment_question);
+
   return (
     <AdminLayout>
       <BackTo
         title="back_to_question"
-        link={`/assessment/${assessment_question.id}/question`}
+        link={`/assessment/${assessment_question.assessment.id}/question`}
       />
       <AdminSection className="mb-6">
         <h4 className="font-bold text-lg">{assessment_question.title}</h4>
@@ -66,15 +68,15 @@ function CreateOption({ assessment_option, assessment_question }) {
             <span className="inline">{flash.success}</span>
           </div>
         )}
-        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
+        <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="option_no"
                 value={t('form_label_option_no')}
               />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="option_no"
                 name="option_no"
@@ -87,10 +89,10 @@ function CreateOption({ assessment_option, assessment_question }) {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="option" value={t('form_label_option')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="option"
                 name="option"
@@ -103,10 +105,10 @@ function CreateOption({ assessment_option, assessment_question }) {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="point" value={t('form_label_point')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="point"
                 name="point"
