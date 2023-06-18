@@ -15,6 +15,7 @@ use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\MemberModuleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PostTestQuestionController;
+use App\Http\Controllers\PreTestOptionController;
 use App\Http\Controllers\PreTestQuestionController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\VerifiedBadgeController;
@@ -138,6 +139,13 @@ Route::post('/post-test-question/store', [PostTestQuestionController::class, 'st
 Route::get('/post-test-question/edit/{id}', [PostTestQuestionController::class, 'edit'])->name('post_test_question.edit');
 Route::patch('/post-test-question/update/{id}', [PostTestQuestionController::class, 'update'])->name('post_test_question.update');
 Route::delete('/post-test-question/delete/{id}', [PostTestQuestionController::class, 'destroy'])->name('post_test_question.destroy');
+
+Route::get('/pre-test-option', [PreTestOptionController::class, 'index'])->name('pre_test_option.index');
+Route::post('/pre-test-option/store', [PreTestOptionController::class, 'store'])->name('pre_test_option.store');
+Route::get('/pre-test-option/edit/{id}', [PreTestOptionController::class, 'edit'])->name('pre_test_option.edit');
+Route::patch('/pre-test-option/update/{id}', [PreTestOptionController::class, 'update'])->name('pre_test_option.update');
+Route::delete('/pre-test-option/delete/{id}', [PreTestOptionController::class, 'destroy'])->name('pre_test_option.destroy');
+
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
