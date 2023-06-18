@@ -14,6 +14,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\MemberModuleController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PreTestQuestionController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\VerifiedBadgeController;
 use Illuminate\Foundation\Application;
@@ -121,9 +122,15 @@ Route::delete('/module/delete/{id}', [ModuleController::class, 'destroy'])->name
 
 Route::get('/member-module', [MemberModuleController::class, 'index'])->name('member_module.index');
 Route::post('/member-module/store', [MemberModuleController::class, 'store'])->name('member_module.store');
-Route::get('/module/edit/{id}', [MemberModuleController::class, 'edit'])->name('member_module.edit');
-Route::patch('/module/update/{id}', [MemberModuleController::class, 'update'])->name('member_module.update');
-Route::delete('/module/delete/{id}', [MemberModuleController::class, 'destroy'])->name('member_module.destroy');
+Route::get('/member-module/edit/{id}', [MemberModuleController::class, 'edit'])->name('member_module.edit');
+Route::patch('/member-module/update/{id}', [MemberModuleController::class, 'update'])->name('member_module.update');
+Route::delete('/member-module/delete/{id}', [MemberModuleController::class, 'destroy'])->name('member_module.destroy');
+
+Route::get('/pre-test-question', [PreTestQuestionController::class, 'index'])->name('pre_test_question.index');
+Route::post('/pre-test-question/store', [PreTestQuestionController::class, 'store'])->name('pre_test_question.store');
+Route::get('/pre-test-question/edit/{id}', [PreTestQuestionController::class, 'edit'])->name('pre_test_question.edit');
+Route::patch('/pre-test-question/update/{id}', [PreTestQuestionController::class, 'update'])->name('pre_test_question.update');
+Route::delete('/pre-test-question/delete/{id}', [PreTestQuestionController::class, 'destroy'])->name('pre_test_question.destroy');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
