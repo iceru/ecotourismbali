@@ -34,7 +34,7 @@ class PreTestOptionController extends Controller
 
     public function edit($id)
     {
-        return Inertia::render('Admin/PreTestQuestion/EditPreTestQuestion', [
+        return Inertia::render('Admin/PreTestOption/EditPreTestOption', [
             'pre_test_option' => PreTestOption::find($id),
         ]);
     }
