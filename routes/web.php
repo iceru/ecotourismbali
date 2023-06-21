@@ -14,6 +14,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\MemberModuleController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PostTestModuleAnswerController;
 use App\Http\Controllers\PostTestOptionController;
 use App\Http\Controllers\PostTestQuestionController;
 use App\Http\Controllers\PreTestModuleAnswerController;
@@ -159,6 +160,12 @@ Route::post('/pre-test-module-answer/store', [PreTestModuleAnswerController::cla
 Route::get('/pre-test-module-answer/edit/{id}', [PreTestModuleAnswerController::class, 'edit'])->name('pre_test_module_answer.edit');
 Route::patch('/pre-test-module-answer/update/{id}', [PreTestModuleAnswerController::class, 'update'])->name('pre_test_module_answer.update');
 Route::delete('/pre-test-module-answer/delete/{id}', [PreTestModuleAnswerController::class, 'destroy'])->name('pre_test_module_answer.destroy');
+
+Route::get('/post-test-module-answer', [PostTestModuleAnswerController::class, 'index'])->name('post_test_module_answer.index');
+Route::post('/post-test-module-answer/store', [PostTestModuleAnswerController::class, 'store'])->name('post_test_module_answer.store');
+Route::get('/post-test-module-answer/edit/{id}', [PostTestModuleAnswerController::class, 'edit'])->name('post_test_module_answer.edit');
+Route::patch('/post-test-module-answer/update/{id}', [PostTestModuleAnswerController::class, 'update'])->name('post_test_module_answer.update');
+Route::delete('/post-test-module-answer/delete/{id}', [PostTestModuleAnswerController::class, 'destroy'])->name('post_test_module_answer.destroy');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
