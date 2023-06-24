@@ -13,7 +13,7 @@ function CreateBadge({ badge }) {
   const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    title: '',
+    name: '',
     image: null,
   });
 

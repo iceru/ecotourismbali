@@ -37,7 +37,7 @@ class ProgramController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'image' => 'required|image',
+            'image' => 'nullable',
         ]);
 
         $filename = null;
@@ -46,10 +46,11 @@ class ProgramController extends Controller
             $extension = $request->file('image')->extension();
             $filename = $request->name . '_' . time() . '.' . $extension;
             $request->file('image')->storeAs('public/programs', $filename);
+            
+            $program->image = $filename;
         }
 
         $program->name = $request->name;
-        $program->image = $filename;
         $program->save();
 
         return Redirect::route('program.index')->with('success', 'Program created successfully.');

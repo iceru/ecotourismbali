@@ -7,15 +7,13 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
-import SelectInput from '@/Components/SelectInput';
 
 function CreateCategory({ category }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    title: '',
-    image: null,
+    name: '',
   });
 
   const headerTable = ['ID', 'Name', 'Action'];

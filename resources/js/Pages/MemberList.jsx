@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { Link } from '@inertiajs/react';
 
 function MemberList({ programs, categories, badges, members }) {
   const { t } = useTranslation();
@@ -19,11 +20,15 @@ function MemberList({ programs, categories, badges, members }) {
           <div className="flex">
             <div className="flex items-center mr-4">
               <InputLabel className="mr-4" value={t('program')} />
-              <SelectInput />
+              <SelectInput
+                options={programs}
+                labelData="name"
+                valueData="name"
+              />
             </div>
             <div className="flex items-center mr-4">
               <InputLabel className="mr-4" value={t('badge')} />
-              <SelectInput />
+              <SelectInput options={badges} labelData="name" valueData="name" />
             </div>
             <div className="flex items-center mr-4">
               <InputLabel className="mr-4" value={t('keyword')} />
@@ -42,29 +47,62 @@ function MemberList({ programs, categories, badges, members }) {
         </div>
       </div>
 
-      <div className="sidebar">
-        <ul className="text-gray-600 font-light">
-          <li
-            onClick={() => setCategory('all')}
-            className={`cursor-pointer mb-6 ${
-              category === 'all' ? 'font-bold text-primary' : ''
-            }`}
-          >
-            {t('all')}
-          </li>
-          {categories?.map(cat => {
+      <div className="flex">
+        <div className="sidebar lg:w-1/6">
+          <ul className="text-gray-600 font-light">
+            {categories?.map(cat => {
+              return (
+                <li
+                  onClick={() => setCategory(cat.name)}
+                  className={`cursor-pointer mb-6 ${
+                    category === cat.name ? 'font-bold text-primary' : ''
+                  }`}
+                >
+                  {t(cat.name)}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="lg:w-5/6 grid lg:grid-cols-3 gap-4">
+          {members?.map(member => {
             return (
-              <li
-                onClick={() => setCategory(cat)}
-                className={`cursor-pointer mb-6 ${
-                  category === cat ? 'font-bold text-primary' : ''
-                }`}
-              >
-                {t(cat)}
-              </li>
+              <div className="border rounded-2xl p-4 h-fit">
+                {member.badge ? (
+                  <div className="rounded-bl-2xl bg-yellow-600 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
+                    <img src={member.badge?.image} alt="" />
+                    <span>{member.badge?.name}</span>
+                  </div>
+                ) : (
+                  <div className="rounded-bl-2xl bg-slate-400 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
+                    <div>{t('not_verified')}</div>
+                  </div>
+                )}
+                <div className="flex items-center mb-4 mt-6">
+                  <div className="mr-2">
+                    <img
+                      src={`/storage/member/images/${member.image}`}
+                      alt={member.bussiness_name}
+                      className="w-[62px] max-h-[62px] object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-2 text-lg">
+                      {member.business_name}
+                    </h4>
+                    <h6>{member.category?.name}</h6>
+                  </div>
+                </div>
+                <p className="mb-4 text-sm">
+                  {member.description.slice(0, 100)}
+                </p>
+                <Link href="" className="text-sm text-primary font-semibold">
+                  {t('learn_more')}
+                </Link>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </div>
     </Guest>
   );
