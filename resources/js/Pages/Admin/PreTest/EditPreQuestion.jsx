@@ -8,26 +8,25 @@ import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import BackTo from '../Components/BackTo';
 
-function EditAssessment() {
+function EditPreQuestion() {
   const { t } = useTranslation();
 
-  const { pre_test } = usePage().props;
+  const { pre_question } = usePage().props;
 
   const { data, setData, patch, processing, errors } = useForm({
-    question_no: pre_test.question_no || '',
-    question: pre_test.question || '',
-    module_id: pre_test.module_id || '',
+    question_no: pre_question.question_no || '',
+    question: pre_question.question || '',
   });
 
   const submit = e => {
     e.preventDefault();
 
-    patch(route('pre_test.update', pre_test.id));
+    patch(route('pre_question.update', pre_question.id));
   };
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_pre_test" link="/pre_test" />
+      <BackTo title="back_to_list_pre_test" link="/pre_question" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_pre_test_title" />
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
@@ -48,6 +47,7 @@ function EditAssessment() {
                 isFocused={true}
                 onChange={e => setData('question_no', e.target.value)}
               />
+              <span className="text-red-600">{errors.question_no}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -59,11 +59,14 @@ function EditAssessment() {
                 id="question"
                 name="question"
                 type="text"
+                typeForm="textarea"
+                rows={6}
                 value={data.question}
                 className="block w-full"
                 isFocused={true}
                 onChange={e => setData('question', e.target.value)}
               />
+              <span className="text-red-600">{errors.question}</span>
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>
@@ -75,4 +78,4 @@ function EditAssessment() {
   );
 }
 
-export default EditAssessment;
+export default EditPreQuestion;

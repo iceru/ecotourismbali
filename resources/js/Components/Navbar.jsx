@@ -111,7 +111,7 @@ function Navbar() {
           </div>
         </div>
       </div> */}
-      <nav className="flex bg-white justify-between items-center py-[7px] max-w-[1300px] px-3 mx-auto">
+      <nav className="flex bg-white justify-between items-center container px-3 py-3 mx-auto">
         <div className="logo">
           <img src={Logo} alt="Eco Tourism Bali" className="w-[80px]" />
         </div>

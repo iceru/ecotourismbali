@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Guest from '@/Layouts/GuestLayout';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '@/Components/InputLabel';
@@ -6,8 +6,10 @@ import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-function MemberList() {
+function MemberList({ programs, categories, badges, members }) {
   const { t } = useTranslation();
+  const [category, setCategory] = useState('all');
+
   return (
     <Guest>
       <h1 className="font-bold text-3xl mb-10">{t('list_of_members')}</h1>
@@ -41,15 +43,27 @@ function MemberList() {
       </div>
 
       <div className="sidebar">
-        <ul>
-          <li className="cursor-pointer mb-6">{t('all')}</li>
-          <li className="cursor-pointer mb-6">{t('community')}</li>
-          <li className="cursor-pointer mb-6">{t('supplier')}</li>
-          <li className="cursor-pointer mb-6">{t('travel')}</li>
-          <li className="cursor-pointer mb-6">{t('company')}</li>
-          <li className="cursor-pointer mb-6">{t('movement')}</li>
-          <li className="cursor-pointer mb-6">{t('bisnis_akomodasi')}</li>
-          <li className="cursor-pointer mb-6">{t('bisnis_fnb')}</li>
+        <ul className="text-gray-600 font-light">
+          <li
+            onClick={() => setCategory('all')}
+            className={`cursor-pointer mb-6 ${
+              category === 'all' ? 'font-bold text-primary' : ''
+            }`}
+          >
+            {t('all')}
+          </li>
+          {categories?.map(cat => {
+            return (
+              <li
+                onClick={() => setCategory(cat)}
+                className={`cursor-pointer mb-6 ${
+                  category === cat ? 'font-bold text-primary' : ''
+                }`}
+              >
+                {t(cat)}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </Guest>

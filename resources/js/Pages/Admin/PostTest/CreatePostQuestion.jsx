@@ -7,15 +7,15 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
+import BackTo from '../Components/BackTo';
 
-function CreatePostQuestion({ post_test }) {
+function CreatePostQuestion({ post_question, module }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
     question_no: '',
     question: '',
-    module_id: null,
   });
 
   const headerTable = [
@@ -32,7 +32,7 @@ function CreatePostQuestion({ post_test }) {
   const tableButtons = [
     {
       label: 'add_post_test_option',
-      link: 'post_test/',
+      link: 'post-question/',
       link2: '/option',
       withId: true,
     },
@@ -41,7 +41,7 @@ function CreatePostQuestion({ post_test }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'post_test/edit',
+      link: '/post-question/edit',
       withId: true,
       color: 'info',
     },
@@ -57,7 +57,7 @@ function CreatePostQuestion({ post_test }) {
   const submit = e => {
     e.preventDefault();
 
-    post(route('post_test.store'), {
+    post(route('post_question.store', module.id), {
       onSuccess: () => {
         reset();
       },
@@ -66,6 +66,15 @@ function CreatePostQuestion({ post_test }) {
 
   return (
     <AdminLayout>
+      <BackTo title="back_to_list_module" link="/module" />
+      <AdminSection className="mb-6 flex items-center">
+        <img
+          src={'/storage/modules/' + module?.image}
+          alt={module.title}
+          className="w-16 h-16 mr-4 object-cover rounded-lg"
+        />
+        <h4 className="font-bold text-lg">{module.title}</h4>
+      </AdminSection>
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="create_post_test_title" />
         {flash.success && (
@@ -105,34 +114,14 @@ function CreatePostQuestion({ post_test }) {
                 id="question"
                 name="question"
                 type="text"
+                typeForm="textarea"
+                rows={6}
                 value={data.question}
                 className="block w-full"
                 isFocused={true}
                 onChange={e => setData('question', e.target.value)}
               />
               <span className="text-red-600">{errors.title}</span>
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="module_id"
-                value={t('form_label_module_id')}
-              />
-            </div>
-            <div className="lg:w-3/4">
-              <SelectInput
-                id="module_id"
-                name="module_id"
-                value={data.module_id}
-                options={module_id}
-                placeholder="select_module_id"
-                className="w-full"
-                labelData="name"
-                valueData="id"
-                onChange={e => setData('module_id', e.target.value)}
-              />
-              <span className="text-red-600">{errors.video}</span>
             </div>
           </div>
           <PrimaryButton
@@ -148,7 +137,7 @@ function CreatePostQuestion({ post_test }) {
         <TitleSection title="list_post_test_title" className="mb-5" />
         <Table
           header={headerTable}
-          data={post_test}
+          data={post_question}
           selectedData={selectedData}
           tableButtons={tableButtons}
           tableActions={tableActions}

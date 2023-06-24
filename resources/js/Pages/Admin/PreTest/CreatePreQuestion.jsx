@@ -1,21 +1,22 @@
+import { useForm, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm, usePage } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
+import BackTo from '../Components/BackTo';
 
-function CreatePostQuestion({ pre_test }) {
+function CreatePreQuestion({ pre_question, module }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
     question_no: '',
     question: '',
-    module_id: null,
   });
 
   const headerTable = [
@@ -32,7 +33,7 @@ function CreatePostQuestion({ pre_test }) {
   const tableButtons = [
     {
       label: 'add_pre_test_option',
-      link: 'pre_test/',
+      link: 'pre-question/',
       link2: '/option',
       withId: true,
     },
@@ -41,13 +42,13 @@ function CreatePostQuestion({ pre_test }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'pre_test/edit',
+      link: '/pre-question/edit',
       withId: true,
       color: 'info',
     },
     {
       label: 'delete_button',
-      route: 'pre_test.destroy',
+      route: 'pre_question.destroy',
       withId: true,
       color: 'danger',
       type: 'delete',
@@ -57,7 +58,7 @@ function CreatePostQuestion({ pre_test }) {
   const submit = e => {
     e.preventDefault();
 
-    post(route('pre_test.store'), {
+    post(route('pre_question.store', module.id), {
       onSuccess: () => {
         reset();
       },
@@ -66,6 +67,15 @@ function CreatePostQuestion({ pre_test }) {
 
   return (
     <AdminLayout>
+      <BackTo title="back_to_list_module" link="/module" />
+      <AdminSection className="mb-6 flex items-center">
+        <img
+          src={'/storage/modules/' + module?.image}
+          alt={module.title}
+          className="w-16 h-16 mr-4 object-cover rounded-lg"
+        />
+        <h4 className="font-bold text-lg">{module.title}</h4>
+      </AdminSection>
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="create_pre_test_title" />
         {flash.success && (
@@ -90,7 +100,6 @@ function CreatePostQuestion({ pre_test }) {
                 value={data.question_no}
                 className="block w-full"
                 isFocused={true}
-                rows={8}
                 onChange={e => setData('question_no', e.target.value)}
               />
               <span className="text-red-600">{errors.question_no}</span>
@@ -102,37 +111,17 @@ function CreatePostQuestion({ pre_test }) {
             </div>
             <div className="lg:w-3/4">
               <TextInput
+                rows={6}
                 id="question"
                 name="question"
                 type="text"
+                typeForm="textarea"
                 value={data.question}
                 className="block w-full"
                 isFocused={true}
                 onChange={e => setData('question', e.target.value)}
               />
               <span className="text-red-600">{errors.title}</span>
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="module_id"
-                value={t('form_label_module_id')}
-              />
-            </div>
-            <div className="lg:w-3/4">
-              <SelectInput
-                id="module_id"
-                name="module_id"
-                value={data.module_id}
-                options={module_id}
-                placeholder="select_module_id"
-                className="w-full"
-                labelData="name"
-                valueData="id"
-                onChange={e => setData('module_id', e.target.value)}
-              />
-              <span className="text-red-600">{errors.video}</span>
             </div>
           </div>
           <PrimaryButton
@@ -148,7 +137,7 @@ function CreatePostQuestion({ pre_test }) {
         <TitleSection title="list_pre_test_title" className="mb-5" />
         <Table
           header={headerTable}
-          data={pre_test}
+          data={pre_question}
           selectedData={selectedData}
           tableButtons={tableButtons}
           tableActions={tableActions}
@@ -159,4 +148,4 @@ function CreatePostQuestion({ pre_test }) {
   );
 }
 
-export default CreatePostQuestion;
+export default CreatePreQuestion;
