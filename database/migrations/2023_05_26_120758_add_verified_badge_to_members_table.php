@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->unsignedBigInteger('verified_badge_id');
+            $table->unsignedBigInteger('verified_badge_id')->nullable();
             $table->foreign('verified_badge_id')->references('id')->on('verified_badges')->onDelete('restrict');
         });
     }

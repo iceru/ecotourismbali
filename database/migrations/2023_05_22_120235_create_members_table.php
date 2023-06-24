@@ -14,22 +14,22 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('address');
-            $table->string('website');
-            $table->string('business_name');
+            $table->string('address')->nullable();
+            $table->string('website')->nullable();
+            $table->string('business_name')->nullable();
             $table->string('job_title')->nullable();
             $table->integer('assess_attempts')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->date('assess_expire')->nullable();
-            $table->string('description');
+            $table->string('description')->nullable();
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-            $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('program_id')->nullable();
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('restrict');
-            $table->unsignedBigInteger('badge_id');
+            $table->unsignedBigInteger('badge_id')->nullable();
             $table->foreign('badge_id')->references('id')->on('badges')->onDelete('restrict');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
         });
     }

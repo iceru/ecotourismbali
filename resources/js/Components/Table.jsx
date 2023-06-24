@@ -9,6 +9,7 @@ export default function Table({
   tableActions,
   pathImage,
   customData,
+  descHtml,
 }) {
   const { delete: destroy, processing } = useForm();
 
@@ -95,6 +96,13 @@ export default function Table({
                                 src={`/storage/${pathImage}${item[column]}`}
                                 className="max-h-24"
                               />
+                            ) : descHtml && column === descHtml ? (
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: item[column],
+                                }}
+                                className="descOverflow"
+                              ></div>
                             ) : customData?.selected === column ? (
                               customData?.data()
                             ) : item[column] ? (

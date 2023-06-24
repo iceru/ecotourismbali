@@ -15,18 +15,23 @@ import { isEmpty } from 'lodash';
 function MemberDashboard({ user, member }) {
   const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   if (isEmpty(member)) {
-  //     window.location.href = '/member/locked';
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (isEmpty(member) && member?.status !== 'active') {
+      window.location.href = '/member/locked';
+    }
+  }, [member]);
 
   return (
     <MemberLayout>
       <div className="grid lg:grid-cols-2 gap-6">
         <AdminSection>
           <h2 className="font-bold text-[20px] mb-4">{t('welcome_member')}</h2>
-          <PrimaryButton className="mb-4 !block" type="lightPrimary">
+          <PrimaryButton
+            as="link"
+            href={route('member.profile')}
+            className="mb-4 !inline-block"
+            type="lightPrimary"
+          >
             {t('edit_profile')}
             <FontAwesomeIcon className="ml-2" icon={faUser} />
           </PrimaryButton>

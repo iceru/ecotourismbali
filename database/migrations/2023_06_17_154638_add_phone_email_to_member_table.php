@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->unsignedBigInteger('business_type_id')->nullable();
-            $table->foreign('business_type_id')->references('id')->on('business_types')->onDelete('restrict');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
         });
     }
 
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropForeign(['business_type_id']);
-            $table->dropColumn('business_type_id');
+            $table->dropColumn('phone');
+            $table->dropColumn('email');
         });
     }
 };

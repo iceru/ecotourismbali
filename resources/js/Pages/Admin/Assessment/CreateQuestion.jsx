@@ -8,6 +8,9 @@ import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
 import BackTo from '../Components/BackTo';
+import { useState, useEffect } from 'react';
+import 'react-quill/dist/quill.snow.css';
+import Editor from '../Components/Editor';
 
 function CreateQuestion({ assess_question, assessment }) {
   const { t } = useTranslation();
@@ -19,15 +22,8 @@ function CreateQuestion({ assess_question, assessment }) {
     title: '',
   });
 
-  const headerTable = [
-    'ID',
-    'Question No',
-    'Title',
-    'Question',
-    'Option',
-    'Action',
-  ];
-  const selectedData = ['id', 'question_no', 'title', 'question'];
+  const headerTable = ['Question No', 'Title', 'Question', 'Option', 'Action'];
+  const selectedData = ['question_no', 'title', 'question'];
 
   const tableButtons = [
     {
@@ -60,6 +56,7 @@ function CreateQuestion({ assess_question, assessment }) {
     post(route('assessment_question.store', assessment.id), {
       onSuccess: () => {
         reset();
+        setValue('');
       },
     });
   };
@@ -68,12 +65,18 @@ function CreateQuestion({ assess_question, assessment }) {
     return '/storage/' + image;
   };
 
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    setData('question', value);
+  }, [value]);
+
   return (
     <AdminLayout>
       <BackTo title="back_to_list_assessment" link="/assessment" />
       <AdminSection className="mb-6 flex items-center">
         <img
-          src={showImage('assessments/' + assessment.image)}
+          src={showImage('assessments/' + assessment?.image)}
           alt={assessment.title}
           className="w-16 h-16 mr-4 object-cover rounded-lg"
         />
@@ -87,15 +90,15 @@ function CreateQuestion({ assess_question, assessment }) {
             <span className="inline">{flash.success}</span>
           </div>
         )}
-        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
+        <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="question_no"
                 value={t('form_label_question_no')}
               />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="question_no"
                 name="question_no"
@@ -110,10 +113,10 @@ function CreateQuestion({ assess_question, assessment }) {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="title" value={t('form_label_title')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="title"
                 name="title"
@@ -127,20 +130,11 @@ function CreateQuestion({ assess_question, assessment }) {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="question" value={t('form_label_question')} />
             </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="question"
-                name="question"
-                type="text"
-                typeForm="textarea"
-                value={data.question}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('question', e.target.value)}
-              />
+            <div className="lg:w-4/5">
+              <Editor onChange={setValue} value={value} />
               <span className="text-red-600">{errors.question}</span>
             </div>
           </div>
@@ -161,6 +155,7 @@ function CreateQuestion({ assess_question, assessment }) {
           selectedData={selectedData}
           tableButtons={tableButtons}
           tableActions={tableActions}
+          descHtml="question"
         />
       </AdminSection>
     </AdminLayout>

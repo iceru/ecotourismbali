@@ -33,15 +33,15 @@ function EditQuestion() {
       />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />
-        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
+        <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="option_no"
                 value={t('form_label_option_no')}
               />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="option_no"
                 name="option_no"
@@ -54,10 +54,10 @@ function EditQuestion() {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="option" value={t('form_label_option')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="option"
                 name="option"
@@ -71,10 +71,10 @@ function EditQuestion() {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="point" value={t('form_label_point')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="point"
                 name="point"

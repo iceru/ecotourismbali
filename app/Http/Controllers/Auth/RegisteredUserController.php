@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -44,6 +45,15 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        $member = Member::where('id', $user->id)->first();
+
+        if (!$member) {
+            $member = new Member;
+            $member->status = 'active';
+            $member->user_id = $user->id;
+            $member->save();
+        }
 
         Auth::login($user);
         $user->addRole('member');

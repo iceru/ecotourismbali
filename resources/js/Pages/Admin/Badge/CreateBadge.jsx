@@ -57,12 +57,12 @@ function CreateBadge({ badge }) {
             <span className="inline">{flash.success}</span>
           </div>
         )}
-        <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
+        <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="name" value={t('form_label_name')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <TextInput
                 id="name"
                 name="name"
@@ -76,10 +76,10 @@ function CreateBadge({ badge }) {
             </div>
           </div>
           <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
-            <div className="lg:w-3/4">
+            <div className="lg:w-4/5">
               <input
                 type="file"
                 name="image"
