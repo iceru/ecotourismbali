@@ -1,8 +1,5 @@
-import AdminSection from '@/Components/AdminSection';
-import MemberLayout from '@/Layouts/MemberLayout';
+import { usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import noImage from '../../../images/no-image.jpg';
-import PrimaryButton from '@/Components/PrimaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightLong,
@@ -11,12 +8,28 @@ import {
   faImage,
   faPen,
 } from '@fortawesome/free-solid-svg-icons';
-import { usePage } from '@inertiajs/react';
+import Slider from 'react-slick';
+
+import AdminSection from '@/Components/AdminSection';
+import MemberLayout from '@/Layouts/MemberLayout';
+import PrimaryButton from '@/Components/PrimaryButton';
+
+import noImage from '../../../images/no-image.jpg';
 
 function MemberProfile({ member }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
-  console.log(member);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow:
+      member.member_slider.length > 2 ? 3 : member.member_slider.length,
+    slidesToScroll: 1,
+  };
+
+  console.log(member.member_slider);
   return (
     <MemberLayout>
       <AdminSection>
@@ -71,8 +84,22 @@ function MemberProfile({ member }) {
           </div>
         </div>
         <div className="mb-10">
-          {member?.member_slider ? (
-            <div>Sliders</div>
+          {member.member_slider ? (
+            <div className="-mx-2">
+              <Slider {...settings}>
+                {member.member_slider.map(slider => {
+                  return (
+                    <div>
+                      <img
+                        src={`/storage/member/sliders/${slider.image}`}
+                        alt=""
+                        className="p-2"
+                      />
+                    </div>
+                  );
+                })}
+              </Slider>
+            </div>
           ) : (
             <div className="flex gap-2 text-gray-600 justify-center items-center p-6 py-12 border rounded-lg border-dashed border-gray-600">
               {t('add_slider')}
@@ -88,10 +115,13 @@ function MemberProfile({ member }) {
                 <div>{member.address}</div>
               </div>
             ) : (
-              <div className="flex gap-2 text-gray-600 justify-center items-center">
+              <a
+                className="flex gap-2 text-gray-600 justify-center items-center cursor-pointer"
+                href={route('member.profile.edit', member?.id)}
+              >
                 {t('add_address')}
                 <FontAwesomeIcon icon={faHome} />
-              </div>
+              </a>
             )}
           </div>
           <div>
@@ -101,10 +131,13 @@ function MemberProfile({ member }) {
                 <div>{member.website}</div>
               </div>
             ) : (
-              <div className="flex gap-2 text-gray-600 justify-center items-center">
+              <a
+                className="flex gap-2 text-gray-600 justify-center items-center cursor-pointer"
+                href={route('member.profile.edit', member?.id)}
+              >
                 {t('add_website')}
                 <FontAwesomeIcon icon={faGlobe} />
-              </div>
+              </a>
             )}
           </div>
         </div>
@@ -112,10 +145,13 @@ function MemberProfile({ member }) {
           {member?.description ? (
             <div className="text-center">{member.description}</div>
           ) : (
-            <div className="flex gap-2 text-gray-600 justify-center items-center">
+            <a
+              className="flex gap-2 text-gray-600 justify-center items-center cursor-pointer"
+              href={route('member.profile.edit', member?.id)}
+            >
               {t('add_description')}
               <FontAwesomeIcon icon={faPen} />
-            </div>
+            </a>
           )}
         </div>
       </AdminSection>

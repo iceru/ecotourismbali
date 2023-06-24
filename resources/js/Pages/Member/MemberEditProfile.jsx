@@ -1,13 +1,16 @@
-import AdminSection from '@/Components/AdminSection';
-import MemberLayout from '@/Layouts/MemberLayout';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import noImage from '../../../images/no-image.jpg';
-import PrimaryButton from '@/Components/PrimaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlobe, faHome } from '@fortawesome/free-solid-svg-icons';
 import { useForm, usePage } from '@inertiajs/react';
+import Slider from 'react-slick';
+
+import AdminSection from '@/Components/AdminSection';
+import MemberLayout from '@/Layouts/MemberLayout';
+import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { useState } from 'react';
+
+import noImage from '../../../images/no-image.jpg';
 
 function MemberEditProfile() {
   const { t } = useTranslation();
@@ -20,6 +23,7 @@ function MemberEditProfile() {
     website: member.website || '',
     description: member.description || '',
     image: member.image || null,
+    sliders: member.sliders || null,
   });
 
   const submit = e => {
@@ -30,6 +34,16 @@ function MemberEditProfile() {
         reset();
       },
     });
+    console.log(data);
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow:
+      member.member_slider.length > 2 ? 3 : member.member_slider.length,
+    slidesToScroll: 1,
   };
 
   return (
@@ -96,24 +110,41 @@ function MemberEditProfile() {
             </div>
           </div>
           <div className="mb-10">
-            {member?.member_slider ? (
-              <div>Sliders</div>
-            ) : (
-              <div>
-                <label
-                  className="block mb-2 font-medium text-gray-900 "
-                  htmlFor="multiple_files"
-                >
-                  {t('your_gallery')}
-                </label>
-                <input
-                  className="block w-full text-gray-900 border border-gray-300 p-2 cursor-pointer bg-gray-50 focus:outline-none"
-                  id="multiple_files"
-                  type="file"
-                  multiple
-                />
+            {member.member_slider && (
+              <div className="-mx-2">
+                <Slider {...settings}>
+                  {member.member_slider.map(slider => {
+                    return (
+                      <div>
+                        <img
+                          src={`/storage/member/sliders/${slider.image}`}
+                          alt=""
+                          className="p-2"
+                        />
+                      </div>
+                    );
+                  })}
+                </Slider>
               </div>
             )}
+            <div>
+              <label
+                className="block mb-2 font-medium text-gray-900 "
+                htmlFor="sliders"
+              >
+                {t('your_gallery')}
+              </label>
+              <input
+                className="block w-full text-gray-900 border border-gray-300 p-2 cursor-pointer bg-gray-50 focus:outline-none"
+                id="sliders"
+                multiple
+                type="file"
+                name="sliders"
+                onChange={e => {
+                  setData('sliders', e.target.files);
+                }}
+              />
+            </div>
           </div>
           <div className="flex justify-around mb-10">
             <div className="flex gap-2 text-gray-600 justify-center items-center">
@@ -144,7 +175,7 @@ function MemberEditProfile() {
             </div>
           </div>
           <div className="mb-6">
-            {member?.member_slider ? (
+            {member?.description ? (
               <div>{t('add_description')}</div>
             ) : (
               <div className="flex gap-2 text-gray-600 justify-center items-center">
