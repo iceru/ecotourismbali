@@ -9,30 +9,28 @@ import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
 import BackTo from '../Components/BackTo';
 
-function CreatePostOption({ post_test_option, post_test_question }) {
+function CreatePostOption({ post_option, post_question }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    option: '',
-    point: '',
-    option_no: '',
+    title: '',
   });
 
-  const headerTable = ['ID', 'Option No', 'Option', 'Point', 'Action'];
+  const headerTable = ['ID', 'Option', 'Action'];
 
-  const selectedData = ['id', 'option_no', 'option', 'point'];
+  const selectedData = ['id', 'title'];
 
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/post_test/option/edit',
+      link: '/post-option/edit',
       withId: true,
       color: 'info',
     },
     {
       label: 'delete_button',
-      route: 'post_test_option.destroy',
+      route: 'post_option.destroy',
       withId: true,
       color: 'danger',
       type: 'delete',
@@ -42,7 +40,7 @@ function CreatePostOption({ post_test_option, post_test_question }) {
   const submit = e => {
     e.preventDefault();
 
-    post(route('post_test_option.store', post_test_question.id), {
+    post(route('post_option.store', post_question.id), {
       onSuccess: () => {
         reset();
       },
@@ -53,10 +51,12 @@ function CreatePostOption({ post_test_option, post_test_question }) {
     <AdminLayout>
       <BackTo
         title="back_to_question"
-        link={`/post_test/${post_test_question.id}/question`}
+        link={`/module/${post_question.module_id}/post-question`}
       />
       <AdminSection className="mb-6">
-        <h4 className="font-bold text-lg">{post_test_question.title}</h4>
+        <h4 className="font-bold text-lg">
+          {post_question.question_no}. {post_question.question}
+        </h4>
       </AdminSection>
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="create_option_title" />
@@ -69,53 +69,19 @@ function CreatePostOption({ post_test_option, post_test_question }) {
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="option_no"
-                value={t('form_label_option_no')}
-              />
+              <InputLabel htmlFor="title" value={t('form_label_option')} />
             </div>
             <div className="lg:w-3/4">
               <TextInput
-                id="option_no"
-                name="option_no"
-                type="number"
-                value={data.option_no}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('option_no', e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="option" value={t('form_label_option')} />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="option"
-                name="option"
+                id="title"
+                name="title"
                 type="text"
-                value={data.option}
+                value={data.title}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('option', e.target.value)}
+                onChange={e => setData('title', e.target.value)}
               />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="point" value={t('form_label_point')} />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="point"
-                name="point"
-                type="number"
-                value={data.point}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('point', e.target.value)}
-              />
+              <span className="text-red-600">{errors.title}</span>
             </div>
           </div>
           <PrimaryButton
@@ -131,7 +97,7 @@ function CreatePostOption({ post_test_option, post_test_question }) {
         <TitleSection title="list_option_title" className="mb-6" />
         <Table
           header={headerTable}
-          data={post_test_option}
+          data={post_option}
           tableActions={tableActions}
           selectedData={selectedData}
         />

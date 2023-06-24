@@ -32,8 +32,8 @@ function CreatePostQuestion({ post_question, module }) {
   const tableButtons = [
     {
       label: 'add_post_test_option',
-      link: 'post-question/',
-      link2: '/option',
+      link: '/post-question/',
+      link2: '/post-option',
       withId: true,
     },
   ];

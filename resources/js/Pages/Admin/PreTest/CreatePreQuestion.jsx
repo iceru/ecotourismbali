@@ -33,8 +33,8 @@ function CreatePreQuestion({ pre_question, module }) {
   const tableButtons = [
     {
       label: 'add_pre_test_option',
-      link: 'pre-question/',
-      link2: '/option',
+      link: '/pre-question/',
+      link2: '/pre-option',
       withId: true,
     },
   ];

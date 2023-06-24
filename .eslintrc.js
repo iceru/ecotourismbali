@@ -39,7 +39,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'no-console': 2,
-    'no-undef': 'off',
+    'no-undef': 2,
   },
   'prettier/prettier': [
     'error',

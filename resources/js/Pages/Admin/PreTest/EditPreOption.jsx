@@ -11,62 +11,42 @@ import BackTo from '../Components/BackTo';
 function EditPreOption() {
   const { t } = useTranslation();
 
-  const { pre_test_option, pre_test_question } = usePage().props;
+  const { pre_option } = usePage().props;
 
-  const { data, setData, patch, processing } = useForm({
-    option_no: pre_test_option.option_no || '',
-    option: pre_test_option.option || '',
+  const { data, setData, patch, processing, errors } = useForm({
+    title: pre_option.title || '',
   });
 
   const submit = e => {
     e.preventDefault();
 
-    patch(route('pre_test_option.update', pre_test_option.id));
+    patch(route('pre_option.update', pre_option.id));
   };
 
   return (
     <AdminLayout>
       <BackTo
-        title="back_to_question"
-        link={`/pre_test/${pre_test_question.id}/question`}
+        title="back_to_list_option"
+        link={`/pre-question/${pre_option.pre_test_question_id}/pre-option`}
       />
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="edit_pre_test_title" />
+        <TitleSection title="edit_option_title" />
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="option_no"
-                value={t('form_label_option_no')}
-              />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="option_no"
-                name="option_no"
-                type="text"
-                value={data.option_no}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('option_no', e.target.value)}
-              />
-            </div>
-          </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="option" value={t('form_label_option')} />
             </div>
             <div className="lg:w-3/4">
               <TextInput
-                id="option"
-                name="option"
+                id="title"
+                name="title"
                 type="text"
-                typeForm="textarea"
-                value={data.option}
+                value={data.title}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('option', e.target.value)}
+                onChange={e => setData('title', e.target.value)}
               />
+              <span className="text-red-600">{errors.title}</span>
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>
