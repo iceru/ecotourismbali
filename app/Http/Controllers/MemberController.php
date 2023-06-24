@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Member;
 use Inertia\Inertia;
+use App\Models\Member;
+use App\Models\MemberSlider;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class MemberController extends Controller
     public function profile()
     {
         return Inertia::render('Member/MemberProfile', [
-            'member' => Member::where('user_id', Auth::id())->first(),
+            'member' => Member::where('user_id', Auth::id())->with('member_slider')->first(),
             'user' => User::find(Auth::id()),
         ]);
     }
@@ -39,7 +40,7 @@ class MemberController extends Controller
     {
 
         return Inertia::render('Member/MemberEditProfile', [
-            'member' => Member::where('id', $id)->first(),
+            'member' => Member::where('id', $id)->with('member_slider')->first(),
             'user' => User::find(Auth::id()),
         ]);
     }
@@ -54,7 +55,7 @@ class MemberController extends Controller
             'address' => 'nullable',
             'website' => 'nullable',
             'description' => 'nullable',
-            'image' => 'nullable|image',
+            'image' => 'nullable',
         ]);
 
         $filename = null;
@@ -63,13 +64,30 @@ class MemberController extends Controller
             $extension = $request->file('image')->extension();
             $filename = $request->business_name . '_' . time() . '.' . $extension;
             $request->file('image')->storeAs('public/member/images', $filename);
+            $member->image = $filename;
+        }
+
+
+        if ($request->hasFile('sliders')) {
+            foreach($request->file('sliders') as $file) {
+                $sliderName = null;
+                $extension = $file->extension();
+                $sliderName = $request->business_name . '_' . time() . '.' . $extension;
+                $file->storeAs('public/member/sliders', $sliderName);
+    
+                $slider = new MemberSlider;
+                $slider->title = $sliderName;
+                $slider->image = $sliderName;
+                $slider->member_id = $id;
+                $slider->save();
+            }
+            
         }
 
         $member->business_name = $request->business_name;
         $member->address = $request->address;
         $member->website = $request->website;
         $member->description = $request->description;
-        $member->image = $filename;
         $member->save();
 
         return Redirect::route('member.profile')->with('success', 'Profile updated successfully.');
