@@ -158,7 +158,7 @@ function AdminLayout({ children }) {
         <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
           <div className="flex items-center order-2 lg:order-1 w-full justify-between lg:w-auto lg:justify-start">
             <PrimaryButton
-              type="lightSecondary"
+              color="lightSecondary"
               className="mr-4"
               onClick={() => setSideActive(!sideActive)}
             >
@@ -209,7 +209,7 @@ function AdminLayout({ children }) {
             <div>
               <PrimaryButton
                 as="link"
-                type="danger"
+                color="danger"
                 href={route('logout')}
                 method="post"
               >

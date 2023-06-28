@@ -76,7 +76,7 @@ function CreateBusinessType({ business_type }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

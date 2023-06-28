@@ -24,6 +24,7 @@
   "verified_badge": "Verified Badge",
 
   "list_of_members": "Daftar Member",
+  "back_to_list_members": "Kembali ke Daftar Members",
 
   "create_assessment_title": "Buat Penilaian",
   "edit_assessment_title": "Ubah Penilaian",
@@ -85,6 +86,11 @@
   "select_business_type": "Pilih Jenis Bisnis",
   "add_business_type": "Tambah Jenis Bisnis",
 
+  "create_business_title": "Buat Tipe Bisnis",
+  "edit_business_title": "Ubah Tipe Bisnis",
+  "list_business_title": "Daftar Tipe Bisnis",
+  "back_to_list_business": "Kembali ke Daftar Tipe Bisnis",
+
   "form_label_name": "Nama",
   "form_label_title": "Judul",
   "form_label_description": "Deskripsi",
@@ -100,6 +106,9 @@
   "form_label_attachment": "Lampiran",
   "form_label_author": "Penulis",
   "form_label_content": "Konten",
+
+  "add_pre_test": "Tambahkan Pertanyaan Pre Test",
+  "add_post_test": "Tambahkan Pertanyaan Post Test",
 
   "detail_button": "Detail",
   "edit_button": "Ubah",
@@ -159,6 +168,11 @@
   "add_description": "Tambahkan Deskripsi",
   "add_address": "Tambahkan Alamat",
   "add_website": "Tambahkan Website",
+  "your_business_name": "Nama Bisnis Anda",
+  "your_address": "Alamat Bisnis Anda",
+  "your_website": "Website Bisnis Anda",
+  "your_gallery": "Tambahkan Galeri",
+  "your_description": "Deskripsi Bisnis Anda",
 
   "all": "Semua",
   "community": "Komunitas",
@@ -167,5 +181,11 @@
   "company": "Perusahaan",
   "movement": "Movement",
   "bisnis_akomodasi": "Bisnis Akomodasi",
-  "bisnis_fnb": "Bisnis FnB"
+  "bisnis_fnb": "Bisnis FnB",
+
+  "list_modules": "Daftar Modul",
+  "post_test": "Post Test",
+  "pre_test": "Pre Test",
+  "back": "Kembali",
+  "module_learning": "Modul Pembelajaran {{ number }}"
 }

@@ -78,7 +78,7 @@ function MemberList({ programs, categories, badges, members }) {
                     <div>{t('not_verified')}</div>
                   </div>
                 )}
-                <div className="flex items-center mb-4 mt-6">
+                <div className="flex items-center mb-3 mt-5">
                   <div className="mr-2">
                     <img
                       src={`/storage/member/images/${member.image}`}
@@ -93,10 +93,13 @@ function MemberList({ programs, categories, badges, members }) {
                     <h6>{member.category?.name}</h6>
                   </div>
                 </div>
-                <p className="mb-4 text-sm">
+                <p className="mb-3 text-sm">
                   {member.description.slice(0, 100)}
                 </p>
-                <Link href="" className="text-sm text-primary font-semibold">
+                <Link
+                  href={route('member.detail', member.id)}
+                  className="text-sm text-primary font-semibold"
+                >
                   {t('learn_more')}
                 </Link>
               </div>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class MemberAssessment extends Controller
+class MemberAssessmentController extends Controller
 {
     public function index()
     {

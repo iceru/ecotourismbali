@@ -94,7 +94,7 @@ function CreateProgram({ program }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

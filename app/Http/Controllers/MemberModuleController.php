@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Module;
 use App\Models\MemberModule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
 
 class MemberModuleController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        return Inertia::render('Admin/MemberModule/CreateMemberModule', [
-            'member_module' => MemberModule::find($id),
+        return Inertia::render('Member/Module/ModuleList', [
+            'modules' => Module::all(),
+        ]);
+    }
+
+    public function detail($id)
+    {
+        return Inertia::render('Member/Module/ModuleDetail', [
+            'module' => Module::where('id', $id)->firstOrFail(),
         ]);
     }
     

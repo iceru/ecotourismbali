@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PostTestModuleAnswer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use App\Models\Module;
+use Illuminate\Http\Request;
+use App\Models\PostTestQuestion;
+use App\Models\PostTestModuleAnswer;
+use Illuminate\Support\Facades\Redirect;
 
 class PostTestModuleAnswerController extends Controller
 {
     public function index($id)
     {
-        return Inertia::render('Admin/PostTestModuleAnswer/CreatePostTestModuleAnswer', [
-            'post_test_module_answer' => PostTestModuleAnswer::find($id),
+        return Inertia::render('Member/Module/ModulePostTest', [
+            'module' => Module::where('id', $id)->firstOrFail(),
+            'post_test' => PostTestQuestion::where('module_id', $id)->with('post_test_option')->get(),
         ]);
     }
 

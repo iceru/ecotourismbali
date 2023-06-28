@@ -4,24 +4,27 @@ export default function PrimaryButton({
   className = '',
   disabled,
   children,
-  type,
+  color,
   as,
   ...props
 }) {
   let classButton =
     'bg-primary hover:bg-primary-dark active:bg-primary-dark text-white focus:ring-primary ';
-  if (type === 'secondary') {
+  if (color === 'secondary') {
     classButton =
       'bg-secondary hover:bg-secondary-dark active:bg-secondary-dark text-white focus:ring-secondary ';
-  } else if (type === 'danger') {
+  } else if (color === 'danger') {
     classButton =
       'bg-red-500 hover:bg-red-600 focus:ring-red-700 active:bg-red-700 text-white ';
-  } else if (type === 'lightSecondary') {
+  } else if (color === 'lightSecondary') {
     classButton =
       'bg-lightSecondary hover:opacity-80 focus:ring-lightSecondary active:bg-lightSecondary text-gray-600';
-  } else if (type === 'lightPrimary') {
+  } else if (color === 'lightPrimary') {
     classButton =
       'bg-lightPrimary hover:opacity-80  focus:ring-lightPrimary active:bg-lightPrimary text-gray-600';
+  } else if (color === 'gray') {
+    classButton =
+      'bg-gray-400 hover:gray-600 focus:ring-gray-400 active:bg-gray-400 text-white';
   }
   return as === 'link' ? (
     <Link

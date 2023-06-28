@@ -9,10 +9,10 @@ use App\Http\Controllers\AssessmentQuestionController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\BusinessTypeController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\MemberAssessment;
+use App\Http\Controllers\MemberAssessmentController;
+use App\Http\Controllers\MemberModuleController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberListController;
-use App\Http\Controllers\MemberModuleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PostTestModuleAnswerController;
 use App\Http\Controllers\PostTestOptionController;
@@ -46,7 +46,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/member-list', [MemberListController::class, 'index'])->name('member-list');
+Route::get('/member/list', [MemberListController::class, 'index'])->name('member.list');
+Route::get('/member/detail/{slug}',[MemberListController::class, 'detail'])->name('member.detail');
 
 Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -54,14 +55,19 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
-    Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
+    // Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
     Route::get('/member/profile', [MemberController::class, 'profile'])->name('member.profile');
     Route::get('/member/profile/edit/{id}', [MemberController::class, 'editProfile'])->name('member.profile.edit');
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
 
-    Route::get('/member/assessment', [MemberAssessment::class, 'index'])->name('member.assessment.index');
-    Route::get('/member/assessment/start', [MemberAssessment::class, 'start'])->name('member.assessment.start');
-    Route::post('/member/assessment/store/{id}/{userId}', [MemberAssessment::class, 'store'])->name('member.assessment.store');
+    Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.index');
+    Route::get('/member/assessment/start', [MemberAssessmentController::class, 'start'])->name('member.assessment.start');
+    Route::post('/member/assessment/store/{id}/{userId}', [MemberAssessmentController::class, 'store'])->name('member.assessment.store');
+
+    Route::get('/member/module', [MemberModuleController::class, 'index'])->name('member.module.index');
+    Route::get('/member/module/{id}', [MemberModuleController::class, 'detail'])->name('member.module.detail');
+    Route::get('/member/module/{id}/post-test', [PostTestModuleAnswerController::class, 'index'])->name('member.module.post-test');
+    Route::get('/member/module/{id}/pre-test', [PreTestModuleAnswerController::class, 'index'])->name('member.module.pre-test');
 });
 
 // route below this must be move into middleware auth with role:admin after we have user admin
@@ -121,23 +127,23 @@ Route::get('/post-option/edit/{id}', [PostTestOptionController::class, 'edit'])-
 Route::patch('/post-option/update/{id}', [PostTestOptionController::class, 'update'])->name('post_option.update');
 Route::delete('/post-option/delete/{id}', [PostTestOptionController::class, 'destroy'])->name('post_option.destroy');
 
-Route::get('/pre-test-module-answer', [PreTestModuleAnswerController::class, 'index'])->name('pre_module_answer.index');
-Route::post('/pre-test-module-answer/store', [PreTestModuleAnswerController::class, 'store'])->name('pre_module_answer.store');
-Route::get('/pre-test-module-answer/edit/{id}', [PreTestModuleAnswerController::class, 'edit'])->name('pre_module_answer.edit');
-Route::patch('/pre-test-module-answer/update/{id}', [PreTestModuleAnswerController::class, 'update'])->name('pre_module_answer.update');
-Route::delete('/pre-test-module-answer/delete/{id}', [PreTestModuleAnswerController::class, 'destroy'])->name('pre_module_answer.destroy');
+// Route::get('/pre-test-module-answer', [PreTestModuleAnswerController::class, 'index'])->name('pre_module_answer.index');
+// Route::post('/pre-test-module-answer/store', [PreTestModuleAnswerController::class, 'store'])->name('pre_module_answer.store');
+// Route::get('/pre-test-module-answer/edit/{id}', [PreTestModuleAnswerController::class, 'edit'])->name('pre_module_answer.edit');
+// Route::patch('/pre-test-module-answer/update/{id}', [PreTestModuleAnswerController::class, 'update'])->name('pre_module_answer.update');
+// Route::delete('/pre-test-module-answer/delete/{id}', [PreTestModuleAnswerController::class, 'destroy'])->name('pre_module_answer.destroy');
 
-Route::get('/member-module', [MemberModuleController::class, 'index'])->name('member_module.index');
-Route::post('/member-module/store', [MemberModuleController::class, 'store'])->name('member_module.store');
-Route::get('/member-module/edit/{id}', [MemberModuleController::class, 'edit'])->name('member_module.edit');
-Route::patch('/member-module/update/{id}', [MemberModuleController::class, 'update'])->name('member_module.update');
-Route::delete('/member-module/delete/{id}', [MemberModuleController::class, 'destroy'])->name('member_module.destroy');
+// Route::get('/member-module', [MemberModuleController::class, 'index'])->name('member_module.index');
+// Route::post('/member-module/store', [MemberModuleController::class, 'store'])->name('member_module.store');
+// Route::get('/member-module/edit/{id}', [MemberModuleController::class, 'edit'])->name('member_module.edit');
+// Route::patch('/member-module/update/{id}', [MemberModuleController::class, 'update'])->name('member_module.update');
+// Route::delete('/member-module/delete/{id}', [MemberModuleController::class, 'destroy'])->name('member_module.destroy');
 
-Route::get('/post-test-module-answer', [PostTestModuleAnswerController::class, 'index'])->name('post_test_module_answer.index');
-Route::post('/post-test-module-answer/store', [PostTestModuleAnswerController::class, 'store'])->name('post_test_module_answer.store');
-Route::get('/post-test-module-answer/edit/{id}', [PostTestModuleAnswerController::class, 'edit'])->name('post_test_module_answer.edit');
-Route::patch('/post-test-module-answer/update/{id}', [PostTestModuleAnswerController::class, 'update'])->name('post_test_module_answer.update');
-Route::delete('/post-test-module-answer/delete/{id}', [PostTestModuleAnswerController::class, 'destroy'])->name('post_test_module_answer.destroy');
+// Route::get('/post-test-module-answer', [PostTestModuleAnswerController::class, 'index'])->name('post_test_module_answer.index');
+// Route::post('/post-test-module-answer/store', [PostTestModuleAnswerController::class, 'store'])->name('post_test_module_answer.store');
+// Route::get('/post-test-module-answer/edit/{id}', [PostTestModuleAnswerController::class, 'edit'])->name('post_test_module_answer.edit');
+// Route::patch('/post-test-module-answer/update/{id}', [PostTestModuleAnswerController::class, 'update'])->name('post_test_module_answer.update');
+// Route::delete('/post-test-module-answer/delete/{id}', [PostTestModuleAnswerController::class, 'destroy'])->name('post_test_module_answer.destroy');
 
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 Route::post('/badge/store', [BadgeController::class, 'store'])->name('badge.store');

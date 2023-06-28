@@ -75,7 +75,7 @@ function MemberProfile({ member }) {
             <PrimaryButton
               as="link"
               href={route('member.assessment.index')}
-              type="lightPrimary"
+              color="lightPrimary"
               className="flex gap-2 items-center"
             >
               {t('start_assessment')}
@@ -107,7 +107,7 @@ function MemberProfile({ member }) {
             </div>
           )}
         </div>
-        <div className="flex justify-around mb-10">
+        <div className="flex justify-center gap-8 mb-10">
           <div>
             {member?.address ? (
               <div className="flex gap-2 text-gray-600 justify-center items-center">

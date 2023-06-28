@@ -20,4 +20,11 @@ class MemberListController extends Controller
             'members' => Member::where('business_name', '!=', '')->with('badge')->with('category')->with('program')->get(),
         ]);
     }
+
+    public function detail($id)
+    {
+        return Inertia::render('MemberDetail', [
+            'member' => Member::where('id', $id)->with('member_slider')->with('category')->with('program')->firstOrFail(),
+        ]);
+    }
 }

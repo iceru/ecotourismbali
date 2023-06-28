@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PreTestModuleAnswer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use App\Models\Module;
+use Illuminate\Http\Request;
+use App\Models\PreTestQuestion;
+use App\Models\PreTestModuleAnswer;
+use Illuminate\Support\Facades\Redirect;
 
 class PreTestModuleAnswerController extends Controller
 {
     public function index($id)
     {
-        return Inertia::render('Admin/PreTestModuleAnswer/CreatePreTestModuleAnswer', [
-            'pre_test_module_answer' => PreTestModuleAnswer::find($id),
+        return Inertia::render('Member/Module/ModulePreTest', [
+            'module' => Module::where('id', $id)->firstOrFail(),
+            'post_test' => PreTestQuestion::where('module_id', $id)->with('pre_test_option')->get(),
         ]);
     }
 

@@ -125,7 +125,7 @@ function CreatePostQuestion({ post_question, module }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

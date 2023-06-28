@@ -85,7 +85,7 @@ function CreatePreOption({ pre_option, pre_question }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >
