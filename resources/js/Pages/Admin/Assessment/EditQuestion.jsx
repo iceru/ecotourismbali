@@ -10,15 +10,17 @@ import BackTo from '../Components/BackTo';
 import { useState, useEffect } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import Editor from '../Components/Editor';
+import SelectInput from '@/Components/SelectInput';
 
 function EditQuestion() {
   const { t } = useTranslation();
 
   const { assess_question, assessment } = usePage().props;
 
-  const { data, setData, post, processing } = useForm({
+  const { data, setData, post, processing, errors } = useForm({
     question_no: assess_question.question_no || '',
     title: assess_question.title || '',
+    type: assess_question.type || '',
     question: assess_question.question || '',
   });
 
@@ -33,6 +35,17 @@ function EditQuestion() {
   useEffect(() => {
     setData('question', value);
   }, [value]);
+
+  const types = [
+    {
+      label: 'Radio Button',
+      value: 'radio',
+    },
+    {
+      label: 'Checkbox',
+      value: 'checkbox',
+    },
+  ];
 
   return (
     <AdminLayout>
@@ -60,6 +73,7 @@ function EditQuestion() {
                 isFocused={true}
                 onChange={e => setData('question_no', e.target.value)}
               />
+              <span className="text-red-600">{errors.question_no}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -76,6 +90,23 @@ function EditQuestion() {
                 isFocused={true}
                 onChange={e => setData('title', e.target.value)}
               />
+              <span className="text-red-600">{errors.title}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="type" value={t('form_label_type')} />
+            </div>
+            <div className="lg:w-4/5">
+              <SelectInput
+                id="type"
+                name="type"
+                value={data.type}
+                options={types}
+                className="w-full"
+                onChange={e => setData('type', e.target.value)}
+              />
+              <span className="text-red-600">{errors.type}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -84,6 +115,7 @@ function EditQuestion() {
             </div>
             <div className="lg:w-4/5">
               <Editor onChange={setValue} value={value} />
+              <span className="text-red-600">{errors.description}</span>
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>

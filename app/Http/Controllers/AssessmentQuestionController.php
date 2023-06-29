@@ -39,7 +39,7 @@ class AssessmentQuestionController extends Controller
 
         $assessment_question->save();
 
-        return Redirect::route('assessment_question.index', $assessment->id);
+        return Redirect::route('assessment_question.index', $assessment->id)->with('success', 'Question created successfully.');
     }
 
     public function edit($id)
@@ -71,7 +71,7 @@ class AssessmentQuestionController extends Controller
 
         $assessment_question->save();
 
-        return Redirect::route('assessment_question.index', $assessment_question->assessment->id);
+        return Redirect::route('assessment_question.index', $assessment_question->assessment->id)->with('success', 'Question updated successfully.');
     }
 
     public function destroy(Request $request)

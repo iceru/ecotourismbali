@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import InputLabel from '@/Components/InputLabel';
 import MemberLayout from '@/Layouts/MemberLayout';
-import { useForm, usePage } from '@inertiajs/react';
+import { router, useForm, usePage } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
@@ -11,13 +11,13 @@ import SelectInput from '@/Components/SelectInput';
 function MemberDashboard({ business_type }) {
   const { t } = useTranslation();
 
-  const { member, user } = usePage().props;
-
+  const { member } = usePage().props;
+  console.log(member);
   const { data, setData, post, processing, errors, reset } = useForm({
     business_name: member.business_name || '',
     address: member.address || '',
     website: member.website || '',
-    name: user.name || '',
+    name: member?.user?.name || '',
     job_title: member.job_title || '',
     phone: member.phone || '',
     email: member.email || '',
@@ -27,11 +27,7 @@ function MemberDashboard({ business_type }) {
   const submit = e => {
     e.preventDefault();
 
-    post(`/member/assessment/store/${member.id}/${user.id}`, {
-      onSuccess: () => {
-        reset();
-      },
-    });
+    post(route('member.assessment.store', member.id), {});
   };
 
   return (
