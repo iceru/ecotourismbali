@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
 import { Link } from '@inertiajs/react';
-import Logo from '../../images/logo.png';
-import Pin from '../../images/pin-1.png';
-import Email from '../../images/mail.png';
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
   faInstagramSquare,
@@ -11,13 +11,17 @@ import {
   faTwitterSquare,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
+
 import TextInput from './TextInput';
-import { useTranslation } from 'react-i18next';
 import enImg from '../../images/en.png';
 import idImg from '../../images/id.png';
+import Logo from '../../images/logo.png';
+import Pin from '../../images/pin-1.png';
+import Email from '../../images/mail.png';
 
 function Navbar() {
   const { i18n } = useTranslation();
+  const [sidebar, setSidebar] = useState(false);
 
   function changeLanguage(code) {
     if (i18n.language !== code) {
@@ -116,7 +120,7 @@ function Navbar() {
           <img src={Logo} alt="Eco Tourism Bali" className="w-[80px]" />
         </div>
         <div>
-          <ul className="flex gap-6 uppercase text-[15px] text-[#b0b0b0] items-center">
+          <ul className=" hidden lg:flex gap-6 uppercase text-[15px] text-[#b0b0b0] items-center">
             <Link href="#">
               <li>About</li>
             </Link>
@@ -138,8 +142,44 @@ function Navbar() {
               <li>Member Login</li>
             </Link>
           </ul>
+          <div onClick={() => setSidebar(true)} className="lg:hidden">
+            <FontAwesomeIcon icon={faBars} className="text-3xl text-primary" />
+          </div>
         </div>
       </nav>
+      <div
+        className={`bg-primary transition  text-white w-full h-full fixed z-40 top-0 left-0 p-6 ${
+          sidebar ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="bg-white flex justify-between items-center p-4 mb-12 -mx-6">
+          <img src={Logo} alt="Eco Tourism Bali" className="w-[60px]" />
+          <div onClick={() => setSidebar(false)}>
+            <FontAwesomeIcon icon={faTimes} className="text-3xl text-primary" />
+          </div>
+        </div>
+
+        <ul className=" gap-8 flex flex-col uppercase text-[15px]">
+          <Link href="#">
+            <li>About</li>
+          </Link>
+          <Link href="#">
+            <li>Programs</li>
+          </Link>
+          <Link href="#">
+            <li>Eco Tourism Tribe</li>
+          </Link>
+          <Link href="#">
+            <li>Sustainable Verification</li>
+          </Link>
+          <Link href="#">
+            <li>Blog and News</li>
+          </Link>
+          <Link href="#">
+            <li>Member Login</li>
+          </Link>
+        </ul>
+      </div>
     </>
   );
 }

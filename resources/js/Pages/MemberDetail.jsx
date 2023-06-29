@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from 'react-responsive';
 
 import Guest from '@/Layouts/GuestLayout';
 import Slider from 'react-slick';
@@ -8,19 +9,26 @@ import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 function MemberList({ member }) {
   const { t } = useTranslation();
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 992px)',
+  });
 
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow:
-      member.member_slider?.length > 2 ? 3 : member.member_slider?.length,
+    arrows: true,
+    slidesToShow: !isDesktop
+      ? 1
+      : member.member_slider?.length > 2
+      ? 3
+      : member.member_slider?.length,
     slidesToScroll: 1,
   };
 
   return (
     <Guest>
-      <section className="flex justify-between items-center mb-12">
-        <div className="flex items-center">
+      <section className="flex justify-between items-center mb-12 flex-wrap">
+        <div className="flex items-center mb-6 lg:mb-0">
           <div className="mr-4">
             <img
               src={'/storage/member/images/' + member.image}
@@ -43,7 +51,7 @@ function MemberList({ member }) {
           <div className="font-bold text-lg">{t('not_verified')}</div>
         )}
       </section>
-      <section className="mb-12">
+      <section className="mb-12 -mx-2">
         <Slider {...settings}>
           {member.member_slider?.map(slider => {
             return (

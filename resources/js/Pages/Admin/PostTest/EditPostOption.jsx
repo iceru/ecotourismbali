@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import BackTo from '../Components/BackTo';
+import SelectInput from '@/Components/SelectInput';
 
 function EditPostOption() {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ function EditPostOption() {
 
   const { data, setData, patch, processing, errors } = useForm({
     title: post_option.title || '',
+    answer: post_option.answer || 'no',
   });
 
   const submit = e => {
@@ -22,6 +24,17 @@ function EditPostOption() {
 
     patch(route('post_option.update', post_option.id));
   };
+
+  const answer = [
+    {
+      label: 'No',
+      value: 'no',
+    },
+    {
+      label: 'Yes',
+      value: 'yes',
+    },
+  ];
 
   return (
     <AdminLayout>
@@ -47,6 +60,22 @@ function EditPostOption() {
                 onChange={e => setData('title', e.target.value)}
               />
               <span className="text-red-600">{errors.title}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="title" value={t('form_label_answer')} />
+            </div>
+            <div className="lg:w-3/4">
+              <SelectInput
+                id="answer"
+                name="answer"
+                value={data.answer}
+                options={answer}
+                className="w-full"
+                onChange={e => setData('answer', e.target.value)}
+              />
+              <span className="text-red-600">{errors.answer}</span>
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>

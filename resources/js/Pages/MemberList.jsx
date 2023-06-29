@@ -14,23 +14,29 @@ function MemberList({ programs, categories, badges, members }) {
   return (
     <Guest>
       <h1 className="font-bold text-3xl mb-10">{t('list_of_members')}</h1>
-      <div className="flex justify-between mb-10">
-        <div>
+      <div className="flex flex-wrap justify-between mb-10">
+        <div className="mb-6 lg:mb-0">
           <div className="font-bold mb-2 text-lg">{t('filter')}:</div>
-          <div className="flex">
-            <div className="flex items-center mr-4">
+          <div className="flex flex-wrap">
+            <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
               <InputLabel className="mr-4" value={t('program')} />
               <SelectInput
                 options={programs}
                 labelData="name"
                 valueData="name"
+                className="w-full"
               />
             </div>
-            <div className="flex items-center mr-4">
+            <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
               <InputLabel className="mr-4" value={t('badge')} />
-              <SelectInput options={badges} labelData="name" valueData="name" />
+              <SelectInput
+                options={badges}
+                labelData="name"
+                valueData="name"
+                className="w-full"
+              />
             </div>
-            <div className="flex items-center mr-4">
+            <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
               <InputLabel className="mr-4" value={t('keyword')} />
               <TextInput />
             </div>
@@ -47,14 +53,14 @@ function MemberList({ programs, categories, badges, members }) {
         </div>
       </div>
 
-      <div className="flex">
-        <div className="sidebar lg:w-1/6">
-          <ul className="text-gray-600 font-light">
+      <div className="flex flex-wrap">
+        <div className="sidebar w-full lg:w-1/6">
+          <ul className="text-gray-600 font-light flex lg:block whitespace-nowrap overflow-auto gap-4 mb-6 lg:mb-0 pb-4">
             {categories?.map(cat => {
               return (
                 <li
                   onClick={() => setCategory(cat.name)}
-                  className={`cursor-pointer mb-6 ${
+                  className={`cursor-pointer lg:mb-6 ${
                     category === cat.name ? 'font-bold text-primary' : ''
                   }`}
                 >
@@ -79,19 +85,21 @@ function MemberList({ programs, categories, badges, members }) {
                   </div>
                 )}
                 <div className="flex items-center mb-3 mt-5">
-                  <div className="mr-2">
+                  <div className="mr-3">
                     <img
                       src={`/storage/member/images/${member.image}`}
                       alt={member.bussiness_name}
                       className="w-[62px] max-h-[62px] object-cover"
                     />
                   </div>
-                  <div>
-                    <h4 className="font-bold mb-2 text-lg">
+                  <Link href={route('member.detail', member.id)}>
+                    <h4 className="font-bold text-lg">
                       {member.business_name}
                     </h4>
-                    <h6>{member.category?.name}</h6>
-                  </div>
+                    {member.category && (
+                      <h6 className="mt-2">{member.category?.name}</h6>
+                    )}
+                  </Link>
                 </div>
                 <p className="mb-3 text-sm">
                   {member.description.slice(0, 100)}

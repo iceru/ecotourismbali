@@ -106,6 +106,7 @@
   "form_label_attachment": "Lampiran",
   "form_label_author": "Penulis",
   "form_label_content": "Konten",
+  "form_label_answer": "Jawaban",
 
   "add_pre_test": "Tambahkan Pertanyaan Pre Test",
   "add_post_test": "Tambahkan Pertanyaan Post Test",
@@ -187,5 +188,7 @@
   "post_test": "Post Test",
   "pre_test": "Pre Test",
   "back": "Kembali",
-  "module_learning": "Modul Pembelajaran {{ number }}"
+  "module_learning": "Modul Pembelajaran {{ number }}",
+  "question": "Pertanyaan {{ number }}",
+  "start_post_test": "Mulai Post Test"
 }

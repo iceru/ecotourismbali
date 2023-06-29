@@ -26,7 +26,18 @@ function ModuleList({ modules }) {
                 <div className="lg:w-2/3">
                   <div className="text-xl font-bold mb-3">{module.title}</div>
                   <div className="mb-3 text-sm">{module.description}</div>
-                  <PrimaryButton as="link">{t('start_learning')}</PrimaryButton>
+                  {module.member_module[0]?.completion > 0 ? (
+                    <div className="rounded-3xl text-sm py-2 px-4 bg-secondary text-white inline-block">
+                      Already Learned
+                    </div>
+                  ) : (
+                    <PrimaryButton
+                      as="link"
+                      href={route('member.module.pre-test', module.id)}
+                    >
+                      {t('start_learning')}
+                    </PrimaryButton>
+                  )}
                 </div>
               </div>
             );

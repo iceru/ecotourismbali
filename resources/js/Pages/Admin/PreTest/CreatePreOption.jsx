@@ -8,6 +8,7 @@ import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
 import BackTo from '../Components/BackTo';
+import SelectInput from '@/Components/SelectInput';
 
 function CreatePreOption({ pre_option, pre_question }) {
   const { t } = useTranslation();
@@ -15,11 +16,12 @@ function CreatePreOption({ pre_option, pre_question }) {
 
   const { data, setData, post, processing, errors, reset } = useForm({
     title: '',
+    answer: 'no',
   });
 
-  const headerTable = ['ID', 'Option', 'Action'];
+  const headerTable = ['ID', 'Option', 'Answer', 'Action'];
 
-  const selectedData = ['id', 'title'];
+  const selectedData = ['id', 'title', 'answer'];
 
   const tableActions = [
     {
@@ -46,6 +48,17 @@ function CreatePreOption({ pre_option, pre_question }) {
       },
     });
   };
+
+  const answer = [
+    {
+      label: 'No',
+      value: 'no',
+    },
+    {
+      label: 'Yes',
+      value: 'yes',
+    },
+  ];
 
   return (
     <AdminLayout>
@@ -82,6 +95,21 @@ function CreatePreOption({ pre_option, pre_question }) {
                 onChange={e => setData('title', e.target.value)}
               />
               <span className="text-red-600">{errors.title}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="title" value={t('form_label_answer')} />
+            </div>
+            <div className="lg:w-3/4">
+              <SelectInput
+                id="answer"
+                name="answer"
+                options={answer}
+                className="w-full"
+                onChange={e => setData('answer', e.target.value)}
+              />
+              <span className="text-red-600">{errors.answer}</span>
             </div>
           </div>
           <PrimaryButton

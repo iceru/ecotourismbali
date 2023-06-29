@@ -24,9 +24,11 @@ class PreTestOptionController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'answer' => 'required',
         ]);
 
         $pre_option->title = $request->title;
+        $pre_option->answer = $request->answer;
         $pre_option->pre_test_question_id = $id;
         $pre_option->save();
 
@@ -46,9 +48,11 @@ class PreTestOptionController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'answer' => 'required',
         ]);
 
         $pre_option->title = $request->title;
+        $pre_option->answer = $request->answer;
         $pre_option->save();
 
         return Redirect::route('pre_option.index', $pre_option->pre_test_question_id);

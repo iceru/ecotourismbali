@@ -66,8 +66,12 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 
     Route::get('/member/module', [MemberModuleController::class, 'index'])->name('member.module.index');
     Route::get('/member/module/{id}', [MemberModuleController::class, 'detail'])->name('member.module.detail');
+    Route::get('/member/module/{id}/result', [MemberModuleController::class, 'result'])->name('member.module.result');
     Route::get('/member/module/{id}/post-test', [PostTestModuleAnswerController::class, 'index'])->name('member.module.post-test');
     Route::get('/member/module/{id}/pre-test', [PreTestModuleAnswerController::class, 'index'])->name('member.module.pre-test');
+
+    Route::post('/member/module/pre-test/store', [PreTestModuleAnswerController::class, 'store'])->name('member.pre-test.store');
+    Route::post('/member/module/post-test/store', [PostTestModuleAnswerController::class, 'store'])->name('member.post-test.store');
 });
 
 // route below this must be move into middleware auth with role:admin after we have user admin

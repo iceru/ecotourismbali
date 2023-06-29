@@ -6,7 +6,7 @@ export default function Guest({ children }) {
       <Navbar />
 
       <div className="min-h-[80vh] container bg-white">
-        <div className="py-12">{children}</div>
+        <div className="py-12 px-3 lg:px-0">{children}</div>
       </div>
     </div>
   );

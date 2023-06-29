@@ -23,10 +23,12 @@ class PostTestOptionController extends Controller
         $post_option = new PostTestOption;
 
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'answer' => 'required'
         ]);
 
         $post_option->title = $request->title;
+        $post_option->answer = $request->answer;
         $post_option->post_test_question_id = $id;
         $post_option->save();
 
@@ -46,9 +48,11 @@ class PostTestOptionController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'answer' => 'required',
         ]);
 
         $post_option->title = $request->title;
+        $post_option->answer = $request->answer;
         $post_option->save();
 
         return Redirect::route('post_option.index', $post_option->post_test_question_id);

@@ -105,6 +105,7 @@
   "form_label_attachment": "Attachment",
   "form_label_author": "Author",
   "form_label_content": "Content",
+  "form_label_answer": "Answer",
 
   "add_pre_test": "Add Pre Test Question",
   "add_post_test": "Add Post Test Question",
@@ -188,5 +189,7 @@
   "post_test": "Post Test",
   "pre_test": "Pre Test",
   "back": "Back",
-  "module_learning": "Module Learning {{ number }}"
+  "module_learning": "Module Learning {{ number }}",
+  "question": "Question {{ number }}",
+  "start_post_test": "Start Post Test"
 }

@@ -25,7 +25,11 @@ function ModuleDetail({ module }) {
             className="text-justify"
             dangerouslySetInnerHTML={{ __html: module.content }}
           ></div>
-          <PrimaryButton as="link" href="#" className="flex justify-center">
+          <PrimaryButton
+            as="link"
+            href={route('member.module.post-test', module.id)}
+            className="flex justify-center"
+          >
             {t('start_post_test')}
           </PrimaryButton>
         </div>
