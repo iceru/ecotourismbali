@@ -71,7 +71,7 @@ function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href={route('member.index')}
+                href={route('admin.member.index')}
                 className={url.startsWith('/admin/member') ? 'font-bold' : ''}
               >
                 <FontAwesomeIcon

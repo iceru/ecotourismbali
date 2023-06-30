@@ -158,9 +158,9 @@ Route::middleware(['auth', 'role:superadministrator,administrator'])->prefix('ad
     Route::post('/program/update/{id}', [ProgramController::class, 'update'])->name('program.update');
     Route::delete('/program/delete/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
     
-    Route::get('/member/index', [AdminMemberController::class, 'index'])->name('member.index');
-    Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('member.detail');
-    Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('member.update');
+    Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
+    Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
+    Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
     //
 });
 

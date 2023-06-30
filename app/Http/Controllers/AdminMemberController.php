@@ -79,7 +79,7 @@ class AdminMemberController extends Controller
         $member->verified_badge_id = $request->verified_badge;
         $member->save();
 
-        return Redirect::route('member.detail', $member->id);
+        return Redirect::route('admin.member.detail', $member->id);
     }
 
     /**

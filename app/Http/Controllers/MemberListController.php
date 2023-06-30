@@ -24,7 +24,7 @@ class MemberListController extends Controller
     public function detail($id)
     {
         return Inertia::render('MemberDetail', [
-            'member' => Member::where('id', $id)->with('member_slider')->with('category')->with('program')->firstOrFail(),
+            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program')->firstOrFail(),
         ]);
     }
 
@@ -36,7 +36,7 @@ class MemberListController extends Controller
         if($request->category && $category->name !== 'All') {
             $member = $member->where('category_id', $request->category);
         }
-        
+
         if($request->program) {
             $member = $member->where('program_id', $request->program);
         }
@@ -47,6 +47,15 @@ class MemberListController extends Controller
 
         if($request->keyword) {
             $member = $member->where('business_name', 'LIKE', "%$request->keyword%");
+        }
+
+        if ($request->sort) {
+            $sortColumns = explode('-', $request->sort);
+            if($sortColumns[1] === 'descending') {
+                $member->orderByDesc('business_name');
+            } else {
+                $member->orderBy('business_name');
+            }
         }
 
         $member = $member->with('badge', 'category', 'program')->get();

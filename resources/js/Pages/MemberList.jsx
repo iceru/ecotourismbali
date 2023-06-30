@@ -8,11 +8,23 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { Link, router } from '@inertiajs/react';
 
 function MemberList({ programs, categories, badges, members }) {
+  const sorts = [
+    {
+      label: 'Name - Ascending',
+      value: 'name-ascending',
+    },
+    {
+      label: 'Name - Descending',
+      value: 'name-descending',
+    },
+  ];
+
   const { t } = useTranslation();
   const [category, setCategory] = useState(categories[0].id);
   const [program, setProgram] = useState();
   const [badge, setBadge] = useState();
   const [keyword, setKeyword] = useState();
+  const [sort, setSort] = useState(sorts[0].value);
   const [payload, setPayload] = useState({});
 
   console.log(payload);
@@ -37,49 +49,71 @@ function MemberList({ programs, categories, badges, members }) {
     router.post(route('member.filter'), value);
   }, [category]);
 
+  useEffect(() => {
+    const value = {
+      ...payload,
+      sort,
+    };
+    router.post(route('member.filter'), value);
+  }, [sort]);
+
   return (
     <Guest>
-      <h1 className="font-bold text-3xl mb-10">{t('list_of_members')}</h1>
+      <h1 className="font-bold text-2xl lg:text-3xl mb-6 lg:mb-10">
+        {t('list_of_members')}
+      </h1>
       <div className="flex flex-wrap justify-between mb-10">
-        <div className="mb-6 lg:mb-0">
+        <div className="mb-6 lg:mb-0 lg:w-3/4 pr-4">
           <div className="font-bold mb-2 text-lg">{t('filter')}:</div>
-          <div className="flex flex-wrap">
-            <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-              <InputLabel className="mr-4" value={t('program')} />
-              <SelectInput
-                options={programs}
-                labelData="name"
-                valueData="id"
-                className="w-full"
-                onChange={e => setProgram(parseInt(e.target.value))}
-              >
-                <option value="">{t('select_program')}</option>
-              </SelectInput>
-            </div>
-            <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-              <InputLabel className="mr-4" value={t('badge')} />
-              <SelectInput
-                options={badges}
-                labelData="name"
-                valueData="id"
-                className="w-full"
-                onChange={e => setBadge(parseInt(e.target.value))}
-              >
-                <option value="">{t('select_badge')}</option>
-              </SelectInput>
-            </div>
-            <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-              <InputLabel className="mr-4" value={t('keyword')} />
-              <TextInput onChange={e => setKeyword(e.target.value)} />
+          <div className="flex">
+            <div className="grid lg:grid-cols-3">
+              <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                <InputLabel className="mr-4" value={t('program')} />
+                <SelectInput
+                  options={programs}
+                  labelData="name"
+                  valueData="id"
+                  className="w-full"
+                  onChange={e => setProgram(parseInt(e.target.value))}
+                >
+                  <option value="">{t('select_program')}</option>
+                </SelectInput>
+              </div>
+              <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                <InputLabel className="mr-4" value={t('badge')} />
+                <SelectInput
+                  options={badges}
+                  labelData="name"
+                  valueData="id"
+                  className="w-full"
+                  onChange={e => setBadge(parseInt(e.target.value))}
+                >
+                  <option value="">{t('select_badge')}</option>
+                </SelectInput>
+              </div>
+              <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                <InputLabel className="mr-4" value={t('keyword')} />
+                <TextInput
+                  className="w-full"
+                  onChange={e => setKeyword(e.target.value)}
+                />
+              </div>
             </div>
             <PrimaryButton onClick={filterData}>{t('filter')}</PrimaryButton>
           </div>
         </div>
-        <div>
-          <div className="font-bold mb-2 text-lg">{t('sort')}:</div>
-          <div className="flex">
-            <div className="flex items-center mr-4">
-              <SelectInput />
+        <div className="lg:w-1/4 ">
+          <div className="ml-auto lg:w-3/4">
+            <div className="font-bold mb-2 text-lg inline-flex">
+              {t('sort')}
+            </div>
+            <div className="flex">
+              <div className="flex items-center">
+                <SelectInput
+                  options={sorts}
+                  onChange={e => setSort(e.target.value)}
+                />
+              </div>
             </div>
           </div>
         </div>

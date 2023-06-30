@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import Guest from '@/Layouts/GuestLayout';
 import Slider from 'react-slick';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faHome } from '@fortawesome/free-solid-svg-icons';
 
 function MemberList({ member }) {
   const { t } = useTranslation();
@@ -37,9 +37,11 @@ function MemberList({ member }) {
             />
           </div>
           <div>
-            <h2 className="text-2xl font-bold">{member.business_name}</h2>
-            <h4>{member.category?.name}</h4>
-            <h4>{member.program?.name}</h4>
+            <h2 className="text-2xl font-bold mb-2">{member.business_name}</h2>
+            <h4 className="uppercase text-primary tracking-wide">
+              {member.category?.name}
+            </h4>
+            <h6>{member.program?.name}</h6>
           </div>
         </div>
         {member.badge ? (
@@ -48,7 +50,9 @@ function MemberList({ member }) {
             <div>{member.badge?.name}</div>
           </div>
         ) : (
-          <div className="font-bold text-lg">{t('not_verified')}</div>
+          <div className=" text-white bg-slate-400 px-4 py-2 rounded-3xl">
+            {t('not_verified')}
+          </div>
         )}
       </section>
       <section className="mb-12 -mx-2">
@@ -67,7 +71,14 @@ function MemberList({ member }) {
         </Slider>
       </section>
       <section className="mb-12">
-        <div className="flex justify-center gap-6 ">
+        <div className="grid grid-cols-2 gap-6 ">
+          <div className="flex items-center justify-end">
+            <FontAwesomeIcon
+              icon={faHome}
+              className="text-primary mr-2 mt-0.5"
+            />
+            {member.address}
+          </div>
           <div className="flex items-center">
             <FontAwesomeIcon
               icon={faGlobe}
