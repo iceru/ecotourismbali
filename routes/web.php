@@ -132,24 +132,6 @@ Route::get('/post-option/edit/{id}', [PostTestOptionController::class, 'edit'])-
 Route::patch('/post-option/update/{id}', [PostTestOptionController::class, 'update'])->name('post_option.update');
 Route::delete('/post-option/delete/{id}', [PostTestOptionController::class, 'destroy'])->name('post_option.destroy');
 
-// Route::get('/pre-test-module-answer', [PreTestModuleAnswerController::class, 'index'])->name('pre_module_answer.index');
-// Route::post('/pre-test-module-answer/store', [PreTestModuleAnswerController::class, 'store'])->name('pre_module_answer.store');
-// Route::get('/pre-test-module-answer/edit/{id}', [PreTestModuleAnswerController::class, 'edit'])->name('pre_module_answer.edit');
-// Route::patch('/pre-test-module-answer/update/{id}', [PreTestModuleAnswerController::class, 'update'])->name('pre_module_answer.update');
-// Route::delete('/pre-test-module-answer/delete/{id}', [PreTestModuleAnswerController::class, 'destroy'])->name('pre_module_answer.destroy');
-
-// Route::get('/member-module', [MemberModuleController::class, 'index'])->name('member_module.index');
-// Route::post('/member-module/store', [MemberModuleController::class, 'store'])->name('member_module.store');
-// Route::get('/member-module/edit/{id}', [MemberModuleController::class, 'edit'])->name('member_module.edit');
-// Route::patch('/member-module/update/{id}', [MemberModuleController::class, 'update'])->name('member_module.update');
-// Route::delete('/member-module/delete/{id}', [MemberModuleController::class, 'destroy'])->name('member_module.destroy');
-
-// Route::get('/post-test-module-answer', [PostTestModuleAnswerController::class, 'index'])->name('post_test_module_answer.index');
-// Route::post('/post-test-module-answer/store', [PostTestModuleAnswerController::class, 'store'])->name('post_test_module_answer.store');
-// Route::get('/post-test-module-answer/edit/{id}', [PostTestModuleAnswerController::class, 'edit'])->name('post_test_module_answer.edit');
-// Route::patch('/post-test-module-answer/update/{id}', [PostTestModuleAnswerController::class, 'update'])->name('post_test_module_answer.update');
-// Route::delete('/post-test-module-answer/delete/{id}', [PostTestModuleAnswerController::class, 'destroy'])->name('post_test_module_answer.destroy');
-
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 Route::post('/badge/store', [BadgeController::class, 'store'])->name('badge.store');
 Route::get('/badge/edit/{id}', [BadgeController::class, 'edit'])->name('badge.edit');
@@ -175,7 +157,8 @@ Route::post('/program/update/{id}', [ProgramController::class, 'update'])->name(
 Route::delete('/program/delete/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
 
 Route::get('/member/index', [AdminMemberController::class, 'index'])->name('member.index');
-Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('member.detail');
+Route::get('/admin/member/detail/{id}', [AdminMemberController::class, 'show'])->name('member.detail');
+Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('member.update');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {

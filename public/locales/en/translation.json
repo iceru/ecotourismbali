@@ -156,7 +156,7 @@
   "business_name": "Business Name",
   "category": "Category",
   "program": "Tribe",
-  "assessment_attempt": "Assessment Attempts",
+  "assessment_attempt": "Assessment Remaining Attempts",
   "status": "Status",
   "assessment_expire": "Assessment Expire",
   "description": "Description",
@@ -192,5 +192,10 @@
   "back": "Back",
   "module_learning": "Module Learning {{ number }}",
   "question": "Question {{ number }}",
-  "start_post_test": "Start Post Test"
+  "start_post_test": "Start Post Test",
+
+  "edit_member": "Edit Member Detail",
+  "select_category": "Select Category",
+  "select_program": "Select Tribe",
+  "select_verify_badge": "Select Verify Badge"
 }

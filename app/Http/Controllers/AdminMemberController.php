@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Member;
+use App\Models\Program;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Models\VerifiedBadge;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminMemberController extends Controller
 {
@@ -14,7 +20,7 @@ class AdminMemberController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Member/MemberIndex', [
-            'members' => User::with('member')->get(),
+            'members' => Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->get(),
         ]);
     }
 
@@ -40,7 +46,10 @@ class AdminMemberController extends Controller
     public function show(string $id)
     {
         return Inertia::render('Admin/Member/MemberDetail', [
-            'user' => User::with('member')->where('id', $id)->first(),
+            'member' => Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->find(Auth::id()),
+            'categories' => Category::all(),
+            'programs' => Program::all(),
+            'verified_badges' => VerifiedBadge::all(),
         ]);
     }
 
@@ -57,7 +66,20 @@ class AdminMemberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $member = Member::find($request->id);
+
+        $request->validate([
+            'category' => 'nullable',
+            'program' => 'nullable',
+            'verified_badge' => 'nullable',
+        ]);
+
+        $member->category_id = $request->category;
+        $member->program_id = $request->program;
+        $member->verified_badge_id = $request->verified_badge;
+        $member->save();
+
+        return Redirect::route('member.detail', $member->id);
     }
 
     /**

@@ -156,7 +156,7 @@
   "business_name": "Nama Bisnis",
   "category": "Kategori",
   "program": "Tribe",
-  "assessment_attempt": "Percobaan Penilaian Mandiri",
+  "assessment_attempt": "Sisa Penilaian Mandiri",
   "status": "Status",
   "assessment_expire": "Tenggang Waktu Penilaian Mandiri",
   "description": "Deskripsi",
@@ -190,5 +190,10 @@
   "back": "Kembali",
   "module_learning": "Modul Pembelajaran {{ number }}",
   "question": "Pertanyaan {{ number }}",
-  "start_post_test": "Mulai Post Test"
+  "start_post_test": "Mulai Post Test",
+
+  "edit_member": "Ubah Member Detail",
+  "select_category": "Pilih Category",
+  "select_program": "Pilih Tribe",
+  "select_verify_badge": "Pilih Verify Badge"
 }
