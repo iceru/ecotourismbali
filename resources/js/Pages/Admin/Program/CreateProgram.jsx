@@ -25,7 +25,7 @@ function CreateProgram({ program }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'program/edit',
+      link: '/admin/program/edit',
       withId: true,
       color: 'info',
     },

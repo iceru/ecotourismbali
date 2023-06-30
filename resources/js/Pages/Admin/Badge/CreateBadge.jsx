@@ -24,7 +24,7 @@ function CreateBadge({ badge }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'badge/edit',
+      link: '/admin/badge/edit',
       withId: true,
       color: 'info',
     },

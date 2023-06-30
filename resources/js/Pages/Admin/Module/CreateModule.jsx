@@ -56,13 +56,13 @@ function CreateModule({ module }) {
   const tableButtons = [
     {
       label: 'add_pre_test',
-      link: '/module/',
+      link: '/admin/module/',
       link2: '/pre-question',
       withId: true,
     },
     {
       label: 'add_post_test',
-      link: '/module/',
+      link: '/admin/module/',
       link2: '/post-question',
       withId: true,
     },
@@ -71,7 +71,7 @@ function CreateModule({ module }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'module/edit',
+      link: '/admin/module/edit',
       withId: true,
       color: 'info',
     },

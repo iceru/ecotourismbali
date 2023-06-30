@@ -26,7 +26,7 @@ function CreatePreOption({ pre_option, pre_question }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/pre-option/edit',
+      link: '/admin/pre-option/edit',
       withId: true,
       color: 'info',
     },
@@ -64,7 +64,7 @@ function CreatePreOption({ pre_option, pre_question }) {
     <AdminLayout>
       <BackTo
         title="back_to_question"
-        link={`/module/${pre_question.module_id}/pre-question`}
+        link={`/admin/module/${pre_question.module_id}/pre-question`}
       />
       <AdminSection className="mb-6">
         <h4 className="font-bold text-lg">

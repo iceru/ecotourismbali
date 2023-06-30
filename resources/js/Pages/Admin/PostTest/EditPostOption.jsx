@@ -40,7 +40,7 @@ function EditPostOption() {
     <AdminLayout>
       <BackTo
         title="back_to_list_option"
-        link={`/post-question/${post_option.post_test_question_id}/post-option`}
+        link={`/admin/post-question/${post_option.post_test_question_id}/post-option`}
       />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_post_test_title" />

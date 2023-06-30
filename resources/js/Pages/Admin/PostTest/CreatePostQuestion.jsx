@@ -32,7 +32,7 @@ function CreatePostQuestion({ post_question, module }) {
   const tableButtons = [
     {
       label: 'add_post_test_option',
-      link: '/post-question/',
+      link: '/admin/post-question/',
       link2: '/post-option',
       withId: true,
     },
@@ -41,7 +41,7 @@ function CreatePostQuestion({ post_question, module }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/post-question/edit',
+      link: '/admin/post-question/edit',
       withId: true,
       color: 'info',
     },
@@ -66,7 +66,7 @@ function CreatePostQuestion({ post_question, module }) {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_module" link="/module" />
+      <BackTo title="back_to_list_module" link="/admin/module" />
       <AdminSection className="mb-6 flex items-center">
         <img
           src={'/storage/modules/' + module?.image}

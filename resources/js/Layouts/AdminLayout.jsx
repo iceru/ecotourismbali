@@ -57,8 +57,10 @@ function AdminLayout({ children }) {
           <ul className="flex flex-col gap-6">
             <li>
               <Link
-                href="/dashboard"
-                className={url.startsWith('/dashboard') ? 'font-bold' : ''}
+                href={route('admin.dashboard')}
+                className={
+                  url.startsWith('/admin/dashboard') ? 'font-bold' : ''
+                }
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
@@ -70,7 +72,7 @@ function AdminLayout({ children }) {
             <li>
               <Link
                 href={route('member.index')}
-                className={url.startsWith('/member') ? 'font-bold' : ''}
+                className={url.startsWith('/admin/member') ? 'font-bold' : ''}
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
@@ -81,8 +83,10 @@ function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href="/assessment"
-                className={url.startsWith('/assessment') ? 'font-bold' : ''}
+                href={route('assessment.index')}
+                className={
+                  url.startsWith('/admin/assessment') ? 'font-bold' : ''
+                }
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
@@ -93,8 +97,8 @@ function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href="/module"
-                className={url.startsWith('/module') ? 'font-bold' : ''}
+                href={route('module.index')}
+                className={url.startsWith('/admin/module') ? 'font-bold' : ''}
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
@@ -105,8 +109,8 @@ function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href="/category"
-                className={url.startsWith('/category') ? 'font-bold' : ''}
+                href={route('category.index')}
+                className={url.startsWith('/admin/category') ? 'font-bold' : ''}
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
@@ -117,8 +121,8 @@ function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href="/program"
-                className={url.startsWith('/program') ? 'font-bold' : ''}
+                href={route('program.index')}
+                className={url.startsWith('/admin/program') ? 'font-bold' : ''}
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
@@ -129,8 +133,8 @@ function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href="/badge"
-                className={url.startsWith('/badge') ? 'font-bold' : ''}
+                href={route('badge.index')}
+                className={url.startsWith('/admin/badge') ? 'font-bold' : ''}
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"
@@ -141,8 +145,10 @@ function AdminLayout({ children }) {
             </li>
             <li>
               <Link
-                href="/verified-badge"
-                className={url.startsWith('/verified-badge') ? 'font-bold' : ''}
+                href={route('verified_badge.index')}
+                className={
+                  url.startsWith('/admin/verified-badge') ? 'font-bold' : ''
+                }
               >
                 <FontAwesomeIcon
                   className="fa-fw mr-2 text-secondary"

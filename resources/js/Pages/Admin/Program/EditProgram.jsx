@@ -27,7 +27,7 @@ function EditProgram() {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_program" link="/program" />
+      <BackTo title="back_to_list_program" link="/admin/program" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_program_title" />
         <form className="flex flex-col gap-6" onSubmit={submit}>

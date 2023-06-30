@@ -40,7 +40,7 @@ function EditPreOption() {
     <AdminLayout>
       <BackTo
         title="back_to_list_option"
-        link={`/pre-question/${pre_option.pre_test_question_id}/pre-option`}
+        link={`/admin/pre-question/${pre_option.pre_test_question_id}/pre-option`}
       />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_option_title" />

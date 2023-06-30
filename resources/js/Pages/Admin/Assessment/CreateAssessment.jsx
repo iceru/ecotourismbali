@@ -43,7 +43,7 @@ function CreateAssessment({ assessment, business_type }) {
   const tableButtons = [
     {
       label: 'add_question',
-      link: 'assessment/',
+      link: '/admin/assessment/',
       link2: '/question',
       withId: true,
     },
@@ -52,7 +52,7 @@ function CreateAssessment({ assessment, business_type }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'assessment/edit',
+      link: '/admin/assessment/edit',
       withId: true,
       color: 'info',
     },

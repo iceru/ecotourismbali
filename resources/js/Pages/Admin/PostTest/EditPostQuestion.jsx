@@ -26,7 +26,7 @@ function EditPostQuestion() {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_post_test" link="/post_question" />
+      <BackTo title="back_to_list_post_test" link="/admin/post_question" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_post_test_title" />
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>

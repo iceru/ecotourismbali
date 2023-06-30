@@ -24,7 +24,7 @@ function CreateBusinessType({ business_type }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'business-type/edit',
+      link: '/admin/business-type/edit',
       withId: true,
       color: 'info',
     },

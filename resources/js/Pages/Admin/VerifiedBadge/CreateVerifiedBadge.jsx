@@ -24,7 +24,7 @@ function CreateVerifiedBadge({ badge }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'verified-badge/edit',
+      link: '/admin/verified-badge/edit',
       withId: true,
       color: 'info',
     },

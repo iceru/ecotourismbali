@@ -23,7 +23,7 @@ function CreateCategory({ category }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'category/edit',
+      link: '/admin/category/edit',
       withId: true,
       color: 'info',
     },

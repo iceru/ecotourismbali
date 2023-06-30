@@ -26,7 +26,7 @@ function EditPreQuestion() {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_pre_test" link="/pre_question" />
+      <BackTo title="back_to_list_pre_test" link="/admin/pre_question" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_pre_test_title" />
         <form className="lg:w-3/4 flex flex-col gap-6" onSubmit={submit}>

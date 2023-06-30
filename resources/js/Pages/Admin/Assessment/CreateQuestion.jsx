@@ -30,7 +30,7 @@ function CreateQuestion({ assess_question, assessment }) {
   const tableButtons = [
     {
       label: 'add_option',
-      link: '/assessment/',
+      link: '/admin/assessment/',
       link2: '/option',
       withId: true,
     },
@@ -39,7 +39,7 @@ function CreateQuestion({ assess_question, assessment }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/assessment/question/edit',
+      link: '/admin/assessment/question/edit',
       withId: true,
       color: 'info',
     },
@@ -86,7 +86,7 @@ function CreateQuestion({ assess_question, assessment }) {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_assessment" link="/assessment" />
+      <BackTo title="back_to_list_assessment" link="/admin/assessment" />
       <AdminSection className="mb-6 flex items-center">
         <img
           src={showImage('assessments/' + assessment?.image)}

@@ -26,7 +26,7 @@ function CreatePostOption({ post_option, post_question }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/post-option/edit',
+      link: '/admin/post-option/edit',
       withId: true,
       color: 'info',
     },
@@ -64,7 +64,7 @@ function CreatePostOption({ post_option, post_question }) {
     <AdminLayout>
       <BackTo
         title="back_to_question"
-        link={`/module/${post_question.module_id}/post-question`}
+        link={`/admin/module/${post_question.module_id}/post-question`}
       />
       <AdminSection className="mb-6">
         <h4 className="font-bold text-lg">

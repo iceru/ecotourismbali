@@ -33,7 +33,7 @@ function CreatePreQuestion({ pre_question, module }) {
   const tableButtons = [
     {
       label: 'add_pre_test_option',
-      link: '/pre-question/',
+      link: '/admin/pre-question/',
       link2: '/pre-option',
       withId: true,
     },
@@ -42,7 +42,7 @@ function CreatePreQuestion({ pre_question, module }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/pre-question/edit',
+      link: '/admin/pre-question/edit',
       withId: true,
       color: 'info',
     },
@@ -67,7 +67,7 @@ function CreatePreQuestion({ pre_question, module }) {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_module" link="/module" />
+      <BackTo title="back_to_list_module" link="/admin/module" />
       <AdminSection className="mb-6 flex items-center">
         <img
           src={'/storage/modules/' + module?.image}

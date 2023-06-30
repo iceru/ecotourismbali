@@ -66,7 +66,7 @@ function MemberIndex() {
   };
   return (
     <AdminLayout>
-      <BackTo link="/member/index" title="back_to_list_members" />
+      <BackTo link="/admin/member/index" title="back_to_list_members" />
       <AdminSection>
         <div className="flex justify-between mb-6">
           <div className="flex items-center">
