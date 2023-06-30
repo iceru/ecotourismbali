@@ -1,15 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Guest from '@/Layouts/GuestLayout';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '@/Components/InputLabel';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 
 function MemberList({ programs, categories, badges, members }) {
   const { t } = useTranslation();
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState(categories[0].id);
+  const [program, setProgram] = useState();
+  const [badge, setBadge] = useState();
+  const [keyword, setKeyword] = useState();
+  const [payload, setPayload] = useState({});
+
+  console.log(payload);
+
+  const filterData = () => {
+    const value = {
+      ...payload,
+      program: program !== '' ? program : null,
+      badge: badge !== '' ? badge : null,
+      keyword,
+      category,
+    };
+    setPayload(value);
+    router.post(route('member.filter'), value);
+  };
+
+  useEffect(() => {
+    const value = {
+      ...payload,
+      category,
+    };
+    router.post(route('member.filter'), value);
+  }, [category]);
 
   return (
     <Guest>
@@ -23,24 +49,30 @@ function MemberList({ programs, categories, badges, members }) {
               <SelectInput
                 options={programs}
                 labelData="name"
-                valueData="name"
+                valueData="id"
                 className="w-full"
-              />
+                onChange={e => setProgram(parseInt(e.target.value))}
+              >
+                <option value="">{t('select_program')}</option>
+              </SelectInput>
             </div>
             <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
               <InputLabel className="mr-4" value={t('badge')} />
               <SelectInput
                 options={badges}
                 labelData="name"
-                valueData="name"
+                valueData="id"
                 className="w-full"
-              />
+                onChange={e => setBadge(parseInt(e.target.value))}
+              >
+                <option value="">{t('select_badge')}</option>
+              </SelectInput>
             </div>
             <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
               <InputLabel className="mr-4" value={t('keyword')} />
-              <TextInput />
+              <TextInput onChange={e => setKeyword(e.target.value)} />
             </div>
-            <PrimaryButton>{t('filter')}</PrimaryButton>
+            <PrimaryButton onClick={filterData}>{t('filter')}</PrimaryButton>
           </div>
         </div>
         <div>
@@ -59,9 +91,10 @@ function MemberList({ programs, categories, badges, members }) {
             {categories?.map(cat => {
               return (
                 <li
-                  onClick={() => setCategory(cat.name)}
+                  onClick={() => setCategory(cat.id)}
+                  id={cat.id}
                   className={`cursor-pointer lg:mb-6 ${
-                    category === cat.name ? 'font-bold text-primary' : ''
+                    category === cat.id ? 'font-bold text-primary' : ''
                   }`}
                 >
                   {t(cat.name)}
@@ -97,7 +130,9 @@ function MemberList({ programs, categories, badges, members }) {
                       {member.business_name}
                     </h4>
                     {member.category && (
-                      <h6 className="mt-2">{member.category?.name}</h6>
+                      <h6 className="text-xs uppercase text-primary">
+                        {member.category?.name}
+                      </h6>
                     )}
                   </Link>
                 </div>

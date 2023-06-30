@@ -17,7 +17,7 @@ class MemberListController extends Controller
             'programs' => Program::all(),
             'categories' => Category::all(),
             'badges' => Badge::all(),
-            'members' => Member::where('business_name', '!=', '')->with('badge')->with('category')->with('program')->get(),
+            'members' => Member::where('business_name', '!=', '')->with('badge', 'category', 'program')->get(),
         ]);
     }
 
@@ -25,6 +25,36 @@ class MemberListController extends Controller
     {
         return Inertia::render('MemberDetail', [
             'member' => Member::where('id', $id)->with('member_slider')->with('category')->with('program')->firstOrFail(),
+        ]);
+    }
+
+    public function filter(Request $request)
+    {
+        $member = Member::where('business_name', '!=', '');
+        $category = Category::where('id', $request->category)->first();
+
+        if($request->category && $category->name !== 'All') {
+            $member = $member->where('category_id', $request->category);
+        }
+        
+        if($request->program) {
+            $member = $member->where('program_id', $request->program);
+        }
+
+        if($request->badge) {
+            $member = $member->where('badge_id', $request->badge);
+        }
+
+        if($request->keyword) {
+            $member = $member->where('business_name', 'LIKE', "%$request->keyword%");
+        }
+
+        $member = $member->with('badge', 'category', 'program')->get();
+        return Inertia::render('MemberList', [
+            'programs' => Program::all(),
+            'categories' => Category::all(),
+            'badges' => Badge::all(),
+            'members' => $member,
         ]);
     }
 }

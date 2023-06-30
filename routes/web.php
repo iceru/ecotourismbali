@@ -48,6 +48,7 @@ Route::get('/', function () {
 
 Route::get('/member/list', [MemberListController::class, 'index'])->name('member.list');
 Route::get('/member/detail/{slug}',[MemberListController::class, 'detail'])->name('member.detail');
+Route::post('/member/list',[MemberListController::class, 'filter'])->name('member.filter');
 
 Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
