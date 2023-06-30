@@ -18,9 +18,9 @@ function CreateProgram({ program }) {
     image: null,
   });
 
-  const headerTable = ['ID', 'Name', 'Image', 'Action'];
+  const headerTable = ['Name', 'Image', 'Action'];
 
-  const selectedData = ['id', 'name', 'image'];
+  const selectedData = ['name', 'image'];
 
   const tableActions = [
     {

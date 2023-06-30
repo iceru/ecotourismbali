@@ -19,9 +19,9 @@ function CreatePreOption({ pre_option, pre_question }) {
     answer: 'no',
   });
 
-  const headerTable = ['ID', 'Option', 'Answer', 'Action'];
+  const headerTable = ['Option', 'Answer', 'Action'];
 
-  const selectedData = ['id', 'title', 'answer'];
+  const selectedData = ['title', 'answer'];
 
   const tableActions = [
     {

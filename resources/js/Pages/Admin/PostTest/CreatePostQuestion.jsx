@@ -18,16 +18,9 @@ function CreatePostQuestion({ post_question, module }) {
     question: '',
   });
 
-  const headerTable = [
-    'ID',
-    'Question No',
-    'Question',
-    'Module',
-    'Option',
-    'Action',
-  ];
+  const headerTable = ['Question No', 'Question', 'Module', 'Option', 'Action'];
 
-  const selectedData = ['id', 'question_no', 'question', 'module_id'];
+  const selectedData = ['question_no', 'question', 'module_id'];
 
   const tableButtons = [
     {

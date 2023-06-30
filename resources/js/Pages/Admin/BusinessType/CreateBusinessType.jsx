@@ -17,9 +17,9 @@ function CreateBusinessType({ business_type }) {
     name: '',
   });
 
-  const headerTable = ['ID', 'Name', 'Created At', 'Action'];
+  const headerTable = ['Name', 'Created At', 'Action'];
 
-  const selectedData = ['id', 'name', 'created_at'];
+  const selectedData = ['name', 'created_at'];
 
   const tableActions = [
     {

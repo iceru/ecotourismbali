@@ -23,7 +23,6 @@ function CreateAssessment({ assessment, business_type }) {
   });
 
   const headerTable = [
-    'ID',
     'Title',
     'Description',
     'Image',
@@ -32,13 +31,7 @@ function CreateAssessment({ assessment, business_type }) {
     'Action',
   ];
 
-  const selectedData = [
-    'id',
-    'title',
-    'description',
-    'image',
-    'business_type_id',
-  ];
+  const selectedData = ['title', 'description', 'image', 'business_type_id'];
 
   const tableButtons = [
     {

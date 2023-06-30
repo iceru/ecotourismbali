@@ -29,7 +29,6 @@ function CreateModule({ module }) {
   });
 
   const headerTable = [
-    'ID',
     'Title',
     'Description',
     'Image',
@@ -43,7 +42,6 @@ function CreateModule({ module }) {
   ];
 
   const selectedData = [
-    'id',
     'title',
     'description',
     'image',

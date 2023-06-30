@@ -16,9 +16,9 @@ function CreateCategory({ category }) {
     name: '',
   });
 
-  const headerTable = ['ID', 'Name', 'Action'];
+  const headerTable = ['Name', 'Action'];
 
-  const selectedData = ['id', 'name'];
+  const selectedData = ['name'];
 
   const tableActions = [
     {
