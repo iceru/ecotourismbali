@@ -7,7 +7,6 @@ import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 function ModuleResult({ memberModule }) {
-  console.log(memberModule);
   const { t } = useTranslation();
 
   return (

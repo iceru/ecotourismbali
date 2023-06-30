@@ -25,10 +25,6 @@ function EditProgram() {
     post(route('program.update', program.id));
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <AdminLayout>
       <BackTo title="back_to_list_program" link="/program" />

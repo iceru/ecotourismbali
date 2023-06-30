@@ -49,8 +49,6 @@ function CreateOption({ assessment_option, assessment_question }) {
     });
   };
 
-  console.log(assessment_question);
-
   return (
     <AdminLayout>
       <BackTo

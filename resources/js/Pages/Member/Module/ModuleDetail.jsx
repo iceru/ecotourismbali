@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 function ModuleDetail({ module }) {
   const { t } = useTranslation();
 
-  console.log(module);
   return (
     <MemberLayout>
       <AdminSection>

@@ -12,7 +12,6 @@ function MemberDashboard({ business_type }) {
   const { t } = useTranslation();
 
   const { member } = usePage().props;
-  console.log(member);
   const { data, setData, post, processing, errors, reset } = useForm({
     business_name: member.business_name || '',
     address: member.address || '',

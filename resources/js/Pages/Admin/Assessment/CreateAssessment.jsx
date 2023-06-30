@@ -82,40 +82,6 @@ function CreateAssessment({ assessment, business_type }) {
     setData('description', value);
   }, [value]);
 
-  // const imageHandler = e => {
-  //   const editor = quillRef.current.getEditor();
-  //   console.log(editor);
-  //   const input = document.createElement('input');
-  //   input.setAttribute('type', 'file');
-  //   input.setAttribute('accept', 'image/*');
-  //   input.click();
-
-  //   input.onchange = async () => {
-  //     const file = input.files[0];
-  //     if (/^image\//.test(file.type)) {
-  //       const formData = new FormData();
-  //       formData.append('image', file);
-  //       const res = await ImageUpload(formData); // upload data into server or aws or cloudinary
-  //       const url = res?.data?.url;
-  //       editor.insertEmbed(editor.getSelection(), 'image', url);
-  //     } else {
-  //       ErrorToast('You could only upload images.');
-  //     }
-  //   };
-  // };
-
-  // const ImageUpload = async formData => {
-  //   // console.log(JSON.parse(file));
-  //   axios({
-  //     method: 'post',
-  //     url: route('admin.upload'),
-  //     data: {
-  //       formData,
-  //     },
-  //     headers: { 'Content-Type': 'multipart/form-data' },
-  //   });
-  // };
-
   return (
     <AdminLayout>
       <AdminSection className="flex flex-col gap-6 mb-6">

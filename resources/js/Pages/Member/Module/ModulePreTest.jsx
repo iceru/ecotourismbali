@@ -18,7 +18,6 @@ function ModulePreTest({ pre_test, module, member }) {
 
   const submit = e => {
     e.preventDefault();
-    console.log(data);
 
     post(route('member.pre-test.store'), {
       onSuccess: () => {

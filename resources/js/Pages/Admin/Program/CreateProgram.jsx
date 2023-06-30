@@ -47,9 +47,7 @@ function CreateProgram({ program }) {
       },
     });
   };
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+
   return (
     <AdminLayout>
       <AdminSection className="flex flex-col gap-6 mb-6">

@@ -8,7 +8,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 
 function ModuleList({ modules }) {
   const { t } = useTranslation();
-  console.log(modules);
+
   return (
     <MemberLayout>
       <AdminSection>

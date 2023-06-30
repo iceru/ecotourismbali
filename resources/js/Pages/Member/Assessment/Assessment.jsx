@@ -15,7 +15,6 @@ function Assessment({ assessments }) {
 
   const submit = e => {
     e.preventDefault();
-    console.log(data);
     post(route('member.assessment.save'), {
       onSuccess: () => {
         if (assessments.length > active + 1) {

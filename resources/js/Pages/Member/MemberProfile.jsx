@@ -29,7 +29,6 @@ function MemberProfile({ member }) {
     slidesToScroll: 1,
   };
 
-  console.log(member.member_slider);
   return (
     <MemberLayout>
       <AdminSection>
