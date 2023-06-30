@@ -15,11 +15,11 @@ import { isEmpty } from 'lodash';
 function MemberDashboard({ user, member }) {
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (isEmpty(member) && member?.status !== 'active') {
-      window.location.href = '/member/locked';
-    }
-  }, [member]);
+  // useEffect(() => {
+  //   if (isEmpty(member) && member?.status !== 'active') {
+  //     window.location.href = '/member/locked';
+  //   }
+  // }, [member]);
 
   return (
     <MemberLayout>
@@ -30,12 +30,12 @@ function MemberDashboard({ user, member }) {
             as="link"
             href={route('member.profile')}
             className="mb-4 !inline-block"
-            type="lightPrimary"
+            color="lightPrimary"
           >
             {t('edit_profile')}
             <FontAwesomeIcon className="ml-2" icon={faUser} />
           </PrimaryButton>
-          <PrimaryButton className="!block" type="lightSecondary">
+          <PrimaryButton className="!block" color="lightSecondary">
             {t('start_learning')}
             <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
           </PrimaryButton>
@@ -55,11 +55,11 @@ function MemberDashboard({ user, member }) {
               </div>
             )}
             <div className="grid gap-4">
-              <PrimaryButton type="lightPrimary">
+              <PrimaryButton color="lightPrimary">
                 {t('start_assessment')}
                 <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-2" />
               </PrimaryButton>
-              <PrimaryButton type="lightSecondary">
+              <PrimaryButton color="lightSecondary">
                 {t('learn_more_assessment')}
                 <FontAwesomeIcon icon={faBook} className="ml-2" />
               </PrimaryButton>

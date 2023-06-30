@@ -11,13 +11,12 @@ import SelectInput from '@/Components/SelectInput';
 function MemberDashboard({ business_type }) {
   const { t } = useTranslation();
 
-  const { member, user } = usePage().props;
-
+  const { member } = usePage().props;
   const { data, setData, post, processing, errors, reset } = useForm({
     business_name: member.business_name || '',
     address: member.address || '',
     website: member.website || '',
-    name: user.name || '',
+    name: member?.user?.name || '',
     job_title: member.job_title || '',
     phone: member.phone || '',
     email: member.email || '',
@@ -27,11 +26,7 @@ function MemberDashboard({ business_type }) {
   const submit = e => {
     e.preventDefault();
 
-    post(`/member/assessment/store/${member.id}/${user.id}`, {
-      onSuccess: () => {
-        reset();
-      },
-    });
+    post(route('member.assessment.store', member.id), {});
   };
 
   return (

@@ -5,20 +5,28 @@ import Table from '@/Components/Table';
 import { isEmpty } from 'lodash';
 
 function MemberIndex({ members }) {
-  const header = ['ID', 'Name', 'Email', 'Logo', 'Badge', 'Status', 'Action'];
-  const selectedData = ['id', 'name', 'email', 'logo', 'badge', 'member'];
-
-  const customStatus = {
-    selected: 'member',
-    data: () => {
-      return !isEmpty(members.member) ? 'Active' : 'Not Active';
-    },
-  };
+  const header = [
+    'ID',
+    'Business Name',
+    'Email',
+    'Image',
+    'Badge',
+    'Status',
+    'Action',
+  ];
+  const selectedData = [
+    'id',
+    'business_name',
+    'email',
+    'image',
+    'badge',
+    'status',
+  ];
 
   const tableActions = [
     {
       label: 'detail_button',
-      link: '/member/detail',
+      link: '/admin/member/detail',
       withId: true,
       color: 'info',
     },
@@ -32,8 +40,8 @@ function MemberIndex({ members }) {
           header={header}
           data={members}
           selectedData={selectedData}
-          customData={customStatus}
           tableActions={tableActions}
+          pathImage={'member/images/'}
         />
       </AdminSection>
     </AdminLayout>

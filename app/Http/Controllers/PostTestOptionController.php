@@ -2,65 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PostTestOption;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Models\PostTestOption;
+use App\Models\PostTestQuestion;
+use Illuminate\Support\Facades\Redirect;
 
 class PostTestOptionController extends Controller
 {
     public function index($id)
     {
-        return Inertia::render('Admin/PostTestOption/CreatePostTestOption', [
-            'post_test_option' => PostTestOption::find($id),
+        return Inertia::render('Admin/PostTest/CreatePostOption', [
+            'post_option' => PostTestOption::where('post_test_question_id', $id)->get(),
+            'post_question' => PostTestQuestion::where('id', $id)->with('module')->first(),
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $post_test_option = new PostTestOption;
+        $post_option = new PostTestOption;
 
         $request->validate([
             'title' => 'required',
-            'post_test_question_id' => 'required',
+            'answer' => 'required'
         ]);
 
-        $post_test_option->title = $request->title;
-        $post_test_option->post_test_question_id = $request->post_test_question_id;
-        $post_test_option->save();
+        $post_option->title = $request->title;
+        $post_option->answer = $request->answer;
+        $post_option->post_test_question_id = $id;
+        $post_option->save();
 
-        return Redirect::route('post_test_option.index')->with('success', 'Post test option created successfully.');
+        return Redirect::route('post_option.index', $id)->with('success', 'Post test option created successfully.');
     }
 
     public function edit($id)
     {
-        return Inertia::render('Admin/PostTestOption/EditPostTestOption', [
-            'post_test_option' => PostTestOption::find($id),
+        return Inertia::render('Admin/PostTest/EditPostOption', [
+            'post_option' => PostTestOption::find($id),
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $post_test_option = PostTestOption::find($request->id);
+        $post_option = PostTestOption::find($id);
 
         $request->validate([
             'title' => 'required',
-            'post_test_question_id' => 'required',
+            'answer' => 'required',
         ]);
 
-        $post_test_option->title = $request->title;
-        $post_test_option->post_test_question_id = $request->post_test_question_id;
-        $post_test_option->save();
+        $post_option->title = $request->title;
+        $post_option->answer = $request->answer;
+        $post_option->save();
 
-        return Redirect::route('post_test_option.index');
+        return Redirect::route('post_option.index', $post_option->post_test_question_id);
     }
 
     public function destroy(Request $request)
     {
-        $post_test_option = PostTestOption::find($request->id);
+        $post_option = PostTestOption::find($request->id);
+        $id = $post_option->post_test_question_id;
 
-        $post_test_option->delete();
+        $post_option->delete();
 
-        return Redirect::route('post_test_option.index');
+        return Redirect::route('post_option.index', $id);
     }
 }

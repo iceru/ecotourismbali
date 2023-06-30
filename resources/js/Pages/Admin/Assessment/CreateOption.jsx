@@ -26,7 +26,7 @@ function CreateOption({ assessment_option, assessment_question }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/assessment/option/edit',
+      link: '/admin/assessment/option/edit',
       withId: true,
       color: 'info',
     },
@@ -49,13 +49,11 @@ function CreateOption({ assessment_option, assessment_question }) {
     });
   };
 
-  console.log(assessment_question);
-
   return (
     <AdminLayout>
       <BackTo
         title="back_to_question"
-        link={`/assessment/${assessment_question.assessment.id}/question`}
+        link={`/admin/assessment/${assessment_question.assessment.id}/question`}
       />
       <AdminSection className="mb-6">
         <h4 className="font-bold text-lg">{assessment_question.title}</h4>
@@ -121,7 +119,7 @@ function CreateOption({ assessment_option, assessment_question }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

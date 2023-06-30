@@ -2,36 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PostTestModuleAnswer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use App\Models\Member;
+use App\Models\Module;
+use Illuminate\Http\Request;
+use App\Models\PostTestQuestion;
+use App\Models\PostTestModuleAnswer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class PostTestModuleAnswerController extends Controller
 {
     public function index($id)
     {
-        return Inertia::render('Admin/PostTestModuleAnswer/CreatePostTestModuleAnswer', [
-            'post_test_module_answer' => PostTestModuleAnswer::find($id),
+        return Inertia::render('Member/Module/ModulePostTest', [
+            'module' => Module::where('id', $id)->firstOrFail(),
+            'post_test' => PostTestQuestion::where('module_id', $id)->with('post_test_option')->get(),
+            'member' => Member::where('user_id', Auth::id())->first(),
         ]);
     }
 
     public function store(Request $request)
     {
-        $post_test_module_answer = new PostTestModuleAnswer;
-
         $request->validate([
             'member_id' => 'required',
             'post_test_question_id' => 'required',
             'post_test_option_id' => 'required',
         ]);
-
-        $post_test_module_answer->member_id = $request->member_id;
-        $post_test_module_answer->post_test_question_id = $request->post_test_question_id;
-        $post_test_module_answer->post_test_option_id = $request->post_test_option_id;
-        $post_test_module_answer->save();
-
-        return Redirect::route('post_test_module_answer.index')->with('success', 'Pre test module answer created successfully.');
+        
+        $postTestModuleAnswer = PostTestModuleAnswer::firstOrNew([
+            'member_id' => $request->member_id,
+            'post_test_question_id' => $request->post_test_question_id
+        ]);
+        
+        $postTestModuleAnswer->member_id = $request->member_id;
+        $postTestModuleAnswer->post_test_question_id = $request->post_test_question_id;
+        $postTestModuleAnswer->post_test_option_id = $request->post_test_option_id;
+        $postTestModuleAnswer->save();
     }
 
     public function edit($id)

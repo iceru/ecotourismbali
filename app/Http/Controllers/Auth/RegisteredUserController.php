@@ -60,4 +60,39 @@ class RegisteredUserController extends Controller
 
         return redirect('/member/dashboard');
     }
+
+       /**
+     * Display the registration view.
+     */
+    public function createAdmin(): Response
+    {
+        return Inertia::render('Auth/RegisterAdmin');
+    }
+
+    /**
+     * Handle an incoming registration request.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function storeAdmin(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:' . User::class,
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        // Auth::login($user);
+        $user->addRole('superadministrator');
+
+        return redirect('/admin/dashboard');
+    }
 }

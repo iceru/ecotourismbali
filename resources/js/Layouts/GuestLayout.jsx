@@ -5,8 +5,8 @@ export default function Guest({ children }) {
     <div>
       <Navbar />
 
-      <div className="min-h-[82vh] container bg-white">
-        <div className="py-16">{children}</div>
+      <div className="min-h-[80vh] container bg-white">
+        <div className="py-12 px-3 lg:px-0">{children}</div>
       </div>
     </div>
   );

@@ -7,25 +7,23 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
-import SelectInput from '@/Components/SelectInput';
 
 function CreateCategory({ category }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    title: '',
-    image: null,
+    name: '',
   });
 
-  const headerTable = ['ID', 'Name', 'Action'];
+  const headerTable = ['Name', 'Action'];
 
-  const selectedData = ['id', 'name'];
+  const selectedData = ['name'];
 
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'category/edit',
+      link: '/admin/category/edit',
       withId: true,
       color: 'info',
     },
@@ -77,7 +75,7 @@ function CreateCategory({ category }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

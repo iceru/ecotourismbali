@@ -10,6 +10,7 @@ export default forwardRef(function SelectInput(
     value,
     labelData = 'label',
     valueData = 'value',
+    children,
     ...props
   },
   ref
@@ -33,6 +34,7 @@ export default forwardRef(function SelectInput(
       }
       value={value}
     >
+      {children}
       {placeholder && <option>{t(placeholder)}</option>}
       {options?.map(option => (
         <option value={option[valueData]}>{option[labelData]}</option>

@@ -25,7 +25,7 @@ function EditBusinessType() {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_business" link="/business-type" />
+      <BackTo title="back_to_list_business" link="/admin/business-type" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_business_title" />
         <form className="flex flex-col gap-6" onSubmit={submit}>

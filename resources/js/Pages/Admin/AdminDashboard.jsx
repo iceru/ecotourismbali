@@ -26,7 +26,7 @@ function MemberDashboard() {
           <TitleSection title="guide_book" />
           <div className="text-sm mb-6">{t('guide_book_text')}</div>
           <PrimaryButton
-            type="lightSecondary"
+            color="lightSecondary"
             className="w-full justify-between"
           >
             {t('download_guide_book')}

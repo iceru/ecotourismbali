@@ -30,13 +30,13 @@ export default forwardRef(function TextInput(
     />
   ) : (
     <textarea
+      rows={7}
       {...props}
       type={type}
       className={
         'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm ' +
         className
       }
-      rows={7}
       ref={input}
     />
   );

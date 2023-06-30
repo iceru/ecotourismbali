@@ -26,7 +26,7 @@ function EditCategory() {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_category" link="/category" />
+      <BackTo title="back_to_list_category" link="/admin/category" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_category_title" />
         <form className="flex flex-col gap-6" onSubmit={submit}>

@@ -23,6 +23,6 @@ class Assessment extends Model
     
     public function assessment_question(): HasMany
     {
-        return $this->hasMany(AssessmentQuestion::class, 'assessment_id');
+        return $this->hasMany(AssessmentQuestion::class, 'assessment_id')->with('assessment_option');
     }
 }

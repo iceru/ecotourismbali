@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class MemberModule extends Model
 {
     protected $table = 'member_modules';
+    protected $fillable = ['member_id', 'module_id'];
 
     public function member(): BelongsTo
     {
