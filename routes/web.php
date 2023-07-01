@@ -51,6 +51,8 @@ Route::get('/member/list', [MemberListController::class, 'index'])->name('member
 Route::get('/member/detail/{slug}',[MemberListController::class, 'detail'])->name('member.detail');
 Route::post('/member/list',[MemberListController::class, 'filter'])->name('member.filter');
 
+Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
+
 Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -77,7 +79,6 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::post('/member/module/post-test/store', [PostTestModuleAnswerController::class, 'store'])->name('member.post-test.store');
 
     Route::get('/member-payment/new-payment', [MemberPaymentController::class, 'new_payment'])->name('member_payment.new_payment');
-    Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 });
 
 
