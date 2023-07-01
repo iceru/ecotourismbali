@@ -75,6 +75,9 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 
     Route::post('/member/module/pre-test/store', [PreTestModuleAnswerController::class, 'store'])->name('member.pre-test.store');
     Route::post('/member/module/post-test/store', [PostTestModuleAnswerController::class, 'store'])->name('member.post-test.store');
+
+    Route::get('/member-payment/new-payment', [MemberPaymentController::class, 'new_payment'])->name('member_payment.new_payment');
+    Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 });
 
 
