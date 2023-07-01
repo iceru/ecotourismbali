@@ -32,8 +32,6 @@ function CreateModule({ module }) {
     'Title',
     'Description',
     'Image',
-    'Content',
-    'Video',
     'Attachment',
     'Author',
     'Post Test',
@@ -45,8 +43,6 @@ function CreateModule({ module }) {
     'title',
     'description',
     'image',
-    'content',
-    'video',
     'attachment',
     'resource_person',
   ];

@@ -29,13 +29,13 @@ function Assessment({ assessments }) {
   const handleOptionChange = (questionId, optionId) => {
     setData(prevData => ({
       ...prevData,
-      [`radio[${questionId}]`]: optionId,
+      [`radio.${questionId}`]: optionId,
     }));
   };
 
   const handleCheckboxChange = (questionId, optionId) => {
     setData(prevData => {
-      const updatedOptions = prevData[`checkbox[${questionId}]`] || [];
+      const updatedOptions = prevData[`checkbox.${questionId}`] || [];
       if (updatedOptions.includes(optionId)) {
         // Remove the option if it was already selected
         const updatedOptionsWithoutRemoved = updatedOptions.filter(
@@ -43,14 +43,14 @@ function Assessment({ assessments }) {
         );
         return {
           ...prevData,
-          [`checkbox[${questionId}]`]: updatedOptionsWithoutRemoved,
+          [`checkbox.${questionId}`]: updatedOptionsWithoutRemoved,
         };
       } else {
         // Add the option if it was not selected
         const updatedOptionsWithAdded = [...updatedOptions, optionId];
         return {
           ...prevData,
-          [`checkbox[${questionId}]`]: updatedOptionsWithAdded,
+          [`checkbox.${questionId}`]: updatedOptionsWithAdded,
         };
       }
     });
@@ -91,12 +91,12 @@ function Assessment({ assessments }) {
                               {question.type === 'radio' ? (
                                 <input
                                   type="radio"
-                                  name={`radio[${question.id}]`}
+                                  name={`radio.${question.id}`}
                                   id={`option_${option.id}`}
                                   value={option.id}
                                   className="mr-3 text-primary focus:ring-primary"
                                   checked={
-                                    data[`radio[${question.id}]`] === option.id
+                                    data[`radio.${question.id}`] === option.id
                                   }
                                   required
                                   onChange={() =>
@@ -106,7 +106,7 @@ function Assessment({ assessments }) {
                               ) : (
                                 <input
                                   type="checkbox"
-                                  name={`checkbox[${question.id}]`}
+                                  name={`checkbox.${question.id}`}
                                   id={`option_${option.id}`}
                                   value={option.id}
                                   className="mr-3 text-primary focus:ring-primary"

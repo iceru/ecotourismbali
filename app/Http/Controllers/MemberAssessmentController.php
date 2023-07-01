@@ -10,6 +10,7 @@ use App\Models\BusinessType;
 use Illuminate\Http\Request;
 use App\Models\AssessmentQuestion;
 use Illuminate\Support\Facades\Auth;
+use App\Models\MemberAssessmentAnswer;
 use Illuminate\Support\Facades\Redirect;
 
 class MemberAssessmentController extends Controller
@@ -32,43 +33,36 @@ class MemberAssessmentController extends Controller
 
     public function save(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'radio.*' => 'required|exists:options,id',
             'checkbox.*' => 'required|exists:options,id',
         ]);
         $member =  Member::where('user_id', Auth::id())->first();
-        dd($request);
-        foreach ($data['radio'] as $questionId => $optionId) {
-            $memberAnswer = MemberAssessmentAnswer::firstOrNew([
-                'member_id' => $member->id,
-                'assessment_question_id' => $questionId,
-            ]);
-            
-            $postTestModuleAnswer->member_id = $member->id;
-            $postTestModuleAnswer->assessment_question_id = $questionId;
-            $postTestModuleAnswer->assessment_option_id = $opionId;
-            $postTestModuleAnswer->save();
-        }
-
-        foreach ($data['checkbox'] as $questionId => $optionIds) {
-            if ($optionIds) {
-                foreach ($optionIds as $optionId) {
-                    // Process each question and selected option
-                    // You can save them to the database or perform any other logic here
-                    // For example:
-                    $question = Question::find($questionId);
-                    $option = $question->options()->find($optionId);
-
+        foreach ($request->input() as $questionId => $optionId) {
+            $id = explode('.', $questionId);
+            $id = $id[1];
+            if(str_contains($questionId, 'radio')) {
+                $memberAnswer = MemberAssessmentAnswer::firstOrNew([
+                    'member_id' => $member->id,
+                    'assessment_question_id' => $id,
+                ]);
+                
+                $memberAnswer->member_id = $member->id;
+                $memberAnswer->assessment_question_id = $id;
+                $memberAnswer->assessment_option_id = $optionId;
+                $memberAnswer->save();
+            } else {
+                foreach ($optionId as $checkId) {
                     // Do something with $question and $option
                     $memberAnswer = MemberAssessmentAnswer::firstOrNew([
                         'member_id' => $member->id,
-                        'assessment_question_id' => $questionId,
+                        'assessment_question_id' => $id,
                     ]);
                     
-                    $postTestModuleAnswer->member_id = $member->id;
-                    $postTestModuleAnswer->assessment_question_id = $questionId;
-                    $postTestModuleAnswer->assessment_option_id = $opionId;
-                    $postTestModuleAnswer->save();
+                    $memberAnswer->member_id = $member->id;
+                    $memberAnswer->assessment_question_id = $id;
+                    $memberAnswer->assessment_option_id = $checkId;
+                    $memberAnswer->save();
                 }
             }
         }
