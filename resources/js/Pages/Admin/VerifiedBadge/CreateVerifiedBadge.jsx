@@ -13,18 +13,18 @@ function CreateVerifiedBadge({ badge }) {
   const { flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    title: '',
+    name: '',
     image: null,
   });
 
-  const headerTable = ['ID', 'Name', 'Image', 'Action'];
+  const headerTable = ['Name', 'Image', 'Action'];
 
-  const selectedData = ['id', 'name', 'image'];
+  const selectedData = ['name', 'image'];
 
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'verified-badge/edit',
+      link: '/admin/verified-badge/edit',
       withId: true,
       color: 'info',
     },
@@ -91,7 +91,7 @@ function CreateVerifiedBadge({ badge }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

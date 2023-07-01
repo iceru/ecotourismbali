@@ -26,7 +26,7 @@ function EditBadge() {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_badge" link="/badge" />
+      <BackTo title="back_to_list_badge" link="/admin/badge" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_badge_title" />
         <form className="flex flex-col gap-6" onSubmit={submit}>

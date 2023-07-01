@@ -24,6 +24,7 @@
   "verified_badge": "Verified Badge",
 
   "list_of_members": "Daftar Member",
+  "back_to_list_members": "Kembali ke Daftar Members",
 
   "create_assessment_title": "Buat Penilaian",
   "edit_assessment_title": "Ubah Penilaian",
@@ -55,8 +56,40 @@
   "list_verified_badge_title": "Daftar Verified Badge",
   "back_to_list_verified_badge": "Kembali ke Daftar Verified Badge",
 
+  "create_module_title": "Buat Module",
+  "edit_module_title": "Ubah Module",
+  "list_module_title": "Daftar Module",
+  "back_to_list_module": "Kembali ke Daftar Module",
+
+  "create_pre_test_title": "Buat  Pertanyaan Pertanyaan Pre Test",
+  "edit_pre_test_title": "Ubah Pertanyaan Pre Test",
+  "list_pre_test_title": "Pertanyaan Pre Test List",
+  "back_to_list_pre_test": "Kembali ke Daftar Pertanyaan Pre Test",
+  "add_pre_test_option": "Tambah Opsi Pre Test",
+
+  "create_post_test_title": "Buat Pertanyaan Pertanyaan Post Test",
+  "edit_post_test_title": "Ubah Pertanyaan Post Test",
+  "list_post_test_title": "Pertanyaan Post Test List",
+  "back_to_list_post_test": "Kembali ke Daftar Pertanyaan Post Test",
+  "add_post_test_option": "Tambah Opsi Post Test",
+
+  "create_category_title": "Buat Kategori",
+  "edit_category_title": "Ubah Kategori",
+  "list_category_title": "Daftar Kategori",
+  "back_to_list_category": "Kembali ke Daftar Kategori",
+
+  "create_program_title": "Buat Tribe",
+  "edit_program_title": "Ubah Tribe",
+  "list_program_title": "Daftar Tribe",
+  "back_to_list_program": "Kembali ke Daftar Tribe",
+
   "select_business_type": "Pilih Jenis Bisnis",
   "add_business_type": "Tambah Jenis Bisnis",
+
+  "create_business_title": "Buat Tipe Bisnis",
+  "edit_business_title": "Ubah Tipe Bisnis",
+  "list_business_title": "Daftar Tipe Bisnis",
+  "back_to_list_business": "Kembali ke Daftar Tipe Bisnis",
 
   "form_label_name": "Nama",
   "form_label_title": "Judul",
@@ -69,6 +102,15 @@
   "form_label_option_no": "Nomor Opsi",
   "form_label_point": "Poin",
   "form_label_business_type": "Jenis Bisnis",
+  "form_label_video": "Video",
+  "form_label_attachment": "Lampiran",
+  "form_label_author": "Penulis",
+  "form_label_content": "Konten",
+  "form_label_answer": "Jawaban",
+
+  "add_pre_test": "Tambahkan Pertanyaan Pre Test",
+  "add_post_test": "Tambahkan Pertanyaan Post Test",
+
   "detail_button": "Detail",
   "edit_button": "Ubah",
   "delete_button": "Hapus",
@@ -113,8 +155,8 @@
   "email": "Email",
   "business_name": "Nama Bisnis",
   "category": "Kategori",
-  "program": "Program",
-  "assessment_attempt": "Percobaan Penilaian Mandiri",
+  "program": "Tribe",
+  "assessment_attempt": "Sisa Penilaian Mandiri",
   "status": "Status",
   "assessment_expire": "Tenggang Waktu Penilaian Mandiri",
   "description": "Deskripsi",
@@ -126,5 +168,33 @@
   "add_slider": "Tambahkan Galeri",
   "add_description": "Tambahkan Deskripsi",
   "add_address": "Tambahkan Alamat",
-  "add_website": "Tambahkan Website"
+  "add_website": "Tambahkan Website",
+  "your_business_name": "Nama Bisnis Anda",
+  "your_address": "Alamat Bisnis Anda",
+  "your_website": "Website Bisnis Anda",
+  "your_gallery": "Tambahkan Galeri",
+  "your_description": "Deskripsi Bisnis Anda",
+
+  "all": "Semua",
+  "community": "Komunitas",
+  "supplier": "Supplier",
+  "travel": "Travel",
+  "company": "Perusahaan",
+  "movement": "Movement",
+  "bisnis_akomodasi": "Bisnis Akomodasi",
+  "bisnis_fnb": "Bisnis FnB",
+
+  "list_modules": "Daftar Modul",
+  "post_test": "Post Test",
+  "pre_test": "Pre Test",
+  "back": "Kembali",
+  "module_learning": "Modul Pembelajaran {{ number }}",
+  "question": "Pertanyaan {{ number }}",
+  "start_post_test": "Mulai Post Test",
+
+  "edit_member": "Ubah Detail Member",
+  "select_category": "Pilih Kategori",
+  "select_program": "Pilih Tribe",
+  "select_verify_badge": "Pilih Verify Badge",
+  "select_badge": "Pilih Badge"
 }

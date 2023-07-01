@@ -29,7 +29,7 @@ function EditQuestion() {
     <AdminLayout>
       <BackTo
         title="back_to_question"
-        link={`/assessment/${assessment_question.id}/question`}
+        link={`/admin/assessment/${assessment_question.id}/question`}
       />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />

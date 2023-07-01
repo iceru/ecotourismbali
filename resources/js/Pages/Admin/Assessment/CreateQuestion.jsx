@@ -2,7 +2,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
@@ -11,6 +11,7 @@ import BackTo from '../Components/BackTo';
 import { useState, useEffect } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import Editor from '../Components/Editor';
+import SelectInput from '@/Components/SelectInput';
 
 function CreateQuestion({ assess_question, assessment }) {
   const { t } = useTranslation();
@@ -20,6 +21,7 @@ function CreateQuestion({ assess_question, assessment }) {
     question_no: '',
     question: '',
     title: '',
+    type: 'radio',
   });
 
   const headerTable = ['Question No', 'Title', 'Question', 'Option', 'Action'];
@@ -28,7 +30,7 @@ function CreateQuestion({ assess_question, assessment }) {
   const tableButtons = [
     {
       label: 'add_option',
-      link: '/assessment/',
+      link: '/admin/assessment/',
       link2: '/option',
       withId: true,
     },
@@ -37,7 +39,7 @@ function CreateQuestion({ assess_question, assessment }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/assessment/question/edit',
+      link: '/admin/assessment/question/edit',
       withId: true,
       color: 'info',
     },
@@ -71,9 +73,20 @@ function CreateQuestion({ assess_question, assessment }) {
     setData('question', value);
   }, [value]);
 
+  const types = [
+    {
+      label: 'Radio Button',
+      value: 'radio',
+    },
+    {
+      label: 'Checkbox',
+      value: 'checkbox',
+    },
+  ];
+
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_assessment" link="/assessment" />
+      <BackTo title="back_to_list_assessment" link="/admin/assessment" />
       <AdminSection className="mb-6 flex items-center">
         <img
           src={showImage('assessments/' + assessment?.image)}
@@ -131,6 +144,22 @@ function CreateQuestion({ assess_question, assessment }) {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="type" value={t('form_label_type')} />
+            </div>
+            <div className="lg:w-4/5">
+              <SelectInput
+                id="type"
+                name="type"
+                value={data.type}
+                options={types}
+                className="w-full"
+                onChange={e => setData('type', e.target.value)}
+              />
+              <span className="text-red-600">{errors.type}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="question" value={t('form_label_question')} />
             </div>
             <div className="lg:w-4/5">
@@ -139,7 +168,7 @@ function CreateQuestion({ assess_question, assessment }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

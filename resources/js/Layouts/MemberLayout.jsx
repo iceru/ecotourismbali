@@ -100,13 +100,18 @@ function MemberLayout({ children, state }) {
                   </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link
+                    href={route('member.module.index')}
+                    className={
+                      url.startsWith('/member/module') ? 'font-bold' : ''
+                    }
+                  >
                     <FontAwesomeIcon
                       className="fa-fw mr-2 text-primary"
                       icon={faFileClipboard}
                     />
                     {t('e_learning')}
-                  </a>
+                  </Link>
                 </li>
               </>
             )}
@@ -117,7 +122,7 @@ function MemberLayout({ children, state }) {
         <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
           <div className="flex items-center order-2 lg:order-1 w-full justify-between lg:w-auto lg:justify-start">
             <PrimaryButton
-              type="lightPrimary"
+              color="lightPrimary"
               className="mr-4"
               onClick={() => setSideActive(!sideActive)}
             >
@@ -168,7 +173,7 @@ function MemberLayout({ children, state }) {
             <div>
               <PrimaryButton
                 as="link"
-                type="danger"
+                color="danger"
                 href={route('logout')}
                 method="post"
               >

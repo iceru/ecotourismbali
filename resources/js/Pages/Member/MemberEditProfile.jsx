@@ -34,7 +34,6 @@ function MemberEditProfile() {
         reset();
       },
     });
-    console.log(data);
   };
 
   const settings = {

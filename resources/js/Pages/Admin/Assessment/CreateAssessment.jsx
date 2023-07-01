@@ -23,7 +23,6 @@ function CreateAssessment({ assessment, business_type }) {
   });
 
   const headerTable = [
-    'ID',
     'Title',
     'Description',
     'Image',
@@ -32,18 +31,12 @@ function CreateAssessment({ assessment, business_type }) {
     'Action',
   ];
 
-  const selectedData = [
-    'id',
-    'title',
-    'description',
-    'image',
-    'business_type_id',
-  ];
+  const selectedData = ['title', 'description', 'image', 'business_type_id'];
 
   const tableButtons = [
     {
       label: 'add_question',
-      link: 'assessment/',
+      link: '/admin/assessment/',
       link2: '/question',
       withId: true,
     },
@@ -52,7 +45,7 @@ function CreateAssessment({ assessment, business_type }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'assessment/edit',
+      link: '/admin/assessment/edit',
       withId: true,
       color: 'info',
     },
@@ -81,40 +74,6 @@ function CreateAssessment({ assessment, business_type }) {
   useEffect(() => {
     setData('description', value);
   }, [value]);
-
-  // const imageHandler = e => {
-  //   const editor = quillRef.current.getEditor();
-  //   console.log(editor);
-  //   const input = document.createElement('input');
-  //   input.setAttribute('type', 'file');
-  //   input.setAttribute('accept', 'image/*');
-  //   input.click();
-
-  //   input.onchange = async () => {
-  //     const file = input.files[0];
-  //     if (/^image\//.test(file.type)) {
-  //       const formData = new FormData();
-  //       formData.append('image', file);
-  //       const res = await ImageUpload(formData); // upload data into server or aws or cloudinary
-  //       const url = res?.data?.url;
-  //       editor.insertEmbed(editor.getSelection(), 'image', url);
-  //     } else {
-  //       ErrorToast('You could only upload images.');
-  //     }
-  //   };
-  // };
-
-  // const ImageUpload = async formData => {
-  //   // console.log(JSON.parse(file));
-  //   axios({
-  //     method: 'post',
-  //     url: route('admin.upload'),
-  //     data: {
-  //       formData,
-  //     },
-  //     headers: { 'Content-Type': 'multipart/form-data' },
-  //   });
-  // };
 
   return (
     <AdminLayout>
@@ -200,7 +159,7 @@ function CreateAssessment({ assessment, business_type }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >

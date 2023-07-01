@@ -10,10 +10,10 @@ use Inertia\Inertia;
 
 class ModuleController extends Controller
 {
-    public function index($id)
+    public function index()
     {
         return Inertia::render('Admin/Module/CreateModule', [
-            'module' => Module::find($id),
+            'module' => Module::all(),
         ]);
     }
 
@@ -27,7 +27,7 @@ class ModuleController extends Controller
             'description' => 'required',
             'content' => 'required',
             'video' => 'required',
-            'attachment' => 'required|mimes:application/pdf',
+            'attachment' => 'nullable|file',
             'resource_person' => 'required',
         ]);
 
@@ -70,34 +70,33 @@ class ModuleController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'image' => 'required|image',
+            'image' => 'nullable|image',
             'description' => 'required',
             'content' => 'required',
             'video' => 'required',
-            'attachment' => 'required|mimes:application/pdf',
+            'attachment' => 'nullable|file',
             'resource_person' => 'required',
         ]);
 
-        $image_filename = null;
-        $attachment_filename = null;
-
         if ($request->hasFile('image')) {
+            $image_filename = null;
             $extension = $request->file('image')->extension();
             $image_filename = $request->title . '_' . time() . '.' . $extension;
             $request->file('image')->storeAs('public/modules', $image_filename);
+            $module->image = $image_filename;
         }
         if ($request->hasFile('attachment')) {
+            $attachment_filename = null;
             $extension = $request->file('attachment')->extension();
             $attachment_filename = $request->title . '_' . time() . '.' . $extension;
             $request->file('attachment')->storeAs('public/modules', $attachment_filename);
+            $module->attachment = $attachment_filename;
         }
 
         $module->title = $request->title;
-        $module->image = $image_filename;
         $module->description = $request->description;
         $module->content = $request->content;
         $module->video = $request->video;
-        $module->attachment = $attachment_filename;
         $module->resource_person = $request->resource_person;
         $module->save();
 
@@ -114,5 +113,4 @@ class ModuleController extends Controller
 
         return Redirect::route('module.index');
     }
-
 }

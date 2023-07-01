@@ -21,3 +21,12 @@
   height: 60px;
   max-width: 80px;
 }
+
+.slick-next {
+  right: 10px;
+}
+
+.slick-prev {
+  left: 10px;
+  z-index: 30;
+}

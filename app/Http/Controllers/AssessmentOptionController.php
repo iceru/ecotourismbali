@@ -38,7 +38,7 @@ class AssessmentOptionController extends Controller
 
         $assessment_option->save();
 
-        return Redirect::route('assessment_option.index', $id);
+        return Redirect::route('assessment_option.index', $id)->with('success', 'Assessment Option created successfully.');
     }
 
     public function edit($id)

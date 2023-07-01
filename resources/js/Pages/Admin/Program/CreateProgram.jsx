@@ -18,14 +18,14 @@ function CreateProgram({ program }) {
     image: null,
   });
 
-  const headerTable = ['ID', 'Name', 'Image', 'Action'];
+  const headerTable = ['Name', 'Image', 'Action'];
 
-  const selectedData = ['id', 'name', 'image'];
+  const selectedData = ['name', 'image'];
 
   const tableActions = [
     {
       label: 'edit_button',
-      link: 'program/edit',
+      link: '/admin/program/edit',
       withId: true,
       color: 'info',
     },
@@ -47,9 +47,7 @@ function CreateProgram({ program }) {
       },
     });
   };
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+
   return (
     <AdminLayout>
       <AdminSection className="flex flex-col gap-6 mb-6">
@@ -94,7 +92,7 @@ function CreateProgram({ program }) {
             </div>
           </div>
           <PrimaryButton
-            type="secondary"
+            color="secondary"
             className="w-fit"
             disabled={processing}
           >
