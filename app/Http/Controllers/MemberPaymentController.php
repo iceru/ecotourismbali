@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use App\Models\MemberPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 use Midtrans;
 use Midtrans\Config;
 use Midtrans\Snap;
@@ -70,7 +72,7 @@ class MemberPaymentController extends Controller
             }
         }
         else if ($transaction == 'settlement') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'settlement']);
+            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'success']);
         }
         else if ($transaction == 'pending') {
             MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'pending']);
