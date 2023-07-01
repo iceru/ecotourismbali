@@ -13,6 +13,7 @@ use App\Http\Controllers\MemberAssessment;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\MemberModuleController;
+use App\Http\Controllers\MemberPaymentController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PostTestModuleAnswerController;
 use App\Http\Controllers\PostTestOptionController;
@@ -166,6 +167,9 @@ Route::post('/post-test-module-answer/store', [PostTestModuleAnswerController::c
 Route::get('/post-test-module-answer/edit/{id}', [PostTestModuleAnswerController::class, 'edit'])->name('post_test_module_answer.edit');
 Route::patch('/post-test-module-answer/update/{id}', [PostTestModuleAnswerController::class, 'update'])->name('post_test_module_answer.update');
 Route::delete('/post-test-module-answer/delete/{id}', [PostTestModuleAnswerController::class, 'destroy'])->name('post_test_module_answer.destroy');
+
+Route::get('/member-payment/new_payment', [MemberPaymentController::class, 'new_payment'])->name('member_payment.new_payment');
+Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 // route above this must be move into middleware auth with role:admin after we have user admin
 
 Route::middleware(['auth', 'role:administrator'])->group(function () {
