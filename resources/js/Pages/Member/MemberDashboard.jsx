@@ -9,21 +9,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
-import { isEmpty } from 'lodash';
 
-function MemberDashboard({ user, member }) {
+function MemberDashboard({ member }) {
   const { t } = useTranslation();
-
-  // useEffect(() => {
-  //   if (isEmpty(member) && member?.status !== 'active') {
-  //     window.location.href = '/member/locked';
-  //   }
-  // }, [member]);
 
   return (
     <MemberLayout>
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-6 mb-6">
         <AdminSection>
           <h2 className="font-bold text-[20px] mb-4">{t('welcome_member')}</h2>
           <div>
@@ -37,45 +29,88 @@ function MemberDashboard({ user, member }) {
               <FontAwesomeIcon className="ml-2" icon={faUser} />
             </PrimaryButton>
           </div>
-          <div>
-            <PrimaryButton
-              className="!inline-block"
-              as="link"
-              href={route('member.module.index')}
-              color="lightSecondary"
-            >
-              {t('start_learning')}
-              <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
-            </PrimaryButton>
-          </div>
-        </AdminSection>
-        <AdminSection>
-          {member && member.badge ? (
-            <h2 className="font-bold text-[20px] mb-4">
-              {t('your_assessment')}
-            </h2>
-          ) : (
-            <h2 className="font-bold text-[20px] mb-4">{t('no_assessment')}</h2>
-          )}
-          <div className="flex items-center">
-            {member && member.badge && (
-              <div>
-                <img src={member.badge.image} alt={member.badge.name} />
-              </div>
-            )}
-            <div className="grid gap-4">
-              <PrimaryButton color="lightPrimary">
-                {t('start_assessment')}
-                <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-2" />
-              </PrimaryButton>
-              <PrimaryButton color="lightSecondary">
-                {t('learn_more_assessment')}
-                <FontAwesomeIcon icon={faBook} className="ml-2" />
+          {member.status === 'active' && (
+            <div>
+              <PrimaryButton
+                className="!inline-block"
+                as="link"
+                href={route('member.module.index')}
+                color="lightSecondary"
+              >
+                {t('start_learning')}
+                <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
               </PrimaryButton>
             </div>
-          </div>
+          )}
+        </AdminSection>
+        <AdminSection>
+          {member.status === 'active' ? (
+            <>
+              {member && member.badge ? (
+                <h2 className="font-bold text-[20px] mb-4">
+                  {t('your_assessment')}
+                </h2>
+              ) : (
+                <h2 className="font-bold text-[20px] mb-4">
+                  {t('no_assessment')}
+                </h2>
+              )}
+              <div className="flex items-center">
+                {member && member.badge && (
+                  <div>
+                    <img src={member.badge.image} alt={member.badge.name} />
+                  </div>
+                )}
+                <div className="grid gap-4">
+                  <PrimaryButton color="lightPrimary">
+                    {t('start_assessment')}
+                    <FontAwesomeIcon
+                      icon={faLongArrowAltRight}
+                      className="ml-2"
+                    />
+                  </PrimaryButton>
+                  <PrimaryButton color="lightSecondary">
+                    {t('learn_more_assessment')}
+                    <FontAwesomeIcon icon={faBook} className="ml-2" />
+                  </PrimaryButton>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div>
+              <h2 className="font-bold text-[20px] mb-4">
+                {t('preview_member')}
+              </h2>
+              <div className="grid gap-4">
+                <div>
+                  <PrimaryButton color="lightPrimary">
+                    {t('my_assessment')}
+                    <FontAwesomeIcon
+                      icon={faLongArrowAltRight}
+                      className="ml-2"
+                    />
+                  </PrimaryButton>
+                </div>
+                <div>
+                  <PrimaryButton color="lightSecondary">
+                    {t('e_learning')}
+                    <FontAwesomeIcon icon={faBook} className="ml-2" />
+                  </PrimaryButton>
+                </div>
+              </div>
+            </div>
+          )}
         </AdminSection>
       </div>
+      {member.status !== 'active' && (
+        <AdminSection className="flex flex-col items-center justify-center gap-4">
+          <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
+          <p className="text-sm">{t('member_locked_text')}</p>
+          <PrimaryButton as="link" href={route('member_payment.new_payment')}>
+            {t('member_locked_button')}
+          </PrimaryButton>
+        </AdminSection>
+      )}
     </MemberLayout>
   );
 }

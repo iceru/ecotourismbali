@@ -9,6 +9,7 @@ import {
   faPencilRuler,
   faUser,
   faTimes,
+  faBook,
 } from '@fortawesome/free-solid-svg-icons';
 import { Head, Link, usePage } from '@inertiajs/react';
 import AdminSection from '@/Components/AdminSection';
@@ -20,7 +21,9 @@ import { useMediaQuery } from 'react-responsive';
 function MemberLayout({ children, state }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
-  const { auth } = usePage().props;
+  const { auth, memberShared } = usePage().props;
+
+  console.log(auth);
 
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
@@ -108,7 +111,7 @@ function MemberLayout({ children, state }) {
                   >
                     <FontAwesomeIcon
                       className="fa-fw mr-2 text-primary"
-                      icon={faFileClipboard}
+                      icon={faBook}
                     />
                     {t('e_learning')}
                   </Link>
@@ -166,7 +169,7 @@ function MemberLayout({ children, state }) {
           <div className="flex gap-4 items-center justify-between mb-4 lg:mb-0 lg:justify-start w-full lg:w-auto order-1 lg:order-2">
             <div>
               <h5>
-                Hello, <strong>{auth.user.name}</strong>
+                {t('hello')}, <strong>{auth.user.name}</strong>
               </h5>
               <div className="text-primary text-sm font-semibold">Member</div>
             </div>

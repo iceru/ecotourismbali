@@ -20,6 +20,7 @@ class MemberModuleController extends Controller
     {
         return Inertia::render('Member/Module/ModuleList', [
             'modules' => Module::with('member_module')->get(),
+            'member' => Member::where('user_id', Auth::id())->first(),
         ]);
     }
 
@@ -87,43 +88,5 @@ class MemberModuleController extends Controller
             'totalPrePoint' => $totalPrePoint,
             'memberModule' => $memberModule,
         ]);
-    }
-    
-    public function edit($id)
-    {
-        return Inertia::render('Admin/MemberModule/EditMemberModule', [
-            'member_module' => MemberModule::find($id),
-        ]);
-    }
-    
-    public function update(Request $request)
-    {
-        $member_module = MemberModule::find($request->id);
-
-        $request->validate([
-            'completion' => 'required',
-            'score_pre_test' => 'required|integer',
-            'score_post_test' => 'required|integer',
-            'member_id' => 'required',
-            'module_id' => 'required',
-        ]);
-
-        $member_module->completion = $request->completion;
-        $member_module->score_pre_test = $request->score_pre_test;
-        $member_module->score_post_test = $request->score_post_test;
-        $member_module->member_id = $request->member_id;
-        $member_module->module_id = $request->module_id;
-        $member_module->save();
-
-        return Redirect::route('member_module.index');
-    }
-
-    public function destroy(Request $request)
-    {
-        $member_module = MemberModule::find($request->id);
-
-        $member_module->delete();
-
-        return Redirect::route('member_module.index');
     }
 }

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MemberPayment;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Midtrans;
-use Midtrans\Config;
 use Midtrans\Snap;
+use Midtrans\Config;
+use App\Models\Member;
 use Midtrans\Transaction;
 use Midtrans\Notification;
+use Illuminate\Http\Request;
+use App\Models\MemberPayment;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class MemberPaymentController extends Controller
 {
@@ -19,6 +20,7 @@ class MemberPaymentController extends Controller
         $member_payment = new MemberPayment;
 
         $order_id = date('YmdHis').Auth::id();
+        $member = Member::where('user_id', Auth::id())->first();
 
         $params = array(
             'transaction_details' => array(
@@ -37,7 +39,7 @@ class MemberPaymentController extends Controller
         
         $member_payment->payment_no = $order_id;
         $member_payment->payment_status = 'pending';
-        $member_payment->member_id = Auth::id();
+        $member_payment->member_id = $member->id;
         $member_payment->save();
 
         return Redirect::to($payment_url);
