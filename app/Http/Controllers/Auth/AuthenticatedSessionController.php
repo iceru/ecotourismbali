@@ -37,6 +37,30 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
+     /**
+     * Display the login view.
+     */
+    public function createAdmin(): Response
+    {
+        return Inertia::render('Auth/LoginAdmin', [
+            'canResetPassword' => Route::has('password.request'),
+            'status' => session('status'),
+        ]);
+    }
+
+    /**
+     * Handle an incoming authentication request.
+     */
+    public function storeAdmin(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+        
+        return redirect()->route('admin.dashboard');
+    }
+
+
     /**
      * Destroy an authenticated session.
      */

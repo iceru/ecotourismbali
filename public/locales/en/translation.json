@@ -127,6 +127,7 @@
   "search": "Search",
 
   "eligible_assessment": "You are eligible to do an assessment. Remaining Attempt(s): {{ number }}",
+  "not_eligible_assessment": "You are not eligible to do an assessment. Remaining Attempt(s): {{ number }}",
   "business_info": "Business Information Page",
   "label_business_name": "What is your business name",
   "label_business_location": "Where is your business located?",
@@ -198,5 +199,14 @@
   "select_category": "Select Category",
   "select_program": "Select Tribe",
   "select_verify_badge": "Select Verify Badge",
-  "select_badge": "Select Badge"
+  "select_badge": "Select Badge",
+
+  "admin_login": "Admin Login",
+
+  "congrats_assessment": "Congratulations you finished the Self Assessment",
+  "your_assessment_scores": "Your Self Assessment Score is:",
+  "back_to_assessment": "Back to Assessment",
+  "your_badge_is": "Your Self Assessment Badge is:",
+  "not_eligible_badge": "You are not eligible to get Self Assessment Badge",
+  "cant_assessment": "You have done Self Assessment 2 times. You can do your next Self Assessment on:"
 }

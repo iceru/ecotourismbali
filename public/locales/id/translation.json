@@ -126,7 +126,8 @@
   "confirm_delete": "Apakah Anda yakin ingin menghapus data ini?",
   "search": "Cari",
 
-  "eligible_assessment": "Anda masih berhak melakukan penilaian. Percobaan yang Tersisa: {{ number }}",
+  "eligible_assessment": "Anda masih berhak melakukan penilaian mandiri. Percobaan yang Tersisa: {{ number }}",
+  "not_eligible_assessment": "Anda tidak berhak melakukan penilaian mandiri. Percobaan yang Tersisa: {{ number }}",
   "business_info": "Halaman Informasi Bisnis",
   "label_business_name": "Apakah nama bisnis Anda?",
   "label_business_location": "Dimana lokasi bisnis Anda?",
@@ -196,5 +197,14 @@
   "select_category": "Pilih Kategori",
   "select_program": "Pilih Tribe",
   "select_verify_badge": "Pilih Verify Badge",
-  "select_badge": "Pilih Badge"
+  "select_badge": "Pilih Badge",
+
+  "admin_login": "Admin Login",
+
+  "congrats_assessment": "Selamat anda telah menyelesaikan Penilaian Mandiri",
+  "your_assessment_scores": "Skor Penilaian Mandiri Anda adalah:",
+  "back_to_assessment": "Kembali Ke Penilaian Mandiri",
+  "your_badge_is": "Badge Penilaian Mandiri Anda adalah:",
+  "not_eligible_badge": "Anda belum mendapatkan Badge untuk Penilaian Mandiri",
+  "cant_assessment": "Anda sudah melakukan penilaian mandiri sebanyak 2 kali. Anda bisa melakukan penilaian mandiri selanjutnya pada tanggal:"
 }

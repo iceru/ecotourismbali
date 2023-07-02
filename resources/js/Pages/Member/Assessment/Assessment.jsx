@@ -7,20 +7,22 @@ import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-function Assessment({ assessments }) {
+function Assessment({ assessments, session }) {
   const [active, setActive] = useState(0);
   const { t } = useTranslation();
 
-  const { data, setData, post, processing, errors, reset } = useForm();
+  const { data, setData, post, processing, errors } = useForm();
 
+  console.log(data);
   const submit = e => {
     e.preventDefault();
+
     post(route('member.assessment.save'), {
       onSuccess: () => {
         if (assessments.length > active + 1) {
           setActive(active + 1);
         } else {
-          // router.visit(route('member.assessment.result', module.id));
+          router.post(route('member.assessment.complete', session.id));
         }
       },
     });
@@ -29,13 +31,15 @@ function Assessment({ assessments }) {
   const handleOptionChange = (questionId, optionId) => {
     setData(prevData => ({
       ...prevData,
-      [`radio[${questionId}]`]: optionId,
+      [`radio.${questionId}`]: optionId,
+      assessment_id: assessments[active].id,
+      session_id: session.id,
     }));
   };
 
   const handleCheckboxChange = (questionId, optionId) => {
     setData(prevData => {
-      const updatedOptions = prevData[`checkbox[${questionId}]`] || [];
+      const updatedOptions = prevData[`checkbox.${questionId}`] || [];
       if (updatedOptions.includes(optionId)) {
         // Remove the option if it was already selected
         const updatedOptionsWithoutRemoved = updatedOptions.filter(
@@ -43,14 +47,14 @@ function Assessment({ assessments }) {
         );
         return {
           ...prevData,
-          [`checkbox[${questionId}]`]: updatedOptionsWithoutRemoved,
+          [`checkbox.${questionId}`]: updatedOptionsWithoutRemoved,
         };
       } else {
         // Add the option if it was not selected
         const updatedOptionsWithAdded = [...updatedOptions, optionId];
         return {
           ...prevData,
-          [`checkbox[${questionId}]`]: updatedOptionsWithAdded,
+          [`checkbox.${questionId}`]: updatedOptionsWithAdded,
         };
       }
     });
@@ -91,12 +95,12 @@ function Assessment({ assessments }) {
                               {question.type === 'radio' ? (
                                 <input
                                   type="radio"
-                                  name={`radio[${question.id}]`}
+                                  name={`radio.${question.id}`}
                                   id={`option_${option.id}`}
                                   value={option.id}
                                   className="mr-3 text-primary focus:ring-primary"
                                   checked={
-                                    data[`radio[${question.id}]`] === option.id
+                                    data[`radio.${question.id}`] === option.id
                                   }
                                   required
                                   onChange={() =>
@@ -106,7 +110,7 @@ function Assessment({ assessments }) {
                               ) : (
                                 <input
                                   type="checkbox"
-                                  name={`checkbox[${question.id}]`}
+                                  name={`checkbox.${question.id}`}
                                   id={`option_${option.id}`}
                                   value={option.id}
                                   className="mr-3 text-primary focus:ring-primary"
