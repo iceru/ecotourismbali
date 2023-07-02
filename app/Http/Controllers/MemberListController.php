@@ -24,7 +24,7 @@ class MemberListController extends Controller
     public function detail($id)
     {
         return Inertia::render('MemberDetail', [
-            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program')->firstOrFail(),
+            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program', 'badge')->firstOrFail(),
         ]);
     }
 

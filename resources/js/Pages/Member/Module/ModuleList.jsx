@@ -6,7 +6,7 @@ import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-function ModuleList({ modules }) {
+function ModuleList({ modules, member }) {
   const { t } = useTranslation();
 
   return (
@@ -26,7 +26,8 @@ function ModuleList({ modules }) {
                 <div className="lg:w-2/3">
                   <div className="text-xl font-bold mb-3">{module.title}</div>
                   <div className="mb-3 text-sm">{module.description}</div>
-                  {module.member_module[0]?.completion > 0 ? (
+                  {module.member_module.completion > 0 &&
+                  module.member_module.member_id === member.id ? (
                     <div className="rounded-3xl text-sm py-2 px-4 bg-secondary text-white inline-block">
                       Already Learned
                     </div>
