@@ -8,10 +8,10 @@ import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SelectInput from '@/Components/SelectInput';
 
-function MemberDashboard({ business_type }) {
+function AssessmentData() {
   const { t } = useTranslation();
 
-  const { member } = usePage().props;
+  const { member, business_type } = usePage().props;
   const { data, setData, post, processing, errors, reset } = useForm({
     business_name: member.business_name || '',
     address: member.address || '',
@@ -181,4 +181,4 @@ function MemberDashboard({ business_type }) {
   );
 }
 
-export default MemberDashboard;
+export default AssessmentData;

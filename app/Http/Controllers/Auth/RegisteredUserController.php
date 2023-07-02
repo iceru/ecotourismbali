@@ -50,7 +50,6 @@ class RegisteredUserController extends Controller
 
         if (!$member) {
             $member = new Member;
-            $member->status = 'active';
             $member->user_id = $user->id;
             $member->save();
         }

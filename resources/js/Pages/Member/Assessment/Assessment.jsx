@@ -7,20 +7,22 @@ import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-function Assessment({ assessments }) {
+function Assessment({ assessments, session }) {
   const [active, setActive] = useState(0);
   const { t } = useTranslation();
 
-  const { data, setData, post, processing, errors, reset } = useForm();
+  const { data, setData, post, processing, errors } = useForm();
 
+  console.log(data);
   const submit = e => {
     e.preventDefault();
+
     post(route('member.assessment.save'), {
       onSuccess: () => {
         if (assessments.length > active + 1) {
           setActive(active + 1);
         } else {
-          // router.visit(route('member.assessment.result', module.id));
+          router.post(route('member.assessment.complete', session.id));
         }
       },
     });
@@ -30,6 +32,8 @@ function Assessment({ assessments }) {
     setData(prevData => ({
       ...prevData,
       [`radio.${questionId}`]: optionId,
+      assessment_id: assessments[active].id,
+      session_id: session.id,
     }));
   };
 
