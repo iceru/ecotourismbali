@@ -5,15 +5,8 @@ import Table from '@/Components/Table';
 import { isEmpty } from 'lodash';
 
 function MemberIndex({ members }) {
-  const header = [
-    'Business Name',
-    'Email',
-    'Image',
-    'Badge',
-    'Status',
-    'Action',
-  ];
-  const selectedData = ['business_name', 'email', 'image', 'badge', 'status'];
+  const header = ['Business Name', 'Email', 'Image', 'Status', 'Action'];
+  const selectedData = ['business_name', 'email', 'image', 'status'];
 
   const tableActions = [
     {
