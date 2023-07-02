@@ -6,7 +6,6 @@ import { isEmpty } from 'lodash';
 
 function MemberIndex({ members }) {
   const header = [
-    'ID',
     'Business Name',
     'Email',
     'Image',
@@ -14,14 +13,7 @@ function MemberIndex({ members }) {
     'Status',
     'Action',
   ];
-  const selectedData = [
-    'id',
-    'business_name',
-    'email',
-    'image',
-    'badge',
-    'status',
-  ];
+  const selectedData = ['business_name', 'email', 'image', 'badge', 'status'];
 
   const tableActions = [
     {

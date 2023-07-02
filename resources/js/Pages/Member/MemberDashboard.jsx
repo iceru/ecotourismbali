@@ -26,19 +26,28 @@ function MemberDashboard({ user, member }) {
       <div className="grid lg:grid-cols-2 gap-6">
         <AdminSection>
           <h2 className="font-bold text-[20px] mb-4">{t('welcome_member')}</h2>
-          <PrimaryButton
-            as="link"
-            href={route('member.profile')}
-            className="mb-4 !inline-block"
-            color="lightPrimary"
-          >
-            {t('edit_profile')}
-            <FontAwesomeIcon className="ml-2" icon={faUser} />
-          </PrimaryButton>
-          <PrimaryButton className="!block" color="lightSecondary">
-            {t('start_learning')}
-            <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
-          </PrimaryButton>
+          <div>
+            <PrimaryButton
+              as="link"
+              href={route('member.profile')}
+              className="mb-4 !inline-block"
+              color="lightPrimary"
+            >
+              {t('edit_profile')}
+              <FontAwesomeIcon className="ml-2" icon={faUser} />
+            </PrimaryButton>
+          </div>
+          <div>
+            <PrimaryButton
+              className="!inline-block"
+              as="link"
+              href={route('member.module.index')}
+              color="lightSecondary"
+            >
+              {t('start_learning')}
+              <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
+            </PrimaryButton>
+          </div>
         </AdminSection>
         <AdminSection>
           {member && member.badge ? (

@@ -64,14 +64,14 @@ export default function Table({
                 {data?.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800">
                         {index + 1}
                       </td>
                       {selectedData?.map((column, index) => {
                         return (
                           <td
                             key={index}
-                            className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
+                            className="px-6 py-4 text-sm font-medium text-gray-800"
                           >
                             {column === 'image' ? (
                               <img
