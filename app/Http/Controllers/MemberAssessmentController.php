@@ -4,26 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Badge;
 use App\Models\Member;
 use App\Models\Assessment;
 use Illuminate\Support\Str;
 use App\Models\BusinessType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\AssessmentOption;
 use App\Models\MemberAssessment;
 use App\Models\AssessmentSession;
 use App\Models\AssessmentQuestion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use App\Models\MemberAssessmentAnswer;
 use Illuminate\Support\Facades\Redirect;
 
 class MemberAssessmentController extends Controller
 {
     public function index()
-    {
+    { 
+        $member = Member::where('user_id', Auth::id())->with('user')->first();
+        $sessions = AssessmentSession::where('member_id', $member->id)->get();
+
+        $attempt = 0;
+        $dateAssessment = new Date();
+        foreach ($sessions as $session) {
+            if($session->completion === 'yes' && $session->total_score > 0) {
+                $attempt = $attempt + 1;
+            }
+        }
+
+        $remaining = 2 - $attempt;
+        if($remaining === 0) {
+            $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
+            
+            $dateAssessment = $lastSession->created_at->addYears(1);
+        }
         return Inertia::render('Member/Assessment/AssessmentData', [
             'business_type' => BusinessType::all(),
-            'member' => Member::where('user_id', Auth::id())->with('user')->first(),
+            'member' => $member,
+            'remaining' => $remaining,
+            'dateAssessment' => $dateAssessment,
         ]);
     }
 
@@ -136,28 +158,49 @@ class MemberAssessmentController extends Controller
         $memberAssessment->completion = 'no';
         $memberAssessment->save();
     }
-
+ 
     public function complete($id)
     {
         $memberAssessment = MemberAssessment::where('assessment_session_id', $id)->get();
         $session = AssessmentSession::where('id', $id)->first();
+        $member =  Member::where('user_id', Auth::id())->first();
+        $badge =  Badge::all();
+
+        $totalPoint = 0;
+        foreach($memberAssessment as $assess) {
+            $totalPoint = $totalPoint + $assess->score;
+        }
+
+        if($totalPoint > 87) {
+            $badge = Badge::where('name', 'Bronze')->first();
+        } else if ($totalPoint > 175) {
+            $badge = Badge::where('name', 'Silver')->first();
+        } else if ($totalPoint > 264) {
+            $badge = Badge::where('name', 'Gold')->first();
+        }
+
+        if($totalPoint > 87) {
+            $member->badge_id = $badge->id;
+            $member->save();
+        }
 
         $session->completion = 'yes';
+        $session->total_score = $totalPoint;
         $session->save();
+
         foreach($memberAssessment as $assess) {
             $assess->completion = 'yes';
-            $assess->save;
+            $assess->save();
         } 
-        return Inertia::render('Member/Assessment/AssessmentResult', [
-            'session' => AssessmentSession::where('id', $id)->first(),
-        ]);
+        return Redirect::route('member.assessment.result', $session->id);
     }
 
     public function result($id)
     {
+    
         return Inertia::render('Member/Assessment/AssessmentResult', [
             'session' => AssessmentSession::where('id', $id)->first(),
-            'assessments' => MemberAssessment::where('assessment_session_id', $id)->get()
+            'member' =>  Member::where('user_id', Auth::id())->with('badge')->first(),
         ]);
     }
 }
