@@ -12,10 +12,19 @@ import { capitalize } from 'lodash';
 import moment from 'moment/moment';
 
 function MemberIndex() {
-  const { member, categories, programs, verified_badges } = usePage().props;
+  const {
+    member,
+    categories,
+    programs,
+    verified_badges,
+    remaining,
+    dateAssessment,
+  } = usePage().props;
   const { t } = useTranslation();
 
   const [edit, setEdit] = useState(false);
+
+  console.log(member);
 
   const { data, setData, post, processing, errors, reset } = useForm({
     category: '',
@@ -52,18 +61,6 @@ function MemberIndex() {
     return total - length;
   };
 
-  const expire = () => {
-    const length = member?.member_assessment?.length;
-    let expired;
-    if (length > 0) {
-      expired = moment(member?.member_assessment[length].created_at).add(
-        1,
-        'year'
-      );
-    }
-
-    return expired;
-  };
   return (
     <AdminLayout>
       <BackTo link="/admin/member/index" title="back_to_list_members" />
@@ -73,14 +70,22 @@ function MemberIndex() {
             {member?.image && (
               <img
                 className="mr-4 w-[100px]"
-                src={`/storage/member/images/${member.image}`}
+                src={`/storage/member/images/${member?.image}`}
               />
             )}
-            <div className="font-bold text-2xl">{member.business_name}</div>
+            <div className="font-bold text-2xl">{member?.business_name}</div>
           </div>
           <div>
             {member?.badge ? (
-              <img src={member.badge.image} />
+              <div className="flex flex-col items-center">
+                <div>
+                  <img
+                    className="max-h-[120px]"
+                    src={'/storage/badges/' + member.badge.image}
+                  />
+                </div>
+                <div className="font-bold mt-1">{member.badge.name} Member</div>
+              </div>
             ) : (
               <div className="bg-red-500 text-white rounded-full px-3 py-1 font-bold">
                 No Badge
@@ -136,9 +141,9 @@ function MemberIndex() {
           ) : (
             items('program', member?.program?.name)
           )}
-          {items('assessment_attempt', attempts())}
-          {items('assessment_expire', expire())}
-          {items('badge', member?.badge?.name, true)}
+          {items('assessment_attempt', remaining)}
+          {items('assessment_expire', moment(dateAssessment).format('LL'))}
+          {items('badge', member?.badge?.name)}
           {edit ? (
             <div className="flex items-center mb-4">
               <div className="font-bold lg:w-1/4">{t('verified_badge')}</div>

@@ -142,8 +142,14 @@ function MemberList({ programs, categories, badges, members }) {
             return (
               <div className="border rounded-2xl p-4 h-fit">
                 {member.badge ? (
-                  <div className="rounded-bl-2xl bg-yellow-600 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
-                    <img src={member.badge?.image} alt="" />
+                  <div className="rounded-bl-2xl bg-yellow-600 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right flex items-center">
+                    <div>
+                      <img
+                        src={'/storage/badges/' + member.badge?.image}
+                        alt=""
+                        className="h-6 mr-2 brightness-0 filter invert"
+                      />
+                    </div>
                     <span>{member.badge?.name}</span>
                   </div>
                 ) : (

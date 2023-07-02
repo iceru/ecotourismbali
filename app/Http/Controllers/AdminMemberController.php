@@ -9,7 +9,9 @@ use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\VerifiedBadge;
+use App\Models\AssessmentSession;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminMemberController extends Controller
@@ -45,11 +47,29 @@ class AdminMemberController extends Controller
      */
     public function show(string $id)
     {
+        $member = Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->find($id);
+        $sessions = AssessmentSession::where('member_id', $id)->get();
+
+        $attempt = 0;
+        $dateAssessment = null;
+        foreach ($sessions as $session) {
+            if($session->completion === 'yes' && $session->total_score > 0) {
+                $attempt = $attempt + 1;
+            }
+        }
+
+        $remaining = 2 - $attempt;
+        $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
+            
+        $dateAssessment = $lastSession->created_at->addYears(1);
+        
         return Inertia::render('Admin/Member/MemberDetail', [
-            'member' => Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->find(Auth::id()),
+            'member' =>$member,
             'categories' => Category::all(),
             'programs' => Program::all(),
             'verified_badges' => VerifiedBadge::all(),
+            'remaining' => $remaining,
+            'dateAssessment' => $dateAssessment,
         ]);
     }
 
