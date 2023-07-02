@@ -1,0 +1,48 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "develop": "concurrently --kill-others \"vite\" \"php artisan serve\""
+    },
+    "devDependencies": {
+        "@headlessui/react": "^1.4.2",
+        "@inertiajs/react": "^1.0.0",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-react": "^3.0.0",
+        "autoprefixer": "^10.4.12",
+        "axios": "^1.1.2",
+        "concurrently": "^8.2.0",
+        "eslint": "^8.41.0",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.32.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "laravel-vite-plugin": "^0.7.2",
+        "lint-staged": "^13.2.2",
+        "postcss": "^8.4.18",
+        "prettier": "^2.8.8",
+        "pretty-quick": "^3.1.3",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tailwindcss": "^3.2.1",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.4.0",
+        "@fortawesome/free-brands-svg-icons": "^6.4.0",
+        "@fortawesome/free-regular-svg-icons": "^6.4.0",
+        "@fortawesome/free-solid-svg-icons": "^6.4.0",
+        "@fortawesome/react-fontawesome": "^0.2.0",
+        "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+        "i18next": "^22.5.0",
+        "i18next-http-backend": "^2.2.1",
+        "lodash": "^4.17.21",
+        "moment": "^2.29.4",
+        "postcss-nesting": "^11.2.2",
+        "react-i18next": "^12.3.1",
+        "react-quill": "^2.0.0",
+        "react-responsive": "^9.0.2",
+        "react-slick": "^0.29.0"
+    }
+}
