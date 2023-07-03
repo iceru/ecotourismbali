@@ -33,15 +33,15 @@ class MemberPaymentController extends Controller
         Config::$isSanitized =config('services.midtrans.is_sanitized');
         Config::$is3ds =config('services.midtrans.is_3ds');
 
-        // $snapToken = Snap::getSnapToken($params);
-        $payment_url = Snap::createTransaction($params)->redirect_url;
+        $snapToken = Snap::getSnapToken($params);
+        // $payment_url = Snap::createTransaction($params)->redirect_url;
         
         $member_payment->payment_no = $order_id;
         $member_payment->payment_status = 'pending';
         $member_payment->member_id = $member->id;
         $member_payment->save();
 
-        return Redirect::to($payment_url);
+        return $snapToken;
 
         // return Redirect::route('member.index')->with('success', ' created successfully.');
     }

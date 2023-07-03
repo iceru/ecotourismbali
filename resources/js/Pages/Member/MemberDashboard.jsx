@@ -15,7 +15,27 @@ function MemberDashboard({ member }) {
   const { t } = useTranslation();
 
   const pay = () => {
-    router.get(route('member_payment.new_payment'));
+    axios.post(route('member_payment.new_payment'), {}).then(function (res) {
+      snap.pay(res.data, {
+        onSuccess: function (result) {
+          console.log('success');
+          console.log(result);
+        },
+        onPending: function (result) {
+          console.log('pending');
+          console.log(result);
+        },
+        onError: function (result) {
+          console.log('error');
+          console.log(result);
+        },
+        onClose: function () {
+          console.log(
+            'customer closed the popup without finishing the payment'
+          );
+        },
+      });
+    });
   };
 
   return (
