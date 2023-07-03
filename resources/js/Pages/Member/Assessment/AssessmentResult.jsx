@@ -17,36 +17,53 @@ function AssessmentResult({ session, member }) {
         <div className="text-center text-2xl mb-4">
           {t('congrats_assessment')}
         </div>
-        <div className="text-center text-lg mb-4">
-          {t('your_assessment_scores')}&nbsp;
-          <span className="font-bold text-primary">{session?.total_score}</span>
-        </div>
-        <div className="flex flex-col">
-          {member?.badge?.image ? (
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-lg">
-                {t('your_badge_is')}{' '}
-                <span className="font-bold text-primary">
-                  {member?.badge?.name}
-                </span>
-              </div>
-              <img
-                className="max-h-[320px]"
-                src={'/storage/badges/' + member?.badge?.image}
-                alt=""
-              />
+        {member.status === 'active' ? (
+          <>
+            <div className="text-center text-lg mb-4">
+              {t('your_assessment_scores')}&nbsp;
+              <span className="font-bold text-primary">
+                {session?.total_score}
+              </span>
             </div>
-          ) : (
-            <div>{t('not_eligible_badge')}</div>
-          )}
-        </div>
-        <PrimaryButton
-          as="link"
-          href={route('member.assessment.index')}
-          className="w-full flex justify-center mt-6"
-        >
-          {t('back_to_assessment')}
-        </PrimaryButton>
+            <div className="flex flex-col">
+              {member?.badge?.image ? (
+                <div className="flex flex-col items-center justify-center">
+                  <div className="text-lg">
+                    {t('your_badge_is')}{' '}
+                    <span className="font-bold text-primary">
+                      {member?.badge?.name}
+                    </span>
+                  </div>
+                  <img
+                    className="max-h-[320px]"
+                    src={'/storage/badges/' + member?.badge?.image}
+                    alt=""
+                  />
+                </div>
+              ) : (
+                <div className="text-center">{t('not_eligible_badge')}</div>
+              )}
+            </div>
+            <PrimaryButton
+              as="link"
+              href={route('member.assessment.index')}
+              className="w-full flex justify-center mt-6"
+            >
+              {t('back_to_assessment')}
+            </PrimaryButton>
+          </>
+        ) : (
+          <>
+            <div className="text-center">{t('result_preview_assessment')}</div>
+            <PrimaryButton
+              as="link"
+              href={route('member.dashboard')}
+              className="w-full flex justify-center mt-6"
+            >
+              {t('back_to_dashboard')}
+            </PrimaryButton>
+          </>
+        )}
       </AdminSection>
     </MemberLayout>
   );

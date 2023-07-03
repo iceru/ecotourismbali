@@ -18,22 +18,34 @@ class MemberModuleController extends Controller
 {
     public function index()
     {
+        $member = Member::where('user_id', Auth::id())->first();
+        $modules = Module::with('member_module')->get();
+        $memberModule = MemberModule::where('member_id', $member->id)->get();
+
+        if($member->status !== 'active') {
+            $modules = Module::with('member_module')->take(1)->get();
+        }
         return Inertia::render('Member/Module/ModuleList', [
-            'modules' => Module::with('member_module')->get(),
-            'member' => Member::where('user_id', Auth::id())->first(),
+            'modules' => $modules,
+            'member' => $member,
+            'memberModule' => $memberModule,
         ]);
     }
 
     public function detail($id)
     {
+        $member = Member::where('user_id', Auth::id())->first();
+        $memberModule = MemberModule::where('member_id', $member->id)->get();
+
         return Inertia::render('Member/Module/ModuleDetail', [
             'module' => Module::where('id', $id)->firstOrFail(),
+            'memberModule' => $memberModule,
         ]);
     }
 
     public function result($id)
     {
-        $member = Member::find(Auth::id());
+        $member = Member::where('user_id', Auth::id())->first();
         
         $preQuestions = PreTestQuestion::with('pre_test_option')->get();
         $prePoint = 100 / $preQuestions->count();

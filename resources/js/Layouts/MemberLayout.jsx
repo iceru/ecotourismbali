@@ -23,8 +23,6 @@ function MemberLayout({ children, state }) {
   const { url } = usePage();
   const { auth, memberShared } = usePage().props;
 
-  console.log(auth);
-
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
   });

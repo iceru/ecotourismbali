@@ -26,7 +26,7 @@ class ModuleController extends Controller
             'image' => 'required|image',
             'description' => 'required',
             'content' => 'required',
-            'video' => 'required',
+            'video' => 'nullable',
             'attachment' => 'nullable|file',
             'resource_person' => 'required',
         ]);
@@ -73,7 +73,7 @@ class ModuleController extends Controller
             'image' => 'nullable|image',
             'description' => 'required',
             'content' => 'required',
-            'video' => 'required',
+            'video' => 'nullable',            
             'attachment' => 'nullable|file',
             'resource_person' => 'required',
         ]);

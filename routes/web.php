@@ -117,7 +117,7 @@ Route::middleware(['auth', 'role:superadministrator,administrator'])->prefix('ad
     Route::get('/module', [ModuleController::class, 'index'])->name('module.index');
     Route::post('/module/store', [ModuleController::class, 'store'])->name('module.store');
     Route::get('/module/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
-    Route::patch('/module/update/{id}', [ModuleController::class, 'update'])->name('module.update');
+    Route::post('/module/update/{id}', [ModuleController::class, 'update'])->name('module.update');
     Route::delete('/module/delete/{id}', [ModuleController::class, 'destroy'])->name('module.destroy');
     
     Route::get('/module/{id}/pre-question', [PreTestQuestionController::class, 'index'])->name('pre_question.index');
@@ -171,7 +171,7 @@ Route::middleware(['auth', 'role:superadministrator,administrator'])->prefix('ad
     Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
     Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
     Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
-    //
+
 });
 
 require __DIR__ . '/auth.php';

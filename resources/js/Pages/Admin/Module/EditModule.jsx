@@ -1,19 +1,22 @@
+import React, { useState, useEffect } from 'react';
+import { useForm, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { useForm, usePage } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import BackTo from '../Components/BackTo';
+import Editor from '../Components/Editor';
 
 function EditAssessment() {
   const { t } = useTranslation();
 
   const { module } = usePage().props;
 
-  const { data, setData, patch, processing, errors } = useForm({
+  const { data, setData, post, processing, errors } = useForm({
     title: module.title || '',
     description: module.description || '',
     content: module.content || '',
@@ -26,8 +29,14 @@ function EditAssessment() {
   const submit = e => {
     e.preventDefault();
 
-    patch(route('module.update', module.id));
+    post(route('module.update', module.id));
   };
+
+  const [value, setValue] = useState(module.content);
+
+  useEffect(() => {
+    setData('content', value);
+  }, [value]);
 
   return (
     <AdminLayout>
@@ -71,6 +80,16 @@ function EditAssessment() {
               />
             </div>
           </div>
+
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="content" value={t('form_label_content')} />
+            </div>
+            <div className="lg:w-3/4">
+              <Editor onChange={setValue} value={value} />
+            </div>
+          </div>
+
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel
@@ -92,38 +111,6 @@ function EditAssessment() {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="video" value={t('form_label_video')} />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="video"
-                name="video"
-                type="text"
-                value={data.video}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('video', e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel htmlFor="content" value={t('form_label_content')} />
-            </div>
-            <div className="lg:w-3/4">
-              <TextInput
-                id="content"
-                name="content"
-                type="text"
-                value={data.content}
-                className="block w-full"
-                isFocused={true}
-                onChange={e => setData('content', e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/4 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
             <div className="lg:w-3/4">
@@ -133,6 +120,21 @@ function EditAssessment() {
                 id="image"
                 onChange={e => setData('image', e.target.files[0])}
               />
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel htmlFor="video" value={t('form_label_video')} />
+            </div>
+            <div className="lg:w-3/4">
+              <input
+                type="file"
+                name="video"
+                id="video"
+                className="block"
+                onChange={e => setData('video', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.video}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">

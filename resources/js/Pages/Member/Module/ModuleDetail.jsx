@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AdminSection from '@/Components/AdminSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import { useTranslation } from 'react-i18next';
+import BackTo from '@/Pages/Admin/Components/BackTo';
 
-function ModuleDetail({ module }) {
+function ModuleDetail({ module, memberModule }) {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    memberModule.forEach(item => {
+      if (module.id === item.module_id && item.completion > 0) {
+        module.complete = true;
+      }
+    });
+  }, []);
 
   return (
     <MemberLayout>
       <AdminSection>
+        {module.complete && (
+          <BackTo
+            title="back_to_list_module"
+            link={route('member.module.index')}
+          />
+        )}
         <div className="grid gap-6">
           <TitleSection title="e_learning" />
           <div className="font-bold text-primary">
@@ -24,13 +39,15 @@ function ModuleDetail({ module }) {
             className="text-justify"
             dangerouslySetInnerHTML={{ __html: module.content }}
           ></div>
-          <PrimaryButton
-            as="link"
-            href={route('member.module.post-test', module.id)}
-            className="flex justify-center"
-          >
-            {t('start_post_test')}
-          </PrimaryButton>
+          {!module.complete && (
+            <PrimaryButton
+              as="link"
+              href={route('member.module.post-test', module.id)}
+              className="flex justify-center"
+            >
+              {t('start_post_test')}
+            </PrimaryButton>
+          )}
         </div>
       </AdminSection>
     </MemberLayout>

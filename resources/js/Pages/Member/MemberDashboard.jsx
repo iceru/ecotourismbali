@@ -83,7 +83,11 @@ function MemberDashboard({ member }) {
               </h2>
               <div className="grid gap-4">
                 <div>
-                  <PrimaryButton color="lightPrimary">
+                  <PrimaryButton
+                    color="lightPrimary"
+                    as="link"
+                    href={route('member.assessment.index')}
+                  >
                     {t('my_assessment')}
                     <FontAwesomeIcon
                       icon={faLongArrowAltRight}
@@ -92,7 +96,11 @@ function MemberDashboard({ member }) {
                   </PrimaryButton>
                 </div>
                 <div>
-                  <PrimaryButton color="lightSecondary">
+                  <PrimaryButton
+                    color="lightSecondary"
+                    as="link"
+                    href={route('member.module.index')}
+                  >
                     {t('e_learning')}
                     <FontAwesomeIcon icon={faBook} className="ml-2" />
                   </PrimaryButton>
