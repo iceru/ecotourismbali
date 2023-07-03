@@ -8,10 +8,15 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function MemberDashboard({ member }) {
   const { t } = useTranslation();
+
+  const pay = () => {
+    router.post(route('member_payment.notif_handler'));
+  };
 
   return (
     <MemberLayout>
@@ -114,7 +119,7 @@ function MemberDashboard({ member }) {
         <AdminSection className="flex flex-col items-center justify-center gap-4">
           <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
           <p className="text-sm">{t('member_locked_text')}</p>
-          <PrimaryButton as="link" href={route('member_payment.new_payment')}>
+          <PrimaryButton onClick={() => pay()}>
             {t('member_locked_button')}
           </PrimaryButton>
         </AdminSection>
