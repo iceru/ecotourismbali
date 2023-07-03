@@ -15,7 +15,7 @@ function MemberDashboard({ member }) {
   const { t } = useTranslation();
 
   const pay = () => {
-    router.post(route('member_payment.notif_handler'));
+    router.get(route('member_payment.new_payment'));
   };
 
   return (
