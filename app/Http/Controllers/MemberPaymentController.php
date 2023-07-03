@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
+use App\Models\MemberPayment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 use Midtrans;
 use Midtrans\Snap;
 use Midtrans\Config;
-use App\Models\Member;
-use Midtrans\Transaction;
-use Midtrans\Notification;
-use Illuminate\Http\Request;
-use App\Models\MemberPayment;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class MemberPaymentController extends Controller
 {
@@ -72,7 +71,7 @@ class MemberPaymentController extends Controller
             }
         }
         else if ($transaction == 'settlement') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'settlement']);
+            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'success']);
         }
         else if ($transaction == 'pending') {
             MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'pending']);
@@ -87,4 +86,35 @@ class MemberPaymentController extends Controller
             MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'denied']);
         }
     }
+
+    public function finish()
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+        $member_payment = MemberPayment::where('member_id', $member->id)->where('payment_status', 'success')->latest()->first();
+        
+        return Inertia::render('Member/Payment/Finish', [
+            'member_payment' => $member_payment,
+        ]);
+    }
+
+    public function unfinish()
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+        $member_payment = MemberPayment::where('member_id', $member->id)->where('payment_status', 'pending')->latest()->first();
+        
+        return Inertia::render('Member/Payment/Unfinish', [
+            'member_payment' => $member_payment,
+        ]);
+    }
+
+    public function error()
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+        $member_payment = MemberPayment::where('member_id', $member->id)->where('payment_status', '!=' ,'success')->latest()->first();
+        
+        return Inertia::render('Member/Payment/Error', [
+            'member_payment' => $member_payment,
+        ]);
+    }
+
 }
