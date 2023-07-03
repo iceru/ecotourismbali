@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { router } from '@inertiajs/react';
 
-function ModuleList({ modules, member }) {
+function ModuleList({ modules, member, memberModule }) {
   const { t } = useTranslation();
 
+  useEffect(() => {
+    modules.forEach(module => {
+      memberModule.forEach(item => {
+        if (module.id === item.module_id && item.completion > 0) {
+          module.complete = true;
+        }
+      });
+    });
+    console.log(modules);
+  }, []);
   return (
     <MemberLayout>
       <AdminSection>
@@ -24,13 +35,22 @@ function ModuleList({ modules, member }) {
                   <img src={'/storage/modules/' + module.image} alt="" />
                 </div>
                 <div className="lg:w-2/3">
-                  <div className="text-xl font-bold mb-3">{module.title}</div>
+                  <div className="text-xl font-bold mb-3 flex items-center">
+                    {module.title}
+                    {module.complete && (
+                      <span className="rounded-3xl ml-3 text-xs py-1 px-3 bg-secondary inline-block text-white">
+                        {t('finished')}
+                      </span>
+                    )}
+                  </div>
                   <div className="mb-3 text-sm">{module.description}</div>
-                  {module.member_module.completion > 0 &&
-                  module.member_module.member_id === member.id ? (
-                    <div className="rounded-3xl text-sm py-2 px-4 bg-secondary text-white inline-block">
-                      Already Learned
-                    </div>
+                  {module.complete ? (
+                    <PrimaryButton
+                      as="link"
+                      href={route('member.module.detail', module.id)}
+                    >
+                      {t('read_material')}
+                    </PrimaryButton>
                   ) : (
                     <PrimaryButton
                       as="link"

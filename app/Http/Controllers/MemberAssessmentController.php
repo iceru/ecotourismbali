@@ -51,9 +51,14 @@ class MemberAssessmentController extends Controller
 
     public function start($id)
     {
+        $member = Member::where('user_id', Auth::id())->first();
+        $assessments = Assessment::with('assessment_question')->get();
+        if($member->status !== 'active') {
+            $assessments = Assessment::with('assessment_question')->take(1)->get();
+        }
         return Inertia::render('Member/Assessment/Assessment', [
             'session' => AssessmentSession::where('id', $id)->first(),
-            'assessments' => Assessment::with('assessment_question')->get(),
+            'assessments' => $assessments,
         ]);
     }
 
@@ -184,14 +189,17 @@ class MemberAssessmentController extends Controller
             $member->save();
         }
 
-        $session->completion = 'yes';
-        $session->total_score = $totalPoint;
-        $session->save();
+        if($member->status === 'active') {
+            $session->completion = 'yes';
+            $session->total_score = $totalPoint;
+            $session->save();
+    
+            foreach($memberAssessment as $assess) {
+                $assess->completion = 'yes';
+                $assess->save();
+            }
+        }
 
-        foreach($memberAssessment as $assess) {
-            $assess->completion = 'yes';
-            $assess->save();
-        } 
         return Redirect::route('member.assessment.result', $session->id);
     }
 

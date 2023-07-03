@@ -32,20 +32,13 @@ function CreateModule({ module }) {
     'Title',
     'Description',
     'Image',
-    'Attachment',
     'Author',
     'Post Test',
     'Pre Test',
     'Action',
   ];
 
-  const selectedData = [
-    'title',
-    'description',
-    'image',
-    'attachment',
-    'resource_person',
-  ];
+  const selectedData = ['title', 'description', 'image', 'resource_person'];
 
   const tableButtons = [
     {
@@ -176,21 +169,6 @@ function CreateModule({ module }) {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
-              <InputLabel htmlFor="video" value={t('form_label_video')} />
-            </div>
-            <div className="lg:w-4/5">
-              <input
-                type="file"
-                name="video"
-                id="video"
-                className="block"
-                onChange={e => setData('video', e.target.files[0])}
-              />
-              <span className="text-red-600">{errors.video}</span>
-            </div>
-          </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
             <div className="lg:w-4/5">
@@ -202,6 +180,21 @@ function CreateModule({ module }) {
                 onChange={e => setData('image', e.target.files[0])}
               />
               <span className="text-red-600">{errors.image}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="video" value={t('form_label_video')} />
+            </div>
+            <div className="lg:w-4/5">
+              <input
+                type="file"
+                name="video"
+                id="video"
+                className="block"
+                onChange={e => setData('video', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.video}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">

@@ -13,14 +13,14 @@ function AssessmentData() {
   const { t } = useTranslation();
 
   const { member, business_type, remaining, dateAssessment } = usePage().props;
-  const { data, setData, post, processing, errors, reset } = useForm({
+  const { data, setData, post, errors } = useForm({
     business_name: member.business_name || '',
     address: member.address || '',
     website: member.website || '',
     name: member?.user?.name || '',
     job_title: member.job_title || '',
     phone: member.phone || '',
-    email: member.email || '',
+    email: member?.user?.email || '',
     business_type_id: member.business_type_id || '',
   });
 
@@ -37,7 +37,9 @@ function AssessmentData() {
           <div>
             <h3 className="text-xl font-bold mb-3">{t('assessment')}</h3>
             <div className="px-4 py-3 bg-lightSecondary rounded-md inline-flex">
-              {t('eligible_assessment', { number: remaining })}
+              {member.status === 'active'
+                ? t('eligible_assessment', { number: remaining })
+                : t('trial_assessment', { number: remaining })}
             </div>
           </div>
           <h3 className="uppercase text-lg font-bold text-center">

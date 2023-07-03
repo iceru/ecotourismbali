@@ -12,13 +12,15 @@ function ModulePreTest({ pre_test, module, member }) {
 
   const { data, setData, post, processing, errors, reset } = useForm({
     member_id: member.id,
-    pre_test_question_id: null,
+    pre_test_question_id: pre_test[0].id || null,
     pre_test_option_id: null,
   });
 
+  console.log(data);
+
   const submit = e => {
     e.preventDefault();
-
+    console.log(data);
     post(route('member.pre-test.store'), {
       onSuccess: () => {
         if (pre_test.length > active + 1) {
