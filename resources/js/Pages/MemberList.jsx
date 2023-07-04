@@ -61,12 +61,15 @@ function MemberList({ programs, categories, badges, members }) {
         {t('list_of_members')}
       </h1>
       <div className="flex flex-wrap justify-between mb-10">
-        <div className="mb-6 lg:mb-0 lg:w-3/4 pr-4">
-          <div className="font-bold mb-2 text-lg">{t('filter')}:</div>
-          <div className="flex">
-            <div className="grid lg:grid-cols-3">
+        <div className="mb-6 lg:mb-0 lg:w-3/4 lg:pr-4">
+          <div className="font-bold mb-2 text-lg">{t('filter')}</div>
+          <div className="flex flex-wrap lg:flex-nowrap">
+            <div className="grid lg:grid-cols-3 w-full lg:w-auto">
               <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                <InputLabel className="mr-4" value={t('program')} />
+                <InputLabel
+                  className="mr-4 w-1/4 lg:w-auto"
+                  value={t('program')}
+                />
                 <SelectInput
                   options={programs}
                   labelData="name"
@@ -78,7 +81,10 @@ function MemberList({ programs, categories, badges, members }) {
                 </SelectInput>
               </div>
               <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                <InputLabel className="mr-4" value={t('badge')} />
+                <InputLabel
+                  className="mr-4 w-1/4 lg:w-auto"
+                  value={t('badge')}
+                />
                 <SelectInput
                   options={badges}
                   labelData="name"
@@ -90,14 +96,19 @@ function MemberList({ programs, categories, badges, members }) {
                 </SelectInput>
               </div>
               <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                <InputLabel className="mr-4" value={t('keyword')} />
+                <InputLabel
+                  className="mr-4 w-1/4 lg:w-auto"
+                  value={t('keyword')}
+                />
                 <TextInput
                   className="w-full"
                   onChange={e => setKeyword(e.target.value)}
                 />
               </div>
             </div>
-            <PrimaryButton onClick={filterData}>{t('filter')}</PrimaryButton>
+            <div className="w-full lg:w-auto">
+              <PrimaryButton onClick={filterData}>{t('filter')}</PrimaryButton>
+            </div>
           </div>
         </div>
         <div className="lg:w-1/4 ">
@@ -136,58 +147,64 @@ function MemberList({ programs, categories, badges, members }) {
           </ul>
         </div>
         <div className="lg:w-5/6 grid lg:grid-cols-3 gap-4">
-          {members?.map(member => {
-            return (
-              <div className="border rounded-2xl p-4 h-fit">
-                {member.badge ? (
-                  <div className="rounded-bl-2xl bg-yellow-600 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right flex items-center">
-                    <div>
-                      <img
-                        src={'/storage/badges/' + member.badge?.image}
-                        alt=""
-                        className="h-6 mr-2 brightness-0 filter invert"
-                      />
+          {members.length > 0 ? (
+            members?.map(member => {
+              return (
+                <div className="border rounded-2xl p-4 h-fit">
+                  {member.badge ? (
+                    <div className="rounded-bl-2xl bg-yellow-600 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right flex items-center">
+                      <div>
+                        <img
+                          src={'/storage/badges/' + member.badge?.image}
+                          alt=""
+                          className="h-6 mr-2 brightness-0 filter invert"
+                        />
+                      </div>
+                      <span>{member.badge?.name}</span>
                     </div>
-                    <span>{member.badge?.name}</span>
-                  </div>
-                ) : (
-                  <div className="rounded-bl-2xl bg-slate-400 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
-                    <div>{t('not_verified')}</div>
-                  </div>
-                )}
-                <div className="flex items-center mb-3 mt-5">
-                  {member.image && (
-                    <div className="mr-3">
-                      <img
-                        src={`/storage/member/images/${member.image}`}
-                        alt={member.bussiness_name}
-                        className="w-[62px] max-h-[62px] object-cover"
-                      />
+                  ) : (
+                    <div className="rounded-bl-2xl bg-slate-400 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
+                      <div>{t('not_verified')}</div>
                     </div>
                   )}
-                  <Link href={route('member.detail', member.id)}>
-                    <h4 className="font-bold text-lg">
-                      {member.business_name}
-                    </h4>
-                    {member.category && (
-                      <h6 className="text-xs uppercase text-primary">
-                        {member.category?.name}
-                      </h6>
+                  <div className="flex items-center mb-3 mt-5">
+                    {member.image && (
+                      <div className="mr-3">
+                        <img
+                          src={`/storage/member/images/${member.image}`}
+                          alt={member.bussiness_name}
+                          className="w-[62px] max-h-[62px] object-cover"
+                        />
+                      </div>
                     )}
+                    <Link href={route('member.detail', member.id)}>
+                      <h4 className="font-bold text-lg">
+                        {member.business_name}
+                      </h4>
+                      {member.category && (
+                        <h6 className="text-xs uppercase text-primary">
+                          {member.category?.name}
+                        </h6>
+                      )}
+                    </Link>
+                  </div>
+                  <p className="mb-3 text-sm">
+                    {member?.description?.slice(0, 100)}
+                  </p>
+                  <Link
+                    href={route('member.detail', member.id)}
+                    className="text-sm text-primary font-semibold"
+                  >
+                    {t('learn_more')}
                   </Link>
                 </div>
-                <p className="mb-3 text-sm">
-                  {member?.description?.slice(0, 100)}
-                </p>
-                <Link
-                  href={route('member.detail', member.id)}
-                  className="text-sm text-primary font-semibold"
-                >
-                  {t('learn_more')}
-                </Link>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div className="text-center flex justify-center">
+              <h3 className=" text-primary font-xl ">Not Found</h3>
+            </div>
+          )}
         </div>
       </div>
     </Guest>
