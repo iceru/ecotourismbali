@@ -27,8 +27,6 @@ function MemberList({ programs, categories, badges, members }) {
   const [sort, setSort] = useState(sorts[0].value);
   const [payload, setPayload] = useState({});
 
-  console.log(payload);
-
   const filterData = () => {
     const value = {
       ...payload,
@@ -158,13 +156,15 @@ function MemberList({ programs, categories, badges, members }) {
                   </div>
                 )}
                 <div className="flex items-center mb-3 mt-5">
-                  <div className="mr-3">
-                    <img
-                      src={`/storage/member/images/${member.image}`}
-                      alt={member.bussiness_name}
-                      className="w-[62px] max-h-[62px] object-cover"
-                    />
-                  </div>
+                  {member.image && (
+                    <div className="mr-3">
+                      <img
+                        src={`/storage/member/images/${member.image}`}
+                        alt={member.bussiness_name}
+                        className="w-[62px] max-h-[62px] object-cover"
+                      />
+                    </div>
+                  )}
                   <Link href={route('member.detail', member.id)}>
                     <h4 className="font-bold text-lg">
                       {member.business_name}
@@ -177,7 +177,7 @@ function MemberList({ programs, categories, badges, members }) {
                   </Link>
                 </div>
                 <p className="mb-3 text-sm">
-                  {member.description.slice(0, 100)}
+                  {member?.description?.slice(0, 100)}
                 </p>
                 <Link
                   href={route('member.detail', member.id)}

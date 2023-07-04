@@ -24,8 +24,6 @@ function MemberIndex() {
 
   const [edit, setEdit] = useState(false);
 
-  console.log(member);
-
   const { data, setData, post, processing, errors, reset } = useForm({
     category: '',
     program: '',

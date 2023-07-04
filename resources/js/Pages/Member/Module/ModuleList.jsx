@@ -18,7 +18,6 @@ function ModuleList({ modules, member, memberModule }) {
         }
       });
     });
-    console.log(modules);
   }, []);
   return (
     <MemberLayout>

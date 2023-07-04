@@ -17,7 +17,7 @@ class MemberListController extends Controller
             'programs' => Program::all(),
             'categories' => Category::all(),
             'badges' => Badge::all(),
-            'members' => Member::where('business_name', '!=', '')->with('badge', 'category', 'program')->get(),
+            'members' => Member::where('business_name', '!=', '')->where('status', 'active')->with('badge', 'category', 'program')->get(),
         ]);
     }
 
