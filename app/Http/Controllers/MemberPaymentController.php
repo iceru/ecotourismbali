@@ -86,6 +86,15 @@ class MemberPaymentController extends Controller
         else if ($transaction == 'cancel') {
             MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'denied']);
         }
+
+        if($transaction) {
+            MemberPayment::where('payment_no', $order_id)->update([
+                'payment_type' => $notif->payment_type,
+                'status_code' => $notif->status_code,
+                'amount' => $notif->amount,
+                'bank' => $notif->bank
+            ]);
+        }
     }
 
     public function finish()
@@ -116,41 +125,6 @@ class MemberPaymentController extends Controller
         return Inertia::render('Member/Payment/Error', [
             'member_payment' => $member_payment,
         ]);
-    }
-
-    public function update(Request $request)
-    {
-        $transaction = $request->transaction_status;
-        $type = $request->payment_type;
-        $order_id = $request->order_id;
-        $fraud = $request->fraud_status;
-                
-        if ($transaction == 'capture') {
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'challenge by FDS']);
-                }
-                else {
-                    MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'success']);
-                }
-            }
-        }
-        else if ($transaction == 'settlement') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'success']);
-        }
-        else if ($transaction == 'pending') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'pending']);
-        }
-        else if ($transaction == 'deny') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'denied']);
-        }
-        else if ($transaction == 'expire') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'expire']);
-        }
-        else if ($transaction == 'cancel') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'denied']);
-        }
     }
 
 }
