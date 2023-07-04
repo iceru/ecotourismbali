@@ -16,11 +16,8 @@ function ModulePreTest({ pre_test, module, member }) {
     pre_test_option_id: null,
   });
 
-  console.log(data);
-
   const submit = e => {
     e.preventDefault();
-    console.log(data);
     post(route('member.pre-test.store'), {
       onSuccess: () => {
         if (pre_test.length > active + 1) {

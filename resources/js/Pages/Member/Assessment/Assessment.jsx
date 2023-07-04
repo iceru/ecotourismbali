@@ -13,7 +13,6 @@ function Assessment({ assessments, session }) {
 
   const { data, setData, post, processing, errors } = useForm();
 
-  console.log(data);
   const submit = e => {
     e.preventDefault();
 
