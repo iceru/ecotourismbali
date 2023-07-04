@@ -11,7 +11,7 @@ use Inertia\Inertia;
 use Midtrans;
 use Midtrans\Snap;
 use Midtrans\Config;
-use Midtrans\Notif;
+use Midtrans\Notification;
 
 class MemberPaymentController extends Controller
 {
@@ -51,8 +51,6 @@ class MemberPaymentController extends Controller
     {
         Config::$serverKey = config('services.midtrans.server_key');
         Config::$isProduction = config('services.midtrans.is_production');
-        $member = Member::where('user_id', Auth::id())->first();
-
         $notif = new Notification();
 
         $notif = $notif->getResponse();
@@ -60,42 +58,45 @@ class MemberPaymentController extends Controller
         $type = $notif->payment_type;
         $order_id = $notif->order_id;
         $fraud = $notif->fraud_status;
+
+        $memberPayment = MemberPayment::where('payment_no', $order_id);
+        $memberPaymentFirst = MemberPayment::where('payment_no', $order_id)->first();
+        $member = Member::where('id', $memberPaymentFirst->member_id)->first();
                 
         if ($transaction == 'capture') {
             // For credit card transaction, we need to check whether transaction is challenge by FDS or not
             if ($type == 'credit_card') {
                 if ($fraud == 'challenge') {
-                    MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'challenge by FDS']);
+                    $memberPayment->update(['payment_status' => 'challenge by FDS']);
                 }
                 else {
-                    MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'success']);
+                    $memberPayment->update(['payment_status' => 'success']);
                 }
             }
         }
         else if ($transaction == 'settlement') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'success']);
+            $memberPayment->update(['payment_status' => 'success']);
             $member->status = 'active';
             $member->save();
         }
         else if ($transaction == 'pending') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'pending']);
+            $memberPayment->update(['payment_status' => 'pending']);
         }
         else if ($transaction == 'deny') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'denied']);
+            $memberPayment->update(['payment_status' => 'denied']);
         }
         else if ($transaction == 'expire') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'expire']);
+            $memberPayment->update(['payment_status' => 'expire']);
         }
         else if ($transaction == 'cancel') {
-            MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'denied']);
+            $memberPayment->update(['payment_status' => 'denied']);
         }
 
         if($transaction) {
-            MemberPayment::where('payment_no', $order_id)->update([
-                'payment_type' => $notif->payment_type,
+            $memberPayment->update([
+                'payment_type' => $type,
                 'status_code' => $notif->status_code,
-                'amount' => $notif->amount,
-                'bank' => $notif->bank
+                'amount' => $notif->gross_amount,
             ]);
         }
     }

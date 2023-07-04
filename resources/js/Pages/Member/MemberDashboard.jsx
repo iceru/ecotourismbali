@@ -9,49 +9,82 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { router } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import queryString from 'query-string';
 
 function MemberDashboard({ member }) {
   const { t } = useTranslation();
+  const [payComplete, setPayComplete] = useState(false);
+  const [payPending, setPayPending] = useState(false);
+  const parsed = queryString.parse(location.search);
 
   const pay = () => {
-    let snapToken = localStorage.getItem('snapToken');
+    let snapToken = sessionStorage.getItem('snapToken');
+
     if (!snapToken) {
       axios.post(route('member_payment.new_payment'), {}).then(function (res) {
         snapToken = res.data;
-        localStorage.setItem('snapToken', res.data);
+        sessionStorage.setItem('snapToken', res.data);
         snap.pay(snapToken, {
           onSuccess: function (result) {
-            router.visit(route('member.dashboard'));
-            localStorage.clear('snapToken');
+            setPayComplete(true);
+            setPayPending(false);
+            sessionStorage.clear('snapToken');
+            router.visit('/member/dashboard?newPayment=true');
           },
-          onPending: function (result) {},
+          onPending: function (result) {
+            setPayPending(true);
+          },
           onError: function (result) {
-            localStorage.clear('snapToken');
+            setPayPending(false);
+            sessionStorage.clear('snapToken');
           },
           onClose: function () {
-            console.log(
-              'customer closed the popup without finishing the payment'
-            );
+            setPayPending(true);
           },
         });
       });
     } else {
       snap.pay(snapToken, {
         onSuccess: function (result) {
-          localStorage.clear('snapToken');
+          setPayComplete(true);
+          setPayPending(false);
+          sessionStorage.clear('snapToken');
+          router.visit('/member/dashboard?newPayment=true');
         },
-        onPending: function (result) {},
+        onPending: function (result) {
+          setPayPending(true);
+        },
         onError: function (result) {
-          localStorage.clear('snapToken');
+          setPayPending(false);
+          sessionStorage.clear('snapToken');
         },
-        onClose: function () {},
+        onClose: function () {
+          setPayPending(true);
+        },
       });
     }
   };
 
+  useEffect(() => {
+    if (parsed.newPayment) {
+      setPayComplete(true);
+    }
+  }, []);
+
   return (
     <MemberLayout>
+      {payComplete && (
+        <div className="px-4 py-3 bg-primary text-white rounded-md inline-flex mb-4">
+          {t('pay_complete')}
+        </div>
+      )}
+      {payPending && (
+        <div className="px-4 py-3 bg-yellow-300 rounded-md inline-flex mb-4 transition">
+          {t('pay_pending')}
+        </div>
+      )}
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
         <AdminSection>
           <h2 className="font-bold text-[20px] mb-4">{t('welcome_member')}</h2>
