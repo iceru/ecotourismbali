@@ -21,7 +21,7 @@ import { useMediaQuery } from 'react-responsive';
 function MemberLayout({ children, state }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
-  const { auth, memberShared } = usePage().props;
+  const { auth } = usePage().props;
 
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
