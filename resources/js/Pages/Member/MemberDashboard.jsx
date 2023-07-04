@@ -15,11 +15,37 @@ function MemberDashboard({ member }) {
   const { t } = useTranslation();
 
   const pay = () => {
-    axios.post(route('member_payment.new_payment'), {}).then(function (res) {
-      snap.pay(res.data, {
+    let snapToken = localStorage.getItem('snapToken');
+    if (!snapToken) {
+      axios.post(route('member_payment.new_payment'), {}).then(function (res) {
+        snapToken = res.data;
+        localStorage.setItem('snapToken', res.data);
+        snap.pay(snapToken, {
+          onSuccess: function (result) {
+            console.log(result);
+            localStorage.clear('snapToken');
+          },
+          onPending: function (result) {
+            console.log(result);
+            localStorage.clear('snapToken');
+          },
+          onError: function (result) {
+            console.log(result);
+            localStorage.clear('snapToken');
+          },
+          onClose: function () {
+            console.log(
+              'customer closed the popup without finishing the payment'
+            );
+          },
+        });
+      });
+    } else {
+      snap.pay(snapToken, {
         onSuccess: function (result) {
           console.log('success');
           console.log(result);
+          localStorage.clear('snapToken');
         },
         onPending: function (result) {
           console.log('pending');
@@ -28,6 +54,7 @@ function MemberDashboard({ member }) {
         onError: function (result) {
           console.log('error');
           console.log(result);
+          localStorage.clear('snapToken');
         },
         onClose: function () {
           console.log(
@@ -35,7 +62,7 @@ function MemberDashboard({ member }) {
           );
         },
       });
-    });
+    }
   };
 
   return (
@@ -139,7 +166,9 @@ function MemberDashboard({ member }) {
         <AdminSection className="flex flex-col items-center justify-center gap-4">
           <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
           <p className="text-sm">{t('member_locked_text')}</p>
-          <PrimaryButton onClick={() => pay()}>
+          <PrimaryButton
+            onClick={() => (member.status !== 'active' ? pay() : null)}
+          >
             {t('member_locked_button')}
           </PrimaryButton>
         </AdminSection>
