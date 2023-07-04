@@ -89,8 +89,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        // Auth::login($user);
-        $user->addRole('superadministrator');
+        $user->addRole('administrator');
 
         return redirect('/admin/dashboard');
     }
