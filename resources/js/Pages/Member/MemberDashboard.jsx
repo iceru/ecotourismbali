@@ -22,15 +22,11 @@ function MemberDashboard({ member }) {
         localStorage.setItem('snapToken', res.data);
         snap.pay(snapToken, {
           onSuccess: function (result) {
-            console.log(result);
+            router.visit(route('member.dashboard'));
             localStorage.clear('snapToken');
           },
-          onPending: function (result) {
-            console.log(result);
-            localStorage.clear('snapToken');
-          },
+          onPending: function (result) {},
           onError: function (result) {
-            console.log(result);
             localStorage.clear('snapToken');
           },
           onClose: function () {
@@ -43,24 +39,13 @@ function MemberDashboard({ member }) {
     } else {
       snap.pay(snapToken, {
         onSuccess: function (result) {
-          console.log('success');
-          console.log(result);
           localStorage.clear('snapToken');
         },
-        onPending: function (result) {
-          console.log('pending');
-          console.log(result);
-        },
+        onPending: function (result) {},
         onError: function (result) {
-          console.log('error');
-          console.log(result);
           localStorage.clear('snapToken');
         },
-        onClose: function () {
-          console.log(
-            'customer closed the popup without finishing the payment'
-          );
-        },
+        onClose: function () {},
       });
     }
   };

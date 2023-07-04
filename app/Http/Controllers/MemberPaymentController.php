@@ -51,6 +51,7 @@ class MemberPaymentController extends Controller
     {
         Config::$serverKey = config('services.midtrans.server_key');
         Config::$isProduction = config('services.midtrans.is_production');
+        $member = Member::where('user_id', Auth::id())->first();
 
         $notif = new Notification();
 
@@ -73,6 +74,8 @@ class MemberPaymentController extends Controller
         }
         else if ($transaction == 'settlement') {
             MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'success']);
+            $member->status = 'active';
+            $member->save();
         }
         else if ($transaction == 'pending') {
             MemberPayment::where('payment_no', $order_id)->update(['payment_status' => 'pending']);
