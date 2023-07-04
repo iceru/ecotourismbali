@@ -1,31 +1,32 @@
 <?php
 
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\AdminMemberController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AssessmentController;
-use App\Http\Controllers\AssessmentOptionController;
-use App\Http\Controllers\AssessmentQuestionController;
-use App\Http\Controllers\BadgeController;
-use App\Http\Controllers\BusinessTypeController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\MemberAssessmentController;
-use App\Http\Controllers\MemberModuleController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\MemberListController;
-use App\Http\Controllers\MemberPaymentController;
-use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\PostTestModuleAnswerController;
-use App\Http\Controllers\PostTestOptionController;
-use App\Http\Controllers\PostTestQuestionController;
-use App\Http\Controllers\PreTestModuleAnswerController;
-use App\Http\Controllers\PreTestOptionController;
-use App\Http\Controllers\PreTestQuestionController;
-use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\VerifiedBadgeController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AssessmentController;
+use App\Http\Controllers\MemberListController;
+use App\Http\Controllers\AdminMemberController;
+use App\Http\Controllers\AdminPaymentController;
+use App\Http\Controllers\BusinessTypeController;
+use App\Http\Controllers\MemberModuleController;
+use App\Http\Controllers\MemberPaymentController;
+use App\Http\Controllers\PreTestOptionController;
+use App\Http\Controllers\VerifiedBadgeController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\PostTestOptionController;
+use App\Http\Controllers\PreTestQuestionController;
+use App\Http\Controllers\AssessmentOptionController;
+use App\Http\Controllers\MemberAssessmentController;
+use App\Http\Controllers\PostTestQuestionController;
+use App\Http\Controllers\AssessmentQuestionController;
+use App\Http\Controllers\PreTestModuleAnswerController;
+use App\Http\Controllers\PostTestModuleAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,12 @@ Route::middleware(['auth', 'role:member'])->group(function () {
 
 Route::middleware(['auth', 'role:superadministrator,administrator'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    
+    Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
+    Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
+    Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
+
+    Route::get('/payment/index', [AdminPaymentController::class, 'index'])->name('admin.payment.index');
     
     Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
     Route::post('/assessment/store', [AssessmentController::class, 'store'])->name('assessment.store');
@@ -167,10 +174,6 @@ Route::middleware(['auth', 'role:superadministrator,administrator'])->prefix('ad
     Route::get('/program/edit/{id}', [ProgramController::class, 'edit'])->name('program.edit');
     Route::post('/program/update/{id}', [ProgramController::class, 'update'])->name('program.update');
     Route::delete('/program/delete/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
-    
-    Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
-    Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
-    Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
 
 });
 

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAward,
   faBars,
+  faDollar,
   faFileClipboard,
   faHome,
   faListAlt,
@@ -79,6 +80,18 @@ function AdminLayout({ children }) {
                   icon={faUsers}
                 />
                 {t('member')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={route('admin.payment.index')}
+                className={url.startsWith('/admin/payment') ? 'font-bold' : ''}
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faDollar}
+                />
+                {t('payment')}
               </Link>
             </li>
             <li>
