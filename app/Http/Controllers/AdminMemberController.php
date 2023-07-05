@@ -92,11 +92,13 @@ class AdminMemberController extends Controller
             'category' => 'nullable',
             'program' => 'nullable',
             'verified_badge' => 'nullable',
+            'total_payment' => 'nullable',
         ]);
 
         $member->category_id = $request->category;
         $member->program_id = $request->program;
         $member->verified_badge_id = $request->verified_badge;
+        $member->total_payment = $request->total_payment;
         $member->save();
 
         return Redirect::route('admin.member.detail', $member->id);
