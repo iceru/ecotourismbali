@@ -25,7 +25,7 @@ class MemberPaymentController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => $order_id,
-                'gross_amount' => 500000,
+                'gross_amount' => $member->total_payment,
             )
         );
 
