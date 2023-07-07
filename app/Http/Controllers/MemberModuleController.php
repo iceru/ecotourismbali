@@ -43,7 +43,7 @@ class MemberModuleController extends Controller
         $memberModule = MemberModule::where('member_id', $member->id)->get();
 
         return Inertia::render('Member/Module/ModuleDetail', [
-            'module' => Module::where('id', $id)->firstOrFail(),
+            'module' => Module::with('member_module')->where('id', $id)->firstOrFail(),
             'memberModule' => $memberModule,
         ]);
     }

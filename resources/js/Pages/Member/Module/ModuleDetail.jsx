@@ -6,18 +6,19 @@ import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import { useTranslation } from 'react-i18next';
 import BackTo from '@/Pages/Admin/Components/BackTo';
 
-function ModuleDetail({ module, memberModule }) {
+function ModuleDetail({ module }) {
   const { t } = useTranslation();
 
   return (
     <MemberLayout>
       <AdminSection>
-        {module.complete && (
-          <BackTo
-            title="back_to_list_module"
-            link={route('member.module.index')}
-          />
-        )}
+        {module.member_module[0] &&
+          module.member_module[0].completion === 1 && (
+            <BackTo
+              title="back_to_list_module"
+              link={route('member.module.index')}
+            />
+          )}
         <div className="grid gap-6">
           <TitleSection title="e_learning" />
           <div className="font-bold text-primary">
@@ -39,15 +40,16 @@ function ModuleDetail({ module, memberModule }) {
             className="text-justify"
             dangerouslySetInnerHTML={{ __html: module.content }}
           ></div>
-          {!module.complete && (
-            <PrimaryButton
-              as="link"
-              href={route('member.module.post-test', module.id)}
-              className="flex justify-center"
-            >
-              {t('start_post_test')}
-            </PrimaryButton>
-          )}
+          {module.member_module[0] &&
+            module.member_module[0].completion !== 1 && (
+              <PrimaryButton
+                as="link"
+                href={route('member.module.post-test', module.id)}
+                className="flex justify-center"
+              >
+                {t('start_post_test')}
+              </PrimaryButton>
+            )}
         </div>
       </AdminSection>
     </MemberLayout>

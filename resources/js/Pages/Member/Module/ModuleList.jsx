@@ -17,7 +17,7 @@ function ModuleList({ modules }) {
         <h1 className="mb-6 text-center font-bold text-primary text-2xl">
           {t('list_modules')}
         </h1>
-        <section className="grid lg:grid-cols-2">
+        <section className="grid lg:grid-cols-2 gap-6">
           {modules?.map(module => {
             return (
               <div className="p-6  bg-lightPrimary bg-opacity-50 rounded-2xl flex">
@@ -27,14 +27,16 @@ function ModuleList({ modules }) {
                 <div className="lg:w-2/3">
                   <div className="text-xl font-bold mb-3 flex items-center">
                     {module.title}
-                    {module.member_module[0] && module.member_module[0].completion === 1 && (
-                      <span className="rounded-3xl ml-3 text-xs py-1 px-3 bg-secondary inline-block text-white">
-                        {t('finished')}
-                      </span>
-                    )}
+                    {module.member_module[0] &&
+                      module.member_module[0].completion === 1 && (
+                        <span className="rounded-3xl ml-3 text-xs py-1 px-3 bg-secondary inline-block text-white">
+                          {t('finished')}
+                        </span>
+                      )}
                   </div>
                   <div className="mb-3 text-sm">{module.description}</div>
-                  {module.member_module[0] && module.member_module[0].completion === 1 ? (
+                  {module.member_module[0] &&
+                  module.member_module[0].completion === 1 ? (
                     <PrimaryButton
                       as="link"
                       href={route('member.module.detail', module.id)}
