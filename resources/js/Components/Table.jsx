@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { Link, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import useTable from '@/Hooks/useTable';
+import TableFooter from './TableFooter';
 
 export default function Table({
   header,
@@ -12,6 +15,9 @@ export default function Table({
   descHtml,
 }) {
   const { delete: destroy, processing } = useForm();
+
+  const [page, setPage] = useState(1);
+  const { slice, range } = useTable(data, page, 10);
 
   const { t } = useTranslation();
 
@@ -63,7 +69,7 @@ export default function Table({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {data?.map((item, index) => {
+                {slice?.map((item, index) => {
                   return (
                     <tr key={index}>
                       <td className="px-6 py-4 text-sm font-medium text-gray-800">
@@ -157,6 +163,7 @@ export default function Table({
           </div>
         </div>
       </div>
+      <TableFooter range={range} slice={slice} setPage={setPage} page={page} />
     </div>
   );
 }

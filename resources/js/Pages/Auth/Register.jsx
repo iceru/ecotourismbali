@@ -8,6 +8,8 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import AuthImage from '@/Components/AuthImage';
 import { useTranslation } from 'react-i18next';
 
+import RegisImage from '../../../images/regisImage.jpg';
+
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
@@ -35,19 +37,19 @@ export default function Register() {
       <Head title="Register" />
       <div className="grid lg:grid-cols-2 items-center">
         <div className="hidden lg:block">
-          <AuthImage />
+          <AuthImage image={RegisImage} />
         </div>
 
         <div>
           <div className="mb-8">
             <h3 className="font-bold text-2xl mb-3">{t('register_welcome')}</h3>
             <p className="mb-2">{t('register_welcome_text')}</p>
-            <p>
+            {/* <p>
               {t('register_welcome_text2')}
               <span className="text-primary font-semibold ml-1">
                 <Link href={route('login')}>{t('login_here')}</Link>
               </span>
-            </p>
+            </p> */}
           </div>
           <form onSubmit={submit}>
             <div>
@@ -144,7 +146,7 @@ export default function Register() {
               <PrimaryButton disabled={processing}>Register</PrimaryButton>
               <Link
                 href={route('login')}
-                className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="text-sm text-primary font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 {t('already_registered')}
               </Link>
