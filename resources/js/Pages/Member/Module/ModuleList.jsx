@@ -7,18 +7,9 @@ import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { router } from '@inertiajs/react';
 
-function ModuleList({ modules, member, memberModule }) {
+function ModuleList({ modules }) {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    modules.forEach(module => {
-      memberModule.forEach(item => {
-        if (module.id === item.module_id && item.completion > 0) {
-          module.complete = true;
-        }
-      });
-    });
-  }, []);
+  console.log(modules[0].completed);
   return (
     <MemberLayout>
       <AdminSection>

@@ -29,10 +29,16 @@ class MemberAssessmentController extends Controller
 
         $attempt = 0;
         $dateAssessment = new Date();
+        $now = Carbon::now();
         foreach ($sessions as $session) {
+            if($session->created_at->diffInYears($now) > 0) {
+                $session->completion = 'expired';
+                $session->save();
+            }
+
             if($session->completion === 'yes' && $session->total_score > 0) {
                 $attempt = $attempt + 1;
-            }
+            }           
         }
 
         $remaining = 2 - $attempt;
@@ -176,18 +182,22 @@ class MemberAssessmentController extends Controller
             $totalPoint = $totalPoint + $assess->score;
         }
 
-        if($totalPoint > 87) {
-            $badge = Badge::where('name', 'Bronze')->first();
-        } else if ($totalPoint > 175) {
-            $badge = Badge::where('name', 'Silver')->first();
-        } else if ($totalPoint > 264) {
+        if ($totalPoint > 264) {
             $badge = Badge::where('name', 'Gold')->first();
         }
+        else if ($totalPoint > 175) {
+            $badge = Badge::where('name', 'Silver')->first();
+        }
+        else if($totalPoint > 87) {
+            $badge = Badge::where('name', 'Bronze')->first();
+        }
+      
 
         if($totalPoint > 87) {
             $member->badge_id = $badge->id;
             $member->save();
         }
+
 
         if($member->status === 'active') {
             $session->completion = 'yes';
@@ -198,6 +208,8 @@ class MemberAssessmentController extends Controller
                 $assess->completion = 'yes';
                 $assess->save();
             }
+        } else {
+            $session->completion = 'trial';
         }
 
         return Redirect::route('member.assessment.result', $session->id);

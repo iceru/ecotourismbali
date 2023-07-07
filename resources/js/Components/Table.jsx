@@ -23,6 +23,8 @@ export default function Table({
         return 'bg-red-500 hover:bg-red-600 active:bg-red-600';
       case 'info':
         return 'bg-blue-500 hover:bg-blue-600 active:bg-blue-600';
+      case 'show':
+        return 'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-600';
       default:
         return 'bg-gray-500 hover:bg-gray-600 active:bg-gray-600';
     }
@@ -124,7 +126,7 @@ export default function Table({
                                 <button
                                   disabled={processing}
                                   key={index}
-                                  className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full mt-2 text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
+                                  className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
                                     action.color
                                   )}`}
                                 >
@@ -137,7 +139,7 @@ export default function Table({
                                   action.withId ? '/' + item.id : ''
                                 }`}
                                 key={index}
-                                className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
+                                className={`px-2 py-1 mr-2 text-sm block text-center font-medium leading-5 w-full mb-2 text-white transition-colors duration-150 border border-transparent rounded-lg  focus:outline-none focus:shadow-outline-green ${buttonColor(
                                   action.color
                                 )}`}
                               >

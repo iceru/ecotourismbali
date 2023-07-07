@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Module extends Model
 {
     protected $table = 'modules';
-
+    protected $appends = ['completed'];
     public function member_module(): HasMany
     {
         return $this->hasMany(MemberModule::class, 'module_id');
@@ -23,5 +23,10 @@ class Module extends Model
     public function post_test_question(): HasMany
     {
         return $this->hasMany(PostTestQuestion::class, 'module_id');
+    }
+
+    public function getCompletedAttribute($value)
+    {  
+        $this->attributes['completed'] = $value;
     }
 }

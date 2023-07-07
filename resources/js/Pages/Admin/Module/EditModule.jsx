@@ -21,7 +21,7 @@ function EditAssessment() {
     description: module.description || '',
     content: module.content || '',
     video: module.video || '',
-    resource_person: module.resource_person || '',
+    author: module.author || '',
     image: '',
     attachment: '',
   });
@@ -92,20 +92,17 @@ function EditAssessment() {
 
           <div className="block lg:flex items-center">
             <div className="lg:w-1/4 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="resource_person"
-                value={t('form_label_author')}
-              />
+              <InputLabel htmlFor="author" value={t('form_label_author')} />
             </div>
             <div className="lg:w-3/4">
               <TextInput
-                id="resource_person"
-                name="resource_person"
+                id="author"
+                name="author"
                 type="text"
-                value={data.resource_person}
+                value={data.author}
                 className="block w-full"
                 isFocused={true}
-                onChange={e => setData('resource_person', e.target.value)}
+                onChange={e => setData('author', e.target.value)}
               />
             </div>
           </div>

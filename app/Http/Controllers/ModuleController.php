@@ -17,6 +17,13 @@ class ModuleController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        return Inertia::render('Admin/Module/ShowModule', [
+            'module' => Module::find($id),
+        ]);
+    }
+
     public function store(Request $request)
     {
         $module = new Module;
@@ -28,7 +35,7 @@ class ModuleController extends Controller
             'content' => 'required',
             'video' => 'nullable',
             'attachment' => 'nullable|file',
-            'resource_person' => 'required',
+            'author' => 'required',
         ]);
 
         $image_filename = null;
@@ -44,14 +51,19 @@ class ModuleController extends Controller
             $attachment_filename = $request->title . '_' . time() . '.' . $extension;
             $request->file('attachment')->storeAs('public/modules', $attachment_filename);
         }
+        if ($request->hasFile('video')) {
+            $extension = $request->file('video')->extension();
+            $video_filename = $request->title . '_' . time() . '.' . $extension;
+            $request->file('video')->storeAs('public/modules', $video_filename);
+        }
 
         $module->title = $request->title;
         $module->image = $image_filename;
         $module->description = $request->description;
         $module->content = $request->content;
-        $module->video = $request->video;
         $module->attachment = $attachment_filename;
-        $module->resource_person = $request->resource_person;
+        $module->video = $video_filename;
+        $module->author = $request->author;
         $module->save();
 
         return Redirect::route('module.index')->with('success', 'Module created successfully.');
@@ -75,7 +87,7 @@ class ModuleController extends Controller
             'content' => 'required',
             'video' => 'nullable',            
             'attachment' => 'nullable|file',
-            'resource_person' => 'required',
+            'author' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -93,14 +105,20 @@ class ModuleController extends Controller
             $module->attachment = $attachment_filename;
         }
 
+        if ($request->hasFile('video')) {
+            $extension = $request->file('video')->extension();
+            $video_filename = $request->title . '_' . time() . '.' . $extension;
+            $request->file('video')->storeAs('public/modules', $video_filename);
+            $module->video = $video_filename;
+        }
+
         $module->title = $request->title;
         $module->description = $request->description;
         $module->content = $request->content;
-        $module->video = $request->video;
-        $module->resource_person = $request->resource_person;
+        $module->author = $request->author;
         $module->save();
 
-        return Redirect::route('module.index');
+        return Redirect::route('module.index')->with('success', 'Module updated successfully.');;
     }
 
     public function destroy(Request $request)

@@ -86,6 +86,7 @@
 
   "select_business_type": "Pilih Jenis Bisnis",
   "add_business_type": "Tambah Jenis Bisnis",
+  "business_type": "Jenis Bisnis",
 
   "create_business_title": "Buat Tipe Bisnis",
   "edit_business_title": "Ubah Tipe Bisnis",
@@ -115,6 +116,7 @@
   "detail_button": "Detail",
   "edit_button": "Ubah",
   "delete_button": "Hapus",
+  "show_button": "Lihat Detail",
 
   "member_locked_title": "Akun Anda Terkunci",
   "member_locked_text": "Untuk mengaktifkan keanggotaan Anda, silakan klik tombol di bawah ini dan lanjutkan pembayaran",
@@ -223,5 +225,7 @@
   "pay_complete": "Pembayaran berhasil. Selamat datang di Membership Eco Tourism Bali!",
   "pay_pending": "Pembayaran masih berjalan. Silahkan selesaikan pembayaran",
 
-  "list_of_payments": "Daftar Pembayaran"
+  "list_of_payments": "Daftar Pembayaran",
+  "notify_admin_text": "Mohon tunggu, kami sedang mengkonfirmasi total pembayaran anda",
+  "notify_admin": "Laporkan ke Admin"
 }

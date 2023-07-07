@@ -28,6 +28,7 @@ function MemberIndex() {
     category: '',
     program: '',
     verified_badge: '',
+    total_payment: '',
   });
 
   const submit = e => {
@@ -41,6 +42,21 @@ function MemberIndex() {
     });
   };
 
+  const total_payments = [
+    {
+      label: 'Rp2.000.000',
+      value: 2000000,
+    },
+    {
+      label: 'Rp6.000.000',
+      value: 6000000,
+    },
+    {
+      label: 'Rp12.000.000',
+      value: 12000000,
+    },
+  ];
+
   const items = (label, data) => {
     return (
       <div className="flex flex-wrap mb-4">
@@ -50,13 +66,6 @@ function MemberIndex() {
         <div className="w-full lg:w-3/4">{data || '-'}</div>
       </div>
     );
-  };
-
-  const attempts = () => {
-    const total = 2;
-    const length = member?.member_assessment?.length || 0;
-
-    return total - length;
   };
 
   return (
@@ -96,6 +105,24 @@ function MemberIndex() {
         </PrimaryButton>
         <form onSubmit={submit}>
           {items('status', capitalize(member?.status))}
+          {edit ? (
+            <div className="flex items-center mb-4">
+              <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
+              <SelectInput
+                id="total_payment"
+                name="total_payment"
+                value={data.total_payment}
+                options={total_payments}
+                labelData="name"
+                placeholder="select_total_payment"
+                valueData="id"
+                className="lg:w-3/4"
+                onChange={e => setData('total_payment', e.target.value)}
+              />
+            </div>
+          ) : (
+            items('total_payment', member?.total_payment?.name)
+          )}
           {items('email', member.user.email)}
           {items('address', member?.address)}
           {items('phone', member.phone)}

@@ -11,8 +11,11 @@
         "laravel/framework": "^10.8",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "mailjet/laravel-mailjet": "^3.0",
         "midtrans/midtrans-php": "^2.5",
         "santigarcor/laratrust": "^8.2",
+        "symfony/http-client": "^6.3",
+        "thedoctor0/laravel-mailjet-driver": "^2.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {

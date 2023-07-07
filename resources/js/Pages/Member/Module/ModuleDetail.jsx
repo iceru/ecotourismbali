@@ -9,14 +9,6 @@ import BackTo from '@/Pages/Admin/Components/BackTo';
 function ModuleDetail({ module, memberModule }) {
   const { t } = useTranslation();
 
-  useEffect(() => {
-    memberModule.forEach(item => {
-      if (module.id === item.module_id && item.completion > 0) {
-        module.complete = true;
-      }
-    });
-  }, []);
-
   return (
     <MemberLayout>
       <AdminSection>
@@ -33,7 +25,15 @@ function ModuleDetail({ module, memberModule }) {
           </div>
           <div className="text-center font-bold text-xl">{module.title}</div>
           <div className="flex justify-center">
-            <img src={`/storage/modules/${module.image}`} alt={module.name} />
+            {module.video ? (
+              <video
+                src={`/storage/modules/${module.video}`}
+                alt={module.name}
+                controls
+              />
+            ) : (
+              <img src={`/storage/modules/${module.image}`} alt={module.name} />
+            )}
           </div>
           <div
             className="text-justify"

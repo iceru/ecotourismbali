@@ -54,7 +54,8 @@ Route::post('/member/list',[MemberListController::class, 'filter'])->name('membe
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 
-Route::middleware(['auth', 'role:member'])->group(function () {
+
+Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -123,6 +124,7 @@ Route::middleware(['auth', 'role:superadministrator,administrator'])->prefix('ad
     
     Route::get('/module', [ModuleController::class, 'index'])->name('module.index');
     Route::post('/module/store', [ModuleController::class, 'store'])->name('module.store');
+    Route::get('/module/show/{id}', [ModuleController::class, 'show'])->name('module.show');
     Route::get('/module/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
     Route::post('/module/update/{id}', [ModuleController::class, 'update'])->name('module.update');
     Route::delete('/module/delete/{id}', [ModuleController::class, 'destroy'])->name('module.destroy');

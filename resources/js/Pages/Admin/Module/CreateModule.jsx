@@ -38,7 +38,7 @@ function CreateModule({ module }) {
     'Action',
   ];
 
-  const selectedData = ['title', 'description', 'image', 'resource_person'];
+  const selectedData = ['title', 'description', 'image', 'author'];
 
   const tableButtons = [
     {
@@ -61,6 +61,12 @@ function CreateModule({ module }) {
       link: '/admin/module/edit',
       withId: true,
       color: 'info',
+    },
+    {
+      label: 'show_button',
+      link: '/admin/module/show',
+      withId: true,
+      color: 'show',
     },
     {
       label: 'delete_button',
@@ -149,22 +155,19 @@ function CreateModule({ module }) {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="resource_person"
-                value={t('form_label_author')}
-              />
+              <InputLabel htmlFor="author" value={t('form_label_author')} />
             </div>
             <div className="lg:w-4/5">
               <TextInput
-                id="resource_person"
-                name="resource_person"
-                value={data.resource_person}
+                id="author"
+                name="author"
+                value={data.author}
                 className="block w-full"
                 isFocused={true}
                 rows={8}
-                onChange={e => setData('resource_person', e.target.value)}
+                onChange={e => setData('author', e.target.value)}
               />
-              <span className="text-red-600">{errors.resource_person}</span>
+              <span className="text-red-600">{errors.author}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">

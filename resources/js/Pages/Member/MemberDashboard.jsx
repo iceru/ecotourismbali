@@ -183,12 +183,26 @@ function MemberDashboard({ member }) {
       {member.status !== 'active' && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">
           <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
-          <p className="text-sm">{t('member_locked_text')}</p>
-          <PrimaryButton
-            onClick={() => (member.status !== 'active' ? pay() : null)}
-          >
-            {t('member_locked_button')}
-          </PrimaryButton>
+          {member.total_payment ? (
+            <>
+              <p className="text-sm">{t('member_locked_text')}</p>
+              <PrimaryButton
+                onClick={() => (member.status !== 'active' ? pay() : null)}
+              >
+                {t('member_locked_button')}
+              </PrimaryButton>
+            </>
+          ) : (
+            <>
+              <p className="text-sm">{t('notify_admin_text')}</p>
+              <PrimaryButton
+                onClick={() => (member.status !== 'active' ? pay() : null)}
+                color="secondary"
+              >
+                {t('notify_admin')}
+              </PrimaryButton>
+            </>
+          )}
         </AdminSection>
       )}
     </MemberLayout>

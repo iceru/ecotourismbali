@@ -25,10 +25,15 @@ class MemberModuleController extends Controller
         if($member->status !== 'active') {
             $modules = Module::with('member_module')->take(1)->get();
         }
+        foreach($modules as $module) {
+            foreach($memberModule as $memModule) {
+                if($memModule->module_id === $module->id) {
+                    $module->completed = true;
+                } 
+            }
+        }
         return Inertia::render('Member/Module/ModuleList', [
             'modules' => $modules,
-            'member' => $member,
-            'memberModule' => $memberModule,
         ]);
     }
 
