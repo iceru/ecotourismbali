@@ -33,8 +33,10 @@ export default function Register() {
   return (
     <GuestLayout>
       <Head title="Register" />
-      <div className="grid grid-cols-2 items-center">
-        <AuthImage />
+      <div className="grid lg:grid-cols-2 items-center">
+        <div className="hidden lg:block">
+          <AuthImage />
+        </div>
 
         <div>
           <div className="mb-8">
@@ -63,6 +65,22 @@ export default function Register() {
               />
 
               <InputError message={errors.name} className="mt-2" />
+            </div>
+            <div className="mt-4">
+              <InputLabel htmlFor="business_name" value="Business Name" />
+
+              <TextInput
+                id="business_name"
+                name="business_name"
+                value={data.business_name}
+                className="mt-1 block w-full"
+                autoComplete="business_name"
+                isFocused={true}
+                onChange={e => setData('business_name', e.target.value)}
+                required
+              />
+
+              <InputError message={errors.business_name} className="mt-2" />
             </div>
 
             <div className="mt-4">
