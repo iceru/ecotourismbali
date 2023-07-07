@@ -20,6 +20,10 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u',
         ],
+        'finance' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u',
+        ],
         'member' => [
             'profile' => 'r,u',
         ],

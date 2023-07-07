@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::table('modules', function (Blueprint $table) {
             $table->string('attachment')->nullable()->change();
-            $table->dropColumn('pre_total_question');
-            $table->dropColumn('post_total_question');
         });
     }
 
@@ -25,8 +23,6 @@ return new class extends Migration
     {
         Schema::table('modules', function (Blueprint $table) {
             $table->string('attachment')->change();
-            $table->integer('pre_total_question')->nullable();
-            $table->integer('post_total_question')->nullable();
         });
     }
 };
