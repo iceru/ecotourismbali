@@ -27,14 +27,14 @@ function ModuleList({ modules }) {
                 <div className="lg:w-2/3">
                   <div className="text-xl font-bold mb-3 flex items-center">
                     {module.title}
-                    {module.complete && (
+                    {module.member_module[0] && module.member_module[0].completion === 1 && (
                       <span className="rounded-3xl ml-3 text-xs py-1 px-3 bg-secondary inline-block text-white">
                         {t('finished')}
                       </span>
                     )}
                   </div>
                   <div className="mb-3 text-sm">{module.description}</div>
-                  {module.complete ? (
+                  {module.member_module[0] && module.member_module[0].completion === 1 ? (
                     <PrimaryButton
                       as="link"
                       href={route('member.module.detail', module.id)}
