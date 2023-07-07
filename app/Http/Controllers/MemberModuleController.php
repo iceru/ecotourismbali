@@ -19,11 +19,15 @@ class MemberModuleController extends Controller
     public function index()
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $modules = Module::with('member_module')->get();
+        $modules = Module::with(array('member_module' => function($query) use($member) {
+            $query->where('member_id', $member->id);
+        }))->get();
         $memberModule = MemberModule::where('member_id', $member->id)->get();
 
         if($member->status !== 'active') {
-            $modules = Module::with('member_module')->take(1)->get();
+            $modules = Module::with(array('member_module' => function($query) use($member) {
+                $query->where('member_id', $member->id);
+            }))->take(1)->get();
         }
         foreach($modules as $module) {
             foreach($memberModule as $memModule) {
