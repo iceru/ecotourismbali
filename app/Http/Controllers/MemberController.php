@@ -8,7 +8,9 @@ use App\Models\MemberSlider;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use App\Mail\NotifyPayment;
 
 class MemberController extends Controller
 {
@@ -91,5 +93,14 @@ class MemberController extends Controller
         $member->save();
 
         return Redirect::route('member.profile')->with('success', 'Profile updated successfully.');
+    }
+
+    public function notifyPayment()
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+        // Mail::to('finance@ecotourismbali.com)->send(new NotifyPayment($member));
+        Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
+
+        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
 }

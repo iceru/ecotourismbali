@@ -8,7 +8,7 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { router } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
@@ -18,6 +18,7 @@ function MemberDashboard({ member }) {
   const [payComplete, setPayComplete] = useState(false);
   const [payPending, setPayPending] = useState(false);
   const parsed = queryString.parse(location.search);
+  const { flash } = usePage().props;
 
   const pay = () => {
     let snapToken = sessionStorage.getItem('snapToken');
@@ -73,6 +74,10 @@ function MemberDashboard({ member }) {
     }
   }, []);
 
+  const notifyAdmin = () => {
+    router.post(route('member.notifyPayment'));
+  };
+
   return (
     <MemberLayout>
       {payComplete && (
@@ -83,6 +88,11 @@ function MemberDashboard({ member }) {
       {payPending && (
         <div className="px-4 py-3 bg-yellow-300 rounded-md inline-flex mb-4 transition">
           {t('pay_pending')}
+        </div>
+      )}
+      {flash.success && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl relative mb-3">
+          <span className="inline">{flash.success}</span>
         </div>
       )}
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
@@ -195,10 +205,7 @@ function MemberDashboard({ member }) {
           ) : (
             <>
               <p className="text-sm">{t('notify_admin_text')}</p>
-              <PrimaryButton
-                onClick={() => (member.status !== 'active' ? pay() : null)}
-                color="secondary"
-              >
+              <PrimaryButton onClick={() => notifyAdmin()} color="secondary">
                 {t('notify_admin')}
               </PrimaryButton>
             </>
