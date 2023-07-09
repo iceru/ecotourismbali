@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faChevronDown,
+  faTimes,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
   faInstagramSquare,
@@ -248,8 +253,12 @@ function Navbar() {
 
         <ul className=" gap-8 flex flex-col uppercase text-[15px]">
           <li className="relative group">
-            <span onClick={() => setAbout(!about)} className="cursor-pointer">
+            <span
+              onClick={() => setAbout(!about)}
+              className="cursor-pointer flex items-center"
+            >
               About
+              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
             </span>
             <ul className={`${about ? 'block' : 'hidden'} pt-3 -mb-4`}>
               <li className="py-3 px-5 whitespace-nowrap ">
@@ -279,9 +288,10 @@ function Navbar() {
           <li className="relative group">
             <span
               onClick={() => setPrograms(!programs)}
-              className="cursor-pointer"
+              className="cursor-pointer flex items-center"
             >
               Programs
+              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
             </span>
             <ul className={`${programs ? 'block' : 'hidden'} pt-3 -mb-4`}>
               <li className="py-3 px-5 whitespace-nowrap ">
@@ -312,8 +322,12 @@ function Navbar() {
             </ul>
           </li>
           <li className="relative group">
-            <span onClick={() => setTribe(!tribe)} className="cursor-pointer">
+            <span
+              onClick={() => setTribe(!tribe)}
+              className="cursor-pointer flex items-center"
+            >
               Eco Tourism Tribe
+              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
             </span>
             <ul className={`${tribe ? 'block' : 'hidden'} pt-3 -mb-4`}>
               <li className="py-3 px-5 whitespace-nowrap  flex items-center w-full">
@@ -386,8 +400,12 @@ function Navbar() {
             <li className="">Sustainable Verification</li>
           </a>
           <li className="relative group">
-            <span onClick={() => setBlog(!blog)} className="cursor-pointer">
+            <span
+              onClick={() => setBlog(!blog)}
+              className="cursor-pointer flex items-center"
+            >
               Blog And News
+              <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
             </span>
             <ul className={`${blog ? 'block' : 'hidden'} pt-3 -mb-4`}>
               <li className="py-3 px-5 whitespace-nowrap ">

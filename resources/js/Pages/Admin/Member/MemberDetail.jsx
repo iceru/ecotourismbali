@@ -25,16 +25,16 @@ function MemberIndex() {
   const [edit, setEdit] = useState(false);
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    category: '',
-    program: '',
-    verified_badge: '',
-    total_payment: '',
+    category: member.category_id || '',
+    program: member.program_id || '',
+    verified_badge: member.verified_badge_id || '',
+    total_payment: member.total_payment || '',
   });
 
   const submit = e => {
     e.preventDefault();
 
-    post(route('member.update', member.id), {
+    post(route('admin.member.update', member.id), {
       onSuccess: () => {
         reset();
         setEdit(false);
@@ -113,15 +113,13 @@ function MemberIndex() {
                 name="total_payment"
                 value={data.total_payment}
                 options={total_payments}
-                labelData="name"
                 placeholder="select_total_payment"
-                valueData="id"
                 className="lg:w-3/4"
                 onChange={e => setData('total_payment', e.target.value)}
               />
             </div>
           ) : (
-            items('total_payment', member?.total_payment?.name)
+            items('total_payment', member?.total_payment)
           )}
           {items('email', member.user.email)}
           {items('address', member?.address)}

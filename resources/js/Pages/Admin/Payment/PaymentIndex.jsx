@@ -2,7 +2,6 @@ import AdminSection from '@/Components/AdminSection';
 import AdminLayout from '@/Layouts/AdminLayout';
 import TitleSection from '../Components/TitleSection';
 import Table from '@/Components/Table';
-import { isEmpty } from 'lodash';
 
 function PaymentIndex({ payments }) {
   const header = ['Order Id', 'Status', 'Payment Type', 'Member ID', 'Amount'];

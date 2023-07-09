@@ -9,7 +9,7 @@ import { router } from '@inertiajs/react';
 
 function ModuleList({ modules }) {
   const { t } = useTranslation();
-  console.log(modules[0].completed);
+
   return (
     <MemberLayout>
       <AdminSection>
