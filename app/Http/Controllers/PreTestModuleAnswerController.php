@@ -15,10 +15,15 @@ class PreTestModuleAnswerController extends Controller
 {
     public function index($id)
     {
+        $member = Member::where('user_id', Auth::id())->first();
+        $module = Module::where('id', $id)->with(array('member_module' => function($query) use($member) {
+            $query->where('member_id', $member->id);
+        }))->firstOrFail();
+        
         return Inertia::render('Member/Module/ModulePreTest', [
-            'module' => Module::where('id', $id)->firstOrFail(),
+            'module' => $module,
             'pre_test' => PreTestQuestion::where('module_id', $id)->with('pre_test_option')->get(),
-            'member' => Member::where('user_id', Auth::id())->first(),
+            'member' => $member,
         ]);
     }
 

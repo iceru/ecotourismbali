@@ -58,6 +58,7 @@ function MemberList({ programs, categories, badges, members }) {
 
   return (
     <Guest>
+      <Head title="Member List" />
       <h1 className="font-bold text-2xl lg:text-3xl mb-6 lg:mb-10">
         {t('list_of_members')}
       </h1>

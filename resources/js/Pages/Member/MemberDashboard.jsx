@@ -20,44 +20,23 @@ function MemberDashboard({ member }) {
   const parsed = queryString.parse(location.search);
   const { flash } = usePage().props;
 
+  const payCompleteStorage = localStorage.getItem('paid');
   const pay = () => {
     let snapToken = sessionStorage.getItem('snapToken');
 
-    if (!snapToken) {
-      axios.post(route('member_payment.new_payment'), {}).then(function (res) {
-        snapToken = res.data;
-        sessionStorage.setItem('snapToken', res.data);
-        snap.pay(snapToken, {
-          onSuccess: function (result) {
-            setPayComplete(true);
-            setPayPending(false);
-            sessionStorage.clear('snapToken');
-            router.visit('/member/dashboard?newPayment=true');
-          },
-          onPending: function (result) {
-            setPayPending(true);
-          },
-          onError: function (result) {
-            setPayPending(false);
-            sessionStorage.clear('snapToken');
-          },
-          onClose: function () {
-            setPayPending(true);
-          },
-        });
-      });
-    } else {
+    const snapInit = snapToken => {
       snap.pay(snapToken, {
-        onSuccess: function (result) {
+        onSuccess: function () {
           setPayComplete(true);
           setPayPending(false);
           sessionStorage.clear('snapToken');
+          localStorage.setItem('paid', true);
           router.visit('/member/dashboard?newPayment=true');
         },
-        onPending: function (result) {
+        onPending: function () {
           setPayPending(true);
         },
-        onError: function (result) {
+        onError: function () {
           setPayPending(false);
           sessionStorage.clear('snapToken');
         },
@@ -65,6 +44,14 @@ function MemberDashboard({ member }) {
           setPayPending(true);
         },
       });
+    };
+    if (!snapToken) {
+      axios.post(route('member_payment.new_payment'), {}).then(function (res) {
+        sessionStorage.setItem('snapToken', res.data);
+        snapInit(res.data);
+      });
+    } else {
+      snapInit(snapToken);
     }
   };
 
@@ -80,11 +67,11 @@ function MemberDashboard({ member }) {
 
   return (
     <MemberLayout>
-      {payComplete && (
+      {payComplete || payCompleteStorage ? (
         <div className="px-4 py-3 bg-primary text-white rounded-md inline-flex mb-4">
           {t('pay_complete')}
         </div>
-      )}
+      ) : null}
       {payPending && (
         <div className="px-4 py-3 bg-yellow-300 rounded-md inline-flex mb-4 transition">
           {t('pay_pending')}

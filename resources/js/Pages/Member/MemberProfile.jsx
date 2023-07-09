@@ -16,6 +16,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 
 import noImage from '../../../images/no-image.jpg';
 import { lowerCase } from 'lodash';
+import { badgeColor } from '@/Helper/BadgeColor';
 
 function MemberProfile({ member, scores, lastSession }) {
   const { t } = useTranslation();
@@ -30,7 +31,6 @@ function MemberProfile({ member, scores, lastSession }) {
     slidesToScroll: 1,
   };
 
-  console.log(member);
   return (
     <MemberLayout>
       <AdminSection>
@@ -148,19 +148,24 @@ function MemberProfile({ member, scores, lastSession }) {
           <div className="lg:w-1/5">
             {member.badge ? (
               <div>
-                <div className="flex flex-col items-center text-primary uppercase mb-1">
+                <div className="flex flex-col items-center  uppercase mb-1">
                   <div>
                     <img
                       className="max-h-[120px]"
                       src={'/storage/badges/' + member.badge.image}
                     />
                   </div>
-                  <div className="font-bold mt-1">
+                  <div
+                    className={`font-bold mt-1 text-center ${badgeColor(
+                      member.badge.name,
+                      'text'
+                    )}`}
+                  >
                     {member.badge.name} Badge
                   </div>
                 </div>
                 {lastSession && (
-                  <div className="text-center text-gray-500  text-xs mb-3">
+                  <div className="text-center text-gray-500 text-xs mb-3">
                     <span className="font-bold">{lastSession.total_score}</span>
                     &nbsp;
                     <span className=" uppercase">Points</span>
