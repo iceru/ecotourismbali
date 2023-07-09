@@ -9,6 +9,7 @@ use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\VerifiedBadge;
+use App\Models\MemberAssessment;
 use App\Models\AssessmentSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
@@ -60,6 +61,8 @@ class AdminMemberController extends Controller
 
         $remaining = 2 - $attempt;
         $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
+
+        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
             
         if($lastSession) {
             $dateAssessment = $lastSession->created_at->addYears(1);
@@ -74,6 +77,8 @@ class AdminMemberController extends Controller
             'verified_badges' => VerifiedBadge::all(),
             'remaining' => $remaining,
             'dateAssessment' => $dateAssessment,
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession,
         ]);
     }
 

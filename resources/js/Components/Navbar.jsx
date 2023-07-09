@@ -203,7 +203,10 @@ function Navbar() {
                 </div>
                 <ul className="hidden absolute top-2 pt-8 group-hover:block hover:block">
                   <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
-                    <Link href={route('member.dashboard')}>
+                    <Link
+                      href={route('member.dashboard')}
+                      className="text-left"
+                    >
                       {t('member_dashboard')}
                     </Link>
                   </li>
@@ -212,7 +215,7 @@ function Navbar() {
                     method="post"
                     as="button"
                     type="button"
-                    className="w-full"
+                    className="w-full text-left"
                   >
                     <li className="py-3 px-5 whitespace-nowrap hover:bg-red-600 hover:text-white text-red-600 bg-white cursor-pointer">
                       {t('logout')}

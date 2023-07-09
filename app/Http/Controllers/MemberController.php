@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Member;
+use App\Mail\NotifyPayment;
 use App\Models\MemberSlider;
 use Illuminate\Http\Request;
+use App\Models\MemberAssessment;
+use App\Models\AssessmentSession;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
-use App\Mail\NotifyPayment;
 
 class MemberController extends Controller
 {
@@ -32,9 +34,15 @@ class MemberController extends Controller
 
     public function profile()
     {
+        $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
+        $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
+
+        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
         return Inertia::render('Member/MemberProfile', [
-            'member' => Member::where('user_id', Auth::id())->with('member_slider')->first(),
+            'member' => $member,
             'user' => User::find(Auth::id()),
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession,
         ]);
     }
 

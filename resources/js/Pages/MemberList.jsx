@@ -6,6 +6,7 @@ import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Link, router } from '@inertiajs/react';
+import { badgeColor } from '@/Helper/BadgeColor';
 
 function MemberList({ programs, categories, badges, members }) {
   const sorts = [
@@ -60,7 +61,7 @@ function MemberList({ programs, categories, badges, members }) {
       <h1 className="font-bold text-2xl lg:text-3xl mb-6 lg:mb-10">
         {t('list_of_members')}
       </h1>
-      <div className="flex flex-wrap justify-between mb-10">
+      <div className="flex flex-wrap justify-between mb-6 pb-6 border-b">
         <div className="mb-6 lg:mb-0 lg:w-3/4 lg:pr-4">
           <div className="font-bold mb-2 text-lg">{t('filter')}</div>
           <div className="flex flex-wrap lg:flex-nowrap">
@@ -146,13 +147,17 @@ function MemberList({ programs, categories, badges, members }) {
             })}
           </ul>
         </div>
-        <div className="lg:w-5/6 grid lg:grid-cols-3 gap-4">
+        <div className="lg:w-5/6 grid lg:grid-cols-3 md:grid-cols-2 gap-4">
           {members.length > 0 ? (
             members?.map(member => {
               return (
                 <div className="border rounded-2xl p-4 h-fit">
                   {member.badge ? (
-                    <div className="rounded-bl-2xl bg-yellow-600 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right flex items-center">
+                    <div
+                      className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right items-center
+                    ${badgeColor(member.badge.name)}
+                    `}
+                    >
                       <div>
                         <img
                           src={'/storage/badges/' + member.badge?.image}
@@ -163,7 +168,7 @@ function MemberList({ programs, categories, badges, members }) {
                       <span>{member.badge?.name}</span>
                     </div>
                   ) : (
-                    <div className="rounded-bl-2xl bg-slate-400 text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
+                    <div className="rounded-bl-2xl rounded-tr-2xl bg-gray-100  px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
                       <div>{t('not_verified')}</div>
                     </div>
                   )}

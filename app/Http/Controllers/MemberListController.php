@@ -8,6 +8,8 @@ use App\Models\Member;
 use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\MemberAssessment;
+use App\Models\AssessmentSession;
 
 class MemberListController extends Controller
 {
@@ -23,8 +25,13 @@ class MemberListController extends Controller
 
     public function detail($id)
     {
+        $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
+        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
+        
         return Inertia::render('MemberDetail', [
-            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program', 'badge')->firstOrFail(),
+            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail(),
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession
         ]);
     }
 
