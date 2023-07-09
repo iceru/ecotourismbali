@@ -40,6 +40,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if($request->subscribed) {
+            Newsletter::subscribe($request->email);
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -56,10 +60,6 @@ class RegisteredUserController extends Controller
             $member->business_name = $request->business_name;
             $member->subscribed = $request->subscribed;
             $member->save();
-        }
-
-        if($request->subscribed) {
-            Newsletter::subscribe($request->email);
         }
 
         Auth::login($user);
