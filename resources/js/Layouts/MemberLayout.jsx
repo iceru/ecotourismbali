@@ -22,7 +22,7 @@ import { useMediaQuery } from 'react-responsive';
 function MemberLayout({ children, state }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
-  const { auth, member } = usePage().props;
+  const { member } = usePage().props;
 
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
@@ -65,8 +65,8 @@ function MemberLayout({ children, state }) {
               )}
             </div>
             <div>
-              <h3 className="font-bold text-lg">{member.business_name}</h3>
-              {member.status === 'active' && (
+              <h3 className="font-bold text-lg">{member?.business_name}</h3>
+              {member?.status === 'active' && (
                 <p className="text-sm mt-1 font-semibold text-primary">
                   {t('verified_member')}
                 </p>
