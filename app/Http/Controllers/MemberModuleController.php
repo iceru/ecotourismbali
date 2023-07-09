@@ -94,7 +94,7 @@ class MemberModuleController extends Controller
             }
         }
 
-        $memberModule = MemberModule::firstOrNew([
+        $memberModule = MemberModule::with('module')->firstOrNew([
             'member_id' => $member->id,
             'module_id' => $id
         ]);
@@ -106,10 +106,11 @@ class MemberModuleController extends Controller
         $memberModule->module_id = $id;
         $memberModule->save();
 
+        $module = Module::where('id', $id)->first();
+        
         return Inertia::render('Member/Module/ModuleResult', [
-            'totalPostPoint' => $totalPostPoint,
-            'totalPrePoint' => $totalPrePoint,
             'memberModule' => $memberModule,
+            'module' => $module,
         ]);
     }
 }

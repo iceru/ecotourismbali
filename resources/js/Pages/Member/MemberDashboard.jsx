@@ -13,8 +13,9 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
 import { badgeColor } from '@/Helper/BadgeColor';
+import { lowerCase } from 'lodash';
 
-function MemberDashboard({ member }) {
+function MemberDashboard({ member, scores, lastSession }) {
   const { t } = useTranslation();
   const [payComplete, setPayComplete] = useState(false);
   const [payPending, setPayPending] = useState(false);
@@ -130,8 +131,8 @@ function MemberDashboard({ member }) {
                   {t('no_assessment')}
                 </h2>
               )}
-              <div className="flex items-center">
-                {member && member.badge && (
+              {member && member.badge ? (
+                <div className="flex items-center">
                   <div className="flex flex-col items-center mr-4 uppercase mb-1">
                     <div>
                       <img
@@ -148,7 +149,30 @@ function MemberDashboard({ member }) {
                       {member.badge.name} Badge
                     </div>
                   </div>
-                )}
+                  <div className="ml-2">
+                    {lastSession && (
+                      <div className=" mb-3">
+                        <span className="font-bold">
+                          {lastSession.total_score}
+                        </span>
+                        &nbsp;
+                        <span className=" uppercase">Points</span>
+                      </div>
+                    )}
+                    {scores?.map(score => {
+                      return (
+                        <div className="flex justify-center text-gray-500 text-sm mb-1">
+                          <div className="capitalize">
+                            {lowerCase(score?.assessment?.title).slice(0, 11)}
+                          </div>
+                          <div className="mx-1">-</div>
+                          <div>{score?.score}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
                 <div className="grid gap-4">
                   <PrimaryButton color="lightPrimary">
                     {t('start_assessment')}
@@ -162,7 +186,7 @@ function MemberDashboard({ member }) {
                     <FontAwesomeIcon icon={faBook} className="ml-2" />
                   </PrimaryButton>
                 </div>
-              </div>
+              )}
             </>
           ) : (
             <div>

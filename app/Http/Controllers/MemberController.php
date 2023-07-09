@@ -18,9 +18,18 @@ class MemberController extends Controller
 {
     public function index()
     {
+        $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
+
+        $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
+        $memberAssessments = null;
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+        }
         return Inertia::render('Member/MemberDashboard', [
-            'member' => Member::where('user_id', Auth::id())->with('badge')->first(),
+            'member' => $member,
             'user' => User::find(Auth::id()),
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession,
         ]);
     }
 

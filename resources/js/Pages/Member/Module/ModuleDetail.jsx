@@ -52,7 +52,7 @@ function ModuleDetail({ module }) {
             <PrimaryButton
               as="link"
               href={route('member.module.post-test', module.id)}
-              className="flex justify-center"
+              className="flex justify-center mt-6"
             >
               {t('start_post_test')}
             </PrimaryButton>
