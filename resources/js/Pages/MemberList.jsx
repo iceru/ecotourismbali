@@ -133,6 +133,14 @@ function MemberList({ programs, categories, badges, members }) {
       <div className="flex flex-wrap">
         <div className="sidebar w-full lg:w-1/6">
           <ul className="text-gray-600 font-light flex lg:block whitespace-nowrap overflow-auto gap-4 mb-6 lg:mb-0 pb-4">
+            <li
+              className={`cursor-pointer lg:mb-6 ${
+                category === 'all' ? 'font-bold text-primary' : ''
+              }`}
+              onClick={() => setCategory('all')}
+            >
+              {t('all')}
+            </li>
             {categories?.map(cat => {
               return (
                 <li
@@ -156,7 +164,7 @@ function MemberList({ programs, categories, badges, members }) {
                   {member.badge ? (
                     <div
                       className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
-                      -mr-4 w-fit float-right items-center bg-yellow-500 bg-slate-500 bg-yellow-700 
+                      -mr-4 w-fit float-right items-center  
                     ${badgeColor(member.badge.name)}
                     `}
                     >

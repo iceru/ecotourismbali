@@ -109,7 +109,7 @@ function MemberList({ member, lastSession, scores }) {
                 />
               </div>
               <div
-                className={`font-bold mt-1 text-yellow-500 text-yellow-700 text-slate-500 ${badgeColor(
+                className={`font-bold mt-1 ${badgeColor(
                   member.badge.name,
                   'text'
                 )}`}
@@ -128,7 +128,7 @@ function MemberList({ member, lastSession, scores }) {
                   />
                 </div>
                 <div
-                  className={`font-bold mt-1 text-yellow-500 text-yellow-700 text-slate-500 ${badgeColor(
+                  className={`font-bold mt-1 ${badgeColor(
                     member.badge.name,
                     'text'
                   )}`}

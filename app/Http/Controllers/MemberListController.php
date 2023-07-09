@@ -42,7 +42,7 @@ class MemberListController extends Controller
         $member = Member::where('business_name', '!=', '');
         $category = Category::where('id', $request->category)->first();
 
-        if($request->category && $category->name !== 'All') {
+        if($request->category && $request->category !== 'all') {
             $member = $member->where('category_id', $request->category);
         }
 
