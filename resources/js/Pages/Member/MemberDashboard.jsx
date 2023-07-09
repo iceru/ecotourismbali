@@ -120,7 +120,9 @@ function MemberDashboard({ member, scores, lastSession }) {
                   {t('your_assessment')}
                   <span
                     className={
-                      badgeColor(member.badge.name, 'text') + ' ml-1.5'
+                      'text-yellow-500 text-yellow-700 text-slate-500 ' +
+                      badgeColor(member.badge.name, 'text') +
+                      ' ml-1.5'
                     }
                   >
                     {member.badge.name}
@@ -141,7 +143,7 @@ function MemberDashboard({ member, scores, lastSession }) {
                       />
                     </div>
                     <div
-                      className={`font-bold mt-1 text-center text-primary whitespace-nowrap  ${badgeColor(
+                      className={`font-bold mt-1 text-center whitespace-nowrap text-yellow-500 text-yellow-700 text-slate-500 ${badgeColor(
                         member.badge.name,
                         'text'
                       )}`}

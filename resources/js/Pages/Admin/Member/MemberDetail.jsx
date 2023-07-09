@@ -199,7 +199,7 @@ function MemberIndex() {
                   />
                 </div>
                 <div
-                  className={`font-bold mt-1 text-center ${badgeColor(
+                  className={`font-bold mt-1 text-center text-yellow-500 text-yellow-700 text-slate-500 ${badgeColor(
                     member.badge.name,
                     'text'
                   )}`}
@@ -218,7 +218,7 @@ function MemberIndex() {
                     />
                   </div>
                   <div
-                    className={`font-bold mt-1 ${badgeColor(
+                    className={`font-bold mt-1 text-yellow-500 text-yellow-700 text-slate-500 ${badgeColor(
                       member.badge.name,
                       'text'
                     )}`}
@@ -246,7 +246,7 @@ function MemberIndex() {
                 })}
               </div>
             ) : (
-              <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold">
+              <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold inline-block">
                 No Badge
               </div>
             )}

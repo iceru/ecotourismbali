@@ -46,7 +46,7 @@ function AssessmentResult({ session, member }) {
                       <div>
                         <div
                           className={
-                            'font-bold  text-2xl ' +
+                            'font-bold  text-2xl text-yellow-500 text-yellow-700 text-slate-500 ' +
                             badgeColor(member.badge.name, 'text')
                           }
                         >

@@ -25,9 +25,11 @@ class MemberListController extends Controller
 
     public function detail($id)
     {
+        $memberAssessments = null;
         $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
-        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
-        
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
+        }
         return Inertia::render('MemberDetail', [
             'member' => Member::where('id', $id)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail(),
             'scores' => $memberAssessments,

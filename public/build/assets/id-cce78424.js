@@ -1,1 +1,0 @@
-import{j as a}from"./app-ce659c54.js";function i({children:s,className:n=""}){return a("div",{className:`bg-white drop-shadow-admin p-6 rounded-2xl ${n}`,children:s})}const e="/build/assets/en-a5b1a8df.png",o="/build/assets/id-f9148931.png";export{i as A,e,o as i};

@@ -155,7 +155,8 @@ function MemberList({ programs, categories, badges, members }) {
                 <div className="border rounded-2xl p-4 h-fit">
                   {member.badge ? (
                     <div
-                      className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right items-center
+                      className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
+                      -mr-4 w-fit float-right items-center bg-yellow-500 bg-slate-500 bg-yellow-700 
                     ${badgeColor(member.badge.name)}
                     `}
                     >

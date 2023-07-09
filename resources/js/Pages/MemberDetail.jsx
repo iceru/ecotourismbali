@@ -76,20 +76,24 @@ function MemberList({ member, lastSession, scores }) {
           </section>
           <section className="mb-12">
             <div className="grid grid-cols-2 gap-6 ">
-              <div className="flex items-center justify-end">
-                <FontAwesomeIcon
-                  icon={faHome}
-                  className="text-primary mr-2 mt-0.5"
-                />
-                {member?.address}
-              </div>
-              <div className="flex items-center">
-                <FontAwesomeIcon
-                  icon={faGlobe}
-                  className="text-primary mr-2 mt-0.5"
-                />
-                {member?.website}
-              </div>
+              {member?.address && (
+                <div className="flex items-center justify-end">
+                  <FontAwesomeIcon
+                    icon={faHome}
+                    className="text-primary mr-2 mt-0.5"
+                  />
+                  {member?.address}
+                </div>
+              )}
+              {member?.website && (
+                <div className="flex items-center">
+                  <FontAwesomeIcon
+                    icon={faGlobe}
+                    className="text-primary mr-2 mt-0.5"
+                  />
+                  {member?.website}
+                </div>
+              )}
             </div>
           </section>
           <section className="text-justify">{member?.description}</section>
@@ -105,7 +109,7 @@ function MemberList({ member, lastSession, scores }) {
                 />
               </div>
               <div
-                className={`font-bold mt-1 ${badgeColor(
+                className={`font-bold mt-1 text-yellow-500 text-yellow-700 text-slate-500 ${badgeColor(
                   member.badge.name,
                   'text'
                 )}`}
@@ -124,7 +128,7 @@ function MemberList({ member, lastSession, scores }) {
                   />
                 </div>
                 <div
-                  className={`font-bold mt-1 ${badgeColor(
+                  className={`font-bold mt-1 text-yellow-500 text-yellow-700 text-slate-500 ${badgeColor(
                     member.badge.name,
                     'text'
                   )}`}
@@ -152,7 +156,7 @@ function MemberList({ member, lastSession, scores }) {
               })}
             </div>
           ) : (
-            <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold">
+            <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold inline-block">
               No Badge
             </div>
           )}

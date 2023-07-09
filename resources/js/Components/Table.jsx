@@ -93,8 +93,6 @@ export default function Table({
                                 }}
                                 className="descOverflow"
                               ></div>
-                            ) : customData?.selected === column ? (
-                              customData?.data()
                             ) : item[column] ? (
                               item[column]
                             ) : (
