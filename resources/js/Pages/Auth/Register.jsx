@@ -14,6 +14,7 @@ export default function Register() {
     email: '',
     password: '',
     password_confirmation: '',
+    subscribed: true,
   });
 
   const { t } = useTranslation();
@@ -29,7 +30,6 @@ export default function Register() {
 
     post(route('register'));
   };
-
   return (
     <GuestLayout>
       <Head title="Register" />
@@ -63,6 +63,23 @@ export default function Register() {
               />
 
               <InputError message={errors.name} className="mt-2" />
+            </div>
+
+            <div className="mt-4">
+              <InputLabel htmlFor="business_name" value="Business Name" />
+
+              <TextInput
+                id="business_name"
+                name="business_name"
+                value={data.business_name}
+                className="mt-1 block w-full"
+                autoComplete="business_name"
+                isFocused={true}
+                onChange={e => setData('business_name', e.target.value)}
+                required
+              />
+
+              <InputError message={errors.business_name} className="mt-2" />
             </div>
 
             <div className="mt-4">
@@ -120,6 +137,24 @@ export default function Register() {
                 message={errors.password_confirmation}
                 className="mt-2"
               />
+            </div>
+
+            <div className="mt-4 flex items-center">
+              <input
+                type="checkbox"
+                id="subscribed"
+                name="subscribed"
+                value={data.subscribed}
+                checked={data.subscribed}
+                className="mr-2 mt-1"
+                onChange={e => setData('subscribed', !data.subscribed)}
+              />
+              <InputLabel
+                htmlFor="subscribed"
+                value={t('subscribe_checkbox')}
+              />
+
+              <InputError message={errors.subscribed} className="mt-2" />
             </div>
 
             <div className="flex items-center justify-between mt-6">
