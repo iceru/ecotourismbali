@@ -171,14 +171,14 @@ function MemberProfile({ member, scores, lastSession }) {
                     <span className=" uppercase">Points</span>
                   </div>
                 )}
-                {scores.map(score => {
+                {scores?.map(score => {
                   return (
                     <div className="flex justify-center text-gray-500 text-xs mb-1">
                       <div className="capitalize">
-                        {lowerCase(score.assessment.title).slice(0, 11)}
+                        {lowerCase(score?.assessment?.title).slice(0, 11)}
                       </div>
                       <div className="mx-1">-</div>
-                      <div>{score.score}</div>
+                      <div>{score?.score}</div>
                     </div>
                   );
                 })}

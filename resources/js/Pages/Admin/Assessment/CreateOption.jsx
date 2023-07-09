@@ -15,6 +15,7 @@ function CreateOption({ assessment_option, assessment_question }) {
 
   const { data, setData, post, processing, errors, reset } = useForm({
     option: '',
+    option_en: '',
     point: '',
     option_no: '',
   });
@@ -84,6 +85,7 @@ function CreateOption({ assessment_option, assessment_question }) {
                 isFocused={true}
                 onChange={e => setData('option_no', e.target.value)}
               />
+              <span className="text-red-600">{errors.option_no}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -100,6 +102,27 @@ function CreateOption({ assessment_option, assessment_question }) {
                 isFocused={true}
                 onChange={e => setData('option', e.target.value)}
               />
+              <span className="text-red-600">{errors.option}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="option_en"
+                value={t('form_label_option_en')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="option_en"
+                name="option_en"
+                type="text"
+                value={data.option_en}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('option_en', e.target.value)}
+              />
+              <span className="text-red-600">{errors.option_en}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -116,6 +139,7 @@ function CreateOption({ assessment_option, assessment_question }) {
                 isFocused={true}
                 onChange={e => setData('point', e.target.value)}
               />
+              <span className="text-red-600">{errors.point}</span>
             </div>
           </div>
           <PrimaryButton

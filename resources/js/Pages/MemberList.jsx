@@ -5,7 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Link, router } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { badgeColor } from '@/Helper/BadgeColor';
 
 function MemberList({ programs, categories, badges, members }) {

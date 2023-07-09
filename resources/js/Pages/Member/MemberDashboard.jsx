@@ -12,6 +12,7 @@ import { router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
+import { badgeColor } from '@/Helper/BadgeColor';
 
 function MemberDashboard({ member }) {
   const { t } = useTranslation();
@@ -114,8 +115,15 @@ function MemberDashboard({ member }) {
           {member.status === 'active' ? (
             <>
               {member && member.badge ? (
-                <h2 className="font-bold text-[20px] mb-4">
+                <h2 className={'font-bold text-[20px] mb-4'}>
                   {t('your_assessment')}
+                  <span
+                    className={
+                      badgeColor(member.badge.name, 'text') + ' ml-1.5'
+                    }
+                  >
+                    {member.badge.name}
+                  </span>
                 </h2>
               ) : (
                 <h2 className="font-bold text-[20px] mb-4">
@@ -124,8 +132,21 @@ function MemberDashboard({ member }) {
               )}
               <div className="flex items-center">
                 {member && member.badge && (
-                  <div>
-                    <img src={member.badge.image} alt={member.badge.name} />
+                  <div className="flex flex-col items-center mr-4 uppercase mb-1">
+                    <div>
+                      <img
+                        className="max-h-[120px]"
+                        src={'/storage/badges/' + member.badge.image}
+                      />
+                    </div>
+                    <div
+                      className={`font-bold mt-1 text-center text-primary whitespace-nowrap  ${badgeColor(
+                        member.badge.name,
+                        'text'
+                      )}`}
+                    >
+                      {member.badge.name} Badge
+                    </div>
                   </div>
                 )}
                 <div className="grid gap-4">
@@ -136,7 +157,7 @@ function MemberDashboard({ member }) {
                       className="ml-2"
                     />
                   </PrimaryButton>
-                  <PrimaryButton color="lightSecondary">
+                  <PrimaryButton color="lightSecondary" className="text-left">
                     {t('learn_more_assessment')}
                     <FontAwesomeIcon icon={faBook} className="ml-2" />
                   </PrimaryButton>

@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -30,6 +31,7 @@ module.exports = {
         lightSecondary: '#D8E8CC',
         lightPrimary: '#D2E0E2',
         etbGray: '#353535',
+        ...colors
       },
       dropShadow: {
         'admin': '0px 0px 8px 2px rgba(0, 0, 0, 0.05)'

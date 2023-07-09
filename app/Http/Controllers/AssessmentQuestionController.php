@@ -24,13 +24,17 @@ class AssessmentQuestionController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'title_en' => 'required',
             'question' => 'required',
+            'question_en' => 'required',
             'type' => 'required',
             'question_no' => 'required|integer',
         ]);
 
         $assessment_question->title = $request->title;
+        $assessment_question->title_en = $request->title_en;
         $assessment_question->question = $request->question;
+        $assessment_question->question_en = $request->question_en;
         $assessment_question->question_no = $request->question_no;
         $assessment_question->type = $request->type;
 
@@ -59,13 +63,17 @@ class AssessmentQuestionController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'title_en' => 'required',
             'question' => 'required',
+            'question_en' => 'required',
             'type' => 'required',
             'question_no' => 'required|integer',
         ]);
 
         $assessment_question->title = $request->title;
+        $assessment_question->title_en = $request->title_en;
         $assessment_question->question = $request->question;
+        $assessment_question->question_en = $request->question_en;
         $assessment_question->question_no = $request->question_no;
         $assessment_question->type = $request->type;
 

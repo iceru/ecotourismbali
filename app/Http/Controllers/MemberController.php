@@ -19,7 +19,7 @@ class MemberController extends Controller
     public function index()
     {
         return Inertia::render('Member/MemberDashboard', [
-            'member' => Member::where('user_id', Auth::id())->first(),
+            'member' => Member::where('user_id', Auth::id())->with('badge')->first(),
             'user' => User::find(Auth::id()),
         ]);
     }
@@ -35,9 +35,12 @@ class MemberController extends Controller
     public function profile()
     {
         $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
-        $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
+        $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
+        $memberAssessments = null;
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+        }
 
-        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
         return Inertia::render('Member/MemberProfile', [
             'member' => $member,
             'user' => User::find(Auth::id()),

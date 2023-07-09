@@ -102,6 +102,7 @@
   "form_label_action": "Action",
   "form_label_option": "Option",
   "form_label_option_no": "Option No.",
+  "form_label_business_type": "Business Type",
   "form_label_point": "Point",
   "form_label_video": "Video",
   "form_label_attachment": "Attachment",
@@ -109,6 +110,11 @@
   "form_label_content": "Content",
   "form_label_answer": "Answer",
   "form_label_type": "Type",
+  "form_label_title_en": "Title in English",
+  "form_label_description_en": "Description in English",
+  "form_label_image_en": "Image in English",
+  "form_label_question_en": "Question in English",
+  "form_label_option_en": "Option in English",
 
   "add_pre_test": "Add Pre Test Question",
   "add_post_test": "Add Post Test Question",
@@ -142,7 +148,7 @@
   "label_business_type_id": "What is your type of business?",
 
   "no_assessment": "You haven't done a Self Assessment",
-  "your_assessment": "Your Self Assessment Badge is {{ badge }}",
+  "your_assessment": "Your Self Assessment Badge is",
   "start_assessment": "Take a Self Assessment",
   "learn_more_assessment": "Learn More about Self Assessment",
 
@@ -209,7 +215,8 @@
 
   "admin_login": "Admin Login",
 
-  "congrats_assessment": "Congratulations you finished the Self Assessment",
+  "congrats": "Congratulations!",
+  "finish_assessment": "You completed the Self Assessment",
   "your_assessment_scores": "Your Self Assessment Score is:",
   "back_to_assessment": "Back to Assessment",
   "your_badge_is": "Your Self Assessment Badge is:",
@@ -233,5 +240,7 @@
   "list_of_payments": "List of Payments",
   "notify_admin_text": "Please wait until we confirm your total payment",
   "notify_admin": "Notify Admin",
-  "subscribe_checkbox": "I would like to receive updates, news, and special offers via email."
+  "subscribe_checkbox": "I would like to receive updates, news, and special offers via email.",
+
+  "verified_member": "Verified Member"
 }

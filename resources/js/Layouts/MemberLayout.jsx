@@ -66,6 +66,11 @@ function MemberLayout({ children, state }) {
             </div>
             <div>
               <h3 className="font-bold text-lg">{member.business_name}</h3>
+              {member.status === 'active' && (
+                <p className="text-sm mt-1 font-semibold text-primary">
+                  {t('verified_member')}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -186,12 +191,6 @@ function MemberLayout({ children, state }) {
             </div>
           </div>
           <div className="flex gap-4 items-center justify-between mb-4 lg:mb-0 lg:justify-start w-full lg:w-auto order-1 lg:order-2">
-            <div>
-              <h5>
-                {t('hello')}, <strong>{auth.user.name}</strong>
-              </h5>
-              <div className="text-primary text-sm font-semibold">Member</div>
-            </div>
             <div>
               <PrimaryButton
                 as="link"

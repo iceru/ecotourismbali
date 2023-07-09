@@ -9,10 +9,12 @@ import PrimaryButton from '@/Components/PrimaryButton';
 
 function Assessment({ assessments, session }) {
   const [active, setActive] = useState(0);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { data, setData, post, processing, errors } = useForm();
 
+  const lang = i18n.language;
+  console.log(data);
   const submit = e => {
     e.preventDefault();
 
@@ -20,6 +22,7 @@ function Assessment({ assessments, session }) {
       onSuccess: () => {
         if (assessments.length > active + 1) {
           setActive(active + 1);
+          setData({});
         } else {
           router.post(route('member.assessment.complete', session.id));
         }
@@ -70,14 +73,26 @@ function Assessment({ assessments, session }) {
                 onSubmit={submit}
                 className={`${active === i ? '' : 'hidden'}`}
               >
-                <div className="mb-4">
-                  <img src={`/storage/assessments/${item.image}`} alt="" />
+                <div className="mb-4 flex justify-center">
+                  <img
+                    src={`/storage/assessments/${
+                      lang === 'en' && item.image_en
+                        ? item.image_en
+                        : item.image
+                    }`}
+                    alt=""
+                  />
                 </div>
                 <div className="font-bold mb-3 text-xl text-center">
-                  {item.title}
+                  {lang === 'en' && item.title_en ? item.title_en : item.title}
                 </div>
                 <div
-                  dangerouslySetInnerHTML={{ __html: item.description }}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      lang === 'en' && item.description_en
+                        ? item.description_en
+                        : item.description,
+                  }}
                   className="text-center mb-10"
                 />
                 {item.assessment_question.map((question, i) => {
@@ -85,7 +100,12 @@ function Assessment({ assessments, session }) {
                     <div>
                       <div className="font-bold text-lg">{question.title}</div>
                       <div
-                        dangerouslySetInnerHTML={{ __html: question.question }}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            lang === 'en' && question.question_en
+                              ? question.question_en
+                              : question.question,
+                        }}
                       />
                       <div className="mt-4">
                         {question.assessment_option.map(option => {
@@ -122,7 +142,9 @@ function Assessment({ assessments, session }) {
                                 htmlFor={`option_${option.id}`}
                                 className="w-full"
                               >
-                                {option.option}
+                                {lang === 'en' && option.option_en
+                                  ? option.option_en
+                                  : option.option}
                               </label>
                             </div>
                           );

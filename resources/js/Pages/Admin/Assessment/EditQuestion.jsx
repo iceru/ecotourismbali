@@ -20,8 +20,10 @@ function EditQuestion() {
   const { data, setData, post, processing, errors } = useForm({
     question_no: assess_question.question_no || '',
     title: assess_question.title || '',
+    title_en: assess_question.title_en || '',
     type: assess_question.type || '',
     question: assess_question.question || '',
+    question_en: assess_question.question_en || '',
   });
 
   const submit = e => {
@@ -35,6 +37,12 @@ function EditQuestion() {
   useEffect(() => {
     setData('question', value);
   }, [value]);
+
+  const [valueEn, setValueEn] = useState(assess_question.question_en);
+
+  useEffect(() => {
+    setData('question_en', valueEn);
+  }, [valueEn]);
 
   const types = [
     {
@@ -95,6 +103,23 @@ function EditQuestion() {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="title_en" value={t('form_label_title_en')} />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="title_en"
+                name="title_en"
+                type="text"
+                value={data.title_en}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('title_en', e.target.value)}
+              />
+              <span className="text-red-600">{errors.title_en}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="type" value={t('form_label_type')} />
             </div>
             <div className="lg:w-4/5">
@@ -115,7 +140,19 @@ function EditQuestion() {
             </div>
             <div className="lg:w-4/5">
               <Editor onChange={setValue} value={value} />
-              <span className="text-red-600">{errors.description}</span>
+              <span className="text-red-600">{errors.question}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="question_en"
+                value={t('form_label_question_en')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <Editor onChange={setValueEn} value={valueEn} />
+              <span className="text-red-600">{errors.question_en}</span>
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>
