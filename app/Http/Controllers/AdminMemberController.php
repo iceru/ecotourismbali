@@ -61,7 +61,11 @@ class AdminMemberController extends Controller
         $remaining = 2 - $attempt;
         $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
             
-        $dateAssessment = $lastSession->created_at->addYears(1);
+        if($lastSession) {
+            $dateAssessment = $lastSession->created_at->addYears(1);
+        } else {
+            $dateAssessment = null;
+        }
         
         return Inertia::render('Admin/Member/MemberDetail', [
             'member' =>$member,

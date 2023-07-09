@@ -89,7 +89,7 @@ class MemberAssessmentController extends Controller
         $member->website = $request->website;
         $member->job_title = $request->job_title;
         $member->phone = $request->phone;
-        $member->email = $request->email;
+        $user->email = $request->email;
         $member->business_type_id = $request->business_type_id;
         $member->save();
 
