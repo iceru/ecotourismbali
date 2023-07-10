@@ -90,7 +90,7 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:superadministrator,administrator'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'role:superadministrator|administrator'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     
     Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
