@@ -26,11 +26,13 @@ class AssessmentOptionController extends Controller
         $request->validate([
             'option_no' => 'required',
             'option' => 'required',
+            'option_en' => 'required',
             'point' => 'required|integer',
         ]);
 
         $assessment_option->option_no = $request->option_no;
         $assessment_option->option = $request->option;
+        $assessment_option->option_en = $request->option_en;
         $assessment_option->point = $request->point;
 
         $assessment_question = AssessmentQuestion::find($id);
@@ -59,11 +61,13 @@ class AssessmentOptionController extends Controller
         $request->validate([
             'option_no' => 'required',
             'option' => 'required',
+            'option_en' => 'required',
             'point' => 'required|integer',
         ]);
 
         $assessment_option->option_no = $request->option_no;
         $assessment_option->option = $request->option;
+        $assessment_option->option_en = $request->option_en;
         $assessment_option->point = $request->point;
 
         $assessment_option->save();

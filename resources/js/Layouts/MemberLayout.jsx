@@ -16,12 +16,13 @@ import AdminSection from '@/Components/AdminSection';
 import { useTranslation } from 'react-i18next';
 import enImg from '../../images/en.png';
 import idImg from '../../images/id.png';
+import noImage from '../../images/no-image.jpg';
 import { useMediaQuery } from 'react-responsive';
 
 function MemberLayout({ children, state }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
-  const { auth } = usePage().props;
+  const { member } = usePage().props;
 
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
@@ -35,6 +36,7 @@ function MemberLayout({ children, state }) {
       setLanguage(code);
     }
   }
+
   return (
     <div className="flex bg-lightPrimary p-3 gap-4 lg:p-6 lg:gap-6 min-h-screen bg-opacity-70">
       <Head title="Member" />
@@ -46,7 +48,31 @@ function MemberLayout({ children, state }) {
         }`}
       >
         <div className="logo mb-12">
-          <img src={Logo} alt="Eco Tourism Bali" />
+          <div className="flex items-center mb-10">
+            <div>
+              {member?.image ? (
+                <img
+                  className="w-16 h-16 rounded-full mr-4 object-cover"
+                  src={`/storage/member/images/${member?.image}`}
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="w-16 h-16 rounded-full mr-4"
+                  src={noImage}
+                  alt=""
+                />
+              )}
+            </div>
+            <div>
+              <h3 className="font-bold text-lg">{member?.business_name}</h3>
+              {member?.status === 'active' && (
+                <p className="text-sm mt-1 font-semibold text-primary">
+                  {t('verified_member')}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
         <div
           className="block lg:hidden absolute text-primary right-6 top-6 text-2xl"
@@ -165,12 +191,6 @@ function MemberLayout({ children, state }) {
             </div>
           </div>
           <div className="flex gap-4 items-center justify-between mb-4 lg:mb-0 lg:justify-start w-full lg:w-auto order-1 lg:order-2">
-            <div>
-              <h5>
-                {t('hello')}, <strong>{auth.user.name}</strong>
-              </h5>
-              <div className="text-primary text-sm font-semibold">Member</div>
-            </div>
             <div>
               <PrimaryButton
                 as="link"

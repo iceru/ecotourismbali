@@ -89,7 +89,7 @@ class MemberAssessmentController extends Controller
         $member->website = $request->website;
         $member->job_title = $request->job_title;
         $member->phone = $request->phone;
-        $member->email = $request->email;
+        $user->email = $request->email;
         $member->business_type_id = $request->business_type_id;
         $member->save();
 
@@ -118,8 +118,6 @@ class MemberAssessmentController extends Controller
         $member =  Member::where('user_id', Auth::id())->first();
         $totalPoints = 0;
         foreach ($request->input() as $questionId => $optionId) {
-            
-
             $optionSelected = AssessmentOption::where('id', $optionId)->first();
             if(str_contains($questionId, 'radio')) {
                 $id = explode('.', $questionId);
@@ -133,18 +131,21 @@ class MemberAssessmentController extends Controller
                 $memberAnswer->member_id = $member->id;
                 $memberAnswer->assessment_question_id = $id;
                 $memberAnswer->assessment_option_id = $optionId;
-                $totalPoints = $totalPoints + $optionSelected->point;
                 $memberAnswer->assessment_session_id = $request->session_id;
                 $memberAnswer->save();
+
+                $totalPoints = $totalPoints + $optionSelected->point;
             } else if (str_contains($questionId, 'checkbox')) {
                 $id = explode('.', $questionId);
                 $id = $id[1];
                 foreach ($optionId as $checkId) {
+                    $checkSelected = AssessmentOption::where('id', $checkId)->first();
                     $memberAnswer = MemberAssessmentAnswer::firstOrNew([
                         'member_id' => $member->id,
                         'assessment_question_id' => $id,
                         'assessment_session_id' => $request->session_id,
                     ]);
+                    $totalPoints = $totalPoints + $checkSelected->point;
                     
                     $memberAnswer->member_id = $member->id;
                     $memberAnswer->assessment_question_id = $id;
@@ -153,6 +154,7 @@ class MemberAssessmentController extends Controller
                     $memberAnswer->save();
                 }
             }
+                
         }
 
         $memberAssessment = MemberAssessment::firstOrNew([

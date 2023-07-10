@@ -25,12 +25,16 @@ class AssessmentController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'title_en' => 'required',
             'description' => 'required',
-            'business_type' => 'required',
+            'description_en' => 'required',
+            'business_type_id' => 'required',
             'image' => 'required|image',
+            'image_en' => 'required|image',
         ]);
 
         $filename = null;
+        $imageEn = null;
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->extension();
@@ -38,9 +42,19 @@ class AssessmentController extends Controller
             $request->file('image')->storeAs('public/assessments', $filename);
         }
 
+        
+        if ($request->hasFile('image_en')) {
+            $extension = $request->file('image_en')->extension();
+            $imageEn = $request->title . '_' . time() . '.' . $extension;
+            $request->file('image_en')->storeAs('public/assessments', $imageEn);
+        }
+
         $assessment->title = $request->title;
+        $assessment->title_en = $request->title_en;
         $assessment->description = $request->description;
+        $assessment->description_en = $request->description_en;
         $assessment->image = $filename;
+        $assessment->image_en = $imageEn;
         $assessment->business_type_id = $request->business_type;
         $assessment->save();
 
@@ -61,11 +75,16 @@ class AssessmentController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'title_en' => 'required',
             'description' => 'required',
-            'image' => 'nullable',
+            'description_en' => 'required',
+            'business_type' => 'required',
+            'image' => 'nullable|image',
+            'image_en' => 'nullable|image',
         ]);
 
         $filename = null;
+        $imageEn = null;
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->extension();
@@ -75,11 +94,20 @@ class AssessmentController extends Controller
             $assessment->image = $filename;
         }
 
+        if ($request->hasFile('image_en')) {
+            $extension = $request->file('image_en')->extension();
+            $imageEn = $request->title . '_' . time() . '.' . $extension;
+            $request->file('image_en')->storeAs('public/assessments', $imageEn);
+            $assessment->image_en = $imageEn;
+        }
+
         $assessment->title = $request->title;
+        $assessment->title_en = $request->title_en;
         $assessment->description = $request->description;
+        $assessment->description_en = $request->description_en;
         $assessment->save();
 
-        return Redirect::route('assessment.index');
+        return Redirect::route('assessment.index')->with('success', 'Assessment edited successfully.');
     }
 
     public function destroy(Request $request)

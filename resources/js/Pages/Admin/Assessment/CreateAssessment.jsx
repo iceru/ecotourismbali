@@ -17,8 +17,11 @@ function CreateAssessment({ assessment, business_type }) {
   const { flash } = usePage().props;
   const { data, setData, post, processing, errors, reset } = useForm({
     title: '',
+    title_en: '',
     description: '',
+    description_en: '',
     image: null,
+    image_en: null,
     business_type: null,
   });
 
@@ -70,10 +73,15 @@ function CreateAssessment({ assessment, business_type }) {
   };
 
   const [value, setValue] = useState('');
+  const [valueEn, setValueEn] = useState('');
 
   useEffect(() => {
     setData('description', value);
   }, [value]);
+
+  useEffect(() => {
+    setData('description_en', valueEn);
+  }, [valueEn]);
 
   return (
     <AdminLayout>
@@ -105,6 +113,23 @@ function CreateAssessment({ assessment, business_type }) {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="title_en" value={t('form_label_title_en')} />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="title_en"
+                name="title_en"
+                type="text"
+                value={data.title_en}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('title_en', e.target.value)}
+              />
+              <span className="text-red-600">{errors.title_en}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel
                 htmlFor="description"
                 value={t('form_label_description')}
@@ -113,6 +138,18 @@ function CreateAssessment({ assessment, business_type }) {
             <div className="lg:w-4/5">
               <Editor onChange={setValue} value={value} />
               <span className="text-red-600">{errors.description}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="description_en"
+                value={t('form_label_description_en')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <Editor onChange={setValueEn} value={valueEn} />
+              <span className="text-red-600">{errors.description_en}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
@@ -156,6 +193,21 @@ function CreateAssessment({ assessment, business_type }) {
                 onChange={e => setData('image', e.target.files[0])}
               />
               <span className="text-red-600">{errors.image}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="image_en" value={t('form_label_image_en')} />
+            </div>
+            <div className="lg:w-4/5">
+              <input
+                type="file"
+                name="image_en"
+                id="image_en"
+                className="block"
+                onChange={e => setData('image_en', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.image_en}</span>
             </div>
           </div>
           <PrimaryButton

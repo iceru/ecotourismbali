@@ -4,19 +4,32 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Member;
+use App\Mail\NotifyPayment;
 use App\Models\MemberSlider;
 use Illuminate\Http\Request;
+use App\Models\MemberAssessment;
+use App\Models\AssessmentSession;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class MemberController extends Controller
 {
     public function index()
     {
+        $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
+
+        $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
+        $memberAssessments = null;
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+        }
         return Inertia::render('Member/MemberDashboard', [
-            'member' => Member::where('user_id', Auth::id())->first(),
+            'member' => $member,
             'user' => User::find(Auth::id()),
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession,
         ]);
     }
 
@@ -30,9 +43,18 @@ class MemberController extends Controller
 
     public function profile()
     {
+        $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
+        $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
+        $memberAssessments = null;
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+        }
+
         return Inertia::render('Member/MemberProfile', [
-            'member' => Member::where('user_id', Auth::id())->with('member_slider')->first(),
+            'member' => $member,
             'user' => User::find(Auth::id()),
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession,
         ]);
     }
 
@@ -93,5 +115,14 @@ class MemberController extends Controller
         $member->save();
 
         return Redirect::route('member.profile')->with('success', 'Profile updated successfully.');
+    }
+
+    public function notifyPayment()
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+        // Mail::to('finance@ecotourismbali.com)->send(new NotifyPayment($member));
+        Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
+
+        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
 }

@@ -30,7 +30,6 @@ function CreateModule({ module }) {
 
   const headerTable = [
     'Title',
-    'Description',
     'Image',
     'Author',
     'Post Test',
@@ -38,7 +37,7 @@ function CreateModule({ module }) {
     'Action',
   ];
 
-  const selectedData = ['title', 'description', 'image', 'author'];
+  const selectedData = ['title', 'image', 'author'];
 
   const tableButtons = [
     {
@@ -83,6 +82,7 @@ function CreateModule({ module }) {
     post(route('module.store'), {
       onSuccess: () => {
         reset();
+        setValue();
       },
       onError: error => {
         console.log(error);

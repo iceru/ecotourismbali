@@ -15,10 +15,15 @@ class PostTestModuleAnswerController extends Controller
 {
     public function index($id)
     {
+        $member = Member::where('user_id', Auth::id())->first();
+        $module = Module::where('id', $id)->with(array('member_module' => function($query) use($member) {
+            $query->where('member_id', $member->id);
+        }))->firstOrFail();
+
         return Inertia::render('Member/Module/ModulePostTest', [
-            'module' => Module::where('id', $id)->firstOrFail(),
+            'module' => $module,
             'post_test' => PostTestQuestion::where('module_id', $id)->with('post_test_option')->get(),
-            'member' => Member::where('user_id', Auth::id())->first(),
+            'member' => $member,
         ]);
     }
 

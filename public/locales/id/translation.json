@@ -109,6 +109,11 @@
   "form_label_author": "Penulis",
   "form_label_content": "Konten",
   "form_label_answer": "Jawaban",
+  "form_label_title_en": "Judul B.Inggris",
+  "form_label_description_en": "Deskripsi B.Inggris",
+  "form_label_image_en": "Gambar B.Inggris",
+  "form_label_question_en": "Pertanyaan B.Inggris",
+  "form_label_option_en": "Opsi B.Inggris",
 
   "add_pre_test": "Tambahkan Pertanyaan Pre Test",
   "add_post_test": "Tambahkan Pertanyaan Post Test",
@@ -142,7 +147,7 @@
   "label_business_type_id": "Apa Jenis Bisnis Anda?",
 
   "no_assessment": "Anda belum melakukan Penilaian Mandiri",
-  "your_assessment": "Badge Penilaian Mandiri Anda adalah {{ badge }}",
+  "your_assessment": "Badge Penilaian Mandiri Anda adalah",
   "start_assessment": "Lakukan Penilaian Mandiri Sekarang",
   "learn_more_assessment": "Pelajari lebih lanjut mengenai Penilaian Mandiri",
 
@@ -164,6 +169,7 @@
   "status": "Status",
   "assessment_expire": "Tenggang Waktu Penilaian Mandiri",
   "description": "Deskripsi",
+  "total_payment": "Total Pembayaran",
 
   "filter": "Filter",
   "keyword": "Kata Kunci",
@@ -197,14 +203,17 @@
   "start_post_test": "Mulai Post Test",
 
   "edit_member": "Ubah Detail Member",
+  "close_edit_member": "Tutup Ubah Detail Member",
   "select_category": "Pilih Kategori",
   "select_program": "Pilih Tribe",
   "select_verify_badge": "Pilih Verify Badge",
   "select_badge": "Pilih Badge",
+  "select_total_payment": "Pilih Total Pembayaran",
 
   "admin_login": "Admin Login",
 
-  "congrats_assessment": "Selamat anda telah menyelesaikan Penilaian Mandiri",
+  "congrats": "Selamat!",
+  "finish_assessment": "Anda telah menyelesaikan Penilaian Mandiri",
   "your_assessment_scores": "Skor Penilaian Mandiri Anda adalah:",
   "back_to_assessment": "Kembali Ke Penilaian Mandiri",
   "your_badge_is": "Badge Penilaian Mandiri Anda adalah:",
@@ -220,12 +229,17 @@
 
   "finished": "Selesai",
   "read_material": "Baca Materi Modul",
-  "congrats_module": "Selamat anda telah menyelesaikan Modul",
+  "congrats_module": "Anda telah menyelesaikan Modul - ",
   "member_dashboard": "Member Dashboard",
   "pay_complete": "Pembayaran berhasil. Selamat datang di Membership Eco Tourism Bali!",
   "pay_pending": "Pembayaran masih berjalan. Silahkan selesaikan pembayaran",
 
   "list_of_payments": "Daftar Pembayaran",
   "notify_admin_text": "Mohon tunggu, kami sedang mengkonfirmasi total pembayaran anda",
-  "notify_admin": "Laporkan ke Admin"
+  "notify_admin": "Laporkan ke Admin",
+  "subscribe_checkbox": "Saya ingin menerima pembaruan, berita, dan penawaran khusus melalui email.",
+
+  "verified_member": "Member Terverifikasi",
+  "pre_score": "Skor Pre-Test anda",
+  "post_score": "Skore Post-Test anda"
 }

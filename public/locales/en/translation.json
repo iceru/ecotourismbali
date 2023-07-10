@@ -102,6 +102,7 @@
   "form_label_action": "Action",
   "form_label_option": "Option",
   "form_label_option_no": "Option No.",
+  "form_label_business_type": "Business Type",
   "form_label_point": "Point",
   "form_label_video": "Video",
   "form_label_attachment": "Attachment",
@@ -109,6 +110,11 @@
   "form_label_content": "Content",
   "form_label_answer": "Answer",
   "form_label_type": "Type",
+  "form_label_title_en": "Title in English",
+  "form_label_description_en": "Description in English",
+  "form_label_image_en": "Image in English",
+  "form_label_question_en": "Question in English",
+  "form_label_option_en": "Option in English",
 
   "add_pre_test": "Add Pre Test Question",
   "add_post_test": "Add Post Test Question",
@@ -142,7 +148,7 @@
   "label_business_type_id": "What is your type of business?",
 
   "no_assessment": "You haven't done a Self Assessment",
-  "your_assessment": "Your Self Assessment Badge is {{ badge }}",
+  "your_assessment": "Your Self Assessment Badge is",
   "start_assessment": "Take a Self Assessment",
   "learn_more_assessment": "Learn More about Self Assessment",
 
@@ -164,6 +170,7 @@
   "status": "Status",
   "assessment_expire": "Assessment Expire",
   "description": "Description",
+  "total_payment": "Total Payment",
 
   "filter": "Filter",
   "keyword": "Keyword",
@@ -199,14 +206,17 @@
   "start_post_test": "Start Post Test",
 
   "edit_member": "Edit Member Detail",
+  "close_edit_member": "Close Edit Member Detail",
   "select_category": "Select Category",
   "select_program": "Select Tribe",
   "select_verify_badge": "Select Verify Badge",
   "select_badge": "Select Badge",
+  "select_total_payment": "Select Total Payment",
 
   "admin_login": "Admin Login",
 
-  "congrats_assessment": "Congratulations you finished the Self Assessment",
+  "congrats": "Congratulations!",
+  "finish_assessment": "You completed the Self Assessment",
   "your_assessment_scores": "Your Self Assessment Score is:",
   "back_to_assessment": "Back to Assessment",
   "your_badge_is": "Your Self Assessment Badge is:",
@@ -222,12 +232,17 @@
 
   "finished": "Finished",
   "read_material": "Read Module Material",
-  "congrats_module": "Congratulations you already completed the Module",
+  "congrats_module": "You completed the Module - ",
   "member_dashboard": "Member Dashboard",
   "pay_complete": "Payment is completed. Welcome to Eco Tourism Bali Membership!",
   "pay_pending": "Payment is still on going. Please proceed to finish the payment",
 
   "list_of_payments": "List of Payments",
   "notify_admin_text": "Please wait until we confirm your total payment",
-  "notify_admin": "Notify Admin"
+  "notify_admin": "Notify Admin",
+  "subscribe_checkbox": "I would like to receive updates, news, and special offers via email.",
+
+  "verified_member": "Verified Member",
+  "pre_score": "Your Pre-Test Score",
+  "post_score": "Your Post-Test Score"
 }

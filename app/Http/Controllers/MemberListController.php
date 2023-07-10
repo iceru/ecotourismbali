@@ -8,6 +8,8 @@ use App\Models\Member;
 use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\MemberAssessment;
+use App\Models\AssessmentSession;
 
 class MemberListController extends Controller
 {
@@ -23,8 +25,15 @@ class MemberListController extends Controller
 
     public function detail($id)
     {
+        $memberAssessments = null;
+        $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
+        }
         return Inertia::render('MemberDetail', [
-            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program', 'badge')->firstOrFail(),
+            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail(),
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession
         ]);
     }
 
@@ -33,7 +42,7 @@ class MemberListController extends Controller
         $member = Member::where('business_name', '!=', '');
         $category = Category::where('id', $request->category)->first();
 
-        if($request->category && $category->name !== 'All') {
+        if($request->category && $request->category !== 'all') {
             $member = $member->where('category_id', $request->category);
         }
 

@@ -16,6 +16,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Newsletter;
 
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -39,6 +40,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if($request->subscribed) {
+            Newsletter::subscribe($request->email);
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -52,6 +57,7 @@ class RegisteredUserController extends Controller
         if (!$member) {
             $member = new Member;
             $member->user_id = $user->id;
+            $member->business_name = $request->business_name;
             $member->subscribed = $request->subscribed;
             $member->save();
         }
@@ -59,11 +65,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
         $user->addRole('member');
 
-        if($request->subscribed) {
-            Newsletter::subscribe($user->email);
-        }
-
-        return redirect('/member/dashboard');
+        return redirect(route('member.dashboard'));
     }
 
        /**

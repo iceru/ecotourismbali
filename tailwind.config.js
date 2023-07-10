@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -8,7 +9,14 @@ module.exports = {
     './resources/views/**/*.blade.php',
     './resources/js/**/*.jsx',
   ],
-
+  safelist: [
+    'bg-yellow-500',
+    'bg-yellow-700',
+    'bg-slate-500',
+    'text-slate-500',
+    'text-yellow-500',
+    'text-yellow-700',
+  ],
   theme: {
     container: {
       center: true,

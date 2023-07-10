@@ -61,6 +61,7 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
+    Route::post('/member/notifPayment', [MemberController::class, 'notifyPayment'])->name('member.notifyPayment');
     // Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
     Route::get('/member/profile', [MemberController::class, 'profile'])->name('member.profile');
     Route::get('/member/profile/edit/{id}', [MemberController::class, 'editProfile'])->name('member.profile.edit');

@@ -34,8 +34,10 @@ export default function Login({ status, canResetPassword }) {
     <GuestLayout>
       <Head title="Log in" />
 
-      <div className="grid grid-cols-2 items-center">
-        <AuthImage />
+      <div className="grid lg:grid-cols-2 items-center">
+        <div className="hidden lg:block">
+          <AuthImage />
+        </div>
 
         <div>
           <div className="mb-8">
