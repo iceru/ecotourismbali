@@ -56,6 +56,7 @@ class MemberController extends Controller
             'website' => 'nullable',
             'description' => 'nullable',
             'image' => 'nullable',
+            'social_media' => 'nullable',
         ]);
 
         $filename = null;
@@ -88,6 +89,7 @@ class MemberController extends Controller
         $member->address = $request->address;
         $member->website = $request->website;
         $member->description = $request->description;
+        $member->social_media = $request->social_media;
         $member->save();
 
         return Redirect::route('member.profile')->with('success', 'Profile updated successfully.');
