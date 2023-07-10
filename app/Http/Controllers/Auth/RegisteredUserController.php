@@ -73,7 +73,10 @@ class RegisteredUserController extends Controller
      */
     public function createAdmin(): Response
     {
-        return Inertia::render('Auth/RegisterAdmin');
+        // return Inertia::render('Auth/RegisterAdmin');
+        return Inertia::render('Admin/Register/CreateAdmin', [
+            'admin' => User::whereHasRole('administrator')->get(),
+        ]);
     }
 
     /**
@@ -95,10 +98,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
         $user->addRole('administrator');
 
-        return redirect('/admin/dashboard');
+        return redirect(route('register.admin'));
     }
 }

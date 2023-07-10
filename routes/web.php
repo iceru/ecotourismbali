@@ -25,6 +25,7 @@ use App\Http\Controllers\AssessmentOptionController;
 use App\Http\Controllers\MemberAssessmentController;
 use App\Http\Controllers\PostTestQuestionController;
 use App\Http\Controllers\AssessmentQuestionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PreTestModuleAnswerController;
 use App\Http\Controllers\PostTestModuleAnswerController;
 
@@ -87,8 +88,11 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/member-payment/finish', [MemberPaymentController::class, 'finish'])->name('member_payment.finish');
     Route::get('/member-payment/unfinish', [MemberPaymentController::class, 'unfinish'])->name('member_payment.unfinish');
     Route::get('/member-payment/error', [MemberPaymentController::class, 'error'])->name('member_payment.error');
-});
+});  
 
+Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(function () {
+    Route::get('/register', [RegisteredUserController::class, 'createAdmin'])->name('register.admin');
+});
 
 Route::middleware(['auth', 'role:superadministrator|administrator'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
