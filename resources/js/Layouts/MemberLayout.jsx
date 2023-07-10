@@ -1,6 +1,6 @@
 import PrimaryButton from '@/Components/PrimaryButton';
 import Logo from '../../images/logo.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFileClipboard,
@@ -11,7 +11,7 @@ import {
   faTimes,
   faBook,
 } from '@fortawesome/free-solid-svg-icons';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import AdminSection from '@/Components/AdminSection';
 import { useTranslation } from 'react-i18next';
 import enImg from '../../images/en.png';
@@ -22,7 +22,15 @@ import { useMediaQuery } from 'react-responsive';
 function MemberLayout({ children, state }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
-  const { member } = usePage().props;
+  const { member, admin } = usePage().props;
+
+  console.log(admin);
+
+  useEffect(() => {
+    if (admin) {
+      router.visit(route('admin.dashboard'));
+    }
+  }, [admin]);
 
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
