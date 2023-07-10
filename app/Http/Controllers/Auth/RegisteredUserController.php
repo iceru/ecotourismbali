@@ -84,7 +84,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function storeAdmin(Request $request): RedirectResponse
+    public function storeAdmin(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',

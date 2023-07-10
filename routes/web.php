@@ -92,6 +92,7 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
 
 Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'createAdmin'])->name('register.admin');
+    Route::post('/register/store', [RegisteredUserController::class, 'storeAdmin'])->name('register.admin.store');
 });
 
 Route::middleware(['auth', 'role:superadministrator|administrator'])->prefix('admin')->group(function () {

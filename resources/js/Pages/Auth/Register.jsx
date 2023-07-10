@@ -48,7 +48,7 @@ export default function Register() {
           </div>
           <form onSubmit={submit}>
             <div>
-              <InputLabel htmlFor="name" value="Name" />
+              <InputLabel htmlFor="name" value={t('form_label_name')} />
 
               <TextInput
                 id="name"
@@ -64,7 +64,7 @@ export default function Register() {
               <InputError message={errors.name} className="mt-2" />
             </div>
             <div className="mt-4">
-              <InputLabel htmlFor="business_name" value="Business Name" />
+              <InputLabel htmlFor="business_name" value={t('business_name')} />
 
               <TextInput
                 id="business_name"
@@ -81,7 +81,7 @@ export default function Register() {
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="email" value="Email" />
+              <InputLabel htmlFor="email" value={t('form_label_email')} />
 
               <TextInput
                 id="email"
@@ -98,7 +98,7 @@ export default function Register() {
             </div>
 
             <div className="mt-4">
-              <InputLabel htmlFor="password" value="Password" />
+              <InputLabel htmlFor="password" value={t('form_label_password')} />
 
               <TextInput
                 id="password"
@@ -117,7 +117,7 @@ export default function Register() {
             <div className="mt-4">
               <InputLabel
                 htmlFor="password_confirmation"
-                value="Confirm Password"
+                value={t('form_label_password_confirmation')}
               />
 
               <TextInput

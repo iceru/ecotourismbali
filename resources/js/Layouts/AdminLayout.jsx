@@ -170,6 +170,20 @@ function AdminLayout({ children }) {
                 {t('verified_badge')}
               </Link>
             </li>
+            <li>
+              <Link
+                href={route('register.admin')}
+                className={
+                  url.startsWith('/admin/verified-badge') ? 'font-bold' : ''
+                }
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faUsers}
+                />
+                {t('register_admin')}
+              </Link>
+            </li>
           </ul>
         </nav>
       </AdminSection>
