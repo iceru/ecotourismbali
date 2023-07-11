@@ -32,7 +32,7 @@ export default function Login({ status, canResetPassword }) {
 
   return (
     <GuestLayout>
-      <Head title="Log in" />
+      <Head title="Login" />
 
       <div className="grid lg:grid-cols-2 items-center">
         <div className="hidden lg:block">
