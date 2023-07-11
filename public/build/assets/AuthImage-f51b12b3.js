@@ -1,0 +1,1 @@
+import{j as a}from"./app-db44250e.js";const s="/build/assets/authImage-b7bee73c.png";function r({image:e}){return a("div",{className:"pr-20",children:a("img",{className:"rounded-2xl",src:e||s,alt:""})})}export{r as A};
