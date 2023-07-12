@@ -86,13 +86,17 @@ function MemberList({ member, lastSession, scores }) {
                 </div>
               )}
               {member?.website && (
-                <div className="flex items-center">
+                <a
+                  href={member.website}
+                  target="_blank"
+                  className="flex items-center"
+                >
                   <FontAwesomeIcon
                     icon={faGlobe}
                     className="text-primary mr-2 mt-0.5"
                   />
                   {member?.website}
-                </div>
+                </a>
               )}
             </div>
           </section>

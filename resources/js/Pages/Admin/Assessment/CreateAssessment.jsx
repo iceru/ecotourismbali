@@ -173,7 +173,7 @@ function CreateAssessment({ assessment, business_type }) {
               />
               <Link
                 className="mt-2 block text-sm text-primary font-semibold"
-                href="/business-type"
+                href={route('business_type.index')}
               >
                 {t('add_business_type')}
               </Link>

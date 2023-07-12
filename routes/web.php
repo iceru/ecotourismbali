@@ -55,7 +55,6 @@ Route::post('/member/list',[MemberListController::class, 'filter'])->name('membe
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 
-
 Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -93,28 +92,12 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
 Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'createAdmin'])->name('register.admin');
     Route::post('/register/store', [RegisteredUserController::class, 'storeAdmin'])->name('register.admin.store');
-});
-
-Route::middleware(['auth', 'role:superadministrator|administrator'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    
-    Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
-    Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
-    Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
-
-    Route::get('/payment/index', [AdminPaymentController::class, 'index'])->name('admin.payment.index');
     
     Route::get('/assessment', [AssessmentController::class, 'index'])->name('assessment.index');
     Route::post('/assessment/store', [AssessmentController::class, 'store'])->name('assessment.store');
     Route::get('/assessment/edit/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
     Route::post('/assessment/update/{id}', [AssessmentController::class, 'update'])->name('assessment.update');
     Route::delete('/assessment/delete/{id}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
-    
-    Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
-    Route::post('/business-type/store', [BusinessTypeController::class, 'store'])->name('business_type.store');
-    Route::get('/business-type/edit/{id}', [BusinessTypeController::class, 'edit'])->name('business_type.edit');
-    Route::post('/business-type/update/{id}', [BusinessTypeController::class, 'update'])->name('business_type.update');
-    Route::delete('/business-type/delete/{id}', [BusinessTypeController::class, 'destroy'])->name('business_type.destroy');
     
     Route::get('/assessment/{id}/question', [AssessmentQuestionController::class, 'index'])->name('assessment_question.index');
     Route::post('/assessment/{id}/question/store', [AssessmentQuestionController::class, 'store'])->name('assessment_question.store');
@@ -127,6 +110,25 @@ Route::middleware(['auth', 'role:superadministrator|administrator'])->prefix('ad
     Route::get('/assessment/option/edit/{id}', [AssessmentOptionController::class, 'edit'])->name('assessment_option.edit');
     Route::post('/assessment/option/update/{id}', [AssessmentOptionController::class, 'update'])->name('assessment_option.update');
     Route::delete('/assessment/option/delete/{id}', [AssessmentOptionController::class, 'destroy'])->name('assessment_option.destroy');
+});
+
+Route::middleware(['auth', 'role:superadministrator|finance'])->prefix('admin')->group(function () {
+    Route::get('/payment/index', [AdminPaymentController::class, 'index'])->name('admin.payment.index');
+});
+
+Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    
+    Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
+    Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
+    Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
+
+    
+    Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
+    Route::post('/business-type/store', [BusinessTypeController::class, 'store'])->name('business_type.store');
+    Route::get('/business-type/edit/{id}', [BusinessTypeController::class, 'edit'])->name('business_type.edit');
+    Route::post('/business-type/update/{id}', [BusinessTypeController::class, 'update'])->name('business_type.update');
+    Route::delete('/business-type/delete/{id}', [BusinessTypeController::class, 'destroy'])->name('business_type.destroy');
     
     Route::get('/module', [ModuleController::class, 'index'])->name('module.index');
     Route::post('/module/store', [ModuleController::class, 'store'])->name('module.store');

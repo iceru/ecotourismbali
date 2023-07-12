@@ -5,10 +5,17 @@ import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { router } from '@inertiajs/react';
 
 function ModuleList({ modules }) {
   const { t } = useTranslation();
+
+  function truncateString(str, num) {
+    if (str.length > num) {
+      return str.slice(0, num) + '...';
+    } else {
+      return str;
+    }
+  }
 
   return (
     <MemberLayout>
@@ -34,7 +41,9 @@ function ModuleList({ modules }) {
                         </span>
                       )}
                   </div>
-                  <div className="mb-3 text-sm">{module.description}</div>
+                  <div className="mb-3 text-sm">
+                    {truncateString(module.description, 80)}
+                  </div>
                   {module.member_module[0] &&
                   module.member_module[0].completion === 1 ? (
                     <PrimaryButton
