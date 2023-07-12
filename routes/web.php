@@ -114,6 +114,7 @@ Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(f
 
 Route::middleware(['auth', 'role:superadministrator|finance'])->prefix('admin')->group(function () {
     Route::get('/payment/index', [AdminPaymentController::class, 'index'])->name('admin.payment.index');
+    Route::get('/payment/show/{id}', [AdminPaymentController::class, 'show'])->name('admin.payment.show');
 });
 
 Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->prefix('admin')->group(function () {
@@ -123,7 +124,6 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
     Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
 
-    
     Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
     Route::post('/business-type/store', [BusinessTypeController::class, 'store'])->name('business_type.store');
     Route::get('/business-type/edit/{id}', [BusinessTypeController::class, 'edit'])->name('business_type.edit');

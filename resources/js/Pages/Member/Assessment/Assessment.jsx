@@ -14,7 +14,6 @@ function Assessment({ assessments, session }) {
   const { data, setData, post, processing, errors } = useForm();
 
   const lang = i18n.language;
-  console.log(data);
   const submit = e => {
     e.preventDefault();
 

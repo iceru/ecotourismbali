@@ -24,8 +24,8 @@ function ModuleResult({ memberModule, module }) {
             {t('congrats_module')} <span>{module.title}</span>{' '}
           </p>
         </div>
-        <div className="grid grid-cols-2 mb-6">
-          <div>
+        <div className="grid lg:grid-cols-2 mb-6">
+          <div className="mb-6 lg:mb-0">
             <div className="mb-3">{t('pre_score')}:&nbsp;</div>
             <div className="font-bold bg-lightPrimary px-6 py-4 rounded-2xl inline-flex text-2xl">
               {parseInt(memberModule.score_pre_test)} / 100

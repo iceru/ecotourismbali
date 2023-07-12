@@ -25,7 +25,7 @@ function EditAssessment() {
     image: '',
     image_en: '',
   });
-  console.log(data);
+
   const submit = e => {
     e.preventDefault();
 

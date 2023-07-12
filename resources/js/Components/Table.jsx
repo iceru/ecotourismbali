@@ -82,10 +82,14 @@ export default function Table({
                             className="px-6 py-4 text-sm font-medium text-gray-800"
                           >
                             {column === 'image' ? (
-                              <img
-                                src={`/storage/${pathImage}${item[column]}`}
-                                className="max-h-24"
-                              />
+                              item[column] ? (
+                                <img
+                                  src={`/storage/${pathImage}${item[column]}`}
+                                  className="max-h-24"
+                                />
+                              ) : (
+                                <span>-</span>
+                              )
                             ) : descHtml && column === descHtml ? (
                               <div
                                 dangerouslySetInnerHTML={{

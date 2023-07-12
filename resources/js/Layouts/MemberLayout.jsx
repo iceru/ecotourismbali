@@ -24,8 +24,6 @@ function MemberLayout({ children, state }) {
   const { url } = usePage();
   const { member, admin } = usePage().props;
 
-  console.log(admin);
-
   useEffect(() => {
     if (admin) {
       router.visit(route('admin.dashboard'));
@@ -155,7 +153,7 @@ function MemberLayout({ children, state }) {
       </AdminSection>
       <div className={`${!sideActive ? 'w-full' : 'lg:w-3/4'}`}>
         <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
-          <div className="flex items-center order-2 lg:order-1 w-full justify-between lg:w-auto lg:justify-start">
+          <div className="flex items-center w-full justify-between lg:w-auto lg:justify-start mb-4 lg:mb-0">
             <PrimaryButton
               color="lightPrimary"
               className="mr-4"
@@ -198,7 +196,7 @@ function MemberLayout({ children, state }) {
               </div>
             </div>
           </div>
-          <div className="flex gap-4 items-center justify-between mb-4 lg:mb-0 lg:justify-start w-full lg:w-auto order-1 lg:order-2">
+          <div className="flex gap-4 items-center justify-between lg:justify-start w-full lg:w-auto">
             <div>
               <PrimaryButton
                 as="link"

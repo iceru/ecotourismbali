@@ -4,13 +4,16 @@ import TitleSection from '../Components/TitleSection';
 import Table from '@/Components/Table';
 
 function PaymentIndex({ payments }) {
-  const header = ['Order Id', 'Status', 'Payment Type', 'Member ID', 'Amount'];
-  const selectedData = [
-    'payment_no',
-    'payment_status',
-    'payment_type',
-    'member_id',
-    'amount',
+  const header = ['Order Id', 'Status', 'Amount', 'Action'];
+  const selectedData = ['payment_no', 'payment_status', 'amount'];
+
+  const tableActions = [
+    {
+      label: 'show_button',
+      link: '/admin/payment/show',
+      withId: true,
+      color: 'show',
+    },
   ];
 
   return (
@@ -22,6 +25,7 @@ function PaymentIndex({ payments }) {
           data={payments}
           selectedData={selectedData}
           pathImage={'member/images/'}
+          tableActions={tableActions}
         />
       </AdminSection>
     </AdminLayout>

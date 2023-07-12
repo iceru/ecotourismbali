@@ -25,7 +25,7 @@ function AssessmentResult({ session, member }) {
         {member.status === 'active' ? (
           <>
             <div className="grid lg:grid-cols-2">
-              <div>
+              <div className="mb-4 lg:mb-0">
                 <div className="mb-4">{t('your_assessment_scores')}&nbsp;</div>
                 <div className="px-6 py-4 bg-lightPrimary text-3xl font-bold rounded-2xl inline-flex">
                   {session?.total_score}
@@ -33,7 +33,7 @@ function AssessmentResult({ session, member }) {
               </div>
               <div className="flex flex-col">
                 {member?.badge?.image ? (
-                  <div className=" justify-center">
+                  <div className="justify-center">
                     <div className="mb-4">{t('your_badge_is')}</div>
                     <div className="flex items-center">
                       <div>

@@ -27,11 +27,15 @@ function ModuleList({ modules }) {
         <section className="grid lg:grid-cols-2 gap-6">
           {modules?.map(module => {
             return (
-              <div className="p-6  bg-lightPrimary bg-opacity-50 rounded-2xl flex">
-                <div className="mr-4 lg:w-1/3">
-                  <img src={'/storage/modules/' + module.image} alt="" />
+              <div className="p-6  bg-lightPrimary bg-opacity-50 rounded-2xl flex flex-wrap lg:flex-nowrap">
+                <div className="mr-4 lg:w-1/3 w-full mb-4 lg:mb-0">
+                  <img
+                    className="max-h-[150px] object-cover object-center"
+                    src={'/storage/modules/' + module.image}
+                    alt=""
+                  />
                 </div>
-                <div className="lg:w-2/3">
+                <div className="lg:w-2/3 w-full">
                   <div className="text-xl font-bold mb-3 flex items-center">
                     {module.title}
                     {module.member_module[0] &&

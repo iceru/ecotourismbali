@@ -15,4 +15,11 @@ class AdminPaymentController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        return Inertia::render('Admin/Payment/ShowPayment', [
+            'payment' => MemberPayment::with('member')->find($id),
+        ]);
+    }
+
 }

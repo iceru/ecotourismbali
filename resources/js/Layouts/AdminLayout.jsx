@@ -24,7 +24,7 @@ import { useMediaQuery } from 'react-responsive';
 function AdminLayout({ children }) {
   const { t, i18n } = useTranslation();
   const { url } = usePage();
-  const { superadmin } = usePage().props;
+  const { superadmin, auth } = usePage().props;
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
   });
@@ -244,9 +244,11 @@ function AdminLayout({ children }) {
           <div className="flex gap-4 items-center justify-between mb-4 lg:mb-0 lg:justify-start w-full lg:w-auto order-1 lg:order-2">
             <div>
               <h5>
-                Hello, <strong>Admin</strong>
+                Hello, <strong>{auth.user.name}</strong>
               </h5>
-              <div className="text-secondary">Administrator</div>
+              <div className="text-secondary">
+                {superadmin ? 'Super Administrator' : 'Administrator'}
+              </div>
             </div>
             <div>
               <PrimaryButton

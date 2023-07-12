@@ -49,8 +49,8 @@ function MemberProfile({ member, scores, lastSession }) {
           {t('edit_profile')}
           <FontAwesomeIcon icon={faPen} />
         </PrimaryButton>
-        <div className="flex">
-          <div className="lg:w-4/5">
+        <div className="flex flex-wrap">
+          <div className="w-full mb-4 lg:mb-0 lg:w-4/5">
             <div className="flex items-center mb-10">
               <div>
                 {member.image ? (
@@ -145,7 +145,7 @@ function MemberProfile({ member, scores, lastSession }) {
               )}
             </div>
           </div>
-          <div className="lg:w-1/5">
+          <div className="w-full lg:w-1/5">
             {member.badge ? (
               <div>
                 <div className="flex flex-col items-center  uppercase mb-1">

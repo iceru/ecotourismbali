@@ -145,8 +145,8 @@ function MemberEditProfile() {
               />
             </div>
           </div>
-          <div className="flex justify-around mb-10">
-            <div className="flex gap-2 text-gray-600 justify-center items-center">
+          <div className="flex justify-center lg:gap-8 mb-10 flex-wrap">
+            <div className="flex gap-2 text-gray-600 justify-center items-center w-full lg:w-auto mb-4 lg:mb-0">
               <FontAwesomeIcon icon={faHome} />
               <TextInput
                 id="address"
@@ -158,19 +158,17 @@ function MemberEditProfile() {
                 onChange={e => setData('address', e.target.value)}
               />
             </div>
-            <div>
-              <div className="flex gap-2 text-gray-600 justify-center items-center">
-                <FontAwesomeIcon icon={faGlobe} />
-                <TextInput
-                  id="website"
-                  name="website"
-                  placeholder={t('your_website')}
-                  value={data.website}
-                  className="block w-full"
-                  isFocused={true}
-                  onChange={e => setData('website', e.target.value)}
-                />
-              </div>
+            <div className="flex gap-2 text-gray-600 justify-center items-center w-full lg:w-auto">
+              <FontAwesomeIcon icon={faGlobe} />
+              <TextInput
+                id="website"
+                name="website"
+                placeholder={t('your_website')}
+                value={data.website}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('website', e.target.value)}
+              />
             </div>
           </div>
           <div className="mb-6">
