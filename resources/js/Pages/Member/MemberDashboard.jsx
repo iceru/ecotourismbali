@@ -22,7 +22,7 @@ function MemberDashboard({ member, scores, lastSession }) {
   const parsed = queryString.parse(location.search);
   const { flash } = usePage().props;
 
-  const payCompleteStorage = localStorage.getItem('paid');
+  const payCompleteStorage = sessionStorage.getItem('paid');
   const pay = () => {
     let snapToken = sessionStorage.getItem('snapToken');
 
@@ -32,7 +32,7 @@ function MemberDashboard({ member, scores, lastSession }) {
           setPayComplete(true);
           setPayPending(false);
           sessionStorage.clear('snapToken');
-          localStorage.setItem('paid', true);
+          sessionStorage.setItem('paid', true);
           router.visit('/member/dashboard?newPayment=true');
         },
         onPending: function () {
