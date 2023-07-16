@@ -15,23 +15,25 @@ class MemberListController extends Controller
 {
     public function index()
     {
+        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'category', 'program')->get();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
             'badges' => Badge::all(),
-            'members' => Member::where('business_name', '!=', '')->where('status', 'active')->with('badge', 'category', 'program')->get(),
+            'members' => $members,
         ]);
     }
 
-    public function detail($id)
+    public function detail($slug)
     {
+        $member = Member::where('slug', $slug)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail();
         $memberAssessments = null;
-        $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
+        $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
         if($lastSession) {
-            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
         }
         return Inertia::render('MemberDetail', [
-            'member' => Member::where('id', $id)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail(),
+            'member' => $member,
             'scores' => $memberAssessments,
             'lastSession' => $lastSession
         ]);
@@ -39,7 +41,7 @@ class MemberListController extends Controller
 
     public function filter(Request $request)
     {
-        $member = Member::where('business_name', '!=', '');
+        $member =  Member::where('slug', '!=', '')->where('status', 'active');
         $category = Category::where('id', $request->category)->first();
 
         if($request->category && $request->category !== 'all') {

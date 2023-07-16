@@ -9,6 +9,12 @@ import { faGlobe, faHome } from '@fortawesome/free-solid-svg-icons';
 import BackTo from './Admin/Components/BackTo';
 import { lowerCase } from 'lodash';
 import { badgeColor } from '@/Helper/BadgeColor';
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons';
 
 function MemberList({ member, lastSession, scores }) {
   const { t } = useTranslation();

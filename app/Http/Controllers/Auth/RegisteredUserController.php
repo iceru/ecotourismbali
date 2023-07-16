@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\Member;
+use Newsletter;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
-use Newsletter;
+use App\Models\Member;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 
 class RegisteredUserController extends Controller
@@ -58,6 +59,7 @@ class RegisteredUserController extends Controller
             $member = new Member;
             $member->user_id = $user->id;
             $member->business_name = $request->business_name;
+            $member->slug = Str::slug($request->business_name);
             $member->subscribed = $request->subscribed;
             $member->save();
         }

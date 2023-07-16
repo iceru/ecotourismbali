@@ -20,8 +20,10 @@ function MemberList({ programs, categories, badges, members }) {
     },
   ];
 
+  console.log(members);
+
   const { t } = useTranslation();
-  const [category, setCategory] = useState(categories[0].id);
+  const [category, setCategory] = useState('all');
   const [program, setProgram] = useState();
   const [badge, setBadge] = useState();
   const [keyword, setKeyword] = useState();
@@ -207,7 +209,7 @@ function MemberList({ programs, categories, badges, members }) {
                     {member?.description?.slice(0, 100)}
                   </p>
                   <Link
-                    href={route('member.detail', member.id)}
+                    href={route('member.detail', member.slug)}
                     className="text-sm text-primary font-semibold"
                   >
                     {t('learn_more')}
