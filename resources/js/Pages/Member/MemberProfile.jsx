@@ -17,6 +17,11 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import noImage from '../../../images/no-image.jpg';
 import { lowerCase } from 'lodash';
 import { badgeColor } from '@/Helper/BadgeColor';
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
 
 function MemberProfile({ member, scores, lastSession }) {
   const { t } = useTranslation();
@@ -71,6 +76,14 @@ function MemberProfile({ member, scores, lastSession }) {
                 <h3 className="font-bold text-lg">
                   {member.business_name || 'Business Name'}
                 </h3>
+                {member.category && (
+                  <h6 className="uppercase text-primary">
+                    {member.category?.name}
+                  </h6>
+                )}
+                {member.program && (
+                  <h6 className="text-sm">{member.program?.name}</h6>
+                )}
               </div>
             </div>
             <div className="mb-10">
@@ -142,6 +155,37 @@ function MemberProfile({ member, scores, lastSession }) {
                   {t('add_description')}
                   <FontAwesomeIcon icon={faPen} />
                 </a>
+              )}
+            </div>
+
+            <div className="flex gap-6">
+              {member.facebook && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a href={member.facebook} target="_blank" className="mt-1">
+                    <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
+                  </a>
+                </div>
+              )}
+              {member.instagram && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a href={member.instagram} target="_blank" className="mt-1">
+                    <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
+                  </a>
+                </div>
+              )}
+              {member.whatsapp && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a href={member.whatsapp} target="_blank" className="mt-1">
+                    <FontAwesomeIcon icon={faWhatsapp} className="text-2xl" />
+                  </a>
+                </div>
+              )}
+              {member.twitter && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a href={member.twitter} target="_blank" className="mt-1">
+                    <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
+                  </a>
+                </div>
               )}
             </div>
           </div>

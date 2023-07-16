@@ -11,6 +11,12 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
 import noImage from '../../../images/no-image.jpg';
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons';
 
 function MemberEditProfile() {
   const { t } = useTranslation();
@@ -188,6 +194,56 @@ function MemberEditProfile() {
                 />
               </div>
             )}
+          </div>
+          <div className="grid lg:grid-cols-2 gap-6 mb-10">
+            <div className="flex gap-4 text-gray-600 justify-center items-center ">
+              <FontAwesomeIcon className="text-xl" icon={faFacebook} />
+              <TextInput
+                id="facebook"
+                name="facebook"
+                placeholder={'Facebook'}
+                value={data.facebook}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('facebook', e.target.value)}
+              />
+            </div>
+            <div className="flex gap-4 text-gray-600 justify-center items-center ">
+              <FontAwesomeIcon className="text-xl" icon={faInstagram} />
+              <TextInput
+                id="instagram"
+                name="instagram"
+                placeholder={'Instagram'}
+                value={data.instagram}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('instagram', e.target.value)}
+              />
+            </div>
+            <div className="flex gap-4 text-gray-600 justify-center items-center ">
+              <FontAwesomeIcon className="text-xl" icon={faWhatsapp} />
+              <TextInput
+                id="whatsapp"
+                name="whatsapp"
+                placeholder={'Whatsapp'}
+                value={data.whatsapp}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('whatsapp', e.target.value)}
+              />
+            </div>
+            <div className="flex gap-4 text-gray-600 justify-center items-center ">
+              <FontAwesomeIcon className="text-xl" icon={faTwitter} />
+              <TextInput
+                id="twitter"
+                name="twitter"
+                placeholder={'Twitter'}
+                value={data.twitter}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('twitter', e.target.value)}
+              />
+            </div>
           </div>
           <div>
             <PrimaryButton className="w-full flex justify-center !py-2 ">

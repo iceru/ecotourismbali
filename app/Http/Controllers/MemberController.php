@@ -43,7 +43,7 @@ class MemberController extends Controller
 
     public function profile()
     {
-        $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
+        $member = Member::where('user_id', Auth::id())->with(['member_slider', 'program', 'category', 'badge'])->first();
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
         if($lastSession) {
