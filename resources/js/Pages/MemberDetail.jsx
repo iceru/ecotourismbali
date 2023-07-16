@@ -100,7 +100,40 @@ function MemberList({ member, lastSession, scores }) {
               )}
             </div>
           </section>
-          <section className="text-justify">{member?.description}</section>
+          <section className="text-justify mb-10">
+            {member?.description}
+          </section>
+
+          <div className="flex gap-6">
+            {member.facebook && (
+              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                <a href={member.facebook} target="_blank" className="mt-1">
+                  <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
+                </a>
+              </div>
+            )}
+            {member.instagram && (
+              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                <a href={member.instagram} target="_blank" className="mt-1">
+                  <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
+                </a>
+              </div>
+            )}
+            {member.whatsapp && (
+              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                <a href={member.whatsapp} target="_blank" className="mt-1">
+                  <FontAwesomeIcon icon={faWhatsapp} className="text-2xl" />
+                </a>
+              </div>
+            )}
+            {member.twitter && (
+              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                <a href={member.twitter} target="_blank" className="mt-1">
+                  <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
+                </a>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="lg:w-1/5 mx-auto flex lg:block gap-12 sticky top-0 lg:border-l pl-4 mt-10 lg:mt-0">
