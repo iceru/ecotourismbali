@@ -20,8 +20,6 @@ function MemberList({ programs, categories, badges, members }) {
     },
   ];
 
-  console.log(members);
-
   const { t } = useTranslation();
   const [category, setCategory] = useState('all');
   const [program, setProgram] = useState();

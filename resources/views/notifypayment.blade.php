@@ -9,9 +9,9 @@
     <h3>Notif Payment for Member - <b>{{ $member->business_name }}</b></h3>
     <p>Please input the total payment for <b>{{ $member->business_name }}</b> so they can proceed to do a payment
     </p>
-    <p>Here is the link to update their total payment: <br />
-        <a href="https://member.ecotourismbali.com/admin/member/detail/{{ $member->id }}" target="_blank">
-            Update Member Link
+    <p>Login to admin dashboard and input the total payment in member list: <br />
+        <a href="https://member.ecotourismbali.com/admin/member/index" target="_blank">
+            Member List
         </a>
     </p>
     <p>Thank you</p>
