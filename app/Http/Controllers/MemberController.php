@@ -52,6 +52,10 @@ class MemberController extends Controller
         $member->save();
 
         return Redirect::route('member.dashboard');
+        Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
+        // Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
+
+        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
 
     public function locked()
@@ -147,9 +151,5 @@ class MemberController extends Controller
     public function notifyPayment()
     {
         $member = Member::where('user_id', Auth::id())->first();
-        // Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
-        Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
-
-        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
 }

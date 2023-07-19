@@ -6,8 +6,8 @@
 </head>
 
 <body>
-    <h3>Notif Payment for Member - <b>{{ $member->business_name }}</b></h3>
-    <p>Please input the total payment for <b>{{ $member->business_name }}</b> so they can proceed to do a payment
+    <h3>Notif Approval of Payment for Member - <b>{{ $member->business_name }}</b></h3>
+    <p>Please approve the total payment for <b>{{ $member->business_name }}</b> so they can proceed to do a payment
     </p>
     <p>Here is the link to update their total payment: <br />
         <a href="https://member.ecotourismbali.com/admin/member/detail/{{ $member->id }}" target="_blank">
