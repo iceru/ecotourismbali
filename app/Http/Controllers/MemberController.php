@@ -32,6 +32,27 @@ class MemberController extends Controller
             'lastSession' => $lastSession,
         ]);
     }
+    
+    public function store(Request $request)
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+
+        $request->validate([
+            'no_rooms' => 'nullable',
+            'no_outlet' => 'nullable',
+            'no_employees' => 'nullable',
+            'total_payment' => 'required',
+        ]);
+
+        $member->no_rooms = $request->no_rooms;
+        $member->no_outlets = $request->no_outlets;
+        $member->no_employees = $request->no_employees;
+        $member->total_payment = $request->total_payment;
+        $member->status = 'waiting_approval';
+        $member->save();
+
+        return Redirect::route('member.dashboard');
+    }
 
     public function locked()
     {

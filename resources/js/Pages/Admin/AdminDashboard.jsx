@@ -16,14 +16,12 @@ function MemberDashboard({ members, modules, visitors, pages, referrers }) {
 
   const labelVisitors = () => {
     const visitor = visitors.reverse();
-    console.log(visitor);
     return visitor.map(visit => {
       return moment(visit.date).format('LL');
     });
   };
 
   const referrer = referrers.slice(0, 6);
-
   const page = pages.slice(0, 8);
 
   return (

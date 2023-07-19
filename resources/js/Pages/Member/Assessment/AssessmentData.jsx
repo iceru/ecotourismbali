@@ -149,6 +149,7 @@ function AssessmentData() {
                   value={data.phone}
                   className="block w-full"
                   isFocused={true}
+                  type="tel"
                   onChange={e => setData('phone', e.target.value)}
                 />
                 {errors.phone && (

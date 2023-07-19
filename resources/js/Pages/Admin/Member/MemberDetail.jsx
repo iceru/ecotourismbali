@@ -32,6 +32,7 @@ function MemberIndex() {
     program: member.program_id || '',
     verified_badge: member.verified_badge_id || '',
     total_payment: member.total_payment || '',
+    status: member.status || null,
   });
 
   const submit = e => {
@@ -45,6 +46,12 @@ function MemberIndex() {
     });
   };
 
+  let currency = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    maximumFractionDigits: 0,
+  });
+
   const total_payments = [
     {
       label: 'Rp2.000.000',
@@ -57,6 +64,17 @@ function MemberIndex() {
     {
       label: 'Rp12.000.000',
       value: 12000000,
+    },
+  ];
+
+  const status = [
+    {
+      label: 'Waiting Approval',
+      value: 'waiting_approval',
+    },
+    {
+      label: 'Payment',
+      value: 'payment',
     },
   ];
 
@@ -94,7 +112,21 @@ function MemberIndex() {
               {!edit ? t('edit_member') : t('close_edit_member')}
             </PrimaryButton>
             <form onSubmit={submit}>
-              {items('status', capitalize(member?.status))}
+              {edit && status !== 'active' ? (
+                <div className="flex items-center mb-4">
+                  <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
+                  <SelectInput
+                    id="status"
+                    name="status"
+                    value={data.status}
+                    options={status}
+                    className="lg:w-3/4"
+                    onChange={e => setData('status', e.target.value)}
+                  />
+                </div>
+              ) : (
+                items('status', capitalize(member?.status.replace('_', ' ')))
+              )}
               {edit ? (
                 <div className="flex items-center mb-4">
                   <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
@@ -109,7 +141,7 @@ function MemberIndex() {
                   />
                 </div>
               ) : (
-                items('total_payment', member?.total_payment)
+                items('total_payment', currency.format(member.total_payment))
               )}
               {items('email', member.user.email)}
               {items('address', member?.address)}

@@ -61,9 +61,10 @@ class AdminMemberController extends Controller
 
         $remaining = 2 - $attempt;
         $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
-
-        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
-            
+        $memberAssessments = null;
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();    
+        }
         if($lastSession) {
             $dateAssessment = $lastSession->created_at->addYears(1);
         } else {
@@ -102,12 +103,16 @@ class AdminMemberController extends Controller
             'program' => 'nullable',
             'verified_badge' => 'nullable',
             'total_payment' => 'nullable',
+            'status' => 'nullable',
         ]);
 
         $member->category_id = $request->category;
         $member->program_id = $request->program;
         $member->verified_badge_id = $request->verified_badge;
         $member->total_payment = $request->total_payment;
+        if($member->status) {
+            $member->status = $request->status;
+        }
         $member->save();
 
         return Redirect::route('admin.member.detail', $member->id);
