@@ -30,6 +30,10 @@ function MemberEditProfile() {
     description: member.description || '',
     image: member.image || null,
     sliders: member.sliders || null,
+    facebook: member.facebook || null,
+    whatsapp: member.whatsapp || null,
+    twitter: member.twitter || null,
+    instagram: member.instagram || null,
   });
 
   const submit = e => {

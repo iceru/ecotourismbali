@@ -51,9 +51,8 @@ class MemberController extends Controller
         $member->status = 'waiting_approval';
         $member->save();
 
-        return Redirect::route('member.dashboard');
-        Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
-        // Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
+        // Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
+        Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
 
         return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
@@ -122,8 +121,8 @@ class MemberController extends Controller
         if ($request->hasFile('sliders')) {
             foreach($request->file('sliders') as $file) {
                 $sliderName = null;
-                $extension = $file->extension();
-                $sliderName = $request->business_name . '_' . time() . '.' . $extension;
+                $name = $file->getClientOriginalName();
+                $sliderName = $request->business_name . '_' . $name;
                 $file->storeAs('public/member/sliders', $sliderName);
     
                 $slider = new MemberSlider;
