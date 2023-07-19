@@ -13,11 +13,16 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        $visitors = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+        $visitors = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+        $pages = Analytics::fetchMostVisitedPages(Period::days(7));
+        $referrers = Analytics::fetchTopReferrers(Period::days(7));
+
         return Inertia::render('Admin/AdminDashboard', [
             'members' => Member::all(),
             'modules' => Module::all(),
             'visitors' => $visitors,
+            'pages' => $pages,
+            'referrers' => $referrers
         ]);
     }
 }
