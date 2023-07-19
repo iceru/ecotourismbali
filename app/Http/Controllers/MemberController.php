@@ -32,6 +32,31 @@ class MemberController extends Controller
             'lastSession' => $lastSession,
         ]);
     }
+    
+    public function store(Request $request)
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+
+        $request->validate([
+            'no_rooms' => 'nullable',
+            'no_outlet' => 'nullable',
+            'no_employees' => 'nullable',
+            'total_payment' => 'required',
+        ]);
+
+        $member->no_rooms = $request->no_rooms;
+        $member->no_outlets = $request->no_outlets;
+        $member->no_employees = $request->no_employees;
+        $member->total_payment = $request->total_payment;
+        $member->status = 'waiting_approval';
+        $member->save();
+
+        return Redirect::route('member.dashboard');
+        Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
+        // Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
+
+        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
+    }
 
     public function locked()
     {
@@ -126,8 +151,5 @@ class MemberController extends Controller
     public function notifyPayment()
     {
         $member = Member::where('user_id', Auth::id())->first();
-        Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
-
-        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
 }

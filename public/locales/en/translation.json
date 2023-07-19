@@ -120,6 +120,10 @@
   "form_label_image_en": "Image in English",
   "form_label_question_en": "Question in English",
   "form_label_option_en": "Option in English",
+  "form_label_no_rooms": "Number of Rooms",
+  "form_label_no_outlet": "Number of Outlets",
+  "form_label_no_employees": "Number of Employees",
+  "form_label_total_payment": "Price Range Per-Night",
 
   "add_pre_test": "Add Pre Test Question",
   "add_post_test": "Add Post Test Question",
@@ -230,6 +234,7 @@
 
   "member_not_active": "Your membership is not activated yet",
   "preview_member": "Preview of Assessment and Modules",
+  "member_not_approved": "Your account is under review. Please wait until we approve your account status",
 
   "trial_assessment": "You are in trial of assessment. Remaining Attempt: 1",
   "result_preview_assessment": "This is the end of the trial of assessment. Please activate your membership to unlock full assessment and having a chance of getting self assessment badge",
@@ -243,7 +248,7 @@
   "pay_pending": "Payment is still on going. Please proceed to finish the payment",
 
   "list_of_payments": "List of Payments",
-  "notify_admin_text": "Please wait until we confirm your total payment",
+  "notify_admin_text": "Please input the data to proceed the payment",
   "notify_admin": "Notify Admin",
   "subscribe_checkbox": "I would like to receive updates, news, and special offers via email.",
 

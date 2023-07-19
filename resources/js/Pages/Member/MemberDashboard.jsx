@@ -1,6 +1,6 @@
-import AdminSection from '@/Components/AdminSection';
-import PrimaryButton from '@/Components/PrimaryButton';
-import MemberLayout from '@/Layouts/MemberLayout';
+import { router, useForm, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   faBook,
   faLongArrowAltRight,
@@ -8,12 +8,16 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { router, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
-import { badgeColor } from '@/Helper/BadgeColor';
 import { lowerCase } from 'lodash';
+
+import { badgeColor } from '@/Helper/BadgeColor';
+import InputLabel from '@/Components/InputLabel';
+import TextInput from '@/Components/TextInput';
+import SelectInput from '@/Components/SelectInput';
+import AdminSection from '@/Components/AdminSection';
+import PrimaryButton from '@/Components/PrimaryButton';
+import MemberLayout from '@/Layouts/MemberLayout';
 
 function MemberDashboard({ member, scores, lastSession }) {
   const { t } = useTranslation();
@@ -21,6 +25,28 @@ function MemberDashboard({ member, scores, lastSession }) {
   const [payPending, setPayPending] = useState(false);
   const parsed = queryString.parse(location.search);
   const { flash } = usePage().props;
+
+  const total_payments = [
+    {
+      label: 'Green/Publish Rate IDR 0 - 1.500.000',
+      value: 2000000,
+    },
+    {
+      label: 'Branch/Publish Rate IDR 1.500.001 - 3.000.000',
+      value: 6000000,
+    },
+    {
+      label: 'Root/Publish Rate Above IDR 3.000.000',
+      value: 12000000,
+    },
+  ];
+
+  const { data, setData, post, processing, errors, reset } = useForm({
+    no_rooms: null,
+    no_employees: null,
+    no_outlets: null,
+    total_payment: total_payments[0].value,
+  });
 
   const payCompleteStorage = sessionStorage.getItem('paid');
   const pay = () => {
@@ -67,6 +93,16 @@ function MemberDashboard({ member, scores, lastSession }) {
     router.post(route('member.notifyPayment'));
   };
 
+  const submit = e => {
+    e.preventDefault();
+    debugger;
+
+    post(route('member.store'), {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  };
   return (
     <MemberLayout>
       {payComplete || payCompleteStorage ? (
@@ -225,7 +261,7 @@ function MemberDashboard({ member, scores, lastSession }) {
       {member.status !== 'active' && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">
           <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
-          {member.total_payment ? (
+          {member.status === 'payment' && member.total_payment ? (
             <>
               <p className="text-sm">{t('member_locked_text')}</p>
               <PrimaryButton
@@ -234,12 +270,105 @@ function MemberDashboard({ member, scores, lastSession }) {
                 {t('member_locked_button')}
               </PrimaryButton>
             </>
+          ) : member.status === 'waiting_approval' ? (
+            <>
+              <p className="text-sm">{t('member_not_approved')}</p>
+            </>
           ) : (
             <>
-              <p className="text-sm">{t('notify_admin_text')}</p>
-              <PrimaryButton onClick={() => notifyAdmin()} color="secondary">
-                {t('notify_admin')}
-              </PrimaryButton>
+              <p className="mb-4">{t('notify_admin_text')}</p>
+              <form className="grid lg:grid-cols-2 gap-4" onSubmit={submit}>
+                <div className="block  items-center">
+                  <div className="mb-2">
+                    <InputLabel
+                      htmlFor="no_rooms"
+                      value={t('form_label_no_rooms')}
+                    />
+                  </div>
+                  <div className="lg:w-4/5">
+                    <TextInput
+                      id="no_rooms"
+                      name="no_rooms"
+                      type="number"
+                      min={0}
+                      value={data.no_rooms}
+                      className="block w-full"
+                      isFocused={true}
+                      onChange={e => setData('no_rooms', e.target.value)}
+                    />
+                    <span className="text-red-600">{errors.no_rooms}</span>
+                  </div>
+                </div>
+                <div className="block  items-center">
+                  <div className="mb-2">
+                    <InputLabel
+                      htmlFor="no_outlet"
+                      value={t('form_label_no_outlet')}
+                    />
+                  </div>
+                  <div className="lg:w-4/5">
+                    <TextInput
+                      id="no_outlets"
+                      name="no_outlets"
+                      type="number"
+                      min={0}
+                      value={data.no_outlets}
+                      className="block w-full"
+                      isFocused={true}
+                      onChange={e => setData('no_outlets', e.target.value)}
+                    />
+                    <span className="text-red-600">{errors.no_outlets}</span>
+                  </div>
+                </div>
+                <div className="block  items-center">
+                  <div className="mb-2">
+                    <InputLabel
+                      htmlFor="no_employees"
+                      value={t('form_label_no_employees')}
+                    />
+                  </div>
+                  <div className="lg:w-4/5">
+                    <TextInput
+                      id="no_employees"
+                      name="no_employees"
+                      type="number"
+                      min={0}
+                      value={data.no_employees}
+                      className="block w-full"
+                      isFocused={true}
+                      onChange={e => setData('no_employees', e.target.value)}
+                    />
+                    <span className="text-red-600">{errors.no_employees}</span>
+                  </div>
+                </div>
+                <div className="block  items-center">
+                  <div className="mb-2">
+                    <InputLabel
+                      htmlFor="total_payment"
+                      value={t('form_label_total_payment')}
+                    />
+                  </div>
+                  <div className="lg:w-4/5">
+                    <SelectInput
+                      id="total_payment"
+                      name="total_payment"
+                      value={data.total_payment}
+                      options={total_payments}
+                      className="w-full"
+                      onChange={e => setData('total_payment', e.target.value)}
+                    />
+                    <span className="text-red-600">{errors.total_payment}</span>
+                  </div>
+                </div>
+                <PrimaryButton
+                  color="secondary"
+                  type="submit"
+                  className="w-fit"
+                  disabled={processing}
+                >
+                  {t('submit')}
+                </PrimaryButton>
+              </form>
             </>
           )}
         </AdminSection>
