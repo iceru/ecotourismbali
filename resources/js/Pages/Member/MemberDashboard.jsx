@@ -18,6 +18,7 @@ import SelectInput from '@/Components/SelectInput';
 import AdminSection from '@/Components/AdminSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 import MemberLayout from '@/Layouts/MemberLayout';
+import { currency } from '@/Helper/Formatter';
 
 function MemberDashboard({ member, scores, lastSession, business_type }) {
   const { t } = useTranslation();
@@ -91,13 +92,8 @@ function MemberDashboard({ member, scores, lastSession, business_type }) {
     }
   }, []);
 
-  const notifyAdmin = () => {
-    router.post(route('member.notifyPayment'));
-  };
-
   const submit = e => {
     e.preventDefault();
-    debugger;
 
     post(route('member.store'), {
       onSuccess: () => {
@@ -270,11 +266,20 @@ function MemberDashboard({ member, scores, lastSession, business_type }) {
           {member.status === 'payment' && member.total_payment ? (
             <>
               <p className="text-sm">{t('member_locked_text')}</p>
-              <PrimaryButton
-                onClick={() => (member.status !== 'active' ? pay() : null)}
-              >
-                {t('member_locked_button')}
-              </PrimaryButton>
+              <div className="flex justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
+                <div>
+                  <p>{t('total_payment')}</p>
+                  <h4 className="text-2xl font-bold">
+                    {currency.format(member.total_payment)}
+                  </h4>
+                </div>
+                <PrimaryButton
+                  className="text-[16px]"
+                  onClick={() => (member.status !== 'active' ? pay() : null)}
+                >
+                  {t('member_locked_button')}
+                </PrimaryButton>
+              </div>
             </>
           ) : member.status === 'waiting_approval' ? (
             <>
@@ -301,6 +306,7 @@ function MemberDashboard({ member, scores, lastSession, business_type }) {
                         placeholder="select_business_type"
                         className="w-full"
                         labelData="name"
+                        required
                         valueData="id"
                         onChange={e => {
                           setData('business_type_id', e.target.value);
@@ -349,6 +355,7 @@ function MemberDashboard({ member, scores, lastSession, business_type }) {
                       <TextInput
                         id="no_outlets"
                         name="no_outlets"
+                        required
                         type="number"
                         min={0}
                         value={data.no_outlets}
@@ -371,6 +378,7 @@ function MemberDashboard({ member, scores, lastSession, business_type }) {
                         id="no_employees"
                         name="no_employees"
                         type="number"
+                        required
                         min={0}
                         value={data.no_employees}
                         className="block w-full"

@@ -24,7 +24,10 @@ class MemberAssessmentController extends Controller
 {
     public function tutorial()
     { 
-        return Inertia::render('Member/Assessment/AssessmentStep');
+        $member = Member::where('user_id', Auth::id())->with('business_type')->first();
+        return Inertia::render('Member/Assessment/AssessmentStep', [
+            'member' => $member,
+        ]);
     }
 
     public function index()

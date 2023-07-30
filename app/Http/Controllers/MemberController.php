@@ -45,6 +45,7 @@ class MemberController extends Controller
             'no_rooms' => 'nullable',
             'no_outlet' => 'nullable',
             'no_employees' => 'nullable',
+            'business_type_id' => 'required',
             'total_payment' => 'required',
         ]);
 
@@ -52,6 +53,7 @@ class MemberController extends Controller
         $member->no_outlets = $request->no_outlets;
         $member->no_employees = $request->no_employees;
         $member->total_payment = $request->total_payment;
+        $member->business_type_id = $request->business_type_id;
         $member->status = 'waiting_approval';
         $member->save();
 
