@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Member;
 use App\Mail\NotifyPayment;
+use App\Models\BusinessType;
 use App\Models\MemberSlider;
 use Illuminate\Http\Request;
 use App\Models\MemberAssessment;
@@ -19,17 +20,20 @@ class MemberController extends Controller
     public function index()
     {
         $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
+        $business_type = BusinessType::all();
 
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
         if($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
         }
+        
         return Inertia::render('Member/MemberDashboard', [
             'member' => $member,
             'user' => User::find(Auth::id()),
             'scores' => $memberAssessments,
             'lastSession' => $lastSession,
+            'business_type' => $business_type,
         ]);
     }
     

@@ -68,7 +68,8 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/member/profile/edit/{id}', [MemberController::class, 'editProfile'])->name('member.profile.edit');
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
 
-    Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.index');
+    Route::get('/member/assessment/tutorial', [MemberAssessmentController::class, 'tutorial'])->name('member.assessment.index');
+    Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.data');
     Route::get('/member/assessment/result/{id}', [MemberAssessmentController::class, 'result'])->name('member.assessment.result');
     Route::get('/member/assessment/start/{id}', [MemberAssessmentController::class, 'start'])->name('member.assessment.start');
     Route::post('/member/assessment/store', [MemberAssessmentController::class, 'store'])->name('member.assessment.store');

@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class MemberAssessmentController extends Controller
 {
+    public function tutorial()
+    { 
+        return Inertia::render('Member/Assessment/AssessmentStep');
+    }
+
     public function index()
     { 
         $member = Member::where('user_id', Auth::id())->with('user')->first();
@@ -59,12 +64,15 @@ class MemberAssessmentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $assessments = Assessment::with('assessment_question')->get();
+        $session = AssessmentSession::where('id', $id)->first();
         if($member->status !== 'active') {
             $assessments = Assessment::with('assessment_question')->take(1)->get();
         }
+        $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Member/Assessment/Assessment', [
-            'session' => AssessmentSession::where('id', $id)->first(),
+            'session' => $session,
             'assessments' => $assessments,
+            'answers' => $answers,
         ]);
     }
 
@@ -100,10 +108,12 @@ class MemberAssessmentController extends Controller
             'completion' => 'no',
             'member_id' => $member->id
         ]);
+        if(!$session->member_id) {
+            $session->member_id = $member->id;
+            $session->id = Str::ulid()->toBase32();
+        }
 
         $session->completion = 'no';
-        $session->member_id = $member->id;
-        $session->id = Str::ulid()->toBase32();
         $session->save();
 
         return Redirect::route('member.assessment.start', $session->id);
@@ -138,11 +148,19 @@ class MemberAssessmentController extends Controller
             } else if (str_contains($questionId, 'checkbox')) {
                 $id = explode('.', $questionId);
                 $id = $id[1];
+                $memberAnswer = MemberAssessmentAnswer::where([
+                    'member_id' => $member->id,
+                    'assessment_session_id' => $request->session_id,
+                    'assessment_question_id' => $id])->get();
+                    
+                foreach($memberAnswer as $answer) {
+                    $answer->delete();
+                } 
                 foreach ($optionId as $checkId) {
                     $checkSelected = AssessmentOption::where('id', $checkId)->first();
                     $memberAnswer = MemberAssessmentAnswer::firstOrNew([
                         'member_id' => $member->id,
-                        'assessment_question_id' => $id,
+                        'assessment_option_id' => $checkId,
                         'assessment_session_id' => $request->session_id,
                     ]);
                     $totalPoints = $totalPoints + $checkSelected->point;

@@ -19,10 +19,11 @@ import AdminSection from '@/Components/AdminSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 import MemberLayout from '@/Layouts/MemberLayout';
 
-function MemberDashboard({ member, scores, lastSession }) {
+function MemberDashboard({ member, scores, lastSession, business_type }) {
   const { t } = useTranslation();
   const [payComplete, setPayComplete] = useState(false);
   const [payPending, setPayPending] = useState(false);
+  const [business, setBusiness] = useState();
   const parsed = queryString.parse(location.search);
   const { flash } = usePage().props;
 
@@ -45,6 +46,7 @@ function MemberDashboard({ member, scores, lastSession }) {
     no_rooms: null,
     no_employees: null,
     no_outlets: null,
+    business_type_id: null,
     total_payment: total_payments[0].value,
   });
 
@@ -210,17 +212,21 @@ function MemberDashboard({ member, scores, lastSession }) {
                 </div>
               ) : (
                 <div className="grid gap-4">
-                  <PrimaryButton color="lightPrimary">
+                  <PrimaryButton
+                    color="lightPrimary"
+                    as="link"
+                    href={route('member.assessment.index')}
+                  >
                     {t('start_assessment')}
                     <FontAwesomeIcon
                       icon={faLongArrowAltRight}
                       className="ml-2"
                     />
                   </PrimaryButton>
-                  <PrimaryButton color="lightSecondary" className="text-left">
+                  {/* <PrimaryButton color="lightSecondary" className="text-left">
                     {t('learn_more_assessment')}
                     <FontAwesomeIcon icon={faBook} className="ml-2" />
-                  </PrimaryButton>
+                  </PrimaryButton> */}
                 </div>
               )}
             </>
@@ -277,93 +283,131 @@ function MemberDashboard({ member, scores, lastSession }) {
           ) : (
             <>
               <p className="mb-4">{t('notify_admin_text')}</p>
-              <form className="grid lg:grid-cols-2 gap-4" onSubmit={submit}>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="no_rooms"
-                      value={t('form_label_no_rooms')}
-                    />
+              <form onSubmit={submit}>
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="total_payment"
+                        value={t('form_label_total_payment')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <SelectInput
+                        id="business_type"
+                        name="business_type"
+                        value={data.business_type_id}
+                        options={business_type}
+                        placeholder="select_business_type"
+                        className="w-full"
+                        labelData="name"
+                        valueData="id"
+                        onChange={e => {
+                          setData('business_type_id', e.target.value);
+                          let index = e.target.selectedIndex;
+                          setBusiness(e.target[index].text);
+                        }}
+                      />
+                      {errors.business_type_id && (
+                        <span className="text-red-600">
+                          {errors.business_type_id}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="lg:w-4/5">
-                    <TextInput
-                      id="no_rooms"
-                      name="no_rooms"
-                      type="number"
-                      min={0}
-                      value={data.no_rooms}
-                      className="block w-full"
-                      isFocused={true}
-                      onChange={e => setData('no_rooms', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.no_rooms}</span>
+                  {business === 'Hotel' && (
+                    <div className="block  items-center">
+                      <div className="mb-2">
+                        <InputLabel
+                          htmlFor="no_rooms"
+                          value={t('form_label_no_rooms')}
+                        />
+                      </div>
+                      <div className="lg:w-4/5">
+                        <TextInput
+                          id="no_rooms"
+                          name="no_rooms"
+                          type="number"
+                          min={0}
+                          value={data.no_rooms}
+                          className="block w-full"
+                          isFocused={true}
+                          onChange={e => setData('no_rooms', e.target.value)}
+                        />
+                        <span className="text-red-600">{errors.no_rooms}</span>
+                      </div>
+                    </div>
+                  )}
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="no_outlet"
+                        value={t('form_label_no_outlet')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <TextInput
+                        id="no_outlets"
+                        name="no_outlets"
+                        type="number"
+                        min={0}
+                        value={data.no_outlets}
+                        className="block w-full"
+                        isFocused={true}
+                        onChange={e => setData('no_outlets', e.target.value)}
+                      />
+                      <span className="text-red-600">{errors.no_outlets}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="no_outlet"
-                      value={t('form_label_no_outlet')}
-                    />
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="no_employees"
+                        value={t('form_label_no_employees')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <TextInput
+                        id="no_employees"
+                        name="no_employees"
+                        type="number"
+                        min={0}
+                        value={data.no_employees}
+                        className="block w-full"
+                        isFocused={true}
+                        onChange={e => setData('no_employees', e.target.value)}
+                      />
+                      <span className="text-red-600">
+                        {errors.no_employees}
+                      </span>
+                    </div>
                   </div>
-                  <div className="lg:w-4/5">
-                    <TextInput
-                      id="no_outlets"
-                      name="no_outlets"
-                      type="number"
-                      min={0}
-                      value={data.no_outlets}
-                      className="block w-full"
-                      isFocused={true}
-                      onChange={e => setData('no_outlets', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.no_outlets}</span>
-                  </div>
-                </div>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="no_employees"
-                      value={t('form_label_no_employees')}
-                    />
-                  </div>
-                  <div className="lg:w-4/5">
-                    <TextInput
-                      id="no_employees"
-                      name="no_employees"
-                      type="number"
-                      min={0}
-                      value={data.no_employees}
-                      className="block w-full"
-                      isFocused={true}
-                      onChange={e => setData('no_employees', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.no_employees}</span>
-                  </div>
-                </div>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="total_payment"
-                      value={t('form_label_total_payment')}
-                    />
-                  </div>
-                  <div className="lg:w-4/5">
-                    <SelectInput
-                      id="total_payment"
-                      name="total_payment"
-                      value={data.total_payment}
-                      options={total_payments}
-                      className="w-full"
-                      onChange={e => setData('total_payment', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.total_payment}</span>
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="total_payment"
+                        value={t('form_label_total_payment')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <SelectInput
+                        id="total_payment"
+                        name="total_payment"
+                        value={data.total_payment}
+                        options={total_payments}
+                        className="w-full"
+                        onChange={e => setData('total_payment', e.target.value)}
+                      />
+                      <span className="text-red-600">
+                        {errors.total_payment}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <PrimaryButton
                   color="secondary"
                   type="submit"
-                  className="w-fit"
+                  className="flex justify-center mt-6 w-full"
                   disabled={processing}
                 >
                   {t('submit')}

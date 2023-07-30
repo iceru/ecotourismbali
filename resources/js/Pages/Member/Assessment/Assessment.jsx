@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { router, useForm } from '@inertiajs/react';
+import React, { useEffect, useState } from 'react';
+import { router, useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { isEmpty } from 'lodash';
 
-function Assessment({ assessments, session }) {
+function Assessment({ assessments, session, answers }) {
   const [active, setActive] = useState(0);
   const { t, i18n } = useTranslation();
+  const { ziggy } = usePage().props;
 
   const { data, setData, post, processing, errors } = useForm();
 
@@ -20,7 +22,12 @@ function Assessment({ assessments, session }) {
     post(route('member.assessment.save'), {
       onSuccess: () => {
         if (assessments.length > active + 1) {
-          setActive(active + 1);
+          router.visit(
+            route('member.assessment.start', [
+              session.id,
+              { question: active + 1 },
+            ])
+          );
           setData({});
         } else {
           router.post(route('member.assessment.complete', session.id));
@@ -29,36 +36,93 @@ function Assessment({ assessments, session }) {
     });
   };
 
-  const handleOptionChange = (questionId, optionId) => {
-    setData(prevData => ({
-      ...prevData,
+  useEffect(() => {
+    if (ziggy?.query?.question) {
+      setActive(parseInt(ziggy?.query?.question));
+    }
+  }, [ziggy?.query]);
+
+  useEffect(() => {
+    let localAnswers = localStorage.getItem('assesment');
+    if (localAnswers) {
+      localAnswers = JSON.parse(localAnswers);
+    }
+    if (!isEmpty(localAnswers)) {
+      Object.keys(localAnswers)?.forEach(ans => {
+        const question = localAnswers[ans];
+        const question_id = ans.split('.');
+
+        if (question_id[0] === 'checkbox') {
+          question.forEach(check => {
+            handleCheckboxChange(question_id[1], check, true);
+          });
+        } else if (question_id[0] === 'radio') {
+          handleOptionChange(question_id[1], question, true);
+        }
+      });
+    } else {
+      answers.forEach(ans => {
+        if (ans.assessment_question.type === 'checkbox') {
+          handleCheckboxChange(
+            ans.assessment_question_id,
+            ans.assessment_option_id
+          );
+        } else {
+          handleOptionChange(
+            ans.assessment_question_id,
+            ans.assessment_option_id
+          );
+        }
+      });
+    }
+  }, [answers]);
+
+  const handleOptionChange = (questionId, optionId, noStore) => {
+    const updatedData = {
       [`radio.${questionId}`]: optionId,
       assessment_id: assessments[active].id,
       session_id: session.id,
-    }));
+    };
+
+    setData(prevData => {
+      const newData = { ...prevData, ...updatedData };
+      if (!noStore) {
+        localStorage.setItem('assesment', JSON.stringify(newData)); // Store in localStorage
+      }
+      return newData;
+    });
   };
 
-  const handleCheckboxChange = (questionId, optionId) => {
+  const handleCheckboxChange = (questionId, optionId, noStore) => {
     setData(prevData => {
       const updatedOptions = prevData[`checkbox.${questionId}`] || [];
-      if (updatedOptions.includes(optionId)) {
-        // Remove the option if it was already selected
-        const updatedOptionsWithoutRemoved = updatedOptions.filter(
-          id => id !== optionId
-        );
-        return {
-          ...prevData,
-          [`checkbox.${questionId}`]: updatedOptionsWithoutRemoved,
-        };
-      } else {
-        // Add the option if it was not selected
-        const updatedOptionsWithAdded = [...updatedOptions, optionId];
-        return {
-          ...prevData,
-          [`checkbox.${questionId}`]: updatedOptionsWithAdded,
-        };
+      const updatedData = updatedOptions.includes(optionId)
+        ? {
+            ...prevData,
+            [`checkbox.${questionId}`]: updatedOptions.filter(
+              id => id !== optionId
+            ),
+          }
+        : {
+            ...prevData,
+            [`checkbox.${questionId}`]: [...updatedOptions, optionId],
+          };
+
+      if (!noStore) {
+        localStorage.setItem('assesment', JSON.stringify(updatedData)); // Store in localStorage
       }
+      return updatedData;
     });
+  };
+
+  const handleBack = () => {
+    if (active > 0) {
+      router.visit(
+        route('member.assessment.start', [session.id, { question: active - 1 }])
+      );
+    } else {
+      router.visit(route('member.assessment.index'));
+    }
   };
 
   return (
@@ -131,6 +195,12 @@ function Assessment({ assessments, session }) {
                                   name={`checkbox.${question.id}`}
                                   id={`option_${option.id}`}
                                   value={option.id}
+                                  checked={
+                                    data[`checkbox.${question.id}`] &&
+                                    data[`checkbox.${question.id}`].includes(
+                                      option.id
+                                    )
+                                  }
                                   className="mr-3 text-primary focus:ring-primary"
                                   onChange={() =>
                                     handleCheckboxChange(question.id, option.id)
@@ -157,6 +227,8 @@ function Assessment({ assessments, session }) {
                 })}
                 <div className="flex justify-center gap-6 mt-6">
                   <PrimaryButton
+                    type="button"
+                    onClick={handleBack}
                     className="min-w-[160px] flex justify-center"
                     color="gray"
                   >
@@ -164,6 +236,7 @@ function Assessment({ assessments, session }) {
                   </PrimaryButton>
                   <PrimaryButton
                     type="submit"
+                    disabled={processing}
                     className="min-w-[160px] flex justify-center"
                   >
                     {t('next')}
