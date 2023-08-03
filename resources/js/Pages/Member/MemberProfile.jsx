@@ -22,8 +22,9 @@ import {
   faInstagram,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
+import moment from 'moment';
 
-function MemberProfile({ member, scores, lastSession }) {
+function MemberProfile({ member, scores, lastSession, expiredDate }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
@@ -192,7 +193,7 @@ function MemberProfile({ member, scores, lastSession }) {
           <div className="w-full lg:w-1/5">
             {member.badge ? (
               <div>
-                <div className="flex flex-col items-center  uppercase mb-1">
+                <div className="flex flex-col items-center   mb-1">
                   <div>
                     <img
                       className="max-h-[120px]"
@@ -200,16 +201,20 @@ function MemberProfile({ member, scores, lastSession }) {
                     />
                   </div>
                   <div
-                    className={`font-bold mt-1 text-center ${badgeColor(
+                    className={`font-bold mt-1 text-center uppercase ${badgeColor(
                       member.badge.name,
                       'text'
                     )}`}
                   >
                     {member.badge.name} Badge
                   </div>
+                  <div className="text-xs text-center mt-1 mb-1 text-gray-500">
+                    Expired:&nbsp;
+                    {moment(expiredDate).format('ll')}
+                  </div>
                 </div>
                 {lastSession && (
-                  <div className="text-center text-gray-500 text-xs mb-3">
+                  <div className="text-center text-gray-500 text-xs mb-1">
                     <span className="font-bold">{lastSession.total_score}</span>
                     &nbsp;
                     <span className=" uppercase">Points</span>

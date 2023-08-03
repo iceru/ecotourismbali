@@ -132,47 +132,51 @@ class MemberAssessmentController extends Controller
         $totalPoints = 0;
         foreach ($request->input() as $questionId => $optionId) {
             $optionSelected = AssessmentOption::where('id', $optionId)->first();
-            if(str_contains($questionId, 'radio')) {
+            if(str_contains($questionId, 'radio') || str_contains($questionId, 'checkbox')) {
                 $id = explode('.', $questionId);
                 $id = $id[1];
-                $memberAnswer = MemberAssessmentAnswer::firstOrNew([
-                    'member_id' => $member->id,
-                    'assessment_question_id' => $id,
-                    'assessment_session_id' => $request->session_id,
-                ]);
-                
-                $memberAnswer->member_id = $member->id;
-                $memberAnswer->assessment_question_id = $id;
-                $memberAnswer->assessment_option_id = $optionId;
-                $memberAnswer->assessment_session_id = $request->session_id;
-                $memberAnswer->save();
-
-                $totalPoints = $totalPoints + $optionSelected->point;
-            } else if (str_contains($questionId, 'checkbox')) {
-                $id = explode('.', $questionId);
-                $id = $id[1];
-                $memberAnswer = MemberAssessmentAnswer::where([
-                    'member_id' => $member->id,
-                    'assessment_session_id' => $request->session_id,
-                    'assessment_question_id' => $id])->get();
-                    
-                foreach($memberAnswer as $answer) {
-                    $answer->delete();
-                } 
-                foreach ($optionId as $checkId) {
-                    $checkSelected = AssessmentOption::where('id', $checkId)->first();
+            }
+            $questionSelected = AssessmentQuestion::where('id', $id)->with('assessment')->first();
+            
+            if($questionSelected->assessment->id === $request->assessment_id) {
+                if(str_contains($questionId, 'radio')) {
                     $memberAnswer = MemberAssessmentAnswer::firstOrNew([
                         'member_id' => $member->id,
-                        'assessment_option_id' => $checkId,
+                        'assessment_question_id' => $id,
                         'assessment_session_id' => $request->session_id,
                     ]);
-                    $totalPoints = $totalPoints + $checkSelected->point;
                     
                     $memberAnswer->member_id = $member->id;
                     $memberAnswer->assessment_question_id = $id;
-                    $memberAnswer->assessment_option_id = $checkId;
+                    $memberAnswer->assessment_option_id = $optionId;
                     $memberAnswer->assessment_session_id = $request->session_id;
                     $memberAnswer->save();
+    
+                    $totalPoints = $totalPoints + $optionSelected->point;
+                } else if (str_contains($questionId, 'checkbox')) {
+                    $memberAnswer = MemberAssessmentAnswer::where([
+                        'member_id' => $member->id,
+                        'assessment_session_id' => $request->session_id,
+                        'assessment_question_id' => $id])->get();
+                        
+                    foreach($memberAnswer as $answer) {
+                        $answer->delete();
+                    } 
+                    foreach ($optionId as $checkId) {
+                        $checkSelected = AssessmentOption::where('id', $checkId)->first();
+                        $memberAnswer = MemberAssessmentAnswer::firstOrNew([
+                            'member_id' => $member->id,
+                            'assessment_option_id' => $checkId,
+                            'assessment_session_id' => $request->session_id,
+                        ]);
+                        $totalPoints = $totalPoints + $checkSelected->point;
+                        
+                        $memberAnswer->member_id = $member->id;
+                        $memberAnswer->assessment_question_id = $id;
+                        $memberAnswer->assessment_option_id = $checkId;
+                        $memberAnswer->assessment_session_id = $request->session_id;
+                        $memberAnswer->save();
+                    }
                 }
             }
                 

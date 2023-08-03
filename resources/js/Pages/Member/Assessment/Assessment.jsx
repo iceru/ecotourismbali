@@ -43,7 +43,7 @@ function Assessment({ assessments, session, answers }) {
   }, [ziggy?.query]);
 
   useEffect(() => {
-    let localAnswers = localStorage.getItem('assesment');
+    let localAnswers = localStorage.getItem('assessment');
     if (localAnswers) {
       localAnswers = JSON.parse(localAnswers);
     }
@@ -77,17 +77,19 @@ function Assessment({ assessments, session, answers }) {
     }
   }, [answers]);
 
+  console.log(data);
+
   const handleOptionChange = (questionId, optionId, noStore) => {
     const updatedData = {
       [`radio.${questionId}`]: optionId,
-      assessment_id: assessments[active].id,
+      assessment_id: assessments[ziggy?.query?.question].id,
       session_id: session.id,
     };
 
     setData(prevData => {
       const newData = { ...prevData, ...updatedData };
       if (!noStore) {
-        localStorage.setItem('assesment', JSON.stringify(newData)); // Store in localStorage
+        localStorage.setItem('assessment', JSON.stringify(newData)); // Store in localStorage
       }
       return newData;
     });
@@ -109,7 +111,7 @@ function Assessment({ assessments, session, answers }) {
           };
 
       if (!noStore) {
-        localStorage.setItem('assesment', JSON.stringify(updatedData)); // Store in localStorage
+        localStorage.setItem('assessment', JSON.stringify(updatedData)); // Store in localStorage
       }
       return updatedData;
     });

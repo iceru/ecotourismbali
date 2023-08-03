@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AdminSection from '@/Components/AdminSection';
@@ -9,6 +9,10 @@ import { badgeColor } from '@/Helper/BadgeColor';
 
 function AssessmentResult({ session, member }) {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    localStorage.clear('assessment');
+  }, []);
 
   return (
     <MemberLayout>

@@ -31,35 +31,35 @@ function ModuleList({ modules }) {
                 <div className="mr-4 lg:w-1/3 w-full mb-4 lg:mb-0">
                   <img
                     className="max-h-[150px] object-cover object-center"
-                    src={'/storage/modules/' + module.image}
+                    src={'/storage/modules/' + module?.image}
                     alt=""
                   />
                 </div>
                 <div className="lg:w-2/3 w-full">
                   <div className="text-xl font-bold mb-3 flex items-center">
-                    {module.title}
-                    {module.member_module[0] &&
-                      module.member_module[0].completion === 1 && (
+                    {module?.title}
+                    {module?.member_module[0] &&
+                      module?.member_module[0].completion === 1 && (
                         <span className="rounded-3xl ml-3 text-xs py-1 px-3 bg-secondary inline-block text-white">
                           {t('finished')}
                         </span>
                       )}
                   </div>
-                  <div className="mb-3 text-sm">
+                  <div className="mb-3 text-sm" title={module?.description}>
                     {truncateString(module.description, 80)}
                   </div>
-                  {module.member_module[0] &&
-                  module.member_module[0].completion === 1 ? (
+                  {module?.member_module[0] &&
+                  module?.member_module[0].completion === 1 ? (
                     <PrimaryButton
                       as="link"
-                      href={route('member.module.detail', module.id)}
+                      href={route('member.module.detail', module?.id)}
                     >
                       {t('read_material')}
                     </PrimaryButton>
                   ) : (
                     <PrimaryButton
                       as="link"
-                      href={route('member.module.pre-test', module.id)}
+                      href={route('member.module.pre-test', module?.id)}
                     >
                       {t('start_learning')}
                     </PrimaryButton>

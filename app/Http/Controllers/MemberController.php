@@ -24,8 +24,11 @@ class MemberController extends Controller
 
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
+        $dateAssessment = null;
+
         if($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+            $dateAssessment = $lastSession->created_at->addYears(1);
         }
         
         return Inertia::render('Member/MemberDashboard', [
@@ -34,6 +37,7 @@ class MemberController extends Controller
             'scores' => $memberAssessments,
             'lastSession' => $lastSession,
             'business_type' => $business_type,
+            'expiredDate' => $dateAssessment,
         ]);
     }
     
@@ -76,8 +80,11 @@ class MemberController extends Controller
         $member = Member::where('user_id', Auth::id())->with(['member_slider', 'program', 'category', 'badge'])->first();
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
+        $dateAssessment = null;
+
         if($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+            $dateAssessment = $lastSession->created_at->addYears(1);
         }
 
         return Inertia::render('Member/MemberProfile', [
@@ -85,6 +92,7 @@ class MemberController extends Controller
             'user' => User::find(Auth::id()),
             'scores' => $memberAssessments,
             'lastSession' => $lastSession,
+            'expiredDate' => $dateAssessment,
         ]);
     }
 

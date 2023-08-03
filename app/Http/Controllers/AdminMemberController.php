@@ -63,15 +63,13 @@ class AdminMemberController extends Controller
         }
 
         $remaining = 2 - $attempt;
+
         $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
+        $dateAssessment = null;
         if($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();    
-        }
-        if($lastSession) {
             $dateAssessment = $lastSession->created_at->addYears(1);
-        } else {
-            $dateAssessment = null;
         }
 
         $lastPayment = MemberPayment::where('member_id', $id)->where('status_code', '!=', '')->orderBy('created_at', 'desc')->first();
