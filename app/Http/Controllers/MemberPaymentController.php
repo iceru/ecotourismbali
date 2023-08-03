@@ -2,25 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use Midtrans;
+use Carbon\Carbon;
+use Midtrans\Snap;
+use Inertia\Inertia;
+use Midtrans\Config;
 use App\Models\Member;
-use App\Models\MemberPayment;
+use Midtrans\Notification;
 use Illuminate\Http\Request;
+use App\Models\MemberPayment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
-use Midtrans;
-use Midtrans\Snap;
-use Midtrans\Config;
-use Midtrans\Notification;
 
 class MemberPaymentController extends Controller
 {
     public function new_payment()
     {
-        $member_payment = new MemberPayment;
+        $member = Member::where('user_id', Auth::id())->first();
+
+        $payment = MemberPayment::where('member_id', $member->id)
+            ->where('status_code', '!=', '')
+            ->latest('created_at')
+            ->first();
+
+        if ($payment && Carbon::now()->between($payment->created_at, $payment->created_at->addDays(7))) {
+            $member_payment = $payment;
+        } else {
+            $member_payment = new MemberPayment;
+        }
 
         $order_id = date('YmdHis').Auth::id();
-        $member = Member::where('user_id', Auth::id())->first();
 
         $params = array(
             'transaction_details' => array(
@@ -35,7 +46,7 @@ class MemberPaymentController extends Controller
         Config::$is3ds =config('services.midtrans.is_3ds');
 
         $snapToken = Snap::getSnapToken($params);
-        // $payment_url = Snap::createTransaction($params)->redirect_url;
+        // $payment_url = Snap::createTransaction($params)->redirect_url;;
         
         $member_payment->payment_no = $order_id;
         $member_payment->payment_status = 'pending';

@@ -8,11 +8,14 @@ use App\Models\Member;
 use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\MemberPayment;
 use App\Models\VerifiedBadge;
+use App\Mail\MemberPaymentMail;
 use App\Models\MemberAssessment;
 use App\Models\AssessmentSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminMemberController extends Controller
@@ -70,7 +73,8 @@ class AdminMemberController extends Controller
         } else {
             $dateAssessment = null;
         }
-        
+
+        $lastPayment = MemberPayment::where('member_id', $id)->where('status_code', '!=', '')->orderBy('created_at', 'desc')->first();
         return Inertia::render('Admin/Member/MemberDetail', [
             'member' =>$member,
             'categories' => Category::all(),
@@ -80,6 +84,7 @@ class AdminMemberController extends Controller
             'dateAssessment' => $dateAssessment,
             'scores' => $memberAssessments,
             'lastSession' => $lastSession,
+            'lastPayment' => $lastPayment,
         ]);
     }
 
@@ -96,15 +101,18 @@ class AdminMemberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $member = Member::find($request->id);
-
         $request->validate([
             'category' => 'nullable',
             'program' => 'nullable',
             'verified_badge' => 'nullable',
             'total_payment' => 'nullable',
             'status' => 'nullable',
+            'invoice_no' => 'nullable',
+            'invoice_item_text' => 'nullable',
         ]);
+
+        $member = Member::find($request->id);
+        $payment = MemberPayment::firstOrNew(['status_code' => $request->invoice_no]);
 
         $member->category_id = $request->category;
         $member->program_id = $request->program;
@@ -114,6 +122,14 @@ class AdminMemberController extends Controller
             $member->status = $request->status;
         }
         $member->save();
+
+        $payment->status_code = $request->invoice_no;
+        $payment->invoice_item_text = $request->invoice_item_text;
+        $payment->payment_status = 'pending';
+        $payment->member_id = $id;
+        $payment->save();
+
+        Mail::to($member->user->email)->send(new MemberPaymentMail($payment));
 
         return Redirect::route('admin.member.detail', $member->id);
     }

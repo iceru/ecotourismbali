@@ -21,20 +21,20 @@ function AssessmentStep({ member }) {
   return (
     <MemberLayout>
       <AdminSection>
-        <TitleSection title="assessment" />
+        <TitleSection title="assessment" className="mb-6" />
 
         <div className="text-center">
           <TitleSection title="short_tutorial" className="mb-2 !text-2xl" />
           <p className="mb-8">{t('short_tutorial_text')}</p>
         </div>
 
-        <div>
+        <div className="lg:w-[80%] m-auto">
           <h4 className="mb-4 text-xl font-bold">{t('content_tutorial')}</h4>
           <div>
             <img src={business === 'Hotel' ? konten : kontenRes} />
           </div>
         </div>
-        <div>
+        <div className="mt-8 lg:w-[80%] m-auto">
           <h4 className="mb-4 text-xl font-bold">{t('form_tutorial')}</h4>
           <div>
             <img src={business === 'Hotel' ? form : formRes} />

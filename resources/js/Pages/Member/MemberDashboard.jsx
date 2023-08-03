@@ -207,7 +207,7 @@ function MemberDashboard({ member, scores, lastSession, business_type }) {
                   </div>
                 </div>
               ) : (
-                <div className="grid gap-4">
+                <div>
                   <PrimaryButton
                     color="lightPrimary"
                     as="link"

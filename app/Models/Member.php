@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Member extends Model
 {
     protected $table = 'members';
-
+    protected $with = ['user'];
+    
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
