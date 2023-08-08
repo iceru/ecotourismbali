@@ -82,7 +82,7 @@ function Assessment({ assessments, session, answers }) {
   const handleOptionChange = (questionId, optionId, noStore) => {
     const updatedData = {
       [`radio.${questionId}`]: optionId,
-      assessment_id: assessments[ziggy?.query?.question].id,
+      assessment_id: assessments[ziggy?.query?.question || 0].id,
       session_id: session.id,
     };
 

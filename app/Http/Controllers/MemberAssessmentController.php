@@ -66,7 +66,7 @@ class MemberAssessmentController extends Controller
     public function start($id)
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $assessments = Assessment::with('assessment_question')->get();
+        $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
         $session = AssessmentSession::where('id', $id)->first();
         if($member->status !== 'active') {
             $assessments = Assessment::with('assessment_question')->take(1)->get();
