@@ -21,6 +21,7 @@ import AdminSection from '@/Components/AdminSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 import MemberLayout from '@/Layouts/MemberLayout';
 import { currency } from '@/Helper/Formatter';
+import TitleSection from '../Admin/Components/TitleSection';
 
 function MemberDashboard({
   member,
@@ -129,7 +130,7 @@ function MemberDashboard({
       )}
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
         <AdminSection>
-          <h2 className="font-bold text-[20px] mb-4">{t('welcome_member')}</h2>
+          <TitleSection title="welcome_member" className="mb-4" />
           <div>
             <PrimaryButton
               as="link"
@@ -193,7 +194,7 @@ function MemberDashboard({
                     </div>
                     <div className="ml-2">
                       {lastSession && (
-                        <div className=" mb-3">
+                        <div className=" mb-2">
                           <span className="font-bold">
                             {lastSession.total_score}
                           </span>
@@ -201,17 +202,22 @@ function MemberDashboard({
                           <span className=" uppercase">Points</span>
                         </div>
                       )}
-                      {scores?.map(score => {
-                        return (
-                          <div className="flex justify-center text-gray-500 text-sm mb-1">
-                            <div className="capitalize">
-                              {lowerCase(score?.assessment?.title).slice(0, 11)}
+                      <div className="grid lg:grid-cols-2 gap-x-3">
+                        {scores?.map(score => {
+                          return (
+                            <div className="flex justify-center text-gray-500 text-sm mb-1">
+                              <div className="capitalize">
+                                {lowerCase(score?.assessment?.title).slice(
+                                  0,
+                                  11
+                                )}
+                              </div>
+                              <div className="mx-1">-</div>
+                              <div>{score?.score}</div>
                             </div>
-                            <div className="mx-1">-</div>
-                            <div>{score?.score}</div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 </>
@@ -273,6 +279,13 @@ function MemberDashboard({
             </div>
           )}
         </AdminSection>
+        {member.badge_id && !member.verified_badge && (
+          <AdminSection>
+            <TitleSection title="verified_badge" className="mb-3" />
+            <p className="m-0 mb-3">You are eligible to verify your badge!</p>
+            <PrimaryButton>Click Here to Notify Us</PrimaryButton>
+          </AdminSection>
+        )}
       </div>
       {member.status !== 'active' && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">

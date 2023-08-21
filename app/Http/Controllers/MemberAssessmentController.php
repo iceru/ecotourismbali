@@ -10,6 +10,7 @@ use App\Models\Assessment;
 use Illuminate\Support\Str;
 use App\Models\BusinessType;
 use Illuminate\Http\Request;
+use App\Mail\VerifyBadgeMail;
 use Illuminate\Support\Carbon;
 use App\Models\AssessmentOption;
 use App\Models\MemberAssessment;
@@ -17,6 +18,7 @@ use App\Models\AssessmentSession;
 use App\Models\AssessmentQuestion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Mail;
 use App\Models\MemberAssessmentAnswer;
 use Illuminate\Support\Facades\Redirect;
 
@@ -244,10 +246,26 @@ class MemberAssessmentController extends Controller
 
     public function result($id)
     {
-    
+        $member = Member::where('user_id', Auth::id())->with('badge')->first();
+        $session = AssessmentSession::where('id', $id)->first();
+        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $id)->get();
+        $dateAssessment = $session->created_at->addYears(1);
+        
         return Inertia::render('Member/Assessment/AssessmentResult', [
-            'session' => AssessmentSession::where('id', $id)->first(),
-            'member' =>  Member::where('user_id', Auth::id())->with('badge')->first(),
+            'session' => $session,
+            'member' =>  $member,
+            'scores' => $memberAssessments,
+            'expiredDate' => $dateAssessment,
         ]);
+    }
+
+    public function verifyEmail($id)
+    {
+        $member = Member::where('user_id', Auth::id())->with('badge')->first();
+        $session = AssessmentSession::where('id', $id)->first();
+
+        Mail::to('m.hafiz1825@gmail.com')->send(new VerifyBadgeMail($member));
+
+        return Redirect::route('member.assessment.result', $session->id)->with('success', 'The administrator has been notified of your request.');
     }
 }

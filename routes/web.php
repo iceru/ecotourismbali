@@ -75,6 +75,7 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::post('/member/assessment/store', [MemberAssessmentController::class, 'store'])->name('member.assessment.store');
     Route::post('/member/assessment/save', [MemberAssessmentController::class, 'save'])->name('member.assessment.save');
     Route::post('/member/assessment/complete/{id}', [MemberAssessmentController::class, 'complete'])->name('member.assessment.complete');
+    Route::get('/member/assessment/verify-email/{id}', [MemberAssessmentController::class, 'verifyEmail'])->name('member.assessment.verifyEmail');
 
     Route::get('/member/module', [MemberModuleController::class, 'index'])->name('member.module.index');
     Route::get('/member/module/{id}', [MemberModuleController::class, 'detail'])->name('member.module.detail');
