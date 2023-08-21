@@ -28,7 +28,7 @@ class AssessmentController extends Controller
             'title_en' => 'required',
             'description' => 'required',
             'description_en' => 'required',
-            'business_type_id' => 'required',
+            'business_type' => 'required',
             'image' => 'required|image',
             'image_en' => 'required|image',
         ]);

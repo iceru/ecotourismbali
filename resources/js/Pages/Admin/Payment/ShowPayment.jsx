@@ -28,7 +28,7 @@ function ShowPayment() {
         {items('payment_status', payment?.payment_status)}
         {items('name', payment?.member.business_name)}
         {items('payment_type', payment?.payment_type)}
-        {items('status_code', payment?.status_code)}
+        {items('invoice_number', payment?.status_code)}
         {items('amount', payment?.amount)}
         {items('bank', payment?.bank)}
       </AdminSection>

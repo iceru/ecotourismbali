@@ -68,12 +68,14 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/member/profile/edit/{id}', [MemberController::class, 'editProfile'])->name('member.profile.edit');
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
 
-    Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.index');
+    Route::get('/member/assessment/tutorial', [MemberAssessmentController::class, 'tutorial'])->name('member.assessment.index');
+    Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.data');
     Route::get('/member/assessment/result/{id}', [MemberAssessmentController::class, 'result'])->name('member.assessment.result');
     Route::get('/member/assessment/start/{id}', [MemberAssessmentController::class, 'start'])->name('member.assessment.start');
     Route::post('/member/assessment/store', [MemberAssessmentController::class, 'store'])->name('member.assessment.store');
     Route::post('/member/assessment/save', [MemberAssessmentController::class, 'save'])->name('member.assessment.save');
     Route::post('/member/assessment/complete/{id}', [MemberAssessmentController::class, 'complete'])->name('member.assessment.complete');
+    Route::get('/member/assessment/verify-email/{id}', [MemberAssessmentController::class, 'verifyEmail'])->name('member.assessment.verifyEmail');
 
     Route::get('/member/module', [MemberModuleController::class, 'index'])->name('member.module.index');
     Route::get('/member/module/{id}', [MemberModuleController::class, 'detail'])->name('member.module.detail');

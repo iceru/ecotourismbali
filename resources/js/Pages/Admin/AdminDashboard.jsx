@@ -49,9 +49,10 @@ function MemberDashboard({ members, modules, visitors, pages, referrers }) {
           </PrimaryButton>
         </AdminSection>
       </div>
-      <div className="flex mb-6 ">
-        <div className="lg:w-2/3">
+      <div className="flex mb-6 flex-wrap lg:flex-nowrap">
+        <div className="lg:w-2/3 w-full">
           <AdminSection>
+            <TitleSection title="total_pageviews" className="mb-4" />
             <Bar
               datasetIdKey="id"
               data={{
@@ -81,7 +82,9 @@ function MemberDashboard({ members, modules, visitors, pages, referrers }) {
           </AdminSection>
         </div>
 
-        <AdminSection className="ml-6">
+        <AdminSection className="ml-6 lg:w-1/3 w-full">
+          <TitleSection title="referral" className="mb-4" />
+
           <Pie
             datasetIdKey="id"
             data={{
@@ -104,7 +107,7 @@ function MemberDashboard({ members, modules, visitors, pages, referrers }) {
         </AdminSection>
       </div>
       <AdminSection>
-        <TitleSection title="total_visitor" />
+        <TitleSection title="total_visitor" className="mb-4" />
         <Line
           datasetIdKey="id"
           data={{

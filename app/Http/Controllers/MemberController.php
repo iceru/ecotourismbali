@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Member;
 use App\Mail\NotifyPayment;
+use App\Models\BusinessType;
 use App\Models\MemberSlider;
 use Illuminate\Http\Request;
 use App\Models\MemberAssessment;
@@ -19,17 +20,24 @@ class MemberController extends Controller
     public function index()
     {
         $member = Member::where('user_id', Auth::id())->with('member_slider')->with('badge')->first();
+        $business_type = BusinessType::all();
 
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
+        $dateAssessment = null;
+
         if($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+            $dateAssessment = $lastSession->created_at->addYears(1);
         }
+        
         return Inertia::render('Member/MemberDashboard', [
             'member' => $member,
             'user' => User::find(Auth::id()),
             'scores' => $memberAssessments,
             'lastSession' => $lastSession,
+            'business_type' => $business_type,
+            'expiredDate' => $dateAssessment,
         ]);
     }
     
@@ -41,6 +49,7 @@ class MemberController extends Controller
             'no_rooms' => 'nullable',
             'no_outlet' => 'nullable',
             'no_employees' => 'nullable',
+            'business_type_id' => 'required',
             'total_payment' => 'required',
         ]);
 
@@ -48,6 +57,7 @@ class MemberController extends Controller
         $member->no_outlets = $request->no_outlets;
         $member->no_employees = $request->no_employees;
         $member->total_payment = $request->total_payment;
+        $member->business_type_id = $request->business_type_id;
         $member->status = 'waiting_approval';
         $member->save();
 
@@ -70,8 +80,11 @@ class MemberController extends Controller
         $member = Member::where('user_id', Auth::id())->with(['member_slider', 'program', 'category', 'badge'])->first();
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
+        $dateAssessment = null;
+
         if($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+            $dateAssessment = $lastSession->created_at->addYears(1);
         }
 
         return Inertia::render('Member/MemberProfile', [
@@ -79,6 +92,7 @@ class MemberController extends Controller
             'user' => User::find(Auth::id()),
             'scores' => $memberAssessments,
             'lastSession' => $lastSession,
+            'expiredDate' => $dateAssessment,
         ]);
     }
 

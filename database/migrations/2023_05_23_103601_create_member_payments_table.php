@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('member_payments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('payment_no');
+            $table->string('payment_no')->nullable();
             $table->string('payment_status');
             
             $table->unsignedBigInteger('member_id');

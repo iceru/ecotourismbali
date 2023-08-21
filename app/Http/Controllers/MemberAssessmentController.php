@@ -10,6 +10,7 @@ use App\Models\Assessment;
 use Illuminate\Support\Str;
 use App\Models\BusinessType;
 use Illuminate\Http\Request;
+use App\Mail\VerifyBadgeMail;
 use Illuminate\Support\Carbon;
 use App\Models\AssessmentOption;
 use App\Models\MemberAssessment;
@@ -17,11 +18,20 @@ use App\Models\AssessmentSession;
 use App\Models\AssessmentQuestion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Mail;
 use App\Models\MemberAssessmentAnswer;
 use Illuminate\Support\Facades\Redirect;
 
 class MemberAssessmentController extends Controller
 {
+    public function tutorial()
+    { 
+        $member = Member::where('user_id', Auth::id())->with('business_type')->first();
+        return Inertia::render('Member/Assessment/AssessmentStep', [
+            'member' => $member,
+        ]);
+    }
+
     public function index()
     { 
         $member = Member::where('user_id', Auth::id())->with('user')->first();
@@ -58,13 +68,16 @@ class MemberAssessmentController extends Controller
     public function start($id)
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $assessments = Assessment::with('assessment_question')->get();
+        $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
+        $session = AssessmentSession::where('id', $id)->first();
         if($member->status !== 'active') {
             $assessments = Assessment::with('assessment_question')->take(1)->get();
         }
+        $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Member/Assessment/Assessment', [
-            'session' => AssessmentSession::where('id', $id)->first(),
+            'session' => $session,
             'assessments' => $assessments,
+            'answers' => $answers,
         ]);
     }
 
@@ -100,10 +113,12 @@ class MemberAssessmentController extends Controller
             'completion' => 'no',
             'member_id' => $member->id
         ]);
+        if(!$session->member_id) {
+            $session->member_id = $member->id;
+            $session->id = Str::ulid()->toBase32();
+        }
 
         $session->completion = 'no';
-        $session->member_id = $member->id;
-        $session->id = Str::ulid()->toBase32();
         $session->save();
 
         return Redirect::route('member.assessment.start', $session->id);
@@ -119,39 +134,51 @@ class MemberAssessmentController extends Controller
         $totalPoints = 0;
         foreach ($request->input() as $questionId => $optionId) {
             $optionSelected = AssessmentOption::where('id', $optionId)->first();
-            if(str_contains($questionId, 'radio')) {
+            if(str_contains($questionId, 'radio') || str_contains($questionId, 'checkbox')) {
                 $id = explode('.', $questionId);
                 $id = $id[1];
-                $memberAnswer = MemberAssessmentAnswer::firstOrNew([
-                    'member_id' => $member->id,
-                    'assessment_question_id' => $id,
-                    'assessment_session_id' => $request->session_id,
-                ]);
-                
-                $memberAnswer->member_id = $member->id;
-                $memberAnswer->assessment_question_id = $id;
-                $memberAnswer->assessment_option_id = $optionId;
-                $memberAnswer->assessment_session_id = $request->session_id;
-                $memberAnswer->save();
-
-                $totalPoints = $totalPoints + $optionSelected->point;
-            } else if (str_contains($questionId, 'checkbox')) {
-                $id = explode('.', $questionId);
-                $id = $id[1];
-                foreach ($optionId as $checkId) {
-                    $checkSelected = AssessmentOption::where('id', $checkId)->first();
+            }
+            $questionSelected = AssessmentQuestion::where('id', $id)->with('assessment')->first();
+            
+            if($questionSelected->assessment->id === $request->assessment_id) {
+                if(str_contains($questionId, 'radio')) {
                     $memberAnswer = MemberAssessmentAnswer::firstOrNew([
                         'member_id' => $member->id,
                         'assessment_question_id' => $id,
                         'assessment_session_id' => $request->session_id,
                     ]);
-                    $totalPoints = $totalPoints + $checkSelected->point;
                     
                     $memberAnswer->member_id = $member->id;
                     $memberAnswer->assessment_question_id = $id;
-                    $memberAnswer->assessment_option_id = $checkId;
+                    $memberAnswer->assessment_option_id = $optionId;
                     $memberAnswer->assessment_session_id = $request->session_id;
                     $memberAnswer->save();
+    
+                    $totalPoints = $totalPoints + $optionSelected->point;
+                } else if (str_contains($questionId, 'checkbox')) {
+                    $memberAnswer = MemberAssessmentAnswer::where([
+                        'member_id' => $member->id,
+                        'assessment_session_id' => $request->session_id,
+                        'assessment_question_id' => $id])->get();
+                        
+                    foreach($memberAnswer as $answer) {
+                        $answer->delete();
+                    } 
+                    foreach ($optionId as $checkId) {
+                        $checkSelected = AssessmentOption::where('id', $checkId)->first();
+                        $memberAnswer = MemberAssessmentAnswer::firstOrNew([
+                            'member_id' => $member->id,
+                            'assessment_option_id' => $checkId,
+                            'assessment_session_id' => $request->session_id,
+                        ]);
+                        $totalPoints = $totalPoints + $checkSelected->point;
+                        
+                        $memberAnswer->member_id = $member->id;
+                        $memberAnswer->assessment_question_id = $id;
+                        $memberAnswer->assessment_option_id = $checkId;
+                        $memberAnswer->assessment_session_id = $request->session_id;
+                        $memberAnswer->save();
+                    }
                 }
             }
                 
@@ -219,10 +246,26 @@ class MemberAssessmentController extends Controller
 
     public function result($id)
     {
-    
+        $member = Member::where('user_id', Auth::id())->with('badge')->first();
+        $session = AssessmentSession::where('id', $id)->first();
+        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $id)->get();
+        $dateAssessment = $session->created_at->addYears(1);
+        
         return Inertia::render('Member/Assessment/AssessmentResult', [
-            'session' => AssessmentSession::where('id', $id)->first(),
-            'member' =>  Member::where('user_id', Auth::id())->with('badge')->first(),
+            'session' => $session,
+            'member' =>  $member,
+            'scores' => $memberAssessments,
+            'expiredDate' => $dateAssessment,
         ]);
+    }
+
+    public function verifyEmail($id)
+    {
+        $member = Member::where('user_id', Auth::id())->with('badge')->first();
+        $session = AssessmentSession::where('id', $id)->first();
+
+        Mail::to('m.hafiz1825@gmail.com')->send(new VerifyBadgeMail($member));
+
+        return Redirect::route('member.assessment.result', $session->id)->with('success', 'The administrator has been notified of your request.');
     }
 }

@@ -11,6 +11,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { capitalize, lowerCase } from 'lodash';
 import moment from 'moment/moment';
 import { badgeColor } from '@/Helper/BadgeColor';
+import TextInput from '@/Components/TextInput';
 
 function MemberIndex() {
   const {
@@ -22,17 +23,21 @@ function MemberIndex() {
     dateAssessment,
     scores,
     lastSession,
+    lastPayment,
   } = usePage().props;
   const { t } = useTranslation();
 
   const [edit, setEdit] = useState(false);
+  const [statusMember, setStatusMember] = useState(member?.status);
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    category: member.category_id || '',
+    category: member?.category_id || '',
     program: member.program_id || '',
     verified_badge: member.verified_badge_id || '',
     total_payment: member.total_payment || '',
     status: member.status || null,
+    invoice_no: lastPayment?.status_code || null,
+    invoice_item_text: lastPayment?.invoice_item_text || null,
   });
 
   const submit = e => {
@@ -121,11 +126,43 @@ function MemberIndex() {
                     value={data.status}
                     options={status}
                     className="lg:w-3/4"
-                    onChange={e => setData('status', e.target.value)}
+                    onChange={e => {
+                      setData('status', e.target.value);
+                      setStatusMember(e.target.value);
+                    }}
                   />
                 </div>
               ) : (
                 items('status', capitalize(member?.status.replace('_', ' ')))
+              )}
+
+              {edit && statusMember === 'payment' && (
+                <>
+                  <div className="flex items-center mb-4">
+                    <div className="font-bold lg:w-1/4">{t('invoice_no')}</div>
+                    <TextInput
+                      id="invoice_no"
+                      name="invoice_no"
+                      value={data.invoice_no}
+                      className="lg:w-3/4"
+                      onChange={e => setData('invoice_no', e.target.value)}
+                    />
+                  </div>
+                  <div className="flex items-center mb-4">
+                    <div className="font-bold lg:w-1/4">
+                      {t('invoice_item_text')}
+                    </div>
+                    <TextInput
+                      id="invoice_item_text"
+                      name="invoice_item_text"
+                      value={data.invoice_item_text}
+                      className="lg:w-3/4"
+                      onChange={e =>
+                        setData('invoice_item_text', e.target.value)
+                      }
+                    />
+                  </div>
+                </>
               )}
               {edit ? (
                 <div className="flex items-center mb-4">

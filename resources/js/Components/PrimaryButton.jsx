@@ -9,19 +9,19 @@ export default function PrimaryButton({
   ...props
 }) {
   let classButton =
-    'bg-primary hover:bg-primary-dark active:bg-primary-dark text-white focus:ring-primary ';
+    'bg-primary hover:bg-opacity-80 active:bg-primary-dark text-white focus:ring-primary ';
   if (color === 'secondary') {
     classButton =
-      'bg-secondary hover:bg-secondary-dark active:bg-secondary-dark text-white focus:ring-secondary ';
+      'bg-secondary hover:bg-opacity-80 active:bg-secondary-dark text-white focus:ring-secondary ';
   } else if (color === 'danger') {
     classButton =
       'bg-red-500 hover:bg-red-600 focus:ring-red-700 active:bg-red-700 text-white ';
   } else if (color === 'lightSecondary') {
     classButton =
-      'bg-lightSecondary hover:opacity-80 focus:ring-lightSecondary active:bg-lightSecondary text-gray-600';
+      'bg-lightSecondary hover:bg-opacity-80 focus:ring-lightSecondary active:bg-lightSecondary text-gray-600';
   } else if (color === 'lightPrimary') {
     classButton =
-      'bg-lightPrimary hover:opacity-80  focus:ring-lightPrimary active:bg-lightPrimary text-gray-600';
+      'bg-lightPrimary hover:bg-opacity-80  focus:ring-lightPrimary active:bg-lightPrimary text-gray-600';
   } else if (color === 'gray') {
     classButton =
       'bg-gray-400 hover:gray-600 focus:ring-gray-400 active:bg-gray-400 text-white';

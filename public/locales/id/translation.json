@@ -134,7 +134,7 @@
 
   "member_locked_title": "Akun Anda Terkunci",
   "member_locked_text": "Untuk mengaktifkan keanggotaan Anda, silakan klik tombol di bawah ini dan lanjutkan pembayaran",
-  "member_locked_button": "Aktifkan Keanggotaan",
+  "member_locked_button": "Bayar Disini",
 
   "welcome_member": "Selamat Datang di Laman Utama Member",
   "edit_profile": "Ubah Profil",
@@ -221,8 +221,9 @@
 
   "admin_login": "Admin Login",
 
-  "congrats": "Selamat!",
-  "finish_assessment": "Anda telah menyelesaikan Penilaian Mandiri",
+  "congrats": "Selamat,",
+  "finish_assessment": "Anda dinyatakan lulus Self-Assessment! ",
+  "finish_assessment_text": "Self-assessment adalah penilaian mandiri untuk restoran dan bisnis akomodasi yang berada di Bali, member akan mendapatkan score dari hasil self-assessment tersebut.",
   "your_assessment_scores": "Skor Penilaian Mandiri Anda adalah:",
   "back_to_assessment": "Kembali Ke Penilaian Mandiri",
   "your_badge_is": "Badge Penilaian Mandiri Anda adalah:",
@@ -230,7 +231,7 @@
   "cant_assessment": "Anda sudah melakukan penilaian mandiri sebanyak 2 kali. Anda bisa melakukan penilaian mandiri selanjutnya pada tanggal:",
 
   "member_not_active": "Membership anda belum aktif",
-  "preview_member": "Pratinjau untuk Penilaian Mandiri dan Modul",
+  "preview_member": "Pratinjau untuk Penilaian Mandiri dan E-Learning",
   "member_not_approved": "Akun anda sedang dalam proses review. Harap tunggu sampai kami menyetujui status akun anda.",
 
   "trial_assessment": "Anda sedang berada pada percobaan penilaian mandiri. Percobaan yang tersisa: 1",
@@ -260,7 +261,24 @@
   "payment_status": "Status Pembayaran",
   "payment_type": "Tipe Pembayaran",
   "status_code": "Status Kode",
+  "invoice_number": "Nomor Invoice",
   "amount": "Total",
   "bank": "Bank",
-  "name": "Nama"
+  "name": "Nama",
+
+  "total_visitor": "Jumlah Session and Views dalam 7 hari",
+  "total_pageviews": "Jumlah Page Views dalam 7 hari",
+  "referral": "Referral Website",
+
+  "short_tutorial": "PANDUAN SINGKAT PERANGKAT",
+  "short_tutorial_text": "Penjelasan singkat tentang konten dari perangkat dan instruksi untuk mengisi formulir ",
+  "content_tutorial": "Konten dari Perangkat",
+  "form_tutorial": "Cara Mengisi Formulir",
+
+  "invoice_no": "Nomor Invoice",
+  "invoice_item_text": "Item Invoice",
+
+  "verify_badge": "Verifikasi Badge Anda sekarang!",
+  "verify_badge_text": "Untuk Verifikasi Badge Anda dengan kami dan mendapatkan Verified Badge, Anda dapat mengeklik tombol di bawah untuk memberi tahu administrator kami tentang permintaan Anda.",
+  "notify_us": "Beri tahu kami"
 }

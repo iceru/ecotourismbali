@@ -8,8 +8,10 @@ use App\Models\Member;
 use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\MemberPayment;
 use App\Models\MemberAssessment;
 use App\Models\AssessmentSession;
+use Illuminate\Support\Facades\Auth;
 
 class MemberListController extends Controller
 {
@@ -76,5 +78,13 @@ class MemberListController extends Controller
             'badges' => Badge::all(),
             'members' => $member,
         ]);
+    }
+
+    public function invoice(Request $request)
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+        $payment = MemberPayment::where('member_id', $member->id)->where('status_code', '!=', '')->orderBy('created_at', 'desc')->first();
+
+        return view('invoice', compact('payment'));
     }
 }

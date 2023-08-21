@@ -135,7 +135,7 @@
 
   "member_locked_title": "Your Membership is still locked",
   "member_locked_text": "To activate your membership, please click button below and proceed for payment",
-  "member_locked_button": "Click here to Activate Membership",
+  "member_locked_button": "Pay Here",
 
   "welcome_member": "Welcome to the Member Dashboard",
   "edit_profile": "Edit Your Profile",
@@ -224,8 +224,9 @@
 
   "admin_login": "Admin Login",
 
-  "congrats": "Congratulations!",
-  "finish_assessment": "You completed the Self Assessment",
+  "congrats": "Congratulations,",
+  "finish_assessment": "You have passed the self-assessment! ",
+  "finish_assessment_text": "Self-assessment is an independent assessment for restaurants and accommodation businesses in Bali, members will get a score from the results of the self-assessment .",
   "your_assessment_scores": "Your Self Assessment Score is:",
   "back_to_assessment": "Back to Assessment",
   "your_badge_is": "Your Self Assessment Badge is:",
@@ -233,7 +234,7 @@
   "cant_assessment": "You have done Self Assessment 2 times. You can do your next Self Assessment on:",
 
   "member_not_active": "Your membership is not activated yet",
-  "preview_member": "Preview of Assessment and Modules",
+  "preview_member": "Preview of Assessment and E-Learning",
   "member_not_approved": "Your account is under review. Please wait until we approve your account status",
 
   "trial_assessment": "You are in trial of assessment. Remaining Attempt: 1",
@@ -263,7 +264,28 @@
   "payment_status": "Payment Status",
   "payment_type": "Payment Type",
   "status_code": "Status Code",
+  "invoice_number": "Invoice Number",
   "amount": "Amount",
   "bank": "Bank",
-  "name": "Name"
+  "name": "Name",
+
+  "total_visitor": "Total Session and Views for 7 days",
+  "total_pageviews": "Total Page Views for 7 day",
+  "referral": "Referral Website",
+
+  "short_tutorial": "QUICK GUIDE OF THE TOOL",
+  "short_tutorial_text": "A quick explanation of the content of the Tool and instructions to fill out the form",
+  "content_tutorial": "Content of the Tool",
+  "form_tutorial": "How to Fill Out the Form",
+
+  "invoice_no": "Invoice Number",
+  "invoice_item_text": "Invoice Item",
+
+  "verify_badge": "Verify your Badge now!",
+  "verify_badge_text": "To verify your badge with us and get the Verified Badge, you can simply click the button below to notify our administrator about your request.",
+  "notify_us": "Notify Us",
+
+  "self_certificate": "Self Assessment Certificate",
+  "self_certificate_text": "Download your Self Assessment Certificate here",
+  "download": "Download"
 }

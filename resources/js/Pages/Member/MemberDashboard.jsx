@@ -10,6 +10,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import queryString from 'query-string';
 import { lowerCase } from 'lodash';
+import moment from 'moment';
+import 'moment/locale/id';
 
 import { badgeColor } from '@/Helper/BadgeColor';
 import InputLabel from '@/Components/InputLabel';
@@ -18,11 +20,20 @@ import SelectInput from '@/Components/SelectInput';
 import AdminSection from '@/Components/AdminSection';
 import PrimaryButton from '@/Components/PrimaryButton';
 import MemberLayout from '@/Layouts/MemberLayout';
+import { currency } from '@/Helper/Formatter';
+import TitleSection from '../Admin/Components/TitleSection';
 
-function MemberDashboard({ member, scores, lastSession }) {
-  const { t } = useTranslation();
+function MemberDashboard({
+  member,
+  scores,
+  lastSession,
+  business_type,
+  expiredDate,
+}) {
+  const { t, i18n } = useTranslation();
   const [payComplete, setPayComplete] = useState(false);
   const [payPending, setPayPending] = useState(false);
+  const [business, setBusiness] = useState();
   const parsed = queryString.parse(location.search);
   const { flash } = usePage().props;
 
@@ -45,6 +56,7 @@ function MemberDashboard({ member, scores, lastSession }) {
     no_rooms: null,
     no_employees: null,
     no_outlets: null,
+    business_type_id: null,
     total_payment: total_payments[0].value,
   });
 
@@ -89,13 +101,8 @@ function MemberDashboard({ member, scores, lastSession }) {
     }
   }, []);
 
-  const notifyAdmin = () => {
-    router.post(route('member.notifyPayment'));
-  };
-
   const submit = e => {
     e.preventDefault();
-    debugger;
 
     post(route('member.store'), {
       onSuccess: () => {
@@ -103,6 +110,7 @@ function MemberDashboard({ member, scores, lastSession }) {
       },
     });
   };
+
   return (
     <MemberLayout>
       {payComplete || payCompleteStorage ? (
@@ -122,7 +130,7 @@ function MemberDashboard({ member, scores, lastSession }) {
       )}
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
         <AdminSection>
-          <h2 className="font-bold text-[20px] mb-4">{t('welcome_member')}</h2>
+          <TitleSection title="welcome_member" className="mb-4" />
           <div>
             <PrimaryButton
               as="link"
@@ -152,76 +160,90 @@ function MemberDashboard({ member, scores, lastSession }) {
           {member.status === 'active' ? (
             <>
               {member && member.badge ? (
-                <h2 className={'font-bold text-[20px] mb-4'}>
-                  {t('your_assessment')}
-                  <span
-                    className={
-                      badgeColor(member.badge.name, 'text') + ' ml-1.5'
-                    }
-                  >
-                    {member.badge.name}
-                  </span>
-                </h2>
-              ) : (
-                <h2 className="font-bold text-[20px] mb-4">
-                  {t('no_assessment')}
-                </h2>
-              )}
-              {member && member.badge ? (
-                <div className="flex items-center">
-                  <div className="flex flex-col items-center mr-4 uppercase mb-1">
-                    <div>
-                      <img
-                        className="max-h-[120px]"
-                        src={'/storage/badges/' + member.badge.image}
-                      />
-                    </div>
-                    <div
-                      className={`font-bold mt-1 text-center whitespace-nowrap   ${badgeColor(
-                        member.badge.name,
-                        'text'
-                      )}`}
+                <>
+                  <h2 className={'font-bold text-[20px] mb-4'}>
+                    {t('your_assessment')}
+                    <span
+                      className={
+                        badgeColor(member.badge.name, 'text') + ' ml-1.5'
+                      }
                     >
-                      {member.badge.name} Badge
+                      {member.badge.name}
+                    </span>
+                  </h2>
+                  <div className="flex items-center">
+                    <div className="flex flex-col items-center mr-4  mb-1">
+                      <div>
+                        <img
+                          className="max-h-[120px]"
+                          src={'/storage/badges/' + member.badge.image}
+                        />
+                      </div>
+                      <div
+                        className={`font-bold mt-1 text-center whitespace-nowrap uppercase ${badgeColor(
+                          member.badge.name,
+                          'text'
+                        )}`}
+                      >
+                        {member.badge.name} Badge
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        Expired:&nbsp;
+                        {moment(expiredDate).locale(i18n.language).format('ll')}
+                      </div>
+                    </div>
+                    <div className="ml-2">
+                      {lastSession && (
+                        <div className=" mb-2">
+                          <span className="font-bold">
+                            {lastSession.total_score}
+                          </span>
+                          &nbsp;
+                          <span className=" uppercase">Points</span>
+                        </div>
+                      )}
+                      <div className="grid lg:grid-cols-2 gap-x-3">
+                        {scores?.map(score => {
+                          return (
+                            <div className="flex justify-center text-gray-500 text-sm mb-1">
+                              <div className="capitalize">
+                                {lowerCase(score?.assessment?.title).slice(
+                                  0,
+                                  11
+                                )}
+                              </div>
+                              <div className="mx-1">-</div>
+                              <div>{score?.score}</div>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
-                  <div className="ml-2">
-                    {lastSession && (
-                      <div className=" mb-3">
-                        <span className="font-bold">
-                          {lastSession.total_score}
-                        </span>
-                        &nbsp;
-                        <span className=" uppercase">Points</span>
-                      </div>
-                    )}
-                    {scores?.map(score => {
-                      return (
-                        <div className="flex justify-center text-gray-500 text-sm mb-1">
-                          <div className="capitalize">
-                            {lowerCase(score?.assessment?.title).slice(0, 11)}
-                          </div>
-                          <div className="mx-1">-</div>
-                          <div>{score?.score}</div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+                </>
               ) : (
-                <div className="grid gap-4">
-                  <PrimaryButton color="lightPrimary">
-                    {t('start_assessment')}
-                    <FontAwesomeIcon
-                      icon={faLongArrowAltRight}
-                      className="ml-2"
-                    />
-                  </PrimaryButton>
-                  <PrimaryButton color="lightSecondary" className="text-left">
+                <>
+                  <h2 className="font-bold text-[20px] mb-4">
+                    {t('no_assessment')}
+                  </h2>
+                  <div>
+                    <PrimaryButton
+                      color="lightPrimary"
+                      as="link"
+                      href={route('member.assessment.index')}
+                    >
+                      {t('start_assessment')}
+                      <FontAwesomeIcon
+                        icon={faLongArrowAltRight}
+                        className="ml-2"
+                      />
+                    </PrimaryButton>
+                    {/* <PrimaryButton color="lightSecondary" className="text-left">
                     {t('learn_more_assessment')}
                     <FontAwesomeIcon icon={faBook} className="ml-2" />
-                  </PrimaryButton>
-                </div>
+                  </PrimaryButton> */}
+                  </div>
+                </>
               )}
             </>
           ) : (
@@ -257,6 +279,13 @@ function MemberDashboard({ member, scores, lastSession }) {
             </div>
           )}
         </AdminSection>
+        {member.badge_id && !member.verified_badge && (
+          <AdminSection>
+            <TitleSection title="verified_badge" className="mb-3" />
+            <p className="m-0 mb-3">You are eligible to verify your badge!</p>
+            <PrimaryButton>Click Here to Notify Us</PrimaryButton>
+          </AdminSection>
+        )}
       </div>
       {member.status !== 'active' && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">
@@ -264,11 +293,20 @@ function MemberDashboard({ member, scores, lastSession }) {
           {member.status === 'payment' && member.total_payment ? (
             <>
               <p className="text-sm">{t('member_locked_text')}</p>
-              <PrimaryButton
-                onClick={() => (member.status !== 'active' ? pay() : null)}
-              >
-                {t('member_locked_button')}
-              </PrimaryButton>
+              <div className="flex justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
+                <div>
+                  <p>{t('total_payment')}</p>
+                  <h4 className="text-2xl font-bold">
+                    {currency.format(member.total_payment)}
+                  </h4>
+                </div>
+                <PrimaryButton
+                  className="text-[16px]"
+                  onClick={() => (member.status !== 'active' ? pay() : null)}
+                >
+                  {t('member_locked_button')}
+                </PrimaryButton>
+              </div>
             </>
           ) : member.status === 'waiting_approval' ? (
             <>
@@ -277,93 +315,134 @@ function MemberDashboard({ member, scores, lastSession }) {
           ) : (
             <>
               <p className="mb-4">{t('notify_admin_text')}</p>
-              <form className="grid lg:grid-cols-2 gap-4" onSubmit={submit}>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="no_rooms"
-                      value={t('form_label_no_rooms')}
-                    />
+              <form onSubmit={submit}>
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="total_payment"
+                        value={t('form_label_total_payment')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <SelectInput
+                        id="business_type"
+                        name="business_type"
+                        value={data.business_type_id}
+                        options={business_type}
+                        placeholder="select_business_type"
+                        className="w-full"
+                        labelData="name"
+                        required
+                        valueData="id"
+                        onChange={e => {
+                          setData('business_type_id', e.target.value);
+                          let index = e.target.selectedIndex;
+                          setBusiness(e.target[index].text);
+                        }}
+                      />
+                      {errors.business_type_id && (
+                        <span className="text-red-600">
+                          {errors.business_type_id}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="lg:w-4/5">
-                    <TextInput
-                      id="no_rooms"
-                      name="no_rooms"
-                      type="number"
-                      min={0}
-                      value={data.no_rooms}
-                      className="block w-full"
-                      isFocused={true}
-                      onChange={e => setData('no_rooms', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.no_rooms}</span>
+                  {business === 'Hotel' && (
+                    <div className="block  items-center">
+                      <div className="mb-2">
+                        <InputLabel
+                          htmlFor="no_rooms"
+                          value={t('form_label_no_rooms')}
+                        />
+                      </div>
+                      <div className="lg:w-4/5">
+                        <TextInput
+                          id="no_rooms"
+                          name="no_rooms"
+                          type="number"
+                          min={0}
+                          value={data.no_rooms}
+                          className="block w-full"
+                          isFocused={true}
+                          onChange={e => setData('no_rooms', e.target.value)}
+                        />
+                        <span className="text-red-600">{errors.no_rooms}</span>
+                      </div>
+                    </div>
+                  )}
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="no_outlet"
+                        value={t('form_label_no_outlet')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <TextInput
+                        id="no_outlets"
+                        name="no_outlets"
+                        required
+                        type="number"
+                        min={0}
+                        value={data.no_outlets}
+                        className="block w-full"
+                        isFocused={true}
+                        onChange={e => setData('no_outlets', e.target.value)}
+                      />
+                      <span className="text-red-600">{errors.no_outlets}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="no_outlet"
-                      value={t('form_label_no_outlet')}
-                    />
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="no_employees"
+                        value={t('form_label_no_employees')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <TextInput
+                        id="no_employees"
+                        name="no_employees"
+                        type="number"
+                        required
+                        min={0}
+                        value={data.no_employees}
+                        className="block w-full"
+                        isFocused={true}
+                        onChange={e => setData('no_employees', e.target.value)}
+                      />
+                      <span className="text-red-600">
+                        {errors.no_employees}
+                      </span>
+                    </div>
                   </div>
-                  <div className="lg:w-4/5">
-                    <TextInput
-                      id="no_outlets"
-                      name="no_outlets"
-                      type="number"
-                      min={0}
-                      value={data.no_outlets}
-                      className="block w-full"
-                      isFocused={true}
-                      onChange={e => setData('no_outlets', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.no_outlets}</span>
-                  </div>
-                </div>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="no_employees"
-                      value={t('form_label_no_employees')}
-                    />
-                  </div>
-                  <div className="lg:w-4/5">
-                    <TextInput
-                      id="no_employees"
-                      name="no_employees"
-                      type="number"
-                      min={0}
-                      value={data.no_employees}
-                      className="block w-full"
-                      isFocused={true}
-                      onChange={e => setData('no_employees', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.no_employees}</span>
-                  </div>
-                </div>
-                <div className="block  items-center">
-                  <div className="mb-2">
-                    <InputLabel
-                      htmlFor="total_payment"
-                      value={t('form_label_total_payment')}
-                    />
-                  </div>
-                  <div className="lg:w-4/5">
-                    <SelectInput
-                      id="total_payment"
-                      name="total_payment"
-                      value={data.total_payment}
-                      options={total_payments}
-                      className="w-full"
-                      onChange={e => setData('total_payment', e.target.value)}
-                    />
-                    <span className="text-red-600">{errors.total_payment}</span>
+                  <div className="block  items-center">
+                    <div className="mb-2">
+                      <InputLabel
+                        htmlFor="total_payment"
+                        value={t('form_label_total_payment')}
+                      />
+                    </div>
+                    <div className="lg:w-4/5">
+                      <SelectInput
+                        id="total_payment"
+                        name="total_payment"
+                        value={data.total_payment}
+                        options={total_payments}
+                        className="w-full"
+                        onChange={e => setData('total_payment', e.target.value)}
+                      />
+                      <span className="text-red-600">
+                        {errors.total_payment}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <PrimaryButton
                   color="secondary"
                   type="submit"
-                  className="w-fit"
+                  className="flex justify-center mt-6 w-full"
                   disabled={processing}
                 >
                   {t('submit')}

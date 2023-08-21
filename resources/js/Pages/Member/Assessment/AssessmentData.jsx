@@ -156,7 +156,7 @@ function AssessmentData() {
                   <span className="text-red-600">{errors.phone}</span>
                 )}
               </div>
-              <div className="grid gap-3">
+              {/* <div className="grid gap-3">
                 <InputLabel
                   htmlFor="business_type_id"
                   value={t('label_business_type_id')}
@@ -177,7 +177,7 @@ function AssessmentData() {
                     {errors.business_type_id}
                   </span>
                 )}
-              </div>
+              </div> */}
             </div>
             <PrimaryButton className="py-3 mt-6 w-full">
               <div className="w-full">{t('next')}</div>
