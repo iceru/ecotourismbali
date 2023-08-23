@@ -117,7 +117,7 @@ function MemberIndex() {
               {!edit ? t('edit_member') : t('close_edit_member')}
             </PrimaryButton>
             <form onSubmit={submit}>
-              {edit && status !== 'active' ? (
+              {edit && !status.includes('active') ? (
                 <div className="flex items-center mb-4">
                   <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
                   <SelectInput

@@ -147,6 +147,9 @@
   "not_eligible_assessment": "Anda tidak berhak melakukan penilaian mandiri. Percobaan yang tersisa: {{ number }}",
   "business_info": "Halaman Informasi Bisnis",
   "label_business_name": "Apakah nama bisnis Anda?",
+  "label_company_name": "Apakah nama perusahaan Anda?",
+  "label_sister_company": "Apakah nama perusahaan seinduk anda?",
+  "label_is_sister_company": "Apakah anda memiliki perusahaan seinduk lainnya?",
   "label_business_location": "Dimana lokasi bisnis Anda?",
   "label_website": "Apakah nama website bisnis Anda?",
   "label_name": "Nama Anda?",
@@ -223,7 +226,7 @@
 
   "congrats": "Selamat,",
   "finish_assessment": "Anda dinyatakan lulus Self-Assessment! ",
-  "finish_assessment_text": "Self-assessment adalah penilaian mandiri untuk restoran dan bisnis akomodasi yang berada di Bali, member akan mendapatkan score dari hasil self-assessment tersebut.",
+  "finish_assessment_text": "Self-assessment adalah penilaian mandiri berlaku selama setahun untuk restoran dan juga bisnis akomodasi yang ada di Bali. Member dapat melakukan dua self-assessment dan akan mendapatkan score dari hasil self-assessment tersebut.",
   "your_assessment_scores": "Skor Penilaian Mandiri Anda adalah:",
   "back_to_assessment": "Kembali Ke Penilaian Mandiri",
   "your_badge_is": "Badge Penilaian Mandiri Anda adalah:",
@@ -280,5 +283,20 @@
 
   "verify_badge": "Verifikasi Badge Anda sekarang!",
   "verify_badge_text": "Untuk Verifikasi Badge Anda dengan kami dan mendapatkan Verified Badge, Anda dapat mengeklik tombol di bawah untuk memberi tahu administrator kami tentang permintaan Anda.",
-  "notify_us": "Beri tahu kami"
+  "notify_us": "Beri tahu kami",
+
+  "self_certificate": "Sertifikat Self Assessment",
+  "self_certificate_text": "Unduh Sertifikat Self Assessment disini",
+  "download": "Unduh",
+
+  "green_credential": "Green Credential",
+  "provinces": "Provinsi",
+  "city": "Kota",
+  "select_province": "Pilih Provinsi",
+  "select_city": "Pilih Kota",
+
+  "no_badge": "No Badge",
+  "greenpal": "Green Pal",
+  "data_saved": "Data Berhasil Tersimpan",
+  "save": "Simpan"
 }

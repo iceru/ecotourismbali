@@ -49,9 +49,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/member/list', [MemberListController::class, 'index'])->name('member.list');
+Route::get('/green-credential', [MemberListController::class, 'index'])->name('member.list');
 Route::get('/member/detail/{slug}',[MemberListController::class, 'detail'])->name('member.detail');
-Route::post('/member/list',[MemberListController::class, 'filter'])->name('member.filter');
+Route::post('/green-credential',[MemberListController::class, 'filter'])->name('member.filter');
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 

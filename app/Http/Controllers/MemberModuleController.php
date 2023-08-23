@@ -19,21 +19,21 @@ class MemberModuleController extends Controller
     public function index()
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $modules = Module::with(array('member_module' => function($query) use($member) {
+        $modules = Module::with(array('member_module' => function ($query) use ($member) {
             $query->where('member_id', $member->id);
         }))->get();
         $memberModule = MemberModule::where('member_id', $member->id)->get();
 
-        if($member->status !== 'active') {
-            $modules = Module::with(array('member_module' => function($query) use($member) {
+        if (!str_contains($member->status, 'active')) {
+            $modules = Module::with(array('member_module' => function ($query) use ($member) {
                 $query->where('member_id', $member->id);
             }))->take(1)->get();
         }
-        foreach($modules as $module) {
-            foreach($memberModule as $memModule) {
-                if($memModule->module_id === $module->id) {
+        foreach ($modules as $module) {
+            foreach ($memberModule as $memModule) {
+                if ($memModule->module_id === $module->id) {
                     $module->completed = true;
-                } 
+                }
             }
         }
         return Inertia::render('Member/Module/ModuleList', [
@@ -44,26 +44,26 @@ class MemberModuleController extends Controller
     public function detail($id)
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $module = Module::where('id', $id)->with(array('member_module' => function($query) use($member) {
+        $module = Module::where('id', $id)->with(array('member_module' => function ($query) use ($member) {
             $query->where('member_id', $member->id);
         }))->firstOrFail();
-        
+
 
         return Inertia::render('Member/Module/ModuleDetail', [
-            'module' =>$module,
+            'module' => $module,
         ]);
     }
 
     public function result($id)
     {
         $member = Member::where('user_id', Auth::id())->first();
-        
+
         $preQuestions = PreTestQuestion::with('pre_test_option')->get();
         $prePoint = 100 / $preQuestions->count();
         $totalPrePoint = 0;
-        
+
         $preAnswers = PreTestModuleAnswer::where('member_id', $member->id)->get();
-        
+
         foreach ($preAnswers as $answer) {
             foreach ($preQuestions as $question) {
                 if ($answer->pre_test_question_id === $question->id) {
@@ -79,7 +79,7 @@ class MemberModuleController extends Controller
         $postQuestions = PostTestQuestion::with('post_test_option')->get();
         $postPoint = 100 / $postQuestions->count();
         $totalPostPoint = 0;
-        
+
         $postAnswers = PostTestModuleAnswer::where('member_id', $member->id)->get();
 
         foreach ($postAnswers as $answer) {
@@ -98,7 +98,7 @@ class MemberModuleController extends Controller
             'member_id' => $member->id,
             'module_id' => $id
         ]);
-        
+
         $memberModule->completion = 1;
         $memberModule->score_pre_test = $totalPrePoint;
         $memberModule->score_post_test = $totalPostPoint;
@@ -107,7 +107,7 @@ class MemberModuleController extends Controller
         $memberModule->save();
 
         $module = Module::where('id', $id)->first();
-        
+
         return Inertia::render('Member/Module/ModuleResult', [
             'memberModule' => $memberModule,
             'module' => $module,

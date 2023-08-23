@@ -10,6 +10,7 @@ import { isEmpty } from 'lodash';
 
 function Assessment({ assessments, session, answers }) {
   const [active, setActive] = useState(0);
+  const [dataSaved, setDataSaved] = useState(false);
   const { t, i18n } = useTranslation();
   const { ziggy } = usePage().props;
 
@@ -32,6 +33,18 @@ function Assessment({ assessments, session, answers }) {
         } else {
           router.post(route('member.assessment.complete', session.id));
         }
+        setDataSaved(false);
+      },
+    });
+  };
+
+  const save = e => {
+    e.preventDefault();
+
+    post(route('member.assessment.save'), {
+      onSuccess: () => {
+        window.scrollTo(0, 0);
+        setDataSaved(true);
       },
     });
   };
@@ -41,6 +54,28 @@ function Assessment({ assessments, session, answers }) {
       setActive(parseInt(ziggy?.query?.question));
     }
   }, [ziggy?.query]);
+
+  useEffect(() => {
+    const handleCutCopy = e => {
+      e.preventDefault();
+    };
+
+    document.body.addEventListener('cut', handleCutCopy);
+    document.body.addEventListener('copy', handleCutCopy);
+
+    return () => {
+      document.body.removeEventListener('cut', handleCutCopy);
+      document.body.removeEventListener('copy', handleCutCopy);
+    };
+  }, []);
+
+  const handleMouseDown = e => {
+    e.preventDefault();
+  };
+
+  const handleSelectStart = e => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     let localAnswers = localStorage.getItem('assessment');
@@ -76,8 +111,6 @@ function Assessment({ assessments, session, answers }) {
       });
     }
   }, [answers]);
-
-  console.log(data);
 
   const handleOptionChange = (questionId, optionId, noStore) => {
     const updatedData = {
@@ -129,9 +162,19 @@ function Assessment({ assessments, session, answers }) {
 
   return (
     <MemberLayout>
+      {dataSaved && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-4 relative">
+          {t('data_saved')}
+        </div>
+      )}
       <AdminSection>
         <TitleSection title="assessment" className="mb-6" />
-        <div>
+        <div
+          className="assessments"
+          onMouseDown={handleMouseDown}
+          onSelectStart={handleSelectStart}
+          style={{ userSelect: 'none' }}
+        >
           {assessments.map((item, i) => {
             return (
               <form
@@ -151,19 +194,25 @@ function Assessment({ assessments, session, answers }) {
                 <div className="font-bold mb-3 text-xl text-center">
                   {lang === 'en' && item.title_en ? item.title_en : item.title}
                 </div>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      lang === 'en' && item.description_en
-                        ? item.description_en
-                        : item.description,
-                  }}
-                  className="text-center mb-10"
-                />
+                {item.description !== '<p>-</p>' && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        lang === 'en' && item.description_en
+                          ? item.description_en
+                          : item.description,
+                    }}
+                    className="text-center mb-10"
+                  />
+                )}
                 {item.assessment_question.map((question, i) => {
                   return (
                     <div>
-                      <div className="font-bold text-lg">{question.title}</div>
+                      <div className="font-bold text-lg mb-3">
+                        {lang === 'en' && question.title_en
+                          ? question.title_en
+                          : question.title}
+                      </div>
                       <div
                         dangerouslySetInnerHTML={{
                           __html:
@@ -235,6 +284,14 @@ function Assessment({ assessments, session, answers }) {
                     color="gray"
                   >
                     {t('back')}
+                  </PrimaryButton>
+                  <PrimaryButton
+                    type="button"
+                    onClick={save}
+                    className="min-w-[160px] flex justify-center"
+                    color="secondary"
+                  >
+                    {t('save')}
                   </PrimaryButton>
                   <PrimaryButton
                     type="submit"

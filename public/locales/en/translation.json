@@ -1,7 +1,7 @@
 {
   "login_welcome": "Welcome Back!",
   "login_welcome_text": "Enter the email and password to login",
-  "register_welcome": "Register as a Member",
+  "register_welcome": "Register as our Tribe",
   "register_welcome_text": "Fill the information to continue register",
   "register_welcome_text2": "Already a Member?",
   "already_registered": "Already registered?",
@@ -121,9 +121,9 @@
   "form_label_question_en": "Question in English",
   "form_label_option_en": "Option in English",
   "form_label_no_rooms": "Number of Rooms",
-  "form_label_no_outlet": "Number of Outlets",
+  "form_label_no_outlet": "Number of Restaurant Outlets",
   "form_label_no_employees": "Number of Employees",
-  "form_label_total_payment": "Price Range Per-Night",
+  "form_label_total_payment": "ETB Product",
 
   "add_pre_test": "Add Pre Test Question",
   "add_post_test": "Add Post Test Question",
@@ -148,6 +148,9 @@
   "not_eligible_assessment": "You are not eligible to do an assessment. Remaining Attempt(s): {{ number }}",
   "business_info": "Business Information Page",
   "label_business_name": "What is your business name",
+  "label_company_name": "What is your company name",
+  "label_sister_company": "What is your sister company name",
+  "label_is_sister_company": "Do you have any sister company?",
   "label_business_location": "Where is your business located?",
   "label_website": "What is your business website?",
   "label_name": "What's your name?",
@@ -225,8 +228,8 @@
   "admin_login": "Admin Login",
 
   "congrats": "Congratulations,",
-  "finish_assessment": "You have passed the self-assessment! ",
-  "finish_assessment_text": "Self-assessment is an independent assessment for restaurants and accommodation businesses in Bali, members will get a score from the results of the self-assessment .",
+  "finish_assessment": "on your self-assessment!",
+  "finish_assessment_text": "Self-assessment is an independent assessment valid for restaurants and accommodation businesses in Bali for a year. Members can do two self-assessments and will get a score from the results of the self-assessment.",
   "your_assessment_scores": "Your Self Assessment Score is:",
   "back_to_assessment": "Back to Assessment",
   "your_badge_is": "Your Self Assessment Badge is:",
@@ -287,5 +290,16 @@
 
   "self_certificate": "Self Assessment Certificate",
   "self_certificate_text": "Download your Self Assessment Certificate here",
-  "download": "Download"
+  "download": "Download",
+
+  "green_credential": "Green Credential",
+  "provinces": "Province",
+  "city": "City",
+  "select_province": "Select Province",
+  "select_city": "Select City",
+
+  "no_badge": "No Badge",
+  "greenpal": "Green Pal",
+  "data_saved": "Data Saved Successfully",
+  "save": "Save"
 }

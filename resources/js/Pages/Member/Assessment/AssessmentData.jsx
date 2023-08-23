@@ -6,15 +6,25 @@ import MemberLayout from '@/Layouts/MemberLayout';
 import { useForm, usePage } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import SelectInput from '@/Components/SelectInput';
 import moment from 'moment';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import SelectInput from '@/Components/SelectInput';
 
 function AssessmentData() {
   const { t } = useTranslation();
+  const [provinces, setProvinces] = useState();
+  const [selectedProvince, setSelectedProvince] = useState();
+  const [city, setCity] = useState();
+  const [isSisterCompany, setIsSisterCompany] = useState(false);
 
-  const { member, business_type, remaining, dateAssessment } = usePage().props;
+  const { member, remaining, dateAssessment } = usePage().props;
   const { data, setData, post, errors } = useForm({
     business_name: member.business_name || '',
+    company_name: member.company_name || '',
+    sister_company: member.sister_company || '',
+    city: member.city || '',
+    province: member.province || '',
     address: member.address || '',
     website: member.website || '',
     name: member?.user?.name || '',
@@ -30,18 +40,45 @@ function AssessmentData() {
     post(route('member.assessment.store', member.id), {});
   };
 
+  useEffect(() => {
+    axios;
+    fetch(`https://iceru.github.io/api-wilayah-indonesia/api/provinces.json`)
+      .then(response => response.json())
+      .then(provinces => {
+        setProvinces(provinces);
+        getCity(selectedProvince || provinces[0].id);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCity();
+  }, [selectedProvince]);
+
+  const getCity = id => {
+    fetch(
+      `https://iceru.github.io/api-wilayah-indonesia/api/regencies/${
+        id || selectedProvince
+      }.json`
+    )
+      .then(response => response.json())
+      .then(city => setCity(city));
+  };
+
+  const companies = [
+    {
+      label: 'No',
+      value: false,
+    },
+    {
+      label: 'Yes',
+      value: true,
+    },
+  ];
+
   return (
     <MemberLayout>
       {remaining > 0 ? (
         <AdminSection className="grid gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-3">{t('assessment')}</h3>
-            <div className="px-4 py-3 bg-lightSecondary rounded-md inline-flex">
-              {member.status === 'active'
-                ? t('eligible_assessment', { number: remaining })
-                : t('trial_assessment', { number: remaining })}
-            </div>
-          </div>
           <h3 className="uppercase text-lg font-bold text-center">
             {t('business_info')}
           </h3>
@@ -66,21 +103,54 @@ function AssessmentData() {
               </div>
               <div className="grid gap-3">
                 <InputLabel
-                  htmlFor="address"
-                  value={t('label_business_location')}
+                  htmlFor="company_name"
+                  value={t('label_company_name')}
                 />
                 <TextInput
-                  id="address"
-                  name="address"
-                  value={data.address}
+                  id="company_name"
+                  name="company_name"
+                  value={data.company_name}
                   className="block w-full"
                   isFocused={true}
-                  onChange={e => setData('address', e.target.value)}
+                  onChange={e => setData('company_name', e.target.value)}
                 />
-                {errors.address && (
-                  <span className="text-red-600">{errors.address}</span>
+                {errors.company_name && (
+                  <span className="text-red-600">{errors.company_name}</span>
                 )}
               </div>
+              <div className="flex flex-col gap-3">
+                <InputLabel
+                  htmlFor="isSisterCompany"
+                  value={t('label_is_sister_company')}
+                />
+                <SelectInput
+                  options={companies}
+                  onChange={() => {
+                    setIsSisterCompany(!isSisterCompany);
+                  }}
+                />
+              </div>
+              {isSisterCompany && (
+                <div className="grid gap-3">
+                  <InputLabel
+                    htmlFor="sister_company"
+                    value={t('label_sister_company')}
+                  />
+                  <TextInput
+                    id="sister_company"
+                    name="sister_company"
+                    value={data.sister_company}
+                    className="block w-full"
+                    isFocused={true}
+                    onChange={e => setData('sister_company', e.target.value)}
+                  />
+                  {errors.sister_company && (
+                    <span className="text-red-600">
+                      {errors.sister_company}
+                    </span>
+                  )}
+                </div>
+              )}
               <div className="grid gap-3">
                 <InputLabel htmlFor="website" value={t('label_website')} />
                 <TextInput
@@ -156,28 +226,64 @@ function AssessmentData() {
                   <span className="text-red-600">{errors.phone}</span>
                 )}
               </div>
-              {/* <div className="grid gap-3">
-                <InputLabel
-                  htmlFor="business_type_id"
-                  value={t('label_business_type_id')}
+            </div>
+            <div className="mt-6 pt-6 border-t">
+              <div className="text-lg font-bold mb-3 text-center">
+                {t('address')}
+              </div>
+              <div className="grid lg:grid-cols-2 gap-6 mb-6">
+                <div className="flex flex-col gap-3">
+                  <InputLabel htmlFor="provinces" value={t('provinces')} />
+                  <SelectInput
+                    options={provinces}
+                    labelData="name"
+                    valueData="id"
+                    placeholder="select_province"
+                    selectedLabel={data.province}
+                    onChange={e => {
+                      const index = e.nativeEvent.target.selectedIndex;
+                      const text = e.nativeEvent.target[index].text;
+                      setSelectedProvince(e.target.value);
+                      setData('province', text);
+                    }}
+                  />
+                  {errors.provinces && (
+                    <span className="text-red-600">{errors.provinces}</span>
+                  )}
+                </div>
+                <div className="flex flex-col gap-3">
+                  <InputLabel htmlFor="city" value={t('city')} />
+                  <SelectInput
+                    options={city}
+                    labelData="name"
+                    valueData="id"
+                    placeholder="select_city"
+                    onChange={e => {
+                      const index = e.nativeEvent.target.selectedIndex;
+                      const text = e.nativeEvent.target[index].text;
+                      setData('city', text);
+                    }}
+                  />
+                  {errors.city && (
+                    <span className="text-red-600">{errors.city}</span>
+                  )}
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <InputLabel htmlFor="address" value={t('address')} />
+                <TextInput
+                  id="address"
+                  name="address"
+                  typeForm="textarea"
+                  value={data.address}
+                  className="block w-full"
+                  isFocused={true}
+                  onChange={e => setData('address', e.target.value)}
                 />
-                <SelectInput
-                  id="business_type"
-                  name="business_type"
-                  value={data.business_type_id}
-                  options={business_type}
-                  placeholder="select_business_type"
-                  className="w-full"
-                  labelData="name"
-                  valueData="id"
-                  onChange={e => setData('business_type_id', e.target.value)}
-                />
-                {errors.business_type_id && (
-                  <span className="text-red-600">
-                    {errors.business_type_id}
-                  </span>
+                {errors.address && (
+                  <span className="text-red-600">{errors.address}</span>
                 )}
-              </div> */}
+              </div>
             </div>
             <PrimaryButton className="py-3 mt-6 w-full">
               <div className="w-full">{t('next')}</div>

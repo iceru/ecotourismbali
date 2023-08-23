@@ -9,8 +9,9 @@ import AuthImage from '@/Components/AuthImage';
 import { useTranslation } from 'react-i18next';
 
 import RegisImage from '../../../images/regisImage.jpg';
+import SelectInput from '@/Components/SelectInput';
 
-export default function Register() {
+export default function Register({ programs }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     email: '',
@@ -18,6 +19,7 @@ export default function Register() {
     business_name: '',
     password_confirmation: '',
     subscribed: true,
+    tribe: programs[0],
   });
 
   const { t } = useTranslation();
@@ -78,6 +80,23 @@ export default function Register() {
               />
 
               <InputError message={errors.business_name} className="mt-2" />
+            </div>
+            <div className="mt-4">
+              <InputLabel htmlFor="program" value={t('program')} />
+
+              <SelectInput
+                id="program"
+                name="program"
+                value={data.program}
+                className="mt-1 block w-full"
+                labelData="name"
+                valueData="id"
+                options={programs}
+                onChange={e => setData('program', e.target.value)}
+                required
+              />
+
+              <InputError message={errors.program} className="mt-2" />
             </div>
 
             <div className="mt-4">

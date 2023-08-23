@@ -31,7 +31,7 @@ class MemberPaymentController extends Controller
             $member_payment = new MemberPayment;
         }
 
-        $order_id = date('YmdHis').Auth::id();
+        $order_id = date('YmdHis') . Auth::id();
 
         $params = array(
             'transaction_details' => array(
@@ -42,12 +42,12 @@ class MemberPaymentController extends Controller
 
         Config::$serverKey = config('services.midtrans.server_key');
         Config::$isProduction = config('services.midtrans.is_production');
-        Config::$isSanitized =config('services.midtrans.is_sanitized');
-        Config::$is3ds =config('services.midtrans.is_3ds');
+        Config::$isSanitized = config('services.midtrans.is_sanitized');
+        Config::$is3ds = config('services.midtrans.is_3ds');
 
         $snapToken = Snap::getSnapToken($params);
         // $payment_url = Snap::createTransaction($params)->redirect_url;;
-        
+
         $member_payment->payment_no = $order_id;
         $member_payment->payment_status = 'pending';
         $member_payment->member_id = $member->id;
@@ -73,39 +73,36 @@ class MemberPaymentController extends Controller
         $memberPayment = MemberPayment::where('payment_no', $order_id);
         $memberPaymentFirst = MemberPayment::where('payment_no', $order_id)->first();
         $member = Member::where('id', $memberPaymentFirst->member_id)->first();
-                
+
         if ($transaction == 'capture') {
             // For credit card transaction, we need to check whether transaction is challenge by FDS or not
             if ($type == 'credit_card') {
                 if ($fraud == 'challenge') {
                     $memberPayment->update(['payment_status' => 'challenge by FDS']);
-                }
-                else {
+                } else {
                     $memberPayment->update(['payment_status' => 'success']);
                 }
             }
-        }
-        else if ($transaction == 'settlement') {
+        } else if ($transaction == 'settlement') {
             $memberPayment->update(['payment_status' => 'success']);
-            $member->status = 'active';
-            $member->save();
-        }
-        else if ($transaction == 'pending') {
+            if (intval($member->total_payment) === 500000) {
+                $member->update(['status' => 'active_assessment']);
+            } else {
+                $member->update(['status' => 'active']);
+            }
+        } else if ($transaction == 'pending') {
             $memberPayment->update(['payment_status' => 'pending']);
-        }
-        else if ($transaction == 'deny') {
+        } else if ($transaction == 'deny') {
             $memberPayment->update(['payment_status' => 'denied']);
-        }
-        else if ($transaction == 'expire') {
+        } else if ($transaction == 'expire') {
             $memberPayment->update(['payment_status' => 'expire']);
-        }
-        else if ($transaction == 'cancel') {
+        } else if ($transaction == 'cancel') {
             $memberPayment->update(['payment_status' => 'denied']);
         }
 
-        if($transaction) {
+        if ($transaction) {
             $bankName;
-            if($notif->va_numbers) {
+            if ($notif->va_numbers) {
                 $bankName = $notif->va_numbers[0]->bank;
             } else {
                 $bankName = $notif->bank;
@@ -123,7 +120,7 @@ class MemberPaymentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $member_payment = MemberPayment::where('member_id', $member->id)->where('payment_status', 'success')->latest()->first();
-        
+
         return Inertia::render('Member/Payment/Finish', [
             'member_payment' => $member_payment,
         ]);
@@ -133,7 +130,7 @@ class MemberPaymentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $member_payment = MemberPayment::where('member_id', $member->id)->where('payment_status', 'pending')->latest()->first();
-        
+
         return Inertia::render('Member/Payment/Unfinish', [
             'member_payment' => $member_payment,
         ]);
@@ -142,11 +139,10 @@ class MemberPaymentController extends Controller
     public function error()
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $member_payment = MemberPayment::where('member_id', $member->id)->where('payment_status', '!=' ,'success')->latest()->first();
-        
+        $member_payment = MemberPayment::where('member_id', $member->id)->where('payment_status', '!=', 'success')->latest()->first();
+
         return Inertia::render('Member/Payment/Error', [
             'member_payment' => $member_payment,
         ]);
     }
-
 }

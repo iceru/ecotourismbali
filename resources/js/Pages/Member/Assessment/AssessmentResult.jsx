@@ -2,10 +2,8 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Document,
-  Font,
   Image,
   PDFDownloadLink,
-  PDFViewer,
   Page,
   StyleSheet,
   Text,
@@ -20,7 +18,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { badgeColor } from '@/Helper/BadgeColor';
 
 import Certificate from '../../../../images/certificate.png';
-import { lowerCase, toUpper } from 'lodash';
+import { toUpper } from 'lodash';
 import moment from 'moment';
 
 function AssessmentResult({ session, member, scores, expiredDate }) {
@@ -63,16 +61,16 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
     },
     certValid: {
       position: 'absolute',
-      bottom: '13px',
-      left: '25%',
+      bottom: '11px',
+      left: '25.5%',
       transform: 'translateX(-50%)',
       fontSize: '12px',
       color: 'white',
     },
     certNumber: {
       position: 'absolute',
-      bottom: '13px',
-      left: '82%',
+      bottom: '11px',
+      left: '81%',
       transform: 'translateX(-50%)',
       fontSize: '12px',
       color: 'white',
@@ -106,8 +104,6 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
     </Document>
   );
 
-  console.log(``);
-
   return (
     <MemberLayout>
       {flash.success && (
@@ -126,9 +122,11 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
           <p className=" mb-3 text-lg font-bold text-primary">
             {t('finish_assessment')}
           </p>
-          <p className="text-etbGray xl:w-2/3">{t('finish_assessment_text')}</p>
+          <p className="text-etbGray xxl:w-2/3">
+            {t('finish_assessment_text')}
+          </p>
         </div>
-        {member.status === 'active' ? (
+        {member?.status?.includes('active') ? (
           <>
             <div className="grid lg:grid-cols-2 gap-6">
               <div className="mb-4 lg:mb-0">
@@ -160,23 +158,6 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                         </div>
                         <p>Badge</p>
                       </div>
-
-                      {/* <div className="grid grid-cols-2 gap-x-2 mt-2 lg:mt-0 lg:ml-4">
-                        {scores?.map(score => {
-                          return (
-                            <div className="flex text-gray-500 text-xs mb-1">
-                              <div className="capitalize">
-                                {lowerCase(score?.assessment?.title).slice(
-                                  0,
-                                  11
-                                )}
-                              </div>
-                              <div className="mx-1">-</div>
-                              <div>{score?.score}</div>
-                            </div>
-                          );
-                        })}
-                      </div> */}
                     </div>
                   </div>
                 ) : (

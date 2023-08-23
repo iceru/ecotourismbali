@@ -51,11 +51,15 @@ class MemberController extends Controller
             'no_employees' => 'nullable',
             'business_type_id' => 'required',
             'total_payment' => 'required',
+            'city' => 'required',
+            'province' => 'required',
         ]);
 
         $member->no_rooms = $request->no_rooms;
         $member->no_outlets = $request->no_outlets;
         $member->no_employees = $request->no_employees;
+        $member->city = $request->city;
+        $member->province = $request->province;
         $member->total_payment = $request->total_payment;
         $member->business_type_id = $request->business_type_id;
         $member->status = 'waiting_approval';

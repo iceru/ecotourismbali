@@ -33,7 +33,10 @@ function MemberDashboard({
   const { t, i18n } = useTranslation();
   const [payComplete, setPayComplete] = useState(false);
   const [payPending, setPayPending] = useState(false);
-  const [business, setBusiness] = useState();
+  const [provinces, setProvinces] = useState();
+  const [selectedProvince, setSelectedProvince] = useState();
+  const [city, setCity] = useState();
+  const [business, setBusiness] = useState('Hotel');
   const parsed = queryString.parse(location.search);
   const { flash } = usePage().props;
 
@@ -52,12 +55,28 @@ function MemberDashboard({
     },
   ];
 
+  const total_payments_restaurant = [
+    {
+      label: 'Access to Self Assessment',
+      value: 500000,
+    },
+    {
+      label: 'Annual Membership',
+      value: 1500000,
+    },
+  ];
+
   const { data, setData, post, processing, errors, reset } = useForm({
     no_rooms: null,
     no_employees: null,
     no_outlets: null,
     business_type_id: null,
-    total_payment: total_payments[0].value,
+    total_payment:
+      business === 'Hotel'
+        ? total_payments[0].value
+        : total_payments_restaurant[0].value,
+    city: member.city || '',
+    province: member.province || '',
   });
 
   const payCompleteStorage = sessionStorage.getItem('paid');
@@ -99,7 +118,35 @@ function MemberDashboard({
     if (parsed.newPayment) {
       setPayComplete(true);
     }
+
+    fetch(`https://iceru.github.io/api-wilayah-indonesia/api/provinces.json`)
+      .then(response => response.json())
+      .then(provinces => {
+        setProvinces(provinces);
+        getCity(selectedProvince || provinces[0].id);
+      });
   }, []);
+
+  useEffect(() => {
+    getCity();
+  }, [selectedProvince]);
+
+  useEffect(() => {
+    if (business === 'Restaurant') {
+      setData(data => ({ ...data, no_outlets: null }));
+      setData(data => ({ ...data, no_rooms: null }));
+    }
+  }, [business]);
+
+  const getCity = id => {
+    fetch(
+      `https://iceru.github.io/api-wilayah-indonesia/api/regencies/${
+        id || selectedProvince
+      }.json`
+    )
+      .then(response => response.json())
+      .then(city => setCity(city));
+  };
 
   const submit = e => {
     e.preventDefault();
@@ -142,7 +189,7 @@ function MemberDashboard({
               <FontAwesomeIcon className="ml-2" icon={faUser} />
             </PrimaryButton>
           </div>
-          {member.status === 'active' && (
+          {member?.status?.includes('active') && (
             <div>
               <PrimaryButton
                 className="!inline-block"
@@ -157,7 +204,7 @@ function MemberDashboard({
           )}
         </AdminSection>
         <AdminSection>
-          {member.status === 'active' ? (
+          {member?.status?.includes('active') ? (
             <>
               {member && member.badge ? (
                 <>
@@ -279,15 +326,8 @@ function MemberDashboard({
             </div>
           )}
         </AdminSection>
-        {member.badge_id && !member.verified_badge && (
-          <AdminSection>
-            <TitleSection title="verified_badge" className="mb-3" />
-            <p className="m-0 mb-3">You are eligible to verify your badge!</p>
-            <PrimaryButton>Click Here to Notify Us</PrimaryButton>
-          </AdminSection>
-        )}
       </div>
-      {member.status !== 'active' && (
+      {!member?.status?.includes('active') && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">
           <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
           {member.status === 'payment' && member.total_payment ? (
@@ -302,7 +342,9 @@ function MemberDashboard({
                 </div>
                 <PrimaryButton
                   className="text-[16px]"
-                  onClick={() => (member.status !== 'active' ? pay() : null)}
+                  onClick={() =>
+                    !member?.status?.includes('active') ? pay() : null
+                  }
                 >
                   {t('member_locked_button')}
                 </PrimaryButton>
@@ -310,27 +352,26 @@ function MemberDashboard({
             </>
           ) : member.status === 'waiting_approval' ? (
             <>
-              <p className="text-sm">{t('member_not_approved')}</p>
+              <p>{t('member_not_approved')}</p>
             </>
           ) : (
             <>
               <p className="mb-4">{t('notify_admin_text')}</p>
-              <form onSubmit={submit}>
-                <div className="grid lg:grid-cols-2 gap-4">
+              <form onSubmit={submit} className="w-full">
+                <div className="grid lg:grid-cols-2 gap-4 min-w-[50vw]">
                   <div className="block  items-center">
                     <div className="mb-2">
                       <InputLabel
                         htmlFor="total_payment"
-                        value={t('form_label_total_payment')}
+                        value={t('form_label_business_type')}
                       />
                     </div>
-                    <div className="lg:w-4/5">
+                    <div className="">
                       <SelectInput
                         id="business_type"
                         name="business_type"
                         value={data.business_type_id}
                         options={business_type}
-                        placeholder="select_business_type"
                         className="w-full"
                         labelData="name"
                         required
@@ -348,6 +389,42 @@ function MemberDashboard({
                       )}
                     </div>
                   </div>
+
+                  <div className="flex flex-col gap-3">
+                    <InputLabel htmlFor="provinces" value={t('provinces')} />
+                    <SelectInput
+                      options={provinces}
+                      labelData="name"
+                      valueData="id"
+                      placeholder="select_province"
+                      onChange={e => {
+                        const index = e.nativeEvent.target.selectedIndex;
+                        const text = e.nativeEvent.target[index].text;
+                        setSelectedProvince(e.target.value);
+                        setData('province', text);
+                      }}
+                    />
+                    {errors.provinces && (
+                      <span className="text-red-600">{errors.provinces}</span>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <InputLabel htmlFor="city" value={t('city')} />
+                    <SelectInput
+                      options={city}
+                      labelData="name"
+                      valueData="id"
+                      placeholder="select_city"
+                      onChange={e => {
+                        const index = e.nativeEvent.target.selectedIndex;
+                        const text = e.nativeEvent.target[index].text;
+                        setData('city', text);
+                      }}
+                    />
+                    {errors.city && (
+                      <span className="text-red-600">{errors.city}</span>
+                    )}
+                  </div>
                   {business === 'Hotel' && (
                     <div className="block  items-center">
                       <div className="mb-2">
@@ -356,7 +433,7 @@ function MemberDashboard({
                           value={t('form_label_no_rooms')}
                         />
                       </div>
-                      <div className="lg:w-4/5">
+                      <div className="">
                         <TextInput
                           id="no_rooms"
                           name="no_rooms"
@@ -371,36 +448,40 @@ function MemberDashboard({
                       </div>
                     </div>
                   )}
-                  <div className="block  items-center">
-                    <div className="mb-2">
-                      <InputLabel
-                        htmlFor="no_outlet"
-                        value={t('form_label_no_outlet')}
-                      />
+                  {business === 'Hotel' && (
+                    <div className="block  items-center">
+                      <div className="mb-2">
+                        <InputLabel
+                          htmlFor="no_outlet"
+                          value={t('form_label_no_outlet')}
+                        />
+                      </div>
+                      <div className="">
+                        <TextInput
+                          id="no_outlets"
+                          name="no_outlets"
+                          required
+                          type="number"
+                          min={0}
+                          value={data.no_outlets}
+                          className="block w-full"
+                          isFocused={true}
+                          onChange={e => setData('no_outlets', e.target.value)}
+                        />
+                        <span className="text-red-600">
+                          {errors.no_outlets}
+                        </span>
+                      </div>
                     </div>
-                    <div className="lg:w-4/5">
-                      <TextInput
-                        id="no_outlets"
-                        name="no_outlets"
-                        required
-                        type="number"
-                        min={0}
-                        value={data.no_outlets}
-                        className="block w-full"
-                        isFocused={true}
-                        onChange={e => setData('no_outlets', e.target.value)}
-                      />
-                      <span className="text-red-600">{errors.no_outlets}</span>
-                    </div>
-                  </div>
-                  <div className="block  items-center">
+                  )}
+                  <div className="block items-center">
                     <div className="mb-2">
                       <InputLabel
                         htmlFor="no_employees"
                         value={t('form_label_no_employees')}
                       />
                     </div>
-                    <div className="lg:w-4/5">
+                    <div className="">
                       <TextInput
                         id="no_employees"
                         name="no_employees"
@@ -417,20 +498,24 @@ function MemberDashboard({
                       </span>
                     </div>
                   </div>
-                  <div className="block  items-center">
+                  <div className="block items-center">
                     <div className="mb-2">
                       <InputLabel
                         htmlFor="total_payment"
                         value={t('form_label_total_payment')}
                       />
                     </div>
-                    <div className="lg:w-4/5">
+                    <div className="">
                       <SelectInput
                         id="total_payment"
                         name="total_payment"
                         value={data.total_payment}
-                        options={total_payments}
-                        className="w-full"
+                        options={
+                          business === 'Hotel'
+                            ? total_payments
+                            : total_payments_restaurant
+                        }
+                        className="w-full "
                         onChange={e => setData('total_payment', e.target.value)}
                       />
                       <span className="text-red-600">

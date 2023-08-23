@@ -11,6 +11,7 @@ export default forwardRef(function SelectInput(
     labelData = 'label',
     valueData = 'value',
     children,
+    selectedLabel,
     ...props
   },
   ref
@@ -24,6 +25,7 @@ export default forwardRef(function SelectInput(
       input.current.focus();
     }
   }, []);
+
   return (
     <select
       {...props}
@@ -37,7 +39,12 @@ export default forwardRef(function SelectInput(
       {children}
       {placeholder && <option>{t(placeholder)}</option>}
       {options?.map(option => (
-        <option value={option[valueData]}>{option[labelData]}</option>
+        <option
+          {...(selectedLabel === option[labelData] ? 'selected' : '')}
+          value={option[valueData]}
+        >
+          {option[labelData]}
+        </option>
       ))}
     </select>
   );

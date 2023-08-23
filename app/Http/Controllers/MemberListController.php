@@ -17,7 +17,7 @@ class MemberListController extends Controller
 {
     public function index()
     {
-        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'category', 'program')->get();
+        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'verified_badge', 'category', 'program')->get();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
@@ -71,7 +71,7 @@ class MemberListController extends Controller
             }
         }
 
-        $member = $member->with('badge', 'category', 'program')->get();
+        $member = $member->with('badge', 'category', 'verified_badge', 'program')->get();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),

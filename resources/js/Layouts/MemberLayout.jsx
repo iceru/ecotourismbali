@@ -10,6 +10,7 @@ import {
   faUser,
   faTimes,
   faBook,
+  faLeaf,
 } from '@fortawesome/free-solid-svg-icons';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AdminSection from '@/Components/AdminSection';
@@ -72,11 +73,15 @@ function MemberLayout({ children, state }) {
             </div>
             <div>
               <h3 className="font-bold text-lg">{member?.business_name}</h3>
-              {member?.status === 'active' && (
+              {member?.status?.includes('active') ? (
                 <p className="text-sm mt-1 font-semibold text-primary">
                   {t('verified_member')}
                 </p>
-              )}
+              ) : member?.status?.includes('greenpal') ? (
+                <p className="text-sm mt-1 font-semibold text-primary">
+                  {t('greenpal')}
+                </p>
+              ) : null}
             </div>
           </div>
         </div>
@@ -102,51 +107,57 @@ function MemberLayout({ children, state }) {
                 {t('home')}
               </Link>
             </li>
-            {state !== 'locked' && (
-              <>
-                <li>
-                  <Link
-                    href={route('member.profile')}
-                    className={
-                      url.startsWith('/member/profile') ? 'font-bold' : ''
-                    }
-                  >
-                    <FontAwesomeIcon
-                      className="fa-fw mr-2 text-primary"
-                      icon={faUser}
-                    />
-                    {t('my_profile')}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={route('member.assessment.index')}
-                    className={
-                      url.startsWith('/member/assessment') ? 'font-bold' : ''
-                    }
-                  >
-                    <FontAwesomeIcon
-                      className="fa-fw mr-2 text-primary"
-                      icon={faPencilRuler}
-                    />
-                    {t('my_assessment')}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={route('member.module.index')}
-                    className={
-                      url.startsWith('/member/module') ? 'font-bold' : ''
-                    }
-                  >
-                    <FontAwesomeIcon
-                      className="fa-fw mr-2 text-primary"
-                      icon={faBook}
-                    />
-                    {t('e_learning')}
-                  </Link>
-                </li>
-              </>
+            <li>
+              <Link
+                href={route('member.profile')}
+                className={url.startsWith('/member/profile') ? 'font-bold' : ''}
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-primary"
+                  icon={faUser}
+                />
+                {t('my_profile')}
+              </Link>
+            </li>
+
+            <li>
+              <Link href={route('member.list')}>
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-primary"
+                  icon={faLeaf}
+                />
+                {t('green_credential')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={route('member.assessment.index')}
+                className={
+                  url.startsWith('/member/assessment') ? 'font-bold' : ''
+                }
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-primary"
+                  icon={faPencilRuler}
+                />
+                {t('my_assessment')}
+              </Link>
+            </li>
+            {!member?.status?.includes('assessment') && (
+              <li>
+                <Link
+                  href={route('member.module.index')}
+                  className={
+                    url.startsWith('/member/module') ? 'font-bold' : ''
+                  }
+                >
+                  <FontAwesomeIcon
+                    className="fa-fw mr-2 text-primary"
+                    icon={faBook}
+                  />
+                  {t('e_learning')}
+                </Link>
+              </li>
             )}
           </ul>
         </nav>

@@ -143,21 +143,21 @@ function MemberList({ member, lastSession, scores }) {
         </div>
 
         <div className="lg:w-1/5 mx-auto flex lg:block gap-12 sticky top-0 lg:border-l pl-4 mt-10 lg:mt-0">
-          {member.verified_badge && (
+          {member?.verified_badge && (
             <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4 lg:border-b">
               <div>
                 <img
-                  className="max-h-[120px]"
-                  src={'/storage/badges/' + member.verified_badge.image}
+                  className="max-h-[200px]"
+                  src={'/storage/badges/' + member?.verified_badge.image}
                 />
               </div>
               <div
-                className={`font-bold mt-1 ${badgeColor(
-                  member.badge.name,
+                className={`font-bold ${badgeColor(
+                  member?.badge.name,
                   'text'
                 )}`}
               >
-                {member.verified_badge.name} Verified Badge
+                {member?.verified_badge.name} Verified Badge
               </div>
             </div>
           )}

@@ -161,12 +161,30 @@ function MemberList({ programs, categories, badges, members }) {
             members?.map(member => {
               return (
                 <div className="border rounded-2xl p-4 h-fit">
-                  {member.badge ? (
+                  {member?.verified_badge_id ? (
+                    <div>
+                      <div
+                        className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
+                      -mr-4 w-fit float-right items-center  
+                    ${badgeColor(member?.verified_badge?.name)}
+                    `}
+                      >
+                        <div>
+                          <img
+                            src={'/storage/badges/' + member.badge?.image}
+                            alt=""
+                            className="h-6 mr-2 brightness-0 filter invert"
+                          />
+                        </div>
+                        <span>Verified {member?.verified_badge?.name}</span>
+                      </div>
+                    </div>
+                  ) : member.badge && !member?.verified_badge_id ? (
                     <div
                       className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
-                      -mr-4 w-fit float-right items-center  
-                    ${badgeColor(member.badge.name)}
-                    `}
+                        -mr-4 w-fit float-right items-center  
+                      ${badgeColor(member.badge.name)}
+                      `}
                     >
                       <div>
                         <img
@@ -179,7 +197,7 @@ function MemberList({ programs, categories, badges, members }) {
                     </div>
                   ) : (
                     <div className="rounded-bl-2xl rounded-tr-2xl bg-gray-100  px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
-                      <div>{t('not_verified')}</div>
+                      <div>{t('no_badge')}</div>
                     </div>
                   )}
                   <div className="flex items-center mb-3 mt-5">

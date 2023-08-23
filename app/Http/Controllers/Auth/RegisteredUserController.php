@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
+use App\Models\Program;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +26,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        $programs = Program::all();
+        return Inertia::render('Auth/Register', [
+            'programs' => $programs
+        ]);
     }
 
     /**
@@ -41,7 +45,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::min(8)->letters()],
         ]);
 
-        if($request->subscribed) {
+        if ($request->subscribed) {
             Newsletter::subscribe($request->email);
         }
 
@@ -70,7 +74,7 @@ class RegisteredUserController extends Controller
         return redirect(route('member.dashboard'));
     }
 
-       /**
+    /**
      * Display the registration view.
      */
     public function createAdmin(): Response
