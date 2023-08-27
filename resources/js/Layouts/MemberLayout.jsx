@@ -31,6 +31,13 @@ function MemberLayout({ children, state }) {
     }
   }, [admin]);
 
+  useEffect(() => {
+    const lang = localStorage.getItem('lang');
+    if (lang) {
+      i18n.changeLanguage(lang);
+    }
+  }, []);
+
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
   });
@@ -40,7 +47,7 @@ function MemberLayout({ children, state }) {
   function changeLanguage(code) {
     if (i18n.language !== code) {
       i18n.changeLanguage(code);
-      setLanguage(code);
+      localStorage.setItem('lang', code);
     }
   }
 
