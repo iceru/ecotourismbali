@@ -1,1 +1,0 @@
-import{r as e,b as o,F as r}from"./app-6ec9350d.js";function a(){return e.useEffect(()=>{window.location.href="/login"},[]),o(r,{})}export{a as default};

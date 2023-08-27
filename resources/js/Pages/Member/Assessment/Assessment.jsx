@@ -6,7 +6,7 @@ import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { isEmpty } from 'lodash';
+import { isEmpty, sortBy } from 'lodash';
 
 function Assessment({ assessments, session, answers }) {
   const [active, setActive] = useState(0);
@@ -222,53 +222,58 @@ function Assessment({ assessments, session, answers }) {
                         }}
                       />
                       <div className="mt-4">
-                        {question.assessment_option.map(option => {
-                          return (
-                            <div className="flex items-center px-5 py-3 mb-4 rounded-3xl bg-lightPrimary bg-opacity-60">
-                              {question.type === 'radio' ? (
-                                <input
-                                  type="radio"
-                                  name={`radio.${question.id}`}
-                                  id={`option_${option.id}`}
-                                  value={option.id}
-                                  className="mr-3 text-primary focus:ring-primary"
-                                  checked={
-                                    data[`radio.${question.id}`] === option.id
-                                  }
-                                  required
-                                  onChange={() =>
-                                    handleOptionChange(question.id, option.id)
-                                  }
-                                />
-                              ) : (
-                                <input
-                                  type="checkbox"
-                                  name={`checkbox.${question.id}`}
-                                  id={`option_${option.id}`}
-                                  value={option.id}
-                                  checked={
-                                    data[`checkbox.${question.id}`] &&
-                                    data[`checkbox.${question.id}`].includes(
-                                      option.id
-                                    )
-                                  }
-                                  className="mr-3 text-primary focus:ring-primary"
-                                  onChange={() =>
-                                    handleCheckboxChange(question.id, option.id)
-                                  }
-                                />
-                              )}
-                              <label
-                                htmlFor={`option_${option.id}`}
-                                className="w-full"
-                              >
-                                {lang === 'en' && option.option_en
-                                  ? option.option_en
-                                  : option.option}
-                              </label>
-                            </div>
-                          );
-                        })}
+                        {sortBy(question.assessment_option, ['option_no']).map(
+                          option => {
+                            return (
+                              <div className="flex items-center px-5 py-3 mb-4 rounded-3xl bg-lightPrimary bg-opacity-60">
+                                {question.type === 'radio' ? (
+                                  <input
+                                    type="radio"
+                                    name={`radio.${question.id}`}
+                                    id={`option_${option.id}`}
+                                    value={option.id}
+                                    className="mr-3 text-primary focus:ring-primary"
+                                    checked={
+                                      data[`radio.${question.id}`] === option.id
+                                    }
+                                    required
+                                    onChange={() =>
+                                      handleOptionChange(question.id, option.id)
+                                    }
+                                  />
+                                ) : (
+                                  <input
+                                    type="checkbox"
+                                    name={`checkbox.${question.id}`}
+                                    id={`option_${option.id}`}
+                                    value={option.id}
+                                    checked={
+                                      data[`checkbox.${question.id}`] &&
+                                      data[`checkbox.${question.id}`].includes(
+                                        option.id
+                                      )
+                                    }
+                                    className="mr-3 text-primary focus:ring-primary"
+                                    onChange={() =>
+                                      handleCheckboxChange(
+                                        question.id,
+                                        option.id
+                                      )
+                                    }
+                                  />
+                                )}
+                                <label
+                                  htmlFor={`option_${option.id}`}
+                                  className="w-full"
+                                >
+                                  {lang === 'en' && option.option_en
+                                    ? option.option_en
+                                    : option.option}
+                                </label>
+                              </div>
+                            );
+                          }
+                        )}
                       </div>
                       {i + 1 !== item.assessment_question.length && (
                         <div className="h-0.5 w-1/2 my-10 box-border left-1/2 mx-auto -translate-y-1/2 bg-gray-300"></div>
