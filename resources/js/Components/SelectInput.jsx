@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default forwardRef(function SelectInput(
@@ -17,6 +17,7 @@ export default forwardRef(function SelectInput(
   ref
 ) {
   const input = ref ? ref : useRef();
+  const [labelSelected, setLabelSelected] = useState();
 
   const { t } = useTranslation();
 
@@ -24,7 +25,14 @@ export default forwardRef(function SelectInput(
     if (isFocused) {
       input.current.focus();
     }
-  }, []);
+
+    if (selectedLabel && options) {
+      const selected = options.find(item => {
+        return item.name === selectedLabel;
+      });
+      selected && setLabelSelected(selected[valueData]);
+    }
+  }, [options]);
 
   return (
     <select
@@ -34,17 +42,12 @@ export default forwardRef(function SelectInput(
         'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm ' +
         className
       }
-      value={value}
+      value={value || labelSelected}
     >
       {children}
       {placeholder && <option>{t(placeholder)}</option>}
       {options?.map(option => (
-        <option
-          {...(selectedLabel === option[labelData] ? 'selected' : '')}
-          value={option[valueData]}
-        >
-          {option[labelData]}
-        </option>
+        <option value={option[valueData]}>{option[labelData]}</option>
       ))}
     </select>
   );

@@ -122,6 +122,7 @@ class MemberAssessmentController extends Controller
             'province' => 'required',
             'city' => 'required',
             'sister_company' => 'nullable',
+            'company_name' => 'required',
         ]);
 
         if ($request->sister_company) {
@@ -135,6 +136,7 @@ class MemberAssessmentController extends Controller
         $member->phone = $request->phone;
         $member->province = $request->province;
         $member->city = $request->city;
+        $member->company_name = $request->company_name;
         $user->email = $request->email;
         $member->business_type_id = $request->business_type_id;
         $member->save();

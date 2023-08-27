@@ -41,17 +41,21 @@ function AssessmentData() {
   };
 
   useEffect(() => {
-    axios;
     fetch(`https://iceru.github.io/api-wilayah-indonesia/api/provinces.json`)
       .then(response => response.json())
       .then(provinces => {
         setProvinces(provinces);
-        getCity(selectedProvince || provinces[0].id);
+        let dataProvince;
+        if (data?.province) {
+          dataProvince = provinces.find(prov => {
+            return prov.name === data?.province;
+          });
+        }
+        getCity(selectedProvince || dataProvince.id || provinces[0].id);
       });
   }, []);
-
   useEffect(() => {
-    getCity();
+    selectedProvince && getCity(selectedProvince);
   }, [selectedProvince]);
 
   const getCity = id => {
@@ -258,6 +262,7 @@ function AssessmentData() {
                     labelData="name"
                     valueData="id"
                     placeholder="select_city"
+                    selectedLabel={data.city}
                     onChange={e => {
                       const index = e.nativeEvent.target.selectedIndex;
                       const text = e.nativeEvent.target[index].text;
