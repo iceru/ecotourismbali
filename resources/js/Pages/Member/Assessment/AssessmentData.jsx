@@ -279,7 +279,6 @@ function AssessmentData() {
                 <TextInput
                   id="address"
                   name="address"
-                  typeForm="textarea"
                   value={data.address}
                   className="block w-full"
                   isFocused={true}

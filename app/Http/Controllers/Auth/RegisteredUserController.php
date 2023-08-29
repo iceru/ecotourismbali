@@ -43,6 +43,8 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::min(8)->letters()],
+            'business_name' => 'required|unique:members',
+            'program' => 'required',
         ]);
 
         if ($request->subscribed) {
@@ -65,6 +67,7 @@ class RegisteredUserController extends Controller
             $member->business_name = $request->business_name;
             $member->slug = Str::slug($request->business_name);
             $member->subscribed = $request->subscribed;
+            $member->program_id = $request->program;
             $member->save();
         }
 
