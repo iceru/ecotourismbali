@@ -19,8 +19,10 @@ export default function Register({ programs }) {
     business_name: '',
     password_confirmation: '',
     subscribed: true,
-    tribe: programs[0],
+    program: programs[0].id,
   });
+
+  console.log(data);
 
   const { t } = useTranslation();
 

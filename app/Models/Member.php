@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Member extends Model
 {
     protected $table = 'members';
-    protected $with = ['user'];
+    protected $with = ['user', 'program'];
     
     public function user(): BelongsTo
     {

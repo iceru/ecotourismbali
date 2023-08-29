@@ -67,6 +67,7 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/member/profile', [MemberController::class, 'profile'])->name('member.profile');
     Route::get('/member/profile/edit/{id}', [MemberController::class, 'editProfile'])->name('member.profile.edit');
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
+    Route::post('/member/greenpal/store', [MemberController::class, 'greenpal'])->name('member.greenpal.store');
 
     Route::get('/member/assessment/tutorial', [MemberAssessmentController::class, 'tutorial'])->name('member.assessment.index');
     Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.data');

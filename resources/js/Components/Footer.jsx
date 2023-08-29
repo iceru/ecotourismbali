@@ -5,13 +5,19 @@ function Footer() {
   return (
     <div className="text-gray-500 pb-10 pt-16">
       <div className="flex justify-center mb-2">
-        <div className="font-poppins mr-3 pr-3 border-r-gray-400 border-r">
-          Terms & Conditions
+        <div className="font-poppins hover:text-secondary mr-3 pr-3 border-r-gray-400 border-r">
+          <a href="https://ecotourismbali.com/terms-conditions/">
+            Terms & Conditions
+          </a>
         </div>
-        <div className="font-poppins mr-3 pr-3 border-r-gray-400 border-r">
-          Privacy Policy
+        <div className="font-poppins hover:text-secondary mr-3 pr-3 border-r-gray-400 border-r">
+          <a href="https://ecotourismbali.com/privacy-policy/">
+            Privacy Policy
+          </a>
         </div>
-        <div className="font-poppins">FAQ</div>
+        <div className="font-poppins hover:text-secondary">
+          <a href="https://ecotourismbali.com/faq/">FAQ</a>
+        </div>
       </div>
       <div className="text-primary tracking-wide uppercase mb-2 text-center font-neue text-2xl">
         Eco Tourism Bali {moment().format('YYYY')}

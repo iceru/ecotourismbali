@@ -15,6 +15,7 @@ import {
   faTwitter,
   faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
+import greenpal from '../../images/greenpal.png';
 
 function MemberList({ member, lastSession, scores }) {
   const { t } = useTranslation();
@@ -143,65 +144,80 @@ function MemberList({ member, lastSession, scores }) {
         </div>
 
         <div className="lg:w-1/5 mx-auto flex lg:block gap-12 sticky top-0 lg:border-l pl-4 mt-10 lg:mt-0">
-          {member?.verified_badge && (
-            <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4 lg:border-b">
-              <div>
-                <img
-                  className="max-h-[200px]"
-                  src={'/storage/badges/' + member?.verified_badge.image}
-                />
-              </div>
-              <div
-                className={`font-bold ${badgeColor(
-                  member?.badge.name,
-                  'text'
-                )}`}
-              >
-                {member?.verified_badge.name} Verified Badge
-              </div>
-            </div>
-          )}
-          {member?.badge ? (
-            <div>
-              <div className="flex flex-col items-center  uppercase mb-1">
-                <div>
-                  <img
-                    className="max-h-[120px]"
-                    src={'/storage/badges/' + member.badge.image}
-                  />
-                </div>
-                <div
-                  className={`font-bold mt-1 ${badgeColor(
-                    member.badge.name,
-                    'text'
-                  )}`}
-                >
-                  {member.badge.name} Badge
-                </div>
-              </div>
-              {lastSession && (
-                <div className="text-center text-gray-500  text-xs mb-3">
-                  <span className="font-bold">{lastSession.total_score}</span>
-                  &nbsp;
-                  <span className=" uppercase">Points</span>
+          {member?.program?.name !== 'Green Pal' ? (
+            <>
+              {member?.verified_badge && (
+                <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4 lg:border-b">
+                  <div>
+                    <img
+                      className="max-h-[200px]"
+                      src={'/storage/badges/' + member?.verified_badge.image}
+                    />
+                  </div>
+                  <div
+                    className={`font-bold ${badgeColor(
+                      member?.badge.name,
+                      'text'
+                    )}`}
+                  >
+                    {member?.verified_badge.name} {t('verified_badge')}
+                  </div>
                 </div>
               )}
-              {scores.map(score => {
-                return (
-                  <div className="flex justify-center text-gray-500 text-xs mb-1">
-                    <div className="capitalize">
-                      {lowerCase(score.assessment.title).slice(0, 11)}
+              {member?.badge ? (
+                <div>
+                  <div className="flex flex-col items-center  uppercase mb-1">
+                    <div>
+                      <img
+                        className="max-h-[120px]"
+                        src={'/storage/badges/' + member.badge.image}
+                      />
                     </div>
-                    <div className="mx-1">-</div>
-                    <div>{score.score}</div>
+                    <div
+                      className={`font-bold mt-1 ${badgeColor(
+                        member.badge.name,
+                        'text'
+                      )}`}
+                    >
+                      {member.badge.name} Badge
+                    </div>
                   </div>
-                );
-              })}
-            </div>
+                  {lastSession && (
+                    <div className="text-center text-gray-500  text-xs mb-3">
+                      <span className="font-bold">
+                        {lastSession.total_score}
+                      </span>
+                      &nbsp;
+                      <span className=" uppercase">Points</span>
+                    </div>
+                  )}
+                  {scores?.map(score => {
+                    return (
+                      <div className="flex justify-center text-gray-500 text-xs mb-1">
+                        <div className="capitalize">
+                          {lowerCase(score.assessment.title).slice(0, 11)}
+                        </div>
+                        <div className="mx-1">-</div>
+                        <div>{score.score}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold inline-block">
+                  No Badge
+                </div>
+              )}
+            </>
           ) : (
-            <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold inline-block">
-              No Badge
-            </div>
+            <>
+              <div className="flex justify-center">
+                <img src={greenpal} alt="Green Pal" className="w-[100px]" />
+              </div>
+              <h4 className="m-0 font-bold text-greenpal mt-2 text-center">
+                Green Pal Member
+              </h4>
+            </>
           )}
         </div>
       </div>
