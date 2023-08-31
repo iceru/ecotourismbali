@@ -21,9 +21,11 @@ const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
               <h2 className={'font-bold text-[20px] mb-4'}>
                 {t('your_assessment')}
                 <span
-                  className={badgeColor(member.badge.name, 'text') + ' ml-1.5'}
+                  className={
+                    badgeColor(member?.badge?.name, 'text') + ' ml-1.5'
+                  }
                 >
-                  {member.badge.name}
+                  {member?.badge?.name}
                 </span>
               </h2>
               <div className="flex items-center">
@@ -31,16 +33,16 @@ const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
                   <div>
                     <img
                       className="max-h-[120px]"
-                      src={'/storage/badges/' + member.badge.image}
+                      src={'/storage/badges/' + member?.badge?.image}
                     />
                   </div>
                   <div
                     className={`font-bold mt-1 text-center whitespace-nowrap uppercase ${badgeColor(
-                      member.badge.name,
+                      member?.badge?.name,
                       'text'
                     )}`}
                   >
-                    {member.badge.name} Badge
+                    {member?.badge?.name} Badge
                   </div>
                   <div className="text-xs text-gray-500">
                     Expired:&nbsp;

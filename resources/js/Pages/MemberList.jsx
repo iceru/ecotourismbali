@@ -192,7 +192,7 @@ function MemberList({ programs, categories, badges, members }) {
                         <div
                           className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
                         -mr-4 w-fit float-right items-center  
-                      ${badgeColor(member.badge.name)}
+                      ${badgeColor(member?.badge?.name)}
                       `}
                         >
                           <div>

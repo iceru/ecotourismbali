@@ -29,7 +29,6 @@ const MemberGreenpal = ({ member }) => {
     description: member.description || null,
     city: member.city || null,
     province: member.province || null,
-    address: member.address || null,
     website: member.website || null,
   });
 

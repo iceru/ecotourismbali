@@ -151,7 +151,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                         <div
                           className={
                             'font-bold  text-2xl ' +
-                            badgeColor(member.badge.name, 'text')
+                            badgeColor(member?.badge?.name, 'text')
                           }
                         >
                           {member?.badge?.name}

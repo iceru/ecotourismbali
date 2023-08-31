@@ -200,16 +200,16 @@ function MemberList({ member, lastSession, scores }) {
                     <div>
                       <img
                         className="max-h-[120px]"
-                        src={'/storage/badges/' + member.badge.image}
+                        src={'/storage/badges/' + member?.badge?.image}
                       />
                     </div>
                     <div
                       className={`font-bold mt-1 ${badgeColor(
-                        member.badge.name,
+                        member?.badge?.name,
                         'text'
                       )}`}
                     >
-                      {member.badge.name} Badge
+                      {member?.badge?.name} Badge
                     </div>
                   </div>
                   {lastSession && (

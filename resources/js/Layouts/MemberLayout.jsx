@@ -136,7 +136,7 @@ function MemberLayout({ children, state }) {
                 {t('green_credential')}
               </Link>
             </li>
-            {member.program.name !== 'Green Pal' && (
+            {member?.program?.name !== 'Green Pal' && (
               <>
                 <li>
                   <Link

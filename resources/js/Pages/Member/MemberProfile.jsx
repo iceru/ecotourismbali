@@ -191,7 +191,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
               )}
             </div>
           </div>
-          {member.program.name !== 'Green Pal' && (
+          {member?.program?.name !== 'Green Pal' && (
             <div className="w-full lg:w-1/5">
               {member.badge ? (
                 <div>
@@ -199,16 +199,16 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
                     <div>
                       <img
                         className="max-h-[120px]"
-                        src={'/storage/badges/' + member.badge.image}
+                        src={'/storage/badges/' + member?.badge?.image}
                       />
                     </div>
                     <div
                       className={`font-bold mt-1 text-center uppercase ${badgeColor(
-                        member.badge.name,
+                        member?.badge?.name,
                         'text'
                       )}`}
                     >
-                      {member.badge.name} Badge
+                      {member?.badge?.name} Badge
                     </div>
                     <div className="text-xs text-center mt-1 mb-1 text-gray-500">
                       Expired:&nbsp;
