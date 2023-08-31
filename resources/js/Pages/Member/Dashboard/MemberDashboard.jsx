@@ -90,7 +90,7 @@ function MemberDashboard({
         </div>
       )}
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
-        {member.program.name === 'Green Pal' && (
+        {member?.program?.name === 'Green Pal' && (
           <>
             <AdminSection>
               <TitleSection title="welcome_greenpal" className="mb-4" />
@@ -112,7 +112,7 @@ function MemberDashboard({
             </AdminSection>
           </>
         )}
-        {member.program.name !== 'Green Pal' && (
+        {member?.program?.name !== 'Green Pal' && (
           <>
             <AdminSection>
               <TitleSection title="welcome_member" className="mb-4" />
@@ -128,7 +128,7 @@ function MemberDashboard({
                 </PrimaryButton>
               </div>
               {member?.status?.includes('active') &&
-                member.program.name !== 'Green Pal' && (
+                member?.program?.name !== 'Green Pal' && (
                   <div>
                     <PrimaryButton
                       className="!inline-block"
@@ -155,17 +155,17 @@ function MemberDashboard({
       </div>
       {!member?.status?.includes('active') && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">
-          {member.program.name !== 'Green Pal' && (
+          {member?.program?.name !== 'Green Pal' && (
             <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
           )}
-          {member.status === 'payment' && member.total_payment ? (
+          {member?.status === 'payment' && member?.total_payment ? (
             <>
               <p className="text-sm">{t('member_locked_text')}</p>
               <div className="flex justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
                 <div>
                   <p>{t('total_payment')}</p>
                   <h4 className="text-2xl font-bold">
-                    {currency.format(member.total_payment)}
+                    {currency.format(member?.total_payment)}
                   </h4>
                 </div>
                 <PrimaryButton
@@ -178,13 +178,13 @@ function MemberDashboard({
                 </PrimaryButton>
               </div>
             </>
-          ) : member.status === 'waiting_approval' ? (
+          ) : member?.status === 'waiting_approval' ? (
             <>
               <p>{t('member_not_approved')}</p>
             </>
           ) : (
             <>
-              {member.program.name !== 'Green Pal' ? (
+              {member?.program?.name !== 'Green Pal' ? (
                 <MemberDashboardForm
                   business_type={business_type}
                   member={member}

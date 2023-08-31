@@ -21,6 +21,7 @@ import {
   faFacebook,
   faInstagram,
   faTwitter,
+  faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
 import moment from 'moment';
 
@@ -97,7 +98,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
                           <img
                             src={`/storage/member/sliders/${slider.image}`}
                             alt=""
-                            className="p-2"
+                            className="p-2 h-[200px] w-full object-cover"
                           />
                         </div>
                       );
@@ -147,7 +148,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
             </div>
             <div className="mb-6">
               {member?.description ? (
-                <div className="text-center">{member.description}</div>
+                <div className="text-justify">{member.description}</div>
               ) : (
                 <a
                   className="flex gap-2 text-gray-600 justify-center items-center cursor-pointer"

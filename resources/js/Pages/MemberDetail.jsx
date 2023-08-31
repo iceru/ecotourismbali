@@ -62,7 +62,9 @@ function MemberList({ member, lastSession, scores }) {
                 <h4 className="uppercase text-primary tracking-wide mb-2">
                   {member?.category?.name}
                 </h4>
-                <h6>{member?.program?.name}</h6>
+                {member?.program?.name !== 'Green Pal' && (
+                  <h6>{member?.program?.name}</h6>
+                )}
               </div>
             </div>
           </section>
@@ -74,7 +76,7 @@ function MemberList({ member, lastSession, scores }) {
                     <img
                       src={`/storage/member/sliders/${slider.image}`}
                       alt=""
-                      className="p-2 max-w-screen"
+                      className="p-2 max-w-screen h-[250px] w-full object-cover"
                     />
                   </div>
                 );
@@ -82,7 +84,7 @@ function MemberList({ member, lastSession, scores }) {
             </Slider>
           </section>
           <section className="mb-12">
-            <div className="grid grid-cols-2 gap-6 ">
+            <div className="grid grid-cols-2 gap-20 ">
               {member?.address && (
                 <div className="flex items-center justify-end">
                   <FontAwesomeIcon
@@ -96,7 +98,7 @@ function MemberList({ member, lastSession, scores }) {
                 <a
                   href={member.website}
                   target="_blank"
-                  className="flex items-center"
+                  className="flex items-center hover:text-primary transition"
                 >
                   <FontAwesomeIcon
                     icon={faGlobe}
@@ -114,28 +116,56 @@ function MemberList({ member, lastSession, scores }) {
           <div className="flex gap-6">
             {member.facebook && (
               <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a href={member.facebook} target="_blank" className="mt-1">
+                <a
+                  href={
+                    member.facebook.includes('http')
+                      ? member.facebook
+                      : `https://${member.facebook}`
+                  }
+                  target="_blank"
+                  className="mt-1"
+                >
                   <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
                 </a>
               </div>
             )}
             {member.instagram && (
               <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a href={member.instagram} target="_blank" className="mt-1">
+                <a
+                  href={
+                    member.instagram.includes('http')
+                      ? member.instagram
+                      : `https://${member.instagram}`
+                  }
+                  target="_blank"
+                  className="mt-1"
+                >
                   <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
                 </a>
               </div>
             )}
             {member.whatsapp && (
               <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a href={member.whatsapp} target="_blank" className="mt-1">
+                <a
+                  href={`https://wa.me/${member.whatsapp}`}
+                  target="_blank"
+                  className="mt-1"
+                >
                   <FontAwesomeIcon icon={faWhatsapp} className="text-2xl" />
                 </a>
               </div>
             )}
             {member.twitter && (
               <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a href={member.twitter} target="_blank" className="mt-1">
+                <a
+                  href={
+                    member.twitter.includes('http')
+                      ? member.twitter
+                      : `https://${member.twitter}`
+                  }
+                  target="_blank"
+                  className="mt-1"
+                >
                   <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
                 </a>
               </div>
@@ -214,7 +244,7 @@ function MemberList({ member, lastSession, scores }) {
               <div className="flex justify-center">
                 <img src={greenpal} alt="Green Pal" className="w-[100px]" />
               </div>
-              <h4 className="m-0 font-bold text-greenpal mt-2 text-center">
+              <h4 className="m-0 font-bold text-greenpal mt-3 text-center">
                 Green Pal Member
               </h4>
             </>

@@ -146,7 +146,7 @@ function MemberList({ programs, categories, badges, members }) {
                 <li
                   onClick={() => setCategory(cat.id)}
                   id={cat.id}
-                  className={`cursor-pointer lg:mb-6 ${
+                  className={`cursor-pointer lg:mb-6 whitespace-break-spaces ${
                     category === cat.id ? 'font-bold text-primary' : ''
                   }`}
                 >

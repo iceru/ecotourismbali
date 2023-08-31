@@ -23,7 +23,7 @@ function MemberEditProfile() {
   const [editImage, setEditImage] = useState(false);
   const { user, member } = usePage().props;
 
-  const { data, setData, post, processing, errors } = useForm({
+  const { data, setData, post, processing, errors, reset } = useForm({
     business_name: member.business_name || '',
     address: member.address || '',
     website: member.website || '',
