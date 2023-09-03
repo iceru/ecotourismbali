@@ -7,7 +7,7 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import SelectInput from '@/Components/SelectInput';
 
-const MemberGreenpal = ({ member }) => {
+const MemberGreenpal = ({ member, categories }) => {
   const localAgreement = localStorage.getItem('agreement');
   const { t } = useTranslation();
 
@@ -30,6 +30,7 @@ const MemberGreenpal = ({ member }) => {
     city: member.city || null,
     province: member.province || null,
     website: member.website || null,
+    category: member.category || null,
   });
 
   useEffect(() => {
@@ -103,7 +104,7 @@ const MemberGreenpal = ({ member }) => {
                 )}
               </div>
               <div className="grid gap-3">
-                <InputLabel htmlFor="job_title" value={t('label_job_title')} />
+                <InputLabel htmlFor="job_title" value={t('job_title')} />
                 <TextInput
                   id="job_title"
                   name="job_title"
@@ -120,7 +121,7 @@ const MemberGreenpal = ({ member }) => {
               <div className="grid gap-3">
                 <InputLabel
                   htmlFor="business_name"
-                  value={t('label_business_name')}
+                  value={t('business_name')}
                 />
                 <TextInput
                   id="business_name"
@@ -135,10 +136,7 @@ const MemberGreenpal = ({ member }) => {
                 )}
               </div>
               <div className="grid gap-3">
-                <InputLabel
-                  htmlFor="company_name"
-                  value={t('label_company_name')}
-                />
+                <InputLabel htmlFor="company_name" value={t('company_name')} />
                 <TextInput
                   id="company_name"
                   name="company_name"
@@ -152,7 +150,7 @@ const MemberGreenpal = ({ member }) => {
                 )}
               </div>
               <div className="grid gap-3">
-                <InputLabel htmlFor="email" value={t('label_email')} />
+                <InputLabel htmlFor="email" value={t('email')} />
                 <TextInput
                   id="email"
                   name="email"
@@ -167,7 +165,7 @@ const MemberGreenpal = ({ member }) => {
                 )}
               </div>
               <div className="grid gap-3">
-                <InputLabel htmlFor="phone" value={t('label_phone')} />
+                <InputLabel htmlFor="phone" value={t('phone_whatsapp')} />
                 <TextInput
                   id="phone"
                   name="phone"
@@ -221,16 +219,33 @@ const MemberGreenpal = ({ member }) => {
                 />
               </div>
               <div className="grid gap-3">
-                <InputLabel htmlFor="description" value={t('description')} />
-                <TextInput
-                  id="description"
-                  name="description"
-                  value={data.description}
+                <InputLabel htmlFor="category" value={t('category')} />
+                <SelectInput
+                  id="category"
+                  name="category"
+                  value={data.category}
+                  labelData="name"
+                  valueData="id"
                   className="block w-full"
-                  isFocused={true}
-                  onChange={e => setData('description', e.target.value)}
+                  options={categories}
+                  onChange={e => setData('category', e.target.value)}
                 />
               </div>
+            </div>
+            <div className="grid gap-3 mt-6">
+              <InputLabel htmlFor="description" value={t('description')} />
+              <TextInput
+                id="description"
+                typeForm="textarea"
+                rows={7}
+                name="description"
+                value={data.description}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('description', e.target.value)}
+              />
+            </div>
+            <div className="grid lg:grid-cols-2 gap-6 min-w-[50vw] mt-6">
               <div className="grid gap-3">
                 <InputLabel htmlFor="provinces" value={t('provinces')} />
                 <SelectInput
@@ -266,20 +281,22 @@ const MemberGreenpal = ({ member }) => {
                   <span className="text-red-600">{errors.city}</span>
                 )}
               </div>
-              <div className="grid gap-3">
-                <InputLabel htmlFor="address" value={t('address')} />
-                <TextInput
-                  id="address"
-                  name="address"
-                  value={data.address}
-                  className="block w-full"
-                  isFocused={true}
-                  onChange={e => setData('address', e.target.value)}
-                />
-                {errors.address && (
-                  <span className="text-red-600">{errors.address}</span>
-                )}
-              </div>
+            </div>
+            <div className="grid gap-3 mt-6 mb-2">
+              <InputLabel htmlFor="address" value={t('address')} />
+              <TextInput
+                id="address"
+                rows={4}
+                name="address"
+                typeForm="textarea"
+                value={data.address}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('address', e.target.value)}
+              />
+              {errors.address && (
+                <span className="text-red-600">{errors.address}</span>
+              )}
             </div>
             <PrimaryButton
               type="submit"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Member;
+use App\Models\Category;
 use App\Mail\NotifyPayment;
 use App\Models\BusinessType;
 use App\Models\MemberSlider;
@@ -21,6 +22,7 @@ class MemberController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->with(['badge', 'business_type', 'member_slider', 'program'])->first();
         $business_type = BusinessType::all();
+        $categories = Category::all();
 
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
@@ -38,6 +40,7 @@ class MemberController extends Controller
             'lastSession' => $lastSession,
             'business_type' => $business_type,
             'expiredDate' => $dateAssessment,
+            'categories' => $categories
         ]);
     }
     
@@ -105,6 +108,7 @@ class MemberController extends Controller
 
         return Inertia::render('Member/MemberEditProfile', [
             'member' => Member::where('id', $id)->with('member_slider')->first(),
+            'categories' => Category::all(),
             'user' => User::find(Auth::id()),
         ]);
     }
@@ -124,6 +128,7 @@ class MemberController extends Controller
             'instagram' => 'nullable',
             'twitter' => 'nullable',
             'whatsapp' => 'nullable',
+            'merchant_promo' => 'nullable',
         ]);
 
         $filename = null;
@@ -160,6 +165,7 @@ class MemberController extends Controller
         $member->instagram = $request->instagram;
         $member->twitter = $request->twitter;
         $member->whatsapp = $request->whatsapp;
+        $member->merchant_promo = $request->merchant_promo;
         $member->save();
 
         return Redirect::route('member.profile')->with('success', 'Profile updated successfully.');
@@ -188,6 +194,7 @@ class MemberController extends Controller
             'image' => 'required',
             'province' => 'required',
             'city' => 'required',
+            'category' => 'required',
         ]);
 
         $filename = null;
@@ -222,7 +229,8 @@ class MemberController extends Controller
         $member->address = $request->address;
         $member->description = $request->description;
         $member->province = $request->province;
-        $member->city = $request->province;
+        $member->city = $request->city;
+        $member->category_id = $request->category;
         $member->status = 'active';
         $member->save();
 

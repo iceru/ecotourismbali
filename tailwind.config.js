@@ -34,6 +34,9 @@ module.exports = {
         neue: ['Bebas Neue', ...defaultTheme.fontFamily.sans],
         poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
+      spacing: {
+        '2/3': '66.666667%'
+      },
       colors: {
         primary: '#1F656C',
         secondary: '#7BB052',

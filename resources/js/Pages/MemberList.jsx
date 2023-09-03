@@ -156,7 +156,7 @@ function MemberList({ programs, categories, badges, members }) {
             })}
           </ul>
         </div>
-        <div className="lg:w-5/6 grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+        <div className="lg:w-5/6 grid lg:pl-6 lg:grid-cols-3 md:grid-cols-2 gap-4">
           {members.length > 0 ? (
             members?.map(member => {
               return (

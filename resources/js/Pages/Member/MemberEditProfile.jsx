@@ -17,8 +17,9 @@ import {
   faTwitter,
   faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
+import SelectInput from '@/Components/SelectInput';
 
-function MemberEditProfile() {
+function MemberEditProfile({ categories }) {
   const { t } = useTranslation();
   const [editImage, setEditImage] = useState(false);
   const { user, member } = usePage().props;
@@ -34,6 +35,8 @@ function MemberEditProfile() {
     whatsapp: member.whatsapp || null,
     twitter: member.twitter || null,
     instagram: member.instagram || null,
+    merchant_promo: member.merchant_promo || null,
+    category: member.category_id || null,
   });
 
   const submit = e => {
@@ -51,7 +54,7 @@ function MemberEditProfile() {
     infinite: true,
     speed: 500,
     slidesToShow:
-      member.member_slider.length > 2 ? 3 : member.member_slider.length,
+      member.member_slider.length > 1 ? 2 : member.member_slider.length,
     slidesToScroll: 1,
   };
 
@@ -115,21 +118,34 @@ function MemberEditProfile() {
                   isFocused={true}
                   onChange={e => setData('business_name', e.target.value)}
                 />
+                <SelectInput
+                  id="category"
+                  name="category"
+                  options={categories}
+                  valueData="id"
+                  labelData="name"
+                  value={data.category}
+                  className="block w-full mt-2"
+                  isFocused={true}
+                  onChange={e => setData('category', e.target.value)}
+                />
               </div>
             </div>
           </div>
           <div className="mb-10">
             {member.member_slider && (
-              <div className="-mx-2">
+              <div className="mb-8 -mx-2">
                 <Slider {...settings}>
                   {member.member_slider.map(slider => {
                     return (
-                      <div>
-                        <img
-                          src={`/storage/member/sliders/${slider.image}`}
-                          alt=""
-                          className="p-2"
-                        />
+                      <div className="px-2">
+                        <div class="relative overflow-hidden pb-2/3">
+                          <img
+                            src={`/storage/member/sliders/${slider.image}`}
+                            alt=""
+                            class="absolute h-full w-full object-cover p-2"
+                          />
+                        </div>
                       </div>
                     );
                   })}
@@ -182,22 +198,18 @@ function MemberEditProfile() {
             </div>
           </div>
           <div className="mb-6">
-            {member?.description ? (
-              <div>{t('add_description')}</div>
-            ) : (
-              <div className="flex gap-2 text-gray-600 justify-center items-center">
-                <TextInput
-                  id="description"
-                  name="description"
-                  typeForm="textarea"
-                  placeholder={t('your_description')}
-                  value={data.description}
-                  className="block w-full"
-                  isFocused={true}
-                  onChange={e => setData('description', e.target.value)}
-                />
-              </div>
-            )}
+            <div className="flex gap-2 text-gray-600 justify-center items-center">
+              <TextInput
+                id="description"
+                name="description"
+                typeForm="textarea"
+                placeholder={t('your_description')}
+                value={data.description}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('description', e.target.value)}
+              />
+            </div>
           </div>
           <div className="grid lg:grid-cols-2 gap-6 mb-10">
             <div className="flex gap-4 text-gray-600 justify-center items-center ">
@@ -246,6 +258,20 @@ function MemberEditProfile() {
                 className="block w-full"
                 isFocused={true}
                 onChange={e => setData('twitter', e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="mb-6">
+            <div className="flex gap-2 text-gray-600 justify-center items-center">
+              <TextInput
+                id="merchant_promo"
+                name="merchant_promo"
+                typeForm="textarea"
+                placeholder={t('your_merchant_promo')}
+                value={data.merchant_promo}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('merchant_promo', e.target.value)}
               />
             </div>
           </div>

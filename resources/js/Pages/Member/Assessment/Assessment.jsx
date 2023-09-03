@@ -44,6 +44,7 @@ function Assessment({ assessments, session, answers }) {
     post(route('member.assessment.save'), {
       onSuccess: () => {
         window.scrollTo(0, 0);
+        setData({});
         setDataSaved(true);
       },
     });
@@ -77,8 +78,11 @@ function Assessment({ assessments, session, answers }) {
     e.preventDefault();
   };
 
+  console.log(data);
+
   useEffect(() => {
     let localAnswers = localStorage.getItem('assessment');
+    debugger;
     if (localAnswers) {
       localAnswers = JSON.parse(localAnswers);
     }

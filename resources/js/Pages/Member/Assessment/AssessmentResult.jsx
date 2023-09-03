@@ -20,6 +20,7 @@ import { badgeColor } from '@/Helper/BadgeColor';
 import Certificate from '../../../../images/certificate.png';
 import { toUpper } from 'lodash';
 import moment from 'moment';
+import { saveAs } from 'file-saver';
 
 function AssessmentResult({ session, member, scores, expiredDate }) {
   const { t } = useTranslation();
@@ -53,6 +54,10 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       position: 'absolute',
       top: '65%',
       left: '30%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
       transform: 'translate(-50%, -50%)',
     },
     certBadgeImage: {
@@ -91,6 +96,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
             src={'/storage/badges/' + member?.badge?.image}
             style={styles?.certBadgeImage}
           ></Image>
+          <Text>{member?.badge?.name} Badge</Text>
         </View>
         <View style={styles?.certValid}>
           <Text>{moment(expiredDate).format('ll')}</Text>
@@ -103,6 +109,10 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       </Page>
     </Document>
   );
+
+  const downloadImage = url => {
+    saveAs(url, 'badge.png'); // Put your image URL here.
+  };
 
   return (
     <MemberLayout>
@@ -159,6 +169,14 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                         <p>Badge</p>
                       </div>
                     </div>
+                    <PrimaryButton
+                      onClick={() =>
+                        downloadImage('/storage/badges/' + member?.badge?.image)
+                      }
+                      className="text-sm !px-2 !py-1.5 mt-1"
+                    >
+                      {t('download_badge')}
+                    </PrimaryButton>
                   </div>
                 ) : (
                   <div className="text-center">{t('not_eligible_badge')}</div>

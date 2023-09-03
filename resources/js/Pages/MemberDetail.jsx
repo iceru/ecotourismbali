@@ -29,8 +29,8 @@ function MemberList({ member, lastSession, scores }) {
     arrows: true,
     slidesToShow: !isDesktop
       ? 1
-      : member?.member_slider?.length > 2
-      ? 3
+      : member?.member_slider?.length > 1
+      ? 2
       : member?.member_slider?.length,
     slidesToScroll: 1,
   };
@@ -72,12 +72,14 @@ function MemberList({ member, lastSession, scores }) {
             <Slider {...settings}>
               {member?.member_slider?.map(slider => {
                 return (
-                  <div>
-                    <img
-                      src={`/storage/member/sliders/${slider.image}`}
-                      alt=""
-                      className="p-2 max-w-screen h-[250px] w-full object-cover"
-                    />
+                  <div className="px-2">
+                    <div class="relative overflow-hidden pb-2/3">
+                      <img
+                        src={`/storage/member/sliders/${slider.image}`}
+                        alt=""
+                        class="absolute h-full w-full object-cover p-2"
+                      />
+                    </div>
                   </div>
                 );
               })}
@@ -112,62 +114,71 @@ function MemberList({ member, lastSession, scores }) {
           <section className="text-justify mb-10">
             {member?.description}
           </section>
-
-          <div className="flex gap-6">
-            {member.facebook && (
-              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a
-                  href={
-                    member.facebook.includes('http')
-                      ? member.facebook
-                      : `https://${member.facebook}`
-                  }
-                  target="_blank"
-                  className="mt-1"
-                >
-                  <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
-                </a>
-              </div>
-            )}
-            {member.instagram && (
-              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a
-                  href={
-                    member.instagram.includes('http')
-                      ? member.instagram
-                      : `https://${member.instagram}`
-                  }
-                  target="_blank"
-                  className="mt-1"
-                >
-                  <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
-                </a>
-              </div>
-            )}
-            {member.whatsapp && (
-              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a
-                  href={`https://wa.me/${member.whatsapp}`}
-                  target="_blank"
-                  className="mt-1"
-                >
-                  <FontAwesomeIcon icon={faWhatsapp} className="text-2xl" />
-                </a>
-              </div>
-            )}
-            {member.twitter && (
-              <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                <a
-                  href={
-                    member.twitter.includes('http')
-                      ? member.twitter
-                      : `https://${member.twitter}`
-                  }
-                  target="_blank"
-                  className="mt-1"
-                >
-                  <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
-                </a>
+          <div className="flex justify-between items-end gap-6">
+            <div className="flex gap-6 h-fit">
+              {member.facebook && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a
+                    href={
+                      member.facebook.includes('http')
+                        ? member.facebook
+                        : `https://${member.facebook}`
+                    }
+                    target="_blank"
+                    className="mt-1"
+                  >
+                    <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
+                  </a>
+                </div>
+              )}
+              {member.instagram && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a
+                    href={
+                      member.instagram.includes('http')
+                        ? member.instagram
+                        : `https://${member.instagram}`
+                    }
+                    target="_blank"
+                    className="mt-1"
+                  >
+                    <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
+                  </a>
+                </div>
+              )}
+              {member.whatsapp && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a
+                    href={`https://wa.me/${member.whatsapp}`}
+                    target="_blank"
+                    className="mt-1"
+                  >
+                    <FontAwesomeIcon icon={faWhatsapp} className="text-2xl" />
+                  </a>
+                </div>
+              )}
+              {member.twitter && (
+                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                  <a
+                    href={
+                      member.twitter.includes('http')
+                        ? member.twitter
+                        : `https://${member.twitter}`
+                    }
+                    target="_blank"
+                    className="mt-1"
+                  >
+                    <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
+                  </a>
+                </div>
+              )}
+            </div>
+            {member?.merchant_promo && (
+              <div className="bg-primary text-white p-4 rounded-xl">
+                <h5 className="font-semibold text-lg mb-2">
+                  {t('merchant_promo')}
+                </h5>
+                <p>{member?.merchant_promo}</p>
               </div>
             )}
           </div>

@@ -17,7 +17,7 @@ class MemberListController extends Controller
 {
     public function index()
     {
-        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'verified_badge', 'category', 'program')->get();
+        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name')->get();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),

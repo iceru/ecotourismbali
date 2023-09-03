@@ -27,12 +27,21 @@
 }
 
 .slick-next {
-  right: 10px;
+  right: 20px;
+  &::before {
+    opacity: 1;
+    color: #D8E8CC;
+  }
 }
 
 .slick-prev {
-  left: 10px;
+  left: 20px;
   z-index: 30;
+
+  &::before {
+    opacity: 1;
+    color: #D8E8CC;
+  }
 }
 
 .slick-slider {

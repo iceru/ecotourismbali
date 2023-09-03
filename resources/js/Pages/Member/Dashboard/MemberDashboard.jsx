@@ -23,6 +23,7 @@ function MemberDashboard({
   lastSession,
   business_type,
   expiredDate,
+  categories,
 }) {
   const { t } = useTranslation();
   const [payComplete, setPayComplete] = useState(false);
@@ -190,7 +191,7 @@ function MemberDashboard({
                   member={member}
                 />
               ) : (
-                <MemberGreenpal member={member} />
+                <MemberGreenpal member={member} categories={categories} />
               )}
             </>
           )}
