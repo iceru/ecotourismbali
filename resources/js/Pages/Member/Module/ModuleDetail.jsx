@@ -12,14 +12,19 @@ function ModuleDetail({ module }) {
   return (
     <MemberLayout>
       <AdminSection>
-        {module.member_module[0] &&
+        <BackTo
+          title="back_to_list_module"
+          link={route('member.module.index')}
+          className="text-sm"
+        />
+        {/* {module.member_module[0] &&
           module.member_module[0].completion === 1 && (
             <BackTo
               title="back_to_list_module"
               link={route('member.module.index')}
               className="text-sm"
             />
-          )}
+          )} */}
         <div className="grid">
           <TitleSection title="e_learning" className="mb-3" />
           <div className="font-bold text-primary mb-10">
@@ -47,7 +52,7 @@ function ModuleDetail({ module }) {
             className="text-justify"
             dangerouslySetInnerHTML={{ __html: module.content }}
           ></div>
-          {module.member_module[0] &&
+          {/* {module.member_module[0] &&
           module.member_module[0].completion === 1 ? null : (
             <PrimaryButton
               as="link"
@@ -56,7 +61,7 @@ function ModuleDetail({ module }) {
             >
               {t('start_post_test')}
             </PrimaryButton>
-          )}
+          )} */}
         </div>
       </AdminSection>
     </MemberLayout>

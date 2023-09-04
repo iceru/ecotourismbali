@@ -153,7 +153,7 @@ function MemberLayout({ children, state }) {
                   </Link>
                 </li>
                 {!member?.status?.includes('assessment') &&
-                  member?.total_payment === '500000' && (
+                  member?.total_payment !== '500000' && (
                     <li>
                       <Link
                         href={route('member.module.index')}

@@ -48,7 +48,7 @@ function ModuleList({ modules }) {
                   <div className="mb-3 text-sm" title={module?.description}>
                     {truncateString(module.description, 80)}
                   </div>
-                  {module?.member_module[0] &&
+                  {/* {module?.member_module[0] &&
                   module?.member_module[0].completion === 1 ? (
                     <PrimaryButton
                       as="link"
@@ -63,7 +63,13 @@ function ModuleList({ modules }) {
                     >
                       {t('start_learning')}
                     </PrimaryButton>
-                  )}
+                  )} */}
+                  <PrimaryButton
+                    as="link"
+                    href={route('member.module.detail', module?.id)}
+                  >
+                    {t('read_material')}
+                  </PrimaryButton>
                 </div>
               </div>
             );
