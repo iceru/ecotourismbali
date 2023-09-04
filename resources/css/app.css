@@ -52,3 +52,7 @@
   list-style: disc;
   padding-left: 1.5rem;
 }
+
+.module__content h3 {
+    font-size: 20px;
+}

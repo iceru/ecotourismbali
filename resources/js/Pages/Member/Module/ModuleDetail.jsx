@@ -49,7 +49,7 @@ function ModuleDetail({ module }) {
             )}
           </div>
           <div
-            className="text-justify"
+            className="text-justify module__content"
             dangerouslySetInnerHTML={{ __html: module.content }}
           ></div>
           {/* {module.member_module[0] &&
