@@ -6,6 +6,7 @@ import {
   faGlobe,
   faHome,
   faImage,
+  faLock,
   faPen,
 } from '@fortawesome/free-solid-svg-icons';
 import Slider from 'react-slick';
@@ -56,6 +57,15 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
         >
           {t('edit_profile')}
           <FontAwesomeIcon icon={faPen} />
+        </PrimaryButton>
+        <PrimaryButton
+          as="link"
+          href={route('profile.edit', member?.id)}
+          className="mb-6 flex items-center gap-2 ml-4"
+          color="secondary"
+        >
+          {t('change_password')}
+          <FontAwesomeIcon icon={faLock} />
         </PrimaryButton>
         <div className="flex flex-wrap">
           <div className="w-full mb-4 lg:mb-0 lg:w-4/5">

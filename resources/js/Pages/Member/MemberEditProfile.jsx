@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faHome, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useForm, usePage } from '@inertiajs/react';
 import Slider from 'react-slick';
 
@@ -22,7 +22,7 @@ import SelectInput from '@/Components/SelectInput';
 function MemberEditProfile({ categories }) {
   const { t } = useTranslation();
   const [editImage, setEditImage] = useState(false);
-  const { user, member } = usePage().props;
+  const { user, member, flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
     business_name: member.business_name || '',
@@ -49,6 +49,10 @@ function MemberEditProfile({ categories }) {
     });
   };
 
+  const onDelete = id => {
+    post(route('member.profile.deleteImage', id));
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -62,7 +66,12 @@ function MemberEditProfile({ categories }) {
     <MemberLayout>
       <AdminSection>
         <h2 className="font-bold text-xl mb-4">{t('edit_profile')}</h2>
-
+        {flash.success && (
+          <div className="bg-green-100 border border-green-400 mb-3 text-green-700 px-4 py-3 rounded relative">
+            <strong className="font-bold mr-2">Success!</strong>
+            <span className="inline">{flash.success}</span>
+          </div>
+        )}
         <form onSubmit={submit}>
           <div className="flex justify-between items-center mb-10">
             <div className="flex items-center">
@@ -139,7 +148,15 @@ function MemberEditProfile({ categories }) {
                   {member.member_slider.map(slider => {
                     return (
                       <div className="px-2">
-                        <div class="relative overflow-hidden pb-2/3">
+                        <button
+                          type="button"
+                          onClick={() => onDelete(slider.id)}
+                          className="absolute bg-red-700 text-white px-4 py-2 rounded-lg z-10 top-4 ml-4 text-sm flex gap-2 items-center opacity-90"
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
+                          Delete
+                        </button>
+                        <div class="relative overflow-hidden pb-2/3 z-0">
                           <img
                             src={`/storage/member/sliders/${slider.image}`}
                             alt=""

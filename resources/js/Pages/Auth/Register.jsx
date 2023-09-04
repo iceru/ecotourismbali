@@ -22,8 +22,6 @@ export default function Register({ programs }) {
     program: programs[0].id,
   });
 
-  console.log(data);
-
   const { t } = useTranslation();
 
   useEffect(() => {

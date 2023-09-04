@@ -52,7 +52,7 @@ const MemberDashboardForm = ({ business_type, member }) => {
     no_rooms: member.no_rooms || null,
     no_employees: member.no_employees || null,
     no_outlets: member.no_outlets || null,
-    business_type_id: member.business_type_id || null,
+    business_type_id: member.business_type_id || business_type[0].id || null,
     total_payment:
       business === 'Hotel'
         ? total_payments[0].value

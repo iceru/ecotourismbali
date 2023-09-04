@@ -14,6 +14,7 @@ use App\Models\AssessmentSession;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 
 class MemberController extends Controller
@@ -169,6 +170,18 @@ class MemberController extends Controller
         $member->save();
 
         return Redirect::route('member.profile')->with('success', 'Profile updated successfully.');
+    }
+
+    public function deleteImage($id)
+    {
+        $member = Member::where('user_id', Auth::id())->first();
+        $slider = MemberSlider::find($id);
+        if (Storage::disk('public')->exists('/member/sliders/'.$slider->image)){
+            Storage::disk('public')->delete('/member/sliders/'.$slider->image);
+        }
+        $slider->delete();
+
+        return Redirect::route('member.profile.edit', $member->id)->with('success', 'Image deleted');
     }
 
     public function notifyPayment()

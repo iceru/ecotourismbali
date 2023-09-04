@@ -57,7 +57,7 @@ Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'n
 
 Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
@@ -66,6 +66,7 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     // Route::get('/member/locked', [MemberController::class, 'locked'])->name('member.locked');
     Route::get('/member/profile', [MemberController::class, 'profile'])->name('member.profile');
     Route::get('/member/profile/edit/{id}', [MemberController::class, 'editProfile'])->name('member.profile.edit');
+    Route::post('/member/profile/delete/image/{id}', [MemberController::class, 'deleteImage'])->name('member.profile.deleteImage');
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
     Route::post('/member/greenpal/store', [MemberController::class, 'greenpal'])->name('member.greenpal.store');
 
