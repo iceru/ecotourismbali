@@ -30,7 +30,7 @@ const MemberGreenpal = ({ member, categories }) => {
     city: member.city || null,
     province: member.province || null,
     website: member.website || null,
-    category: member.category || null,
+    category: member.category || categories[0].id || null,
   });
 
   useEffect(() => {

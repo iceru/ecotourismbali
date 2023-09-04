@@ -1,0 +1,1 @@
+import{b as t}from"./app-1ebe35dd.js";import{u as n}from"./useTranslation-030126f9.js";function a({title:o,className:e}){const{t:i}=n();return t("div",{children:t("div",{className:`font-bold text-xl ${e}`,children:i(o)})})}export{a as default};
