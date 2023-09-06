@@ -35,7 +35,7 @@ function MemberIndex() {
     program: member.program_id || '',
     verified_badge: member.verified_badge_id || '',
     total_payment: member.total_payment || '',
-    status: member.status || null,
+    status: member?.status || null,
     invoice_no: lastPayment?.status_code || null,
     invoice_item_text: lastPayment?.invoice_item_text || null,
   });
@@ -133,7 +133,7 @@ function MemberIndex() {
                   />
                 </div>
               ) : (
-                items('status', capitalize(member?.status.replace('_', ' ')))
+                items('status', capitalize(member?.status?.replace('_', ' ')))
               )}
 
               {edit && statusMember === 'payment' && (

@@ -122,6 +122,7 @@ class AdminMemberController extends Controller
         $member->save();
 
         $payment->status_code = $request->invoice_no;
+        $payment->payment_no = $request->invoice_no;
         $payment->invoice_item_text = $request->invoice_item_text;
         $payment->payment_status = 'pending';
         $payment->member_id = $id;

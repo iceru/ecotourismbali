@@ -102,10 +102,12 @@ class MemberPaymentController extends Controller
 
         if ($transaction) {
             $bankName;
-            if ($notif->va_numbers) {
+            if (isset($notif->va_numbers)) {
                 $bankName = $notif->va_numbers[0]->bank;
-            } else {
+            } else if(isset($notif->bank)) {
                 $bankName = $notif->bank;
+            } else if(isset($notif->issuer)) {
+                $bankName = $notif->issuer;
             }
             $memberPayment->update([
                 'payment_type' => $type,

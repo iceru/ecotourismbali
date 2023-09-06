@@ -70,7 +70,7 @@ class MemberController extends Controller
         $member->save();
 
         // Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
-        Mail::to('m.hafiz1825@gmail.com')->send(new NotifyPayment($member));
+        Mail::to('info@ecotourismbali.com')->send(new NotifyPayment($member));
 
         return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
