@@ -1,1 +1,0 @@
-import{l as a}from"./lodash-28ff9561.js";const b=(l,o)=>{const r=a.toLower(l);let e,t;switch(r){case"bronze":e="bg-yellow-700",t="text-yellow-700";break;case"silver":e="bg-slate-500",t="text-slate-500";break;case"gold":t="text-yellow-500",e="bg-yellow-500";break;default:e="bg-yellow-700",t="text-yellow-700";break}return o==="text"?t:e};export{b};
