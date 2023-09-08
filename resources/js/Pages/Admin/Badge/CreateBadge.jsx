@@ -28,13 +28,13 @@ function CreateBadge({ badge }) {
       withId: true,
       color: 'info',
     },
-    {
-      label: 'delete_button',
-      route: 'badge.destroy',
-      withId: true,
-      color: 'danger',
-      type: 'delete',
-    },
+    // {
+    //   label: 'delete_button',
+    //   route: 'badge.destroy',
+    //   withId: true,
+    //   color: 'danger',
+    //   type: 'delete',
+    // },
   ];
 
   const submit = e => {

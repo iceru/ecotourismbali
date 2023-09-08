@@ -89,10 +89,12 @@ function MemberIndex() {
         <div className="w-full lg:w-1/4 mb-3 lg:mb-0">
           <div className="font-bold">{t(label)}</div>
         </div>
-        <div className="w-full lg:w-3/4">{data || '-'}</div>
+        <div className="w-full lg:w-3/4 lg:pl-6">{data || '-'}</div>
       </div>
     );
   };
+
+  console.log(member.status);
 
   return (
     <AdminLayout>
@@ -117,7 +119,7 @@ function MemberIndex() {
               {!edit ? t('edit_member') : t('close_edit_member')}
             </PrimaryButton>
             <form onSubmit={submit}>
-              {edit && !status.includes('active') ? (
+              {edit && !member?.status?.includes('active') ? (
                 <div className="flex items-center mb-4">
                   <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
                   <SelectInput
@@ -164,7 +166,7 @@ function MemberIndex() {
                   </div>
                 </>
               )}
-              {edit ? (
+              {edit && !member?.status?.includes('active') ? (
                 <div className="flex items-center mb-4">
                   <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
                   <SelectInput
@@ -178,7 +180,7 @@ function MemberIndex() {
                   />
                 </div>
               ) : (
-                items('total_payment', currency.format(member.total_payment))
+                items('total_payment', currency.format(member?.total_payment))
               )}
               {items('email', member.user.email)}
               {items('address', member?.address)}
@@ -224,7 +226,8 @@ function MemberIndex() {
                 items('program', member?.program?.name)
               )}
               {items('assessment_attempt', remaining)}
-              {items('assessment_expire', moment(dateAssessment).format('LL'))}
+              {dateAssessment &&
+                items('assessment_expire', moment(dateAssessment).format('LL'))}
               {items('badge', member?.badge?.name)}
               {edit ? (
                 <div className="flex items-center mb-4">
@@ -302,7 +305,7 @@ function MemberIndex() {
                     <span className=" uppercase">Points</span>
                   </div>
                 )}
-                {scores.map(score => {
+                {scores?.map(score => {
                   return (
                     <div className="flex justify-center text-gray-500 text-xs mb-1">
                       <div className="capitalize">

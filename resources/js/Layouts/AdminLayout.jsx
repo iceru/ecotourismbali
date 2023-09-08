@@ -84,36 +84,36 @@ function AdminLayout({ children }) {
               </Link>
             </li>
             {superadmin && (
-              <li>
-                <Link
-                  href={route('admin.payment.index')}
-                  className={
-                    url.startsWith('/admin/payment') ? 'font-bold' : ''
-                  }
-                >
-                  <FontAwesomeIcon
-                    className="fa-fw mr-2 text-secondary"
-                    icon={faDollar}
-                  />
-                  {t('payment')}
-                </Link>
-              </li>
-            )}
-            {superadmin && (
-              <li>
-                <Link
-                  href={route('assessment.index')}
-                  className={
-                    url.startsWith('/admin/assessment') ? 'font-bold' : ''
-                  }
-                >
-                  <FontAwesomeIcon
-                    className="fa-fw mr-2 text-secondary"
-                    icon={faPencilRuler}
-                  />
-                  {t('assessment')}
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link
+                    href={route('admin.payment.index')}
+                    className={
+                      url.startsWith('/admin/payment') ? 'font-bold' : ''
+                    }
+                  >
+                    <FontAwesomeIcon
+                      className="fa-fw mr-2 text-secondary"
+                      icon={faDollar}
+                    />
+                    {t('payment')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={route('assessment.index')}
+                    className={
+                      url.startsWith('/admin/assessment') ? 'font-bold' : ''
+                    }
+                  >
+                    <FontAwesomeIcon
+                      className="fa-fw mr-2 text-secondary"
+                      icon={faPencilRuler}
+                    />
+                    {t('assessment')}
+                  </Link>
+                </li>
+              </>
             )}
             <li>
               <Link

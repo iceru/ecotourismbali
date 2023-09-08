@@ -27,13 +27,13 @@ function CreateCategory({ category }) {
       withId: true,
       color: 'info',
     },
-    {
-      label: 'delete_button',
-      route: 'category.destroy',
-      withId: true,
-      color: 'danger',
-      type: 'delete',
-    },
+    // {
+    //   label: 'delete_button',
+    //   route: 'category.destroy',
+    //   withId: true,
+    //   color: 'danger',
+    //   type: 'delete',
+    // },
   ];
 
   const submit = e => {

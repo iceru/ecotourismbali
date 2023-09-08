@@ -10,8 +10,10 @@ import { useTranslation } from 'react-i18next';
 
 import RegisImage from '../../../images/regisImage.jpg';
 import SelectInput from '@/Components/SelectInput';
+import queryString from 'query-string';
 
 export default function Register({ programs }) {
+  const parsed = queryString.parse(location.search);
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     email: '',
@@ -19,9 +21,8 @@ export default function Register({ programs }) {
     business_name: '',
     password_confirmation: '',
     subscribed: true,
-    program: programs[0].id,
+    program: programs[parsed?.tribe === 'greenpal' ? 1 : 0].id,
   });
-
   const { t } = useTranslation();
 
   useEffect(() => {

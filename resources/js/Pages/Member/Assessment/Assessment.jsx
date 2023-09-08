@@ -78,11 +78,8 @@ function Assessment({ assessments, session, answers }) {
     e.preventDefault();
   };
 
-  console.log(data);
-
   useEffect(() => {
     let localAnswers = localStorage.getItem('assessment');
-    debugger;
     if (localAnswers) {
       localAnswers = JSON.parse(localAnswers);
     }

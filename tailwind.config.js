@@ -16,6 +16,9 @@ module.exports = {
     'text-slate-500',
     'text-yellow-500',
     'text-yellow-700',
+    'border-slate-500',
+    'border-yellow-500',
+    'border-yellow-700',
   ],
   theme: {
     container: {

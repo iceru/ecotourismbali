@@ -29,13 +29,13 @@ function CreateProgram({ program }) {
       withId: true,
       color: 'info',
     },
-    {
-      label: 'delete_button',
-      route: 'program.destroy',
-      withId: true,
-      color: 'danger',
-      type: 'delete',
-    },
+    // {
+    //   label: 'delete_button',
+    //   route: 'program.destroy',
+    //   withId: true,
+    //   color: 'danger',
+    //   type: 'delete',
+    // },
   ];
 
   const submit = e => {

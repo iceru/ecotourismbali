@@ -41,18 +41,34 @@ function Navbar() {
   }
   return (
     <>
-      <nav className="flex bg-white justify-between items-center container px-3 py-3 mx-auto">
+      <div className="flex items-center justify-end container mx-auto p-3">
+        <div className="flex items-center">
+          <div className="text-xs mr-3 text-gray-400">{t('language')}</div>
+          <div onClick={() => changeLanguage('en')} className="cursor-pointer">
+            <img src={enImg} alt="" />
+          </div>
+          <div
+            onClick={() => changeLanguage('id')}
+            className="ml-3 cursor-pointer"
+          >
+            <img src={idImg} alt="" />
+          </div>
+        </div>
+      </div>
+      <nav className="flex bg-white justify-between items-center container px-3 pb-3 mx-auto">
         <div className="logo">
-          <img src={Logo} alt="Eco Tourism Bali" className="w-[80px]" />
+          <a href="https://ecotourismbali.com">
+            <img src={Logo} alt="Eco Tourism Bali" className="w-[80px]" />
+          </a>
         </div>
         <div>
           <ul className="hidden lg:flex gap-8 uppercase text-[15px] text-[#b0b0b0] items-center">
             <li className="relative group">
-              <span>About</span>
+              <span>{t('about')}</span>
               <ul className="hidden absolute top-2 pt-8 group-hover:block hover:block">
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/about/climate-ambition/">
-                    Climate Ambition
+                    {t('climate_ambition')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
@@ -60,48 +76,43 @@ function Navbar() {
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/about/partners/">
-                    Partners
+                    {t('partners')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/about/pillars/">
-                    Pillars
+                    {t('pillars')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/about/etb-road-map/">
-                    Road Map
+                    {t('roadmap')}
                   </a>
                 </li>
-              </ul>
-            </li>
 
-            <li className="relative group">
-              <span>Programs</span>
-              <ul className="hidden absolute top-2 pt-8 group-hover:block hover:block">
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/sustainable-verification/">
-                    Sustainable Verification
+                    {t('sustainable_verification')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://joinetw.ecotourismbali.com/">
-                    Eco Tourism Week
+                    {t('eco_tourism_week')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/programs/regenarive-bali/">
-                    Regenerative Bali
+                    {t('regenerative_bali')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/programs/workshop/">
-                    Workshop
+                    {t('workshop')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
                   <a href="https://ecotourismbali.com/programs/consultation/">
-                    Consulting
+                    {t('consulting')}
                   </a>
                 </li>
               </ul>
@@ -117,7 +128,7 @@ function Navbar() {
                     className="mr-3"
                   />
                   <a href="https://ecotourismbali.com/tribe/community/">
-                    Community
+                    {t('community')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white flex items-center">
@@ -137,7 +148,7 @@ function Navbar() {
                     height="36"
                   />
                   <a href="https://ecotourismbali.com/tribe/eco-tourism-partners/">
-                    Partners
+                    {t('partners')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white flex items-center w-full min-w-[230px]">
@@ -148,7 +159,7 @@ function Navbar() {
                     height="36"
                   />
                   <a href="https://ecotourismbali.com/tribe/verified-member/">
-                    Verified Members
+                    {t('verified_members')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white flex items-center">
@@ -159,7 +170,7 @@ function Navbar() {
                     height="36"
                   />
                   <a href="https://ecotourismbali.com/tribe/ambassadors/">
-                    Ambassadors
+                    {t('ambassadors')}
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white flex items-center">
@@ -170,24 +181,29 @@ function Navbar() {
                     height="36"
                   />
                   <a href="https://ecotourismbali.com/tribe/warriors/">
-                    Warriors
+                    {t('warriors')}
                   </a>
                 </li>
               </ul>
             </li>
             <a href="https://ecotourismbali.com/sustainable-verification/">
-              <li className="bg-primary text-white px-[10px] py-[5px] transition hover:bg-white hover:text-primary border hover:border-primary">
-                Sustainable Verification
+              <li className="bg-[#05403a] text-white px-[10px] py-[5px] transition hover:bg-white hover:text-[#05403a] border hover:border-[#05403a]">
+                {t('sustainable_verification')}
               </li>
             </a>
+            <Link href={route('member.list')}>
+              <li className="bg-primary text-white px-[10px] py-[5px] transition hover:bg-white hover:text-primary border hover:border-primary">
+                {t('green_credential')}
+              </li>
+            </Link>
             <li className="relative group">
-              <span>Blog and News</span>
+              <span>{t('blog_news')}</span>
               <ul className="hidden absolute top-2 pt-8 group-hover:block hover:block">
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
-                  <a href="https://ecotourismbali.com/blog/">Blog</a>
+                  <a href="https://ecotourismbali.com/blog/">{t('blog')}</a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
-                  <a href="https://ecotourismbali.com/news/">News</a>
+                  <a href="https://ecotourismbali.com/news/">{t('news')}</a>
                 </li>
               </ul>
             </li>
@@ -227,7 +243,7 @@ function Navbar() {
                   <div className="mr-2">
                     <FontAwesomeIcon icon={faUser} />
                   </div>
-                  <div>Member Login</div>
+                  <div>{t('member_login')}</div>
                 </li>
               </Link>
             )}
@@ -258,7 +274,7 @@ function Navbar() {
               onClick={() => setAbout(!about)}
               className="cursor-pointer flex items-center"
             >
-              About
+              {t('about')}
               <FontAwesomeIcon className="ml-2 text-xs" icon={faChevronDown} />
             </span>
             <ul className={`${about ? 'block' : 'hidden'} pt-3 -mb-4`}>

@@ -28,13 +28,13 @@ function CreateVerifiedBadge({ badge }) {
       withId: true,
       color: 'info',
     },
-    {
-      label: 'delete_button',
-      route: 'verified_badge.destroy',
-      withId: true,
-      color: 'danger',
-      type: 'delete',
-    },
+    // {
+    //   label: 'delete_button',
+    //   route: 'verified_badge.destroy',
+    //   withId: true,
+    //   color: 'danger',
+    //   type: 'delete',
+    // },
   ];
 
   const submit = e => {

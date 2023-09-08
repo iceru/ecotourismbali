@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Badge;
 use App\Models\Member;
+use App\Models\Category;
 use App\Models\Assessment;
 use Illuminate\Support\Str;
 use App\Models\BusinessType;
@@ -60,6 +61,7 @@ class MemberAssessmentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->with('user')->first();
         $sessions = AssessmentSession::where('member_id', $member->id)->get();
+        $categories = Category::all();
 
         $attempt = 0;
         $dateAssessment = new Date();
@@ -86,6 +88,7 @@ class MemberAssessmentController extends Controller
             'member' => $member,
             'remaining' => $remaining,
             'dateAssessment' => $dateAssessment,
+            'categories' => $categories,
         ]);
     }
 
@@ -123,6 +126,7 @@ class MemberAssessmentController extends Controller
             'city' => 'required',
             'sister_company' => 'nullable',
             'company_name' => 'required',
+            'category' => 'required',
         ]);
 
         if ($request->sister_company) {
@@ -139,6 +143,7 @@ class MemberAssessmentController extends Controller
         $member->company_name = $request->company_name;
         $user->email = $request->email;
         $member->business_type_id = $request->business_type_id;
+        $member->category_id = $request->category;
         $member->save();
 
         $user->name = $request->name;

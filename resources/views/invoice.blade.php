@@ -129,12 +129,12 @@
     <tr>
         <td>
             <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
-                bgcolor="#ffffff" style="border-radius: 10px 10px 0 0;">
+                bgcolor="#ffffff" style="border-radius: 10px 10px 0 0; background-color:white; margin: auto">
 
                 <tr>
                     <td>
                         <table width="480" border="0" cellpadding="0" cellspacing="0" align="center"
-                            class="fullPadding">
+                            class="fullPadding" style="margin: auto">
                             <tbody>
                                 <tr>
                                     <td>
@@ -192,12 +192,12 @@
     <tr>
         <td>
             <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
-                bgcolor="#ffffff">
+                bgcolor="#ffffff" style="background-color:white; margin: auto">
 
                 <tr>
                     <td>
                         <table width="480" border="0" cellpadding="0" cellspacing="0" align="center"
-                            class="fullPadding">
+                            class="fullPadding" style="margin: auto">
                             <tbody>
                                 <tr>
                                     <td>
@@ -256,7 +256,7 @@
     <tr>
         <td>
             <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
-                bgcolor="#ffffff">
+                bgcolor="#ffffff" style="background-color: white; margin: auto">
                 <tbody>
                     <tr>
                     <tr>
@@ -265,7 +265,7 @@
                     <tr>
                         <td>
                             <table width="480" border="0" cellpadding="0" cellspacing="0" align="center"
-                                class="fullPadding">
+                                class="fullPadding" style="margin: auto">
                                 <tbody>
                                     <tr>
                                         <th style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;"
@@ -314,14 +314,14 @@
     <tr>
         <td>
             <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
-                bgcolor="#ffffff">
+                bgcolor="#ffffff" style="background-color: white; margin: auto">
                 <tbody>
                     <tr>
                         <td>
 
                             <!-- Table Total -->
                             <table width="480" border="0" cellpadding="0" cellspacing="0" align="center"
-                                class="fullPadding">
+                                class="fullPadding" style="margin: auto">
                                 <tbody>
                                     <tr>
                                         <td
@@ -347,7 +347,7 @@
     <tr>
         <td>
             <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
-                bgcolor="#ffffff" style="border-radius: 0 0 10px 10px;">
+                bgcolor="#ffffff" style="border-radius: 0 0 10px 10px; background-color: white; margin: auto">
                 <tbody>
                     <tr>
                     <tr>
@@ -356,7 +356,7 @@
                     <tr>
                         <td>
                             <table width="480" border="0" cellpadding="0" cellspacing="0" align="center"
-                                class="fullPadding">
+                                class="fullPadding" style="margin: auto">
                                 <tbody>
                                     <tr>
                                         <td
@@ -387,5 +387,9 @@
                 </tbody>
             </table>
         </td>
+    </tr>
+
+    <tr>
+        <td height="20"></td>
     </tr>
 </table>

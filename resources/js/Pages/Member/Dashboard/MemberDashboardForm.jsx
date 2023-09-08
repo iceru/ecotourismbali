@@ -16,8 +16,6 @@ const MemberDashboardForm = ({ business_type, member }) => {
     member?.business_type?.name || 'Hotel'
   );
 
-  console.log(member);
-
   const total_payments = [
     {
       label: 'Access to Self Assessment',

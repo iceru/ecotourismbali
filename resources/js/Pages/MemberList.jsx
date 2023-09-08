@@ -156,11 +156,11 @@ function MemberList({ programs, categories, badges, members }) {
             })}
           </ul>
         </div>
-        <div className="lg:w-5/6 grid lg:pl-6 lg:grid-cols-3 md:grid-cols-2 gap-4">
+        <div className="lg:w-5/6 grid lg:pl-6 xl:grid-cols-3 lg:grid-cols-2 gap-4">
           {members.length > 0 ? (
             members?.map(member => {
               return (
-                <div className="border rounded-2xl p-4 h-fit">
+                <div className="border rounded-2xl p-4 h-full">
                   {member?.program?.name === 'Green Pal' ? (
                     <div
                       className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex 

@@ -39,19 +39,23 @@ function MemberList({ member, lastSession, scores }) {
     <Guest>
       <BackTo
         title="back_to_list_members"
-        className="text-sm px-4 py-2 bg-primary text-white inline-flex rounded-3xl"
+        className="text-sm text-primary inline-flex rounded-3xl"
         link={route('member.list')}
       />
       <div className="flex flex-wrap mt-10">
-        <div className="lg:w-4/5 lg:pr-10">
-          <section className="flex justify-between items-center mb-12 flex-wrap">
+        <div
+          className={`${
+            member?.program?.name !== 'Green Pal' ? 'lg:w-4/5' : 'w-full'
+          } lg:pr-10`}
+        >
+          <section className="flex justify-between items-center lg:mb-12 mb-6 flex-wrap">
             <div className="flex items-center mb-6 lg:mb-0">
               {member.image && (
-                <div className="mr-4">
+                <div className="mr-4 lg:w-[120px] lg:h-[120px] w-1/3 h-[90px] ">
                   <img
                     src={'/storage/member/images/' + member?.image}
                     alt={member?.business_name}
-                    className="w-[120px] h-[120px] object-cover rounded-full"
+                    className="lg:w-[120px] lg:h-[120px] w-[90px] h-[90px] object-cover rounded-full"
                   />
                 </div>
               )}
@@ -62,22 +66,29 @@ function MemberList({ member, lastSession, scores }) {
                 <h4 className="uppercase text-primary tracking-wide mb-2">
                   {member?.category?.name}
                 </h4>
-                {member?.program?.name !== 'Green Pal' && (
-                  <h6>{member?.program?.name}</h6>
-                )}
               </div>
             </div>
+            {member?.program?.name === 'Green Pal' && (
+              <div>
+                <div className="flex justify-center">
+                  <img src={greenpal} alt="Green Pal" className="w-[100px]" />
+                </div>
+                <h4 className="m-0 font-bold text-greenpal mt-3 text-center">
+                  Green Pal Member
+                </h4>
+              </div>
+            )}
           </section>
-          <section className="mb-12 -mx-2">
+          <section className="lg:mb-12 mb-6 lg:-mx-2">
             <Slider {...settings}>
               {member?.member_slider?.map(slider => {
                 return (
-                  <div className="px-2">
-                    <div class="relative overflow-hidden pb-2/3">
+                  <div className="lg:px-2">
+                    <div className="relative overflow-hidden pb-2/3">
                       <img
                         src={`/storage/member/sliders/${slider.image}`}
                         alt=""
-                        class="absolute h-full w-full object-cover p-2"
+                        className="absolute h-full w-full object-cover p-1"
                       />
                     </div>
                   </div>
@@ -85,110 +96,143 @@ function MemberList({ member, lastSession, scores }) {
               })}
             </Slider>
           </section>
-          <section className="mb-12">
-            <div className="grid grid-cols-2 gap-20 ">
+          <section className="lg:mb-12 mb-6">
+            <div className="flex justify-center flex-col lg:flex-row gap-4 lg:gap-20">
               {member?.address && (
-                <div className="flex items-center justify-end">
+                <div className="flex items-center lg:justify-end">
                   <FontAwesomeIcon
                     icon={faHome}
-                    className="text-primary mr-2 mt-0.5"
+                    className="text-white bg-primary p-[8px] rounded-full mt-0.5 z-10 relative h-[24px] w-[24px]"
                   />
-                  {member?.address}
+                  <div className="border-primary border px-4 py-0.5 pl-8 -ml-6 z-0 rounded-xl text-primary font-semibold">
+                    {member?.address}
+                  </div>
                 </div>
               )}
               {member?.website && (
                 <a
-                  href={member.website}
+                  href={member?.website}
                   target="_blank"
                   className="flex items-center hover:text-primary transition"
                 >
                   <FontAwesomeIcon
                     icon={faGlobe}
-                    className="text-primary mr-2 mt-0.5"
+                    className="text-white bg-primary p-[8px] rounded-full mt-0.5 z-10 relative h-[24px] w-[24px]"
                   />
-                  {member?.website}
+                  <a
+                    href={
+                      member?.website?.includes('http')
+                        ? member?.website
+                        : `https://${member.website}`
+                    }
+                    className="border-primary border px-4 py-0.5 pl-8 -ml-6 z-0 rounded-xl hover:bg-primary hover:text-white transition text-primary font-semibold"
+                  >
+                    {member?.website}
+                  </a>
                 </a>
               )}
             </div>
           </section>
-          <section className="text-justify mb-10">
-            {member?.description}
-          </section>
-          <div className="flex justify-between items-end gap-6">
-            <div className="flex gap-6 h-fit">
-              {member.facebook && (
-                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                  <a
-                    href={
-                      member.facebook.includes('http')
-                        ? member.facebook
-                        : `https://${member.facebook}`
-                    }
-                    target="_blank"
-                    className="mt-1"
-                  >
-                    <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
-                  </a>
-                </div>
-              )}
-              {member.instagram && (
-                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                  <a
-                    href={
-                      member.instagram.includes('http')
-                        ? member.instagram
-                        : `https://${member.instagram}`
-                    }
-                    target="_blank"
-                    className="mt-1"
-                  >
-                    <FontAwesomeIcon icon={faInstagram} className="text-2xl" />
-                  </a>
-                </div>
-              )}
-              {member.whatsapp && (
-                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                  <a
-                    href={`https://wa.me/${member.whatsapp}`}
-                    target="_blank"
-                    className="mt-1"
-                  >
-                    <FontAwesomeIcon icon={faWhatsapp} className="text-2xl" />
-                  </a>
-                </div>
-              )}
-              {member.twitter && (
-                <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
-                  <a
-                    href={
-                      member.twitter.includes('http')
-                        ? member.twitter
-                        : `https://${member.twitter}`
-                    }
-                    target="_blank"
-                    className="mt-1"
-                  >
-                    <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
-                  </a>
+          <div
+            className={`${
+              member?.program?.name === 'Green Pal'
+                ? 'lg:w-3/4 w-full mx-auto'
+                : ''
+            }`}
+          >
+            <section className="text-justify mb-10">
+              {member?.description}
+            </section>
+            <div className="flex justify-between items-center gap-6">
+              <div className="flex gap-6 h-fit">
+                {member.facebook && (
+                  <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                    <a
+                      href={
+                        member.facebook.includes('http')
+                          ? member.facebook
+                          : `https://${member.facebook}`
+                      }
+                      target="_blank"
+                      className="mt-1"
+                    >
+                      <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
+                    </a>
+                  </div>
+                )}
+                {member.instagram && (
+                  <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                    <a
+                      href={
+                        member.instagram.includes('http')
+                          ? member.instagram
+                          : `https://${member.instagram}`
+                      }
+                      target="_blank"
+                      className="mt-1"
+                    >
+                      <FontAwesomeIcon
+                        icon={faInstagram}
+                        className="text-2xl"
+                      />
+                    </a>
+                  </div>
+                )}
+                {member.whatsapp && (
+                  <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                    <a
+                      href={`https://wa.me/${member.whatsapp}`}
+                      target="_blank"
+                      className="mt-1"
+                    >
+                      <FontAwesomeIcon icon={faWhatsapp} className="text-2xl" />
+                    </a>
+                  </div>
+                )}
+                {member.twitter && (
+                  <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
+                    <a
+                      href={
+                        member.twitter.includes('http')
+                          ? member.twitter
+                          : `https://${member.twitter}`
+                      }
+                      target="_blank"
+                      className="mt-1"
+                    >
+                      <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
+                    </a>
+                  </div>
+                )}
+              </div>
+              {member?.merchant_promo && (
+                <div className="bg-primary text-white p-4 rounded-xl">
+                  <h5 className="font-semibold text-lg mb-2">
+                    {t('merchant_promo')}
+                  </h5>
+                  <p>{member?.merchant_promo}</p>
                 </div>
               )}
             </div>
-            {member?.merchant_promo && (
-              <div className="bg-primary text-white p-4 rounded-xl">
-                <h5 className="font-semibold text-lg mb-2">
-                  {t('merchant_promo')}
-                </h5>
-                <p>{member?.merchant_promo}</p>
-              </div>
-            )}
           </div>
         </div>
 
-        <div className="lg:w-1/5 mx-auto flex lg:block gap-12 sticky top-0 lg:border-l pl-4 mt-10 lg:mt-0">
-          {member?.program?.name !== 'Green Pal' ? (
+        {member?.program?.name !== 'Green Pal' && (
+          <div className="lg:w-1/5 mx-auto w-full lg:gap-12 top-0 py-4  mt-10 lg:mt-0 sticky min-h-[50vh]">
+            {member?.badge && (
+              <div
+                className={`absolute top-0 left-0 ${badgeColor(
+                  member?.badge?.name,
+                  'color'
+                )} bg-opacity-[3%] border border-opacity-30 border-${badgeColor(
+                  member?.badge?.name,
+                  'plain'
+                )} lg:rounded-bl-full rounded-2xl h-full w-full -z-10`}
+              ></div>
+            )}
             <>
               {member?.verified_badge && (
-                <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4 lg:border-b">
+                <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4">
                   <div>
                     <img
                       className="max-h-[200px]"
@@ -197,7 +241,7 @@ function MemberList({ member, lastSession, scores }) {
                   </div>
                   <div
                     className={`font-bold ${badgeColor(
-                      member?.badge.name,
+                      member?.badge?.name,
                       'text'
                     )}`}
                   >
@@ -250,17 +294,8 @@ function MemberList({ member, lastSession, scores }) {
                 </div>
               )}
             </>
-          ) : (
-            <>
-              <div className="flex justify-center">
-                <img src={greenpal} alt="Green Pal" className="w-[100px]" />
-              </div>
-              <h4 className="m-0 font-bold text-greenpal mt-3 text-center">
-                Green Pal Member
-              </h4>
-            </>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </Guest>
   );

@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import SelectInput from '@/Components/SelectInput';
 
-function AssessmentData() {
+function AssessmentData({ categories }) {
   const { t } = useTranslation();
   const [provinces, setProvinces] = useState();
   const [selectedProvince, setSelectedProvince] = useState();
@@ -20,18 +20,19 @@ function AssessmentData() {
 
   const { member, remaining, dateAssessment } = usePage().props;
   const { data, setData, post, errors } = useForm({
-    business_name: member.business_name || '',
-    company_name: member.company_name || '',
-    sister_company: member.sister_company || '',
-    city: member.city || '',
-    province: member.province || '',
-    address: member.address || '',
-    website: member.website || '',
+    business_name: member?.business_name || '',
+    company_name: member?.company_name || '',
+    sister_company: member?.sister_company || '',
+    city: member?.city || '',
+    province: member?.province || '',
+    address: member?.address || '',
+    website: member?.website || '',
     name: member?.user?.name || '',
-    job_title: member.job_title || '',
-    phone: member.phone || '',
+    job_title: member?.job_title || '',
+    phone: member?.phone || '',
     email: member?.user?.email || '',
-    business_type_id: member.business_type_id || '',
+    business_type_id: member?.business_type_id || '',
+    category: member?.category_id || '',
   });
 
   const submit = e => {
@@ -54,6 +55,7 @@ function AssessmentData() {
         getCity(selectedProvince || dataProvince.id || provinces[0].id);
       });
   }, []);
+
   useEffect(() => {
     selectedProvince && getCity(selectedProvince);
   }, [selectedProvince]);
@@ -120,6 +122,22 @@ function AssessmentData() {
                 />
                 {errors.company_name && (
                   <span className="text-red-600">{errors.company_name}</span>
+                )}
+              </div>
+              <div className="flex flex-col gap-3">
+                <InputLabel htmlFor="category" value={t('category')} />
+                <SelectInput
+                  options={categories}
+                  labelData="name"
+                  valueData="id"
+                  placeholder="select_category"
+                  value={data.category}
+                  onChange={e => {
+                    setData('category', e.target.value);
+                  }}
+                />
+                {errors.category && (
+                  <span className="text-red-600">{errors.category}</span>
                 )}
               </div>
               <div className="flex flex-col gap-3">
@@ -297,7 +315,7 @@ function AssessmentData() {
       ) : (
         <AdminSection className="grid gap-6">
           <div className="px-4 py-3 bg-red-300 rounded-md inline-flex">
-            {t('not_eligible_assessment', { number: remaining })}
+            {t('not_eligible_assessment', { number: remaining || 0 })}
           </div>
           <div className="text-center text-lg">{t('cant_assessment')}</div>
           <div className="text-center text-2xl text-primary">
