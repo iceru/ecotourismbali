@@ -11,6 +11,7 @@ class Member extends Model
 {
     protected $table = 'members';
     protected $with = ['user', 'program'];
+    protected $fillable = ['status'];
     
     public function user(): BelongsTo
     {
