@@ -239,7 +239,7 @@
 
   "member_not_active": "Membership anda belum aktif",
   "preview_member": "Pratinjau untuk Penilaian Mandiri dan E-Learning",
-  "member_not_approved": "Akun anda sedang dalam proses review. Harap tunggu sampai kami menyetujui status akun anda.",
+  "member_not_approved": "Akun anda sedang dalam proses review. Harap tunggu sampai kami menyetujui status akun anda. Kami akan mengirimkan informasi melalui email anda jika proses review telah selesai.",
 
   "trial_assessment": "Anda sedang berada pada percobaan penilaian mandiri. Percobaan yang tersisa: 1",
   "result_preview_assessment": "Ini adalah akhir dari percobaan assessment. Silahkan aktivasi membership untuk membuka keseluruhan penilaian mandiri dan mendapatkan kesempatan untuk meraih badge untuk penilaian mandiri",
@@ -342,5 +342,9 @@
   "blog": "Blog",
   "news": "Berita",
 
-  "reset_pay": "Ulang Pembayaran"
+  "reset_pay": "Ulang Pembayaran",
+  "verify_thanks": "Terima kasih telah mendaftar!",
+  "verify_email": "Terima kasih telah mendaftar! Sebelum memulai, bisakah Anda memverifikasi alamat email Anda dengan mengklik tautan yang baru saja kami kirimkan melalui email kepada Anda? Jika Anda tidak menerima email tersebut, kami dengan senang hati akan mengirimkan email lain kepada Anda.",
+  "resend_email": "Tautan verifikasi yang baru telah dikirimkan ke alamat email anda.",
+  "resend_email_button": "Kirim Ulang Email Verifikasi"
 }

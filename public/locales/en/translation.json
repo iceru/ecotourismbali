@@ -242,7 +242,7 @@
 
   "member_not_active": "Your membership is not activated yet",
   "preview_member": "Preview of Assessment and E-Learning",
-  "member_not_approved": "Your account is under review. Please wait until we approve your account status",
+  "member_not_approved": "Your account is under review. Please wait until we approve your account status. We will send you an email when your account status is approved",
 
   "trial_assessment": "You are in trial of assessment. Remaining Attempt: 1",
   "result_preview_assessment": "This is the end of the trial of assessment. Please activate your membership to unlock full assessment and having a chance of getting self assessment badge",
@@ -345,5 +345,9 @@
   "blog": "Blog",
   "news": "News",
 
-  "reset_pay": "Reset Payment"
+  "reset_pay": "Reset Payment",
+  "verify_thanks": "Thanks for signing up!",
+  "verify_email": "Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
+  "resend_email": " A new verification link has been sent to the email address you provided during registration.",
+  "resend_email_button": "Resend Verification Email"
 }

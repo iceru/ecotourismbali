@@ -116,6 +116,7 @@ class AdminMemberController extends Controller
         $member->program_id = $request->program;
         $member->verified_badge_id = $request->verified_badge;
         $member->total_payment = $request->total_payment;
+
         if($member->status) {
             $member->status = $request->status;
         }
@@ -128,7 +129,9 @@ class AdminMemberController extends Controller
         $payment->member_id = $id;
         $payment->save();
 
-        Mail::to($member->user->email)->send(new MemberPaymentMail($payment));
+        if($request->status === 'payment') {
+            Mail::to($member->user->email)->send(new MemberPaymentMail($payment));
+        }
 
         return Redirect::route('admin.member.detail', $member->id);
     }
