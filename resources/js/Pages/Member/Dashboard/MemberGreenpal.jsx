@@ -190,6 +190,9 @@ const MemberGreenpal = ({ member, categories }) => {
                     onChange={e => setData('image', e.target.files[0])}
                   />
                 </div>
+                {errors.image && (
+                  <span className="text-red-600">{errors.image}</span>
+                )}
               </div>
               <div className="grid gap-3">
                 <InputLabel
@@ -206,6 +209,9 @@ const MemberGreenpal = ({ member, categories }) => {
                     setData('sliders', e.target.files);
                   }}
                 />
+                {errors.sliders && (
+                  <span className="text-red-600">{errors.sliders}</span>
+                )}
               </div>
               <div className="grid gap-3">
                 <InputLabel htmlFor="website" value={t('website')} />
@@ -217,6 +223,9 @@ const MemberGreenpal = ({ member, categories }) => {
                   isFocused={true}
                   onChange={e => setData('website', e.target.value)}
                 />
+                {errors.website && (
+                  <span className="text-red-600">{errors.website}</span>
+                )}
               </div>
               <div className="grid gap-3">
                 <InputLabel htmlFor="category" value={t('category')} />

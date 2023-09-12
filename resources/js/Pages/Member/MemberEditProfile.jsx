@@ -78,11 +78,11 @@ function MemberEditProfile({ categories }) {
               <div>
                 {member.image ? (
                   <div
-                    className="relative mr-4 group cursor-pointer"
+                    className="relative mr-4 group cursor-pointer bg-primary bg-opacity-10 flex justify-center items-center rounded-full "
                     onClick={() => setEditImage(!editImage)}
                   >
                     <img
-                      className="w-24 h-24 rounded-full object-cover"
+                      className="w-24 h-24 object-contain"
                       src={`/storage/member/images/${member.image}`}
                       alt=""
                     />

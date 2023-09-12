@@ -130,6 +130,7 @@ class MemberController extends Controller
             'twitter' => 'nullable',
             'whatsapp' => 'nullable',
             'merchant_promo' => 'nullable',
+            'category' => 'nullable',
         ]);
 
         $filename = null;
@@ -167,6 +168,7 @@ class MemberController extends Controller
         $member->twitter = $request->twitter;
         $member->whatsapp = $request->whatsapp;
         $member->merchant_promo = $request->merchant_promo;
+        $member->category_id = $request->category;
         $member->save();
 
         return Redirect::route('member.profile')->with('success', 'Profile updated successfully.');
@@ -208,6 +210,7 @@ class MemberController extends Controller
             'province' => 'required',
             'city' => 'required',
             'category' => 'required',
+            'website' => 'nullable',
         ]);
 
         $filename = null;
@@ -238,6 +241,7 @@ class MemberController extends Controller
 
         $member->business_name = $request->business_name;
         $member->company_name = $request->company_name;
+        $member->website = $request->website;
         $member->job_title = $request->job_title;
         $member->address = $request->address;
         $member->description = $request->description;

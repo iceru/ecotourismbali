@@ -63,19 +63,15 @@ function MemberLayout({ children, state }) {
       >
         <div className="logo mb-12">
           <div className="flex items-center mb-10">
-            <div>
+            <div className="w-20 h-20 bg-primary bg-opacity-10 flex justify-center items-center rounded-full mr-2">
               {member?.image ? (
                 <img
-                  className="w-16 h-16 rounded-full mr-4 object-cover"
+                  className="w-20 h-20 rounded-full  object-contain"
                   src={`/storage/member/images/${member?.image}`}
                   alt=""
                 />
               ) : (
-                <img
-                  className="w-16 h-16 rounded-full mr-4"
-                  src={noImage}
-                  alt=""
-                />
+                <img className="w-20 h-20 rounded-full " src={noImage} alt="" />
               )}
             </div>
             <div>

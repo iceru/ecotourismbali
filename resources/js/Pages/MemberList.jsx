@@ -212,16 +212,16 @@ function MemberList({ programs, categories, badges, members }) {
                     </>
                   )}
                   <div className="flex items-center mb-3 mt-5">
-                    {member.image && (
-                      <div className="mr-3">
+                    {member?.image && (
+                      <div className="mr-3 rounded-full w-[62px] h-[62px] bg-lightPrimary bg-opacity-30 flex justify-center items-center">
                         <img
-                          src={`/storage/member/images/${member.image}`}
+                          src={`/storage/member/images/${member?.image}`}
                           alt={member.bussiness_name}
-                          className="w-[62px] max-h-[62px] object-cover"
+                          className="w-[62px] max-h-[62px] object-contain rounded-full"
                         />
                       </div>
                     )}
-                    <Link href={route('member.detail', member.id)}>
+                    <Link href={route('member.detail', member.slug)}>
                       <h4 className="font-bold text-lg">
                         {member.business_name}
                       </h4>

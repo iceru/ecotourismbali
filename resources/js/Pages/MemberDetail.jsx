@@ -51,11 +51,11 @@ function MemberList({ member, lastSession, scores }) {
           <section className="flex justify-between items-center lg:mb-12 mb-6 flex-wrap">
             <div className="flex items-center mb-6 lg:mb-0">
               {member.image && (
-                <div className="mr-4 lg:w-[120px] lg:h-[120px] w-1/3 h-[90px] ">
+                <div className="mr-4 lg:w-[120px] lg:h-[120px] w-1/3 h-[90px] object-contain rounded-full bg-primary bg-opacity-10 flex justify-center items-center">
                   <img
                     src={'/storage/member/images/' + member?.image}
                     alt={member?.business_name}
-                    className="lg:w-[120px] lg:h-[120px] w-[90px] h-[90px] object-cover rounded-full"
+                    className="lg:w-[120px] lg:h-[120px] w-[90px] h-[90px] rounded-full object-contain"
                   />
                 </div>
               )}
@@ -97,7 +97,7 @@ function MemberList({ member, lastSession, scores }) {
             </Slider>
           </section>
           <section className="lg:mb-12 mb-6">
-            <div className="flex justify-center flex-col lg:flex-row gap-4 lg:gap-20">
+            <div className="flex justify-center flex-col lg:flex-row flex-wrap gap-4 lg:gap-20">
               {member?.address && (
                 <div className="flex items-center lg:justify-end">
                   <FontAwesomeIcon

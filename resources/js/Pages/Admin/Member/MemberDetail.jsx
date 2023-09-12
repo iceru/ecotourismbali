@@ -59,6 +59,18 @@ function MemberIndex() {
 
   const total_payments = [
     {
+      label: 'Rp1',
+      value: 1,
+    },
+    {
+      label: 'Rp500.000',
+      value: 500000,
+    },
+    {
+      label: 'Rp1.500.000',
+      value: 1500000,
+    },
+    {
       label: 'Rp2.000.000',
       value: 2000000,
     },

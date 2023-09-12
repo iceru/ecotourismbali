@@ -70,22 +70,22 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
         <div className="flex flex-wrap">
           <div className="w-full mb-4 lg:mb-0 lg:w-4/5">
             <div className="flex items-center mb-10">
-              <div>
+              <div className="w-24 h-24 bg-primary bg-opacity-10 flex justify-center items-center rounded-full ">
                 {member.image ? (
                   <img
-                    className="w-24 h-24 rounded-full mr-4 object-cover"
+                    className="w-24 h-24 object-contain rounded-full"
                     src={`/storage/member/images/${member.image}`}
                     alt=""
                   />
                 ) : (
                   <img
-                    className="w-24 h-24 rounded-full mr-4"
+                    className="w-24 h-24 rounded-full"
                     src={noImage}
                     alt=""
                   />
                 )}
               </div>
-              <div>
+              <div className="ml-4">
                 <h3 className="font-bold text-lg">
                   {member.business_name || 'Business Name'}
                 </h3>
