@@ -88,7 +88,7 @@ function MemberList({ member, lastSession, scores }) {
                       <img
                         src={`/storage/member/sliders/${slider.image}`}
                         alt=""
-                        className="absolute h-full w-full object-cover p-1"
+                        className="absolute h-full w-full object-contain p-1"
                       />
                     </div>
                   </div>

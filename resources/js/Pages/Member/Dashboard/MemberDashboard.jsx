@@ -33,9 +33,9 @@ function MemberDashboard({
   const { flash } = usePage().props;
 
   const payCompleteStorage = sessionStorage.getItem('paid');
-  const pay = () => {
-    let snapToken = sessionStorage.getItem('snapToken');
+  let snapToken = sessionStorage.getItem('snapToken');
 
+  const pay = () => {
     const snapInit = snapToken => {
       snap.pay(snapToken, {
         onSuccess: function () {
@@ -65,6 +65,10 @@ function MemberDashboard({
     } else {
       snapInit(snapToken);
     }
+  };
+
+  const resetPay = () => {
+    sessionStorage.clear('snapToken');
   };
 
   useEffect(() => {
@@ -162,21 +166,32 @@ function MemberDashboard({
           {member?.status === 'payment' && member?.total_payment ? (
             <>
               <p className="text-sm">{t('member_locked_text')}</p>
-              <div className="flex justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
-                <div>
+              <div className="flex flex-wrap justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
+                <div className=" mb-4 lg:mb-0">
                   <p>{t('total_payment')}</p>
                   <h4 className="text-2xl font-bold">
                     {currency.format(member?.total_payment)}
                   </h4>
                 </div>
-                <PrimaryButton
-                  className="text-[16px]"
-                  onClick={() =>
-                    !member?.status?.includes('active') ? pay() : null
-                  }
-                >
-                  {t('member_locked_button')}
-                </PrimaryButton>
+                <div className="flex items-center">
+                  {snapToken && (
+                    <PrimaryButton
+                      className="text-[16px] mr-4"
+                      color="danger"
+                      onClick={resetPay}
+                    >
+                      {t('reset_pay')}
+                    </PrimaryButton>
+                  )}
+                  <PrimaryButton
+                    className="text-[16px] "
+                    onClick={() =>
+                      !member?.status?.includes('active') ? pay() : null
+                    }
+                  >
+                    {t('member_locked_button')}
+                  </PrimaryButton>
+                </div>
               </div>
             </>
           ) : member?.status === 'waiting_approval' ? (

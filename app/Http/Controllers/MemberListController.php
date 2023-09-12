@@ -69,6 +69,8 @@ class MemberListController extends Controller
             } else {
                 $member->orderBy('business_name');
             }
+        } else {
+            $member->orderBy('business_name');
         }
 
         $member = $member->with('badge', 'category', 'verified_badge', 'program')->get();
