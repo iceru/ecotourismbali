@@ -108,15 +108,12 @@ export default function Register({ programs }) {
                 <div className="flex">
                   <img src={greenforce} className="w-16 h-16 mr-2" alt="" />
                   <p>
-                    <strong>Green Force</strong> is divided into members who
+                    <strong>Green Force </strong> Tribe is a group of
+                    accommodation and restaurant businesses that have become
+                    members of Eco Tourism Bali and have undertaken
+                    self-assessment. Green Force is divided into members who
                     conduct self-assessments and verified members who Eco
-                    Tourism Bali expert verifiers have verified. Green Force is
-                    Eco Tourism Bali's leading partner company in providing
-                    eco-friendly and sustainable products to complement the
-                    amenity needs of Bali's accommodation and restaurant
-                    businesses. Green Force will be a business accelerator and
-                    key actor in driving Bali's transformation as a sustainable
-                    tourism destination.
+                    Tourism Bali expert verifiers have verified.
                   </p>
                 </div>
               ) : (
@@ -127,10 +124,7 @@ export default function Register({ programs }) {
                     together with Eco Tourism Bali for free consisting of small
                     scale suppliers, community and travel who have the same
                     vision to support Bali to become a Green Tourism Destination
-                    and sustainability. Green Force Tribe is a group of
-                    accommodation and restaurant businesses that have become
-                    members of Eco Tourism Bali and have undertaken
-                    self-assessment.
+                    and sustainability.
                   </p>
                 </div>
               )}
