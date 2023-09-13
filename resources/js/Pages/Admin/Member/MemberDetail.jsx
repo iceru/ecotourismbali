@@ -97,8 +97,8 @@ function MemberIndex() {
 
   const items = (label, data) => {
     return (
-      <div className="flex flex-wrap mb-4">
-        <div className="w-full lg:w-1/4 mb-3 lg:mb-0">
+      <div className="flex flex-wrap mb-6">
+        <div className="w-full lg:w-1/4 mb-2 lg:mb-0">
           <div className="font-bold">{t(label)}</div>
         </div>
         <div className="w-full lg:w-3/4 lg:pl-6">{data || '-'}</div>
@@ -106,15 +106,13 @@ function MemberIndex() {
     );
   };
 
-  console.log(member.status);
-
   return (
     <AdminLayout>
       <BackTo link="/admin/member/index" title="back_to_list_members" />
       <AdminSection>
         <div className="flex mb-6 flex-wrap">
           <div className="lg:w-4/5 pr-4">
-            <div className="flex items-center mb-6">
+            <div className="flex flex-wrap items-center mb-6">
               {member?.image && (
                 <img
                   className="mr-4 w-[100px]"
@@ -132,14 +130,14 @@ function MemberIndex() {
             </PrimaryButton>
             <form onSubmit={submit}>
               {edit && !member?.status?.includes('active') ? (
-                <div className="flex items-center mb-4">
+                <div className="flex flex-wrap items-center mb-6">
                   <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
                   <SelectInput
                     id="status"
                     name="status"
                     value={data.status}
                     options={status}
-                    className="lg:w-3/4"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     onChange={e => {
                       setData('status', e.target.value);
                       setStatusMember(e.target.value);
@@ -152,17 +150,17 @@ function MemberIndex() {
 
               {edit && statusMember === 'payment' && (
                 <>
-                  <div className="flex items-center mb-4">
+                  <div className="flex flex-wrap items-center mb-6">
                     <div className="font-bold lg:w-1/4">{t('invoice_no')}</div>
                     <TextInput
                       id="invoice_no"
                       name="invoice_no"
                       value={data.invoice_no}
-                      className="lg:w-3/4"
+                      className="lg:w-3/4 w-full mt-2 lg:mt-0"
                       onChange={e => setData('invoice_no', e.target.value)}
                     />
                   </div>
-                  <div className="flex items-center mb-4">
+                  <div className="flex flex-wrap items-center mb-6">
                     <div className="font-bold lg:w-1/4">
                       {t('invoice_item_text')}
                     </div>
@@ -170,7 +168,7 @@ function MemberIndex() {
                       id="invoice_item_text"
                       name="invoice_item_text"
                       value={data.invoice_item_text}
-                      className="lg:w-3/4"
+                      className="lg:w-3/4 w-full mt-2 lg:mt-0"
                       onChange={e =>
                         setData('invoice_item_text', e.target.value)
                       }
@@ -179,7 +177,7 @@ function MemberIndex() {
                 </>
               )}
               {edit && !member?.status?.includes('active') ? (
-                <div className="flex items-center mb-4">
+                <div className="flex flex-wrap items-center mb-6">
                   <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
                   <SelectInput
                     id="total_payment"
@@ -187,7 +185,7 @@ function MemberIndex() {
                     value={data.total_payment}
                     options={total_payments}
                     placeholder="select_total_payment"
-                    className="lg:w-3/4"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     onChange={e => setData('total_payment', e.target.value)}
                   />
                 </div>
@@ -202,7 +200,7 @@ function MemberIndex() {
               {items('business_type', member?.business_type?.name)}
 
               {edit ? (
-                <div className="flex items-center mb-4">
+                <div className="flex flex-wrap items-center mb-6">
                   <div className="font-bold lg:w-1/4">{t('category')}</div>
                   <SelectInput
                     id="category"
@@ -212,7 +210,7 @@ function MemberIndex() {
                     labelData="name"
                     placeholder="select_category"
                     valueData="id"
-                    className="lg:w-3/4"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     onChange={e => setData('category', e.target.value)}
                   />
                 </div>
@@ -220,14 +218,14 @@ function MemberIndex() {
                 items('category', member?.category?.name)
               )}
               {edit ? (
-                <div className="flex items-center mb-4">
+                <div className="flex flex-wrap items-center mb-6">
                   <div className="font-bold lg:w-1/4">{t('program')}</div>
                   <SelectInput
                     id="program"
                     name="program"
                     value={data.program}
                     options={programs}
-                    className="lg:w-3/4"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     placeholder="select_program"
                     labelData="name"
                     valueData="id"
@@ -242,7 +240,7 @@ function MemberIndex() {
                 items('assessment_expire', moment(dateAssessment).format('LL'))}
               {items('badge', member?.badge?.name)}
               {edit ? (
-                <div className="flex items-center mb-4">
+                <div className="flex flex-wrap items-center mb-6">
                   <div className="font-bold lg:w-1/4">
                     {t('verified_badge')}
                   </div>
@@ -251,7 +249,7 @@ function MemberIndex() {
                     name="verified_badge"
                     value={data.verified_badge}
                     options={verified_badges}
-                    className="lg:w-3/4"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     labelData="name"
                     placeholder="select_verify_badge"
                     valueData="id"
@@ -275,7 +273,7 @@ function MemberIndex() {
           </div>
           <div className="lg:w-1/5 mx-auto flex lg:block gap-12 sticky top-0 lg:border-l pl-4 mt-10 lg:mt-0">
             {member?.verified_badge && (
-              <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4 lg:border-b">
+              <div className="flex flex-col items-center text-primary uppercase mb-6 pb-4 lg:border-b">
                 <div>
                   <img
                     className="max-h-[120px]"

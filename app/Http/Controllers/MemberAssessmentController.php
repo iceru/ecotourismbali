@@ -251,36 +251,37 @@ class MemberAssessmentController extends Controller
             $totalPoint = $totalPoint + $assess->score;
         }
 
-        if ($member->business_type->name == 'Hotel') {
-            if ($totalPoint > 264) {
-                $badge = Badge::where('name', 'Gold')->first();
-            } else if ($totalPoint > 175) {
-                $badge = Badge::where('name', 'Silver')->first();
-            } else if ($totalPoint > 87) {
-                $badge = Badge::where('name', 'Bronze')->first();
-            }
-
-
-            if ($totalPoint > 87) {
-                $member->badge_id = $badge->id;
-                $member->save();
-            }
-        } else {
-            if ($totalPoint > 246) {
-                $badge = Badge::where('name', 'Gold')->first();
-            } else if ($totalPoint > 164) {
-                $badge = Badge::where('name', 'Silver')->first();
-            } else if ($totalPoint > 82) {
-                $badge = Badge::where('name', 'Bronze')->first();
-            }
-
-            if ($totalPoint > 82) {
-                $member->badge_id = $badge->id;
-                $member->save();
-            }
-        }
 
         if (str_contains($member->status, 'active')) {
+            if ($member->business_type->name == 'Hotel') {
+                if ($totalPoint > 264) {
+                    $badge = Badge::where('name', 'Gold')->first();
+                } else if ($totalPoint > 175) {
+                    $badge = Badge::where('name', 'Silver')->first();
+                } else if ($totalPoint > 87) {
+                    $badge = Badge::where('name', 'Bronze')->first();
+                }
+
+
+                if ($totalPoint > 87) {
+                    $member->badge_id = $badge->id;
+                    $member->save();
+                }
+            } else {
+                if ($totalPoint > 246) {
+                    $badge = Badge::where('name', 'Gold')->first();
+                } else if ($totalPoint > 164) {
+                    $badge = Badge::where('name', 'Silver')->first();
+                } else if ($totalPoint > 82) {
+                    $badge = Badge::where('name', 'Bronze')->first();
+                }
+
+                if ($totalPoint > 82) {
+                    $member->badge_id = $badge->id;
+                    $member->save();
+                }
+            }
+
             $session->completion = 'yes';
             $session->total_score = $totalPoint;
             $session->save();

@@ -9,6 +9,8 @@ import AuthImage from '@/Components/AuthImage';
 import { useTranslation } from 'react-i18next';
 
 import RegisImage from '../../../images/regisImage.jpg';
+import greenforce from '../../../images/green_force.png';
+import greenpal from '../../../images/greenpal.png';
 import SelectInput from '@/Components/SelectInput';
 import queryString from 'query-string';
 
@@ -36,6 +38,7 @@ export default function Register({ programs }) {
 
     post(route('register'));
   };
+
   return (
     <GuestLayout>
       <Head title="Register" />
@@ -98,6 +101,39 @@ export default function Register({ programs }) {
               />
 
               <InputError message={errors.program} className="mt-2" />
+            </div>
+
+            <div className="text-sm text-gray-500 mt-3">
+              {data.program == 1 ? (
+                <div className="flex">
+                  <img src={greenforce} className="w-16 h-16 mr-2" alt="" />
+                  <p>
+                    <strong>Green Force</strong> is divided into members who
+                    conduct self-assessments and verified members who Eco
+                    Tourism Bali expert verifiers have verified. Green Force is
+                    Eco Tourism Bali's leading partner company in providing
+                    eco-friendly and sustainable products to complement the
+                    amenity needs of Bali's accommodation and restaurant
+                    businesses. Green Force will be a business accelerator and
+                    key actor in driving Bali's transformation as a sustainable
+                    tourism destination.
+                  </p>
+                </div>
+              ) : (
+                <div className="flex">
+                  <img src={greenpal} className="w-16 h-16 mr-2" alt="" />
+                  <p>
+                    <strong>Green Pal</strong> is a whole community that joins
+                    together with Eco Tourism Bali for free consisting of small
+                    scale suppliers, community and travel who have the same
+                    vision to support Bali to become a Green Tourism Destination
+                    and sustainability. Green Force Tribe is a group of
+                    accommodation and restaurant businesses that have become
+                    members of Eco Tourism Bali and have undertaken
+                    self-assessment.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="mt-4">
