@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import BackTo from '@/Pages/Admin/Components/BackTo';
 
 function ModuleDetail({ module }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <MemberLayout>
@@ -50,7 +50,10 @@ function ModuleDetail({ module }) {
           </div>
           <div
             className="text-justify module__content"
-            dangerouslySetInnerHTML={{ __html: module.content }}
+            dangerouslySetInnerHTML={{
+              __html:
+                i18n.language === 'en' ? module.content_en : module.content,
+            }}
           ></div>
           {/* {module.member_module[0] &&
           module.member_module[0].completion === 1 ? null : (

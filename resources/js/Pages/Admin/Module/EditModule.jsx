@@ -20,6 +20,7 @@ function EditAssessment() {
     title: module.title || '',
     description: module.description || '',
     content: module.content || '',
+    content_en: module.content_en || '',
     video: module.video || '',
     author: module.author || '',
     image: '',
@@ -33,10 +34,15 @@ function EditAssessment() {
   };
 
   const [value, setValue] = useState(module.content);
+  const [valueEn, setValueEn] = useState(module.content_en);
 
   useEffect(() => {
     setData('content', value);
   }, [value]);
+
+  useEffect(() => {
+    setData('content_en', valueEn);
+  }, [valueEn]);
 
   return (
     <AdminLayout>
@@ -87,6 +93,20 @@ function EditAssessment() {
             </div>
             <div className="lg:w-3/4">
               <Editor onChange={setValue} value={value} />
+              <span className="text-red-600">{errors.content}</span>
+            </div>
+          </div>
+
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/4 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="content"
+                value={t('form_label_content_en')}
+              />
+            </div>
+            <div className="lg:w-3/4">
+              <Editor onChange={setValueEn} value={valueEn} />
+              <span className="text-red-600">{errors.content_en}</span>
             </div>
           </div>
 

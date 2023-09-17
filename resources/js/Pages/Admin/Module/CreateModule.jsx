@@ -17,12 +17,14 @@ function CreateModule({ module }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
   const [value, setValue] = useState('');
+  const [valueEn, setValueEn] = useState('');
 
   const { data, setData, post, processing, errors, reset } = useForm({
     title: '',
     description: '',
     image: null,
     content: null,
+    content_en: null,
     video: '',
     attachment: null,
     author: '',
@@ -83,6 +85,7 @@ function CreateModule({ module }) {
       onSuccess: () => {
         reset();
         setValue();
+        setValueEn();
       },
       onError: error => {
         console.log(error);
@@ -93,6 +96,10 @@ function CreateModule({ module }) {
   useEffect(() => {
     setData('content', value);
   }, [value]);
+
+  useEffect(() => {
+    setData('content_en', valueEn);
+  }, [valueEn]);
 
   return (
     <AdminLayout>
@@ -151,6 +158,19 @@ function CreateModule({ module }) {
             <div className="lg:w-4/5">
               <Editor onChange={setValue} value={value} />
               <span className="text-red-600">{errors.content}</span>
+            </div>
+          </div>
+
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="content_en"
+                value={t('form_label_content_en')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <Editor onChange={setValueEn} value={valueEn} />
+              <span className="text-red-600">{errors.content_en}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">

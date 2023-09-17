@@ -101,7 +101,7 @@ class MemberPaymentController extends Controller
         }
 
         if ($transaction) {
-            $bankName;
+            $bankName = "-";
             if (isset($notif->va_numbers)) {
                 $bankName = $notif->va_numbers[0]->bank;
             } else if(isset($notif->bank)) {

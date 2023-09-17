@@ -33,6 +33,7 @@ class ModuleController extends Controller
             'image' => 'required|image',
             'description' => 'required',
             'content' => 'required',
+            'content_en' => 'required',
             'video' => 'nullable',
             'attachment' => 'nullable|file',
             'author' => 'required',
@@ -61,6 +62,7 @@ class ModuleController extends Controller
         $module->image = $image_filename;
         $module->description = $request->description;
         $module->content = $request->content;
+        $module->content_en = $request->content_en;
         $module->attachment = $attachment_filename;
         $module->video = $video_filename;
         $module->author = $request->author;
@@ -85,6 +87,7 @@ class ModuleController extends Controller
             'image' => 'nullable|image',
             'description' => 'required',
             'content' => 'required',
+            'content_en' => 'required',
             'video' => 'nullable',            
             'attachment' => 'nullable|file',
             'author' => 'required',
@@ -115,6 +118,7 @@ class ModuleController extends Controller
         $module->title = $request->title;
         $module->description = $request->description;
         $module->content = $request->content;
+        $module->content_en = $request->content_en;
         $module->author = $request->author;
         $module->save();
 

@@ -42,14 +42,15 @@ function ShowModule() {
   };
   return (
     <AdminLayout>
-      <BackTo link="/admin/module" title="back_to_list_modules" />
+      <BackTo link="/admin/module" title="back_to_list_module" />
       <AdminSection>
         {items('title', module?.title)}
         {items('description', module?.description)}
         {items('author', module?.author)}
         {items('content', module?.content, 'content')}
+        {items('content_en', module?.content_en, 'content')}
         {items('image', module?.image, 'image')}
-        {items('video', module?.video, 'video')}
+        {module?.video && items('video', module?.video, 'video')}
         {items('attachment', module?.attachment)}
       </AdminSection>
     </AdminLayout>
