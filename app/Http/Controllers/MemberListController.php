@@ -15,29 +15,44 @@ use Illuminate\Support\Facades\Auth;
 
 class MemberListController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name')->get();
+        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
+        
+        
+        if($request->input('category') && $request->input('category') !== 'all') {
+            $members = $members->where('category_id', $request->input('category'));
+        }
+
+        if($request->input('program')) {
+            $members = $members->where('program_id', $request->input('program'));
+        }
+
+        if($request->input('badge')) {
+            $members = $members->where('badge_id', $request->input('badge'));
+        }
+
+        if($request->input('keyword')) {
+            $members = $members->where('business_name', 'LIKE', "%$request->input('keyword')%");
+        }
+
+        if ($request->input('sort')) {
+            $sortColumns = explode('-', $request->input('sort'));
+            if($sortColumns[1] === 'descending') {
+                $members->orderByDesc('business_name');
+            } else {
+                $members->orderBy('business_name');
+            }
+        } else {
+            $members->orderBy('business_name');
+        }
+
+        $members = $members->paginate(12)->withQueryString();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
             'badges' => Badge::all(),
             'members' => $members,
-        ]);
-    }
-
-    public function detail($slug)
-    {
-        $member = Member::where('slug', $slug)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail();
-        $memberAssessments = null;
-        $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
-        if($lastSession) {
-            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
-        }
-        return Inertia::render('MemberDetail', [
-            'member' => $member,
-            'scores' => $memberAssessments,
-            'lastSession' => $lastSession
         ]);
     }
 
@@ -73,12 +88,27 @@ class MemberListController extends Controller
             $member->orderBy('business_name');
         }
 
-        $member = $member->with('badge', 'category', 'verified_badge', 'program')->get();
+        $member = $member->with('badge', 'category', 'verified_badge', 'program')->paginate(12)->withQueryString();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
             'badges' => Badge::all(),
             'members' => $member,
+        ]);
+    }
+
+    public function detail($slug)
+    {
+        $member = Member::where('slug', $slug)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail();
+        $memberAssessments = null;
+        $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
+        if($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+        }
+        return Inertia::render('MemberDetail', [
+            'member' => $member,
+            'scores' => $memberAssessments,
+            'lastSession' => $lastSession
         ]);
     }
 
