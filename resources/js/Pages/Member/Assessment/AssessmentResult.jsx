@@ -10,6 +10,10 @@ import {
   View,
 } from '@react-pdf/renderer';
 import { usePage } from '@inertiajs/react';
+import Lottie from 'lottie-react';
+import moment from 'moment';
+import { saveAs } from 'file-saver';
+import { toUpper } from 'lodash';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
@@ -18,9 +22,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { badgeColor } from '@/Helper/BadgeColor';
 
 import Certificate from '../../../../images/certificate.png';
-import { toUpper } from 'lodash';
-import moment from 'moment';
-import { saveAs } from 'file-saver';
+import confetti from '../../../../images/confetti2.json';
 
 function AssessmentResult({ session, member, scores, expiredDate }) {
   const { t } = useTranslation();
@@ -123,95 +125,91 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       )}
       <AdminSection>
         <TitleSection title="assessment" className="mb-6" />
-        <div className="font-bold text-primary mb-6"></div>
 
-        <div className="mb-6 pb-6 border-b">
-          <div className="text-2xl mb-1 font-bold text-primary">
+        <div className="mb-6 pb-6 border-b text-center">
+          <div className="text-3xl mb-1 font-bold text-primary">
             {t('congrats')}
           </div>
           <p className=" mb-3 text-lg font-bold text-primary">
             {t('finish_assessment')}
           </p>
-          <p className="text-etbGray xxl:w-2/3">
+          <p className="lg:w-2/3 text-sm lg:text-base text-start lg:text-center mx-auto py-4 px-6 rounded-lg bg-lightPrimary text-primary">
             {t('finish_assessment_text')}
           </p>
         </div>
         {member?.status?.includes('active') ? (
-          <>
-            <div className="grid lg:grid-cols-2 gap-6">
-              <div className="mb-4 lg:mb-0">
-                <div className="mb-4">{t('your_assessment_scores')}&nbsp;</div>
-                <div className="px-6 py-4 bg-lightPrimary text-3xl font-bold rounded-2xl inline-flex">
-                  {session?.total_score}
+          <div className="relative">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] z-0">
+              <Lottie animationData={confetti} loop={3} className="w-full" />
+            </div>
+            <div className="relative z-[2]">
+              <div className="grid lg:grid-cols-2 gap-6 xl:w-[80%] mx-auto">
+                <div className="mb-4 pb-6 lg:pb-0 lg:mb-0 text-center lg:border-r-2 border-gray-200">
+                  <div className="mb-4 font-bold">
+                    {t('your_assessment_scores')}&nbsp;
+                  </div>
+                  <div className=" text-7xl text-primary font-bold rounded-2xl inline-flex">
+                    {session?.total_score}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col">
-                {member?.badge?.image ? (
-                  <div className="justify-center">
-                    <div className="mb-4">{t('your_badge_is')}</div>
-                    <div className="flex items-center flex-wrap lg:flex-nowrap">
-                      <div>
-                        <img
-                          className="max-h-[120px] mr-4"
-                          src={'/storage/badges/' + member?.badge?.image}
-                          alt=""
-                        />
-                      </div>
-                      <div>
-                        <div
-                          className={
-                            'font-bold  text-2xl ' +
-                            badgeColor(member?.badge?.name, 'text')
-                          }
-                        >
-                          {member?.badge?.name}
+                <div className="flex flex-col justify-center items-center text-center">
+                  {member?.badge?.image ? (
+                    <div className="justify-center">
+                      <div className="mb-4 font-bold">{t('your_badge_is')}</div>
+                      <div
+                        className={`rounded-3xl px-6 py-4 bg-opacity-70 flex gap-2 lg:gap-8 items-center justify-center flex-wrap 
+                        lg:flex-nowrap text-white ${badgeColor(
+                          member?.badge?.name,
+                          'color'
+                        )}`}
+                      >
+                        <div>
+                          <div className="font-bold  text-4xl text-start mb-1">
+                            {member?.badge?.name}
+                          </div>
+                          <PrimaryButton
+                            onClick={() =>
+                              downloadImage(
+                                '/storage/badges/' + member?.badge?.image
+                              )
+                            }
+                            className={`text-xs !px-2 !py-1.5 mt-1 border-white border-2 ${badgeColor(
+                              member?.badge?.name,
+                              'color'
+                            )}`}
+                          >
+                            {t('download_badge')}
+                          </PrimaryButton>
                         </div>
-                        <p>Badge</p>
+                        <div className="bg-white w-[120px] h-[120px] rounded-full">
+                          <img
+                            className="max-h-[120px] ml-4"
+                            src={'/storage/badges/' + member?.badge?.image}
+                            alt=""
+                          />
+                        </div>
                       </div>
                     </div>
-                    <PrimaryButton
-                      onClick={() =>
-                        downloadImage('/storage/badges/' + member?.badge?.image)
-                      }
-                      className="text-sm !px-2 !py-1.5 mt-1"
-                    >
-                      {t('download_badge')}
-                    </PrimaryButton>
-                  </div>
-                ) : (
-                  <div className="text-center">{t('not_eligible_badge')}</div>
-                )}
+                  ) : (
+                    <div className="text-center">{t('not_eligible_badge')}</div>
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="grid lg:grid-cols-2 gap-6 mt-6">
-              <div className="bg-orange-200 p-4 lg:p-6 bg-opacity-30 rounded-lg">
-                <h5 className="text-center font-bold text-lg mb-2">
-                  {t('self_certificate')}
-                </h5>
-                <p className="mb-4"> {t('self_certificate_text')}</p>
-                <PDFDownloadLink
-                  document={renderCertificate()}
-                  fileName={`certificate_${
-                    member.business_name
-                  }_${Date.now()}.pdf`}
-                  className="flex justify-center rounded-lg bg-orange-600 text-white fw-bold py-2 px-4"
-                >
-                  {({ loading }) => (loading ? t('loading') : t('download'))}
-                </PDFDownloadLink>
-              </div>
-              <div className="bg-lightSecondary p-4 lg:p-6 bg-opacity-50 rounded-lg">
-                <h5 className="text-center font-bold text-lg mb-2">
-                  {t('verify_badge')}
-                </h5>
-                <p>{t('verify_badge_text')}</p>
-                <PrimaryButton
-                  as="link"
-                  color="secondary"
-                  href={route('member.assessment.verifyEmail', session.id)}
-                  className="w-full flex justify-center mt-4"
-                >
-                  {t('notify_us')}
-                </PrimaryButton>
+              <div className="flex justify-center lg:w-[60%] mx-auto gap-6 mt-12">
+                <div className="bg-lightSecondary text-center p-4 lg:p-6 bg-opacity-50 rounded-lg border-secondary border-dashed border-2">
+                  <h5 className=" font-bold text-lg mb-2">
+                    {t('verify_badge')}
+                  </h5>
+                  <p>{t('verify_badge_text')}</p>
+                  <PrimaryButton
+                    as="link"
+                    color="secondary"
+                    href={route('member.assessment.verifyEmail', session.id)}
+                    className="w-full flex justify-center mt-4"
+                  >
+                    {t('notify_us')}
+                  </PrimaryButton>
+                </div>
               </div>
             </div>
             <PrimaryButton
@@ -221,7 +219,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
             >
               {t('back_to_dashboard')}
             </PrimaryButton>
-          </>
+          </div>
         ) : (
           <>
             <div className="text-center">{t('result_preview_assessment')}</div>
