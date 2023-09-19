@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Font,
 } from '@react-pdf/renderer';
 import { usePage } from '@inertiajs/react';
 import Lottie from 'lottie-react';
@@ -23,6 +24,7 @@ import { badgeColor } from '@/Helper/BadgeColor';
 
 import Certificate from '../../../../images/certificate.png';
 import confetti from '../../../../images/confetti2.json';
+import Logo from '../../../../images/logo.png';
 
 function AssessmentResult({ session, member, scores, expiredDate }) {
   const { t } = useTranslation();
@@ -32,81 +34,320 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
     localStorage.clear('assessment');
   }, []);
 
-  const styles = StyleSheet.create({
-    certWrapper: {
-      width: '100%',
-      position: 'relative',
-    },
-    certImage: {
-      width: '100vw',
-      position: 'absolute',
-      height: '100vh',
-    },
-    certName: {
-      position: 'absolute',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      fontSize: '28px',
-      display: 'flex',
-      justifyContent: 'center',
-      width: '100%',
-      textAlign: 'center',
-    },
-    certBadge: {
-      position: 'absolute',
-      top: '65%',
-      left: '30%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      transform: 'translate(-50%, -50%)',
-    },
-    certBadgeImage: {
-      width: '100px',
-      height: '100%',
-    },
-    certValid: {
-      position: 'absolute',
-      bottom: '11px',
-      left: '25.5%',
-      transform: 'translateX(-50%)',
-      fontSize: '12px',
-      color: 'white',
-    },
-    certNumber: {
-      position: 'absolute',
-      bottom: '11px',
-      left: '81%',
-      transform: 'translateX(-50%)',
-      fontSize: '12px',
-      color: 'white',
-    },
+  // const styles = StyleSheet.create({
+  //   certWrapper: {
+  //     width: '100%',
+  //     position: 'relative',
+  //   },
+  //   certImage: {
+  //     width: '100vw',
+  //     position: 'absolute',
+  //     height: '100vh',
+  //   },
+  //   certName: {
+  //     position: 'absolute',
+  //     top: '50%',
+  //     transform: 'translateY(-50%)',
+  //     fontSize: '28px',
+  //     display: 'flex',
+  //     justifyContent: 'center',
+  //     width: '100%',
+  //     textAlign: 'center',
+  //   },
+  //   certBadge: {
+  //     position: 'absolute',
+  //     top: '65%',
+  //     left: '30%',
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     alignItems: 'center',
+  //     justifyContent: 'center',
+  //     transform: 'translate(-50%, -50%)',
+  //   },
+  //   certBadgeImage: {
+  //     width: '100px',
+  //     height: '100%',
+  //   },
+  //   certValid: {
+  //     position: 'absolute',
+  //     bottom: '11px',
+  //     left: '25.5%',
+  //     transform: 'translateX(-50%)',
+  //     fontSize: '12px',
+  //     color: 'white',
+  //   },
+  //   certNumber: {
+  //     position: 'absolute',
+  //     bottom: '11px',
+  //     left: '81%',
+  //     transform: 'translateX(-50%)',
+  //     fontSize: '12px',
+  //     color: 'white',
+  //   },
+  // });
+
+  // const renderCertificate = () => (
+  //   <Document>
+  //     <Page size="A4" orientation="portrait">
+  //       <View style={styles?.certWrapper}>
+  //         <Image src={Certificate} style={styles?.certImage}></Image>
+  //       </View>
+  //       <View style={styles?.certName}>
+  //         <Text>{member?.business_name}</Text>
+  //       </View>
+  //       <View style={styles?.certBadge}>
+  //         <Image
+  //           src={'/storage/badges/' + member?.badge?.image}
+  //           style={styles?.certBadgeImage}
+  //         ></Image>
+  //         <Text>{member?.badge?.name} Badge</Text>
+  //       </View>
+  //       <View style={styles?.certValid}>
+  //         <Text>{moment(expiredDate).format('ll')}</Text>
+  //       </View>
+  //       <View style={styles?.certNumber}>
+  //         <Text>{`ETB-${moment(session?.created_at).format('DDMMYY')}-${
+  //           member.id
+  //         }-${toUpper(member?.badge?.name.replace(/[aeiou]/gi, ''))}`}</Text>
+  //       </View>
+  //     </Page>
+  //   </Document>
+  // );
+
+  Font.register({
+    family: 'Inter',
+    fonts: [
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeMZhrib2Bg-4.ttf',
+        fontWeight: 100,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyfMZhrib2Bg-4.ttf',
+        fontWeight: 200,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuOKfMZhrib2Bg-4.ttf',
+        fontWeight: 300,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf',
+        fontWeight: 400,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZhrib2Bg-4.ttf',
+        fontWeight: 500,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZhrib2Bg-4.ttf',
+        fontWeight: 600,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.ttf',
+        fontWeight: 700,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZhrib2Bg-4.ttf',
+        fontWeight: 800,
+      },
+      {
+        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZhrib2Bg-4.ttf',
+        fontWeight: 900,
+      },
+    ],
   });
 
-  const renderCertificate = () => (
+  const style = StyleSheet.create({
+    wrapper: {
+      padding: '16px',
+      fontSize: '16px',
+      fontFamily: 'Inter',
+      fontWeight: 300,
+    },
+    header: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: '24px',
+      justifyContent: 'space-between',
+    },
+    logoWrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    date: {
+      fontSize: '14px',
+    },
+    logo: {
+      width: '60px',
+    },
+    textHeader: {
+      marginLeft: '12px',
+    },
+    text1: {
+      fontSize: '14px',
+      fontWeight: 700,
+      color: '#1F656C',
+      marginBottom: '2px',
+    },
+    textInfo: {
+      fontSize: '12px',
+    },
+    info: {
+      fontSize: '12px',
+      padding: '16px',
+      borderRadius: '16px',
+      color: '#1F656C',
+      marginBottom: '16px',
+      backgroundColor: '#D2E0E2',
+    },
+    business: {
+      textAlign: 'center',
+      fontWeight: 700,
+      marginBottom: '16px',
+      fontSize: '24px',
+      paddingBottom: '16px',
+      borderBottom: '1px solid lightgray',
+    },
+    results: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      textAlign: 'center',
+      marginBottom: '32px',
+    },
+    scoreWrapper: {
+      marginRight: '0',
+      paddingRight: '32px',
+      borderRight: '1px solid lightgray',
+    },
+    badges: {
+      marginLeft: '0',
+      paddingLeft: '32px',
+    },
+    score: {
+      fontSize: '48px',
+      color: '#1F656C',
+      fontWeight: 700,
+    },
+    resultText: {
+      fontWeight: 600,
+      fontSize: '14px',
+    },
+    badgeWrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: '8px',
+    },
+    badgeName: {
+      fontWeight: 700,
+      fontSize: '20px',
+    },
+    badgeText: {
+      fontSize: '14px',
+    },
+    badgeImage: {
+      height: '60px',
+      width: 'auto',
+      marginRight: '10px',
+    },
+    scoreList: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    scoreItem: {
+      width: '45%',
+      marginBottom: '24px',
+      marginRight: '24px',
+    },
+    scoreTitle: {
+      fontSize: '10px',
+      fontWeight: 700,
+    },
+    scoreListTitle: {
+      marginBottom: '16px',
+    },
+    scoreText: {
+      fontSize: '14px',
+      marginTop: '4px',
+    },
+    scoreNum: {
+      fontWeight: 700,
+      color: '#1F656C',
+    },
+    scoreImage: {
+      width: '100%',
+      height: 'auto',
+      marginBottom: '4px',
+    },
+  });
+  const renderResult = () => (
     <Document>
       <Page size="A4" orientation="portrait">
-        <View style={styles?.certWrapper}>
-          <Image src={Certificate} style={styles?.certImage}></Image>
-        </View>
-        <View style={styles?.certName}>
-          <Text>{member?.business_name}</Text>
-        </View>
-        <View style={styles?.certBadge}>
-          <Image
-            src={'/storage/badges/' + member?.badge?.image}
-            style={styles?.certBadgeImage}
-          ></Image>
-          <Text>{member?.badge?.name} Badge</Text>
-        </View>
-        <View style={styles?.certValid}>
-          <Text>{moment(expiredDate).format('ll')}</Text>
-        </View>
-        <View style={styles?.certNumber}>
-          <Text>{`ETB-${moment(session?.created_at).format('DDMMYY')}-${
-            member.id
-          }-${toUpper(member?.badge?.name.replace(/[aeiou]/gi, ''))}`}</Text>
+        <View style={style?.wrapper}>
+          <View style={style?.header}>
+            <View style={style?.logoWrapper}>
+              <Image src={Logo} style={style?.logo}></Image>
+              <View style={style?.textHeader}>
+                <Text style={style?.text1}>Self Assessment</Text>
+                <Text>Eco Tourism Bali</Text>
+              </View>
+            </View>
+            <View>
+              <Text style={style?.date}>
+                {moment(session.created_at).format('LL')}
+              </Text>
+            </View>
+          </View>
+          <View style={style?.info}>
+            <Text style={style?.textInfo}>{t('finish_assessment_text')}</Text>
+          </View>
+          <View>
+            <Text style={style?.business}>{member?.business_name}</Text>
+          </View>
+          <View style={style?.results}>
+            <View style={style?.scoreWrapper}>
+              <Text style={style?.resultText}>Total Score:</Text>
+              <Text style={style?.score}>{session?.total_score}</Text>
+            </View>
+            <View style={style?.badges}>
+              <Text style={style?.resultText}>Badge Result:</Text>
+              <View style={style?.badgeWrapper}>
+                <Image
+                  src={'/storage/badges/' + member?.badge?.image}
+                  style={style?.badgeImage}
+                ></Image>
+                <View>
+                  <Text style={style?.badgeName}>{member?.badge?.name}</Text>
+                  <Text style={style?.badgeText}>Badge</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={style?.scoreListTitle}>
+            <Text>Component's Score</Text>
+          </View>
+          <View style={style?.scoreList}>
+            {scores.map(score => {
+              return (
+                <View style={style?.scoreItem}>
+                  <Image
+                    src={'/storage/assessments/' + score?.assessment?.image_en}
+                    style={style?.scoreImage}
+                  ></Image>
+                  <Text style={style?.scoreTitle}>
+                    {score?.assessment?.title_en}
+                  </Text>
+                  <Text style={style?.scoreText}>
+                    Score:{' '}
+                    <Text style={style?.scoreNum}>{score?.score} Points</Text>
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
         </View>
       </Page>
     </Document>
@@ -151,6 +392,17 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                   <div className=" text-7xl text-primary font-bold rounded-2xl inline-flex">
                     {session?.total_score}
                   </div>
+                  <PDFDownloadLink
+                    document={renderResult()}
+                    fileName={`result_${
+                      member.business_name
+                    }_${Date.now()}.pdf`}
+                    className="flex justify-center rounded-lg bg-lightPrimary lg:w-[60%] mx-auto mt-4 border-2 border-primary text-primary font-bold hover:bg-primary transition hover:text-white fw-bold py-2 px-4"
+                  >
+                    {({ loading }) =>
+                      loading ? t('loading') : t('download_result')
+                    }
+                  </PDFDownloadLink>
                 </div>
                 <div className="flex flex-col justify-center items-center text-center">
                   {member?.badge?.image ? (
@@ -215,7 +467,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
             <PrimaryButton
               as="link"
               href={route('member.dashboard')}
-              className="w-full flex justify-center mt-6"
+              className="w-full flex justify-center mt-6 relative z-5"
             >
               {t('back_to_dashboard')}
             </PrimaryButton>

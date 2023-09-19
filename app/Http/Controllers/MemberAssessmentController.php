@@ -301,7 +301,7 @@ class MemberAssessmentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
-        $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $id)->get();
+        $memberAssessments = MemberAssessment::with('assessment')->where('assessment_session_id', $id)->get();
         $dateAssessment = $session->created_at->addYears(1);
 
         return Inertia::render('Member/Assessment/AssessmentResult', [
