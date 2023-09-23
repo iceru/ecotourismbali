@@ -29,11 +29,11 @@ class MemberController extends Controller
         $memberAssessments = null;
         $dateAssessment = null;
 
-        if($lastSession) {
+        if ($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
             $dateAssessment = $lastSession->created_at->addYears(1);
         }
-        
+
         return Inertia::render('Member/Dashboard/MemberDashboard', [
             'member' => $member,
             'user' => User::find(Auth::id()),
@@ -44,7 +44,7 @@ class MemberController extends Controller
             'categories' => $categories
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $member = Member::where('user_id', Auth::id())->first();
@@ -66,13 +66,14 @@ class MemberController extends Controller
         $member->province = $request->province;
         $member->total_payment = $request->total_payment;
         $member->business_type_id = $request->business_type_id;
-        $member->status = 'waiting_approval';
+        $member->status = 'active';
         $member->save();
 
         // Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
-        Mail::to('info@ecotourismbali.com')->send(new NotifyPayment($member));
+        // Mail::to('info@ecotourismbali.com')->send(new NotifyPayment($member));
 
-        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
+        // return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
+        return Redirect::route('member.dashboard')->with('success', 'Welcome to Eco Tourism Bali Membership');
     }
 
     public function locked()
@@ -90,7 +91,7 @@ class MemberController extends Controller
         $memberAssessments = null;
         $dateAssessment = null;
 
-        if($lastSession) {
+        if ($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
             $dateAssessment = $lastSession->created_at->addYears(1);
         }
@@ -144,19 +145,18 @@ class MemberController extends Controller
 
 
         if ($request->hasFile('sliders')) {
-            foreach($request->file('sliders') as $file) {
+            foreach ($request->file('sliders') as $file) {
                 $sliderName = null;
                 $name = $file->getClientOriginalName();
                 $sliderName = $request->business_name . '_' . $name;
                 $file->storeAs('public/member/sliders', $sliderName);
-    
+
                 $slider = new MemberSlider;
                 $slider->title = $sliderName;
                 $slider->image = $sliderName;
                 $slider->member_id = $id;
                 $slider->save();
             }
-            
         }
 
         $member->business_name = $request->business_name;
@@ -178,8 +178,8 @@ class MemberController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $slider = MemberSlider::find($id);
-        if (Storage::disk('public')->exists('/member/sliders/'.$slider->image)){
-            Storage::disk('public')->delete('/member/sliders/'.$slider->image);
+        if (Storage::disk('public')->exists('/member/sliders/' . $slider->image)) {
+            Storage::disk('public')->delete('/member/sliders/' . $slider->image);
         }
         $slider->delete();
 
@@ -224,19 +224,18 @@ class MemberController extends Controller
 
 
         if ($request->hasFile('sliders')) {
-            foreach($request->file('sliders') as $file) {
+            foreach ($request->file('sliders') as $file) {
                 $sliderName = null;
                 $name = $file->getClientOriginalName();
                 $sliderName = $request->business_name . '_' . $name;
                 $file->storeAs('public/member/sliders', $sliderName);
-    
+
                 $slider = new MemberSlider;
                 $slider->title = $sliderName;
                 $slider->image = $sliderName;
                 $slider->member_id = $member->id;
                 $slider->save();
             }
-            
         }
 
         $member->business_name = $request->business_name;
@@ -251,7 +250,7 @@ class MemberController extends Controller
         $member->status = 'active';
         $member->save();
 
-        
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();

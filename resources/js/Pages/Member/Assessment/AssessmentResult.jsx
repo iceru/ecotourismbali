@@ -34,123 +34,43 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
     localStorage.clear('assessment');
   }, []);
 
-  // const styles = StyleSheet.create({
-  //   certWrapper: {
-  //     width: '100%',
-  //     position: 'relative',
-  //   },
-  //   certImage: {
-  //     width: '100vw',
-  //     position: 'absolute',
-  //     height: '100vh',
-  //   },
-  //   certName: {
-  //     position: 'absolute',
-  //     top: '50%',
-  //     transform: 'translateY(-50%)',
-  //     fontSize: '28px',
-  //     display: 'flex',
-  //     justifyContent: 'center',
-  //     width: '100%',
-  //     textAlign: 'center',
-  //   },
-  //   certBadge: {
-  //     position: 'absolute',
-  //     top: '65%',
-  //     left: '30%',
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //     transform: 'translate(-50%, -50%)',
-  //   },
-  //   certBadgeImage: {
-  //     width: '100px',
-  //     height: '100%',
-  //   },
-  //   certValid: {
-  //     position: 'absolute',
-  //     bottom: '11px',
-  //     left: '25.5%',
-  //     transform: 'translateX(-50%)',
-  //     fontSize: '12px',
-  //     color: 'white',
-  //   },
-  //   certNumber: {
-  //     position: 'absolute',
-  //     bottom: '11px',
-  //     left: '81%',
-  //     transform: 'translateX(-50%)',
-  //     fontSize: '12px',
-  //     color: 'white',
-  //   },
-  // });
-
-  // const renderCertificate = () => (
-  //   <Document>
-  //     <Page size="A4" orientation="portrait">
-  //       <View style={styles?.certWrapper}>
-  //         <Image src={Certificate} style={styles?.certImage}></Image>
-  //       </View>
-  //       <View style={styles?.certName}>
-  //         <Text>{member?.business_name}</Text>
-  //       </View>
-  //       <View style={styles?.certBadge}>
-  //         <Image
-  //           src={'/storage/badges/' + member?.badge?.image}
-  //           style={styles?.certBadgeImage}
-  //         ></Image>
-  //         <Text>{member?.badge?.name} Badge</Text>
-  //       </View>
-  //       <View style={styles?.certValid}>
-  //         <Text>{moment(expiredDate).format('ll')}</Text>
-  //       </View>
-  //       <View style={styles?.certNumber}>
-  //         <Text>{`ETB-${moment(session?.created_at).format('DDMMYY')}-${
-  //           member.id
-  //         }-${toUpper(member?.badge?.name.replace(/[aeiou]/gi, ''))}`}</Text>
-  //       </View>
-  //     </Page>
-  //   </Document>
-  // );
-
   Font.register({
     family: 'Inter',
     fonts: [
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeMZhrib2Bg-4.ttf',
         fontWeight: 100,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyfMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyfMZhrib2Bg-4.ttf',
         fontWeight: 200,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuOKfMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuOKfMZhrib2Bg-4.ttf',
         fontWeight: 300,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf',
         fontWeight: 400,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZhrib2Bg-4.ttf',
         fontWeight: 500,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZhrib2Bg-4.ttf',
         fontWeight: 600,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.ttf',
         fontWeight: 700,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZhrib2Bg-4.ttf',
         fontWeight: 800,
       },
       {
-        src: 'http://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZhrib2Bg-4.ttf',
+        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZhrib2Bg-4.ttf',
         fontWeight: 900,
       },
     ],
@@ -283,6 +203,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       marginBottom: '4px',
     },
   });
+
   const renderResult = () => (
     <Document>
       <Page size="A4" orientation="portrait">
@@ -354,7 +275,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
   );
 
   const downloadImage = url => {
-    saveAs(url, 'badge.png'); // Put your image URL here.
+    saveAs(url, 'badge.png');
   };
 
   return (
