@@ -50,7 +50,6 @@ function MemberList({ programs, categories, badges, members }) {
   const qs = queryString.parse(location.search);
 
   useEffect(() => {
-    debugger;
     const filterObject = {
       program: qs.program,
       badge: qs.badge,
@@ -98,8 +97,6 @@ function MemberList({ programs, categories, badges, members }) {
     setSort(data);
     router.post(route('member.filter'), value);
   };
-
-  console.log(members);
 
   return (
     <Guest>
@@ -194,7 +191,7 @@ function MemberList({ programs, categories, badges, members }) {
                 <li
                   onClick={() => changeCategory(cat.id)}
                   id={cat.id}
-                  className={`cursor-pointer lg:mb-6 whitespace-break-spaces ${
+                  className={`cursor-pointer lg:mb-6 whitespace-nowrap lg:whitespace-break-spaces ${
                     category === cat.id ? 'font-bold text-primary' : ''
                   }`}
                 >
@@ -209,7 +206,7 @@ function MemberList({ programs, categories, badges, members }) {
             {members?.data?.length > 0 ? (
               members?.data?.map(member => {
                 return (
-                  <div className="border rounded-2xl p-4 h-full">
+                  <div className="border rounded-2xl p-4 h-fit">
                     {member?.program?.name === 'Green Pal' ? (
                       <div
                         className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex 
@@ -273,7 +270,7 @@ function MemberList({ programs, categories, badges, members }) {
                         </div>
                       )}
                       <Link href={route('member.detail', member.slug)}>
-                        <h4 className="font-bold text-lg">
+                        <h4 className="font-bold text-lg leading-[22px] mb-1">
                           {member.business_name}
                         </h4>
                         {member.category && (

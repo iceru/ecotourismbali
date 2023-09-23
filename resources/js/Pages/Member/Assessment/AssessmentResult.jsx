@@ -254,10 +254,6 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
             {scores.map(score => {
               return (
                 <View style={style?.scoreItem}>
-                  <Image
-                    src={'/storage/assessments/' + score?.assessment?.image_en}
-                    style={style?.scoreImage}
-                  ></Image>
                   <Text style={style?.scoreTitle}>
                     {score?.assessment?.title_en}
                   </Text>
