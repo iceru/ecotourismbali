@@ -23,6 +23,7 @@ function CreateAssessment({ assessment, business_type }) {
     image: null,
     image_en: null,
     business_type: null,
+    logo: null,
   });
 
   const headerTable = [
@@ -208,6 +209,21 @@ function CreateAssessment({ assessment, business_type }) {
                 onChange={e => setData('image_en', e.target.files[0])}
               />
               <span className="text-red-600">{errors.image_en}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="logo" value={t('form_label_logo')} />
+            </div>
+            <div className="lg:w-4/5">
+              <input
+                type="file"
+                name="logo"
+                id="logo"
+                className="block"
+                onChange={e => setData('logo', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.logo}</span>
             </div>
           </div>
           <PrimaryButton

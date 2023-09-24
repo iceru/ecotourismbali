@@ -142,7 +142,7 @@ function EditAssessment() {
               <InputLabel htmlFor="image" value={t('form_label_image')} />
             </div>
             <div className="lg:w-4/5">
-              <div>
+              <div className="mb-2">
                 <img src={`/storage/assessments/${assessment.image}`} alt="" />
               </div>
               <input
@@ -159,7 +159,7 @@ function EditAssessment() {
               <InputLabel htmlFor="image_en" value={t('form_label_image_en')} />
             </div>
             <div className="lg:w-4/5">
-              <div>
+              <div className="mb-2">
                 <img
                   src={`/storage/assessments/${assessment.image_en}`}
                   alt=""
@@ -172,6 +172,23 @@ function EditAssessment() {
                 onChange={e => setData('image_en', e.target.files[0])}
               />
               <span className="text-red-600">{errors.image_en}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="logo" value={t('form_label_logo')} />
+            </div>
+            <div className="lg:w-4/5">
+              <div className="mb-2">
+                <img src={`/storage/assessments/${assessment.logo}`} alt="" />
+              </div>
+              <input
+                type="file"
+                name="logo"
+                id="logo"
+                onChange={e => setData('logo', e.target.files[0])}
+              />
+              <span className="text-red-600">{errors.logo}</span>
             </div>
           </div>
           <PrimaryButton className="w-fit" disabled={processing}>

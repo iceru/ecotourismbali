@@ -31,6 +31,7 @@ class AssessmentController extends Controller
             'business_type' => 'required',
             'image' => 'required|image',
             'image_en' => 'required|image',
+            'logo' => 'required|image',
         ]);
 
         $filename = null;
@@ -49,12 +50,19 @@ class AssessmentController extends Controller
             $request->file('image_en')->storeAs('public/assessments', $imageEn);
         }
 
+        if ($request->hasFile('logo')) {
+            $extension = $request->file('logo')->extension();
+            $logo = $request->title . '_' . time() . '_logo' . '.' . $extension;
+            $request->file('logo')->storeAs('public/assessments', $logo);
+        }
+
         $assessment->title = $request->title;
         $assessment->title_en = $request->title_en;
         $assessment->description = $request->description;
         $assessment->description_en = $request->description_en;
         $assessment->image = $filename;
         $assessment->image_en = $imageEn;
+        $assessment->logo = $logo;
         $assessment->business_type_id = $request->business_type;
         $assessment->save();
 
@@ -81,10 +89,12 @@ class AssessmentController extends Controller
             'business_type' => 'required',
             'image' => 'nullable|image',
             'image_en' => 'nullable|image',
+            'logo' => 'nullable|image',
         ]);
 
         $filename = null;
         $imageEn = null;
+        $logo = null;
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->extension();
@@ -99,6 +109,13 @@ class AssessmentController extends Controller
             $imageEn = $request->title . '_' . time() . '.' . $extension;
             $request->file('image_en')->storeAs('public/assessments', $imageEn);
             $assessment->image_en = $imageEn;
+        }
+
+        if ($request->hasFile('logo')) {
+            $extension = $request->file('logo')->extension();
+            $logo = $request->title . '_' . time() . '_logo' . '.' . $extension;
+            $request->file('logo')->storeAs('public/assessments', $logo);
+            $assessment->logo = $logo;
         }
 
         $assessment->title = $request->title;

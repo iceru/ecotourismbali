@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Member;
-use App\Models\Module;
 use Illuminate\Http\Request;
 use Spatie\Analytics\Period;
+use App\Models\AssessmentSession;
 use Spatie\Analytics\Facades\Analytics;
 
 class AdminDashboardController extends Controller
@@ -19,7 +19,7 @@ class AdminDashboardController extends Controller
 
         return Inertia::render('Admin/AdminDashboard', [
             'members' => Member::all(),
-            'modules' => Module::all(),
+            'assessments' => AssessmentSession::all(),
             'visitors' => $visitors,
             'pages' => $pages,
             'referrers' => $referrers

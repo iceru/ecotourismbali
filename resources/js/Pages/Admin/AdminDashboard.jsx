@@ -10,7 +10,7 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import moment from 'moment';
 
-function MemberDashboard({ members, modules, visitors, pages, referrers }) {
+function MemberDashboard({ members, assessments, visitors, pages, referrers }) {
   const { t } = useTranslation();
   ChartJS.register(...registerables);
 
@@ -33,8 +33,8 @@ function MemberDashboard({ members, modules, visitors, pages, referrers }) {
             <div className="font-bold text-3xl">{members.length}</div>
           </div>
           <div className="bg-lightPrimary p-4 rounded-md">
-            <div className="mb-2">{t('total_module')}</div>
-            <div className="font-bold text-3xl">{modules.length}</div>
+            <div className="mb-2">{t('total_assessments')}</div>
+            <div className="font-bold text-3xl">{assessments.length}</div>
           </div>
         </AdminSection>
         <AdminSection>
