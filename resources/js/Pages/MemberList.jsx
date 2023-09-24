@@ -50,7 +50,6 @@ function MemberList({ programs, categories, badges, members }) {
   const qs = queryString.parse(location.search);
 
   useEffect(() => {
-    debugger;
     const filterObject = {
       program: qs.program,
       badge: qs.badge,

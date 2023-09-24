@@ -13,11 +13,19 @@ import kontenRes from '../../../../images/restaurant/konten.png';
 import kontenResId from '../../../../images/restaurant/kontenId.png';
 // import formRes from '../../../../images/restaurant/form.png';
 import moment from 'moment';
+import { router } from '@inertiajs/react';
 
 function AssessmentStep({ member, remaining, dateAssessment }) {
   const { t, i18n } = useTranslation();
   const [kontenHotel, setKontenHotel] = useState(konten);
   const [kontenResto, setKontenResto] = useState(kontenRes);
+
+  useEffect(() => {
+    if (!member?.status?.includes('active')) {
+      router.visit(route('member.dashboard'));
+    }
+  }, []);
+
   useEffect(() => {
     if (i18n?.language === 'id') {
       setKontenHotel(kontenId);

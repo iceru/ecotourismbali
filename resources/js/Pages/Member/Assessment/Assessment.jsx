@@ -17,6 +17,13 @@ function Assessment({ assessments, session, answers }) {
   const { data, setData, post, processing, errors } = useForm();
 
   const lang = i18n.language;
+
+  useEffect(() => {
+    if (!member?.status?.includes('active')) {
+      router.visit(route('member.dashboard'));
+    }
+  }, [member]);
+
   const submit = e => {
     e.preventDefault();
 

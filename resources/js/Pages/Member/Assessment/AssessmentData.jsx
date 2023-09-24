@@ -3,11 +3,10 @@ import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import InputLabel from '@/Components/InputLabel';
 import MemberLayout from '@/Layouts/MemberLayout';
-import { useForm, usePage } from '@inertiajs/react';
+import { router, useForm, usePage } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import moment from 'moment';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import SelectInput from '@/Components/SelectInput';
 
@@ -34,6 +33,12 @@ function AssessmentData({ categories }) {
     business_type_id: member?.business_type_id || '',
     category: member?.category_id || '',
   });
+
+  useEffect(() => {
+    if (!member?.status?.includes('active')) {
+      router.visit(route('member.dashboard'));
+    }
+  }, []);
 
   const submit = e => {
     e.preventDefault();
