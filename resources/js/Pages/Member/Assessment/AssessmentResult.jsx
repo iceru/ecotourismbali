@@ -182,6 +182,18 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       marginBottom: '24px',
       marginRight: '24px',
     },
+
+    titleLogo: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    scoreLogo: {
+      marginRight: '6px',
+      width: '30px',
+      height: '30px',
+      objectFit: 'contain',
+    },
     scoreTitle: {
       fontSize: '10px',
       fontWeight: 700,
@@ -254,9 +266,15 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
             {scores.map(score => {
               return (
                 <View style={style?.scoreItem}>
-                  <Text style={style?.scoreTitle}>
-                    {score?.assessment?.title_en}
-                  </Text>
+                  <View style={style?.titleLogo}>
+                    <Image
+                      src={'/storage/assessments/' + score?.assessment?.logo}
+                      style={style?.scoreLogo}
+                    ></Image>
+                    <Text style={style?.scoreTitle}>
+                      {score?.assessment?.title_en}
+                    </Text>
+                  </View>
                   <Text style={style?.scoreText}>
                     Score:{' '}
                     <Text style={style?.scoreNum}>{score?.score} Points</Text>
