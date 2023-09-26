@@ -19,23 +19,24 @@ class MemberModuleController extends Controller
     public function index()
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $modules = Module::with(array('member_module' => function ($query) use ($member) {
-            $query->where('member_id', $member->id);
-        }))->get();
-        $memberModule = MemberModule::where('member_id', $member->id)->get();
+        // $modules = Module::with(array('member_module' => function ($query) use ($member) {
+        //     $query->where('member_id', $member->id);
+        // }))->get();
+        // $memberModule = MemberModule::where('member_id', $member->id)->get();
 
-        if (!str_contains($member->status, 'active')) {
-            $modules = Module::with(array('member_module' => function ($query) use ($member) {
-                $query->where('member_id', $member->id);
-            }))->take(1)->get();
-        }
-        foreach ($modules as $module) {
-            foreach ($memberModule as $memModule) {
-                if ($memModule->module_id === $module->id) {
-                    $module->completed = true;
-                }
-            }
-        }
+        // if (!str_contains($member->status, 'active')) {
+        //     $modules = Module::with(array('member_module' => function ($query) use ($member) {
+        //         $query->where('member_id', $member->id);
+        //     }))->take(1)->get();
+        // }
+        // foreach ($modules as $module) {
+        //     foreach ($memberModule as $memModule) {
+        //         if ($memModule->module_id === $module->id) {
+        //             $module->completed = true;
+        //         }
+        //     }
+        // }
+        $modules = Module::select('id', 'title', 'image', 'description')->get();
         return Inertia::render('Member/Module/ModuleList', [
             'modules' => $modules,
         ]);

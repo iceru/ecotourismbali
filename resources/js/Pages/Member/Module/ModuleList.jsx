@@ -28,22 +28,22 @@ function ModuleList({ modules }) {
           {modules?.map(module => {
             return (
               <div className="p-6  bg-lightPrimary bg-opacity-50 rounded-2xl flex flex-wrap lg:flex-nowrap">
-                <div className="mr-4 lg:w-1/3 w-full mb-4 lg:mb-0">
+                <div className="mr-4 lg:w-fit shrink-0 w-full mb-4 lg:mb-0">
                   <img
-                    className="max-h-[150px] object-cover object-center"
+                    className="max-w-[130px] object-cover object-center"
                     src={'/storage/modules/' + module?.image}
                     alt=""
                   />
                 </div>
-                <div className="lg:w-2/3 w-full">
+                <div className=" w-full">
                   <div className="text-xl font-bold mb-3 flex items-center">
                     {module?.title}
-                    {module?.member_module[0] &&
+                    {/* {module?.member_module[0] &&
                       module?.member_module[0].completion === 1 && (
                         <span className="rounded-3xl ml-3 text-xs py-1 px-3 bg-secondary inline-block text-white">
                           {t('finished')}
                         </span>
-                      )}
+                      )} */}
                   </div>
                   <div className="mb-3 text-sm" title={module?.description}>
                     {truncateString(module.description, 80)}
