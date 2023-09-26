@@ -45,13 +45,13 @@ function MemberList({ member, lastSession, scores }) {
       <div className="flex flex-wrap mt-10">
         <div
           className={`${
-            member?.program?.name !== 'Green Pal' ? 'lg:w-4/5' : 'w-full'
+            member?.program?.name !== 'Green Pal' ? 'lg:w-3/4 w-full' : 'w-full'
           } lg:pr-10`}
         >
-          <section className="flex justify-between items-center lg:mb-12 mb-6 flex-wrap">
-            <div className="flex items-center mb-6 lg:mb-0">
+          <section className="flex justify-between items-center md:mb-12 mb-6 flex-wrap">
+            <div className="flex items-center mb-6 md:mb-0">
               {member.image && (
-                <div className="mr-4 lg:w-[120px] lg:h-[120px] w-1/3 h-[90px] object-contain rounded-full bg-primary bg-opacity-10 flex justify-center items-center">
+                <div className="mr-3 lg:w-[120px] lg:h-[120px] shrink-0 w-[90px] h-[90px] object-contain rounded-full bg-primary bg-opacity-10 flex justify-center items-center">
                   <img
                     src={'/storage/member/images/' + member?.image}
                     alt={member?.business_name}
@@ -60,30 +60,34 @@ function MemberList({ member, lastSession, scores }) {
                 </div>
               )}
               <div>
-                <h2 className="text-2xl font-bold mb-2">
+                <h2 className="text-xl md:text-2xl font-bold mb-2">
                   {member?.business_name}
                 </h2>
-                <h4 className="uppercase text-primary tracking-wide mb-2">
+                <h4 className="uppercase text-primary text-xs md:text-base tracking-wide mb-2">
                   {member?.category?.name}
                 </h4>
               </div>
             </div>
             {member?.program?.name === 'Green Pal' && (
-              <div>
+              <div className="flex justify-center items-center flex-col w-full md:w-fit">
                 <div className="flex justify-center">
-                  <img src={greenpal} alt="Green Pal" className="w-[100px]" />
+                  <img
+                    src={greenpal}
+                    alt="Green Pal"
+                    className="lg:w-[100px] w-[70px]"
+                  />
                 </div>
-                <h4 className="m-0 font-bold text-greenpal mt-3 text-center">
+                <h4 className="m-0 font-bold text-greenpal mt-2 text-center">
                   Green Pal Member
                 </h4>
               </div>
             )}
           </section>
-          <section className="lg:mb-12 mb-6 lg:-mx-2">
+          <section className="md:mb-12 mb-6 md:-mx-2">
             <Slider {...settings}>
               {member?.member_slider?.map(slider => {
                 return (
-                  <div className="lg:px-2">
+                  <div className="md:px-2">
                     <div className="relative overflow-hidden pb-2/3">
                       <img
                         src={`/storage/member/sliders/${slider.image}`}
@@ -96,10 +100,10 @@ function MemberList({ member, lastSession, scores }) {
               })}
             </Slider>
           </section>
-          <section className="lg:mb-12 mb-6">
-            <div className="flex justify-center flex-col lg:flex-row flex-wrap gap-4 lg:gap-20">
+          <section className="md:mb-12 mb-6">
+            <div className="flex justify-center flex-col md:flex-row flex-wrap gap-4 md:gap-20">
               {member?.address && (
-                <div className="flex items-center lg:justify-end">
+                <div className="flex items-center md:justify-end">
                   <FontAwesomeIcon
                     icon={faHome}
                     className="text-white bg-primary p-[8px] rounded-full mt-0.5 z-10 relative h-[24px] w-[24px]"
@@ -143,7 +147,7 @@ function MemberList({ member, lastSession, scores }) {
             <section className="text-justify mb-10">
               {member?.description}
             </section>
-            <div className="flex justify-between items-center gap-6">
+            <div className="flex justify-between items-center gap-6 flex-wrap">
               <div className="flex gap-6 h-fit">
                 {member.facebook && (
                   <div className="w-12 h-12 flex justify-center items-center rounded-full bg-primary text-white">
@@ -206,7 +210,7 @@ function MemberList({ member, lastSession, scores }) {
                 )}
               </div>
               {member?.merchant_promo && (
-                <div className="bg-primary text-white p-4 rounded-xl">
+                <div className="bg-primary text-white p-4 rounded-xl w-full md:w-fit">
                   <h5 className="font-semibold text-lg mb-2">
                     {t('merchant_promo')}
                   </h5>
@@ -218,10 +222,10 @@ function MemberList({ member, lastSession, scores }) {
         </div>
 
         {member?.program?.name !== 'Green Pal' && (
-          <div className="lg:w-1/5 mx-auto w-full lg:gap-12 top-0 py-4  mt-10 lg:mt-0 sticky min-h-[50vh]">
+          <div className="lg:w-1/4 mx-auto w-full md:gap-12 top-0 py-4  mt-10 md:mt-0 sticky min-h-[50vh]">
             {member?.badge && (
               <div
-                className={`absolute top-0 left-0 ${badgeColor(
+                className={`absolute top-0 px-3 left-0 ${badgeColor(
                   member?.badge?.name,
                   'color'
                 )} bg-opacity-[3%] border border-opacity-30 border-${badgeColor(
@@ -268,7 +272,7 @@ function MemberList({ member, lastSession, scores }) {
                     </div>
                   </div>
                   {lastSession && (
-                    <div className="text-center text-gray-500  text-xs mb-3">
+                    <div className="text-center text-gray-500 mb-3">
                       <span className="font-bold">
                         {lastSession.total_score}
                       </span>
@@ -278,7 +282,7 @@ function MemberList({ member, lastSession, scores }) {
                   )}
                   {scores?.map(score => {
                     return (
-                      <div className="flex justify-center text-gray-500 text-xs mb-1">
+                      <div className="flex justify-center text-gray-500 mb-1">
                         <div className="capitalize">
                           {lowerCase(score.assessment.title).slice(0, 11)}
                         </div>

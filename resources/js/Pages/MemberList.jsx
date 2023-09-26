@@ -202,7 +202,7 @@ function MemberList({ programs, categories, badges, members }) {
           </ul>
         </div>
         <div className="lg:w-5/6 lg:pl-6">
-          <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4 h-fit">
+          <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-4 h-fit">
             {members?.data?.length > 0 ? (
               members?.data?.map(member => {
                 return (
@@ -280,8 +280,8 @@ function MemberList({ programs, categories, badges, members }) {
                         )}
                       </Link>
                     </div>
-                    <p className="mb-3 text-sm">
-                      {member?.description?.slice(0, 100)}
+                    <p className="mb-3 text-sm line-clamp-3">
+                      {member?.description}
                     </p>
                     <Link
                       href={route('member.detail', member.slug)}
