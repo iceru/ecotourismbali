@@ -86,6 +86,10 @@ function MemberIndex() {
 
   const status = [
     {
+      label: 'Inactive',
+      value: 'inactive',
+    },
+    {
       label: 'Waiting Approval',
       value: 'waiting_approval',
     },
@@ -98,10 +102,10 @@ function MemberIndex() {
   const items = (label, data) => {
     return (
       <div className="flex flex-wrap mb-6">
-        <div className="w-full lg:w-1/4 mb-2 lg:mb-0">
+        <div className="w-full lg:w-1/4 mb-2 lg:mb-0 pr-6">
           <div className="font-bold">{t(label)}</div>
         </div>
-        <div className="w-full lg:w-3/4 lg:pl-6">{data || '-'}</div>
+        <div className="w-full lg:w-3/4">{data || '-'}</div>
       </div>
     );
   };
@@ -131,7 +135,7 @@ function MemberIndex() {
             <form onSubmit={submit}>
               {edit && !member?.status?.includes('active') ? (
                 <div className="flex flex-wrap items-center mb-6">
-                  <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
+                  <div className="font-bold lg:w-1/4">{t('status')}</div>
                   <SelectInput
                     id="status"
                     name="status"

@@ -125,7 +125,7 @@ class MemberAssessmentController extends Controller
             'business_name' => 'required',
             'name' => 'required',
             'address' => 'required',
-            'website' => 'required',
+            'website' => 'nullable',
             'job_title' => 'required',
             'phone' => 'required',
             'email' => 'required',
@@ -140,10 +140,12 @@ class MemberAssessmentController extends Controller
         if ($request->sister_company) {
             $member->sister_company = $request->sister_company;
         }
+        if($request->website) {
+            $member->website = $request->website;
+        }
 
         $member->business_name = $request->business_name;
         $member->address = $request->address;
-        $member->website = $request->website;
         $member->job_title = $request->job_title;
         $member->phone = $request->phone;
         $member->province = $request->province;

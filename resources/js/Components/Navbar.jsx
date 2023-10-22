@@ -101,7 +101,7 @@ function Navbar() {
                   </a>
                 </li>
                 <li className="py-3 px-5 whitespace-nowrap hover:bg-gray-100 hover:text-primary bg-white">
-                  <a href="https://ecotourismbali.com/programs/regenarive-bali/">
+                  <a href="https://ecotourismbali.com/programs/regenerative-bali/">
                     {t('regenerative_bali')}
                   </a>
                 </li>
@@ -322,7 +322,7 @@ function Navbar() {
                 </a>
               </li>
               <li className="py-3 px-5 whitespace-nowrap ">
-                <a href="https://ecotourismbali.com/programs/regenarive-bali/">
+                <a href="https://ecotourismbali.com/programs/regenerative-bali/">
                   Regenerative Bali
                 </a>
               </li>

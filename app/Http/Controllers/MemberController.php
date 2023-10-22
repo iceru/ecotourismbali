@@ -66,14 +66,12 @@ class MemberController extends Controller
         $member->province = $request->province;
         $member->total_payment = $request->total_payment;
         $member->business_type_id = $request->business_type_id;
-        $member->status = 'active';
+        $member->status = 'waiting_approval';
         $member->save();
 
-        // Mail::to('finance@ecotourismbali.com')->send(new NotifyPayment($member));
-        // Mail::to('info@ecotourismbali.com')->send(new NotifyPayment($member));
+        Mail::to('info@ecotourismbali.com')->send(new NotifyPayment($member));
 
-        // return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
-        return Redirect::route('member.dashboard')->with('success', 'Welcome to Eco Tourism Bali Membership');
+        return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }
 
     public function locked()

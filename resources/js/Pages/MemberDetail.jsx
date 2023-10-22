@@ -101,9 +101,9 @@ function MemberList({ member, lastSession, scores }) {
             </Slider>
           </section>
           <section className="md:mb-12 mb-6">
-            <div className="flex justify-center flex-col md:flex-row flex-wrap gap-4 md:gap-20">
+            <div className="flex justify-center flex-col md:flex-row flex-wrap gap-4">
               {member?.address && (
-                <div className="flex items-center md:justify-end">
+                <div className="flex items-center justify-center">
                   <FontAwesomeIcon
                     icon={faHome}
                     className="text-white bg-primary p-[8px] rounded-full mt-0.5 z-10 relative h-[24px] w-[24px]"
@@ -117,7 +117,7 @@ function MemberList({ member, lastSession, scores }) {
                 <a
                   href={member?.website}
                   target="_blank"
-                  className="flex items-center hover:text-primary transition"
+                  className="flex items-center hover:text-primary justify-center transition"
                 >
                   <FontAwesomeIcon
                     icon={faGlobe}
