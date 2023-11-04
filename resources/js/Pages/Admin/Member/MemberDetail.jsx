@@ -97,6 +97,10 @@ function MemberIndex() {
       label: 'Payment',
       value: 'payment',
     },
+    {
+      label: 'Active',
+      value: 'active',
+    },
   ];
 
   const items = (label, data) => {
@@ -133,7 +137,7 @@ function MemberIndex() {
               {!edit ? t('edit_member') : t('close_edit_member')}
             </PrimaryButton>
             <form onSubmit={submit}>
-              {edit && !member?.status?.includes('active') ? (
+              {edit ? (
                 <div className="flex flex-wrap items-center mb-6">
                   <div className="font-bold lg:w-1/4">{t('status')}</div>
                   <SelectInput
