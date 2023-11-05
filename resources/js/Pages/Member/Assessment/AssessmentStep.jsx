@@ -11,6 +11,7 @@ import kontenId from '../../../../images/hotel/kontenId.png';
 
 import kontenRes from '../../../../images/restaurant/konten.png';
 import kontenResId from '../../../../images/restaurant/kontenId.png';
+import tutorial from '../../../../images/tutorial.mp4';
 // import formRes from '../../../../images/restaurant/form.png';
 import moment from 'moment';
 import { router } from '@inertiajs/react';
@@ -46,7 +47,9 @@ function AssessmentStep({ member, remaining, dateAssessment }) {
             </div>
           </div>
           <TitleSection title="assessment" className="mb-6" />
-
+          <div className="text-center mb-6">
+            <video src={tutorial} controls />
+          </div>
           <div className="text-center">
             <TitleSection title="short_tutorial" className="mb-2 !text-2xl" />
             <p className="mb-8">{t('short_tutorial_text')}</p>
