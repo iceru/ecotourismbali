@@ -73,7 +73,7 @@ export default function Table({
                   return (
                     <tr key={index}>
                       <td className="px-6 py-4 text-sm font-medium text-gray-800">
-                        {index + 1}
+                        {index + 1 + (page > 1 ? 10 * page : 0)}
                       </td>
                       {selectedData?.map((column, index) => {
                         return (
