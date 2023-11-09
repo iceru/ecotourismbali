@@ -1,6 +1,7 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\MemberPayment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\BadgeController;
@@ -128,6 +129,7 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
     Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
     Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
+    Route::post('/member/invoice/{id}', [AdminMemberController::class, 'invoice'])->name('admin.member.invoice');
 
     Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
     Route::post('/business-type/store', [BusinessTypeController::class, 'store'])->name('business_type.store');

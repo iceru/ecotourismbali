@@ -12,7 +12,7 @@ import kontenId from '../../../../images/hotel/kontenId.png';
 import kontenRes from '../../../../images/restaurant/konten.png';
 import kontenResId from '../../../../images/restaurant/kontenId.png';
 import tutorial from '../../../../images/tutorial.mp4';
-// import formRes from '../../../../images/restaurant/form.png';
+
 import moment from 'moment';
 import { router } from '@inertiajs/react';
 

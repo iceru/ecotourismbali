@@ -12,6 +12,7 @@ import { capitalize, lowerCase } from 'lodash';
 import moment from 'moment/moment';
 import { badgeColor } from '@/Helper/BadgeColor';
 import TextInput from '@/Components/TextInput';
+import axios from 'axios';
 
 function MemberIndex() {
   const {
@@ -114,6 +115,21 @@ function MemberIndex() {
     );
   };
 
+  const downloadInvoice = () => {
+    axios({
+      url: '/admin/member/invoice/' + member.id,
+      method: 'POST',
+      responseType: 'blob',
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `invoice-${member.business_name}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
+
   return (
     <AdminLayout>
       <BackTo link="/admin/member/index" title="back_to_list_members" />
@@ -129,13 +145,24 @@ function MemberIndex() {
               )}
               <div className="font-bold text-2xl">{member?.business_name}</div>
             </div>
-            <PrimaryButton
-              className="mb-6"
-              onClick={() => setEdit(!edit)}
-              color={!edit ? 'primary' : 'gray'}
-            >
-              {!edit ? t('edit_member') : t('close_edit_member')}
-            </PrimaryButton>
+            <div className="flex gap-4">
+              <PrimaryButton
+                className="mb-6"
+                onClick={() => setEdit(!edit)}
+                color={!edit ? 'primary' : 'gray'}
+              >
+                {!edit ? t('edit_member') : t('close_edit_member')}
+              </PrimaryButton>
+              {statusMember === 'active' || statusMember === 'payment' ? (
+                <PrimaryButton
+                  className="mb-6"
+                  onClick={() => downloadInvoice()}
+                  color={'secondary'}
+                >
+                  Download Invoice
+                </PrimaryButton>
+              ) : null}
+            </div>
             <form onSubmit={submit}>
               {edit ? (
                 <div className="flex flex-wrap items-center mb-6">

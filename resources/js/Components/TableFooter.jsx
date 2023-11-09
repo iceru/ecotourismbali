@@ -6,7 +6,6 @@ const TableFooter = ({ range, setPage, page, slice }) => {
       setPage(page - 1);
     }
   }, [slice, page, setPage]);
-
   return (
     <div className="mt-4 flex justify-center gap-4">
       {range.map((el, index) => (

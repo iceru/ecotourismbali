@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use PDF;
 
 class AdminMemberController extends Controller
 {
@@ -134,6 +135,17 @@ class AdminMemberController extends Controller
         }
 
         return Redirect::route('admin.member.detail', $member->id);
+    }
+
+    public function invoice(Request $request, string $id)
+    {
+        $payment = MemberPayment::where('member_id', $id)->first();
+
+        $data = [
+            'payment' => $payment
+        ];
+        $pdf = PDF::loadView('invoice-pdf', $data);
+        return $pdf->stream('invoice '.$payment->member->name.'.pdf');
     }
 
     /**
