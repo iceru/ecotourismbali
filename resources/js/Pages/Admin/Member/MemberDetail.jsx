@@ -153,7 +153,7 @@ function MemberIndex() {
               >
                 {!edit ? t('edit_member') : t('close_edit_member')}
               </PrimaryButton>
-              {statusMember === 'active' || statusMember === 'payment' ? (
+              {statusMember.includes('active') || statusMember === 'payment' ? (
                 <PrimaryButton
                   className="mb-6"
                   onClick={() => downloadInvoice()}
