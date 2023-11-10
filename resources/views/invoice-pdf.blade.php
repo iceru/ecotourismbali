@@ -330,7 +330,7 @@
         <td>
             <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
                 bgcolor="#ffffff"
-                style="background-color: white; padding: 0 20px; margin: auto; width: 600px!important;">
+                style="border-radius: 0 0 10px 10px; background-color: white; padding: 0 20px; margin: auto; width: 600px!important;">
                 <tbody>
                     <tr>
                         <td>
@@ -354,52 +354,6 @@
                             <!-- /Table Total -->
 
                         </td>
-                    </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
-                bgcolor="#ffffff"
-                style="border-radius: 0 0 10px 10px; background-color: white; padding: 0 20px; margin: auto; width: 600px!important;">
-                <tbody>
-                    <tr>
-                    <tr>
-                        <td height="30"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center"
-                                class="fullPadding" style="margin: auto; width: 100%!important; min-width: 100%;">
-                                <tbody>
-                                    <tr>
-                                        <td
-                                            style="font-size:12px; text-align:center; color: #646a6e; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top;">
-                                            Settle your invoice with ease through our website!
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td height="15"></td>
-                                    </tr>
-                                    <tr>
-                                        <td
-                                            style="font-size:14px; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top;">
-                                            <a style="display:block; text-decoration: none; background-color: #1F656C; color: #fff; padding: 8px 16px 8px 16px; border-radius: 8px; text-align: center"
-                                                href="https://member.ecotourismbali.com/member/dashboard"
-                                                target="_blank">Click
-                                                here
-                                                to pay</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="60"></td>
                     </tr>
                 </tbody>
             </table>
