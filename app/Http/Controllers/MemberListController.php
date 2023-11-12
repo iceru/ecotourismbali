@@ -99,7 +99,7 @@ class MemberListController extends Controller
 
     public function detail($slug)
     {
-        $member = Member::where('slug', $slug)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail();
+        $member = Member::where('slug', $slug)->with('member_slider', 'category', 'business_type', 'program', 'badge', 'verified_badge')->firstOrFail();
         $memberAssessments = null;
         $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
         if($lastSession) {
