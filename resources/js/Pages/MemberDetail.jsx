@@ -49,7 +49,19 @@ function MemberList({ member, lastSession, scores }) {
   const sdgHotel = [4, 6, 7, 8, 11, 12, 13, 14, 15];
   const sdgRestaurant = [2, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15];
 
-  console.log(member?.business_type?.name);
+  console.log(
+    sdg2,
+    sdg4,
+    sdg6,
+    sdg7,
+    sdg8,
+    sdg9,
+    sdg11,
+    sdg12,
+    sdg13,
+    sdg14,
+    sdg15
+  );
 
   return (
     <Guest>
