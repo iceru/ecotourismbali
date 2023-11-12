@@ -6,7 +6,7 @@ import { lowerCase } from 'lodash';
 import { faBook, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import { badgeColor } from '@/Helper/BadgeColor';
 
 const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
@@ -81,7 +81,7 @@ const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
                 {t('no_assessment')}
               </h2>
               <div>
-                <PrimaryButton
+                <Button
                   color="lightPrimary"
                   as="link"
                   href={route('member.assessment.index')}
@@ -91,7 +91,7 @@ const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
                     icon={faLongArrowAltRight}
                     className="ml-2"
                   />
-                </PrimaryButton>
+                </Button>
               </div>
             </>
           )}
@@ -101,24 +101,24 @@ const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
           <h2 className="font-bold text-[20px] mb-4">{t('preview_member')}</h2>
           <div className="grid gap-4">
             <div>
-              <PrimaryButton
+              <Button
                 color="lightPrimary"
                 as="link"
                 href={route('member.assessment.index')}
               >
                 {t('my_assessment')}
                 <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-2" />
-              </PrimaryButton>
+              </Button>
             </div>
             <div>
-              <PrimaryButton
+              <Button
                 color="lightSecondary"
                 as="link"
                 href={route('member.module.index')}
               >
                 {t('e_learning')}
                 <FontAwesomeIcon icon={faBook} className="ml-2" />
-              </PrimaryButton>
+              </Button>
             </div>
           </div>
         </div>

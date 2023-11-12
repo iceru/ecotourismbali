@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import { isEmpty, sortBy } from 'lodash';
 
 function Assessment({ assessments, session, answers }) {
@@ -284,29 +284,29 @@ function Assessment({ assessments, session, answers }) {
                   );
                 })}
                 <div className="flex justify-center gap-6 mt-6">
-                  <PrimaryButton
+                  <Button
                     type="button"
                     onClick={handleBack}
                     className="min-w-[160px] flex justify-center"
                     color="gray"
                   >
                     {t('back')}
-                  </PrimaryButton>
-                  <PrimaryButton
+                  </Button>
+                  <Button
                     type="button"
                     onClick={save}
                     className="min-w-[160px] flex justify-center"
                     color="secondary"
                   >
                     {t('save')}
-                  </PrimaryButton>
-                  <PrimaryButton
+                  </Button>
+                  <Button
                     type="submit"
                     disabled={processing}
                     className="min-w-[160px] flex justify-center"
                   >
                     {t('next')}
-                  </PrimaryButton>
+                  </Button>
                 </div>
               </form>
             );

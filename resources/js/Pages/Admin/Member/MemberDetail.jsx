@@ -7,7 +7,7 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import TitleSection from '../Components/TitleSection';
 import BackTo from '../Components/BackTo';
 import SelectInput from '@/Components/SelectInput';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import { capitalize, lowerCase } from 'lodash';
 import moment from 'moment/moment';
 import { badgeColor } from '@/Helper/BadgeColor';
@@ -146,21 +146,21 @@ function MemberIndex() {
               <div className="font-bold text-2xl">{member?.business_name}</div>
             </div>
             <div className="flex gap-4">
-              <PrimaryButton
+              <Button
                 className="mb-6"
                 onClick={() => setEdit(!edit)}
                 color={!edit ? 'primary' : 'gray'}
               >
                 {!edit ? t('edit_member') : t('close_edit_member')}
-              </PrimaryButton>
+              </Button>
               {statusMember.includes('active') || statusMember === 'payment' ? (
-                <PrimaryButton
+                <Button
                   className="mb-6"
                   onClick={() => downloadInvoice()}
                   color={'secondary'}
                 >
                   Download Invoice
-                </PrimaryButton>
+                </Button>
               ) : null}
             </div>
             <form onSubmit={submit}>
@@ -296,13 +296,9 @@ function MemberIndex() {
               )}
               {items('description', member?.description)}
               {edit && (
-                <PrimaryButton
-                  type="submit"
-                  className="mt-4"
-                  disabled={processing}
-                >
+                <Button type="submit" className="mt-4" disabled={processing}>
                   {t('submit')}
-                </PrimaryButton>
+                </Button>
               )}
             </form>
           </div>

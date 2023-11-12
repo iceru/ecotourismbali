@@ -2,7 +2,7 @@ import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
 import TitleSection from '../Components/TitleSection';
@@ -117,13 +117,9 @@ function CreatePreQuestion({ pre_question, module }) {
               <span className="text-red-600">{errors.title}</span>
             </div>
           </div>
-          <PrimaryButton
-            color="secondary"
-            className="w-fit"
-            disabled={processing}
-          >
+          <Button color="secondary" className="w-fit" disabled={processing}>
             {t('submit')}
-          </PrimaryButton>
+          </Button>
         </form>
       </AdminSection>
       <AdminSection>

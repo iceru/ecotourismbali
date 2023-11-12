@@ -7,7 +7,7 @@ import queryString from 'query-string';
 import 'moment/locale/id';
 
 import AdminSection from '@/Components/AdminSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import MemberLayout from '@/Layouts/MemberLayout';
 import { currency } from '@/Helper/Formatter';
 import TitleSection from '../../Admin/Components/TitleSection';
@@ -122,7 +122,7 @@ function MemberDashboard({
             <AdminSection>
               <TitleSection title="welcome_member" className="mb-4" />
               <div>
-                <PrimaryButton
+                <Button
                   as="link"
                   href={route('member.profile')}
                   className="mb-4 !inline-block"
@@ -130,12 +130,12 @@ function MemberDashboard({
                 >
                   {t('edit_profile')}
                   <FontAwesomeIcon className="ml-2" icon={faUser} />
-                </PrimaryButton>
+                </Button>
               </div>
               {member?.status?.includes('active') &&
                 member?.program?.name !== 'Green Pal' && (
                   <div>
-                    <PrimaryButton
+                    <Button
                       className="!inline-block"
                       as="link"
                       href={route('member.module.index')}
@@ -143,7 +143,7 @@ function MemberDashboard({
                     >
                       {t('start_learning')}
                       <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
-                    </PrimaryButton>
+                    </Button>
                   </div>
                 )}
             </AdminSection>
@@ -175,22 +175,22 @@ function MemberDashboard({
                 </div>
                 <div className="flex items-center">
                   {snapToken && (
-                    <PrimaryButton
+                    <Button
                       className="text-[16px] mr-4"
                       color="danger"
                       onClick={resetPay}
                     >
                       {t('reset_pay')}
-                    </PrimaryButton>
+                    </Button>
                   )}
-                  <PrimaryButton
+                  <Button
                     className="text-[16px] "
                     onClick={() =>
                       !member?.status?.includes('active') ? pay() : null
                     }
                   >
                     {t('member_locked_button')}
-                  </PrimaryButton>
+                  </Button>
                 </div>
               </div>
             </>

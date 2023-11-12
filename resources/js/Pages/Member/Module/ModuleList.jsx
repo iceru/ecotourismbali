@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 
 function ModuleList({ modules }) {
   const { t } = useTranslation();
@@ -50,26 +50,26 @@ function ModuleList({ modules }) {
                   </div>
                   {/* {module?.member_module[0] &&
                   module?.member_module[0].completion === 1 ? (
-                    <PrimaryButton
+                    <Button
                       as="link"
                       href={route('member.module.detail', module?.id)}
                     >
                       {t('read_material')}
-                    </PrimaryButton>
+                    </Button>
                   ) : (
-                    <PrimaryButton
+                    <Button
                       as="link"
                       href={route('member.module.pre-test', module?.id)}
                     >
                       {t('start_learning')}
-                    </PrimaryButton>
+                    </Button>
                   )} */}
-                  <PrimaryButton
+                  <Button
                     as="link"
                     href={route('member.module.detail', module?.id)}
                   >
                     {t('read_material')}
-                  </PrimaryButton>
+                  </Button>
                 </div>
               </div>
             );

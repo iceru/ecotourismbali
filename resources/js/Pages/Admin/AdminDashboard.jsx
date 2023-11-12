@@ -2,7 +2,7 @@ import AdminSection from '@/Components/AdminSection';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { useTranslation } from 'react-i18next';
 import TitleSection from './Components/TitleSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { faFileDownload } from '@fortawesome/free-solid-svg-icons';
@@ -40,13 +40,10 @@ function MemberDashboard({ members, assessments, visitors, pages, referrers }) {
         <AdminSection>
           <TitleSection title="guide_book" />
           <div className="text-sm mb-6">{t('guide_book_text')}</div>
-          <PrimaryButton
-            color="lightSecondary"
-            className="w-full justify-between"
-          >
+          <Button color="lightSecondary" className="w-full justify-between">
             {t('download_guide_book')}
             <FontAwesomeIcon icon={faFileDownload} />
-          </PrimaryButton>
+          </Button>
         </AdminSection>
       </div>
       <div className="flex mb-6 flex-wrap lg:flex-nowrap">

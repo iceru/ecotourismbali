@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 
 import konten from '../../../../images/hotel/konten.png';
 import kontenId from '../../../../images/hotel/kontenId.png';
@@ -61,13 +61,13 @@ function AssessmentStep({ member, remaining, dateAssessment }) {
               <img src={business === 'Hotel' ? kontenHotel : kontenResto} />
             </div>
           </div>
-          <PrimaryButton
+          <Button
             as="link"
             href={route('member.assessment.data')}
             className="flex w-full justify-center p-5 mt-6 text-lg"
           >
             {t('next')}
-          </PrimaryButton>
+          </Button>
         </AdminSection>
       ) : (
         <AdminSection className="grid gap-6">

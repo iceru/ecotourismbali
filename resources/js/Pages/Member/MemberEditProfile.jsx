@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 
 import noImage from '../../../images/no-image.jpg';
@@ -293,9 +293,9 @@ function MemberEditProfile({ categories }) {
             </div>
           </div>
           <div>
-            <PrimaryButton className="w-full flex justify-center !py-2 ">
+            <Button className="w-full flex justify-center !py-2 ">
               Update
-            </PrimaryButton>
+            </Button>
           </div>
         </form>
       </AdminSection>

@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 
-export default function PrimaryButton({
+export default function Button({
   className = '',
   disabled,
   children,

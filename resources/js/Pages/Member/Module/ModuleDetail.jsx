@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import AdminSection from '@/Components/AdminSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import { useTranslation } from 'react-i18next';
@@ -57,13 +57,13 @@ function ModuleDetail({ module }) {
           ></div>
           {/* {module.member_module[0] &&
           module.member_module[0].completion === 1 ? null : (
-            <PrimaryButton
+            <Button
               as="link"
               href={route('member.module.post-test', module.id)}
               className="flex justify-center mt-6"
             >
               {t('start_post_test')}
-            </PrimaryButton>
+            </Button>
           )} */}
         </div>
       </AdminSection>

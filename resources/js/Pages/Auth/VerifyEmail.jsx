@@ -1,5 +1,5 @@
 import GuestLayout from '@/Layouts/GuestLayout';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import { Head, Link, useForm } from '@inertiajs/react';
 import MemberLayout from '@/Layouts/MemberLayout';
 import AdminSection from '@/Components/AdminSection';
@@ -35,9 +35,7 @@ export default function VerifyEmail({ status }) {
 
         <form onSubmit={submit}>
           <div className="mt-4 flex items-center justify-center">
-            <PrimaryButton disabled={processing}>
-              {t('resend_email_button')}
-            </PrimaryButton>
+            <Button disabled={processing}>{t('resend_email_button')}</Button>
           </div>
         </form>
       </AdminSection>

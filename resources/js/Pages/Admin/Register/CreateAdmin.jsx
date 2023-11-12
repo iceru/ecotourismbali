@@ -1,5 +1,5 @@
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Link, useForm, usePage } from '@inertiajs/react';
@@ -113,7 +113,10 @@ function CreateCategory({ admin }) {
           </div>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
-              <InputLabel htmlFor="password_confirmation" value={t('form_label_password_confirmation')} />
+              <InputLabel
+                htmlFor="password_confirmation"
+                value={t('form_label_password_confirmation')}
+              />
             </div>
             <div className="lg:w-4/5">
               <TextInput
@@ -125,16 +128,14 @@ function CreateCategory({ admin }) {
                 isFocused={false}
                 onChange={e => setData('password_confirmation', e.target.value)}
               />
-              <span className="text-red-600">{errors.password_confirmation}</span>
+              <span className="text-red-600">
+                {errors.password_confirmation}
+              </span>
             </div>
           </div>
-          <PrimaryButton
-            color="secondary"
-            className="w-fit"
-            disabled={processing}
-          >
+          <Button color="secondary" className="w-fit" disabled={processing}>
             {t('submit')}
-          </PrimaryButton>
+          </Button>
         </form>
       </AdminSection>
       <AdminSection className="flex flex-col gap-6">

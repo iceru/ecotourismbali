@@ -1,5 +1,5 @@
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Link, useForm, usePage } from '@inertiajs/react';
@@ -191,9 +191,9 @@ function EditAssessment() {
               <span className="text-red-600">{errors.logo}</span>
             </div>
           </div>
-          <PrimaryButton className="w-fit" disabled={processing}>
+          <Button className="w-fit" disabled={processing}>
             {t('submit')}
-          </PrimaryButton>
+          </Button>
         </form>
       </AdminSection>
     </AdminLayout>

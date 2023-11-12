@@ -1,4 +1,4 @@
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import Logo from '../../images/logo.png';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -173,14 +173,14 @@ function MemberLayout({ children, state }) {
       <div className={`${!sideActive ? 'w-full' : 'lg:w-3/4'}`}>
         <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
           <div className="flex items-center w-full justify-between lg:w-auto lg:justify-start mb-4 lg:mb-0">
-            <PrimaryButton
+            <Button
               color="lightPrimary"
               className="mr-4"
               onClick={() => setSideActive(!sideActive)}
             >
               <FontAwesomeIcon icon={faBars} className="mr-2" />
               {t('menu')}
-            </PrimaryButton>
+            </Button>
             <div className="flex items-center gap-3">
               <div
                 className={`flex items-center cursor-pointer ${
@@ -217,14 +217,14 @@ function MemberLayout({ children, state }) {
           </div>
           <div className="flex gap-4 items-center justify-between lg:justify-start w-full lg:w-auto">
             <div>
-              <PrimaryButton
+              <Button
                 as="link"
                 color="danger"
                 href={route('logout')}
                 method="post"
               >
                 {t('logout')}
-              </PrimaryButton>
+              </Button>
             </div>
           </div>
         </AdminSection>

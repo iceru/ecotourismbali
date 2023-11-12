@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import InputLabel from '@/Components/InputLabel';
 import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import { Head, Link, router } from '@inertiajs/react';
 import { badgeColor } from '@/Helper/BadgeColor';
 import Pagination from '@/Components/Pagination';
 import queryString from 'query-string';
+import TitlePage from '@/Components/TitlePage';
 
 function MemberList({ programs, categories, badges, members }) {
   const sorts = [
@@ -101,9 +102,7 @@ function MemberList({ programs, categories, badges, members }) {
   return (
     <Guest>
       <Head title="Member List" />
-      <h1 className="font-bold text-2xl lg:text-3xl mb-6 lg:mb-10">
-        {t('list_of_members')}
-      </h1>
+      <TitlePage title="list_of_members" className="!mb-0" />
       <div className="flex flex-wrap justify-between mb-6 pb-6 border-b">
         <div className="mb-6 lg:mb-0 lg:w-3/4 lg:pr-4">
           <div className="font-bold mb-2 text-lg">{t('filter')}</div>
@@ -154,7 +153,7 @@ function MemberList({ programs, categories, badges, members }) {
               </div>
             </div>
             <div className="w-full lg:w-auto">
-              <PrimaryButton onClick={filterData}>{t('filter')}</PrimaryButton>
+              <Button onClick={filterData}>{t('filter')}</Button>
             </div>
           </div>
         </div>

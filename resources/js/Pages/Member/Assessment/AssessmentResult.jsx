@@ -19,7 +19,7 @@ import { toUpper } from 'lodash';
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import { badgeColor } from '@/Helper/BadgeColor';
 
 import Certificate from '../../../../images/certificate.png';
@@ -354,7 +354,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                           <div className="font-bold  text-4xl text-start mb-1">
                             {member?.badge?.name}
                           </div>
-                          <PrimaryButton
+                          <Button
                             onClick={() =>
                               downloadImage(
                                 '/storage/badges/' + member?.badge?.image
@@ -366,7 +366,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                             )}`}
                           >
                             {t('download_badge')}
-                          </PrimaryButton>
+                          </Button>
                         </div>
                         <div className="bg-white w-[120px] h-[120px] rounded-full">
                           <img
@@ -388,35 +388,35 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                     {t('verify_badge')}
                   </h5>
                   <p>{t('verify_badge_text')}</p>
-                  <PrimaryButton
+                  <Button
                     as="link"
                     color="secondary"
                     href={route('member.assessment.verifyEmail', session.id)}
                     className="w-full flex justify-center mt-4"
                   >
                     {t('notify_us')}
-                  </PrimaryButton>
+                  </Button>
                 </div>
               </div>
             </div>
-            <PrimaryButton
+            <Button
               as="link"
               href={route('member.dashboard')}
               className="w-full flex justify-center mt-6 relative z-5"
             >
               {t('back_to_dashboard')}
-            </PrimaryButton>
+            </Button>
           </div>
         ) : (
           <>
             <div className="text-center">{t('result_preview_assessment')}</div>
-            <PrimaryButton
+            <Button
               as="link"
               href={route('member.dashboard')}
               className="w-full flex justify-center mt-6"
             >
               {t('back_to_dashboard')}
-            </PrimaryButton>
+            </Button>
           </>
         )}
       </AdminSection>

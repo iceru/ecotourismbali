@@ -13,7 +13,7 @@ import Slider from 'react-slick';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 
 import noImage from '../../../images/no-image.jpg';
 import { lowerCase } from 'lodash';
@@ -50,15 +50,15 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
             <span className="inline">{flash.success}</span>
           </div>
         )}
-        <PrimaryButton
+        <Button
           as="link"
           href={route('member.profile.edit', member?.id)}
           className="mb-6 flex items-center gap-2"
         >
           {t('edit_profile')}
           <FontAwesomeIcon icon={faPen} />
-        </PrimaryButton>
-        <PrimaryButton
+        </Button>
+        <Button
           as="link"
           href={route('profile.edit', member?.id)}
           className="mb-6 flex items-center gap-2 ml-4"
@@ -66,7 +66,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
         >
           {t('change_password')}
           <FontAwesomeIcon icon={faLock} />
-        </PrimaryButton>
+        </Button>
         <div className="flex flex-wrap">
           <div className="w-full mb-4 lg:mb-0 lg:w-4/5">
             <div className="flex items-center mb-10">
@@ -298,7 +298,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
                 </div>
               ) : (
                 <div>
-                  <PrimaryButton
+                  <Button
                     as="link"
                     href={route('member.assessment.index')}
                     color="lightPrimary"
@@ -306,7 +306,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
                   >
                     {t('start_assessment')}
                     <FontAwesomeIcon icon={faArrowRightLong} />
-                  </PrimaryButton>
+                  </Button>
                 </div>
               )}
             </div>

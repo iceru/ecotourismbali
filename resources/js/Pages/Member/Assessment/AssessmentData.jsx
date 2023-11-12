@@ -5,7 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import MemberLayout from '@/Layouts/MemberLayout';
 import { router, useForm, usePage } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import SelectInput from '@/Components/SelectInput';
@@ -312,9 +312,9 @@ function AssessmentData({ categories }) {
                 )}
               </div>
             </div>
-            <PrimaryButton className="py-3 mt-6 w-full">
+            <Button className="py-3 mt-6 w-full">
               <div className="w-full">{t('next')}</div>
-            </PrimaryButton>
+            </Button>
           </form>
         </AdminSection>
       ) : (

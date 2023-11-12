@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import SelectInput from '@/Components/SelectInput';
@@ -80,9 +80,7 @@ const MemberGreenpal = ({ member, categories }) => {
         <div>
           <h4 className="font-bold mb-2 text-lg">{t('agreement_title')}</h4>
           <p className="mb-4">{t('agreement_text')}</p>
-          <PrimaryButton onClick={agreeSubmit}>
-            {t('agreement_button')}
-          </PrimaryButton>
+          <Button onClick={agreeSubmit}>{t('agreement_button')}</Button>
         </div>
       ) : (
         <>
@@ -307,13 +305,13 @@ const MemberGreenpal = ({ member, categories }) => {
                 <span className="text-red-600">{errors.address}</span>
               )}
             </div>
-            <PrimaryButton
+            <Button
               type="submit"
               className="w-full justify-center flex mt-4"
               disabled={processing}
             >
               {t('submit')}
-            </PrimaryButton>
+            </Button>
           </form>
         </>
       )}

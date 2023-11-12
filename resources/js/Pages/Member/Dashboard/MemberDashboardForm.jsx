@@ -5,7 +5,7 @@ import SelectInput from '@/Components/SelectInput';
 import { useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TextInput from '@/Components/TextInput';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 
 const MemberDashboardForm = ({ business_type, member }) => {
   const { t } = useTranslation();
@@ -259,14 +259,14 @@ const MemberDashboardForm = ({ business_type, member }) => {
             </div>
           </div>
         </div>
-        <PrimaryButton
+        <Button
           color="secondary"
           type="submit"
           className="flex justify-center mt-6 w-full"
           disabled={processing}
         >
           {t('submit')}
-        </PrimaryButton>
+        </Button>
       </form>
     </>
   );

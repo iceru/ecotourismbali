@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 
 function ModuleResult({ memberModule, module }) {
   const { t } = useTranslation();
@@ -38,13 +38,13 @@ function ModuleResult({ memberModule, module }) {
             </div>
           </div>
         </div>
-        <PrimaryButton
+        <Button
           className="w-full flex justify-center mt-6"
           as="link"
           href={route('member.module.index')}
         >
           {t('back_to_list_module')}
-        </PrimaryButton>
+        </Button>
       </AdminSection>
     </MemberLayout>
   );

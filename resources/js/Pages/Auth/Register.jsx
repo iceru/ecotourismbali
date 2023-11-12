@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AuthImage from '@/Components/AuthImage';
@@ -206,7 +206,7 @@ export default function Register({ programs }) {
             </div>
 
             <div className="flex items-center justify-between mt-6">
-              <PrimaryButton disabled={processing}>Register</PrimaryButton>
+              <Button disabled={processing}>Register</Button>
               <Link
                 href={route('login')}
                 className="text-sm text-primary font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

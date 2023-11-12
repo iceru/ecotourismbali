@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AdminSection from '@/Components/AdminSection';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import { useTranslation } from 'react-i18next';
@@ -85,20 +85,20 @@ function ModulePreTest({ pre_test, module, member }) {
                   })}
                   <div className="flex justify-center gap-4">
                     {active > 0 && (
-                      <PrimaryButton
+                      <Button
                         color="gray"
                         className="min-w-[160px] flex justify-center"
                         onClick={() => setActive(active - 1)}
                       >
                         {t('back')}
-                      </PrimaryButton>
+                      </Button>
                     )}
-                    <PrimaryButton
+                    <Button
                       type="submit"
                       className="min-w-[160px] flex justify-center"
                     >
                       {t('next')}
-                    </PrimaryButton>
+                    </Button>
                   </div>
                 </div>
               );

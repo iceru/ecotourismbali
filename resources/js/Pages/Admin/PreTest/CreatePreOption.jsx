@@ -1,5 +1,5 @@
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { useForm, usePage } from '@inertiajs/react';
@@ -112,13 +112,9 @@ function CreatePreOption({ pre_option, pre_question }) {
               <span className="text-red-600">{errors.answer}</span>
             </div>
           </div>
-          <PrimaryButton
-            color="secondary"
-            className="w-fit"
-            disabled={processing}
-          >
+          <Button color="secondary" className="w-fit" disabled={processing}>
             {t('submit')}
-          </PrimaryButton>
+          </Button>
         </form>
       </AdminSection>
       <AdminSection addClass="flex flex-col gap-6">
