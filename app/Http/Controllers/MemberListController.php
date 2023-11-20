@@ -58,7 +58,7 @@ class MemberListController extends Controller
 
     public function filter(Request $request)
     {
-        $member =  Member::where('slug', '!=', '')->where('status', 'active');
+        $member =  Member::where('slug', '!=', '')->where('status', 'like',  '%active%');
         $category = Category::where('id', $request->category)->first();
 
         if($request->category && $request->category !== 'all') {
