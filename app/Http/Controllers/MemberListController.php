@@ -17,7 +17,7 @@ class MemberListController extends Controller
 {
     public function index(Request $request)
     {
-        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
+        $members =  Member::where('slug', '!=', '')->where('status', 'like',  '%active%')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
         
         
         if($request->input('category') && $request->input('category') !== 'all') {
