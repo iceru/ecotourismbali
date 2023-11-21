@@ -1,25 +1,37 @@
+import { Link } from '@inertiajs/react';
+import moment from 'moment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-function ForumCard({ topic }) {
+function ForumCard({ thread }) {
   const { t } = useTranslation();
+
   return (
-    <div className="p-6 drop-shadow-lg bg-white rounded-2xl even:bg-lightPrimary even:bg-opacity-50">
+    <Link
+      href={route('member.forum.thread.show', thread?.id)}
+      className="p-6 drop-shadow-lg block pointer hover:scale-[101%] cursor-pointer transition bg-white rounded-2xl even:bg-lightPrimary even:bg-opacity-50"
+    >
       <div className="grid gap-3 mb-6 pb-6 border-b border-lightPrimary">
-        <div>{topic?.date}</div>
-        <h3>{topic?.title}</h3>
-        <p>{topic?.description}</p>
+        <h3 className="font-bold text-2xl">{thread?.title}</h3>
+        <div className="text-sm text-gray-400">
+          {moment(thread?.created_at).format('LLL')}
+        </div>
+        <p>{thread?.text}</p>
       </div>
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
-          <img src="" alt="" />
-          Kelapot Indonesia
+          <img
+            src={`/storage/member/images/${thread?.member?.image}`}
+            className="h-[28px]"
+            alt=""
+          />
+          {thread?.member?.business_name}
         </div>
         <div className="flex text-primary items-center">
-          {topic?.comments} {t('comments')}
+          {thread?.total_comments || 0} {t('comments')}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

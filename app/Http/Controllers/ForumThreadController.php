@@ -14,17 +14,24 @@ class ForumThreadController extends Controller
 {
     public function index()
     {
-        $forum_threads = ForumThread::with('member');
+        $threads = ForumThread::with('member')->get();
 
-        return Inertia::render('Forum/ThreadList', [
-            'forum_threads' => $forum_threads,
+        return Inertia::render('Forum/ForumIndex', [
+            'threads' => $threads,
+        ]);
+    }
+
+    public function create()
+    {
+        $member = Member::where('user_id', Auth::id())->with('badge')->first();
+        return Inertia::render('Forum/AddThread', [
+            'member' => $member,
         ]);
     }
     
     public function store(Request $request)
     {
         $member = Member::where('user_id', Auth::id())->first();
-        
         $forum_thread = new ForumThread;
         
         $request->validate([
@@ -34,20 +41,19 @@ class ForumThreadController extends Controller
         
         $forum_thread->title = $request->title;
         $forum_thread->text = $request->text;
-        $forum_thread->total_comment = $request->total_comment;
         $forum_thread->member_id = $member->id;
         $forum_thread->save();
         
-        return Redirect::route('member.forum.index')->with('success', 'Forum Thread created successfully');
+        return Redirect::route('member.forum.thread.show', $forum_thread->id);
     }
 
     public function show($id)
     {
-        $forum_thread = ForumThread::where('id', $id)->with('member')->first();
+        $thread = ForumThread::where('id', $id)->with('member')->first();
         $forum_comments = ForumComment::where('forum_thread_id', $id)->with('member')->get();
 
-        return Inertia::render('Forum/ShowThread', [
-            'forum_thread' => $forum_thread,
+        return Inertia::render('Forum/Thread', [
+            'thread' => $thread,
             'forum_comments' => $forum_comments,
         ]);
     }

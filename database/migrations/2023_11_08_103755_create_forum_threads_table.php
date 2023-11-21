@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title');
-            $table->string('text');
-            $table->integer('total_comment')->default(0);
+            $table->text('text');
+            $table->integer('total_comment')->nullable();
 
             $table->unsignedBigInteger('member_id');
             $table->foreign('member_id')->references('id')->on('members')->onDelete('restrict');

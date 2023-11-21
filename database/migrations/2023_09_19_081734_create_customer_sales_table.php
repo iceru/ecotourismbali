@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('qty');
 
             $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('restrict');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
             $table->unsignedBigInteger('sales_id');
             $table->foreign('sales_id')->references('id')->on('sales')->onDelete('restrict');
             $table->unsignedBigInteger('product_id');

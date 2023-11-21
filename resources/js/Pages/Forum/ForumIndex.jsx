@@ -10,7 +10,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import ForumCard from '@/Components/ForumCard';
 import Guest from '@/Layouts/GuestLayout';
 
-function ForumIndex() {
+function ForumIndex({ threads }) {
   const { t } = useTranslation();
   return (
     <Guest>
@@ -41,7 +41,7 @@ function ForumIndex() {
           </div>
         </section>
 
-        <section className="flex gap-4 flex-wrap">
+        <section className="flex gap-4 flex-wrap lg:flex-nowrap">
           <section className="w-full lg:w-1/5 mb-4 lg:mb-0">
             <div className="grid gap-3 border-b pb-3 mb-8 border-lightPrimary">
               <div className="flex items-center px-3.5 py-6 gap-3">
@@ -56,14 +56,16 @@ function ForumIndex() {
               <div className="grid gap-6">
                 <div className="flex">
                   <img src="" alt="" />
-                  Kelapot Indonesia
+                  Codeomnia
                 </div>
               </div>
             </div>
           </section>
 
           <section className="w-full lg:w-4/5 grid gap-8 lg:pl-6">
-            <ForumCard />
+            {threads.map(thread => {
+              return <ForumCard thread={thread} />;
+            })}
           </section>
         </section>
       </main>
