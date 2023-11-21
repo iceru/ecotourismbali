@@ -62,4 +62,14 @@ class Member extends Model
     {
         return $this->hasMany(MemberAssessmentAnswer::class, 'member_id');
     }
+
+    public function forum_thread(): HasMany
+    {
+        return $this->hasMany(ForumThread::class, 'member_id');
+    }
+
+    public function forum_comment(): HasMany
+    {
+        return $this->hasMany(ForumComment::class, 'member_id');
+    }
 }

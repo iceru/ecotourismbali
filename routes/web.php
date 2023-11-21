@@ -27,6 +27,8 @@ use App\Http\Controllers\MemberAssessmentController;
 use App\Http\Controllers\PostTestQuestionController;
 use App\Http\Controllers\AssessmentQuestionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ForumCommentController;
+use App\Http\Controllers\ForumThreadController;
 use App\Http\Controllers\PreTestModuleAnswerController;
 use App\Http\Controllers\PostTestModuleAnswerController;
 
@@ -95,20 +97,32 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::post('/member/assessment/save', [MemberAssessmentController::class, 'save'])->name('member.assessment.save');
     Route::post('/member/assessment/complete/{id}', [MemberAssessmentController::class, 'complete'])->name('member.assessment.complete');
     Route::get('/member/assessment/verify-email/{id}', [MemberAssessmentController::class, 'verifyEmail'])->name('member.assessment.verifyEmail');
-
+    
     Route::get('/member/module', [MemberModuleController::class, 'index'])->name('member.module.index');
     Route::get('/member/module/{id}', [MemberModuleController::class, 'detail'])->name('member.module.detail');
     Route::get('/member/module/{id}/result', [MemberModuleController::class, 'result'])->name('member.module.result');
     Route::get('/member/module/{id}/post-test', [PostTestModuleAnswerController::class, 'index'])->name('member.module.post-test');
     Route::get('/member/module/{id}/pre-test', [PreTestModuleAnswerController::class, 'index'])->name('member.module.pre-test');
-
+    
     Route::post('/member/module/pre-test/store', [PreTestModuleAnswerController::class, 'store'])->name('member.pre-test.store');
     Route::post('/member/module/post-test/store', [PostTestModuleAnswerController::class, 'store'])->name('member.post-test.store');
-
+    
     Route::post('/member-payment/new-payment', [MemberPaymentController::class, 'new_payment'])->name('member_payment.new_payment');
     Route::get('/member-payment/finish', [MemberPaymentController::class, 'finish'])->name('member_payment.finish');
     Route::get('/member-payment/unfinish', [MemberPaymentController::class, 'unfinish'])->name('member_payment.unfinish');
     Route::get('/member-payment/error', [MemberPaymentController::class, 'error'])->name('member_payment.error');
+    
+    Route::get('/member/forum', [ForumThreadController::class, 'index'])->name('member.forum.index');
+    Route::post('/member/forum/thread/store', [ForumThreadController::class, 'store'])->name('member.forum.thread.store');
+    Route::get('/member/forum/thread/{id}', [ForumThreadController::class, 'show'])->name('member.forum.thread.show');
+    Route::get('/member/forum/thread/{id}/edit', [ForumThreadController::class, 'edit'])->name('member.forum.thread.edit');
+    Route::post('/member/forum/thread/{id}/update', [ForumThreadController::class, 'update'])->name('member.forum.thread.update');
+    Route::delete('/member/forum/thread/delete', [ForumThreadController::class, 'destroy'])->name('member.forum.thread.destroy');
+    
+    Route::post('/member/forum/comment/store', [ForumCommentController::class, 'store'])->name('member.forum.comment.store');
+    Route::get('/member/forum/comment/{id}/edit', [ForumCommentController::class, 'edit'])->name('member.forum.comment.edit');
+    Route::post('/member/forum/comment/{id}/update', [ForumCommentController::class, 'update'])->name('member.forum.comment.update');
+    Route::delete('/member/forum/comment/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
 });  
 
 Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(function () {
