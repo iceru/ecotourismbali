@@ -102,7 +102,7 @@ function MemberList({ programs, categories, badges, members }) {
   return (
     <Guest>
       <Head title="Member List" />
-      <TitlePage title="list_of_members" className="!mb-0" />
+      <TitlePage title="list_of_members" />
       <div className="flex flex-wrap justify-between mb-6 pb-6 border-b">
         <div className="mb-6 lg:mb-0 lg:w-3/4 lg:pr-4">
           <div className="font-bold mb-2 text-lg">{t('filter')}</div>

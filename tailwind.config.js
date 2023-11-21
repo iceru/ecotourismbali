@@ -38,7 +38,7 @@ module.exports = {
         poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
       spacing: {
-        '2/3': '66.666667%'
+        '2/3': '66.666667%',
       },
       colors: {
         primary: '#1F656C',
@@ -46,10 +46,11 @@ module.exports = {
         lightSecondary: '#D8E8CC',
         lightPrimary: '#D2E0E2',
         etbGray: '#353535',
-        greenpal: "#2b583d",
+        greenpal: '#2b583d',
+        gold: '#F1C571',
       },
       dropShadow: {
-        'admin': '0px 0px 8px 2px rgba(0, 0, 0, 0.05)'
+        admin: '0px 0px 8px 2px rgba(0, 0, 0, 0.05)',
       },
     },
   },

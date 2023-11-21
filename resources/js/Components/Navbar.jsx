@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
+  faCartShopping,
   faChevronDown,
   faTimes,
   faUser,
@@ -23,6 +24,7 @@ import idImg from '../../images/id.png';
 import Logo from '../../images/logo.png';
 import Pin from '../../images/pin-1.png';
 import Email from '../../images/mail.png';
+import Button from './Button';
 
 function Navbar() {
   const { i18n } = useTranslation();
@@ -41,9 +43,9 @@ function Navbar() {
   }
   return (
     <>
-      <div className="flex items-center justify-end container mx-auto p-3">
+      <div className="flex items-center justify-between container mx-auto py-3">
         <div className="flex items-center">
-          <div className="text-xs mr-3 text-gray-400">{t('language')}</div>
+          <div className="text-sm mr-3 text-gray-400">{t('language')}</div>
           <div onClick={() => changeLanguage('en')} className="cursor-pointer">
             <img src={enImg} alt="" />
           </div>
@@ -54,6 +56,52 @@ function Navbar() {
             <img src={idImg} alt="" />
           </div>
         </div>
+        {auth?.user ? (
+          <div className="flex items-center gap-3">
+            <Button color="altPrimary" className="!py-1 !px-3 text-sm">
+              {t('cart')}
+              <FontAwesomeIcon icon={faCartShopping} className="ml-2" />
+            </Button>
+            <div className="group relative capitalize">
+              <div className="flex bg-primary text-white p-1 px-3 rounded text-sm">
+                <div className=" font-bold group relative">
+                  {auth?.user?.name}
+                </div>
+                <div className="ml-2">
+                  <FontAwesomeIcon icon={faUser} />
+                </div>
+              </div>
+              <ul className="hidden absolute top-2 pt-8 group-hover:block hover:block z-10 shadow-lg">
+                <Link
+                  href={route('member.dashboard')}
+                  className="w-full text-left py-3 px-5 block text-sm hover:bg-gray-100 hover:text-primary bg-white"
+                >
+                  <li className=" whitespace-nowrap ">
+                    {t('member_dashboard')}
+                  </li>
+                </Link>
+                <Link
+                  href={route('logout')}
+                  method="post"
+                  as="button"
+                  type="button"
+                  className="w-full text-left py-3 px-5 block text-sm bg-white hover:bg-red-600 hover:text-white text-red-600 "
+                >
+                  <li className=" whitespace-nowrap ">{t('logout')}</li>
+                </Link>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <Link href={route('member.dashboard')}>
+            <li className="flex bg-primary text-white text-sm p-1 px-3 rounded">
+              <div>{t('member_login')}</div>
+              <div className="ml-2">
+                <FontAwesomeIcon icon={faUser} />
+              </div>
+            </li>
+          </Link>
+        )}
       </div>
       <nav className="flex bg-white justify-between items-center container px-3 pb-3 mx-auto">
         <div className="logo">
@@ -207,46 +255,6 @@ function Navbar() {
                 </li>
               </ul>
             </li>
-            {auth?.user ? (
-              <div className="group relative capitalize">
-                <div className="flex text-primary">
-                  <div className="mr-2">
-                    <FontAwesomeIcon icon={faUser} />
-                  </div>
-                  <div className=" font-bold group relative">
-                    {auth?.user?.name}
-                  </div>
-                </div>
-                <ul className="hidden absolute top-2 pt-8 group-hover:block hover:block">
-                  <Link
-                    href={route('member.dashboard')}
-                    className="w-full text-left py-3 px-5 block hover:bg-gray-100 hover:text-primary bg-white"
-                  >
-                    <li className=" whitespace-nowrap ">
-                      {t('member_dashboard')}
-                    </li>
-                  </Link>
-                  <Link
-                    href={route('logout')}
-                    method="post"
-                    as="button"
-                    type="button"
-                    className="w-full text-left py-3 px-5 block hover:bg-red-600 hover:text-white text-red-600 "
-                  >
-                    <li className=" whitespace-nowrap ">{t('logout')}</li>
-                  </Link>
-                </ul>
-              </div>
-            ) : (
-              <Link href={route('member.dashboard')}>
-                <li className="flex text-primary">
-                  <div className="mr-2">
-                    <FontAwesomeIcon icon={faUser} />
-                  </div>
-                  <div>{t('member_login')}</div>
-                </li>
-              </Link>
-            )}
           </ul>
           <div onClick={() => setSidebar(true)} className="lg:hidden">
             <FontAwesomeIcon icon={faBars} className="text-3xl text-primary" />

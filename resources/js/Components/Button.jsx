@@ -25,6 +25,12 @@ export default function Button({
   } else if (color === 'gray') {
     classButton =
       'bg-gray-400 hover:gray-600 focus:ring-gray-400 active:bg-gray-400 text-white';
+  } else if (color === 'altPrimary') {
+    classButton =
+      'bg-white hover:bg-primary text-primary hover:text-white focus:ring-white active:bg-white !border-primary';
+  } else if (color === 'altSecondary') {
+    classButton =
+      'bg-white hover:bg-secondary text-secondary hover:text-white focus:ring-white active:bg-white !border-secondary';
   }
   return as === 'link' ? (
     <Link

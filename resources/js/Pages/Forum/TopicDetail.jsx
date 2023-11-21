@@ -19,25 +19,27 @@ function TopicDetail({ topic }) {
         <section className="flex justify-between items-center">
           <h1 className="font-bold text-2xl">{topic?.title}</h1>
           <Button color="lightPrimary">
-            <div>Report Topics</div>
+            <div>{t('report_topics')}</div>
           </Button>
         </section>
         <section className="grid gap-4">
-          <div className="p-6 rounded-xl bg-lightPrimary flex bg-opacity-50">
-            <div className="lg:w-1/5 flex">
+          <div className="p-6 rounded-xl bg-lightPrimary flex bg-opacity-30 shadow-lg flex-wrap">
+            <div className="w-full lg:w-1/5 flex mb-4 lg:mb-0">
               <div>
                 <img src="" alt="" />
               </div>
               <div>
-                Kelapot Indonesia
+                <h4 className="text-lg font-bold">Kelapot Indonesia</h4>
                 <div className="flex">
                   <img src="" alt="" />
                   Gold Member
                 </div>
               </div>
             </div>
-            <div className="lg:w-4/5">
-              <div className="font-bold text-sm">{topic?.date}</div>
+            <div className="w-full lg:w-4/5">
+              <div className="font-bold text-sm text-primary mb-2">
+                {topic?.date}
+              </div>
               <div>{topic?.content}</div>
             </div>
           </div>

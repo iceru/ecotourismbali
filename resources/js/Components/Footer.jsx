@@ -15,7 +15,7 @@ function Footer() {
             Privacy Policy
           </a>
         </div>
-        <div className="font-poppins hover:text-secondary">
+        <div className="font-poppins hover:text-secondary text-sm lg:text-base">
           <a href="https://ecotourismbali.com/faq/">FAQ</a>
         </div>
       </div>
