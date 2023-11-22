@@ -52,6 +52,15 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/booking', function () {
+    return Inertia::render('Booking/Products', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
 Route::get('/green-credential', [MemberListController::class, 'index'])->name('member.list');
 Route::get('/member/detail/{slug}',[MemberListController::class, 'detail'])->name('member.detail');
 Route::post('/green-credential',[MemberListController::class, 'filter'])->name('member.filter');
@@ -102,12 +111,12 @@ Route::middleware(['auth', 'verified','role:member'])->group(function () {
     Route::get('/member/forum/thread/show/{id}', [ForumThreadController::class, 'show'])->name('member.forum.thread.show');
     Route::get('/member/forum/thread/{id}/edit', [ForumThreadController::class, 'edit'])->name('member.forum.thread.edit');
     Route::post('/member/forum/thread/{id}/update', [ForumThreadController::class, 'update'])->name('member.forum.thread.update');
-    Route::delete('/member/forum/thread/delete', [ForumThreadController::class, 'destroy'])->name('member.forum.thread.destroy');
+    Route::post('/member/forum/thread/delete', [ForumThreadController::class, 'destroy'])->name('member.forum.thread.destroy');
     
     Route::post('/member/forum/comment/store', [ForumCommentController::class, 'store'])->name('member.forum.comment.store');
     Route::get('/member/forum/comment/{id}/edit', [ForumCommentController::class, 'edit'])->name('member.forum.comment.edit');
     Route::post('/member/forum/comment/{id}/update', [ForumCommentController::class, 'update'])->name('member.forum.comment.update');
-    Route::delete('/member/forum/comment/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
+    Route::post('/member/forum/comment/{id}/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
 });  
 
 Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(function () {

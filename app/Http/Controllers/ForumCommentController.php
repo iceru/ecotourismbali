@@ -20,19 +20,20 @@ class ForumCommentController extends Controller
 
         $request->validate([
             'text' => 'required',
+            'thread_id' => 'required'
         ]);
 
         $forum_comment->text = $request->text;
-        $forum_comment->forum_thread_id = $request->forum_thread_id;
+        $forum_comment->forum_thread_id = $request->thread_id;
         $forum_comment->member_id = $member->id;
         $forum_comment->save();
 
         //+1 total comment
-        $forum_thread = ForumThread::find($request->forum_thread_id);
+        $forum_thread = ForumThread::find($request->thread_id);
         $forum_thread->total_comment = $forum_thread->total_comment+1;
         $forum_thread->save();
 
-        return Redirect::route('member.forum.thread.show', $request->forum_thread_id);
+        return Redirect::route('member.forum.thread.show', $request->thread_id);
     }
 
     public function edit($id)
@@ -58,10 +59,16 @@ class ForumCommentController extends Controller
         return Redirect::route('member.forum.thread.show', $request->forum_thread_id);
     }
     
-    public function destroy(Request $request)
+    public function destroy($id, Request $request)
     {
-        $forum_comment = ForumComment::find($request->id);
+        $forum_comment = ForumComment::find($id);
         $id = $forum_comment->forum_thread_id;
+        $forum_thread = ForumThread::find($id);
+        if($forum_thread->total_comment > 0) {
+            $forum_thread->total_comment = $forum_thread->total_comment-1;
+            $forum_thread->save();
+        }
+
         $forum_comment->delete();
 
         return Redirect::route('member.forum.thread.show', $id);

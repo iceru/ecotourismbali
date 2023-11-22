@@ -28,7 +28,7 @@ function ForumCard({ thread }) {
           {thread?.member?.business_name}
         </div>
         <div className="flex text-primary items-center">
-          {thread?.total_comments || 0} {t('comments')}
+          {thread?.total_comment || 0} {t('comments')}
         </div>
       </div>
     </Link>

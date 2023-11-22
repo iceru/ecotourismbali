@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@/Components/Button';
@@ -6,12 +6,31 @@ import TitlePage from '@/Components/TitlePage';
 import TextInput from '@/Components/TextInput';
 import SelectInput from '@/Components/SelectInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome,
+  faInfoCircle,
+  faUser,
+  faWarning,
+} from '@fortawesome/free-solid-svg-icons';
 import ForumCard from '@/Components/ForumCard';
 import Guest from '@/Layouts/GuestLayout';
+import { Link } from '@inertiajs/react';
 
 function ForumIndex({ threads }) {
   const { t } = useTranslation();
+  const [filter, setFilter] = useState();
+
+  const sorts = [
+    {
+      label: 'Name - Ascending',
+      value: 'name-ascending',
+    },
+    {
+      label: 'Name - Descending',
+      value: 'name-descending',
+    },
+  ];
+
   return (
     <Guest>
       <main className="grid gap-8 container">
@@ -20,7 +39,11 @@ function ForumIndex({ threads }) {
             <TitlePage title="member_forums" className="!mb-0" />
           </div>
           <div>
-            <Button as="link" color="primary">
+            <Button
+              as="link"
+              href="/member/forum/thread/create"
+              color="primary"
+            >
               {t('start_new_topic')}
             </Button>
           </div>
@@ -34,20 +57,43 @@ function ForumIndex({ threads }) {
             <TextInput />
           </div>
           <div className="flex gap-3 items-center">
-            <label htmlFor="sort" className="min-w-[100px]">
+            <label htmlFor="sort" className="min-w-[100px] lg:min-w-fit">
               {t('sort')}
             </label>
-            <SelectInput />
+            <SelectInput options={sorts} />
           </div>
         </section>
 
         <section className="flex gap-4 flex-wrap lg:flex-nowrap">
           <section className="w-full lg:w-1/5 mb-4 lg:mb-0">
             <div className="grid gap-3 border-b pb-3 mb-8 border-lightPrimary">
-              <div className="flex items-center px-3.5 py-6 gap-3">
-                <FontAwesomeIcon icon={faHome} />
+              <Link
+                className={`flex items-center p-3 mb-1 gap-3 border-l-[10px] rounded ${
+                  !filter &&
+                  'bg-lightPrimary text-primary  border-l-primary font-bold'
+                }`}
+              >
+                <FontAwesomeIcon icon={faHome} className="fa-fw" />
                 {t('home')}
-              </div>
+              </Link>
+              <Link
+                className={`flex items-center p-3 mb-1 gap-3 rounded border-l-[10px] border-l-transparent ${
+                  filter === 'myTopics' &&
+                  'bg-lightPrimary text-primary border-l-primary font-bold'
+                }`}
+              >
+                <FontAwesomeIcon icon={faUser} className="fa-fw" />
+                {t('my_topics')}
+              </Link>
+              <Link
+                className={`flex items-center p-3 gap-3 rounded border-l-[10px] border-l-transparent ${
+                  filter === 'announcements' &&
+                  'bg-lightPrimary text-primary border-l-primary font-bold'
+                }`}
+              >
+                <FontAwesomeIcon icon={faInfoCircle} className="fa-fw" />
+                {t('announcements')}
+              </Link>
             </div>
             <div>
               <h4 className="font-bold text-base mb-4">

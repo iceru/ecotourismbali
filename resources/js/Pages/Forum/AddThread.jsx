@@ -63,7 +63,7 @@ function AddThread({ member }) {
         </div>
         <div className="w-full lg:w-4/5">
           <div className="font-bold text-sm text-primary mb-2">
-            {moment().format('LL')}
+            {moment().format('LLL')}
           </div>
           <div>
             <TextInput

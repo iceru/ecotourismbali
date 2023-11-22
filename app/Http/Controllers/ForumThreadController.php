@@ -50,11 +50,13 @@ class ForumThreadController extends Controller
     public function show($id)
     {
         $thread = ForumThread::where('id', $id)->with('member')->first();
-        $forum_comments = ForumComment::where('forum_thread_id', $id)->with('member')->get();
+        $member = Member::where('user_id', Auth::id())->first();
+        $comments = ForumComment::where('forum_thread_id', $id)->with('member')->get();
 
         return Inertia::render('Forum/Thread', [
             'thread' => $thread,
-            'forum_comments' => $forum_comments,
+            'comments' => $comments,
+            'member' => $member
         ]);
     }
     

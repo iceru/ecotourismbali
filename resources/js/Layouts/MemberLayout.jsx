@@ -11,6 +11,7 @@ import {
   faTimes,
   faBook,
   faLeaf,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import AdminSection from '@/Components/AdminSection';
@@ -129,6 +130,15 @@ function MemberLayout({ children, state }) {
                   icon={faLeaf}
                 />
                 {t('green_credential')}
+              </Link>
+            </li>
+            <li>
+              <Link href={route('member.forum.index')}>
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-primary"
+                  icon={faUsers}
+                />
+                {t('member_forums')}
               </Link>
             </li>
             {member?.program?.name !== 'Green Pal' &&

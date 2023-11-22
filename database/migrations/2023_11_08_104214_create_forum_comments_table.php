@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('forum_comments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('text');
+            $table->text('text');
 
             $table->unsignedBigInteger('forum_thread_id');
             $table->foreign('forum_thread_id')->references('id')->on('forum_threads')->onDelete('restrict');
