@@ -26,6 +26,7 @@ class StatisticController extends Controller
 
         // Badges
         $countBadges = DB::table('members')
+            ->where('status', 'like', '%' . 'active' . '%')
             ->select('badge_id', DB::raw('count(*) as total'))
             ->groupBy('badge_id')
             ->get();
@@ -50,6 +51,7 @@ class StatisticController extends Controller
 
         // Program
         $countProgram = DB::table('members')
+            ->where('status', 'like', '%' . 'active' . '%')
             ->select('program_id', DB::raw('count(*) as total'))
             ->groupBy('program_id')
             ->get();
@@ -84,7 +86,7 @@ class StatisticController extends Controller
         foreach ($assessments as $assess) {
             $members = array();
             foreach ($memberAssess as $memberAs) {
-                if ($assess->id === $memberAs->assessment_id) {
+                if ($assess->id === $memberAs->assessment_id && str_contains($memberAs->member->status, 'active')) {
                     array_push($members, $memberAs);
                     $assess->members = $members;
                 }

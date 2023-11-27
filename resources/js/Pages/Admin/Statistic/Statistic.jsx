@@ -21,11 +21,20 @@ function Statistics({ sessions, badges, programs }) {
               <Bar
                 datasetIdKey="id"
                 data={{
-                  labels: sessions?.map(item => item?.member?.business_name),
+                  labels: sessions?.map(item => {
+                    if (item?.member?.status?.includes('active')) {
+                      return item?.member?.business_name.slice(0, 15);
+                    }
+                  }),
                   datasets: [
                     {
                       label: 'Assessment Score',
-                      data: sessions.map(item => item.total_score),
+                      data: sessions.map(item => {
+                        if (item?.member?.status?.includes('active')) {
+                          console.log(item);
+                          return item.total_score;
+                        }
+                      }),
                       backgroundColor: [
                         '#1F656C',
                         '#7BB052',
@@ -48,23 +57,25 @@ function Statistics({ sessions, badges, programs }) {
             <div>
               <ol>
                 {sessions?.map((item, index) => {
-                  return (
-                    <li className="flex items-center mb-2">
-                      <div className="mr-2">{index + 1}.</div>
-                      <div>
-                        <img
-                          className="w-8 h-8 object-contain rounded-full mr-2"
-                          src={`/storage/member/images/${item?.member?.image}`}
-                          alt=""
-                        />
-                      </div>
-                      <div className="">{item?.member?.business_name}</div>
-                      <div className="font-bold text-primary">
-                        {' '}
-                        - {item?.total_score}
-                      </div>
-                    </li>
-                  );
+                  if (item?.member?.status?.includes('active')) {
+                    return (
+                      <li className="flex items-center mb-2">
+                        <div className="mr-2">{index + 1}.</div>
+                        <div>
+                          <img
+                            className="w-8 h-8 object-contain rounded-full mr-2"
+                            src={`/storage/member/images/${item?.member?.image}`}
+                            alt=""
+                          />
+                        </div>
+                        <div className="">{item?.member?.business_name}</div>
+                        <div className="font-bold text-primary">
+                          {' '}
+                          - {item?.total_score}
+                        </div>
+                      </li>
+                    );
+                  }
                 })}
               </ol>
             </div>
