@@ -4,7 +4,9 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAward,
+  faBarChart,
   faBars,
+  faChartArea,
   faDollar,
   faFileClipboard,
   faHome,
@@ -175,6 +177,34 @@ function AdminLayout({ children }) {
                   icon={faAward}
                 />
                 {t('verified_badge')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={route('statistic.index')}
+                className={
+                  url.startsWith('/admin/statistic') ? 'font-bold' : ''
+                }
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faBarChart}
+                />
+                {t('statistic')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={route('statistic.assessment')}
+                className={
+                  url.match('/admin/assessment/statistic') ? 'font-bold' : ''
+                }
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faChartArea}
+                />
+                {t('statistic_assessment')}
               </Link>
             </li>
             {superadmin && (

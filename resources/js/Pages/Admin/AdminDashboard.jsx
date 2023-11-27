@@ -1,14 +1,16 @@
-import AdminSection from '@/Components/AdminSection';
-import AdminLayout from '@/Layouts/AdminLayout';
 import { useTranslation } from 'react-i18next';
+import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, registerables } from 'chart.js';
+import moment from 'moment';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileDownload } from '@fortawesome/free-solid-svg-icons';
+
 import TitleSection from './Components/TitleSection';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Bar, Line, Pie } from 'react-chartjs-2';
-import { faFileDownload } from '@fortawesome/free-solid-svg-icons';
-import { Chart as ChartJS, registerables } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
-import moment from 'moment';
+import AdminSection from '@/Components/AdminSection';
+
+import AdminLayout from '@/Layouts/AdminLayout';
 
 function MemberDashboard({ members, assessments, visitors, pages, referrers }) {
   const { t } = useTranslation();
