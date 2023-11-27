@@ -15,7 +15,7 @@ class StatisticController extends Controller
     public function index()
     {
         // Highest Score
-        $sessions = AssessmentSession::with('member')->orderBy('total_score', 'desc')->get();
+        $sessions = AssessmentSession::with('member')->get();
         $sessionFilter = array();
 
         foreach ($sessions as $session) {

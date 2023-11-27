@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import AdminSection from '@/Components/AdminSection';
 import { Bar, Pie } from 'react-chartjs-2';
@@ -7,7 +7,18 @@ import PieChart from './Components/PieChart';
 
 function Statistics({ sessions, badges, programs }) {
   ChartJS.register(...registerables);
-  console.log(badges);
+  const [sessionActive, setSessionActive] = useState([]);
+
+  useEffect(() => {
+    let filtered = sessions?.filter(session =>
+      session?.member?.status?.includes('active')
+    );
+    console.log(filtered);
+    filtered = filtered.sort(
+      (a, b) => parseInt(b.total_score) - parseInt(a.total_score)
+    );
+    setSessionActive(filtered);
+  }, []);
 
   return (
     <AdminLayout>
@@ -21,19 +32,14 @@ function Statistics({ sessions, badges, programs }) {
               <Bar
                 datasetIdKey="id"
                 data={{
-                  labels: sessions?.map(item => {
-                    if (item?.member?.status?.includes('active')) {
-                      return item?.member?.business_name.slice(0, 15);
-                    }
+                  labels: sessionActive?.map(item => {
+                    return item?.member?.business_name.slice(0, 15);
                   }),
                   datasets: [
                     {
                       label: 'Assessment Score',
-                      data: sessions.map(item => {
-                        if (item?.member?.status?.includes('active')) {
-                          console.log(item);
-                          return item.total_score;
-                        }
+                      data: sessionActive.map(item => {
+                        return item.total_score;
                       }),
                       backgroundColor: [
                         '#1F656C',
@@ -56,21 +62,22 @@ function Statistics({ sessions, badges, programs }) {
             </div>
             <div>
               <ol>
-                {sessions?.map((item, index) => {
+                {sessionActive?.map((item, index) => {
                   if (item?.member?.status?.includes('active')) {
                     return (
                       <li className="flex items-center mb-2">
                         <div className="mr-2">{index + 1}.</div>
-                        <div>
-                          <img
-                            className="w-8 h-8 object-contain rounded-full mr-2"
-                            src={`/storage/member/images/${item?.member?.image}`}
-                            alt=""
-                          />
-                        </div>
+                        {item?.member?.image && (
+                          <div>
+                            <img
+                              className="w-8 h-8 object-contain rounded-full mr-2"
+                              src={`/storage/member/images/${item?.member?.image}`}
+                              alt=""
+                            />
+                          </div>
+                        )}
                         <div className="">{item?.member?.business_name}</div>
                         <div className="font-bold text-primary">
-                          {' '}
                           - {item?.total_score}
                         </div>
                       </li>
