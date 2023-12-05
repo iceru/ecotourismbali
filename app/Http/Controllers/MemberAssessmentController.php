@@ -98,11 +98,11 @@ class MemberAssessmentController extends Controller
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
         $session = AssessmentSession::where('id', $id)->first();
 
-        if($session->completion === 'yes') {
+        if ($session->completion === 'yes') {
             return Redirect::route('member.dashboard');
         }
-        
-        if($member->id !== $session->member_id) {
+
+        if ($member->id !== $session->member_id) {
             return Redirect::route('member.dashboard');
         }
         if (!str_contains($member->status, 'active')) {
@@ -140,7 +140,7 @@ class MemberAssessmentController extends Controller
         if ($request->sister_company) {
             $member->sister_company = $request->sister_company;
         }
-        if($request->website) {
+        if ($request->website) {
             $member->website = $request->website;
         }
 
@@ -180,7 +180,7 @@ class MemberAssessmentController extends Controller
             'radio.*' => 'required|exists:options,id',
             'checkbox.*' => 'required|exists:options,id',
         ]);
-        $member =  Member::where('user_id', Auth::id())->first();
+        $member = Member::where('user_id', Auth::id())->first();
         $totalPoints = 0;
         foreach ($request->input() as $questionId => $optionId) {
             $optionSelected = AssessmentOption::where('id', $optionId)->first();
@@ -253,8 +253,12 @@ class MemberAssessmentController extends Controller
     {
         $memberAssessment = MemberAssessment::where('assessment_session_id', $id)->get();
         $session = AssessmentSession::where('id', $id)->first();
-        $member =  Member::where('user_id', Auth::id())->with('business_type')->first();
-        $badge =  Badge::all();
+        $member = Member::where('user_id', Auth::id())->with('business_type')->first();
+        $badge = Badge::all();
+
+        if ($session->completion == 'yes') {
+            return Redirect::route('member.assessment.result', $session->id);
+        }
 
         $totalPoint = 0;
         foreach ($memberAssessment as $assess) {
@@ -312,10 +316,10 @@ class MemberAssessmentController extends Controller
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
         $memberAssessments = MemberAssessment::with('assessment')->where('assessment_session_id', $id)->get();
-        if($session) {
+        if ($session) {
             $dateAssessment = $session->created_at->addYears(1);
 
-            if($member->id !== $session->member_id) {
+            if ($member->id !== $session->member_id) {
                 return Redirect::route('member.dashboard');
             }
         } else {
@@ -324,7 +328,7 @@ class MemberAssessmentController extends Controller
 
         return Inertia::render('Member/Assessment/AssessmentResult', [
             'session' => $session,
-            'member' =>  $member,
+            'member' => $member,
             'scores' => $memberAssessments,
             'expiredDate' => $dateAssessment,
         ]);
