@@ -12,13 +12,36 @@ use Inertia\Inertia;
 
 class ForumThreadController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $threads = ForumThread::with('member')->get();
+        $threads = ForumThread::with('member');
+        if ($request->query('keyword')) {
+            $threads = $threads->where('title', 'LIKE', "%" . $request->query('keyword') . "%");
+        }
 
+        if ($request->query('sort')) {
+            $sortColumns = explode('-', $request->query('sort'));
+            if ($sortColumns[1] === 'descending') {
+                if ($sortColumns[0] === 'title') {
+                    $threads->orderByDesc('title');
+                } else if ($sortColumns[0] === 'date') {
+                    $threads->orderByDesc('created_at');
+                }
+            } else {
+                if ($sortColumns[0] === 'title') {
+                    $threads->orderBy('title');
+                } else if ($sortColumns[0] === 'date') {
+                    $threads->orderBy('created_at');
+
+                }
+            }
+        } else {
+            $threads->orderBy('created_at');
+        }
         return Inertia::render('Forum/ForumIndex', [
-            'threads' => $threads,
+            'threads' => $threads->get(),
         ]);
+
     }
 
     public function create()
@@ -28,22 +51,22 @@ class ForumThreadController extends Controller
             'member' => $member,
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $member = Member::where('user_id', Auth::id())->first();
         $forum_thread = new ForumThread;
-        
+
         $request->validate([
             'title' => 'required',
             'text' => 'required',
         ]);
-        
+
         $forum_thread->title = $request->title;
         $forum_thread->text = $request->text;
         $forum_thread->member_id = $member->id;
         $forum_thread->save();
-        
+
         return Redirect::route('member.forum.thread.show', $forum_thread->id);
     }
 
@@ -59,11 +82,11 @@ class ForumThreadController extends Controller
             'member' => $member
         ]);
     }
-    
+
     public function edit($id)
     {
         $forum_thread = ForumThread::find($id);
-        
+
         return Inertia::render('Forum/EditThread', [
             'forum_thread' => $forum_thread,
         ]);
@@ -77,7 +100,7 @@ class ForumThreadController extends Controller
             'title' => 'required',
             'text' => 'required',
         ]);
-        
+
         $forum_thread->title = $request->title;
         $forum_thread->text = $request->text;
         $forum_thread->save();

@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Button from '@/Components/Button';
 import Guest from '@/Layouts/GuestLayout';
 import { Link } from '@inertiajs/react';
-import moment from 'moment';
-import { badgeColor } from '@/Helper/BadgeColor';
 import Comment from './Components/Comment';
 
 function Thread({ thread, comments, member }) {

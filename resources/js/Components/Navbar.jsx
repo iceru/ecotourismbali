@@ -58,10 +58,10 @@ function Navbar() {
         </div>
         {auth?.user ? (
           <div className="flex items-center gap-3">
-            <Button color="altPrimary" className="!py-1 !px-3 text-sm">
+            {/* <Button color="altPrimary" className="!py-1 !px-3 text-sm">
               {t('cart')}
               <FontAwesomeIcon icon={faCartShopping} className="ml-2" />
-            </Button>
+            </Button> */}
             <div className="group relative capitalize">
               <div className="flex bg-primary text-white p-1 px-3 rounded text-sm">
                 <div className=" font-bold group relative">

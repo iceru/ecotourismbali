@@ -9,14 +9,14 @@ function ForumCard({ thread }) {
   return (
     <Link
       href={route('member.forum.thread.show', thread?.id)}
-      className="p-6 drop-shadow-lg block pointer hover:scale-[101%] cursor-pointer transition bg-white rounded-2xl even:bg-lightPrimary even:bg-opacity-50"
+      className="p-6 drop-shadow-lg block pointer hover:scale-[101%] cursor-pointer transition bg-white rounded-2xl even:bg-lightPrimary even:bg-opacity-20"
     >
       <div className="grid gap-3 mb-6 pb-6 border-b border-lightPrimary">
         <h3 className="font-bold text-2xl">{thread?.title}</h3>
         <div className="text-sm text-gray-400">
           {moment(thread?.created_at).format('LLL')}
         </div>
-        <p>{thread?.text}</p>
+        <p className="line-clamp-4">{thread?.text}</p>
       </div>
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
