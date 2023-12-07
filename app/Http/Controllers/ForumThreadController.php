@@ -10,27 +10,36 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class ForumThreadController extends Controller
-{
-    public function index(Request $request)
-    {
+class ForumThreadController extends Controller {
+    public function index(Request $request) {
         $threads = ForumThread::with('member');
-        if ($request->query('keyword')) {
-            $threads = $threads->where('title', 'LIKE', "%" . $request->query('keyword') . "%");
+        $member = Member::where('user_id', Auth::id())->first();
+        if($request->query('keyword')) {
+            $threads = $threads->where('title', 'LIKE', "%".$request->query('keyword')."%");
         }
 
-        if ($request->query('sort')) {
+        if($request->query('category')) {
+            if($request->query('category') === 'home') {
+                $threads = $threads->where('category', 'thread');
+            } else if($request->query('category') === 'my_topics') {
+                $threads = $threads->where('member_id', $member->id);
+            } else {
+                $threads = $threads->where('category', $request->query('category'));
+            }
+        }
+
+        if($request->query('sort')) {
             $sortColumns = explode('-', $request->query('sort'));
-            if ($sortColumns[1] === 'descending') {
-                if ($sortColumns[0] === 'title') {
+            if($sortColumns[1] === 'descending') {
+                if($sortColumns[0] === 'title') {
                     $threads->orderByDesc('title');
-                } else if ($sortColumns[0] === 'date') {
+                } else if($sortColumns[0] === 'date') {
                     $threads->orderByDesc('created_at');
                 }
             } else {
-                if ($sortColumns[0] === 'title') {
+                if($sortColumns[0] === 'title') {
                     $threads->orderBy('title');
-                } else if ($sortColumns[0] === 'date') {
+                } else if($sortColumns[0] === 'date') {
                     $threads->orderBy('created_at');
 
                 }
@@ -44,16 +53,14 @@ class ForumThreadController extends Controller
 
     }
 
-    public function create()
-    {
+    public function create() {
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         return Inertia::render('Forum/AddThread', [
             'member' => $member,
         ]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $member = Member::where('user_id', Auth::id())->first();
         $forum_thread = new ForumThread;
 
@@ -65,13 +72,13 @@ class ForumThreadController extends Controller
         $forum_thread->title = $request->title;
         $forum_thread->text = $request->text;
         $forum_thread->member_id = $member->id;
+        $forum_thread->category = 'thread';
         $forum_thread->save();
 
         return Redirect::route('member.forum.thread.show', $forum_thread->id);
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         $thread = ForumThread::where('id', $id)->with('member')->first();
         $member = Member::where('user_id', Auth::id())->first();
         $comments = ForumComment::where('forum_thread_id', $id)->with('member')->get();
@@ -83,8 +90,7 @@ class ForumThreadController extends Controller
         ]);
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
         $forum_thread = ForumThread::find($id);
 
         return Inertia::render('Forum/EditThread', [
@@ -92,8 +98,7 @@ class ForumThreadController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
-    {
+    public function update($id, Request $request) {
         $forum_thread = ForumThread::find($request->id);
 
         $request->validate([
@@ -108,8 +113,7 @@ class ForumThreadController extends Controller
         return Redirect::route('member.forum.thread.show', $id);
     }
 
-    public function destroy(Request $request)
-    {
+    public function destroy(Request $request) {
         $forum_thread = ForumThread::find($request->id);
         $forum_thread->delete();
 

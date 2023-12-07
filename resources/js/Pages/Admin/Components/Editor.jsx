@@ -61,19 +61,65 @@ function Editor({ onChange, value }) {
             },
           ],
         ],
+        handlers: {
+          image: function (value) {
+            if (value) {
+              document.querySelector('#imageUpload').click();
+            } else {
+              quillRef.format('image', false);
+            }
+          },
+        },
       },
     }),
     []
   );
 
+  const imageUpload = e => {
+    if (e.target.files.length !== 0) {
+      let quill = quillRef;
+      let reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      let self = this;
+      reader.onloadend = function () {
+        let base64data = reader.result;
+        self.form.images.push(base64data);
+
+        // Get cursor location
+        let length = quill.getSelection().index;
+
+        // Insert image at cursor location
+        quill.insertEmbed(length, 'image', base64data);
+
+        // Set cursor to the end
+        quill.setSelection(length + 1);
+      };
+    }
+  };
+
   return (
-    <ReactQuill
-      theme="snow"
-      value={value}
-      modules={modules}
-      onChange={onChange}
-      ref={quillRef}
-    />
+    <>
+      <ReactQuill
+        theme="snow"
+        value={value}
+        modules={modules}
+        onChange={onChange}
+        ref={quillRef}
+      />
+      <div class="custom-file hidden">
+        <input
+          ref="image"
+          oncHange={e => imageUpload(e)}
+          type="file"
+          class="custom-file-input"
+          id="imageUpload"
+          aria-describedby="imageUploadAddon"
+        />
+        <label class="custom-file-label" for="imageUpload">
+          Choose file
+        </label>
+      </div>
+    </>
   );
 }
 

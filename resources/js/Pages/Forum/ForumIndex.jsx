@@ -18,7 +18,7 @@ import { router } from '@inertiajs/react';
 
 function ForumIndex({ threads }) {
   const { t } = useTranslation();
-  const [filter, setFilter] = useState('home');
+  const [category, setCategory] = useState();
   const [payload, setPayload] = useState({});
   const [keyword, setKeyword] = useState();
   const [sort, setSort] = useState();
@@ -28,9 +28,10 @@ function ForumIndex({ threads }) {
     if (qs?.keyword) {
       setKeyword(qs?.keyword);
     }
-
-    if (qs?.filter) {
-      setFilter(qs?.filter);
+    if (qs?.category) {
+      setCategory(qs?.category);
+    } else {
+      setCategory('home');
     }
 
     if (qs?.sort) {
@@ -75,12 +76,24 @@ function ForumIndex({ threads }) {
     router.get(route('member.forum.index'), value);
   };
 
+  const selectCategory = title => {
+    setCategory(title);
+    const value = {
+      ...payload,
+      category: title,
+    };
+    setPayload(value);
+    router.get(route('member.forum.index'), value);
+  };
+
+  console.log(category);
+
   const MenuItem = ({ title, icon }) => {
     return (
       <button
-        onClick={() => setFilter(title)}
-        className={`flex items-center p-3 mb-1 gap-3 border-l-[10px] border-l-transparent rounded transition ${
-          filter === title &&
+        onClick={() => selectCategory(title)}
+        className={`flex items-center p-3 mb-1 gap-3 border-l-[10px] border-l-transparent rounded ${
+          category === title &&
           'bg-lightPrimary text-primary  !border-l-primary font-bold'
         }`}
       >
