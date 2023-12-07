@@ -11,7 +11,7 @@ class AdminPaymentController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Payment/PaymentIndex', [
-            'payments' => MemberPayment::with('member')->get(),
+            'payments' => MemberPayment::with('member')->where('payment_status', 'success')->get(),
         ]);
     }
 

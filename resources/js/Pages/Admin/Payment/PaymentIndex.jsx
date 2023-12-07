@@ -4,8 +4,9 @@ import TitleSection from '../Components/TitleSection';
 import Table from '@/Components/Table';
 
 function PaymentIndex({ payments }) {
-  const header = ['Order Id', 'Status', 'Amount', 'Action'];
+  const header = ['Order Id', 'Status', 'Amount', 'Business Name', 'Action'];
   const selectedData = ['payment_no', 'payment_status', 'amount'];
+  const selectedSecondaryData = ['business_name'];
 
   const tableActions = [
     {
@@ -15,7 +16,6 @@ function PaymentIndex({ payments }) {
       color: 'show',
     },
   ];
-
   return (
     <AdminLayout>
       <AdminSection>
@@ -23,7 +23,9 @@ function PaymentIndex({ payments }) {
         <Table
           header={header}
           data={payments}
+          secondaryData={'member'}
           selectedData={selectedData}
+          selectedSecondaryData={selectedSecondaryData}
           pathImage={'member/images/'}
           tableActions={tableActions}
         />
