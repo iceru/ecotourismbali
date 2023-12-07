@@ -10,7 +10,15 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import moment from 'moment';
 
-function MemberDashboard({ members, assessments, visitors, pages, referrers }) {
+function MemberDashboard({
+  members,
+  assessments,
+  visitors,
+  pages,
+  referrers,
+  greenpal,
+  greenforce,
+}) {
   const { t } = useTranslation();
   ChartJS.register(...registerables);
 
@@ -26,8 +34,8 @@ function MemberDashboard({ members, assessments, visitors, pages, referrers }) {
 
   return (
     <AdminLayout>
-      <div className="grid lg:grid-cols-2 gap-6 mb-6">
-        <AdminSection className="grid lg:grid-cols-2 gap-4">
+      <div className="mb-6">
+        <AdminSection className="grid lg:grid-cols-4 gap-4">
           <div className="bg-lightSecondary p-4 rounded-md">
             <div className="mb-2">{t('total_members')}</div>
             <div className="font-bold text-3xl">{members.length}</div>
@@ -36,14 +44,14 @@ function MemberDashboard({ members, assessments, visitors, pages, referrers }) {
             <div className="mb-2">{t('total_assessments')}</div>
             <div className="font-bold text-3xl">{assessments.length}</div>
           </div>
-        </AdminSection>
-        <AdminSection>
-          <TitleSection title="guide_book" />
-          <div className="text-sm mb-6">{t('guide_book_text')}</div>
-          <Button color="lightSecondary" className="w-full justify-between">
-            {t('download_guide_book')}
-            <FontAwesomeIcon icon={faFileDownload} />
-          </Button>
+          <div className="bg-lightSecondary p-4 rounded-md">
+            <div className="mb-2">{t('total_greenforce_members')}</div>
+            <div className="font-bold text-3xl">{greenforce.length}</div>
+          </div>
+          <div className="bg-lightPrimary p-4 rounded-md">
+            <div className="mb-2">{t('total_greenpal_members')}</div>
+            <div className="font-bold text-3xl">{greenpal.length}</div>
+          </div>
         </AdminSection>
       </div>
       <div className="flex mb-6 flex-wrap lg:flex-nowrap">

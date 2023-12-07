@@ -3,13 +3,19 @@ import { useTranslation } from 'react-i18next';
 
 import Button from '@/Components/Button';
 import Guest from '@/Layouts/GuestLayout';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import Comment from './Components/Comment';
 
-function Thread({ thread, comments, member }) {
+function Thread({ thread, comments, member, images }) {
   const { t } = useTranslation();
 
-  console.log(comments);
+  const deleteThread = (e, id) => {
+    e.preventDefault();
+
+    if (confirm('Are you sure to delete the thread?')) {
+      router.post(route('member.forum.thread.destroy'), { id: id });
+    }
+  };
 
   return (
     <Guest>
@@ -28,7 +34,17 @@ function Thread({ thread, comments, member }) {
           </Button>
         </section>
         <section className="grid gap-6">
-          <Comment comment={thread} type="thread" />
+          <div className="flex items-center gap-4">
+            <Button
+              color="danger"
+              onClick={e => {
+                deleteThread(e, thread?.id);
+              }}
+            >
+              {t('delete_thread')}
+            </Button>
+          </div>
+          <Comment comment={thread} type="thread" images={images} />
           {comments &&
             comments?.map(comment => {
               return <Comment comment={comment} member={member} />;

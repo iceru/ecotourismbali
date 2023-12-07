@@ -41,12 +41,12 @@ function ForumIndex({ threads }) {
 
   const sorts = [
     {
-      label: 'Date - Ascending',
-      value: 'date-ascending',
-    },
-    {
       label: 'Date - Descending',
       value: 'date-descending',
+    },
+    {
+      label: 'Date - Ascending',
+      value: 'date-ascending',
     },
     {
       label: 'Name - Ascending',

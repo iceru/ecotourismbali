@@ -7,6 +7,8 @@ import TextInput from '@/Components/TextInput';
 import Guest from '@/Layouts/GuestLayout';
 import Button from '@/Components/Button';
 import { badgeColor } from '@/Helper/BadgeColor';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileUpload, faImage } from '@fortawesome/free-solid-svg-icons';
 
 function AddThread({ member }) {
   const { t } = useTranslation();
@@ -15,6 +17,8 @@ function AddThread({ member }) {
   const { data, setData, post, errors } = useForm({
     title: '',
     text: '',
+    images: null,
+    file: null,
   });
 
   const submit = e => {
@@ -81,6 +85,35 @@ function AddThread({ member }) {
               placeholder="Topic Content"
               value={data.text}
               onChange={e => setData('text', e.target.value)}
+            />
+          </div>
+          <div className="flex items-center mb-4">
+            <div className="whitespace-nowrap mr-2 font-bold">
+              Add Images <FontAwesomeIcon icon={faImage} /> :
+            </div>
+            <input
+              type="file"
+              multiple
+              name="images"
+              onChange={e => setData('images', e.target.files)}
+              className="block w-full text-sm text-slate-500
+        file:mr-4 file:py-2 file:px-4 file:rounded-md
+        file:border-0 file:text-sm file:font-semibold
+        file:bg-secondary file:text-white"
+            />
+          </div>
+          <div className="flex items-center mb-4">
+            <div className="whitespace-nowrap mr-2 font-bold">
+              Add File <FontAwesomeIcon icon={faFileUpload} /> :
+            </div>
+            <input
+              type="file"
+              name="file"
+              onChange={e => setData('file', e.target.files[0])}
+              className="block w-full text-sm text-slate-500
+        file:mr-4 file:py-2 file:px-4 file:rounded-md
+        file:border-0 file:text-sm file:font-semibold
+        file:bg-secondary file:text-white"
             />
           </div>
           <Button className="py-3">

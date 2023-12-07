@@ -18,8 +18,10 @@ class AdminDashboardController extends Controller
         $referrers = Analytics::fetchTopReferrers(Period::days(7));
 
         return Inertia::render('Admin/AdminDashboard', [
-            'members' => Member::all(),
+            'members' => Member::where('status', 'LIKE', '%active%')->get(),
             'assessments' => AssessmentSession::all(),
+            'greenforce' => Member::where('program_id', 1)->where('status', 'LIKE', '%active%')->get(),
+            'greenpal' => Member::where('program_id', 2)->where('status', 'LIKE', '%active%')->get(),
             'visitors' => $visitors,
             'pages' => $pages,
             'referrers' => $referrers

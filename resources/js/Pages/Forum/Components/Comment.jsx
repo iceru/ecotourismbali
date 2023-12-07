@@ -6,9 +6,18 @@ import TextInput from '@/Components/TextInput';
 import Button from '@/Components/Button';
 
 import { badgeColor } from '@/Helper/BadgeColor';
-import { useForm } from '@inertiajs/react';
+import { useForm, router } from '@inertiajs/react';
+import { isEmpty } from 'lodash';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faDownload,
+  faFile,
+  faFileAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { saveAs } from 'file-saver';
 
-function Comment({ comment, type, member, thread }) {
+function Comment({ comment, type, member, thread, images }) {
   const currentMember = type === 'input' ? member : comment?.member;
   const { t } = useTranslation();
 
@@ -27,6 +36,12 @@ function Comment({ comment, type, member, thread }) {
     });
   };
 
+  const download = (e, file) => {
+    saveAs(`/storage/threads/files/${file}`, file);
+  };
+
+  console.log(thread);
+
   const deleteComment = (e, id) => {
     e.preventDefault();
 
@@ -37,14 +52,14 @@ function Comment({ comment, type, member, thread }) {
 
   return (
     <div
-      className={`p-6 rounded-xl flex gap-6 bg-opacity-30 shadow-lg ${
+      className={`p-6 rounded-xl flex gap-6 bg-opacity-30 shadow-lg flex-wrap lg:flex-nowrap ${
         type === 'thread'
           ? 'bg-lightPrimary w-full'
-          : 'bg-white w-[90%] ml-auto'
+          : 'bg-white lg:w-[90%] ml-auto'
       }`}
     >
-      <div className="flex mb-4 lg:mb-0">
-        <div className="w-[48px] mr-1.5 mt-0.5">
+      <div className="flex">
+        <div className="w-[48px] mr-3 mt-0.5">
           <img src={`/storage/member/images/${currentMember?.image}`} alt="" />
         </div>
         <div>
@@ -101,7 +116,32 @@ function Comment({ comment, type, member, thread }) {
                 </Button>
               )}
             </div>
-            <div>{comment?.text}</div>
+            {!isEmpty(images) && (
+              <div className="flex justify-center gap-6 mb-5">
+                {images.map(image => {
+                  return (
+                    <img
+                      className="max-h-[200px] object-contain"
+                      src={'/storage/threads/images/' + image}
+                      alt=""
+                    />
+                  );
+                })}
+              </div>
+            )}
+            <div className="mb-4">{comment?.text}</div>
+            {comment?.file && (
+              <Button
+                color="primary"
+                onClick={e => download(e, comment?.file)}
+                title={comment?.file}
+              >
+                <FontAwesomeIcon icon={faFile} className="mr-2" />{' '}
+                {comment?.file?.length > 30
+                  ? comment?.file?.slice(0, 30) + '....'
+                  : comment?.file}
+              </Button>
+            )}
           </>
         )}
       </div>

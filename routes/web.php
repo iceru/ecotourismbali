@@ -108,6 +108,7 @@ Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
     Route::get('/member/forum', [ForumThreadController::class, 'index'])->name('member.forum.index');
     Route::get('/member/forum/thread/create', [ForumThreadController::class, 'create'])->name('member.forum.thread.create');
     Route::post('/member/forum/thread/store', [ForumThreadController::class, 'store'])->name('member.forum.thread.store');
+    Route::post('/member/forum/thread/download', [ForumThreadController::class, 'download'])->name('member.forum.thread.download');
     Route::get('/member/forum/thread/show/{id}', [ForumThreadController::class, 'show'])->name('member.forum.thread.show');
     Route::get('/member/forum/thread/{id}/edit', [ForumThreadController::class, 'edit'])->name('member.forum.thread.edit');
     Route::post('/member/forum/thread/{id}/update', [ForumThreadController::class, 'update'])->name('member.forum.thread.update');

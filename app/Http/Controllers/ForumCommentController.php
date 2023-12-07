@@ -30,7 +30,7 @@ class ForumCommentController extends Controller
 
         //+1 total comment
         $forum_thread = ForumThread::find($request->thread_id);
-        $forum_thread->total_comment = $forum_thread->total_comment+1;
+        $forum_thread->total_comment = $forum_thread->total_comment + 1;
         $forum_thread->save();
 
         return Redirect::route('member.forum.thread.show', $request->thread_id);
@@ -39,7 +39,7 @@ class ForumCommentController extends Controller
     public function edit($id)
     {
         $forum_comment = ForumComment::find($id);
-        
+
         return Inertia::render('Forum/EditComment', [
             'forum_comment' => $forum_comment,
         ]);
@@ -58,14 +58,14 @@ class ForumCommentController extends Controller
 
         return Redirect::route('member.forum.thread.show', $request->forum_thread_id);
     }
-    
+
     public function destroy($id, Request $request)
     {
         $forum_comment = ForumComment::find($id);
         $id = $forum_comment->forum_thread_id;
         $forum_thread = ForumThread::find($id);
-        if($forum_thread->total_comment > 0) {
-            $forum_thread->total_comment = $forum_thread->total_comment-1;
+        if ($forum_thread->total_comment > 0) {
+            $forum_thread->total_comment = $forum_thread->total_comment - 1;
             $forum_thread->save();
         }
 
