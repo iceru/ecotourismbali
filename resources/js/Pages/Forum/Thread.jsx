@@ -29,9 +29,9 @@ function Thread({ thread, comments, member, images }) {
         </section>
         <section className="flex justify-between items-center">
           <h1 className="font-bold text-2xl">{thread?.title}</h1>
-          <Button color="lightPrimary">
+          {/* <Button color="lightPrimary">
             <div>{t('report_topics')}</div>
-          </Button>
+          </Button> */}
         </section>
         <section className="grid gap-6">
           <div className="flex items-center gap-4">

@@ -15,6 +15,7 @@ import {
 import ForumCard from '@/Pages/Forum/Components/ForumCard';
 import Guest from '@/Layouts/GuestLayout';
 import { router } from '@inertiajs/react';
+import Pagination from '@/Components/Pagination';
 
 function ForumIndex({ threads, activeUsers }) {
   const { t } = useTranslation();
@@ -85,8 +86,6 @@ function ForumIndex({ threads, activeUsers }) {
     setPayload(value);
     router.get(route('member.forum.index'), value);
   };
-
-  console.log(category);
 
   const MenuItem = ({ title, icon }) => {
     return (
@@ -175,11 +174,18 @@ function ForumIndex({ threads, activeUsers }) {
             </div>
           </section>
 
-          <section className="w-full lg:w-4/5 grid gap-8 lg:pl-6">
-            {threads.map(thread => {
-              return <ForumCard thread={thread} />;
-            })}
-            {threads.length === 0 && <h3>Not Found</h3>}
+          <section className="w-full lg:w-4/5 lg:pl-6">
+            {threads?.data?.length === 0 ? (
+              <h3 className="text-lg font-bold">Not Found</h3>
+            ) : (
+              <div className="grid gap-8 mb-6">
+                {threads?.data?.map(thread => {
+                  return <ForumCard thread={thread} />;
+                })}
+              </div>
+            )}
+
+            <Pagination class="mt-6" links={threads?.links} />
           </section>
         </section>
       </main>

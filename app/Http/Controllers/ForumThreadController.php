@@ -61,7 +61,7 @@ class ForumThreadController extends Controller
         }
 
         return Inertia::render('Forum/ForumIndex', [
-            'threads' => $threads->get(),
+            'threads' => $threads->paginate(10)->withQueryString(),
             'activeUsers' => $activeUsers
         ]);
 
