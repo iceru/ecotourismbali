@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ForumComment;
-use App\Models\ForumThread;
+use Inertia\Inertia;
 use App\Models\Member;
+use App\Models\ForumThread;
+use App\Models\ForumComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
 
 class ForumThreadController extends Controller
 {
@@ -16,6 +17,13 @@ class ForumThreadController extends Controller
     {
         $threads = ForumThread::with('member');
         $member = Member::where('user_id', Auth::id())->first();
+        $activeUsers = DB::table('forum_threads')
+            ->join('members', 'forum_threads.member_id', '=', 'members.id')
+            ->where('member_id', '!=', 1)
+            ->select('member_id', 'business_name', 'image', DB::raw('count(*) as total'))
+            ->groupBy('member_id', 'business_name')
+            ->get(5);
+
         if ($request->query('keyword')) {
             $threads = $threads->where('title', 'LIKE', "%" . $request->query('keyword') . "%");
         }
@@ -28,6 +36,8 @@ class ForumThreadController extends Controller
             } else {
                 $threads = $threads->where('category', $request->query('category'));
             }
+        } else {
+            $threads = $threads->where('category', 'thread');
         }
 
         if ($request->query('sort')) {
@@ -49,8 +59,10 @@ class ForumThreadController extends Controller
         } else {
             $threads->orderBy('created_at', 'desc');
         }
+
         return Inertia::render('Forum/ForumIndex', [
             'threads' => $threads->get(),
+            'activeUsers' => $activeUsers
         ]);
 
     }
@@ -73,6 +85,7 @@ class ForumThreadController extends Controller
             'text' => 'required',
             'images' => 'nullable',
             'file' => 'nullable',
+            'category' => 'required'
         ]);
         $imageNames = array();
         if ($request->hasFile('images')) {
@@ -96,7 +109,7 @@ class ForumThreadController extends Controller
         $forum_thread->title = $request->title;
         $forum_thread->text = $request->text;
         $forum_thread->member_id = $member->id;
-        $forum_thread->category = 'thread';
+        $forum_thread->category = $request->category;
         $forum_thread->save();
 
         return Redirect::route('member.forum.thread.show', $forum_thread->id);
@@ -110,7 +123,7 @@ class ForumThreadController extends Controller
 
     public function show($id)
     {
-        $thread = ForumThread::where('id', $id)->with('member')->first();
+        $thread = ForumThread::where('id', $id)->with('member')->firstOrFail();
         $images = unserialize($thread->images);
         $member = Member::where('user_id', Auth::id())->first();
         $comments = ForumComment::where('forum_thread_id', $id)->with('member')->get();
@@ -139,7 +152,29 @@ class ForumThreadController extends Controller
         $request->validate([
             'title' => 'required',
             'text' => 'required',
+            'images' => 'nullable',
+            'file' => 'nullable',
+            'category' => 'required'
         ]);
+
+        $imageNames = array();
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $name = $image->getClientOriginalName();
+                $extension = $image->extension();
+                $imagename = $name . '_' . time() . '.' . $extension;
+                $image->storeAs('public/threads/images', $imagename);
+                array_push($imageNames, $imagename);
+            }
+
+            $forum_thread->images = serialize($imageNames);
+        }
+
+        if ($request->hasFile('file')) {
+            $filename = $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public/threads/files', $filename);
+            $forum_thread->file = $filename;
+        }
 
         $forum_thread->title = $request->title;
         $forum_thread->text = $request->text;

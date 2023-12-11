@@ -19,6 +19,7 @@ function AddThread({ member }) {
     text: '',
     images: null,
     file: null,
+    category: 'thread',
   });
 
   const submit = e => {

@@ -13,6 +13,7 @@ import {
   faTasks,
   faTimes,
   faUsers,
+  faVolumeUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
@@ -175,6 +176,20 @@ function AdminLayout({ children }) {
                   icon={faAward}
                 />
                 {t('verified_badge')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={route('announcement.index')}
+                className={
+                  url.startsWith('/admin/announcement') ? 'font-bold' : ''
+                }
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faVolumeUp}
+                />
+                {t('announcements')}
               </Link>
             </li>
             {superadmin && (

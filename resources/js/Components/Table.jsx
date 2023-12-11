@@ -98,7 +98,9 @@ export default function Table({
                                 className="descOverflow"
                               ></div>
                             ) : item[column] ? (
-                              item[column]
+                              <span className="line-clamp-4">
+                                {item[column]}
+                              </span>
                             ) : (
                               '-'
                             )}

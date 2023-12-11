@@ -16,7 +16,7 @@ import ForumCard from '@/Pages/Forum/Components/ForumCard';
 import Guest from '@/Layouts/GuestLayout';
 import { router } from '@inertiajs/react';
 
-function ForumIndex({ threads }) {
+function ForumIndex({ threads, activeUsers }) {
   const { t } = useTranslation();
   const [category, setCategory] = useState();
   const [payload, setPayload] = useState({});
@@ -156,10 +156,21 @@ function ForumIndex({ threads }) {
                 {t('most_active_users')}
               </h4>
               <div className="grid gap-6">
-                <div className="flex">
-                  <img src="" alt="" />
-                  Codeomnia
-                </div>
+                {activeUsers &&
+                  activeUsers.map(user => {
+                    return (
+                      <div className="flex items-center">
+                        <div>
+                          <img
+                            src={'/storage/member/images/' + user?.image}
+                            alt=""
+                            className="w-6 h-6 mr-2"
+                          />
+                        </div>
+                        {user?.business_name}
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </section>
@@ -168,6 +179,7 @@ function ForumIndex({ threads }) {
             {threads.map(thread => {
               return <ForumCard thread={thread} />;
             })}
+            {threads.length === 0 && <h3>Not Found</h3>}
           </section>
         </section>
       </main>

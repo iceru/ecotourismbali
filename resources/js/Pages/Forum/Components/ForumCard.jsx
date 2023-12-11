@@ -9,7 +9,7 @@ function ForumCard({ thread }) {
   return (
     <Link
       href={route('member.forum.thread.show', thread?.id)}
-      className="p-6 drop-shadow-lg block pointer hover:scale-[101%] cursor-pointer transition bg-white rounded-2xl even:bg-lightPrimary even:bg-opacity-20"
+      className="p-6 drop-shadow-lg block pointer hover:scale-[101%] cursor-pointer transition h-fit bg-white rounded-2xl even:bg-lightPrimary even:bg-opacity-20"
     >
       <div className="grid gap-3 mb-6 pb-6 border-b border-lightPrimary">
         <h3 className="font-bold text-2xl">{thread?.title}</h3>

@@ -13,8 +13,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\AdminMemberController;
+use App\Http\Controllers\ForumThreadController;
 use App\Http\Controllers\AdminPaymentController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BusinessTypeController;
+use App\Http\Controllers\ForumCommentController;
 use App\Http\Controllers\MemberModuleController;
 use App\Http\Controllers\MemberPaymentController;
 use App\Http\Controllers\PreTestOptionController;
@@ -27,8 +30,6 @@ use App\Http\Controllers\MemberAssessmentController;
 use App\Http\Controllers\PostTestQuestionController;
 use App\Http\Controllers\AssessmentQuestionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\ForumCommentController;
-use App\Http\Controllers\ForumThreadController;
 use App\Http\Controllers\PreTestModuleAnswerController;
 use App\Http\Controllers\PostTestModuleAnswerController;
 
@@ -204,6 +205,12 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/verified-badge/edit/{id}', [VerifiedBadgeController::class, 'edit'])->name('verified_badge.edit');
     Route::post('/verified-badge/update/{id}', [VerifiedBadgeController::class, 'update'])->name('verified_badge.update');
     Route::delete('/verified-badge/delete/{id}', [VerifiedBadgeController::class, 'destroy'])->name('verified_badge.destroy');
+
+    Route::get('/announcement', [AnnouncementController::class, 'index'])->name('announcement.index');
+    Route::post('/announcement/store', [AnnouncementController::class, 'store'])->name('announcement.store');
+    Route::get('/announcement/edit/{id}', [AnnouncementController::class, 'edit'])->name('announcement.edit');
+    Route::post('/announcement/update/{id}', [AnnouncementController::class, 'update'])->name('announcement.update');
+    Route::delete('/announcement/delete/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
 
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');

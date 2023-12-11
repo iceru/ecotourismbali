@@ -65,20 +65,24 @@ function Comment({ comment, type, member, thread, images }) {
         <div>
           <h4 className="text-lg font-bold">{currentMember?.business_name}</h4>
           <div className="flex gap-2 items-center">
-            <div className="h-[32px] w-[24px]">
-              <img
-                className="h-full object-contain w-full"
-                src={'/storage/badges/' + currentMember?.badge?.image}
-              />
-            </div>
-            <div
-              className={`text-center whitespace-nowrap text-sm ${badgeColor(
-                currentMember?.badge?.name,
-                'text'
-              )}`}
-            >
-              {currentMember?.badge?.name} Member
-            </div>
+            {currentMember?.badge_id && (
+              <>
+                <div className="h-[32px] w-[24px]">
+                  <img
+                    className="h-full object-contain w-full"
+                    src={'/storage/badges/' + currentMember?.badge?.image}
+                  />
+                </div>
+                <div
+                  className={`text-center whitespace-nowrap text-sm ${badgeColor(
+                    currentMember?.badge?.name,
+                    'text'
+                  )}`}
+                >
+                  {currentMember?.badge?.name} Member
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
