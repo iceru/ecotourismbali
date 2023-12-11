@@ -132,15 +132,17 @@ function MemberLayout({ children, state }) {
                 {t('green_credential')}
               </Link>
             </li>
-            <li>
-              <Link href={route('member.forum.index')}>
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-primary"
-                  icon={faUsers}
-                />
-                {t('member_forums')}
-              </Link>
-            </li>
+            {member?.status?.includes('active') && (
+              <li>
+                <Link href={route('member.forum.index')}>
+                  <FontAwesomeIcon
+                    className="fa-fw mr-2 text-primary"
+                    icon={faUsers}
+                  />
+                  {t('member_forums')}
+                </Link>
+              </li>
+            )}
             {member?.program?.name !== 'Green Pal' &&
             member?.status?.includes('active') ? (
               <>

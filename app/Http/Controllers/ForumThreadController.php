@@ -21,7 +21,7 @@ class ForumThreadController extends Controller
             ->join('members', 'forum_threads.member_id', '=', 'members.id')
             ->where('member_id', '!=', 1)
             ->select('member_id', 'business_name', 'image', DB::raw('count(*) as total'))
-            ->groupBy('member_id', 'business_name')
+            ->groupBy('member_id', 'business_name', 'image')
             ->get(5);
 
         if ($request->query('keyword')) {

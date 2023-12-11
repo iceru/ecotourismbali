@@ -182,14 +182,15 @@ function ForumIndex({ threads, activeUsers }) {
             {threads?.data?.length === 0 ? (
               <h3 className="text-lg font-bold">Not Found</h3>
             ) : (
-              <div className="grid gap-8 mb-6">
-                {threads?.data?.map(thread => {
-                  return <ForumCard thread={thread} />;
-                })}
-              </div>
+              <>
+                <div className="grid gap-8 mb-6">
+                  {threads?.data?.map(thread => {
+                    return <ForumCard thread={thread} />;
+                  })}
+                </div>
+                <Pagination class="mt-6" links={threads?.links} />
+              </>
             )}
-
-            <Pagination class="mt-6" links={threads?.links} />
           </section>
         </section>
       </main>
