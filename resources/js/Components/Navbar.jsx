@@ -43,7 +43,7 @@ function Navbar() {
   }
   return (
     <>
-      <div className="flex items-center justify-between container mx-auto py-3">
+      <div className="flex items-center justify-between container mx-auto py-3 px-3 lg:px-0">
         <div className="flex items-center">
           <div className="text-sm mr-3 text-gray-400">{t('language')}</div>
           <div onClick={() => changeLanguage('en')} className="cursor-pointer">

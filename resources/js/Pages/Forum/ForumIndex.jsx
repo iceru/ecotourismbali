@@ -42,20 +42,24 @@ function ForumIndex({ threads, activeUsers }) {
 
   const sorts = [
     {
-      label: 'Date - Descending',
+      label: 'Date - Newest',
       value: 'date-descending',
     },
     {
-      label: 'Date - Ascending',
+      label: 'Date - Oldest',
       value: 'date-ascending',
     },
     {
-      label: 'Name - Ascending',
+      label: 'Name - A to Z',
       value: 'name-ascending',
     },
     {
-      label: 'Name - Descending',
+      label: 'Name - Z to A',
       value: 'name-descending',
+    },
+    {
+      label: 'Most Popular',
+      value: 'comments-descending',
     },
   ];
 
@@ -121,7 +125,7 @@ function ForumIndex({ threads, activeUsers }) {
         </section>
 
         <section className="flex justify-between items-center flex-wrap">
-          <div className="flex w-full lg:w-fit mb-4 lg:mb-0 gap-3 items-center">
+          <div className="flex w-full lg:w-fit mb-4 lg:mb-0 gap-3 items-center flex-wrap">
             <label htmlFor="search_topic" className="min-w-[100px]">
               {t('search_topic')}
             </label>

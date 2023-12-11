@@ -43,17 +43,18 @@ class ForumThreadController extends Controller
         if ($request->query('sort')) {
             $sortColumns = explode('-', $request->query('sort'));
             if ($sortColumns[1] === 'descending') {
-                if ($sortColumns[0] === 'title') {
+                if ($sortColumns[0] === 'name') {
                     $threads->orderByDesc('title');
                 } else if ($sortColumns[0] === 'date') {
                     $threads->orderByDesc('created_at');
+                } else if ($sortColumns[0] === 'comments') {
+                    $threads->orderByDesc('total_comment');
                 }
             } else {
-                if ($sortColumns[0] === 'title') {
+                if ($sortColumns[0] === 'name') {
                     $threads->orderBy('title');
                 } else if ($sortColumns[0] === 'date') {
                     $threads->orderBy('created_at');
-
                 }
             }
         } else {
