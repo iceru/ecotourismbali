@@ -135,6 +135,7 @@ class MemberAssessmentController extends Controller
             'sister_company' => 'nullable',
             'company_name' => 'required',
             'category' => 'required',
+            'legal_identity' => 'required',
         ]);
 
         if ($request->sister_company) {
@@ -154,6 +155,7 @@ class MemberAssessmentController extends Controller
         $user->email = $request->email;
         $member->business_type_id = $request->business_type_id;
         $member->category_id = $request->category;
+        $member->legal_identity = $request->legal_identity;
         $member->save();
 
         $user->name = $request->name;

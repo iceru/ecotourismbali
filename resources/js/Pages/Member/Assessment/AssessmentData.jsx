@@ -22,6 +22,7 @@ function AssessmentData({ categories }) {
     business_name: member?.business_name || '',
     company_name: member?.company_name || '',
     sister_company: member?.sister_company || '',
+    legal_identity: member?.legal_identity || '',
     city: member?.city || '',
     province: member?.province || '',
     address: member?.address || '',
@@ -86,6 +87,29 @@ function AssessmentData({ categories }) {
     },
   ];
 
+  const legalIdentities = [
+    {
+      label: 'PT',
+      value: 'PT',
+    },
+    {
+      label: 'UD',
+      value: 'UD',
+    },
+    {
+      label: 'CV',
+      value: 'CV',
+    },
+    {
+      label: 'PMA',
+      value: 'PMA',
+    },
+    {
+      label: 'Others',
+      value: 'Others',
+    },
+  ];
+
   return (
     <MemberLayout>
       {remaining > 0 ? (
@@ -127,6 +151,23 @@ function AssessmentData({ categories }) {
                 />
                 {errors.company_name && (
                   <span className="text-red-600">{errors.company_name}</span>
+                )}
+              </div>
+              <div className="flex flex-col gap-3">
+                <InputLabel
+                  htmlFor="legal_identity"
+                  value={t('legal_identity')}
+                />
+                <SelectInput
+                  options={legalIdentities}
+                  placeholder="select_legal_identity"
+                  value={data.legal_identity}
+                  onChange={e => {
+                    setData('legal_identity', e.target.value);
+                  }}
+                />
+                {errors.category && (
+                  <span className="text-red-600">{errors.category}</span>
                 )}
               </div>
               <div className="flex flex-col gap-3">

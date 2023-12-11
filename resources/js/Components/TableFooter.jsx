@@ -7,7 +7,7 @@ const TableFooter = ({ range, setPage, page, slice }) => {
     }
   }, [slice, page, setPage]);
   return (
-    <div className="mt-4 flex justify-center gap-4">
+    <div className="mt-4 flex  gap-4 max-h-screen overflow-y-auto">
       {range.map((el, index) => (
         <button
           key={index}

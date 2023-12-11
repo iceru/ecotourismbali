@@ -64,7 +64,7 @@ function AssessmentStep({ member, remaining, dateAssessment }) {
           <Button
             as="link"
             href={route('member.assessment.data')}
-            className="flex w-full justify-center p-5 mt-6 text-lg"
+            className="flex w-full justify-center p-5 mt-6"
           >
             {t('next')}
           </Button>

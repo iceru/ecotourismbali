@@ -330,7 +330,7 @@
         <td>
             <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
                 bgcolor="#ffffff"
-                style="border-radius: 0 0 10px 10px; background-color: white; padding: 0 20px; margin: auto; width: 600px!important;">
+                style=" background-color: white; padding: 0 20px; margin: auto; width: 600px!important;">
                 <tbody>
                     <tr>
                         <td>
@@ -359,7 +359,91 @@
             </table>
         </td>
     </tr>
-
+    <tr>
+        <td>
+            <table width="600" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable"
+                bgcolor="#ffffff"
+                style="border-radius: 0 0 10px 10px; background-color:white; margin: auto; padding: 0 20px; width: 600px!important;">
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center"
+                            class="fullPadding" style="margin: auto; width: 100%!important; min-width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table width="220" border="0" cellpadding="0" cellspacing="0"
+                                            align="left" class="col" style="text-align: left;">
+                                            <tbody>
+                                                <tr>
+                                                    <td height="20" style="height: 20px"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                        <table width="100%" "
+                                                            style="margin: auto; width: 100%!important;">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td
+                                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; vertical-align: top; text-align: left;">
+                                                                        <span
+                                                                            style="font-size: 14px; font-weight:bold; color: #1F656C;">No
+                                                                            Rekening:</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td
+                                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; vertical-align: top; text-align: left;">
+                                                                        <b>Berkah Wisata Lestari PT</b>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td
+                                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; vertical-align: top; text-align: left;">
+                                                                        <span style="white-space: nowrap">Bank Central
+                                                                            Asia
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td
+                                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; vertical-align: top; text-align: left;">
+                                                                        <span style="white-space: nowrap">Pondok Indah
+                                                                            Branch
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td
+                                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; vertical-align: top; text-align: left;">
+                                                                        #291 9999 009
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td
+                                                                        style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; vertical-align: top; text-align: left;">
+                                                                        Swift Code: CENAIDJA
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="30"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
     <tr>
         <td height="20"></td>
     </tr>
