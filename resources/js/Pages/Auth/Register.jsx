@@ -42,8 +42,8 @@ export default function Register({ programs }) {
   return (
     <GuestLayout>
       <Head title="Register" />
-      <div className="grid lg:grid-cols-2 items-center">
-        <div className="hidden lg:block">
+      <div className="grid lg:grid-cols-2">
+        <div className="hidden lg:block ">
           <AuthImage image={RegisImage} />
         </div>
 

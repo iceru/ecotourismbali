@@ -1,1 +1,0 @@
-import{a}from"./app-8020c353.js";const s="/build/assets/authImage-d4c8c53f.jpg";function t({image:e}){return a("div",{className:"pr-20",children:a("img",{className:"rounded-2xl w-full h-full object-cover min-h-[60vh]",src:e||s,alt:""})})}export{t as A};
