@@ -10,6 +10,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\AdminMemberController;
@@ -223,6 +224,10 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/program/edit/{id}', [ProgramController::class, 'edit'])->name('program.edit');
     Route::post('/program/update/{id}', [ProgramController::class, 'update'])->name('program.update');
     Route::delete('/program/delete/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
+
+    Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
+    Route::get('/assessment/statistic', [StatisticController::class, 'assessment'])->name('statistic.assessment');
+
 
 });
 

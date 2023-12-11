@@ -16,6 +16,17 @@ import {
   faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons';
 import greenpal from '../../images/greenpal.png';
+import sdg2 from '../../images/sdg/2.png';
+import sdg4 from '../../images/sdg/4.png';
+import sdg6 from '../../images/sdg/6.png';
+import sdg7 from '../../images/sdg/7.png';
+import sdg8 from '../../images/sdg/8.png';
+import sdg9 from '../../images/sdg/9.png';
+import sdg11 from '../../images/sdg/11.png';
+import sdg12 from '../../images/sdg/12.png';
+import sdg13 from '../../images/sdg/13.png';
+import sdg14 from '../../images/sdg/14.png';
+import sdg15 from '../../images/sdg/15.png';
 
 function MemberList({ member, lastSession, scores }) {
   const { t } = useTranslation();
@@ -34,6 +45,23 @@ function MemberList({ member, lastSession, scores }) {
       : member?.member_slider?.length,
     slidesToScroll: 1,
   };
+
+  const sdgHotel = [4, 6, 7, 8, 11, 12, 13, 14, 15];
+  const sdgRestaurant = [2, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15];
+
+  console.log(
+    sdg2,
+    sdg4,
+    sdg6,
+    sdg7,
+    sdg8,
+    sdg9,
+    sdg11,
+    sdg12,
+    sdg13,
+    sdg14,
+    sdg15
+  );
 
   return (
     <Guest>
@@ -222,7 +250,7 @@ function MemberList({ member, lastSession, scores }) {
         </div>
 
         {member?.program?.name !== 'Green Pal' && (
-          <div className="lg:w-1/4 mx-auto w-full md:gap-12 top-0 py-4  mt-10 md:mt-0 sticky min-h-[50vh]">
+          <div className="lg:w-1/4 mx-auto w-full md:gap-12 top-0 py-4 px-3  mt-10 md:mt-0 sticky min-h-[50vh]">
             {member?.badge && (
               <div
                 className={`absolute top-0 px-3 left-0 ${badgeColor(
@@ -231,7 +259,7 @@ function MemberList({ member, lastSession, scores }) {
                 )} bg-opacity-[3%] border border-opacity-30 border-${badgeColor(
                   member?.badge?.name,
                   'plain'
-                )} lg:rounded-bl-full rounded-2xl h-full w-full -z-10`}
+                )}  rounded-2xl h-full w-full -z-10`}
               ></div>
             )}
             <>
@@ -245,7 +273,7 @@ function MemberList({ member, lastSession, scores }) {
                   </div>
                   <div
                     className={`font-bold ${badgeColor(
-                      member?.badge?.name,
+                      member?.verified_badge?.name,
                       'text'
                     )}`}
                   >
@@ -291,6 +319,29 @@ function MemberList({ member, lastSession, scores }) {
                       </div>
                     );
                   })}
+                  {member?.business_type?.name.includes('Hotel') && (
+                    <div className="flex justify-center flex-wrap gap-2 mt-6">
+                      {sdgHotel.map(element => {
+                        return (
+                          <div className="w-1/3 lg:w-1/4">
+                            <img src={eval(`sdg${element}`)} alt="" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {member?.business_type?.name.includes('Restaurant') && (
+                    <div className="flex justify-center flex-wrap gap-2 mt-6">
+                      {sdgRestaurant.map(element => {
+                        return (
+                          <div className="w-1/3 lg:w-1/4">
+                            <img src={eval(`sdg${element}`)} alt="" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold inline-block">

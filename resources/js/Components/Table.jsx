@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import useTable from '@/Hooks/useTable';
@@ -8,10 +8,12 @@ export default function Table({
   header,
   data,
   selectedData,
+  secondaryData,
   tableButtons,
   tableActions,
   pathImage,
   customData,
+  selectedSecondaryData,
   descHtml,
 }) {
   const { delete: destroy, processing } = useForm();
@@ -107,6 +109,37 @@ export default function Table({
                           </td>
                         );
                       })}
+                      {selectedSecondaryData?.map((column, index) => {
+                        return (
+                          <td
+                            key={index}
+                            className="px-6 py-4 text-sm font-medium text-gray-800"
+                          >
+                            {column === 'image' ? (
+                              item[secondaryData][column] ? (
+                                <img
+                                  src={`/storage/${pathImage}${item[secondaryData][column]}`}
+                                  className="max-h-24"
+                                />
+                              ) : (
+                                <span>-</span>
+                              )
+                            ) : descHtml && column === descHtml ? (
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: item[secondaryData][column],
+                                }}
+                                className="descOverflow"
+                              ></div>
+                            ) : item[secondaryData][column] ? (
+                              item[secondaryData][column]
+                            ) : (
+                              '-'
+                            )}
+                          </td>
+                        );
+                      })}
+
                       {tableButtons &&
                         tableButtons?.map((button, index) => {
                           return (

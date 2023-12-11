@@ -17,28 +17,28 @@ class MemberListController extends Controller
 {
     public function index(Request $request)
     {
-        $members =  Member::where('slug', '!=', '')->where('status', 'active')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
-        
-        
-        if($request->input('category') && $request->input('category') !== 'all') {
+        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
+
+
+        if ($request->input('category') && $request->input('category') !== 'all') {
             $members = $members->where('category_id', $request->input('category'));
         }
 
-        if($request->input('program')) {
+        if ($request->input('program')) {
             $members = $members->where('program_id', $request->input('program'));
         }
 
-        if($request->input('badge')) {
+        if ($request->input('badge')) {
             $members = $members->where('badge_id', $request->input('badge'));
         }
 
-        if($request->input('keyword')) {
+        if ($request->input('keyword')) {
             $members = $members->where('business_name', 'LIKE', "%$request->input('keyword')%");
         }
 
         if ($request->input('sort')) {
             $sortColumns = explode('-', $request->input('sort'));
-            if($sortColumns[1] === 'descending') {
+            if ($sortColumns[1] === 'descending') {
                 $members->orderByDesc('business_name');
             } else {
                 $members->orderBy('business_name');
@@ -58,28 +58,28 @@ class MemberListController extends Controller
 
     public function filter(Request $request)
     {
-        $member =  Member::where('slug', '!=', '')->where('status', 'active');
+        $member = Member::where('slug', '!=', '')->where('status', 'like', '%active%');
         $category = Category::where('id', $request->category)->first();
 
-        if($request->category && $request->category !== 'all') {
+        if ($request->category && $request->category !== 'all') {
             $member = $member->where('category_id', $request->category);
         }
 
-        if($request->program) {
+        if ($request->program) {
             $member = $member->where('program_id', $request->program);
         }
 
-        if($request->badge) {
+        if ($request->badge) {
             $member = $member->where('badge_id', $request->badge);
         }
 
-        if($request->keyword) {
+        if ($request->keyword) {
             $member = $member->where('business_name', 'LIKE', "%$request->keyword%");
         }
 
         if ($request->sort) {
             $sortColumns = explode('-', $request->sort);
-            if($sortColumns[1] === 'descending') {
+            if ($sortColumns[1] === 'descending') {
                 $member->orderByDesc('business_name');
             } else {
                 $member->orderBy('business_name');
@@ -99,10 +99,10 @@ class MemberListController extends Controller
 
     public function detail($slug)
     {
-        $member = Member::where('slug', $slug)->with('member_slider', 'category', 'program', 'badge', 'verified_badge')->firstOrFail();
+        $member = Member::where('slug', $slug)->with('member_slider', 'category', 'business_type', 'program', 'badge', 'verified_badge')->firstOrFail();
         $memberAssessments = null;
-        $lastSession = AssessmentSession::where('member_id', $member->id)->orderBy('created_at', 'desc')->first();
-        if($lastSession) {
+        $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
+        if ($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
         }
         return Inertia::render('MemberDetail', [

@@ -87,9 +87,6 @@ function CreateModule({ module }) {
         setValue();
         setValueEn();
       },
-      onError: error => {
-        console.log(error);
-      },
     });
   };
 

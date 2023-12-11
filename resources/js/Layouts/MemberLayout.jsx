@@ -158,23 +158,20 @@ function MemberLayout({ children, state }) {
                     {t('my_assessment')}
                   </Link>
                 </li>
-                {!member?.status?.includes('assessment') &&
-                  member?.total_payment !== '500000' && (
-                    <li>
-                      <Link
-                        href={route('member.module.index')}
-                        className={
-                          url.startsWith('/member/module') ? 'font-bold' : ''
-                        }
-                      >
-                        <FontAwesomeIcon
-                          className="fa-fw mr-2 text-primary"
-                          icon={faBook}
-                        />
-                        {t('e_learning')}
-                      </Link>
-                    </li>
-                  )}
+                <li>
+                  <Link
+                    href={route('member.module.index')}
+                    className={
+                      url.startsWith('/member/module') ? 'font-bold' : ''
+                    }
+                  >
+                    <FontAwesomeIcon
+                      className="fa-fw mr-2 text-primary"
+                      icon={faBook}
+                    />
+                    {t('e_learning')}
+                  </Link>
+                </li>
               </>
             ) : null}
           </ul>

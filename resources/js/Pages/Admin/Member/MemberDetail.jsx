@@ -88,7 +88,7 @@ function MemberIndex() {
   const status = [
     {
       label: 'Inactive',
-      value: 'inactive',
+      value: '',
     },
     {
       label: 'Waiting Approval',
