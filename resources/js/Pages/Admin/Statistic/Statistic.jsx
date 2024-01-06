@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import AdminSection from '@/Components/AdminSection';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import PieChart from './Components/PieChart';
+import { Link } from '@inertiajs/react';
 
 function Statistics({ sessions, badges, programs }) {
   ChartJS.register(...registerables);
@@ -65,22 +66,29 @@ function Statistics({ sessions, badges, programs }) {
                 {sessionActive?.map((item, index) => {
                   if (item?.member?.status?.includes('active')) {
                     return (
-                      <li className="flex items-center mb-2">
-                        <div className="mr-2">{index + 1}.</div>
-                        {item?.member?.image && (
-                          <div>
-                            <img
-                              className="w-8 h-8 object-contain rounded-full mr-2"
-                              src={`/storage/member/images/${item?.member?.image}`}
-                              alt=""
-                            />
-                          </div>
+                      <Link
+                        href={route(
+                          'statistic.assessmentDetail',
+                          item?.member?.id
                         )}
-                        <div className="">{item?.member?.business_name}</div>
-                        <div className="font-bold text-primary">
-                          - {item?.total_score}
-                        </div>
-                      </li>
+                      >
+                        <li className="flex items-center mb-2">
+                          <div className="mr-2">{index + 1}.</div>
+                          {item?.member?.image && (
+                            <div>
+                              <img
+                                className="w-8 h-8 object-contain rounded-full mr-2"
+                                src={`/storage/member/images/${item?.member?.image}`}
+                                alt=""
+                              />
+                            </div>
+                          )}
+                          <div className="">{item?.member?.business_name}</div>
+                          <div className="font-bold text-primary">
+                            - {item?.total_score}
+                          </div>
+                        </li>
+                      </Link>
                     );
                   }
                 })}
