@@ -10,6 +10,8 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import noImage from '../../../../images/no-image.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 function Assessment({ assessments, session, answers, member }) {
   const [active, setActive] = useState(0);
@@ -17,7 +19,7 @@ function Assessment({ assessments, session, answers, member }) {
   const { ziggy } = usePage().props;
 
   const { data, setData, processing } = useForm();
-
+  const [loading, setLoading] = useState(false);
   const lang = i18n.language;
 
   useEffect(() => {
@@ -51,9 +53,6 @@ function Assessment({ assessments, session, answers, member }) {
       return newData;
     });
   };
-
-  console.log(assessments);
-
   const handleCheckboxChange = (questionId, optionId, noStore) => {
     setData(prevData => {
       const updatedOptions = prevData[`checkbox.${questionId}`] || [];
@@ -74,6 +73,65 @@ function Assessment({ assessments, session, answers, member }) {
       }
       return updatedData;
     });
+  };
+  const downloadPDF = () => {
+    const container = document.getElementsByClassName('assess_container');
+    for (var i = 0; i < container.length; i++) {
+      container.item(i).classList.remove('hidden');
+    }
+    const button = document.querySelector('#assess_button');
+    button.style.display = 'none';
+    setLoading(true);
+
+    html2canvas(document.querySelector('#assessments'), {
+      scrollY: -window.scrollY,
+    })
+      .then(canvas => {
+        const imgWidth = 208;
+        const pageHeight = 295;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+        heightLeft -= pageHeight;
+        const pdf = new jsPDF('p', 'mm');
+        pdf.addImage(
+          canvas,
+          'PNG',
+          0,
+          position,
+          imgWidth,
+          imgHeight,
+          '',
+          'FAST'
+        );
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(
+            canvas,
+            'PNG',
+            0,
+            position,
+            imgWidth,
+            imgHeight,
+            '',
+            'FAST'
+          );
+          heightLeft -= pageHeight;
+        }
+        pdf.save('download.pdf');
+      })
+      .finally(() => {
+        setLoading(false);
+        const container = document.getElementsByClassName('assess_container');
+        for (var i = 0; i < container.length; i++) {
+          if (i !== 0) {
+            container.item(i).classList.add('hidden');
+          }
+        }
+        const button = document.querySelector('#assess_button');
+        button.style.display = 'flex';
+      });
   };
   return (
     <AdminLayout>
@@ -99,11 +157,18 @@ function Assessment({ assessments, session, answers, member }) {
           </div>
           <div className="font-bold text-lg">{member?.business_name}</div>
         </div>
+        <div className="flex justify-center mb-4">
+          <Button onClick={downloadPDF} disabled={loading}>
+            {loading ? 'On Process of Downloading PDF...' : 'Download PDF'}
+          </Button>
+        </div>
         <TitleSection title="assessment" className="mb-6" />
-        <div className="assessments">
+        <div className="assessments p-4" id="assessments">
           {assessments.map((item, i) => {
             return (
-              <div className={`${active === i ? '' : 'hidden'}`}>
+              <div
+                className={`${active === i ? '' : 'hidden'} assess_container`}
+              >
                 <div className="mb-4 flex justify-center">
                   <img
                     src={`/storage/assessments/${
@@ -207,7 +272,10 @@ function Assessment({ assessments, session, answers, member }) {
                     </div>
                   );
                 })}
-                <div className="flex justify-center gap-6 mt-6">
+                <div
+                  className="flex justify-center gap-6 mt-6"
+                  id="assess_button"
+                >
                   {active > 0 && (
                     <Button
                       type="button"

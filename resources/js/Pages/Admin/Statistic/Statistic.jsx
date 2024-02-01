@@ -14,7 +14,6 @@ function Statistics({ sessions, badges, programs }) {
     let filtered = sessions?.filter(session =>
       session?.member?.status?.includes('active')
     );
-    console.log(filtered);
     filtered = filtered.sort(
       (a, b) => parseInt(b.total_score) - parseInt(a.total_score)
     );

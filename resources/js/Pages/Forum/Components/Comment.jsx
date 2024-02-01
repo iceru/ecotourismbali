@@ -40,8 +40,6 @@ function Comment({ comment, type, member, thread, images }) {
     saveAs(`/storage/threads/files/${file}`, file);
   };
 
-  console.log(thread);
-
   const deleteComment = (e, id) => {
     e.preventDefault();
 

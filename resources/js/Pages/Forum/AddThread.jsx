@@ -12,8 +12,6 @@ import { faFileUpload, faImage } from '@fortawesome/free-solid-svg-icons';
 
 function AddThread({ member }) {
   const { t } = useTranslation();
-  console.log(member);
-
   const { data, setData, post, errors } = useForm({
     title: '',
     text: '',
