@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResultMail;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Badge;
@@ -302,6 +303,7 @@ class MemberAssessmentController extends Controller
             $session->total_score = $totalPoint;
             $session->save();
 
+
             foreach ($memberAssessment as $assess) {
                 $assess->completion = 'yes';
                 $assess->save();
@@ -318,6 +320,7 @@ class MemberAssessmentController extends Controller
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
         $memberAssessments = MemberAssessment::with('assessment')->where('assessment_session_id', $id)->get();
+        // Mail::to($member->user->email)->send(new ResultMail($member, $memberAssessments, $session));
         if ($session) {
             $dateAssessment = $session->created_at->addYears(1);
 

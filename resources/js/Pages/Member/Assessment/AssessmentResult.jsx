@@ -9,12 +9,12 @@ import {
   Text,
   View,
   Font,
+  Link,
 } from '@react-pdf/renderer';
 import { usePage } from '@inertiajs/react';
 import Lottie from 'lottie-react';
 import moment from 'moment';
 import { saveAs } from 'file-saver';
-import { toUpper } from 'lodash';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
@@ -22,7 +22,6 @@ import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import Button from '@/Components/Button';
 import { badgeColor } from '@/Helper/BadgeColor';
 
-import Certificate from '../../../../images/certificate.png';
 import confetti from '../../../../images/confetti2.json';
 import Logo from '../../../../images/logo.png';
 
@@ -121,6 +120,10 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       marginBottom: '16px',
       backgroundColor: '#D2E0E2',
     },
+    climate: {
+      marginBottom: '16px',
+      fontSize: '12px',
+    },
     business: {
       textAlign: 'center',
       fontWeight: 700,
@@ -176,11 +179,10 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       display: 'flex',
       flexDirection: 'row',
       flexWrap: 'wrap',
+      gap: '16px',
     },
     scoreItem: {
       width: '45%',
-      marginBottom: '24px',
-      marginRight: '24px',
     },
 
     titleLogo: {
@@ -196,7 +198,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
     },
     scoreTitle: {
       fontSize: '10px',
-      fontWeight: 700,
+      fontWeight: 500,
     },
     scoreListTitle: {
       marginBottom: '16px',
@@ -237,6 +239,14 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
           <View style={style?.info}>
             <Text style={style?.textInfo}>{t('finish_assessment_text')}</Text>
           </View>
+          <Text style={style?.climate}>
+            Members who have completed the self-assessment on the Eco Tourism
+            Bali platform are eligible to apply for the Climate Friendly Travel
+            Commitment. Please click this link:
+            <Link src="https://climatefriendly.travel/resources/Registration/index.php">
+              https://climatefriendly.travel/resources/Registration/index.php
+            </Link>
+          </Text>
           <View>
             <Text style={style?.business}>{member?.business_name}</Text>
           </View>
@@ -302,16 +312,27 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       <AdminSection>
         <TitleSection title="assessment" className="mb-6" />
 
-        <div className="mb-6 pb-6 border-b text-center">
+        <div className="mb-6 pb-6 border-b text-center relative z-10">
           <div className="text-3xl mb-1 font-bold text-primary">
             {t('congrats')}
           </div>
           <p className=" mb-3 text-lg font-bold text-primary">
             {t('finish_assessment')}
           </p>
-          <p className="lg:w-2/3 text-sm lg:text-base text-start lg:text-center mx-auto py-4 px-6 rounded-lg bg-lightPrimary text-primary">
+          <p className="lg:w-2/3 text-sm lg:text-base text-start lg:text-center mx-auto py-4 px-6 rounded-lg mb-4 bg-lightPrimary text-primary">
             {t('finish_assessment_text')}
           </p>
+          <p className="lg:w-2/3 mx-auto mb-2">
+            Members who have completed the self-assessment on the Eco Tourism
+            Bali platform are eligible to apply for the Climate Friendly Travel
+            Commitment. Please click this link:
+          </p>
+          <a
+            className="text-primary font-bold underline"
+            href="https://climatefriendly.travel/resources/Registration/index.php"
+          >
+            https://climatefriendly.travel/resources/Registration/index.php
+          </a>
         </div>
         {member?.status?.includes('active') ? (
           <div className="relative">
