@@ -119,7 +119,7 @@ function Assessment({ assessments, session, answers, member }) {
           );
           heightLeft -= pageHeight;
         }
-        pdf.save('download.pdf');
+        pdf.save(`${member?.business_name}-result`);
       })
       .finally(() => {
         setLoading(false);
@@ -143,27 +143,27 @@ function Assessment({ assessments, session, answers, member }) {
           <FontAwesomeIcon icon={faArrowLeftLong} />
           {t('back')}
         </Link>
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <div>
-            {member?.image ? (
-              <img
-                className="w-12 h-12 object-contain"
-                src={`/storage/member/images/${member?.image}`}
-                alt=""
-              />
-            ) : (
-              <img className="w-12 h-12" src={noImage} alt="" />
-            )}
-          </div>
-          <div className="font-bold text-lg">{member?.business_name}</div>
-        </div>
-        <div className="flex justify-center mb-4">
+        <div className="flex my-4">
           <Button onClick={downloadPDF} disabled={loading}>
             {loading ? 'On Process of Downloading PDF...' : 'Download PDF'}
           </Button>
         </div>
         <TitleSection title="assessment" className="mb-6" />
         <div className="assessments p-4" id="assessments">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div>
+              {member?.image ? (
+                <img
+                  className="w-12 h-12 object-contain"
+                  src={`/storage/member/images/${member?.image}`}
+                  alt=""
+                />
+              ) : (
+                <img className="w-12 h-12" src={noImage} alt="" />
+              )}
+            </div>
+            <div className="font-bold text-lg">{member?.business_name}</div>
+          </div>
           {assessments.map((item, i) => {
             return (
               <div

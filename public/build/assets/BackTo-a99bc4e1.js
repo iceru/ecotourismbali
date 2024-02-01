@@ -1,0 +1,1 @@
+import{a as s,j as t,d as n}from"./app-8b4ddf9d.js";import{F as m,n as c}from"./index-cb3b46e0.js";import{u as i}from"./useTranslation-7870b40e.js";function u({link:a,title:e,className:o}){const{t:r}=i();return s("div",{children:t(n,{href:a,className:`mb-6 flex items-center ${o}`,children:[s(m,{icon:c,className:"mr-2"}),r(e)]})})}export{u as default};
