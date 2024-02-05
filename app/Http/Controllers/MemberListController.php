@@ -17,8 +17,7 @@ class MemberListController extends Controller
 {
     public function index(Request $request)
     {
-        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
-
+        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%")->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
 
         if ($request->input('category') && $request->input('category') !== 'all') {
             $members = $members->where('category_id', $request->input('category'));
@@ -58,7 +57,7 @@ class MemberListController extends Controller
 
     public function filter(Request $request)
     {
-        $member = Member::where('slug', '!=', '')->where('status', 'like', '%active%');
+        $member = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%");
         $category = Category::where('id', $request->category)->first();
 
         if ($request->category && $request->category !== 'all') {

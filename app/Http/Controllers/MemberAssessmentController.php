@@ -268,7 +268,6 @@ class MemberAssessmentController extends Controller
             $totalPoint = $totalPoint + $assess->score;
         }
 
-
         if (str_contains($member->status, 'active')) {
             if ($member->business_type->name == 'Hotel') {
                 if ($totalPoint > 264) {

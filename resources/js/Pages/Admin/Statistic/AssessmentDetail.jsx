@@ -164,6 +164,10 @@ function Assessment({ assessments, session, answers, member }) {
             </div>
             <div className="font-bold text-lg">{member?.business_name}</div>
           </div>
+          <div className="flex justify-center items-center font-bold text-primary text-lg mb-4">
+            Total Score: {session?.total_score}
+          </div>
+          <hr />
           {assessments.map((item, i) => {
             return (
               <div
