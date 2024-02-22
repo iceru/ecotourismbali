@@ -19,7 +19,7 @@ const MemberDashboardForm = ({ business_type, member }) => {
   const total_payments = [
     {
       label: 'Access to Self Assessment',
-      value: 500000,
+      value: 1000000,
     },
     {
       label: 'Green/Publish Rate IDR 0 - 1.500.000',
@@ -38,7 +38,7 @@ const MemberDashboardForm = ({ business_type, member }) => {
   const total_payments_restaurant = [
     {
       label: 'Access to Self Assessment',
-      value: 500000,
+      value: 1000000,
     },
     {
       label: 'Annual Membership',

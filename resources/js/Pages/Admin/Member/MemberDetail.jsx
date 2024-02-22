@@ -64,8 +64,8 @@ function MemberIndex() {
       value: 1,
     },
     {
-      label: 'Rp500.000',
-      value: 500000,
+      label: 'Rp1.000.000',
+      value: 1000000,
     },
     {
       label: 'Rp1.500.000',
