@@ -85,7 +85,7 @@ class MemberPaymentController extends Controller
             }
         } else if ($transaction == 'settlement') {
             $memberPayment->update(['payment_status' => 'success']);
-            if (intval($member->total_payment) === 1000000) {
+            if (intval($member->total_payment) === 1000000 || intval($member->total_payment) === 500000 ) {
                 $member->update(['status' => 'active_assessment']);
             } else {
                 $member->update(['status' => 'active']);
