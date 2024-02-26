@@ -244,6 +244,7 @@ class MemberController extends Controller
         $member->description = $request->description;
         $member->province = $request->province;
         $member->city = $request->city;
+        $member->phone = $request->phone;
         $member->category_id = $request->category;
         $member->status = 'active';
         $member->save();
