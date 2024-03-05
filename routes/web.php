@@ -69,6 +69,22 @@ Route::post('/green-credential', [MemberListController::class, 'filter'])->name(
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 
+Route::middleware(['auth', 'verified', 'role:member|administrator|superadministrator|finance'])->group(function () {
+    Route::get('/member/forum', [ForumThreadController::class, 'index'])->name('member.forum.index');
+    Route::get('/member/forum/thread/create', [ForumThreadController::class, 'create'])->name('member.forum.thread.create');
+    Route::post('/member/forum/thread/store', [ForumThreadController::class, 'store'])->name('member.forum.thread.store');
+    Route::post('/member/forum/thread/download', [ForumThreadController::class, 'download'])->name('member.forum.thread.download');
+    Route::get('/member/forum/thread/show/{id}', [ForumThreadController::class, 'show'])->name('member.forum.thread.show');
+    Route::get('/member/forum/thread/{id}/edit', [ForumThreadController::class, 'edit'])->name('member.forum.thread.edit');
+    Route::post('/member/forum/thread/{id}/update', [ForumThreadController::class, 'update'])->name('member.forum.thread.update');
+    Route::post('/member/forum/thread/delete', [ForumThreadController::class, 'destroy'])->name('member.forum.thread.destroy');
+
+    Route::post('/member/forum/comment/store', [ForumCommentController::class, 'store'])->name('member.forum.comment.store');
+    Route::get('/member/forum/comment/{id}/edit', [ForumCommentController::class, 'edit'])->name('member.forum.comment.edit');
+    Route::post('/member/forum/comment/{id}/update', [ForumCommentController::class, 'update'])->name('member.forum.comment.update');
+    Route::post('/member/forum/comment/{id}/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
+});
+
 Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -106,20 +122,6 @@ Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
     Route::get('/member-payment/finish', [MemberPaymentController::class, 'finish'])->name('member_payment.finish');
     Route::get('/member-payment/unfinish', [MemberPaymentController::class, 'unfinish'])->name('member_payment.unfinish');
     Route::get('/member-payment/error', [MemberPaymentController::class, 'error'])->name('member_payment.error');
-
-    Route::get('/member/forum', [ForumThreadController::class, 'index'])->name('member.forum.index');
-    Route::get('/member/forum/thread/create', [ForumThreadController::class, 'create'])->name('member.forum.thread.create');
-    Route::post('/member/forum/thread/store', [ForumThreadController::class, 'store'])->name('member.forum.thread.store');
-    Route::post('/member/forum/thread/download', [ForumThreadController::class, 'download'])->name('member.forum.thread.download');
-    Route::get('/member/forum/thread/show/{id}', [ForumThreadController::class, 'show'])->name('member.forum.thread.show');
-    Route::get('/member/forum/thread/{id}/edit', [ForumThreadController::class, 'edit'])->name('member.forum.thread.edit');
-    Route::post('/member/forum/thread/{id}/update', [ForumThreadController::class, 'update'])->name('member.forum.thread.update');
-    Route::post('/member/forum/thread/delete', [ForumThreadController::class, 'destroy'])->name('member.forum.thread.destroy');
-
-    Route::post('/member/forum/comment/store', [ForumCommentController::class, 'store'])->name('member.forum.comment.store');
-    Route::get('/member/forum/comment/{id}/edit', [ForumCommentController::class, 'edit'])->name('member.forum.comment.edit');
-    Route::post('/member/forum/comment/{id}/update', [ForumCommentController::class, 'update'])->name('member.forum.comment.update');
-    Route::post('/member/forum/comment/{id}/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
 });
 
 Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(function () {
