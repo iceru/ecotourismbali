@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import AdminSection from '@/Components/AdminSection';
 import AdminLayout from '@/Layouts/AdminLayout';
-import TitleSection from '../Components/TitleSection';
 import BackTo from '../Components/BackTo';
 import SelectInput from '@/Components/SelectInput';
 import Button from '@/Components/Button';
@@ -33,9 +32,9 @@ function MemberIndex() {
 
   const { data, setData, post, processing, errors, reset } = useForm({
     category: member?.category_id || '',
-    program: member.program_id || '',
-    verified_badge: member.verified_badge_id || '',
-    total_payment: member.total_payment || '',
+    program: member?.program_id || '',
+    verified_badge: member?.verified_badge_id || '',
+    total_payment: member?.total_payment || '',
     status: member?.status || null,
     invoice_no: lastPayment?.status_code || null,
     invoice_item_text: lastPayment?.invoice_item_text || null,
@@ -44,7 +43,7 @@ function MemberIndex() {
   const submit = e => {
     e.preventDefault();
 
-    post(route('admin.member.update', member.id), {
+    post(route('admin.member.update', member?.id), {
       onSuccess: () => {
         reset();
         setEdit(false);
@@ -117,14 +116,14 @@ function MemberIndex() {
 
   const downloadInvoice = () => {
     axios({
-      url: '/admin/member/invoice/' + member.id,
+      url: '/admin/member/invoice/' + member?.id,
       method: 'POST',
       responseType: 'blob',
     }).then(response => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `invoice-${member.business_name}.pdf`);
+      link.setAttribute('download', `invoice-${member?.business_name}.pdf`);
       document.body.appendChild(link);
       link.click();
     });
@@ -153,7 +152,8 @@ function MemberIndex() {
               >
                 {!edit ? t('edit_member') : t('close_edit_member')}
               </Button>
-              {statusMember.includes('active') || statusMember === 'payment' ? (
+              {statusMember?.includes('active') ||
+              statusMember === 'payment' ? (
                 <Button
                   className="mb-6"
                   onClick={() => downloadInvoice()}
@@ -170,7 +170,7 @@ function MemberIndex() {
                   <SelectInput
                     id="status"
                     name="status"
-                    value={data.status}
+                    value={data?.status}
                     options={status}
                     className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     onChange={e => {
@@ -190,7 +190,7 @@ function MemberIndex() {
                     <TextInput
                       id="invoice_no"
                       name="invoice_no"
-                      value={data.invoice_no}
+                      value={data?.invoice_no}
                       className="lg:w-3/4 w-full mt-2 lg:mt-0"
                       onChange={e => setData('invoice_no', e.target.value)}
                     />
@@ -202,7 +202,7 @@ function MemberIndex() {
                     <TextInput
                       id="invoice_item_text"
                       name="invoice_item_text"
-                      value={data.invoice_item_text}
+                      value={data?.invoice_item_text}
                       className="lg:w-3/4 w-full mt-2 lg:mt-0"
                       onChange={e =>
                         setData('invoice_item_text', e.target.value)
@@ -217,7 +217,7 @@ function MemberIndex() {
                   <SelectInput
                     id="total_payment"
                     name="total_payment"
-                    value={data.total_payment}
+                    value={data?.total_payment}
                     options={total_payments}
                     placeholder="select_total_payment"
                     className="lg:w-3/4 w-full mt-2 lg:mt-0"
@@ -227,9 +227,9 @@ function MemberIndex() {
               ) : (
                 items('total_payment', currency.format(member?.total_payment))
               )}
-              {items('email', member.user.email)}
+              {items('email', member?.user.email)}
               {items('address', member?.address)}
-              {items('phone', member.phone)}
+              {items('phone', member?.phone)}
               {items('website', member?.website)}
               {items('business_name', member?.business_name)}
               {items('business_type', member?.business_type?.name)}
@@ -240,7 +240,7 @@ function MemberIndex() {
                   <SelectInput
                     id="category"
                     name="category"
-                    value={data.category}
+                    value={data?.category}
                     options={categories}
                     labelData="name"
                     placeholder="select_category"
@@ -258,7 +258,7 @@ function MemberIndex() {
                   <SelectInput
                     id="program"
                     name="program"
-                    value={data.program}
+                    value={data?.program}
                     options={programs}
                     className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     placeholder="select_program"
@@ -282,7 +282,7 @@ function MemberIndex() {
                   <SelectInput
                     id="verified_badge"
                     name="verified_badge"
-                    value={data.verified_badge}
+                    value={data?.verified_badge}
                     options={verified_badges}
                     className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     labelData="name"
@@ -341,7 +341,9 @@ function MemberIndex() {
                 </div>
                 {lastSession && (
                   <div className="text-center text-gray-500  text-xs mb-3">
-                    <span className="font-bold">{lastSession.total_score}</span>
+                    <span className="font-bold">
+                      {lastSession?.total_score}
+                    </span>
                     &nbsp;
                     <span className=" uppercase">Points</span>
                   </div>
@@ -350,10 +352,10 @@ function MemberIndex() {
                   return (
                     <div className="flex justify-center text-gray-500 text-xs mb-1">
                       <div className="capitalize">
-                        {lowerCase(score.assessment.title).slice(0, 11)}
+                        {lowerCase(score?.assessment?.title)?.slice(0, 11)}
                       </div>
                       <div className="mx-1">-</div>
-                      <div>{score.score}</div>
+                      <div>{score?.score}</div>
                     </div>
                   );
                 })}
