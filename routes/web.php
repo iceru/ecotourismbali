@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PublicController;
 use Inertia\Inertia;
 use App\Models\MemberPayment;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,8 @@ Route::get('/member/detail/{slug}', [MemberListController::class, 'detail'])->na
 Route::post('/green-credential', [MemberListController::class, 'filter'])->name('member.filter');
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
+
+Route::get('/public/members', [PublicController::class, 'members'])->name('public.members');
 
 Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
