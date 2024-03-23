@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PublicController;
 use Inertia\Inertia;
 use App\Models\MemberPayment;
 use Illuminate\Support\Facades\Route;
@@ -70,7 +69,6 @@ Route::post('/green-credential', [MemberListController::class, 'filter'])->name(
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 
-Route::get('/public/members', [PublicController::class, 'members'])->name('public.members');
 Route::middleware(['auth', 'verified', 'role:member|administrator|superadministrator|finance'])->group(function () {
     Route::get('/member/forum', [ForumThreadController::class, 'index'])->name('member.forum.index');
     Route::get('/member/forum/thread/create', [ForumThreadController::class, 'create'])->name('member.forum.thread.create');
