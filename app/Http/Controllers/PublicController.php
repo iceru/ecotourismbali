@@ -12,7 +12,7 @@ class PublicController extends Controller
 
         $greenforce = Member::where('status', 'LIKE', '%active%')->where('program_id', '1')->count();        
         $hotels = Member::where('status', 'LIKE', '%active%')->where('business_type_id', '1')->count();
-        $restaurant = Member::where('status', 'LIKE', '%active%')->where('business_type_id', '2')->count();
+        $restaurant = Member::where('status', 'LIKE', '%active%')->where('business_type_id', '3')->count();
         
         $total->greenforce = $greenforce;
         $total->hotels = $hotels;
