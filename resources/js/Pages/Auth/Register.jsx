@@ -121,10 +121,10 @@ export default function Register({ programs }) {
                   <img src={greenpal} className="w-16 h-16 mr-2" alt="" />
                   <p>
                     <strong>Green Pal</strong> is a whole community that joins
-                    together with Eco Tourism Bali for free consisting of small
-                    scale suppliers, community and travel who have the same
-                    vision to support Bali to become a Green Tourism Destination
-                    and sustainability.
+                    together with Eco Tourism Bali of small scale suppliers,
+                    community and travel who have the same vision to support
+                    Bali to become a Green Tourism Destination and
+                    sustainability.
                   </p>
                 </div>
               )}
