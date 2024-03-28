@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MemberAssessmentAnswer;
+use App\Exports\MemberAssessmentsExport;
 use Inertia\Inertia;
 use App\Models\Badge;
 use App\Models\Member;
@@ -11,6 +11,8 @@ use App\Models\Assessment;
 use App\Models\MemberAssessment;
 use App\Models\AssessmentSession;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\MemberAssessmentAnswer;
 
 class StatisticController extends Controller
 {
@@ -112,5 +114,15 @@ class StatisticController extends Controller
             'session' => $session,
             'answers' => $answers
         ]);
+    }
+
+    public function assessmentExport($id)
+    {
+        $member = Member::where('id', $id)->first();
+        $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
+        $session = AssessmentSession::where('member_id', $id)->where('completion', 'yes')->latest()->first();
+        $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
+
+        return Excel::download(new MemberAssessmentsExport($id), $member->business_name.'-assessments.xlsx');
     }
 }
