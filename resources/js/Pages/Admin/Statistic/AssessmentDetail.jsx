@@ -147,15 +147,13 @@ function Assessment({ assessments, session, answers, member }) {
           <Button onClick={downloadPDF} disabled={loading}>
             {loading ? 'On Process of Downloading PDF...' : 'Download PDF'}
           </Button>
-          <Button
-            as="link"
-            color="secondary"
+          <a
             target="_blank"
-            className="ml-3"
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-[14px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 bg-secondary hover:bg-opacity-80 active:bg-secondary-dark text-white focus:ring-secondary ml-3"
             href={`/admin/assessment/statistic/export/${member?.id}`}
           >
             Download Excel
-          </Button>
+          </a>
         </div>
         <TitleSection title="assessment" className="mb-6" />
         <div className="assessments p-4" id="assessments">
