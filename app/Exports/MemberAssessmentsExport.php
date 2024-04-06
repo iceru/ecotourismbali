@@ -26,6 +26,7 @@ class Sheet1Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
     public function headings(): array
     {
         return [
+            'Title',
             'Question',
             'Answer',
             'Point'
@@ -50,6 +51,7 @@ class Sheet1Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
         return [
             [
                 $answer->assessment_question->title,
+                str_replace('&nbsp;', ' ', strip_tags($answer->assessment_question->question)),
                 $answer->assessment_option->option,
                 $answer->assessment_option->point,
             ],
@@ -71,6 +73,13 @@ class Sheet2Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
     {
         return [
             'Member',
+            'Email',
+            'Name',
+            'Job Title',
+            'Website',
+            'Phone',
+            'Address',
+            'Business Type',
             'Total Point',
         ];
     }
@@ -91,6 +100,13 @@ class Sheet2Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
         return [
             [
                 $session->member->business_name,
+                $session->member->user->email,
+                $session->member->user->name,
+                $session->member->job_title,
+                $session->member->website,
+                $session->member->phone,
+                $session->member->address,
+                $session->member->business_type->name,
                 $session->total_score
             ],
         ];
