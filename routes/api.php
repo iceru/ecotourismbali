@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/public/members', [PublicController::class, 'members'])->name('public.members');
+Route::get('/public/impacts', [PublicController::class, 'impacts'])->name('public.impacts');
