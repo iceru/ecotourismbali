@@ -13,10 +13,12 @@ class PublicController extends Controller
         $total = new \stdClass();
 
         $greenforce = Member::where('status', 'LIKE', '%active%')->where('program_id', '1')->count();        
+        $greenpal = Member::where('status', 'LIKE', '%active%')->where('program_id', '2')->count();        
         $hotels = Member::where('status', 'LIKE', '%active%')->where('business_type_id', '1')->count();
         $restaurant = Member::where('status', 'LIKE', '%active%')->where('business_type_id', '3')->count();
         
         $total->greenforce = $greenforce;
+        $total->greenpal = $greenpal;
         $total->hotels = $hotels;
         $total->restaurant = $restaurant;
 
