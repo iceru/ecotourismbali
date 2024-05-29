@@ -37,6 +37,7 @@ class ProgramController extends Controller
 
         $request->validate([
             'name' => 'required',
+            'description' => 'required',
             'image' => 'nullable',
         ]);
 
@@ -51,6 +52,7 @@ class ProgramController extends Controller
         }
 
         $program->name = $request->name;
+        $program->description = $request->description;
         $program->save();
 
         return Redirect::route('program.index')->with('success', 'Program created successfully.');
@@ -84,6 +86,7 @@ class ProgramController extends Controller
         $request->validate([
             'name' => 'required',
             'image' => 'nullable',
+            'description' => 'nullable',
         ]);
         $filename = null;
 
@@ -96,6 +99,7 @@ class ProgramController extends Controller
         }
 
         $program->name = $request->name;
+        $program->description = $request->description;
         $program->save();
 
         return Redirect::route('program.index');

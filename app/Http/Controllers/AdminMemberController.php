@@ -155,4 +155,15 @@ class AdminMemberController extends Controller
     {
         //
     }
+
+    /**
+     * Display page for member import
+     */
+    public function import()
+    {
+        return Inertia::render('Admin/Member/Import', [
+            'members' => Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->
+            where('program_id', 2)->get(),
+        ]);
+    }
 }

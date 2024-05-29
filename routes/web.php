@@ -7,6 +7,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SourceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\CategoryController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\BusinessTypeController;
 use App\Http\Controllers\ForumCommentController;
 use App\Http\Controllers\MemberModuleController;
 use App\Http\Controllers\MemberPaymentController;
+use App\Http\Controllers\MemberTourismController;
 use App\Http\Controllers\PreTestOptionController;
 use App\Http\Controllers\VerifiedBadgeController;
 use App\Http\Controllers\AdminDashboardController;
@@ -63,9 +65,9 @@ Route::get('/booking', function () {
     ]);
 });
 
-Route::get('/green-credential', [MemberListController::class, 'index'])->name('member.list');
+Route::get('/directory', [MemberListController::class, 'index'])->name('member.list');
 Route::get('/member/detail/{slug}', [MemberListController::class, 'detail'])->name('member.detail');
-Route::post('/green-credential', [MemberListController::class, 'filter'])->name('member.filter');
+Route::post('/directory', [MemberListController::class, 'filter'])->name('member.filter');
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 
@@ -159,6 +161,14 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
     Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
     Route::post('/member/invoice/{id}', [AdminMemberController::class, 'invoice'])->name('admin.member.invoice');
+    Route::post('/member/invoice/{id}', [AdminMemberController::class, 'invoice'])->name('admin.member.invoice');
+
+    Route::get('/tourism/member/index', [MemberTourismController::class, 'index'])->name('admin.member_tourism.index');
+    Route::post('/tourism/member/import', [MemberTourismController::class, 'import'])->name('admin.member_tourism.import');
+    Route::post('/tourism/member/update/{id}', [MemberTourismController::class, 'update'])->name('admin.member_tourism.update');
+    Route::get('/tourism/member/edit/{id}', [MemberTourismController::class, 'edit'])->name('admin.member_tourism.edit');
+    Route::get('/tourism/member/destroy/{id}', [MemberTourismController::class, 'destroy'])->name('admin.member_tourism.destroy');
+
 
     Route::get('/business-type', [BusinessTypeController::class, 'index'])->name('business_type.index');
     Route::post('/business-type/store', [BusinessTypeController::class, 'store'])->name('business_type.store');
@@ -172,6 +182,13 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/module/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
     Route::post('/module/update/{id}', [ModuleController::class, 'update'])->name('module.update');
     Route::delete('/module/delete/{id}', [ModuleController::class, 'destroy'])->name('module.destroy');
+
+    Route::get('/source', [SourceController::class, 'index'])->name('source.index');
+    Route::post('/source/store', [SourceController::class, 'store'])->name('source.store');
+    Route::get('/source/show/{id}', [SourceController::class, 'show'])->name('source.show');
+    Route::get('/source/edit/{id}', [SourceController::class, 'edit'])->name('source.edit');
+    Route::post('/source/update/{id}', [SourceController::class, 'update'])->name('source.update');
+    Route::delete('/source/delete/{id}', [SourceController::class, 'destroy'])->name('source.destroy');
 
     Route::get('/module/{id}/pre-question', [PreTestQuestionController::class, 'index'])->name('pre_question.index');
     Route::post('/module/{id}/pre-question/store', [PreTestQuestionController::class, 'store'])->name('pre_question.store');

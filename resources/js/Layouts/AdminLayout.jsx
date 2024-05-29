@@ -15,6 +15,7 @@ import {
   faTasks,
   faTimes,
   faUsers,
+  faUsersBetweenLines,
   faVolumeUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +24,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import enImg from '../../images/en.png';
 import idImg from '../../images/id.png';
 import { useMediaQuery } from 'react-responsive';
+import { faSourcetree } from '@fortawesome/free-brands-svg-icons';
 
 function AdminLayout({ children }) {
   const { t, i18n } = useTranslation();
@@ -49,9 +51,9 @@ function AdminLayout({ children }) {
             : 'translate-x-0 !block lg:block lg:w-1/4 p-4 lg:p-6 opacity-100'
         }`}
       >
-        <div className="logo mb-12">
+        <Link href={route('member.list')} className="logo mb-12 block">
           <img src={Logo} alt="Eco Tourism Bali" />
-        </div>
+        </Link>
         <div
           className="block lg:hidden absolute text-secondary right-6 top-6 text-2xl"
           onClick={() => setSideActive(false)}
@@ -84,6 +86,32 @@ function AdminLayout({ children }) {
                   icon={faUsers}
                 />
                 {t('member')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={route('admin.member_tourism.index')}
+                className={
+                  url.startsWith('/admin/tourism/member') ? 'font-bold' : ''
+                }
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faUsersBetweenLines}
+                />
+                {t('member_tourism')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={route('source.index')}
+                className={url.startsWith('/admin/source') ? 'font-bold' : ''}
+              >
+                <FontAwesomeIcon
+                  className="fa-fw mr-2 text-secondary"
+                  icon={faSourcetree}
+                />
+                {t('tourism_source')}
               </Link>
             </li>
             {superadmin && (

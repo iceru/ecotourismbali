@@ -6,12 +6,12 @@ import SelectInput from '@/Components/SelectInput';
 import TextInput from '@/Components/TextInput';
 import Button from '@/Components/Button';
 import { Head, Link, router } from '@inertiajs/react';
-import { badgeColor } from '@/Helper/BadgeColor';
 import Pagination from '@/Components/Pagination';
 import queryString from 'query-string';
 import TitlePage from '@/Components/TitlePage';
+import MemberItem from './MemberItem';
 
-function MemberList({ programs, categories, badges, members }) {
+function MemberList({ programs, categories, badges, members, tribe }) {
   const sorts = [
     {
       label: 'Name - Ascending',
@@ -31,10 +31,12 @@ function MemberList({ programs, categories, badges, members }) {
   const [sort, setSort] = useState(sorts[0].value);
   const [payload, setPayload] = useState({});
 
-  const filterData = () => {
+  console.log(programs);
+
+  const filterData = ({ programData }) => {
     const value = {
       ...payload,
-      program: program || null,
+      program: programData || null,
       badge: badge || null,
       keyword,
       category,
@@ -59,7 +61,7 @@ function MemberList({ programs, categories, badges, members }) {
     };
 
     if (qs.category && qs.category !== 'all') {
-      setCategory(qs.category);
+      setCategory(parseInt(qs.category));
     }
 
     qs.program && setProgram(qs.program);
@@ -102,13 +104,47 @@ function MemberList({ programs, categories, badges, members }) {
   return (
     <Guest>
       <Head title="Member List" />
-      <TitlePage title="list_of_members" />
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center gap-4">
+          <img
+            src={`/storage/programs/${tribe?.image}`}
+            className="w-20 h-20 object-contain"
+            alt=""
+          />
+          <div>
+            <h1 className="text-3xl font-bold mb-1">{tribe?.name}</h1>
+            <p className="lg:max-w-[75%]">{tribe?.description}</p>
+          </div>
+        </div>
+        <div className="flex gap-8 items-start">
+          {programs?.map(program => {
+            return (
+              <button
+                type="button"
+                onClick={() => {
+                  filterData({
+                    programData: program?.id ? parseInt(program?.id) : null,
+                  });
+                }}
+                className="text-center"
+              >
+                <img
+                  src={`/storage/programs/${program?.image}`}
+                  className="w-20 h-20 object-contain mb-1 mx-auto hover:scale-105 transition"
+                  alt=""
+                />
+                <p className="font-bold w-20 text-center">{program?.name}</p>
+              </button>
+            );
+          })}
+        </div>
+      </div>
       <div className="flex flex-wrap justify-between mb-6 pb-6 border-b">
         <div className="mb-6 lg:mb-0 lg:w-3/4 lg:pr-4">
           <div className="font-bold mb-2 text-lg">{t('filter')}</div>
           <div className="flex flex-wrap lg:flex-nowrap">
-            <div className="grid lg:grid-cols-3 w-full lg:w-auto">
-              <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+            <div className="flex w-full lg:w-auto">
+              {/* <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
                 <InputLabel
                   className="mr-4 w-1/4 lg:w-auto"
                   value={t('program')}
@@ -123,23 +159,25 @@ function MemberList({ programs, categories, badges, members }) {
                 >
                   <option value="">{t('select_program')}</option>
                 </SelectInput>
-              </div>
-              <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                <InputLabel
-                  className="mr-4 w-1/4 lg:w-auto"
-                  value={t('badge')}
-                />
-                <SelectInput
-                  options={badges}
-                  value={badge}
-                  labelData="name"
-                  valueData="id"
-                  className="w-full"
-                  onChange={e => setBadge(parseInt(e.target.value))}
-                >
-                  <option value="">{t('select_badge')}</option>
-                </SelectInput>
-              </div>
+              </div> */}
+              {tribe?.id === 1 && (
+                <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                  <InputLabel
+                    className="mr-4 w-1/4 lg:w-auto"
+                    value={t('badge')}
+                  />
+                  <SelectInput
+                    options={badges}
+                    value={badge}
+                    labelData="name"
+                    valueData="id"
+                    className="w-full"
+                    onChange={e => setBadge(parseInt(e.target.value))}
+                  >
+                    <option value="">{t('select_badge')}</option>
+                  </SelectInput>
+                </div>
+              )}
               <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
                 <InputLabel
                   className="mr-4 w-1/4 lg:w-auto"
@@ -175,121 +213,42 @@ function MemberList({ programs, categories, badges, members }) {
       </div>
 
       <div className="flex flex-wrap">
-        <div className="sidebar w-full lg:w-1/6">
-          <ul className="text-gray-600 font-light flex lg:block whitespace-nowrap overflow-auto gap-4 mb-6 lg:mb-0 pb-4">
-            <li
-              className={`cursor-pointer lg:mb-6 ${
-                category === 'all' ? 'font-bold text-primary' : ''
-              }`}
-              onClick={() => changeCategory('all')}
-            >
-              {t('all')}
-            </li>
-            {categories?.map(cat => {
-              return (
-                <li
-                  onClick={() => changeCategory(cat.id)}
-                  id={cat.id}
-                  className={`cursor-pointer lg:mb-6 whitespace-nowrap lg:whitespace-break-spaces ${
-                    category === cat.id ? 'font-bold text-primary' : ''
-                  }`}
-                >
-                  {t(cat.name)}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="lg:w-5/6 lg:pl-6">
-          <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-4 h-fit">
+        {tribe.id === 1 && (
+          <div className="sidebar w-full lg:w-1/6">
+            <ul className="text-gray-600 font-light flex lg:block whitespace-nowrap overflow-auto gap-4 mb-6 lg:mb-0 pb-4">
+              <li
+                className={`cursor-pointer lg:mb-6 ${
+                  category === 'all' ? 'font-bold text-primary' : ''
+                }`}
+                onClick={() => changeCategory('all')}
+              >
+                {t('all')}
+              </li>
+              {categories?.map(cat => {
+                return (
+                  <li
+                    onClick={() => changeCategory(cat.id)}
+                    id={cat.id}
+                    className={`cursor-pointer lg:mb-6 whitespace-nowrap lg:whitespace-break-spaces ${
+                      category === cat.id ? 'font-bold text-primary' : ''
+                    }`}
+                  >
+                    {t(cat.name)}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+        <div className={`${tribe?.id === 1 ? 'lg:w-5/6 lg:pl-6' : 'w-full'}`}>
+          <div
+            className={`${
+              tribe?.id === 1 ? 'xl:grid-cols-3' : 'xl:grid-cols-4'
+            } grid md:grid-cols-2 gap-4 h-fit`}
+          >
             {members?.data?.length > 0 ? (
               members?.data?.map(member => {
-                return (
-                  <div className="border rounded-2xl p-4 h-fit">
-                    {member?.program?.name === 'Green Pal' ? (
-                      <div
-                        className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex 
-                      -mt-4 -mr-4 w-fit float-right items-center bg-greenpal`}
-                      >
-                        Green Pal
-                      </div>
-                    ) : (
-                      <>
-                        {member?.verified_badge_id ? (
-                          <div>
-                            <div
-                              className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
-                      -mr-4 w-fit float-right items-center  
-                    ${badgeColor(member?.verified_badge?.name, 'color')}
-                    `}
-                            >
-                              <div>
-                                <img
-                                  src={'/storage/badges/' + member.badge?.image}
-                                  alt=""
-                                  className="h-6 mr-2 brightness-0 filter invert"
-                                />
-                              </div>
-                              <span>
-                                Verified {member?.verified_badge?.name}
-                              </span>
-                            </div>
-                          </div>
-                        ) : member.badge && !member?.verified_badge_id ? (
-                          <div
-                            className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
-                        -mr-4 w-fit float-right items-center  
-                      ${badgeColor(member?.badge?.name, 'color')}
-                      `}
-                          >
-                            <div>
-                              <img
-                                src={'/storage/badges/' + member.badge?.image}
-                                alt=""
-                                className="h-6 mr-2 brightness-0 filter invert"
-                              />
-                            </div>
-                            <span>{member.badge?.name}</span>
-                          </div>
-                        ) : (
-                          <div className="rounded-bl-2xl rounded-tr-2xl bg-gray-100  px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
-                            <div>{t('no_badge')}</div>
-                          </div>
-                        )}
-                      </>
-                    )}
-                    <div className="flex items-center mb-3 mt-5">
-                      {member?.image && (
-                        <div className="mr-3 rounded-full w-[62px] h-[62px] bg-lightPrimary bg-opacity-30 flex justify-center items-center">
-                          <img
-                            src={`/storage/member/images/${member?.image}`}
-                            alt={member.bussiness_name}
-                            className="w-[62px] max-h-[62px] object-contain rounded-full"
-                          />
-                        </div>
-                      )}
-                      <Link href={route('member.detail', member.slug)}>
-                        <h4 className="font-bold text-lg leading-[22px] mb-1">
-                          {member.business_name}
-                        </h4>
-                        {member.category && (
-                          <h6 className="text-xs uppercase text-primary">
-                            {member.category?.name}
-                          </h6>
-                        )}
-                      </Link>
-                    </div>
-                    <p className="mb-3 text-sm line-clamp-3">
-                      {member?.description}
-                    </p>
-                    <Link
-                      href={route('member.detail', member.slug)}
-                      className="text-sm text-primary font-semibold"
-                    >
-                      {t('learn_more')}
-                    </Link>
-                  </div>
-                );
+                return <MemberItem member={member} tribe={tribe} />;
               })
             ) : (
               <div className="">

@@ -162,6 +162,17 @@ function MemberIndex() {
                   Download Invoice
                 </Button>
               ) : null}
+
+              {statusMember?.includes('active') ||
+              statusMember === 'payment' ? (
+                <Button
+                  className="mb-6"
+                  onClick={() => editInvoice()}
+                  color={'gray'}
+                >
+                  Edit Invoice
+                </Button>
+              ) : null}
             </div>
             <form onSubmit={submit}>
               {edit ? (
@@ -227,7 +238,7 @@ function MemberIndex() {
               ) : (
                 items('total_payment', currency.format(member?.total_payment))
               )}
-              {items('email', member?.user.email)}
+              {items('email', member?.user?.email)}
               {items('address', member?.address)}
               {items('phone', member?.phone)}
               {items('website', member?.website)}

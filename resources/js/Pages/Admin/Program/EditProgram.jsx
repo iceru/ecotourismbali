@@ -16,6 +16,7 @@ function EditProgram() {
 
   const { data, setData, post, processing, errors } = useForm({
     name: program.name || '',
+    description: program.description || '',
     image: null,
   });
 
@@ -61,6 +62,27 @@ function EditProgram() {
               />
             </div>
             <span className="text-red-600">{errors.image}</span>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="description"
+                value={t('form_label_description')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="description"
+                name="description"
+                type="text"
+                typeForm="textarea"
+                value={data.description}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('description', e.target.value)}
+              />
+              <span className="text-red-600">{errors.description}</span>
+            </div>
           </div>
           <Button className="w-fit" disabled={processing}>
             {t('submit')}

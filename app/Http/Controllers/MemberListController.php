@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MemberTourism;
 use Inertia\Inertia;
 use App\Models\Badge;
 use App\Models\Member;
@@ -17,14 +18,29 @@ class MemberListController extends Controller
 {
     public function index(Request $request)
     {
-        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%")->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
+        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')
+        ->where('status', 'not like', "%dummy%")->where('program_id', 1)
+        ->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
 
+        $tribe = Program::where('name', 'like', '%embers%')->first();
+        
         if ($request->input('category') && $request->input('category') !== 'all') {
             $members = $members->where('category_id', $request->input('category'));
         }
 
         if ($request->input('program')) {
             $members = $members->where('program_id', $request->input('program'));
+            $tribe = Program::where('id', $request->input('program'))->first();
+            $tourism = MemberTourism::where('business_name', '!=', NULL)->with('source');
+            $auth = Auth::user();
+            if(!$auth) {
+                $tourism->where('member_only', 'No');
+            } else if ($auth->member && ($auth->member->status === 'admin' || str_contains($auth->member->status, 'active'))){
+                $tourism->where('member_only', '!=', NULL);
+            }
+            if($tribe->id === 2) {
+                $members = $tourism;
+            }
         }
 
         if ($request->input('badge')) {
@@ -45,54 +61,74 @@ class MemberListController extends Controller
         } else {
             $members->orderBy('business_name');
         }
-
+        if($request->program !== 2 && $tribe->id !== 2) {
         $members = $members->paginate(12)->withQueryString();
+        } else {
+        $members = $members->paginate(16)->withQueryString();
+
+        }
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
             'badges' => Badge::all(),
             'members' => $members,
+            'tribe' => $tribe,
         ]);
     }
 
     public function filter(Request $request)
     {
-        $member = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%");
-        $category = Category::where('id', $request->category)->first();
+        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%");
+        $tribe = Program::where('name', 'like', '%embers%')->first();
 
         if ($request->category && $request->category !== 'all') {
-            $member = $member->where('category_id', $request->category);
+            $members = $members->where('category_id', $request->category);
         }
 
         if ($request->program) {
-            $member = $member->where('program_id', $request->program);
+            $members = $members->where('program_id', $request->program);
+            $tribe = Program::where('id', $request->input('program'))->first();
+            $auth = Auth::user();
+            $tourism = MemberTourism::where('business_name', '!=', NULL)->with('source');
+            if(!$auth) {
+                $tourism->where('member_only', 'No');
+            } else if ($auth->member && ($auth->member->status === 'admin' || str_contains($auth->member->status, 'active'))){
+                $tourism->where('member_only', '!=', NULL);
+            }
+            if($tribe->id === 2) {
+                $members = $tourism;
+            }
         }
 
         if ($request->badge) {
-            $member = $member->where('badge_id', $request->badge);
+            $members = $members->where('badge_id', $request->badge);
         }
 
         if ($request->keyword) {
-            $member = $member->where('business_name', 'LIKE', "%$request->keyword%");
+            $members = $members->where('business_name', 'LIKE', "%$request->keyword%");
         }
 
         if ($request->sort) {
             $sortColumns = explode('-', $request->sort);
             if ($sortColumns[1] === 'descending') {
-                $member->orderByDesc('business_name');
+                $members->orderByDesc('business_name');
             } else {
-                $member->orderBy('business_name');
+                $members->orderBy('business_name');
             }
         } else {
-            $member->orderBy('business_name');
+            $members->orderBy('business_name');
         }
-
-        $member = $member->with('badge', 'category', 'verified_badge', 'program')->paginate(12)->withQueryString();
+        if($request->program !== 2 && $tribe->id !== 2) {
+            $members = $members->with('badge', 'category', 'verified_badge', 'program')->paginate(12)->withQueryString();
+        } else {
+            $members = $members->paginate(16)->withQueryString();
+        }
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
             'badges' => Badge::all(),
-            'members' => $member,
+            'members' => $members,
+            'tribe' => $tribe
         ]);
     }
 
