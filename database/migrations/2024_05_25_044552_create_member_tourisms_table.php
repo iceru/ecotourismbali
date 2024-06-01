@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('member_tourisms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('business_name');
-            $table->string('category');
+            $table->string('category')->nullable();
             $table->string('email');
             $table->string('phone');
             $table->string('member_only')->nullable();

@@ -122,6 +122,9 @@ function MemberList({
   return (
     <Guest>
       <Head title="Member List" />
+      <h1 className="text-3xl lg:text-4xl mb-2 font-bold">
+        {t('etb_network')}
+      </h1>
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-4">
           <img
