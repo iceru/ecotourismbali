@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MemberTourism;
+use App\Models\Source;
 use Inertia\Inertia;
 use App\Models\Badge;
 use App\Models\Member;
@@ -51,6 +52,10 @@ class MemberListController extends Controller
             $members = $members->where('business_name', 'LIKE', "%$request->input('keyword')%");
         }
 
+        if($request->source && $request->program === 2) {
+            $members = $members->where('source_id', $request->source);
+        }
+
         if ($request->input('sort')) {
             $sortColumns = explode('-', $request->input('sort'));
             if ($sortColumns[1] === 'descending') {
@@ -62,14 +67,18 @@ class MemberListController extends Controller
             $members->orderBy('business_name');
         }
         if($request->program !== 2 && $tribe->id !== 2) {
-        $members = $members->paginate(12)->withQueryString();
+            $members = $members->paginate(12)->withQueryString();
         } else {
-        $members = $members->paginate(16)->withQueryString();
-
+            $members = $members->paginate(16)->withQueryString();
         }
+        $tourisms = MemberTourism::with('source')->get();
+        $categoriesTourism = $tourisms->pluck('category')->unique()->filter()->values();
+        $sources = Source::all();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
+            'categoriesTourism' => $categoriesTourism,
+            'sources' => $sources,
             'badges' => Badge::all(),
             'members' => $members,
             'tribe' => $tribe,
@@ -108,6 +117,10 @@ class MemberListController extends Controller
             $members = $members->where('business_name', 'LIKE', "%$request->keyword%");
         }
 
+        if($request->source && $request->program === 2) {
+            $members = $members->where('source_id', $request->source);
+        }
+
         if ($request->sort) {
             $sortColumns = explode('-', $request->sort);
             if ($sortColumns[1] === 'descending') {
@@ -123,9 +136,14 @@ class MemberListController extends Controller
         } else {
             $members = $members->paginate(16)->withQueryString();
         }
+        $tourisms = MemberTourism::with('source')->get();
+        $categoriesTourism = $tourisms->pluck('category')->unique()->filter()->values();
+        $sources = Source::all();
         return Inertia::render('MemberList', [
             'programs' => Program::all(),
             'categories' => Category::all(),
+            'categoriesTourism' => $categoriesTourism,
+            'sources' => $sources,
             'badges' => Badge::all(),
             'members' => $members,
             'tribe' => $tribe
@@ -146,6 +164,16 @@ class MemberListController extends Controller
             'lastSession' => $lastSession
         ]);
     }
+
+    public function detailTourism($slug)
+    {
+        $member = MemberTourism::where('slug', $slug)->with('source')->firstOrFail();
+        return Inertia::render('MemberDetailTourism', [
+            'member' => $member,
+            'program' => Program::where('id', 2)->first(),
+        ]);
+    }
+
 
     public function invoice(Request $request)
     {

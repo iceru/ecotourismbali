@@ -66,7 +66,8 @@ Route::get('/booking', function () {
 });
 
 Route::get('/directory', [MemberListController::class, 'index'])->name('member.list');
-Route::get('/member/detail/{slug}', [MemberListController::class, 'detail'])->name('member.detail');
+Route::get('/directory/member/{slug}', [MemberListController::class, 'detail'])->name('member.detail');
+Route::get('/directory/member-tourism/{slug}', [MemberListController::class, 'detailTourism'])->name('member.detail.tourism');
 Route::post('/directory', [MemberListController::class, 'filter'])->name('member.filter');
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');

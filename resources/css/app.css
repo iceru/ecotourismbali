@@ -56,3 +56,7 @@
 .module__content h3 {
     font-size: 20px;
 }
+
+.member-tourism {
+  grid-template-columns: 1fr 3fr 1fr 2fr .5fr;
+}

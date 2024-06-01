@@ -10,8 +10,17 @@ import Pagination from '@/Components/Pagination';
 import queryString from 'query-string';
 import TitlePage from '@/Components/TitlePage';
 import MemberItem from './MemberItem';
+import MemberItemTourism from './MemberItemTourism';
 
-function MemberList({ programs, categories, badges, members, tribe }) {
+function MemberList({
+  programs,
+  categories,
+  badges,
+  members,
+  tribe,
+  sources,
+  categoriesTourism,
+}) {
   const sorts = [
     {
       label: 'Name - Ascending',
@@ -22,25 +31,34 @@ function MemberList({ programs, categories, badges, members, tribe }) {
       value: 'name-descending',
     },
   ];
-
   const { t } = useTranslation();
   const [category, setCategory] = useState('all');
   const [program, setProgram] = useState();
   const [badge, setBadge] = useState();
   const [keyword, setKeyword] = useState();
+  const [source, setSource] = useState();
   const [sort, setSort] = useState(sorts[0].value);
   const [payload, setPayload] = useState({});
 
-  console.log(programs);
-
   const filterData = ({ programData }) => {
-    const value = {
+    let value = {
       ...payload,
-      program: programData || null,
+      program: parseInt(program) || null,
       badge: badge || null,
       keyword,
       category,
+      source,
     };
+    if (programData) {
+      value = {
+        program: parseInt(programData),
+      };
+      setProgram(parseInt(programData));
+      setBadge();
+      setCategory();
+      setSource();
+      setKeyword();
+    }
     setPayload(value);
     router.post(
       route(
@@ -144,22 +162,6 @@ function MemberList({ programs, categories, badges, members, tribe }) {
           <div className="font-bold mb-2 text-lg">{t('filter')}</div>
           <div className="flex flex-wrap lg:flex-nowrap">
             <div className="flex w-full lg:w-auto">
-              {/* <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                <InputLabel
-                  className="mr-4 w-1/4 lg:w-auto"
-                  value={t('program')}
-                />
-                <SelectInput
-                  options={programs}
-                  labelData="name"
-                  valueData="id"
-                  value={program}
-                  className="w-full"
-                  onChange={e => setProgram(parseInt(e.target.value))}
-                >
-                  <option value="">{t('select_program')}</option>
-                </SelectInput>
-              </div> */}
               {tribe?.id === 1 && (
                 <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
                   <InputLabel
@@ -175,6 +177,25 @@ function MemberList({ programs, categories, badges, members, tribe }) {
                     onChange={e => setBadge(parseInt(e.target.value))}
                   >
                     <option value="">{t('select_badge')}</option>
+                  </SelectInput>
+                </div>
+              )}
+
+              {tribe?.id === 2 && (
+                <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                  <InputLabel
+                    className="mr-4 w-1/4 lg:w-auto"
+                    value={t('sources')}
+                  />
+                  <SelectInput
+                    options={sources}
+                    value={source}
+                    labelData="title"
+                    valueData="id"
+                    className="w-full"
+                    onChange={e => setSource(parseInt(e.target.value))}
+                  >
+                    <option value="">{t('select_source')}</option>
                   </SelectInput>
                 </div>
               )}
@@ -240,24 +261,54 @@ function MemberList({ programs, categories, badges, members, tribe }) {
             </ul>
           </div>
         )}
-        <div className={`${tribe?.id === 1 ? 'lg:w-5/6 lg:pl-6' : 'w-full'}`}>
-          <div
-            className={`${
-              tribe?.id === 1 ? 'xl:grid-cols-3' : 'xl:grid-cols-4'
-            } grid md:grid-cols-2 gap-4 h-fit`}
-          >
+        {tribe?.id === 1 ? (
+          <div className="lg:w-5/6 lg:pl-6">
+            <div
+              className={`${
+                tribe?.id === 1 ? 'xl:grid-cols-3' : 'xl:grid-cols-4'
+              } grid md:grid-cols-2 gap-4 h-fit`}
+            >
+              {members?.data?.length > 0 ? (
+                members?.data?.map(member => {
+                  return <MemberItem member={member} tribe={tribe} />;
+                })
+              ) : (
+                <div className="">
+                  <h3 className=" text-primary font-xl ">Not Found</h3>
+                </div>
+              )}
+            </div>
+            <Pagination class="mt-6" links={members?.links} />
+          </div>
+        ) : (
+          <div className="w-full">
+            <div
+              className={`grid member-tourism font-bold mb-6 bg-primary text-white py-4 px-4 gap-6`}
+            >
+              <div>Type</div>
+              <div>Business Name</div>
+              <div>Category</div>
+              <div>Directory Source</div>
+              <div>Action</div>
+            </div>
             {members?.data?.length > 0 ? (
-              members?.data?.map(member => {
-                return <MemberItem member={member} tribe={tribe} />;
+              members?.data?.map((member, index) => {
+                return (
+                  <MemberItemTourism
+                    member={member}
+                    index={index}
+                    tribe={tribe}
+                  />
+                );
               })
             ) : (
               <div className="">
                 <h3 className=" text-primary font-xl ">Not Found</h3>
               </div>
             )}
+            <Pagination class="mt-6" links={members?.links} />
           </div>
-          <Pagination class="mt-6" links={members?.links} />
-        </div>
+        )}
       </div>
     </Guest>
   );
