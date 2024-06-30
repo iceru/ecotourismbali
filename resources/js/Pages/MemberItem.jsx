@@ -21,9 +21,9 @@ function MemberItem({ member, tribe }) {
               >
                 <div>
                   <img
-                    src={'/storage/badges/' + member?.badge?.image}
+                    src={'/storage/badges/' + member?.verified_badge?.image}
                     alt=""
-                    className="h-6 mr-2 brightness-0 filter invert"
+                    className="h-6 mr-2"
                   />
                 </div>
                 <span>Verified {member?.verified_badge?.name}</span>

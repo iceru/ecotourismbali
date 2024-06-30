@@ -19,7 +19,7 @@ function MemberList({
   members,
   tribe,
   sources,
-  categoriesTourism,
+  verified_badges,
 }) {
   const sorts = [
     {
@@ -35,6 +35,7 @@ function MemberList({
   const [category, setCategory] = useState('all');
   const [program, setProgram] = useState();
   const [badge, setBadge] = useState();
+  const [verifiedBadge, setVerifiedBadge] = useState();
   const [keyword, setKeyword] = useState();
   const [source, setSource] = useState();
   const [sort, setSort] = useState(sorts[0].value);
@@ -45,6 +46,7 @@ function MemberList({
       ...payload,
       program: parseInt(program) || null,
       badge: badge || null,
+      verified_badge: verifiedBadge || null,
       keyword,
       category,
       source,
@@ -74,6 +76,7 @@ function MemberList({
     const filterObject = {
       program: qs.program,
       badge: qs.badge,
+      verified_badge: qs.verified_badge,
       keyword: qs.keyword,
       category: qs.category,
     };
@@ -84,6 +87,7 @@ function MemberList({
 
     qs.program && setProgram(qs.program);
     qs.badge && setBadge(qs.badge);
+    qs.badge && setVerifiedBadge(qs.verified_badge);
     qs.keyword && setKeyword(qs.keyword);
 
     if (!qs.page) {
@@ -122,7 +126,7 @@ function MemberList({
   return (
     <Guest>
       <Head title="Member List" />
-      <h1 className="text-3xl lg:text-4xl mb-2 font-bold">
+      <h1 className="text-3xl lg:text-4xl mb-8 font-bold">
         {t('etb_network')}
       </h1>
       <div className="flex justify-between items-center mb-6">
@@ -154,7 +158,7 @@ function MemberList({
                   className="w-20 h-20 object-contain mb-1 mx-auto hover:scale-105 transition"
                   alt=""
                 />
-                <p className="font-bold w-20 text-center">{program?.name}</p>
+                <p className="font-bold w-40 text-center">{program?.name}</p>
               </button>
             );
           })}
@@ -166,22 +170,40 @@ function MemberList({
           <div className="flex flex-wrap lg:flex-nowrap">
             <div className="flex w-full lg:w-auto">
               {tribe?.id === 1 && (
-                <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                  <InputLabel
-                    className="mr-4 w-1/4 lg:w-auto"
-                    value={t('badge')}
-                  />
-                  <SelectInput
-                    options={badges}
-                    value={badge}
-                    labelData="name"
-                    valueData="id"
-                    className="w-full"
-                    onChange={e => setBadge(parseInt(e.target.value))}
-                  >
-                    <option value="">{t('select_badge')}</option>
-                  </SelectInput>
-                </div>
+                <>
+                  <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                    <InputLabel
+                      className="mr-4 w-1/4 lg:w-auto"
+                      value={t('badge')}
+                    />
+                    <SelectInput
+                      options={badges}
+                      value={badge}
+                      labelData="name"
+                      valueData="id"
+                      className="w-full"
+                      onChange={e => setBadge(parseInt(e.target.value))}
+                    >
+                      <option value="">{t('select_badge')}</option>
+                    </SelectInput>
+                  </div>
+                  <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                    <InputLabel
+                      className="mr-4 w-1/4 lg:w-auto"
+                      value={t('verified_badge')}
+                    />
+                    <SelectInput
+                      options={verified_badges}
+                      value={verifiedBadge}
+                      labelData="name"
+                      valueData="id"
+                      className="w-full"
+                      onChange={e => setVerifiedBadge(parseInt(e.target.value))}
+                    >
+                      <option value="">{t('select_verified_badge')}</option>
+                    </SelectInput>
+                  </div>
+                </>
               )}
 
               {tribe?.id === 2 && (

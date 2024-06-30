@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MemberTourism;
-use App\Models\Source;
 use Inertia\Inertia;
 use App\Models\Badge;
 use App\Models\Member;
+use App\Models\Source;
 use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\MemberPayment;
+use App\Models\MemberTourism;
+use App\Models\VerifiedBadge;
 use App\Models\MemberAssessment;
 use App\Models\AssessmentSession;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,10 @@ class MemberListController extends Controller
             $members = $members->where('badge_id', $request->input('badge'));
         }
 
+        if ($request->input('verified_badge')) {
+            $members = $members->where('verified_badge_id', $request->input('verified_badge'));
+        }
+
         if ($request->input('keyword')) {
             $members = $members->where('business_name', 'LIKE', "%$request->input('keyword')%");
         }
@@ -80,6 +85,7 @@ class MemberListController extends Controller
             'categoriesTourism' => $categoriesTourism,
             'sources' => $sources,
             'badges' => Badge::all(),
+            'verified_badges' => VerifiedBadge::all(),
             'members' => $members,
             'tribe' => $tribe,
         ]);
@@ -113,6 +119,11 @@ class MemberListController extends Controller
             $members = $members->where('badge_id', $request->badge);
         }
 
+        if ($request->input('verified_badge')) {
+            $members = $members->where('verified_badge_id', $request->input('verified_badge'));
+        }
+
+
         if ($request->keyword) {
             $members = $members->where('business_name', 'LIKE', "%$request->keyword%");
         }
@@ -145,6 +156,7 @@ class MemberListController extends Controller
             'categoriesTourism' => $categoriesTourism,
             'sources' => $sources,
             'badges' => Badge::all(),
+            'verified_badges' => VerifiedBadge::all(),
             'members' => $members,
             'tribe' => $tribe
         ]);
