@@ -50,7 +50,7 @@ export default function Register({ programs }) {
           <div className="bg-black w-full h-full opacity-70 absolute left-0 top-0 z-[5] rounded-xl"></div>
           <div className="h-full absolute left-0 top-0">
             <img
-              className="rounded-2xl w-full h-full object-cover min-h-[70vh]"
+              className="rounded-2xl w-full h-full object-cover"
               src={RegisImage}
               alt=""
             />
