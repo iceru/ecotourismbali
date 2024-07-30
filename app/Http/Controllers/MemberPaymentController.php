@@ -54,8 +54,6 @@ class MemberPaymentController extends Controller
         $member_payment->save();
 
         return $snapToken;
-
-        // return Redirect::route('member.index')->with('success', ' created successfully.');
     }
 
     public function notif_handler()

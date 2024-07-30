@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -13,9 +13,12 @@ import greenforce from '../../../images/green_force.png';
 import greenpal from '../../../images/greenpal.png';
 import SelectInput from '@/Components/SelectInput';
 import queryString from 'query-string';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function Register({ programs }) {
   const parsed = queryString.parse(location.search);
+  const [toggle, setToggle] = useState(true);
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     email: '',
@@ -43,8 +46,125 @@ export default function Register({ programs }) {
     <GuestLayout>
       <Head title="Register" />
       <div className="grid lg:grid-cols-2">
-        <div className="hidden lg:block ">
-          <AuthImage image={RegisImage} />
+        <div className="hidden lg:block relative mr-12">
+          <div className="bg-black w-full h-full opacity-70 absolute left-0 top-0 z-[5] rounded-xl"></div>
+          <div className="h-full absolute left-0 top-0">
+            <img
+              className="rounded-2xl w-full h-full object-cover min-h-[70vh]"
+              src={RegisImage}
+              alt=""
+            />
+          </div>
+          <section className="p-8 text-white relative z-10">
+            <button
+              onClick={() => setToggle(!toggle)}
+              className="text-xl lg:text-2xl whitespace-nowrap gap-2 flex items-center font-bold mb-6"
+            >
+              Why Join ETB Membership?
+              <FontAwesomeIcon icon={faChevronDown} className="text-sm" />
+            </button>
+            <div className={`mt-4 ${!toggle ? 'hidden' : 'block'}`}>
+              <div className="grid 2 gap-6">
+                <div className="flex gap-2.5">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    1
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">
+                      International Standard of Sustainability
+                    </p>
+                    <p>
+                      Verification service customized to Bali's local context.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5" data-aos-delay="300">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    2
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">Affordable</p>
+                    <p>Affordable cost with many benefits and added value</p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    3
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">
+                      Contributing to Local Supply Chain
+                    </p>
+                    <p>
+                      Drive positive impact to Social, Economy and Cultural
+                      benefits.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5" data-aos-delay="300">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    4
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">Regular Updates</p>
+                    <p>Regular Updates on Sustainable Practices</p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    5
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">
+                      Search and Filter Capabilities
+                    </p>
+                    <p></p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5" data-aos-delay="300">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    6
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">
+                      Event and Collaboration Spaces
+                    </p>
+                    <p></p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    7
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">
+                      Contributing to Nature Restoration{' '}
+                    </p>
+                    <p>
+                      Contributing to nature restoration and preservation
+                      through the Regenerative Bali Program
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2.5" data-aos-delay="300">
+                  <div className="h-9 w-9 rounded-full font-serif text-lg flex-shrink-0 text-white flex justify-center items-center bg-primary">
+                    8
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold mb-1">
+                      Data Analytics and Reporting
+                    </p>
+                    <p>
+                      Businesses can access analytics and reports to track their
+                      sustainability goals, monitor the impact of their supply
+                      chain choices, and make data-driven decisions for
+                      continual improvement.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
 
         <div>
@@ -209,7 +329,7 @@ export default function Register({ programs }) {
               <Button disabled={processing}>Register</Button>
               <Link
                 href={route('login')}
-                className="text-sm text-primary font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="text-sm font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 {t('already_registered')}
               </Link>
