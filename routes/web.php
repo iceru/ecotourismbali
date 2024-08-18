@@ -70,9 +70,10 @@ Route::get('/directory', [MemberListController::class, 'index'])->name('member.l
 Route::get('/directory/member/{slug}', [MemberListController::class, 'detail'])->name('member.detail');
 Route::get('/directory/member-tourism/{slug}', [MemberListController::class, 'detailTourism'])->name('member.detail.tourism');
 Route::post('/directory', [MemberListController::class, 'filter'])->name('member.filter');
-// Route::get('/donation', [DonationController::class, 'index'])->name('donation.index');
-// Route::post('/donation/store', [DonationController::class, 'store'])->name('donation.store');
-// Route::post('/donation/pay', [DonationController::class, 'pay'])->name('donation.pay');
+Route::get('/donation', [DonationController::class, 'index'])->name('donation.index');
+Route::post('/donation/store', [DonationController::class, 'store'])->name('donation.store');
+Route::post('/donation/pay', [DonationController::class, 'pay'])->name('donation.pay');
+Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 

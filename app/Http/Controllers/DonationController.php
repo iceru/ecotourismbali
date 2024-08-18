@@ -83,9 +83,9 @@ class DonationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Donation $donation)
+    public function success()
     {
-        //
+        return Inertia::render('DonationSuccess');
     }
 
     /**

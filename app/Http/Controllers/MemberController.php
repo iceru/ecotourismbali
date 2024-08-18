@@ -24,7 +24,6 @@ class MemberController extends Controller
         $member = Member::where('user_id', Auth::id())->with(['badge', 'business_type', 'member_slider', 'program'])->first();
         $business_type = BusinessType::all();
         $categories = Category::all();
-
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
         $dateAssessment = null;
@@ -199,7 +198,7 @@ class MemberController extends Controller
             'name' => 'required',
             'company_name' => 'required',
             'job_title' => 'required',
-            'sliders' => 'required',
+            'sliders' => 'required|max:2048',
             'address' => 'required',
             'email' => 'required',
             'phone' => 'required',
