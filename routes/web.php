@@ -93,7 +93,7 @@ Route::middleware(['auth', 'verified', 'role:member|administrator|superadministr
     Route::post('/member/forum/comment/{id}/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
+Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
