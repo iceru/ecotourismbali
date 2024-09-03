@@ -40,11 +40,11 @@ function Donation() {
         },
         onClose: function () {
           setPayPending(true);
+          sessionStorage.clear('snapTokenDonation');
         },
       });
     };
     if (!snapToken) {
-      debugger;
       post(route('donation.store'), {
         onSuccess: () => {
           axios
