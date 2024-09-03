@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
             'email_verified_at' => new Date(),
         ]);
 
-        // event(new Registered($user));
+        event(new Registered($user));
 
         $member = Member::where('id', $user->id)->first();
 
