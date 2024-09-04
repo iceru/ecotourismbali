@@ -103,9 +103,10 @@ class MemberAssessmentController extends Controller
             return Redirect::route('member.dashboard');
         }
 
-        if ($member->id !== $session->member_id) {
+        if ((int)$member->id !== (int)$session->member_id) {
             return Redirect::route('member.dashboard');
         }
+        
         if (!str_contains($member->status, 'active')) {
             $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->take(1)->get();
         }
