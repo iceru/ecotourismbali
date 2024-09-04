@@ -97,7 +97,7 @@ class MemberAssessmentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where('id', $id)->first();
+        $session = AssessmentSession::where('id', $id)->where('completion', 'no')->first();
 
         if ($session->completion === 'yes') {
             return Redirect::route('member.dashboard');
