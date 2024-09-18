@@ -97,15 +97,16 @@ class MemberAssessmentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where('id', $id)->first();
+        $session = AssessmentSession::where('id', $id)->where('completion', 'no')->first();
 
         if ($session->completion === 'yes') {
             return Redirect::route('member.dashboard');
         }
 
-        if ($member->id !== $session->member_id) {
+        if ((int)$member->id !== (int)$session->member_id) {
             return Redirect::route('member.dashboard');
         }
+
         if (!str_contains($member->status, 'active')) {
             $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->take(1)->get();
         }
@@ -323,7 +324,7 @@ class MemberAssessmentController extends Controller
         if ($session) {
             $dateAssessment = $session->created_at->addYears(1);
 
-            if ($member->id !== $session->member_id) {
+            if ((int)$member->id !== (int)$session->member_id) {
                 return Redirect::route('member.dashboard');
             }
         } else {
