@@ -130,9 +130,9 @@ class AdminMemberController extends Controller
         $payment->member_id = $id;
         $payment->save();
 
-        // if($request->status === 'payment') {
-        //     Mail::to($member->user->email)->send(new MemberPaymentMail($payment));
-        // }
+        if($request->status === 'payment') {
+            Mail::to($member->user->email)->send(new MemberPaymentMail($payment));
+        }
 
         return Redirect::route('admin.member.detail', $member->id);
     }

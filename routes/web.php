@@ -86,11 +86,17 @@ Route::get('/mail-test', function() {
     $mj = Mailjet::getClient();
 
     $body = [
-      'FromEmail' => "info@ecotourismbali.com",
-      'FromName' => "Eco Tourism Bali",
-      "Text-part"=>"Test Email",
-      'Subject' => "Test Email ETB",
-      'Recipients' => [['Email' => "m.hafiz1825@gmail.com"]]
+        'FromEmail' => 'info@ecotourismbali.com',
+        'FromName' => 'Your Mailjet Pilot',
+        'Recipients' => [
+            [
+                'Email' => 'm.hafiz1825@gmail.com',
+                'Name' => 'Passenger 1'
+            ]
+        ],
+        'Subject' => 'Your email flight plan!',
+        'Text-part' => 'Dear passenger, welcome to Mailjet! May the delivery force be with you!',
+        'Html-part' => '<h3>Dear passenger, welcome to Mailjet!</h3><br />May the delivery force be with you!'
     ];
     
     $response = $mj->post(Resources::$Email, ['body' => $body]);

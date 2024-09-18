@@ -68,7 +68,7 @@ class MemberController extends Controller
         $member->status = 'waiting_approval';
         $member->save();
 
-        // Mail::to('info@ecotourismbali.com')->send(new NotifyPayment($member));
+        Mail::to('info@ecotourismbali.com')->send(new NotifyPayment($member));
 
         return Redirect::route('member.dashboard')->with('success', 'Your notification to Administrator has been successfully delivered');
     }

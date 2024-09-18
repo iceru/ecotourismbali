@@ -303,7 +303,7 @@ class MemberAssessmentController extends Controller
             $session->total_score = $totalPoint;
             $session->save();
 
-            // Mail::to($member->user->email)->send(new ResultMail($member, $memberAssessment, $session));
+            Mail::to($member->user->email)->send(new ResultMail($member, $memberAssessment, $session));
 
             foreach ($memberAssessment as $assess) {
                 $assess->completion = 'yes';
@@ -344,7 +344,7 @@ class MemberAssessmentController extends Controller
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
 
-        // Mail::to('info@ecotourismbali.com')->send(new VerifyBadgeMail($member));
+        Mail::to('info@ecotourismbali.com')->send(new VerifyBadgeMail($member));
 
         return Redirect::route('member.assessment.result', $session->id)->with('success', 'The administrator has been notified of your request.');
     }
