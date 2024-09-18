@@ -33,7 +33,7 @@ class ResultMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('info@ecotourismbali.com', 'Info Eco Tourism Bali'),
+            from: new Address('program@ecotourismbali.com', 'Info Eco Tourism Bali'),
             subject: 'Result Asssessment for '.$this->member->business_name,
         );
     }
