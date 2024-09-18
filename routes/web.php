@@ -96,9 +96,9 @@ Route::get('/mail-test', function() {
     $response = $mj->post(Resources::$Email, ['body' => $body]);
     
     if($response->success()){
-        return $response;
+        return response()->json($response->getData());  // Return response data as JSON
     } else {
-        return 'Failed to send verification email';
+        return response()->json(['message' => 'Failed to send verification email'], 500);  // Return error message as JSON
     }
 });
 
