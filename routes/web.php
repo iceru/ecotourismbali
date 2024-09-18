@@ -66,6 +66,20 @@ Route::get('/booking', function () {
     ]);
 });
 
+Route::get('/validate/sender', function() {
+    $response = Http::withBasicAuth(env('MAILJET_API_KEY'), env('MAILJET_API_SECRET'))
+               ->post('https://api.mailjet.com/v3/REST/sender', [
+                   'Email' => 'program@ecotourismbali.com',
+                   'Name' => 'Eco Tourism Bali',
+                   'EmailType' => 'transactional'
+               ]);
+    if ($response->successful()) {
+        return 'Verification email sent to etb';
+    }
+
+    return 'Failed to send verification email';
+});
+
 Route::get('/directory', [MemberListController::class, 'index'])->name('member.list');
 Route::get('/directory/member/{slug}', [MemberListController::class, 'detail'])->name('member.detail');
 Route::get('/directory/member-tourism/{slug}', [MemberListController::class, 'detailTourism'])->name('member.detail.tourism');
