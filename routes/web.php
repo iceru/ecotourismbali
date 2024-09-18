@@ -1,6 +1,7 @@
 <?php
 
 use Inertia\Inertia;
+use Mailjet\Resources;
 use App\Models\MemberPayment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -10,6 +11,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SourceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
+use Mailjet\LaravelMailjet\Facades\Mailjet;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\StatisticController;
@@ -79,6 +81,28 @@ Route::get('/validate/sender', function() {
 
     return 'Failed to send verification email';
 });
+
+Route::get('/mail-test', function() {
+    $mj = Mailjet::getClient();
+
+    $body = [
+      'FromEmail' => "info@ecotourismbali.com",
+      'FromName' => "Eco Tourism Bali",
+      "Text-part"=>"Test Email",
+      'Subject' => "Test Email ETB",
+      'Recipients' => [['Email' => "m.hafiz1825@gmail.com"]]
+    ];
+    
+    $response = $mj->post(Resources::$Email, ['body' => $body]);
+    
+    if($response->success()){
+        return $response;
+    } else {
+        return 'Failed to send verification email';
+    }
+});
+
+
 
 Route::get('/directory', [MemberListController::class, 'index'])->name('member.list');
 Route::get('/directory/member/{slug}', [MemberListController::class, 'detail'])->name('member.detail');
