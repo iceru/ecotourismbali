@@ -67,7 +67,7 @@ Route::get('/booking', function () {
 });
 
 Route::get('/validate/sender', function() {
-    $response = Http::withBasicAuth(env('MAILJET_API_KEY'), env('MAILJET_API_SECRET'))
+    $response = Http::withBasicAuth(env('MAILJET_APIKEY'), env('MAILJET_APISECRET'))
                ->post('https://api.mailjet.com/v3/REST/sender', [
                    'Email' => 'program@ecotourismbali.com',
                    'Name' => 'Eco Tourism Bali',
