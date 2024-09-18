@@ -74,7 +74,7 @@ Route::get('/validate/sender', function() {
                    'EmailType' => 'transactional'
                ]);
     if ($response->successful()) {
-        return 'Verification email sent to etb';
+        return $response;
     }
 
     return 'Failed to send verification email';
