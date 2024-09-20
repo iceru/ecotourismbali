@@ -303,7 +303,7 @@ class MemberAssessmentController extends Controller
             $session->total_score = $totalPoint;
             $session->save();
 
-            Mail::to($member->user->email)->send(new ResultMail($member, $memberAssessment, $session));
+            // Mail::to($member->user->email)->send(new ResultMail($member, $memberAssessment, $session));
 
             foreach ($memberAssessment as $assess) {
                 $assess->completion = 'yes';

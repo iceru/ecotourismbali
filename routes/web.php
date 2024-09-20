@@ -68,13 +68,13 @@ Route::get('/booking', function () {
     ]);
 });
 
-Route::get('/validate/sender', function() {
+Route::get('/validate/sender', function () {
     $response = Http::withBasicAuth(env('MAILJET_APIKEY'), env('MAILJET_APISECRET'))
-               ->post('https://api.mailjet.com/v3/REST/sender', [
-                   'Email' => 'program@ecotourismbali.com',
-                   'Name' => 'Eco Tourism Bali',
-                   'EmailType' => 'transactional'
-               ]);
+        ->post('https://api.mailjet.com/v3/REST/sender', [
+            'Email' => 'program@ecotourismbali.com',
+            'Name' => 'Eco Tourism Bali',
+            'EmailType' => 'transactional'
+        ]);
     if ($response->successful()) {
         return $response;
     }
@@ -82,7 +82,7 @@ Route::get('/validate/sender', function() {
     return 'Failed to send verification email';
 });
 
-Route::get('/mail-test', function() {
+Route::get('/mail-test', function () {
     $mj = Mailjet::getClient();
 
     $body = [
@@ -98,10 +98,10 @@ Route::get('/mail-test', function() {
         'Text-part' => 'Dear passenger, welcome to Mailjet! May the delivery force be with you!',
         'Html-part' => '<h3>Dear passenger, welcome to Mailjet!</h3><br />May the delivery force be with you!'
     ];
-    
+
     $response = $mj->post(Resources::$Email, ['body' => $body]);
-    
-    if($response->success()){
+
+    if ($response->success()) {
         return response()->json($response->getData());  // Return response data as JSON
     } else {
         return response()->json(['message' => 'Failed to send verification email'], 500);  // Return error message as JSON
@@ -137,7 +137,7 @@ Route::middleware(['auth', 'verified', 'role:member|administrator|superadministr
     Route::post('/member/forum/comment/{id}/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'role:member'])->group(function () {
+Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
