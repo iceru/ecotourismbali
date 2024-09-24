@@ -26,17 +26,19 @@ function Assessment({ assessments, session, answers, member }) {
     answers.forEach(ans => {
       if (ans.assessment_question.type === 'checkbox') {
         handleCheckboxChange(
-          ans.assessment_question_id,
-          ans.assessment_option_id
+          parseInt(ans.assessment_question_id),
+          parseInt(ans.assessment_option_id)
         );
       } else {
         handleOptionChange(
-          ans.assessment_question_id,
-          ans.assessment_option_id
+          parseInt(ans.assessment_question_id),
+          parseInt(ans.assessment_option_id)
         );
       }
     });
   }, [answers]);
+
+  console.log(answers);
 
   const handleOptionChange = (questionId, optionId, noStore) => {
     const updatedData = {

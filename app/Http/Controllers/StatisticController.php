@@ -92,7 +92,7 @@ class StatisticController extends Controller
         foreach ($assessments as $assess) {
             $members = array();
             foreach ($memberAssess as $memberAs) {
-                if ($assess->id === $memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
+                if ((int)$assess->id === (int)$memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
                     array_push($members, $memberAs);
                     $assess->members = $members;
                 }
@@ -109,7 +109,6 @@ class StatisticController extends Controller
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
         $session = AssessmentSession::where('member_id', $id)->where('completion', 'yes')->latest()->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
-
         return Inertia::render('Admin/Statistic/AssessmentDetail', [
             'assessments' => $assessments,
             'member' => $member,
