@@ -55,10 +55,9 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'email_verified_at' => new Date(),
+            'password' => Hash::make($request->password)
         ]);
-
+        
         event(new Registered($user));
 
         $member = Member::where('id', $user->id)->first();
@@ -72,7 +71,7 @@ class RegisteredUserController extends Controller
             $member->program_id = $request->program;
             $member->save();
         }
-
+        
         Auth::login($user);
         $user->addRole('member');
 

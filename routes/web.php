@@ -59,57 +59,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/booking', function () {
-    return Inertia::render('Booking/Products', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/validate/sender', function () {
-    $response = Http::withBasicAuth(env('MAILJET_APIKEY'), env('MAILJET_APISECRET'))
-        ->post('https://api.mailjet.com/v3/REST/sender', [
-            'Email' => 'program@ecotourismbali.com',
-            'Name' => 'Eco Tourism Bali',
-            'EmailType' => 'transactional'
-        ]);
-    if ($response->successful()) {
-        return $response;
-    }
-
-    return 'Failed to send verification email';
-});
-
-Route::get('/mail-test', function () {
-    $mj = Mailjet::getClient();
-
-    $body = [
-        'FromEmail' => 'info@ecotourismbali.com',
-        'FromName' => 'Your Mailjet Pilot',
-        'Recipients' => [
-            [
-                'Email' => 'm.hafiz1825@gmail.com',
-                'Name' => 'Passenger 1'
-            ]
-        ],
-        'Subject' => 'Your email flight plan!',
-        'Text-part' => 'Dear passenger, welcome to Mailjet! May the delivery force be with you!',
-        'Html-part' => '<h3>Dear passenger, welcome to Mailjet!</h3><br />May the delivery force be with you!'
-    ];
-
-    $response = $mj->post(Resources::$Email, ['body' => $body]);
-
-    if ($response->success()) {
-        return response()->json($response->getData());  // Return response data as JSON
-    } else {
-        return response()->json(['message' => 'Failed to send verification email'], 500);  // Return error message as JSON
-    }
-});
-
-
-
 Route::get('/directory', [MemberListController::class, 'index'])->name('member.list');
 Route::get('/directory/member/{slug}', [MemberListController::class, 'detail'])->name('member.detail');
 Route::get('/directory/member-tourism/{slug}', [MemberListController::class, 'detailTourism'])->name('member.detail.tourism');
@@ -137,7 +86,7 @@ Route::middleware(['auth', 'verified', 'role:member|administrator|superadministr
     Route::post('/member/forum/comment/{id}/delete', [ForumCommentController::class, 'destroy'])->name('member.forum.comment.destroy');
 });
 
-Route::middleware(['auth', 'role:member'])->group(function () {
+Route::middleware(['auth', 'role:member', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

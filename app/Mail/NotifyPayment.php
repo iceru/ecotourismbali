@@ -29,7 +29,7 @@ class NotifyPayment extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('program@ecotourismbali.com', 'Info Eco Tourism Bali'),
+            from: new Address('info@ecotourismbali.com', 'Info Eco Tourism Bali'),
             subject: 'Notif Payment for '.$this->member->business_name,
         );
     }

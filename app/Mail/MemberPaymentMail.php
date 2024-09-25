@@ -28,7 +28,7 @@ class MemberPaymentMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('program@ecotourismbali.com', 'Eco Tourism Bali'),
+            from: new Address('info@ecotourismbali.com', 'Eco Tourism Bali'),
             subject: 'Invoice for '.$this->payment->member->business_name,
         );
     }

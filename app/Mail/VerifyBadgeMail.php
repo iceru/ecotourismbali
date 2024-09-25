@@ -29,7 +29,7 @@ class VerifyBadgeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('program@ecotourismbali.com', 'Info Eco Tourism Bali'),
+            from: new Address('info@ecotourismbali.com', 'Info Eco Tourism Bali'),
             subject: 'Verify Badge Request from '.$this->member->business_name,
         );
     }
