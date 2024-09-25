@@ -24,7 +24,7 @@ class MemberListController extends Controller
         ->where('status', 'not like', "%dummy%")->where('program_id', 1)
         ->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
 
-        $tribe = Program::where('name', 'like', '%embers%')->first();
+        $tribe = Program::where('name', 'like', '%members%')->first();
         
         if ($request->input('category') && $request->input('category') !== 'all') {
             $members = $members->where('category_id', $request->input('category'));
@@ -93,7 +93,7 @@ class MemberListController extends Controller
 
     public function filter(Request $request)
     {
-        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%");
+        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%")->where('program_id', 1);
         $tribe = Program::where('name', 'like', '%embers%')->first();
 
         if ($request->category && $request->category !== 'all') {

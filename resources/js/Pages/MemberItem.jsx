@@ -32,22 +32,14 @@ function MemberItem({ member, tribe }) {
           ) : member?.badge && !member?.verified_badge_id ? (
             <div
               className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 
-                      -mr-4 w-fit float-right items-center  
-                    ${badgeColor(member?.badge?.name, 'color')}
+                      -mr-4 w-fit float-right items-center bg-primary
                     `}
             >
-              <div>
-                <img
-                  src={'/storage/badges/' + member?.badge?.image}
-                  alt=""
-                  className="h-6 mr-2 brightness-0 filter invert"
-                />
-              </div>
-              <span>{member?.badge?.name}</span>
+              <div>{t('verification_pending')}</div>
             </div>
           ) : (
             <div className="rounded-bl-2xl rounded-tr-2xl bg-gray-100  px-3 py-1 text-[12px] flex -mt-4 -mr-4 w-fit float-right">
-              <div>{t('no_badge')}</div>
+              <div>{t('member')}</div>
             </div>
           )}
         </>

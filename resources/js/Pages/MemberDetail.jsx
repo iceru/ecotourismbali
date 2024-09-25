@@ -250,20 +250,14 @@ function MemberList({ member, lastSession, scores }) {
         </div>
 
         {member?.program?.name !== 'Green Pal' && (
-          <div className="lg:w-1/4 mx-auto w-full md:gap-12 top-0 py-4 px-3  mt-10 md:mt-0 sticky min-h-[50vh]">
+          <div className="lg:w-1/4 mx-auto w-full md:gap-12 top-0 py-6 px-3  mt-10 md:mt-0 sticky">
             {member?.badge && (
               <div
-                className={`absolute top-0 px-3 left-0 ${badgeColor(
-                  member?.badge?.name,
-                  'color'
-                )} bg-opacity-[3%] border border-opacity-30 border-${badgeColor(
-                  member?.badge?.name,
-                  'plain'
-                )}  rounded-2xl h-full w-full -z-10`}
+                className={`absolute top-0 px-3 left-0  bg-opacity-[5%] border border-opacity-30 border-primary bg-primary rounded-2xl h-full w-full -z-10`}
               ></div>
             )}
             <>
-              {member?.verified_badge && (
+              {member?.verified_badge ? (
                 <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4">
                   <div>
                     <img
@@ -280,74 +274,44 @@ function MemberList({ member, lastSession, scores }) {
                     {member?.verified_badge.name} {t('verified_badge')}
                   </div>
                 </div>
-              )}
-              {member?.badge ? (
+              ) : member?.badge ? (
                 <div>
-                  <div className="flex flex-col items-center  uppercase mb-1">
-                    <div>
-                      <img
-                        className="max-h-[120px]"
-                        src={'/storage/badges/' + member?.badge?.image}
-                      />
-                    </div>
-                    <div
-                      className={`font-bold mt-1 ${badgeColor(
-                        member?.badge?.name,
-                        'text'
-                      )}`}
-                    >
-                      {member?.badge?.name} Badge
+                  <div className="flex justify-center">
+                    <div className="text-center bg-primary text-white px-8 py-3 rounded-full">
+                      {t('verification_pending')}
                     </div>
                   </div>
-                  {lastSession && (
-                    <div className="text-center text-gray-500 mb-3">
-                      <span className="font-bold">
-                        {lastSession.total_score}
-                      </span>
-                      &nbsp;
-                      <span className=" uppercase">Points</span>
-                    </div>
-                  )}
-                  {scores?.map(score => {
-                    return (
-                      <div className="flex justify-center text-gray-500 mb-1">
-                        <div className="capitalize">
-                          {lowerCase(score.assessment.title).slice(0, 11)}
-                        </div>
-                        <div className="mx-1">-</div>
-                        <div>{score.score}</div>
-                      </div>
-                    );
-                  })}
-                  {member?.business_type?.name.includes('Hotel') && (
-                    <div className="flex justify-center flex-wrap gap-2 mt-6">
-                      {sdgHotel.map(element => {
-                        return (
-                          <div className="w-1/3 lg:w-1/4">
-                            <img src={eval(`sdg${element}`)} alt="" />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-
-                  {member?.business_type?.name.includes('Restaurant') && (
-                    <div className="flex justify-center flex-wrap gap-2 mt-6">
-                      {sdgRestaurant.map(element => {
-                        return (
-                          <div className="w-1/3 lg:w-1/4">
-                            <img src={eval(`sdg${element}`)} alt="" />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
                 </div>
               ) : (
-                <div className="bg-slate-600 text-white rounded-full px-3 py-1 font-bold inline-block">
-                  No Badge
+                <div className="text-center bg-slate-500 text-white px-8 py-3 rounded-full">
+                  {t('member')}
                 </div>
               )}
+              <div>
+                {member?.business_type?.name.includes('Hotel') && (
+                  <div className="flex justify-center flex-wrap gap-2 mt-6">
+                    {sdgHotel.map(element => {
+                      return (
+                        <div className="w-1/3 lg:w-1/4">
+                          <img src={eval(`sdg${element}`)} alt="" />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {member?.business_type?.name.includes('Restaurant') && (
+                  <div className="flex justify-center flex-wrap gap-2 mt-6">
+                    {sdgRestaurant.map(element => {
+                      return (
+                        <div className="w-1/3 lg:w-1/4">
+                          <img src={eval(`sdg${element}`)} alt="" />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </>
           </div>
         )}

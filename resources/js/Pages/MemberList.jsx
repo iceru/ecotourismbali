@@ -173,23 +173,7 @@ function MemberList({
                 <>
                   <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
                     <InputLabel
-                      className="mr-4 w-1/4 lg:w-auto"
-                      value={t('badge')}
-                    />
-                    <SelectInput
-                      options={badges}
-                      value={badge}
-                      labelData="name"
-                      valueData="id"
-                      className="w-full"
-                      onChange={e => setBadge(parseInt(e.target.value))}
-                    >
-                      <option value="">{t('select_badge')}</option>
-                    </SelectInput>
-                  </div>
-                  <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                    <InputLabel
-                      className="mr-4 w-1/4 lg:w-auto"
+                      className="mr-4 w-1/4 lg:w-auto lg:whitespace-nowrap"
                       value={t('verified_badge')}
                     />
                     <SelectInput
