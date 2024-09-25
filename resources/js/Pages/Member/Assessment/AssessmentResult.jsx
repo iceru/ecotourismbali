@@ -141,8 +141,6 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
     },
     scoreWrapper: {
       marginRight: '0',
-      paddingRight: '32px',
-      borderRight: '1px solid lightgray',
     },
     badges: {
       marginLeft: '0',
@@ -255,19 +253,6 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
               <Text style={style?.resultText}>Total Score:</Text>
               <Text style={style?.score}>{session?.total_score}</Text>
             </View>
-            <View style={style?.badges}>
-              <Text style={style?.resultText}>Badge Result:</Text>
-              <View style={style?.badgeWrapper}>
-                <Image
-                  src={'/storage/badges/' + member?.badge?.image}
-                  style={style?.badgeImage}
-                ></Image>
-                <View>
-                  <Text style={style?.badgeName}>{member?.badge?.name}</Text>
-                  <Text style={style?.badgeText}>Badge</Text>
-                </View>
-              </View>
-            </View>
           </View>
           <View style={style?.scoreListTitle}>
             <Text>Component's Score</Text>
@@ -313,35 +298,33 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
         <TitleSection title="assessment" className="mb-6" />
 
         <div className="mb-6 pb-6 border-b text-center relative z-10">
-          <div className="text-3xl mb-1 font-bold text-primary">
+          <div className="text-3xl font-bold text-primary mb-4">
             {t('congrats')}
           </div>
-          <p className=" mb-3 text-lg font-bold text-primary">
-            {t('finish_assessment')}
-          </p>
-          <p className="lg:w-2/3 text-sm lg:text-base text-start lg:text-center mx-auto py-4 px-6 rounded-lg mb-4 bg-lightPrimary text-primary">
+          <p className="lg:w-2/3 text-start lg:text-center mx-auto py-4 px-6 rounded-lg mb-4 bg-lightPrimary text-primary">
             {t('finish_assessment_text')}
           </p>
-          <p className="lg:w-2/3 mx-auto mb-2">
-            Members who have completed the self-assessment on the Eco Tourism
-            Bali platform are eligible to apply for the Climate Friendly Travel
-            Commitment. Please click this link:
+          <p className="lg:w-2/3 mx-auto mb-2 text-primary text-lg font-bold">
+            {t('obtain_score')}
           </p>
-          <a
-            className="text-primary font-bold underline"
-            href="https://climatefriendly.travel/resources/Registration/index.php"
+
+          <Button
+            as="link"
+            color="secondary"
+            href={route('member.assessment.verifyEmail', session.id)}
+            className="!px-12 flex justify-center text-lg"
           >
-            https://climatefriendly.travel/resources/Registration/index.php
-          </a>
+            {t('notify_us')}
+          </Button>
         </div>
         {member?.status?.includes('active') ? (
           <div className="relative">
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] z-0">
               <Lottie animationData={confetti} loop={3} className="w-full" />
             </div>
-            <div className="relative z-[2]">
-              <div className="grid lg:grid-cols-2 gap-6 xl:w-[80%] mx-auto">
-                <div className="mb-4 pb-6 lg:pb-0 lg:mb-0 text-center lg:border-r-2 border-gray-200">
+            <div className="relative z-[2] mb-12">
+              <div className="grid gap-6 xl:w-[80%] mx-auto">
+                <div className="mb-4 pb-6 lg:pb-0 lg:mb-0 text-center">
                   <div className="mb-4 font-bold">
                     {t('your_assessment_scores')}&nbsp;
                   </div>
@@ -360,65 +343,15 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
                     }
                   </PDFDownloadLink>
                 </div>
-                <div className="flex flex-col justify-center items-center text-center">
-                  {member?.badge?.image ? (
-                    <div className="justify-center">
-                      <div className="mb-4 font-bold">{t('your_badge_is')}</div>
-                      <div
-                        className={`rounded-3xl px-6 py-4 bg-opacity-70 flex gap-2 lg:gap-8 items-center justify-center flex-wrap 
-                        lg:flex-nowrap text-white ${badgeColor(
-                          member?.badge?.name,
-                          'color'
-                        )}`}
-                      >
-                        <div>
-                          <div className="font-bold  text-4xl text-start mb-1">
-                            {member?.badge?.name}
-                          </div>
-                          <Button
-                            onClick={() =>
-                              downloadImage(
-                                '/storage/badges/' + member?.badge?.image
-                              )
-                            }
-                            className={`text-xs !px-2 !py-1.5 mt-1 border-white border-2 ${badgeColor(
-                              member?.badge?.name,
-                              'color'
-                            )}`}
-                          >
-                            {t('download_badge')}
-                          </Button>
-                        </div>
-                        <div className="bg-white w-[120px] h-[120px] rounded-full">
-                          <img
-                            className="max-h-[120px] ml-4"
-                            src={'/storage/badges/' + member?.badge?.image}
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="text-center">{t('not_eligible_badge')}</div>
-                  )}
-                </div>
               </div>
-              <div className="flex justify-center lg:w-[60%] mx-auto gap-6 mt-12">
+              {/* <div className="flex justify-center lg:w-[60%] mx-auto gap-6 mt-12">
                 <div className="bg-lightSecondary text-center p-4 lg:p-6 bg-opacity-50 rounded-lg border-secondary border-dashed border-2">
                   <h5 className=" font-bold text-lg mb-2">
                     {t('verify_badge')}
                   </h5>
                   <p>{t('verify_badge_text')}</p>
-                  <Button
-                    as="link"
-                    color="secondary"
-                    href={route('member.assessment.verifyEmail', session.id)}
-                    className="w-full flex justify-center mt-4"
-                  >
-                    {t('notify_us')}
-                  </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
             <Button
               as="link"

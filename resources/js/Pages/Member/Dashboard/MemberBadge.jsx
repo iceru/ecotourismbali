@@ -18,48 +18,21 @@ const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
         <>
           {member && member.badge ? (
             <>
-              <h2 className={'font-bold text-[20px] mb-4'}>
+              <h2 className={'font-bold text-[20px] mb-4 text-center'}>
                 {t('your_assessment')}
-                <span
-                  className={
-                    badgeColor(member?.badge?.name, 'text') + ' ml-1.5'
-                  }
-                >
-                  {member?.badge?.name}
-                </span>
               </h2>
-              <div className="flex items-center">
-                <div className="flex flex-col items-center mr-4  mb-1">
-                  <div>
-                    <img
-                      className="max-h-[120px]"
-                      src={'/storage/badges/' + member?.badge?.image}
-                    />
-                  </div>
-                  <div
-                    className={`font-bold mt-1 text-center whitespace-nowrap uppercase ${badgeColor(
-                      member?.badge?.name,
-                      'text'
-                    )}`}
-                  >
-                    {member?.badge?.name} Badge
-                  </div>
-                  <div className="text-xs text-gray-500">
-                    Expired:&nbsp;
-                    {moment(expiredDate).locale(i18n.language).format('ll')}
-                  </div>
-                </div>
-                <div className="ml-2">
+              <div className="flex items-center flex-wrap justify-center">
+                <div>
                   {lastSession && (
-                    <div className=" mb-2">
+                    <div className="text-primary text-[70px] leading-tight">
                       <span className="font-bold">
                         {lastSession.total_score}
                       </span>
-                      &nbsp;
-                      <span className=" uppercase">Points</span>
                     </div>
                   )}
-                  <div className="grid lg:grid-cols-2 gap-x-3">
+                </div>
+                <div className="ml-6">
+                  <div className="grid lg:grid-cols-2 gap-x-3 text-primary">
                     {scores?.map(score => {
                       return (
                         <div className="flex justify-center text-gray-500 text-sm mb-1">

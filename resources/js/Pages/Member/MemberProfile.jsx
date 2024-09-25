@@ -68,7 +68,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
           <FontAwesomeIcon icon={faLock} />
         </Button>
         <div className="flex flex-wrap">
-          <div className="w-full mb-4 lg:mb-0 lg:w-4/5">
+          <div className="w-full mb-4 lg:mb-0">
             <div className="flex items-center mb-10">
               <div className="w-24 h-24 bg-primary bg-opacity-10 flex justify-center items-center rounded-full ">
                 {member.image ? (
@@ -251,66 +251,6 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
               )}
             </div>
           </div>
-          {member?.program?.name !== 'Green Pal' && (
-            <div className="w-full lg:w-1/5">
-              {member.badge ? (
-                <div>
-                  <div className="flex flex-col items-center   mb-1">
-                    <div>
-                      <img
-                        className="max-h-[120px]"
-                        src={'/storage/badges/' + member?.badge?.image}
-                      />
-                    </div>
-                    <div
-                      className={`font-bold mt-1 text-center uppercase ${badgeColor(
-                        member?.badge?.name,
-                        'text'
-                      )}`}
-                    >
-                      {member?.badge?.name} Badge
-                    </div>
-                    <div className="text-xs text-center mt-1 mb-1 text-gray-500">
-                      Expired:&nbsp;
-                      {moment(expiredDate).format('ll')}
-                    </div>
-                  </div>
-                  {lastSession && (
-                    <div className="text-center text-gray-500 text-xs mb-1">
-                      <span className="font-bold">
-                        {lastSession.total_score}
-                      </span>
-                      &nbsp;
-                      <span className=" uppercase">Points</span>
-                    </div>
-                  )}
-                  {scores?.map(score => {
-                    return (
-                      <div className="flex justify-center text-gray-500 text-xs mb-1">
-                        <div className="capitalize">
-                          {lowerCase(score?.assessment?.title).slice(0, 11)}
-                        </div>
-                        <div className="mx-1">-</div>
-                        <div>{score?.score}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div>
-                  <Button
-                    as="link"
-                    href={route('member.assessment.index')}
-                    color="lightPrimary"
-                    className="flex gap-2 items-center"
-                  >
-                    {t('start_assessment')}
-                    <FontAwesomeIcon icon={faArrowRightLong} />
-                  </Button>
-                </div>
-              )}
-            </div>
-          )}
         </div>
       </AdminSection>
     </MemberLayout>
