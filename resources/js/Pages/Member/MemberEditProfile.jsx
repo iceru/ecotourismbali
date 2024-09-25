@@ -110,12 +110,14 @@ function MemberEditProfile({ categories }) {
                 {editImage && (
                   <div>
                     <input
-                      className="mb-3"
+                      className="mb-2"
                       type="file"
                       name="image"
                       id="image"
+                      accept="image/*"
                       onChange={e => setData('image', e.target.files[0])}
                     />
+                    <div className="text-red-600 mb-2">{errors.image}</div>
                   </div>
                 )}
                 <TextInput
@@ -182,10 +184,22 @@ function MemberEditProfile({ categories }) {
                 multiple
                 type="file"
                 name="sliders"
+                accept="image/*"
                 onChange={e => {
                   setData('sliders', e.target.files);
                 }}
               />
+              {Object.keys(errors).map((errorKey, index) => {
+                // Check if the error key starts with "sliders."
+                if (errorKey.startsWith('sliders.')) {
+                  return (
+                    <div key={index} className="text-red-600 mb-2">
+                      {errors[errorKey]} {/* Display the error message */}
+                    </div>
+                  );
+                }
+                return null;
+              })}
             </div>
           </div>
           <div className="flex justify-center lg:gap-8 mb-10 flex-wrap">

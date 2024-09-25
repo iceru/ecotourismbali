@@ -119,10 +119,11 @@ class MemberController extends Controller
         $request->validate([
             'business_name' => 'nullable',
             'sliders' => 'nullable',
+            'sliders.*' => 'file|max:2048', // Validate each file in sliders, max 1MB
             'address' => 'nullable',
             'website' => 'nullable',
             'description' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|file|max:1024', // Validate image, max 1MB
             'facebook' => 'nullable',
             'instagram' => 'nullable',
             'twitter' => 'nullable',
