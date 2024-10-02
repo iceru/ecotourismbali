@@ -14,8 +14,12 @@ function MemberDashboard({
   visitors,
   pages,
   referrers,
-  greenpal,
-  greenforce,
+  restaurant,
+  hotel,
+  hotelVerified,
+  restaurantVerified,
+  hotelAssessed,
+  restaurantAssessed,
 }) {
   const { t } = useTranslation();
   ChartJS.register(...registerables);
@@ -33,22 +37,42 @@ function MemberDashboard({
   return (
     <AdminLayout>
       <div className="mb-6">
-        <AdminSection className="grid lg:grid-cols-4 gap-4">
+        <AdminSection className="grid lg:grid-cols-3 gap-4">
           <div className="bg-lightSecondary p-4 rounded-md">
-            <div className="mb-2">{t('total_members')}</div>
-            <div className="font-bold text-3xl">{members.length}</div>
-          </div>
-          <div className="bg-lightPrimary p-4 rounded-md">
-            <div className="mb-2">{t('total_assessments')}</div>
-            <div className="font-bold text-3xl">{assessments.length}</div>
+            <div className="mb-2">Hotel Members</div>
+            <div className="font-bold text-3xl">{hotel.length}</div>
           </div>
           <div className="bg-lightSecondary p-4 rounded-md">
-            <div className="mb-2">{t('total_greenforce_members')}</div>
-            <div className="font-bold text-3xl">{greenforce.length}</div>
+            <div className="mb-2">
+              <strong>Self Assessed</strong> Hotel Members
+            </div>
+            <div className="font-bold text-3xl">{hotelAssessed.length}</div>
+          </div>
+          <div className="bg-lightSecondary p-4 rounded-md">
+            <div className="mb-2">
+              <strong>Verified</strong> Hotel Members
+            </div>
+            <div className="font-bold text-3xl">{hotelVerified.length}</div>
           </div>
           <div className="bg-lightPrimary p-4 rounded-md">
-            <div className="mb-2">{t('total_greenpal_members')}</div>
-            <div className="font-bold text-3xl">{greenpal.length}</div>
+            <div className="mb-2">Restaurant Members</div>
+            <div className="font-bold text-3xl">{restaurant.length}</div>
+          </div>
+          <div className="bg-lightPrimary p-4 rounded-md">
+            <div className="mb-2">
+              <strong>Self Assessed</strong> Restaurant Members
+            </div>
+            <div className="font-bold text-3xl">
+              {restaurantAssessed.length}
+            </div>
+          </div>
+          <div className="bg-lightPrimary p-4 rounded-md">
+            <div className="mb-2">
+              <strong>Verified</strong> Restaurant Members
+            </div>
+            <div className="font-bold text-3xl">
+              {restaurantVerified.length}
+            </div>
           </div>
         </AdminSection>
       </div>
