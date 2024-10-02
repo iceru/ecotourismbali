@@ -36,16 +36,16 @@ class AdminDashboardController extends Controller
                                ->whereNotNull('badge_id')
                                ->get();
         $restaurant = Member::where($commonConditions)
-                            ->where('business_type_id', 2)
+                            ->where('business_type_id', 3)
                             ->get();
 
         $restaurantAssessed = Member::where($commonConditions)
-                            ->where('business_type_id', 2)
+                            ->where('business_type_id', 3)
                             ->whereNotNull('badge_id')
                             ->get();
         
         $restaurantVerified = Member::where($commonConditions)
-                            ->where('business_type_id', 2)
+                            ->where('business_type_id', 3)
                             ->whereNotNull('verified_badge_id')
                             ->get();
 
