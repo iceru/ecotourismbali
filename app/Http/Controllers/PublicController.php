@@ -37,7 +37,7 @@ class PublicController extends Controller
                 $hotels = array();
                 $assessDatas = new \stdClass();
                 foreach ($memberAssess as $memberAs) {
-                    if ($assess->id === $memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
+                    if ((int)$assess->id === (int)$memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
                         array_push($hotels, $memberAs->score);
                     }
                 }
@@ -51,7 +51,7 @@ class PublicController extends Controller
                 $restos = array();
                 $assessDatas = new \stdClass();
                 foreach ($memberAssess as $memberAs) {
-                    if ($assess->id === $memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
+                    if ((int)$assess->id === (int)$memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
                         array_push($restos, $memberAs->score);
                     }
                 }
