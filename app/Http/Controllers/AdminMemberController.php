@@ -31,6 +31,18 @@ class AdminMemberController extends Controller
         ]);
     }
 
+        /**
+     * Display a listing of the resource.
+     */
+    public function search(Request $request)
+    {
+        $member =  Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')
+        ->where('business_name', 'like', "%$request->search%")->get();
+        return Inertia::render('Admin/Member/MemberIndex', [
+            'members' => $member
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
