@@ -16,45 +16,12 @@ const MemberDashboardForm = ({ business_type, member }) => {
     member?.business_type?.name || 'Hotel'
   );
 
-  const total_payments = [
-    {
-      label: 'Access to Self Assessment',
-      value: 1000000,
-    },
-    {
-      label: 'Green/Publish Rate IDR 0 - 1.500.000',
-      value: 2000000,
-    },
-    {
-      label: 'Branch/Publish Rate IDR 1.500.001 - 3.000.000',
-      value: 6000000,
-    },
-    {
-      label: 'Root/Publish Rate Above IDR 3.000.000',
-      value: 12000000,
-    },
-  ];
-
-  const total_payments_restaurant = [
-    {
-      label: 'Access to Self Assessment',
-      value: 1000000,
-    },
-    {
-      label: 'Annual Membership',
-      value: 1500000,
-    },
-  ];
-
   const { data, setData, post, processing, errors, reset } = useForm({
     no_rooms: member.no_rooms || null,
     no_employees: member.no_employees || null,
     no_outlets: member.no_outlets || null,
     business_type_id: member.business_type_id || business_type[0].id || null,
-    total_payment:
-      business === 'Hotel'
-        ? total_payments[0].value
-        : total_payments_restaurant[0].value,
+    total_payment: business === 'Hotel' ? 12000000 : 9000000,
     city: member.city || '',
     province: member.province || '',
   });
