@@ -202,29 +202,6 @@ const MemberDashboardForm = ({ business_type, member }) => {
               <span className="text-red-600">{errors.no_employees}</span>
             </div>
           </div>
-          <div className="block items-center">
-            <div className="mb-2">
-              <InputLabel
-                htmlFor="total_payment"
-                value={t('form_label_total_payment')}
-              />
-            </div>
-            <div className="">
-              <SelectInput
-                id="total_payment"
-                name="total_payment"
-                value={data.total_payment}
-                options={
-                  business === 'Hotel'
-                    ? total_payments
-                    : total_payments_restaurant
-                }
-                className="w-full "
-                onChange={e => setData('total_payment', e.target.value)}
-              />
-              <span className="text-red-600">{errors.total_payment}</span>
-            </div>
-          </div>
         </div>
         <Button
           color="secondary"

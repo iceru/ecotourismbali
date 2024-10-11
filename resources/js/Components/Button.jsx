@@ -31,6 +31,9 @@ export default function Button({
   } else if (color === 'altSecondary') {
     classButton =
       'bg-white hover:bg-secondary text-secondary hover:text-white focus:ring-white active:bg-white !border-secondary';
+  } else if (color === 'orange') {
+    classButton =
+      'bg-orange-500 hover:bg-orange-600 focus:ring-orange-700 active:bg-orange-700 text-white ';
   }
   return as === 'link' ? (
     <Link

@@ -157,6 +157,7 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/member/index', [AdminMemberController::class, 'index'])->name('admin.member.index');
+    Route::post('/member/search', [AdminMemberController::class, 'search'])->name('admin.member.search');
     Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
     Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
     Route::post('/member/invoice/{id}', [AdminMemberController::class, 'invoice'])->name('admin.member.invoice');

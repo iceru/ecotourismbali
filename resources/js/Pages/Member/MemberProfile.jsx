@@ -10,6 +10,7 @@ import {
   faPen,
 } from '@fortawesome/free-solid-svg-icons';
 import Slider from 'react-slick';
+import saveAs from 'file-saver';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
@@ -40,6 +41,11 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
     slidesToScroll: 1,
   };
 
+  const downloadBadge = url => {
+    console.log(url);
+    saveAs(url, 'badge.png');
+  };
+
   return (
     <MemberLayout>
       <AdminSection>
@@ -61,12 +67,22 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
         <Button
           as="link"
           href={route('profile.edit', member?.id)}
-          className="mb-6 flex items-center gap-2 ml-4"
+          className="mb-6 flex items-center gap-2 mx-4"
           color="secondary"
         >
           {t('change_password')}
           <FontAwesomeIcon icon={faLock} />
         </Button>
+        {member?.verified_badge_id && (
+          <Button
+            color="orange"
+            onClick={() =>
+              downloadBadge(`/storage/badges/${member?.verified_badge?.image}`)
+            }
+          >
+            {t('download_badge')}
+          </Button>
+        )}
         <div className="flex flex-wrap">
           <div className="w-full mb-4 lg:mb-0">
             <div className="flex items-center mb-10">

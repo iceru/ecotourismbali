@@ -56,34 +56,6 @@ function MemberIndex() {
     currency: 'IDR',
     maximumFractionDigits: 0,
   });
-
-  const total_payments = [
-    {
-      label: 'Rp1',
-      value: 1,
-    },
-    {
-      label: 'Rp1.000.000',
-      value: 1000000,
-    },
-    {
-      label: 'Rp1.500.000',
-      value: 1500000,
-    },
-    {
-      label: 'Rp2.000.000',
-      value: 2000000,
-    },
-    {
-      label: 'Rp6.000.000',
-      value: 6000000,
-    },
-    {
-      label: 'Rp12.000.000',
-      value: 12000000,
-    },
-  ];
-
   const status = [
     {
       label: 'Inactive',
@@ -225,11 +197,10 @@ function MemberIndex() {
               {edit && !member?.status?.includes('active') ? (
                 <div className="flex flex-wrap items-center mb-6">
                   <div className="font-bold lg:w-1/4">{t('total_payment')}</div>
-                  <SelectInput
+                  <TextInput
                     id="total_payment"
                     name="total_payment"
                     value={data?.total_payment}
-                    options={total_payments}
                     placeholder="select_total_payment"
                     className="lg:w-3/4 w-full mt-2 lg:mt-0"
                     onChange={e => setData('total_payment', e.target.value)}
