@@ -169,9 +169,26 @@ function MemberDashboard({
               <div className="flex flex-wrap justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
                 <div className=" mb-4 lg:mb-0">
                   <p>{t('total_payment')}</p>
-                  <h4 className="text-2xl font-bold">
-                    {currency.format(member?.total_payment)}
+                  <h4 className="text-2xl font-bold mb-2">
+                    {member?.business_type?.id === 1 ? (
+                      <span>
+                        <strike>{currency.format(12000000)}</strike>
+                        <span className="ml-2 text-red-600 text-3xl">
+                          {currency.format(member?.total_payment)}
+                        </span>
+                      </span>
+                    ) : (
+                      <span>
+                        <strike>{currency.format(9000000)}</strike>
+                        <span className="ml-2 text-red-600 text-3xl">
+                          {currency.format(member?.total_payment)}
+                        </span>
+                      </span>
+                    )}
                   </h4>
+                  <p>
+                    Secure our launch price <strong>Exp 31 Oct 2024</strong>
+                  </p>
                 </div>
                 <div className="flex items-center">
                   {snapToken && (
