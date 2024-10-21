@@ -170,21 +170,12 @@ function MemberDashboard({
                 <div className=" mb-4 lg:mb-0">
                   <p>{t('total_payment')}</p>
                   <h4 className="text-2xl font-bold mb-2">
-                    {member?.business_type?.id === 1 ? (
-                      <span>
-                        <strike>{currency.format(12000000)}</strike>
-                        <span className="ml-2 text-red-600 text-3xl">
-                          {currency.format(member?.total_payment)}
-                        </span>
+                    <span>
+                      <strike>{currency.format(12000000)}</strike>
+                      <span className="ml-2 text-red-600 text-3xl">
+                        {currency.format(member?.total_payment)}
                       </span>
-                    ) : (
-                      <span>
-                        <strike>{currency.format(9000000)}</strike>
-                        <span className="ml-2 text-red-600 text-3xl">
-                          {currency.format(member?.total_payment)}
-                        </span>
-                      </span>
-                    )}
+                    </span>
                   </h4>
                   <p>
                     Secure our launch price <strong>Exp 31 Oct 2024</strong>
