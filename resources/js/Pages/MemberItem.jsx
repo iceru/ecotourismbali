@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { badgeColor } from '@/Helper/BadgeColor';
 import { toLower } from 'lodash';
+import moment from 'moment';
 
 function MemberItem({ member, tribe }) {
   const { t } = useTranslation();
@@ -11,7 +12,10 @@ function MemberItem({ member, tribe }) {
     <div>
       <div className="border rounded-2xl p-4 h-fit">
         <>
-          {member?.verified_badge_id ? (
+          {member?.verified_badge_id &&
+          (member?.expired_verified
+            ? moment(member?.expired_verified).isAfter(moment())
+            : true) ? (
             <div>
               <div
                 className={`rounded-bl-2xl rounded-tr-2xl text-white px-3 py-1 text-[12px] flex -mt-4 

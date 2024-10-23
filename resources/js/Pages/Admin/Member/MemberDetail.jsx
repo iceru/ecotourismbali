@@ -38,6 +38,7 @@ function MemberIndex() {
     status: member?.status || null,
     invoice_no: lastPayment?.status_code || null,
     invoice_item_text: lastPayment?.invoice_item_text || null,
+    expired_verified: member?.expired_verified,
   });
 
   const submit = e => {
@@ -276,6 +277,23 @@ function MemberIndex() {
               ) : (
                 items('verified_badge', member?.verified_badge?.name)
               )}
+              {edit ? (
+                <div className="flex flex-wrap items-center mb-6">
+                  <div className="font-bold lg:w-1/4">
+                    {t('expired_verified')}
+                  </div>
+                  <TextInput
+                    id="expired_verified"
+                    name="expired_verified"
+                    value={data?.expired_verified}
+                    type="date"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
+                    onChange={e => setData('expired_verified', e.target.value)}
+                  />
+                </div>
+              ) : (
+                items('expired_verified', member?.expired_verified)
+              )}
               {items('description', member?.description)}
               {edit && (
                 <Button type="submit" className="mt-4" disabled={processing}>
@@ -285,7 +303,10 @@ function MemberIndex() {
             </form>
           </div>
           <div className="lg:w-1/5 mx-auto flex lg:block gap-12 sticky top-0 lg:border-l pl-4 mt-10 lg:mt-0">
-            {member?.verified_badge && (
+            {member?.verified_badge &&
+            (member?.expired_verified
+              ? moment(member?.expired_verified).isAfter(moment())
+              : true) ? (
               <div className="flex flex-col items-center text-primary uppercase mb-6 pb-4 lg:border-b">
                 <div>
                   <img
@@ -302,7 +323,7 @@ function MemberIndex() {
                   {member?.verified_badge?.name} Verified Badge
                 </div>
               </div>
-            )}
+            ) : null}
             {member?.badge ? (
               <div>
                 <div className="flex flex-col items-center  uppercase mb-1">

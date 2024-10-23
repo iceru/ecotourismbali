@@ -27,6 +27,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import moment from 'moment';
 import { getCountryCodePrefixedNumber } from '@/Helper/NumberHelper';
+import { useEffect, useRef, useState } from 'react';
 
 function MemberProfile({ member, scores, lastSession, expiredDate }) {
   const { t } = useTranslation();
@@ -41,10 +42,54 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
     slidesToScroll: 1,
   };
 
-  const downloadBadge = url => {
-    console.log(url);
-    saveAs(url, 'badge.png');
+  // const downloadBadge = url => {
+  //   console.log(url);
+  //   saveAs(url, 'badge.png');
+  // };
+
+  const canvasRef = useRef(null);
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const drawImageWithText = url => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    const image = new Image();
+    image.src = url; // Path to your image
+    image.onload = () => {
+      // Draw the image on canvas
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      // Add text on the image
+      ctx.font = '40px Arial';
+      ctx.fillStyle = 'black';
+      ctx.textAlign = 'center';
+      const text = member?.expired_verified
+        ? 'Expired ' + moment(member?.expired_verified).format('LL')
+        : '';
+      const x = canvas.width / 2; // Horizontal center
+      const y = canvas.height - 20; // Vertical bottom (20px padding from bottom)
+
+      // Add the text to the canvas
+      ctx.fillText(text, x, y);
+
+      // Convert canvas to image and set it in state to display
+      const imageUrl = canvas.toDataURL('image/png');
+      setImageSrc(imageUrl);
+    };
   };
+
+  // Function to download the image
+  const downloadBadge = () => {
+    const link = document.createElement('a');
+    link.href = imageSrc;
+    link.download = 'badge.png';
+    link.click();
+  };
+
+  useEffect(() => {
+    drawImageWithText(`/storage/badges/${member?.verified_badge?.image}`);
+  }, [member]);
 
   return (
     <MemberLayout>
@@ -73,7 +118,16 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
           {t('change_password')}
           <FontAwesomeIcon icon={faLock} />
         </Button>
-        {member?.verified_badge_id && (
+        <canvas
+          ref={canvasRef}
+          width={500}
+          height={500}
+          style={{ display: 'none' }}
+        />
+        {member?.verified_badge_id &&
+        (member?.expired_verified
+          ? moment(member?.expired_verified).isAfter(moment())
+          : true) ? (
           <Button
             color="orange"
             onClick={() =>
@@ -82,7 +136,7 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
           >
             {t('download_badge')}
           </Button>
-        )}
+        ) : null}
         <div className="flex flex-wrap">
           <div className="w-full mb-4 lg:mb-0">
             <div className="flex items-center mb-10">

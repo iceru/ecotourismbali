@@ -27,6 +27,7 @@ import sdg12 from '../../images/sdg/12.png';
 import sdg13 from '../../images/sdg/13.png';
 import sdg14 from '../../images/sdg/14.png';
 import sdg15 from '../../images/sdg/15.png';
+import moment from 'moment';
 
 function MemberList({ member, lastSession, scores }) {
   const { t } = useTranslation();
@@ -48,7 +49,6 @@ function MemberList({ member, lastSession, scores }) {
 
   const sdgHotel = [4, 6, 7, 8, 11, 12, 13, 14, 15];
   const sdgRestaurant = [2, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15];
-
   console.log(
     sdg2,
     sdg4,
@@ -257,8 +257,11 @@ function MemberList({ member, lastSession, scores }) {
               ></div>
             )}
             <>
-              {member?.verified_badge ? (
-                <div className="flex flex-col items-center text-primary uppercase mb-4 pb-4">
+              {member?.verified_badge &&
+              (member?.expired_verified
+                ? moment(member?.expired_verified).isAfter(moment())
+                : true) ? (
+                <div className="flex flex-col items-center text-primary  mb-4 pb-4">
                   <div>
                     <img
                       className="max-h-[200px]"
@@ -266,13 +269,19 @@ function MemberList({ member, lastSession, scores }) {
                     />
                   </div>
                   <div
-                    className={`font-bold ${badgeColor(
+                    className={`font-bold uppercase ${badgeColor(
                       member?.verified_badge?.name,
                       'text'
                     )}`}
                   >
                     {member?.verified_badge.name} {t('verified_badge')}
                   </div>
+                  {member?.expired_verified && (
+                    <p className="text-black font-bold mt-1 text-sm">
+                      {t('expired')}&nbsp;
+                      {moment(member?.expired_verified).format('LL')}
+                    </p>
+                  )}
                 </div>
               ) : member?.badge ? (
                 <div>

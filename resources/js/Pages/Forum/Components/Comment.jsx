@@ -63,7 +63,10 @@ function Comment({ comment, type, member, thread, images }) {
         <div>
           <h4 className="text-lg font-bold">{currentMember?.business_name}</h4>
           <div className="flex gap-2 items-center">
-            {currentMember?.verified_badge_id && (
+            {currentMember?.verified_badge_id &&
+            (currentMember?.expired_verified
+              ? moment(currentMember?.expired_verified).isAfter(moment())
+              : true) ? (
               <>
                 <div className="h-[32px] w-[24px]">
                   <img
@@ -82,7 +85,7 @@ function Comment({ comment, type, member, thread, images }) {
                   {currentMember?.verified_badge?.name} Member
                 </div>
               </>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
