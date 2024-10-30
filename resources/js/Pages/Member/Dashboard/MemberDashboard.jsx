@@ -95,7 +95,7 @@ function MemberDashboard({
         </div>
       )}
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
-        {member?.program?.name === 'Green Pal' && (
+        {member?.program?.name.includes('Green Pal') ? (
           <>
             <AdminSection>
               <TitleSection title="welcome_greenpal" className="mb-4" />
@@ -116,8 +116,8 @@ function MemberDashboard({
               <p className="text-sm text-justify">{t('greenpal_text_2')}</p>
             </AdminSection>
           </>
-        )}
-        {member?.program?.name !== 'Green Pal' && (
+        ) : null}
+        {member?.program?.name.includes('Green Force') ? (
           <>
             <AdminSection>
               <TitleSection title="welcome_member" className="mb-4" />
@@ -133,7 +133,7 @@ function MemberDashboard({
                 </Button>
               </div>
               {member?.status?.includes('active') &&
-                member?.program?.name !== 'Green Pal' && (
+                member?.program?.name.includes('Green Force') && (
                   <div>
                     <Button
                       className="!inline-block"
@@ -156,13 +156,13 @@ function MemberDashboard({
               />
             </AdminSection>
           </>
-        )}
+        ) : null}
       </div>
       {!member?.status?.includes('active') && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">
-          {member?.program?.name !== 'Green Pal' && (
+          {member?.program?.name.includes('Green Force') ? (
             <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
-          )}
+          ) : null}
           {member?.status === 'payment' && member?.total_payment ? (
             <>
               <p className="text-sm">{t('member_locked_text')}</p>
@@ -208,7 +208,7 @@ function MemberDashboard({
             </>
           ) : (
             <>
-              {member?.program?.name !== 'Green Pal' ? (
+              {member?.program?.name.includes('Green Force') ? (
                 <MemberDashboardForm
                   business_type={business_type}
                   member={member}

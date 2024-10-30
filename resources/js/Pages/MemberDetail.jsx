@@ -73,7 +73,9 @@ function MemberList({ member, lastSession, scores }) {
       <div className="flex flex-wrap mt-10">
         <div
           className={`${
-            member?.program?.name !== 'Green Pal' ? 'lg:w-3/4 w-full' : 'w-full'
+            member?.program?.name.includes('Green Force')
+              ? 'lg:w-3/4 w-full'
+              : 'w-full'
           } lg:pr-10`}
         >
           <section className="flex justify-between items-center md:mb-12 mb-6 flex-wrap">
@@ -96,7 +98,7 @@ function MemberList({ member, lastSession, scores }) {
                 </h4>
               </div>
             </div>
-            {member?.program?.name === 'Green Pal' && (
+            {member?.program?.name.includes('Green Pal') ? (
               <div className="flex justify-center items-center flex-col w-full md:w-fit">
                 <div className="flex justify-center">
                   <img
@@ -109,7 +111,7 @@ function MemberList({ member, lastSession, scores }) {
                   Green Pal Member
                 </h4>
               </div>
-            )}
+            ) : null}
           </section>
           <section className="md:mb-12 mb-6 md:-mx-2">
             <Slider {...settings}>
@@ -167,7 +169,7 @@ function MemberList({ member, lastSession, scores }) {
           </section>
           <div
             className={`${
-              member?.program?.name === 'Green Pal'
+              member?.program?.name.includes('Green Pal')
                 ? 'lg:w-3/4 w-full mx-auto'
                 : ''
             }`}
@@ -249,7 +251,7 @@ function MemberList({ member, lastSession, scores }) {
           </div>
         </div>
 
-        {member?.program?.name !== 'Green Pal' && (
+        {member?.program?.name.includes('Green Force') ? (
           <div className="lg:w-1/4 mx-auto w-full md:gap-12 top-0 py-6 px-3  mt-10 md:mt-0 sticky">
             {member?.badge && (
               <div
@@ -323,7 +325,7 @@ function MemberList({ member, lastSession, scores }) {
               </div>
             </>
           </div>
-        )}
+        ) : null}
       </div>
     </Guest>
   );

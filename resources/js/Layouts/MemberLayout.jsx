@@ -51,6 +51,7 @@ function MemberLayout({ children, state }) {
       localStorage.setItem('lang', code);
     }
   }
+
   return (
     <div className="flex bg-lightPrimary p-3 gap-4 lg:p-6 lg:gap-6 min-h-screen bg-opacity-70">
       <Head title="Member" />
@@ -143,7 +144,7 @@ function MemberLayout({ children, state }) {
                 </Link>
               </li>
             )}
-            {member?.program?.name !== 'Green Pal' &&
+            {member?.program?.name.includes('Green Force') &&
             member?.status?.includes('active') ? (
               <>
                 <li>
