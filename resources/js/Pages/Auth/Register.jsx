@@ -28,6 +28,7 @@ export default function Register({ programs }) {
     subscribed: true,
     program: programs[parsed?.tribe === 'greenpal' ? 1 : 0].id,
   });
+  console.log(data);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -213,7 +214,7 @@ export default function Register({ programs }) {
                 name="program"
                 value={data.program}
                 className="mt-1 block w-full"
-                labelData="name"
+                labelData="label_register"
                 valueData="id"
                 options={programs}
                 onChange={e => setData('program', e.target.value)}
@@ -223,7 +224,7 @@ export default function Register({ programs }) {
               <InputError message={errors.program} className="mt-2" />
             </div>
 
-            <div className="text-sm text-gray-500 mt-3">
+            {/* <div className="text-sm text-gray-500 mt-3">
               {data.program == 1 ? (
                 <div className="flex">
                   <img src={greenforce} className="w-16 h-16 mr-2" alt="" />
@@ -248,7 +249,7 @@ export default function Register({ programs }) {
                   </p>
                 </div>
               )}
-            </div>
+            </div> */}
 
             <div className="mt-4">
               <InputLabel htmlFor="email" value={t('form_label_email')} />

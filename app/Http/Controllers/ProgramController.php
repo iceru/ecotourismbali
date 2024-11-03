@@ -37,6 +37,7 @@ class ProgramController extends Controller
 
         $request->validate([
             'name' => 'required',
+            'label' => 'required',
             'description' => 'required',
             'image' => 'nullable',
         ]);
@@ -52,6 +53,7 @@ class ProgramController extends Controller
         }
 
         $program->name = $request->name;
+        $program->label = $request->label;
         $program->description = $request->description;
         $program->save();
 
@@ -85,6 +87,7 @@ class ProgramController extends Controller
 
         $request->validate([
             'name' => 'required',
+            'label' => 'required',
             'image' => 'nullable',
             'description' => 'nullable',
         ]);
@@ -99,6 +102,7 @@ class ProgramController extends Controller
         }
 
         $program->name = $request->name;
+        $program->label = $request->label;
         $program->description = $request->description;
         $program->save();
 

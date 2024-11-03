@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
-import { useEffect } from 'react';
 
 function CreateProgram({ program }) {
   const { t } = useTranslation();
@@ -16,11 +15,26 @@ function CreateProgram({ program }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     image: null,
+    label: '',
+    label_register: '',
   });
 
-  const headerTable = ['Name', 'Image', 'Description', 'Action'];
+  const headerTable = [
+    'Name',
+    'Label',
+    'Label Register',
+    'Image',
+    'Description',
+    'Action',
+  ];
 
-  const selectedData = ['name', 'image', 'description'];
+  const selectedData = [
+    'name',
+    'label',
+    'label_register',
+    'image',
+    'description',
+  ];
 
   const tableActions = [
     {
@@ -74,6 +88,43 @@ function CreateProgram({ program }) {
                 onChange={e => setData('name', e.target.value)}
               />
               <span className="text-red-600">{errors.name}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="label" value={t('form_label_label')} />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="label"
+                name="label"
+                type="text"
+                value={data.label}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('label', e.target.value)}
+              />
+              <span className="text-red-600">{errors.label}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="label_register"
+                value={t('form_label_label_register')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="label_register"
+                name="label_register"
+                type="text"
+                value={data.label_register}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('label_register', e.target.value)}
+              />
+              <span className="text-red-600">{errors.label_register}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">

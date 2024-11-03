@@ -129,19 +129,19 @@ function MemberList({
       <h1 className="text-3xl lg:text-4xl mb-8 font-bold">
         {t('etb_network')}
       </h1>
-      <div className="flex justify-between flex-wrap lg:flex-nowrap items-center mb-6">
+      <div className="mb-6">
         <div className="flex items-center gap-4 mb-4 lg:mb-0">
-          <img
+          {/* <img
             src={`/storage/programs/${tribe?.image}`}
             className="w-20 h-20 object-contain"
             alt=""
-          />
+          /> */}
           <div>
             <h1 className="text-3xl font-bold mb-1">{tribe?.name}</h1>
-            <p className="lg:max-w-[75%]">{tribe?.description}</p>
+            <p>{tribe?.description}</p>
           </div>
         </div>
-        <div className="flex gap-8 items-start w-full justify-center lg:w-fit lg:justify-start">
+        {/* <div className="flex gap-8 items-start w-full justify-center lg:w-fit lg:justify-start">
           {programs?.map(program => {
             return (
               <button
@@ -162,13 +162,36 @@ function MemberList({
               </button>
             );
           })}
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-wrap justify-between mb-6 pb-6 border-b">
         <div className="mb-6 lg:mb-0 lg:w-3/4 lg:pr-4">
           <div className="font-bold mb-2 text-lg">{t('filter')}</div>
           <div className="flex flex-wrap lg:flex-nowrap">
             <div className="flex w-full lg:w-auto flex-wrap lg:flex-nowrap">
+              <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                <InputLabel
+                  className="mr-4 w-1/4 lg:w-auto"
+                  value={t('program')}
+                />
+                <SelectInput
+                  options={programs}
+                  value={program}
+                  labelData="label"
+                  valueData="id"
+                  className="w-full"
+                  onChange={e => {
+                    console.log(e.target.value);
+                    filterData({
+                      programData: e.target.value
+                        ? parseInt(e.target.value)
+                        : null,
+                    });
+                  }}
+                >
+                  <option value="">{t('select_program')}</option>
+                </SelectInput>
+              </div>
               {tribe?.id === 1 && (
                 <>
                   <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">

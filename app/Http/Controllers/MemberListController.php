@@ -21,7 +21,7 @@ class MemberListController extends Controller
     public function index(Request $request)
     {
         $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')
-        ->where('status', 'not like', "%dummy%")->where('program_id', 1)
+        ->where('status', 'not like', "%dummy%")
         ->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
 
         $tribe = Program::where('name', 'like', '%members%')->first();
@@ -31,7 +31,6 @@ class MemberListController extends Controller
         }
 
         if ($request->input('program')) {
-            $members = $members->where('program_id', $request->input('program'));
             $tribe = Program::where('id', $request->input('program'))->first();
             $tourism = MemberTourism::where('business_name', '!=', NULL)->with('source');
             $auth = Auth::user();
@@ -93,7 +92,7 @@ class MemberListController extends Controller
 
     public function filter(Request $request)
     {
-        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%")->where('program_id', 1);
+        $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%");
         $tribe = Program::where('name', 'like', '%embers%')->first();
 
         if ($request->category && $request->category !== 'all') {
@@ -101,7 +100,6 @@ class MemberListController extends Controller
         }
 
         if ($request->program) {
-            $members = $members->where('program_id', $request->program);
             $tribe = Program::where('id', $request->input('program'))->first();
             $auth = Auth::user();
             $tourism = MemberTourism::where('business_name', '!=', NULL)->with('source');

@@ -18,6 +18,8 @@ function EditProgram() {
     name: program.name || '',
     description: program.description || '',
     image: null,
+    label: program.label || '',
+    label_register: program.label_register || '',
   });
 
   const submit = e => {
@@ -47,6 +49,43 @@ function EditProgram() {
                 onChange={e => setData('name', e.target.value)}
               />
               <span className="text-red-600">{errors.name}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="label" value={t('form_label_label')} />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="label"
+                name="label"
+                type="text"
+                value={data.label}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('label', e.target.value)}
+              />
+              <span className="text-red-600">{errors.label}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="label_register"
+                value={t('form_label_label_register')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="label_register"
+                name="label_register"
+                type="text"
+                value={data.label_register}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('label_register', e.target.value)}
+              />
+              <span className="text-red-600">{errors.label_register}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
