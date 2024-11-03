@@ -137,7 +137,7 @@ function MemberList({
             alt=""
           /> */}
           <div>
-            <h1 className="text-3xl font-bold mb-1">{tribe?.name}</h1>
+            <h1 className="text-3xl font-bold mb-1">{tribe?.label}</h1>
             <p>{tribe?.description}</p>
           </div>
         </div>
