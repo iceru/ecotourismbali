@@ -40,6 +40,7 @@ class ProgramController extends Controller
             'label' => 'required',
             'description' => 'required',
             'image' => 'nullable',
+            'label_register' => 'required',
         ]);
 
         $filename = null;
@@ -54,6 +55,7 @@ class ProgramController extends Controller
 
         $program->name = $request->name;
         $program->label = $request->label;
+        $program->label_register = $request->label_register;
         $program->description = $request->description;
         $program->save();
 
@@ -88,6 +90,7 @@ class ProgramController extends Controller
         $request->validate([
             'name' => 'required',
             'label' => 'required',
+            'label_register' => 'required',
             'image' => 'nullable',
             'description' => 'nullable',
         ]);
@@ -103,6 +106,7 @@ class ProgramController extends Controller
 
         $program->name = $request->name;
         $program->label = $request->label;
+        $program->label_register = $request->label_register;
         $program->description = $request->description;
         $program->save();
 
