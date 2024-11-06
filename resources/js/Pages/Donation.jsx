@@ -99,12 +99,19 @@ function Donation() {
               Donations for <br /> Regenerative Bali
             </h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur. Ut pharetra lorem nunc mi
-              sed. Vitae egestas vitae leo augue. Nec nibh fames vitae libero et
-              congue et pellentesque turpis. <br /> <br /> Fermentum sagittis
-              sem consectetur integer volutpat scelerisque. Id lobortis maecenas
-              aliquet praesent. Faucibus nam amet nullam volutpat orci. Amet
-              arcu mauris eget phasellus sit.
+              Be a force for good in Bali!
+              <br />
+              <br />
+              Through Regenerative Bali Program, drive a real, positive change
+              for the island's environment and communities. Empower your
+              businesses to invest in restoring Bali's natural beauty, and
+              uplifting local livelihood.
+              <br />
+              <br />
+              By contributing, you're not just donating- you're helping to
+              rebuild ecosystems, promote sustainable practices, and support
+              Balinese communities to flourish. Join us in creating a brighter,
+              greener future for Bali.
             </p>
           </section>
           <form
