@@ -71,9 +71,12 @@ function Navbar() {
             >
               <div className="container flex justify-center gap-20 py-6">
                 <div>
-                  <div className="text-primary text-2xl mb-3 block font-serif">
+                  <a
+                    href="https://ecotourimbali.com/what-we-offer"
+                    className="text-primary text-2xl mb-3 block font-serif"
+                  >
                     What We Offer
-                  </div>
+                  </a>
                   <li>
                     <a href="https://ecotourimbali.com/eco-climate-badge">
                       Eco Climate Badge
@@ -202,19 +205,19 @@ function Navbar() {
       >
         <div class="mb-6">
           <div class="logo w-24 lg:w-32 mb-14">
-            <a href="/" class="">
+            <a href="https://ecotourismbali.com/" class="">
               <img class="h-16 lg:h-20" src={Logo} alt="Eco Tourism Bali" />
             </a>
           </div>
           <nav>
             <ul class="flex flex-col  gap-6">
               <li>
-                <a class="menulinks" href="/">
+                <a class="menulinks" href="https://ecotourismbali.com/">
                   Home
                 </a>
               </li>
               <li>
-                <a class="menulinks" href="/about/">
+                <a class="menulinks" href="https://ecotourismbali.com/about/">
                   About
                 </a>
               </li>
@@ -232,40 +235,55 @@ function Navbar() {
                 </button>
                 <div class={`pl-4 mt-4 ${programs ? '' : 'hidden'}`}>
                   <ul class="grid gap-4 mb-4 pb-4 border-b border-gray-100">
-                    <li class="text-primary font-bold">What We Offer</li>
+                    <li class="text-primary font-bold">
+                      <a href="https://ecotourismbali.com/what-we-offer">
+                        What We Offer
+                      </a>
+                    </li>
                     <li>
-                      <a href="/eco-climate-badge">Eco Climate Badge</a>
+                      <a href="https://ecotourismbali.com/eco-climate-badge">
+                        Eco Climate Badge
+                      </a>
                     </li>
                   </ul>
                   <ul class="grid gap-4 mb-4 pb-4 border-b border-gray-100">
                     <li>
-                      <a href="/products" class="text-primary font-bold">
-                        Products
+                      <span class="text-primary font-bold">Products</span>
+                    </li>
+                    <li>
+                      <a href="https://ecotourismbali.com/regenerative-bali">
+                        Regenerative Bali
                       </a>
                     </li>
                     <li>
-                      <a href="/regenerative-bali">Regenerative Bali</a>
+                      <a href="https://ecotourismbali.com/products#training">
+                        Training & Consultancy
+                      </a>
                     </li>
                     <li>
-                      <a href="/products#training">Training & Consultancy</a>
-                    </li>
-                    <li>
-                      <a href="/products#sustainable">
+                      <a href="https://ecotourismbali.com/products#sustainable">
                         Sustainable Event Management
                       </a>
                     </li>
                   </ul>
                   <ul class="grid gap-4">
                     <li>
-                      <a href="/events" class="text-primary font-bold">
+                      <a
+                        href="https://ecotourismbali.com/events"
+                        class="text-primary font-bold"
+                      >
                         Events
                       </a>
                     </li>
                     <li>
-                      <a href="/events#etw">Eco Tourism Week</a>
+                      <a href="https://ecotourismbali.com/events#etw">
+                        Eco Tourism Week
+                      </a>
                     </li>
                     <li>
-                      <a href="/events#calendar">Event Calendar</a>
+                      <a href="https://ecotourismbali.com/events#calendar">
+                        Event Calendar
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -279,7 +297,10 @@ function Navbar() {
                 </a>
               </li>
               <li>
-                <a class="menulinks" href="/insights/">
+                <a
+                  class="menulinks"
+                  href="https://ecotourismbali.com/insights/"
+                >
                   Insights
                 </a>
               </li>

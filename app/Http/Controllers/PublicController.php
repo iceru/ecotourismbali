@@ -12,10 +12,10 @@ class PublicController extends Controller
     public function members() {
         $total = new \stdClass();
 
-        $greenforce = Member::where('status', 'LIKE', '%active%')->where('program_id', '1')->count();        
-        $greenpal = Member::where('status', 'LIKE', '%active%')->where('program_id', '2')->count();        
-        $hotels = Member::where('status', 'LIKE', '%active%')->where('business_type_id', '1')->count();
-        $restaurant = Member::where('status', 'LIKE', '%active%')->where('business_type_id', '3')->count();
+        $greenforce = Member::where('status', 'LIKE', '%active%')->where('status', 'not like', "%dummy%")->where('program_id', '1')->count();        
+        $greenpal = Member::where('status', 'LIKE', '%active%')->where('status', 'not like', "%dummy%")->where('program_id', '2')->count();        
+        $hotels = Member::where('status', 'LIKE', '%active%')->where('status', 'not like', "%dummy%")->where('business_type_id', '1')->count();
+        $restaurant = Member::where('status', 'LIKE', '%active%')->where('status', 'not like', "%dummy%")->where('business_type_id', '3')->count();
         
         $total->greenforce = $greenforce;
         $total->greenpal = $greenpal;
