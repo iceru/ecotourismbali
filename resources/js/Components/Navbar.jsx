@@ -72,13 +72,13 @@ function Navbar() {
               <div className="container flex justify-center gap-20 py-6">
                 <div>
                   <a
-                    href="https://ecotourimbali.com/what-we-offer"
+                    href="https://ecotourismbali.com/what-we-offer"
                     className="text-primary text-2xl mb-3 block font-serif"
                   >
                     What We Offer
                   </a>
                   <li>
-                    <a href="https://ecotourimbali.com/eco-climate-badge">
+                    <a href="https://ecotourismbali.com/eco-climate-badge">
                       Eco Climate Badge
                     </a>
                   </li>
@@ -90,17 +90,17 @@ function Navbar() {
                   </div>
                   <ul className="grid gap-2">
                     <li>
-                      <a href="https://ecotourimbali.com/regenerative-bali">
+                      <a href="https://ecotourismbali.com/regenerative-bali">
                         Regenerative Bali
                       </a>
                     </li>
                     <li>
-                      <a href="https://ecotourimbali.com/products#training">
+                      <a href="https://ecotourismbali.com/products#training">
                         Training & Consultancy
                       </a>
                     </li>
                     <li>
-                      <a href="https://ecotourimbali.com/products#sustainable">
+                      <a href="https://ecotourismbali.com/products#sustainable">
                         Sustainable Workshop Program
                       </a>
                     </li>
@@ -108,19 +108,19 @@ function Navbar() {
                 </div>
                 <div className="w-[1px] bg-gray-300"></div>
                 <div>
-                  <a href="https://ecotourimbali.com/events">
+                  <a href="https://ecotourismbali.com/events">
                     <h4 className="text-primary text-2xl mb-3 font-serif">
                       Events
                     </h4>
                   </a>
                   <ul className="grid gap-2">
                     <li>
-                      <a href="https://ecotourimbali.com/events#etw">
+                      <a href="https://ecotourismbali.com/events#etw">
                         Eco Tourism Week
                       </a>
                     </li>
                     <li>
-                      <a href="https://ecotourimbali.com/events#calendar">
+                      <a href="https://ecotourismbali.com/events#calendar">
                         Calendar Events
                       </a>
                     </li>
