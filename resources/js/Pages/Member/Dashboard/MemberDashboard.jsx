@@ -171,15 +171,11 @@ function MemberDashboard({
                   <p>{t('total_payment')}</p>
                   <h4 className="text-2xl font-bold mb-2">
                     <span>
-                      <strike>{currency.format(12000000)}</strike>
-                      <span className="ml-2 text-red-600 text-3xl">
+                      <span className="ml-2 text-primary text-3xl">
                         {currency.format(member?.total_payment)}
                       </span>
                     </span>
                   </h4>
-                  <p>
-                    Secure our launch price <strong>Exp 31 Oct 2024</strong>
-                  </p>
                 </div>
                 <div className="flex items-center">
                   {snapToken && (
