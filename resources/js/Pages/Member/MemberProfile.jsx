@@ -57,21 +57,41 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
     const image = new Image();
     image.src = url; // Path to your image
     image.onload = () => {
-      // Draw the image on canvas
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      // Define padding for the text area
+      const paddingBottom = 120; // Increased to accommodate two lines of text
 
-      // Add text on the image
-      ctx.font = '40px Arial';
+      // Adjust canvas height to include padding
+      canvas.height = image.height + paddingBottom;
+      canvas.width = image.width;
+
+      // Draw the image on canvas
+      ctx.drawImage(image, 0, 0, canvas.width, image.height);
+
+      // Add the first line of text below the image
+      const fontSize1 = 44; // Font size for the first line of text
+      ctx.font = `${fontSize1}px Arial`;
       ctx.fillStyle = 'black';
       ctx.textAlign = 'center';
-      const text = member?.expired_verified
+
+      // First line of text
+      const text1 = member?.expired_verified
         ? 'Expired ' + moment(member?.expired_verified).format('LL')
         : '';
       const x = canvas.width / 2; // Horizontal center
-      const y = canvas.height - 20; // Vertical bottom (20px padding from bottom)
+      const y1 = image.height + fontSize1; // Place first line of text below the image
 
-      // Add the text to the canvas
-      ctx.fillText(text, x, y);
+      ctx.fillText(text1, x, y1);
+
+      // Set a different font size for the second line of text
+      const fontSize2 = 30; // Font size for the second line of text
+      ctx.font = `${fontSize2}px Arial`;
+
+      // Second line of text below the first one
+      const text2 = member?.badge_certificate; // Replace with the desired second text
+      const lineHeight = fontSize1; // Adjust spacing between lines if needed
+      const y2 = y1 + lineHeight; // Position the second line of text below the first
+
+      ctx.fillText(text2, x, y2);
 
       // Convert canvas to image and set it in state to display
       const imageUrl = canvas.toDataURL('image/png');

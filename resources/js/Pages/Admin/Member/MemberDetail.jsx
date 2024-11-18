@@ -39,6 +39,7 @@ function MemberIndex() {
     invoice_no: lastPayment?.status_code || null,
     invoice_item_text: lastPayment?.invoice_item_text || null,
     expired_verified: member?.expired_verified,
+    badge_certificate: member?.badge_certificate,
   });
 
   const submit = e => {
@@ -293,6 +294,23 @@ function MemberIndex() {
                 </div>
               ) : (
                 items('expired_verified', member?.expired_verified)
+              )}
+              {edit ? (
+                <div className="flex flex-wrap items-center mb-6">
+                  <div className="font-bold lg:w-1/4">
+                    {t('badge_certificate')}
+                  </div>
+                  <TextInput
+                    id="badge_certificate"
+                    name="badge_certificate"
+                    value={data?.badge_certificate}
+                    type="text"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
+                    onChange={e => setData('badge_certificate', e.target.value)}
+                  />
+                </div>
+              ) : (
+                items('badge_certificate', member?.badge_certificate)
               )}
               {items('description', member?.description)}
               {edit && (
