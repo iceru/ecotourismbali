@@ -38,8 +38,6 @@ function Assessment({ assessments, session, answers, member }) {
     });
   }, [answers]);
 
-  console.log(answers);
-
   const handleOptionChange = (questionId, optionId, noStore) => {
     const updatedData = {
       [`radio.${questionId}`]: optionId,

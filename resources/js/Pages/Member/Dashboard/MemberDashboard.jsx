@@ -77,6 +77,8 @@ function MemberDashboard({
     }
   }, []);
 
+  console.log(member.status);
+
   return (
     <MemberLayout>
       {payComplete || payCompleteStorage ? (
@@ -94,9 +96,9 @@ function MemberDashboard({
           <span className="inline">{flash.success}</span>
         </div>
       )}
-      <div className="grid lg:grid-cols-2 gap-6 mb-6">
-        {member?.program?.name.includes('Green Pal') ? (
-          <>
+      {member?.program?.name.includes('Green Pal') ? (
+        <>
+          <div className="grid lg:grid-cols-2 gap-6 mb-6">
             <AdminSection>
               <TitleSection title="welcome_greenpal" className="mb-4" />
               <div className="flex">
@@ -115,49 +117,60 @@ function MemberDashboard({
               <p className="text-sm text-justify mb-2">{t('greenpal_text')}</p>
               <p className="text-sm text-justify">{t('greenpal_text_2')}</p>
             </AdminSection>
-          </>
-        ) : null}
-        {member?.program?.name.includes('Green Force') ? (
-          <>
+          </div>
+
+          {!member?.company_name && !member?.description && (
             <AdminSection>
-              <TitleSection title="welcome_member" className="mb-4" />
-              <div>
-                <Button
-                  as="link"
-                  href={route('member.profile')}
-                  className="mb-4 !inline-block"
-                  color="lightPrimary"
-                >
-                  {t('edit_profile')}
-                  <FontAwesomeIcon className="ml-2" icon={faUser} />
-                </Button>
-              </div>
-              {member?.status?.includes('active') &&
-                member?.program?.name.includes('Green Force') && (
-                  <div>
-                    <Button
-                      className="!inline-block"
-                      as="link"
-                      href={route('member.module.index')}
-                      color="lightSecondary"
-                    >
-                      {t('start_learning')}
-                      <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
-                    </Button>
-                  </div>
-                )}
-            </AdminSection>
-            <AdminSection>
-              <MemberBadge
+              <MemberGreenpal
                 member={member}
-                lastSession={lastSession}
-                scores={scores}
-                expiredDate={expiredDate}
+                categories={categories}
+                snapToken={snapToken}
+                pay={pay}
               />
             </AdminSection>
-          </>
-        ) : null}
-      </div>
+          )}
+        </>
+      ) : null}
+      {member?.program?.name.includes('Green Force') ? (
+        <>
+          <AdminSection>
+            <TitleSection title="welcome_member" className="mb-4" />
+            <div>
+              <Button
+                as="link"
+                href={route('member.profile')}
+                className="mb-4 !inline-block"
+                color="lightPrimary"
+              >
+                {t('edit_profile')}
+                <FontAwesomeIcon className="ml-2" icon={faUser} />
+              </Button>
+            </div>
+            {member?.status?.includes('active') &&
+              member?.program?.name.includes('Green Force') && (
+                <div>
+                  <Button
+                    className="!inline-block"
+                    as="link"
+                    href={route('member.module.index')}
+                    color="lightSecondary"
+                  >
+                    {t('start_learning')}
+                    <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
+                  </Button>
+                </div>
+              )}
+          </AdminSection>
+          <AdminSection>
+            <MemberBadge
+              member={member}
+              lastSession={lastSession}
+              scores={scores}
+              expiredDate={expiredDate}
+            />
+          </AdminSection>
+        </>
+      ) : null}
       {!member?.status?.includes('active') && (
         <AdminSection className="flex flex-col items-center justify-center gap-4">
           {member?.program?.name.includes('Green Force') ? (
@@ -209,9 +222,7 @@ function MemberDashboard({
                   business_type={business_type}
                   member={member}
                 />
-              ) : (
-                <MemberGreenpal member={member} categories={categories} />
-              )}
+              ) : null}
             </>
           )}
         </AdminSection>

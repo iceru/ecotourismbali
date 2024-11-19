@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->string('badge_certificate');
+            $table->string('badge_certificate')->nullable();
         });
     }
 

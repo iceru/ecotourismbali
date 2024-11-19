@@ -28,7 +28,6 @@ export default function Register({ programs }) {
     subscribed: true,
     program: programs[parsed?.tribe === 'greenpal' ? 1 : 0].id,
   });
-  console.log(data);
   const { t } = useTranslation();
 
   useEffect(() => {

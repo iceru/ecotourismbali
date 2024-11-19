@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MemberPayment;
 use Inertia\Inertia;
 use App\Models\Member;
 use App\Models\Category;
@@ -255,5 +256,25 @@ class MemberController extends Controller
         $user->save();
 
         return Redirect::route('member.dashboard')->with('success', 'Data added successfully.');
+    }
+
+    public function updatePayment() {
+        $member = Member::where('user_id', Auth::id())->first();
+        $member->status = 'payment';
+        $member->total_payment = 1000000;
+        $member->save();
+        
+        $business_name = str_replace(' ', '_', $member->business_name);
+        $timestamp = time();
+        
+        $payment = new MemberPayment();
+        $payment->status_code = $business_name . '_' . $timestamp;
+        $payment->payment_no = $business_name . '_' . $timestamp;
+        $payment->invoice_item_text = 'Greenpal Payment';
+        $payment->payment_status = 'pending';
+        $payment->member_id = $member->id;
+        $payment->save();
+
+        return Redirect::route('member.dashboard')->with('success', 'Proceed to payment');
     }
 }

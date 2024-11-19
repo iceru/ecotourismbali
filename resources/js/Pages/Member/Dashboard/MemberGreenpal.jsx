@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
-import { useForm } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import Button from '@/Components/Button';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import SelectInput from '@/Components/SelectInput';
+import { currency } from '@/Helper/Formatter';
 
-const MemberGreenpal = ({ member, categories }) => {
-  const localAgreement = localStorage.getItem('agreement');
+const MemberGreenpal = ({ member, categories, snapToken, pay }) => {
   const { t } = useTranslation();
 
-  const [agreement, setAgreement] = useState(localAgreement || false);
   const [provinces, setProvinces] = useState();
   const [selectedProvince, setSelectedProvince] = useState();
   const [city, setCity] = useState();
 
-  const { data, setData, post, processing, errors, reset } = useForm({
+  const { data, setData, post, get, processing, errors, reset } = useForm({
     company_name: member.company_name || null,
     business_name: member.business_name || null,
     address: member.address || null,
@@ -65,23 +64,61 @@ const MemberGreenpal = ({ member, categories }) => {
     e.preventDefault();
 
     post(route('member.greenpal.store'), {
-      onSuccess: () => {},
+      onSuccess: () => {
+        localStorage.removeItem('agreement');
+      },
     });
   };
 
   const agreeSubmit = () => {
-    setAgreement(true);
-    localStorage.setItem('agreement', true);
+    get(route('member.update.payment'), {
+      onSuccess: () => {},
+    });
   };
 
   return (
     <div>
-      {!agreement ? (
+      {!member?.status ? (
         <div>
           <h4 className="font-bold mb-2 text-lg">{t('agreement_title')}</h4>
           <p className="mb-4">{t('agreement_text')}</p>
           <Button onClick={agreeSubmit}>{t('agreement_button')}</Button>
         </div>
+      ) : member?.status === 'payment' ? (
+        <>
+          <p className="text-sm">{t('member_locked_text')}</p>
+          <div className="flex flex-wrap justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
+            <div className=" mb-4 lg:mb-0">
+              <p>{t('total_payment')}</p>
+              <h4 className="text-2xl font-bold mb-2">
+                <span>
+                  <span className="ml-2 text-primary text-3xl">
+                    {currency.format(member?.total_payment)}
+                  </span>
+                </span>
+              </h4>
+            </div>
+            <div className="flex items-center">
+              {snapToken && (
+                <Button
+                  className="text-[16px] mr-4"
+                  color="danger"
+                  onClick={resetPay}
+                >
+                  {t('reset_pay')}
+                </Button>
+              )}
+              <Button
+                className="text-[16px] "
+                onClick={() =>
+                  !member?.status?.includes('active') ? pay() : null
+                }
+              >
+                {t('member_locked_button')}
+              </Button>
+            </div>
+          </div>
+        </>
       ) : (
         <>
           <form onSubmit={submit} className="w-full">

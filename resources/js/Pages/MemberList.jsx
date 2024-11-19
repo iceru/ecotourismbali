@@ -111,7 +111,7 @@ function MemberList({
       category: cat,
     };
     setCategory(cat);
-    router.post(route('member.filter', { category: category }), value);
+    router.post(route('member.filter', { category: cat }), value);
   };
 
   const changeSort = data => {
@@ -181,7 +181,6 @@ function MemberList({
                   valueData="id"
                   className="w-full"
                   onChange={e => {
-                    console.log(e.target.value);
                     filterData({
                       programData: e.target.value
                         ? parseInt(e.target.value)

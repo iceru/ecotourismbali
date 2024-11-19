@@ -100,6 +100,7 @@ Route::middleware(['auth', 'role:member', 'verified'])->group(function () {
     Route::post('/member/profile/delete/image/{id}', [MemberController::class, 'deleteImage'])->name('member.profile.deleteImage');
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
     Route::post('/member/greenpal/store', [MemberController::class, 'greenpal'])->name('member.greenpal.store');
+    Route::get('/member/update-payment', [MemberController::class, 'updatePayment'])->name('member.update.payment');
 
     Route::get('/member/assessment/tutorial', [MemberAssessmentController::class, 'tutorial'])->name('member.assessment.index');
     Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.data');

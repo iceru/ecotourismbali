@@ -79,15 +79,12 @@ class MemberPaymentController extends Controller
                     $memberPayment->update(['payment_status' => 'challenge by FDS']);
                 } else {
                     $memberPayment->update(['payment_status' => 'success']);
+                    $member->update(['status' => 'active']);
                 }
             }
         } else if ($transaction == 'settlement') {
             $memberPayment->update(['payment_status' => 'success']);
-            if (intval($member->total_payment) === 1000000 || intval($member->total_payment) === 500000 ) {
-                $member->update(['status' => 'active_assessment']);
-            } else {
-                $member->update(['status' => 'active']);
-            }
+            $member->update(['status' => 'active']);
         } else if ($transaction == 'pending') {
             $memberPayment->update(['payment_status' => 'pending']);
         } else if ($transaction == 'deny') {
