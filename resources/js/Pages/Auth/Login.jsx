@@ -17,6 +17,8 @@ export default function Login({ status, canResetPassword }) {
   });
 
   useEffect(() => {
+    sessionStorage.clear('snapToken');
+
     return () => {
       reset('password');
     };

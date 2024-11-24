@@ -72,12 +72,11 @@ function MemberDashboard({
   };
 
   useEffect(() => {
+    setPayComplete(false);
     if (parsed.newPayment) {
       setPayComplete(true);
     }
   }, []);
-
-  console.log(member.status);
 
   return (
     <MemberLayout>
@@ -96,7 +95,7 @@ function MemberDashboard({
           <span className="inline">{flash.success}</span>
         </div>
       )}
-      {member?.program?.name.includes('Green Pal') ? (
+      {member?.program?.name.includes('Green Pal') && (
         <>
           <div className="grid lg:grid-cols-2 gap-6 mb-6">
             <AdminSection>
@@ -115,7 +114,9 @@ function MemberDashboard({
             <AdminSection>
               <TitleSection title="greenpal_community" className="mb-4" />
               <p className="text-sm text-justify mb-2">{t('greenpal_text')}</p>
-              <p className="text-sm text-justify">{t('greenpal_text_2')}</p>
+              <p className="text-sm text-justify mb-2">
+                {t('greenpal_text_2')}
+              </p>
             </AdminSection>
           </div>
 
@@ -130,9 +131,9 @@ function MemberDashboard({
             </AdminSection>
           )}
         </>
-      ) : null}
-      {member?.program?.name.includes('Green Force') ? (
-        <>
+      )}
+      {member?.program?.name.includes('Green Force') && (
+        <div className="grid lg:grid-cols-2 gap-6 mb-6">
           <AdminSection>
             <TitleSection title="welcome_member" className="mb-4" />
             <div>
@@ -169,64 +170,61 @@ function MemberDashboard({
               expiredDate={expiredDate}
             />
           </AdminSection>
-        </>
-      ) : null}
-      {!member?.status?.includes('active') && (
-        <AdminSection className="flex flex-col items-center justify-center gap-4">
-          {member?.program?.name.includes('Green Force') ? (
+        </div>
+      )}
+      {!member?.status?.includes('active') &&
+        member?.program?.name.includes('Green Force') && (
+          <AdminSection className="flex flex-col items-center justify-center gap-4">
             <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
-          ) : null}
-          {member?.status === 'payment' && member?.total_payment ? (
-            <>
-              <p className="text-sm">{t('member_locked_text')}</p>
-              <div className="flex flex-wrap justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
-                <div className=" mb-4 lg:mb-0">
-                  <p>{t('total_payment')}</p>
-                  <h4 className="text-2xl font-bold mb-2">
-                    <span>
-                      <span className="ml-2 text-primary text-3xl">
-                        {currency.format(member?.total_payment)}
+            {member?.status === 'payment' && member?.total_payment ? (
+              <>
+                <p className="text-sm">{t('member_locked_text')}</p>
+                <div className="flex flex-wrap justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
+                  <div className=" mb-4 lg:mb-0">
+                    <p>{t('total_payment')}</p>
+                    <h4 className="text-2xl font-bold mb-2">
+                      <span>
+                        <span className="ml-2 text-primary text-3xl">
+                          {currency.format(member?.total_payment)}
+                        </span>
                       </span>
-                    </span>
-                  </h4>
-                </div>
-                <div className="flex items-center">
-                  {snapToken && (
+                    </h4>
+                  </div>
+                  <div className="flex items-center">
+                    {snapToken && (
+                      <Button
+                        className="text-[16px] mr-4"
+                        color="danger"
+                        onClick={resetPay}
+                      >
+                        {t('reset_pay')}
+                      </Button>
+                    )}
                     <Button
-                      className="text-[16px] mr-4"
-                      color="danger"
-                      onClick={resetPay}
+                      className="text-[16px] "
+                      onClick={() =>
+                        !member?.status?.includes('active') ? pay() : null
+                      }
                     >
-                      {t('reset_pay')}
+                      {t('member_locked_button')}
                     </Button>
-                  )}
-                  <Button
-                    className="text-[16px] "
-                    onClick={() =>
-                      !member?.status?.includes('active') ? pay() : null
-                    }
-                  >
-                    {t('member_locked_button')}
-                  </Button>
+                  </div>
                 </div>
-              </div>
-            </>
-          ) : member?.status === 'waiting_approval' ? (
-            <>
-              <p>{t('member_not_approved')}</p>
-            </>
-          ) : (
-            <>
-              {member?.program?.name.includes('Green Force') ? (
+              </>
+            ) : member?.status === 'waiting_approval' ? (
+              <>
+                <p>{t('member_not_approved')}</p>
+              </>
+            ) : (
+              <>
                 <MemberDashboardForm
                   business_type={business_type}
                   member={member}
                 />
-              ) : null}
-            </>
-          )}
-        </AdminSection>
-      )}
+              </>
+            )}
+          </AdminSection>
+        )}
     </MemberLayout>
   );
 }
