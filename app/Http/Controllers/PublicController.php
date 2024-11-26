@@ -41,6 +41,7 @@ class PublicController extends Controller
                         array_push($hotels, $memberAs->score);
                     }
                 }
+                
                 $avg = array_sum($hotels) / count($hotels);
                 $assessDatas->avg = $avg;
                 $assessDatas->title = $assess->title;
