@@ -27,7 +27,7 @@ class PublicController extends Controller
 
     public function impacts() {
         $impacts = new \stdClass();
-        $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo')->with('business_type')->get();
+        $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo', 'max_points')->with(['business_type'])->get();
         $memberAssess = MemberAssessment::with('member')->where('completion', 'yes')->get();
 
         $hotelsAvgs =  array();
@@ -42,7 +42,7 @@ class PublicController extends Controller
                     }
                 }
                 
-                $avg = array_sum($hotels) / count($hotels);
+                $avg = ((array_sum($hotels) / count($hotels)) * 100) / (int) $assess->max_points;
                 $assessDatas->avg = $avg;
                 $assessDatas->title = $assess->title;
                 $assessDatas->logo = $assess->logo;
@@ -56,8 +56,9 @@ class PublicController extends Controller
                         array_push($restos, $memberAs->score);
                     }
                 }
-                $avg = array_sum($restos) / count($restos);
-                $assessDatas->avg = $avg;
+                // dd($restos);
+                $avg = ((array_sum($restos) / count($restos)) * 100) / (int) $assess->max_points;
+                $assessDatas->avg = (int)$avg;
                 $assessDatas->title = $assess->title;
                 $assessDatas->logo = $assess->logo;
 
