@@ -29,7 +29,18 @@ function Donation() {
           setPayPending(false);
           sessionStorage.clear('snapTokenDonation');
           sessionStorage.setItem('paid', true);
-          router.visit('/donation/success');
+          axios
+            .post(route('donation.sendEmail'), {
+              email: data?.email,
+              amount: data?.amount,
+              name: data?.name,
+            })
+            .then(function (res) {
+              router.visit('/donation/success');
+            })
+            .catch(err => {
+              console.log(err);
+            });
         },
         onPending: function () {
           setPayPending(true);
@@ -87,8 +98,6 @@ function Donation() {
   useEffect(() => {
     handleChangeAmount(amounts[0]);
   }, []);
-
-  console.log(errors);
 
   return (
     <Guest>

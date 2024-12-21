@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DonationMail;
 use Midtrans\Snap;
 use Inertia\Inertia;
 use Midtrans\Config;
 use App\Models\Donation;
+use Error;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class DonationController extends Controller
@@ -50,7 +53,7 @@ class DonationController extends Controller
 
             $donation->save();
 
-        } catch(err) {
+        } catch(Error) {
             return Redirect::route('donation.index')->with('failed', 'There is something wrong');
         }
     }
@@ -79,11 +82,20 @@ class DonationController extends Controller
         return $snapToken;
     }
 
+    public function sendEmail(Request $request)
+    {
+       try {
+        Mail::to($request->email)->send(new DonationMail($request));
+        return response()->json('Success', 200);
+       } catch(Error) {
+        return response()->json('Error', status: 500);
+       }
+    }
 
     /**
      * Display the specified resource.
      */
-    public function success()
+    public function success(Request $request)
     {
         return Inertia::render('DonationSuccess');
     }

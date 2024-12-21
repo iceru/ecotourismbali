@@ -67,6 +67,7 @@ Route::get('/donation', [DonationController::class, 'index'])->name('donation.in
 Route::post('/donation/store', [DonationController::class, 'store'])->name('donation.store');
 Route::post('/donation/pay', [DonationController::class, 'pay'])->name('donation.pay');
 Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
+Route::post('/donation/sendEmail', [DonationController::class, 'sendEmail'])->name('donation.sendEmail');
 
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 
