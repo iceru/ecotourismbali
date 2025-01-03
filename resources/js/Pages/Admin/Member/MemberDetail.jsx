@@ -40,6 +40,8 @@ function MemberIndex() {
     invoice_item_text: lastPayment?.invoice_item_text || null,
     expired_verified: member?.expired_verified,
     badge_certificate: member?.badge_certificate,
+    latitude: member?.latitude,
+    longitude: member?.longitude,
   });
 
   const submit = e => {
@@ -311,6 +313,36 @@ function MemberIndex() {
                 </div>
               ) : (
                 items('badge_certificate', member?.badge_certificate)
+              )}
+              {edit ? (
+                <div className="flex flex-wrap items-center mb-6">
+                  <div className="font-bold lg:w-1/4">{t('latitude')}</div>
+                  <TextInput
+                    id="latitude"
+                    name="latitude"
+                    value={data?.latitude}
+                    type="text"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
+                    onChange={e => setData('latitude', e.target.value)}
+                  />
+                </div>
+              ) : (
+                items('latitude', member?.latitude)
+              )}
+              {edit ? (
+                <div className="flex flex-wrap items-center mb-6">
+                  <div className="font-bold lg:w-1/4">{t('longitude')}</div>
+                  <TextInput
+                    id="longitude"
+                    name="longitude"
+                    value={data?.longitude}
+                    type="text"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
+                    onChange={e => setData('longitude', e.target.value)}
+                  />
+                </div>
+              ) : (
+                items('longitude', member?.longitude)
               )}
               {items('description', member?.description)}
               {edit && (

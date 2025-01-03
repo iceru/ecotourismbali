@@ -138,6 +138,8 @@ class MemberAssessmentController extends Controller
             'company_name' => 'required',
             'category' => 'required',
             'legal_identity' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         if ($request->sister_company) {
@@ -158,6 +160,8 @@ class MemberAssessmentController extends Controller
         $member->business_type_id = $request->business_type_id;
         $member->category_id = $request->category;
         $member->legal_identity = $request->legal_identity;
+        $member->latitude = $request->latitude;
+        $member->longitude = $request->longitude;
         $member->save();
 
         $user->name = $request->name;

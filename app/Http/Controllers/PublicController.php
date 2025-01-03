@@ -25,6 +25,13 @@ class PublicController extends Controller
         return response()->json($total, 200);
     }
 
+    public function activeMembers() {
+        $members = Member::where('status', 'LIKE', '%active%')
+        ->where('status', 'not like', "%dummy%")
+        ->select(['business_name', 'longitude', 'latitude', 'image', 'description'])->get();
+        return response()->json($members, 200);
+    }
+
     public function impacts() {
         $impacts = new \stdClass();
         $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo', 'max_points')->with(['business_type'])->get();

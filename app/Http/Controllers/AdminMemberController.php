@@ -122,6 +122,8 @@ class AdminMemberController extends Controller
             'invoice_item_text' => 'nullable',
             'expired_verified' => 'nullable',
             'badge_certificate' => 'nullable',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
         ]);
 
         $member = Member::find($request->id);
@@ -133,6 +135,8 @@ class AdminMemberController extends Controller
         $member->total_payment = $request->total_payment;
         $member->expired_verified = $request->expired_verified;
         $member->badge_certificate = $request->badge_certificate;
+        $member->latitude = $request->latitude;
+        $member->longitude = $request->longitude;
 
         if($member->status) {
             $member->status = $request->status;

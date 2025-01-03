@@ -29,6 +29,8 @@ const MemberGreenpal = ({ member, categories, snapToken, pay }) => {
     city: member.city || null,
     province: member.province || null,
     website: member.website || null,
+    latitude: member.latitude || null,
+    longitude: member.longitude || null,
     category: member.category || categories[0].id || null,
   });
 
@@ -323,6 +325,36 @@ const MemberGreenpal = ({ member, categories, snapToken, pay }) => {
                 />
                 {errors.city && (
                   <span className="text-red-600">{errors.city}</span>
+                )}
+              </div>
+              <div className="grid gap-3">
+                <InputLabel htmlFor="latitude" value={t('label_latitude')} />
+                <TextInput
+                  id="latitude"
+                  name="latitude"
+                  value={data.latitude}
+                  className="block w-full"
+                  isFocused={true}
+                  type="tel"
+                  onChange={e => setData('latitude', e.target.value)}
+                />
+                {errors.latitude && (
+                  <span className="text-red-600">{errors.latitude}</span>
+                )}
+              </div>
+              <div className="grid gap-3">
+                <InputLabel htmlFor="longitude" value={t('label_longitude')} />
+                <TextInput
+                  id="longitude"
+                  name="longitude"
+                  value={data.longitude}
+                  className="block w-full"
+                  isFocused={true}
+                  type="tel"
+                  onChange={e => setData('longitude', e.target.value)}
+                />
+                {errors.longitude && (
+                  <span className="text-red-600">{errors.longitude}</span>
                 )}
               </div>
             </div>

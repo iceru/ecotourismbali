@@ -33,6 +33,8 @@ function AssessmentData({ categories }) {
     email: member?.user?.email || '',
     business_type_id: member?.business_type_id || '',
     category: member?.category_id || '',
+    latitude: member?.user?.latitude || '',
+    longitude: member?.user?.longitude || '',
   });
 
   useEffect(() => {
@@ -335,6 +337,39 @@ function AssessmentData({ categories }) {
                   />
                   {errors.city && (
                     <span className="text-red-600">{errors.city}</span>
+                  )}
+                </div>
+                <div className="grid gap-3">
+                  <InputLabel htmlFor="latitude" value={t('label_latitude')} />
+                  <TextInput
+                    id="latitude"
+                    name="latitude"
+                    value={data.latitude}
+                    className="block w-full"
+                    isFocused={true}
+                    type="tel"
+                    onChange={e => setData('latitude', e.target.value)}
+                  />
+                  {errors.latitude && (
+                    <span className="text-red-600">{errors.latitude}</span>
+                  )}
+                </div>
+                <div className="grid gap-3">
+                  <InputLabel
+                    htmlFor="longitude"
+                    value={t('label_longitude')}
+                  />
+                  <TextInput
+                    id="longitude"
+                    name="longitude"
+                    value={data.longitude}
+                    className="block w-full"
+                    isFocused={true}
+                    type="tel"
+                    onChange={e => setData('longitude', e.target.value)}
+                  />
+                  {errors.longitude && (
+                    <span className="text-red-600">{errors.longitude}</span>
                   )}
                 </div>
               </div>

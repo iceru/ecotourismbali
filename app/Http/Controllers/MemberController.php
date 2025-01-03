@@ -210,6 +210,8 @@ class MemberController extends Controller
             'city' => 'required',
             'category' => 'required',
             'website' => 'nullable',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         $filename = null;
@@ -246,6 +248,8 @@ class MemberController extends Controller
         $member->province = $request->province;
         $member->city = $request->city;
         $member->phone = $request->phone;
+        $member->latitude = $request->latitude;
+        $member->longitude = $request->longitude;
         $member->category_id = $request->category;
         $member->status = 'active';
         $member->save();
