@@ -28,6 +28,7 @@ function MemberDashboard({
   const { t } = useTranslation();
   const [payComplete, setPayComplete] = useState(false);
   const [payPending, setPayPending] = useState(false);
+  const [snk, setSnk] = useState(false);
 
   const parsed = queryString.parse(location.search);
   const { flash } = usePage().props;
@@ -179,35 +180,74 @@ function MemberDashboard({
             {member?.status === 'payment' && member?.total_payment ? (
               <>
                 <p className="text-sm">{t('member_locked_text')}</p>
-                <div className="flex flex-wrap justify-between w-full lg:w-2/3 items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6 mt-4">
-                  <div className=" mb-4 lg:mb-0">
-                    <p>{t('total_payment')}</p>
-                    <h4 className="text-2xl font-bold mb-2">
-                      <span>
-                        <span className="ml-2 text-primary text-3xl">
-                          {currency.format(member?.total_payment)}
-                        </span>
-                      </span>
-                    </h4>
+                <div className="grid lg:grid-cols-2 gap-6 w-full items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6">
+                  <div>
+                    <div className="mb-4">
+                      <p className="font-bold">Dibayar ke:</p>
+                      <p>
+                        Eco Tourism Bali <br />
+                        Jalan Srirama Gang. Kayumanis III No. 6, Second Floor
+                        <br />
+                        Bali, Indonesia 80361
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-bold">Dibayar oleh:</p>
+                      <p>{member?.business_name}</p>
+                      <p>{member?.user?.name}</p>
+                      <p>{member?.address}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    {snapToken && (
+                  <div>
+                    <div className=" mb-4 lg:mb-0">
+                      <p className="font-bold">{t('total_payment')}:</p>
+                      <h4 className="text-2xl font-bold mb-2">
+                        <span>
+                          <span className=" text-primary text-3xl">
+                            {currency.format(member?.total_payment)}
+                          </span>
+                        </span>
+                      </h4>
+                    </div>
+                    <div className="mb-2">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        name="snk"
+                        id="snk"
+                        onChange={() => setSnk(!snk)}
+                      />
+                      <label htmlFor="snk" className="text-sm">
+                        Saya setuju dengan
+                        <a
+                          href="https://ecotourismbali.com/terms-conditions"
+                          target="_blank"
+                          className="text-primary font-bold ml-1"
+                        >
+                          Syarat dan Ketentuan
+                        </a>
+                      </label>
+                    </div>
+                    <div className="flex items-center">
+                      {snapToken && (
+                        <Button
+                          className="text-[16px] mr-4"
+                          color="danger"
+                          onClick={resetPay}
+                        >
+                          {t('reset_pay')}
+                        </Button>
+                      )}
                       <Button
-                        className="text-[16px] mr-4"
-                        color="danger"
-                        onClick={resetPay}
+                        className="text-[16px] "
+                        onClick={() =>
+                          !member?.status?.includes('active') ? pay() : null
+                        }
+                        disabled={!snk}
                       >
-                        {t('reset_pay')}
+                        {t('member_locked_button')}
                       </Button>
-                    )}
-                    <Button
-                      className="text-[16px] "
-                      onClick={() =>
-                        !member?.status?.includes('active') ? pay() : null
-                      }
-                    >
-                      {t('member_locked_button')}
-                    </Button>
+                    </div>
                   </div>
                 </div>
               </>
