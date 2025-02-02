@@ -15,6 +15,15 @@ import idImg from '../../images/id.png';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 
+import ac from '../../images/payments/american-express.png';
+import visa from '../../images/payments/visa.svg';
+import mastercard from '../../images/payments/mastercard.png';
+import bca from '../../images/payments/bca.png';
+import jcb from '../../images/payments/jcb.png';
+import gopay from '../../images/payments/gopay.png';
+import mandiri from '../../images/payments/mandiri.webp';
+import qris from '../../images/payments/qris.png';
+
 function Footer() {
   const { changeLanguage, language } = i18n;
   const { t } = useTranslation();
@@ -30,7 +39,7 @@ function Footer() {
         <img src={Wave} className="w-full object-cover" alt="" />
       </div>
       <section className="bg-primary">
-        <div className="grid lg:grid-cols-2 gap-12 container py-8">
+        <div className="grid lg:grid-cols-2 gap-12 container py-8 px-4">
           <div>
             <h5 className="font-sans text-xl mb-2 font-bold text-white">
               {t('newsletter')}
@@ -55,7 +64,7 @@ function Footer() {
           </div>
         </div>
       </section>
-      <section className="container flex flex-col lg:flex-row gap-8 lg:gap-0 justify-between py-12 text-primary">
+      <section className="container flex flex-col lg:flex-row gap-8 lg:gap-0 justify-between py-12 text-primary px-4">
         <div className="flex gap-8 flex-col lg:flex-row">
           <div>
             <img className="w-14" src={Logo} alt="Eco Tourism Bali" />
@@ -88,6 +97,39 @@ function Footer() {
               <a href="#">FAQ</a>
             </li>
           </ul>
+        </div>
+        <div>
+          <h6 className="font-bold mb-4 text-lg">{t('payment_method')}</h6>
+          <div className="grid grid-cols-4 lg:grid-cols-3 gap-4">
+            <div>
+              <img src={visa} className="w-12 h-12 object-contain" alt="" />
+            </div>
+            <div>
+              <img
+                src={mastercard}
+                className="w-12 h-12 object-contain"
+                alt=""
+              />
+            </div>
+            <div>
+              <img src={jcb} className="w-12 h-12 object-contain" alt="" />
+            </div>
+            <div>
+              <img src={ac} className="w-12 h-12 object-contain" alt="" />
+            </div>
+            <div>
+              <img src={bca} className="w-12 h-12 object-contain" alt="" />
+            </div>
+            <div>
+              <img src={mandiri} className="w-12 h-12 object-contain" alt="" />
+            </div>
+            <div>
+              <img src={gopay} className="w-12 h-12 object-contain" alt="" />
+            </div>
+            <div>
+              <img src={qris} className="w-12 h-12 object-contain" alt="" />
+            </div>
+          </div>
         </div>
         <div>
           <h6 className="font-bold mb-4 text-lg">{t('social_media')}</h6>
