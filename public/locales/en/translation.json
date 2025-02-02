@@ -6,13 +6,11 @@
   "register_welcome_text2": "Already a Member?",
   "already_registered": "Already registered?",
   "login_here": "Login Here",
-
   "menu": "Menu",
   "logout": "Logout",
   "submit": "Submit",
   "next": "Next",
   "hello": "Hello",
-
   "home": "Home",
   "member": "Member",
   "assessment": "Assessment",
@@ -25,78 +23,62 @@
   "verified_badge": "Verified Badge",
   "statistic": "Statistics",
   "statistic_assessment": "Statistics of Assessment",
-
   "list_of_members": "List of Members",
   "back_to_list_members": "Back to List of Members",
-
   "create_assessment_title": "Create Assessment",
   "edit_assessment_title": "Edit Assessment",
   "list_assessment_title": "Assessment List",
   "back_to_list_assessment": "Back to List of Assessment",
-
   "assessment_score": "Score",
   "assessment_completion": "Completion",
-
   "create_question_title": "Create Question",
   "edit_question_title": "Edit Question",
   "list_question_title": "Question List",
   "back_to_question": "Back to Question",
   "add_question": "Add Question",
-
   "create_option_title": "Create Option",
   "edit_option_title": "Edit Option",
   "list_option_title": "Option List",
   "add_option": "Add Option",
   "back_to_list_option": "Back to List of Option",
-
   "create_badge_title": "Create Badge",
   "edit_badge_title": "Edit Badge",
   "list_badge_title": "Badge List",
   "back_to_list_badge": "Back to List of Badge",
-
   "create_verified_badge_title": "Create Verified Badge",
   "edit_verified_badge_title": "Edit Verified Badge",
   "list_verified_badge_title": "Verified Badge List",
   "back_to_list_verified_badge": "Back to List of Verified Badge",
-
   "create_module_title": "Create Module",
   "edit_module_title": "Edit Module",
   "list_module_title": "Module List",
   "back_to_list_module": "Back to List of Module",
-
   "create_pre_test_title": "Create Pre Test Question",
   "edit_pre_test_title": "Edit Pre Test Question",
   "list_pre_test_title": "Pre Test Question List",
   "back_to_list_pre_test": "Back to List of Pre Test Question",
   "add_pre_test_option": "Add Pre Test Options",
-
   "create_post_test_title": "Create Post Test Question",
   "edit_post_test_title": "Edit Post Test Question",
   "list_post_test_title": "Post Test Question List",
   "back_to_list_post_test": "Back to List of Post Test Question",
   "add_post_test_option": "Add Post Test Options",
-
   "create_category_title": "Create Category",
   "edit_category_title": "Edit Category",
   "list_category_title": "Category List",
   "back_to_list_category": "Back to List of Category",
-
   "create_program_title": "Create Program",
   "edit_program_title": "Edit Program",
   "list_program_title": "Program List",
   "back_to_list_program": "Back to List of Program",
-
   "select_business_type": "Select Business Type",
   "add_business_type": "Add Business Type",
   "business_type": "Business Type",
-
   "create_business_title": "Create Type Business",
   "edit_business_title": "Edit Business Type",
   "list_business_title": "Business Type List",
   "back_to_list_business": "Back to List of Business Type",
-
   "create_admin_title": "Create Admin",
-
   "form_label_name": "Name",
   "form_label_label": "Label",
   "form_label_label_register": "Label Register",
@@ -132,26 +114,20 @@
   "form_label_total_payment": "ETB Product",
   "form_label_text": "Text",
   "form_label_file": "File",
-
   "add_pre_test": "Add Pre Test Question",
   "add_post_test": "Add Post Test Question",
-
   "detail_button": "Detail",
   "edit_button": "Edit",
   "delete_button": "Delete",
   "show_button": "Show",
-
   "member_locked_title": "Your Membership is still locked",
   "member_locked_text": "To activate your membership, please click button below and proceed for payment",
   "member_locked_button": "Pay Here",
-
   "welcome_member": "Welcome to the Member Dashboard",
   "edit_profile": "Edit Your Profile",
   "start_learning": "Start Learning",
-
   "confirm_delete": "Are you sure want to delete this data?",
   "search": "Search",
-
   "eligible_assessment": "You are eligible to do an assessment. Remaining Attempt(s): {{ number }}",
   "not_eligible_assessment": "You are not eligible to do an assessment. Remaining Attempt(s): {{ number }}",
   "business_info": "Business Information Page",
@@ -169,22 +145,18 @@
   "label_business_type_id": "What is your type of business?",
   "company_logo": "Company Logo",
   "company_product": "Company Product / Activity Photos (3)",
-
   "no_assessment": "You haven't done a Self Assessment",
   "your_assessment": "Your Result of Self-Assessment",
   "start_assessment": "Take a Self Assessment",
   "learn_more_assessment": "Learn More about Self Assessment",
-
   "total_module": "Total Module",
   "total_assessments": "Total Assessments",
   "total_members": "Total Members",
   "total_greenpal_members": "Total Green Pal Members",
   "total_greenforce_members": "Total Green Force Members",
-
   "guide_book": "Guide Book",
   "guide_book_text": "Download the latest version of the guide book",
   "download_guide_book": "Download Here",
-
   "website": "Website",
   "address": "Address",
   "phone": "Phone",
@@ -197,11 +169,9 @@
   "assessment_expire": "Assessment Expire",
   "description": "Description",
   "total_payment": "Total Payment",
-
   "filter": "Filter",
   "keyword": "Keyword",
   "sort": "Sort",
-
   "add_slider": "Add Slider Image",
   "add_description": "Add Description",
   "add_address": "Add Address",
@@ -212,7 +182,6 @@
   "your_gallery": "Add Gallery Images",
   "your_description": "Description of the Business",
   "your_merchant_promo": "Merchant Promo",
-
   "all": "All",
   "community": "Community",
   "supplier": "Supplier",
@@ -223,7 +192,6 @@
   "bisnis_fnb": "FnB Business",
   "learn_more": "Learn More",
   "not_verified": "Not Verified",
-
   "list_modules": "List of Modules",
   "post_test": "Post Test",
   "pre_test": "Pre Test",
@@ -231,7 +199,6 @@
   "module_learning": "Module Learning {{ number }}",
   "question": "Question {{ number }}",
   "start_post_test": "Start Post Test",
-
   "edit_member": "Edit Member Detail",
   "close_edit_member": "Close Edit Member Detail",
   "select_category": "Select Category",
@@ -242,9 +209,7 @@
   "select_verified_badge": "Select Verified",
   "select_total_payment": "Select Total Payment",
   "legal_identity": "Legal Identity",
-
   "admin_login": "Admin Login",
-
   "congrats": "Here's your score result!",
   "finish_assessment": "on your self-assessment!",
   "finish_assessment_text": "Your Eco Climate Badge is almost complete. Finish on-site verification to unlock it and access all the perks as a Verified Member!",
@@ -254,33 +219,26 @@
   "your_badge_is": "Your Self Assessment Badge is:",
   "not_eligible_badge": "You are not eligible to get Self Assessment Badge",
   "cant_assessment": "You have done Self Assessment 2 times. You can do your next Self Assessment on:",
-
   "member_not_active": "Your membership is not activated yet",
   "preview_member": "Preview of Assessment and E-Learning",
   "member_not_approved": "Your account is under review. Please wait until we approve your account status. We will send you an email when your account status is approved",
-
   "trial_assessment": "You are in trial of assessment. Remaining Attempt: 1",
   "result_preview_assessment": "This is the end of the trial of assessment. Please activate your membership to unlock full assessment and having a chance of getting self assessment badge",
   "back_to_dashboard": "Back to Dashboard",
-
   "finished": "Finished",
   "read_material": "Read Module Material",
   "congrats_module": "You completed the Module - ",
   "member_dashboard": "Member Dashboard",
   "pay_complete": "Welcome to Eco Tourism Bali Membership!",
   "pay_pending": "Payment is still on going. Please proceed to finish the payment",
-
   "list_of_payments": "List of Payments",
   "notify_admin_text": "Please input the data to proceed the payment",
   "notify_admin": "Notify Admin",
   "subscribe_checkbox": "I would like to receive updates, news, and special offers via email.",
-
   "verified_member": "Active Member",
   "pre_score": "Your Pre-Test Score",
   "post_score": "Your Post-Test Score",
-
   "register_admin": "Register Admin",
-
   "back_to_list_paymnet": "Back to List Payment",
   "payment_no": "Payment No.",
   "payment_status": "Payment Status",
@@ -290,37 +248,29 @@
   "amount": "Amount",
   "bank": "Bank",
   "name": "Name",
-
   "total_visitor": "Total Session and Views for 7 days",
   "total_pageviews": "Total Page Views for 7 day",
   "referral": "Referral Website",
-
   "short_tutorial": "QUICK GUIDE OF THE TOOL",
   "short_tutorial_text": "A quick explanation of the content of the Tool and instructions to fill out the form",
   "content_tutorial": "Content of the Tool",
   "form_tutorial": "How to Fill Out the Form",
-
   "invoice_no": "Invoice Number",
   "invoice_item_text": "Invoice Item",
-
   "verify_badge": "Verify your Badge now!",
   "verify_badge_text": "To verify your badge with us and get the Verified Badge, you can simply click the button below to notify our administrator about your request.",
   "notify_us": "Book on your verification now!",
-
   "self_certificate": "Letter of Acknowledgement",
   "self_certificate_text": "Download your Letter of Acknowledgement here",
   "download": "Download",
-
   "green_credential": "Green Credential",
   "provinces": "Province",
   "city": "City",
   "select_province": "Select Province",
   "select_city": "Select City",
-
   "no_badge": "No Badge",
   "data_saved": "Data Saved Successfully",
   "save": "Save",
-
   "greenpal": "Green Pal",
   "welcome_greenpal": "Welcome Sustainable Suppliers",
   "greenpal_community": "Eco Tourism Bali’s Ecosystem",
@@ -330,15 +280,12 @@
   "agreement_text": "By filling in the data below, I declare that I am willing to participate as part of Eco Tourism Bali in filling out detailed data about the company or community that I own. The data will be published through Eco Tourism Bali social media and the website official Eco Tourism Bali.",
   "agreement_button": "I agree",
   "greenpal_info": "Sustainable Suppliers is a community in Eco Tourism Bali’s ecosystem—a solution for tourism businesses who want to practice sustainability. Be found and get connected with tourism businesses with the same mission to collaborate to make Bali a Sustainable Destination in 2030 through innovative actions and campaigns.",
-
   "merchant_promo": "Merchant Promo",
   "job_title": "Title or Position in the Business (Job Title)",
   "company_name": "Company Name",
   "phone_whatsapp": "Whatsapp Number",
-
   "download_badge": "Download Badge",
   "change_password": "Change Password",
-
   "language": "Language",
   "about": "About",
   "eco_tourism_tribe": "Eco Tourism Member",
@@ -359,13 +306,11 @@
   "warriors": "Warriors",
   "blog": "Blog",
   "news": "News",
-
   "reset_pay": "Reset Payment",
   "verify_thanks": "Thanks for signing up!",
   "verify_email": "Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
   "resend_email": " A new verification link has been sent to the email address you provided during registration.",
   "resend_email_button": "Resend Verification Email",
-
   "content": "Content",
   "content_en": "Content English",
   "image": "Image",
@@ -373,20 +318,16 @@
   "attachment": "Attachment",
   "title": "Title",
   "author": "Author",
-
   "download_result": "Download Result",
-
   "cart": "Cart",
   "hotel_bookings": "Hotel Bookings",
   "price": "Price",
   "hotel_stars": "Hotel Stars",
   "list_items": "List Items",
   "maps": "Maps",
-
   "hotel": "Hotel",
   "restaurant": "Restaurant",
   "product": "Product",
-
   "member_forums": "Member Forums",
   "search_topic": "Search Topic",
   "most_active_users": "Most Active Users",
@@ -397,11 +338,9 @@
   "my_topics": "My Topics",
   "announcements": "Announcements",
   "create_topic": "Create Topic",
-
   "delete_thread": "Delete Topics",
   "create_announcement_title": "Create Announcements",
   "list_announcement": "List Announcements",
-
   "import_data": "Import Data",
   "member_tourism": "Tourism Collective",
   "import_tourism_collective": "Import Tourism Collective",
@@ -409,15 +348,12 @@
   "back_to_list_tourism_collective": "Back to Tourism Collective",
   "edit_tourism_title": "Edit Tourism Collective",
   "form_label_member_only": "Shown to Member Only",
-
   "newsletter_text": "Get the benefits of the fastest growing tourism and hospitality network, join the conversation and be involved in our events and activities to learn how we can contribute for a better planet.",
   "sign_up": "Sign Up Now",
   "your_email": "Your Email",
   "newsletter": "Join Our Newsletter",
   "social_media": "Social Media",
-
   "detail": "Detail",
-
   "tourism_source": "Source of Tourism",
   "create_source_title": "Create Source",
   "list_source_title": "List of Sources",
@@ -425,19 +361,20 @@
   "back_to_list_source": "Back to List of Sources",
   "select_source": "Select Source",
   "sources": "Sources",
-
   "etb_network": "Eco Tourism Bali Network",
-
   "verification_pending": "Verification Pending",
   "expired_verified": "Verified Badge Expiration",
   "expired": "Expired",
-
   "success_dono_text": "Thank you for your generous support of the Regenerative Bali program! Your contribution helps nurture a sustainable future for Bali, empowering communities and protecting our island’s natural beauty.",
   "success_dono_title": "Thank You for the Donations!",
   "success_dono_btn": "Back to Homepage",
-
   "latitude": "Latitude",
   "longitude": "Longitude",
   "label_latitude": "Latitude",
-  "label_longitude": "Longitude"
+  "label_longitude": "Longitude",
+  "agreement": "I agree to the",
+  "terms": "Terms and Conditions",
+  "paid_to": "Paid to",
+  "paid_by": "Paid by",
+  "membership_etb": "Membership Eco Tourism Bali for"
 }

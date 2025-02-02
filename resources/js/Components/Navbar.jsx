@@ -71,16 +71,13 @@ function Navbar() {
             >
               <div className="container flex justify-center gap-20 py-6">
                 <div>
-                  <a
-                    href="https://ecotourismbali.com/what-we-offer"
-                    className="text-primary text-2xl mb-3 block font-serif"
-                  >
-                    What We Offer
-                  </a>
                   <li>
-                    <a href="https://ecotourismbali.com/eco-climate-badge">
-                      Eco Climate Badge
+                    <a href="https://ecotourismbali.com/what-we-offer">
+                      What We Offer
                     </a>
+                  </li>
+                  <li>
+                    <a href="https://ecoclimatebadge.com">Eco Climate Badge</a>
                   </li>
                 </div>
                 <div className="w-[1px] bg-gray-300"></div>
@@ -235,13 +232,13 @@ function Navbar() {
                 </button>
                 <div class={`pl-4 mt-4 ${programs ? '' : 'hidden'}`}>
                   <ul class="grid gap-4 mb-4 pb-4 border-b border-gray-100">
-                    <li class="text-primary font-bold">
+                    <li>
                       <a href="https://ecotourismbali.com/what-we-offer">
                         What We Offer
                       </a>
                     </li>
                     <li>
-                      <a href="https://ecotourismbali.com/eco-climate-badge">
+                      <a href="https://ecoclimatebadge.com">
                         Eco Climate Badge
                       </a>
                     </li>

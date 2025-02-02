@@ -183,7 +183,7 @@ function MemberDashboard({
                 <div className="grid lg:grid-cols-2 gap-6 w-full items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6">
                   <div>
                     <div className="mb-4">
-                      <p className="font-bold">Dibayar ke:</p>
+                      <p className="font-bold">{t('paid_to')}:</p>
                       <p>
                         Eco Tourism Bali <br />
                         Jalan Srirama Gang. Kayumanis III No. 6, Second Floor
@@ -192,7 +192,7 @@ function MemberDashboard({
                       </p>
                     </div>
                     <div>
-                      <p className="font-bold">Dibayar oleh:</p>
+                      <p className="font-bold">Paid by:</p>
                       <p>{member?.business_name}</p>
                       <p>{member?.user?.name}</p>
                       <p>{member?.address}</p>
@@ -210,6 +210,9 @@ function MemberDashboard({
                       </h4>
                     </div>
                     <div className="mb-2">
+                      {t('membership_etb')} {member?.business_type?.name}
+                    </div>
+                    <div className="mb-2">
                       <input
                         type="checkbox"
                         className="mr-2"
@@ -218,13 +221,13 @@ function MemberDashboard({
                         onChange={() => setSnk(!snk)}
                       />
                       <label htmlFor="snk" className="text-sm">
-                        Saya setuju dengan
+                        {t('agreement')}
                         <a
                           href="https://ecotourismbali.com/terms-conditions"
                           target="_blank"
                           className="text-primary font-bold ml-1"
                         >
-                          Syarat dan Ketentuan
+                          {t('terms')}
                         </a>
                       </label>
                     </div>
