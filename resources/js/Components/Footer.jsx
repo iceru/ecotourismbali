@@ -3,7 +3,7 @@ import React from 'react';
 import Wave from '../../images/wave.png';
 import Logo from '../../images/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
   faInstagram,
@@ -81,6 +81,10 @@ function Footer() {
               <a href="mailto:info@ecotourismbali.com">
                 info@ecotourismbali.com
               </a>
+            </div>
+            <div className="flex gap-2.5 items-center">
+              <FontAwesomeIcon icon={faPhone} />
+              <a href="tel:+6281139800055">+62 811-3980-0055</a>
             </div>
           </div>
         </div>
