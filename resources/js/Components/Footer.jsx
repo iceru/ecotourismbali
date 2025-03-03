@@ -15,7 +15,7 @@ import idImg from '../../images/id.png';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 
-import ac from '../../images/payments/american-express.png';
+import bni from '../../images/payments/bni.png';
 import visa from '../../images/payments/visa.svg';
 import mastercard from '../../images/payments/mastercard.png';
 import bca from '../../images/payments/bca.png';
@@ -119,13 +119,13 @@ function Footer() {
               <img src={jcb} className="w-12 h-12 object-contain" alt="" />
             </div>
             <div>
-              <img src={ac} className="w-12 h-12 object-contain" alt="" />
-            </div>
-            <div>
               <img src={bca} className="w-12 h-12 object-contain" alt="" />
             </div>
             <div>
               <img src={mandiri} className="w-12 h-12 object-contain" alt="" />
+            </div>
+            <div>
+              <img src={bni} className="w-12 h-12 object-contain" alt="" />
             </div>
             <div>
               <img src={gopay} className="w-12 h-12 object-contain" alt="" />

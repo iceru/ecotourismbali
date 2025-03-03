@@ -16,6 +16,7 @@ import MemberDashboardForm from './MemberDashboardForm';
 import MemberGreenpal from './MemberGreenpal';
 
 import Greenpal from '../../../../images/greenpal.png';
+import MemberNGO from './MemberNGO';
 
 function MemberDashboard({
   member,
@@ -133,23 +134,53 @@ function MemberDashboard({
           )}
         </>
       )}
-      {member?.program?.name.includes('Green Force') && (
-        <div className="grid lg:grid-cols-2 gap-6 mb-6">
-          <AdminSection>
-            <TitleSection title="welcome_member" className="mb-4" />
-            <div>
-              <Button
-                as="link"
-                href={route('member.profile')}
-                className="mb-4 !inline-block"
-                color="lightPrimary"
-              >
-                {t('edit_profile')}
-                <FontAwesomeIcon className="ml-2" icon={faUser} />
-              </Button>
-            </div>
-            {member?.status?.includes('active') &&
-              member?.program?.name.includes('Green Force') && (
+      {member?.program?.name.includes('NGO') && (
+        <>
+          <div className="grid lg:grid-cols-2 gap-6 mb-6">
+            <AdminSection>
+              <TitleSection title="welcome_ngo" className="mb-4" />
+              <div className="flex">
+                <img
+                  src={Greenpal}
+                  className="h-[120px] mr-4"
+                  alt="Green Pal"
+                />
+                <p className="text-sm text-justify mb-2">{t('ngo_info')}</p>
+              </div>
+            </AdminSection>
+            <AdminSection>
+              <TitleSection title="greenpal_community" className="mb-4" />
+              <p className="text-sm text-justify mb-2">{t('greenpal_text')}</p>
+              <p className="text-sm text-justify mb-2">
+                {t('greenpal_text_2')}
+              </p>
+            </AdminSection>
+          </div>
+
+          {!member?.company_name && !member?.description && (
+            <AdminSection>
+              <MemberNGO member={member} categories={categories} />
+            </AdminSection>
+          )}
+        </>
+      )}
+      {member?.program?.name.includes('Members') && (
+        <>
+          <div className="grid lg:grid-cols-2 gap-6 mb-6">
+            <AdminSection>
+              <TitleSection title="welcome_member" className="mb-4" />
+              <div>
+                <Button
+                  as="link"
+                  href={route('member.profile')}
+                  className="mb-4 !inline-block"
+                  color="lightPrimary"
+                >
+                  {t('edit_profile')}
+                  <FontAwesomeIcon className="ml-2" icon={faUser} />
+                </Button>
+              </div>
+              {member?.status?.includes('active') && (
                 <div>
                   <Button
                     className="!inline-block"
@@ -162,112 +193,112 @@ function MemberDashboard({
                   </Button>
                 </div>
               )}
-          </AdminSection>
-          <AdminSection>
-            <MemberBadge
-              member={member}
-              lastSession={lastSession}
-              scores={scores}
-              expiredDate={expiredDate}
-            />
-          </AdminSection>
-        </div>
-      )}
-      {!member?.status?.includes('active') &&
-        member?.program?.name.includes('Green Force') && (
-          <AdminSection className="flex flex-col items-center justify-center gap-4">
-            <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
-            {member?.status === 'payment' && member?.total_payment ? (
-              <>
-                <p className="text-sm">{t('member_locked_text')}</p>
-                <div className="grid lg:grid-cols-2 gap-6 w-full items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6">
-                  <div>
-                    <div className="mb-4">
-                      <p className="font-bold">{t('paid_to')}:</p>
-                      <p>
-                        Eco Tourism Bali <br />
-                        Jalan Srirama Gang. Kayumanis III No. 6, Second Floor
-                        <br />
-                        Bali, Indonesia 80361
-                      </p>
+            </AdminSection>
+            <AdminSection>
+              <MemberBadge
+                member={member}
+                lastSession={lastSession}
+                scores={scores}
+                expiredDate={expiredDate}
+              />
+            </AdminSection>
+          </div>
+          {!member?.status?.includes('active') && (
+            <AdminSection className="flex flex-col items-center justify-center gap-4">
+              <h2 className="font-bold text-xl">{t('member_not_active')}</h2>
+              {member?.status === 'payment' && member?.total_payment ? (
+                <>
+                  <p className="text-sm">{t('member_locked_text')}</p>
+                  <div className="grid lg:grid-cols-2 gap-6 w-full items-center bg-lightSecondary bg-opacity-60 rounded-2xl p-6">
+                    <div>
+                      <div className="mb-4">
+                        <p className="font-bold">{t('paid_to')}:</p>
+                        <p>
+                          Eco Tourism Bali <br />
+                          Jalan Srirama Gang. Kayumanis III No. 6, Second Floor
+                          <br />
+                          Bali, Indonesia 80361
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-bold">Paid by:</p>
+                        <p>{member?.business_name}</p>
+                        <p>{member?.user?.name}</p>
+                        <p>{member?.address}</p>
+                      </div>
                     </div>
                     <div>
-                      <p className="font-bold">Paid by:</p>
-                      <p>{member?.business_name}</p>
-                      <p>{member?.user?.name}</p>
-                      <p>{member?.address}</p>
-                    </div>
-                  </div>
-                  <div>
-                    <div className=" mb-4 lg:mb-0">
-                      <p className="font-bold">{t('total_payment')}:</p>
-                      <h4 className="text-2xl font-bold mb-2">
-                        <span>
-                          <span className=" text-primary text-3xl">
-                            {currency.format(member?.total_payment)}
+                      <div className=" mb-4 lg:mb-0">
+                        <p className="font-bold">{t('total_payment')}:</p>
+                        <h4 className="text-2xl font-bold mb-2">
+                          <span>
+                            <span className=" text-primary text-3xl">
+                              {currency.format(member?.total_payment)}
+                            </span>
                           </span>
-                        </span>
-                      </h4>
-                    </div>
-                    <div className="mb-2">
-                      {t('membership_etb')} {member?.business_type?.name}
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        type="checkbox"
-                        className="mr-2"
-                        name="snk"
-                        id="snk"
-                        onChange={() => setSnk(!snk)}
-                      />
-                      <label htmlFor="snk" className="text-sm">
-                        {t('agreement')}
-                        <a
-                          href="https://ecotourismbali.com/terms-conditions"
-                          target="_blank"
-                          className="text-primary font-bold ml-1"
-                        >
-                          {t('terms')}
-                        </a>
-                      </label>
-                    </div>
-                    <div className="flex items-center">
-                      {snapToken && (
+                        </h4>
+                      </div>
+                      <div className="mb-2">
+                        {t('membership_etb')} {member?.business_type?.name}
+                      </div>
+                      <div className="mb-2">
+                        <input
+                          type="checkbox"
+                          className="mr-2"
+                          name="snk"
+                          id="snk"
+                          onChange={() => setSnk(!snk)}
+                        />
+                        <label htmlFor="snk" className="text-sm">
+                          {t('agreement')}
+                          <a
+                            href="https://ecotourismbali.com/terms-conditions"
+                            target="_blank"
+                            className="text-primary font-bold ml-1"
+                          >
+                            {t('terms')}
+                          </a>
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        {snapToken && (
+                          <Button
+                            className="text-[16px] mr-4"
+                            color="danger"
+                            onClick={resetPay}
+                          >
+                            {t('reset_pay')}
+                          </Button>
+                        )}
                         <Button
-                          className="text-[16px] mr-4"
-                          color="danger"
-                          onClick={resetPay}
+                          className="text-[16px] "
+                          onClick={() =>
+                            !member?.status?.includes('active') ? pay() : null
+                          }
+                          disabled={!snk}
                         >
-                          {t('reset_pay')}
+                          {t('member_locked_button')}
                         </Button>
-                      )}
-                      <Button
-                        className="text-[16px] "
-                        onClick={() =>
-                          !member?.status?.includes('active') ? pay() : null
-                        }
-                        disabled={!snk}
-                      >
-                        {t('member_locked_button')}
-                      </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </>
-            ) : member?.status === 'waiting_approval' ? (
-              <>
-                <p>{t('member_not_approved')}</p>
-              </>
-            ) : (
-              <>
-                <MemberDashboardForm
-                  business_type={business_type}
-                  member={member}
-                />
-              </>
-            )}
-          </AdminSection>
-        )}
+                </>
+              ) : member?.status === 'waiting_approval' ? (
+                <>
+                  <p>{t('member_not_approved')}</p>
+                </>
+              ) : (
+                <>
+                  <MemberDashboardForm
+                    business_type={business_type}
+                    member={member}
+                  />
+                </>
+              )}
+            </AdminSection>
+          )}
+        </>
+      )}
     </MemberLayout>
   );
 }

@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-
+use Inertia\Inertia;
 class Handler extends ExceptionHandler
 {
     /**
@@ -26,5 +26,14 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception->getMessage() === "User does not have any of the necessary access rights.") {
+            return Inertia::render('ErrorPage403')->toResponse($request)->setStatusCode(403);
+        }
+
+        return parent::render($request, $exception);
     }
 }

@@ -5,14 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
   faChevronDown,
-  faTimes,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Logo from '../../images/logo.png';
 
 function Navbar() {
-  const { i18n } = useTranslation();
   const [sidebar, setSidebar] = useState(false);
   const [programs, setPrograms] = useState(false);
   const { auth } = usePage().props;
@@ -117,7 +115,7 @@ function Navbar() {
                       </a>
                     </li>
                     <li>
-                      <a href="https://ecotourismbali.com/events#calendar">
+                      <a href="https://ecotourismbali.com/event-calendar">
                         Calendar Events
                       </a>
                     </li>
@@ -278,7 +276,7 @@ function Navbar() {
                       </a>
                     </li>
                     <li>
-                      <a href="https://ecotourismbali.com/events#calendar">
+                      <a href="https://ecotourismbali.com/event-calendar">
                         Event Calendar
                       </a>
                     </li>

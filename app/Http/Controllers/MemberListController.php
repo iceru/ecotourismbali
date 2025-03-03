@@ -24,6 +24,7 @@ class MemberListController extends Controller
         ->where('status', 'not like', "%dummy%")
         ->with('badge', 'verified_badge', 'category', 'program')->orderBy('business_name');
 
+        $programs = Program::where('name', 'NOT LIKE', '%NGO%')->get();
         $tribe = Program::where('name', 'like', '%members%')->first();
         
         if ($request->input('category') && $request->input('category') !== 'all') {
@@ -79,7 +80,7 @@ class MemberListController extends Controller
         $categoriesTourism = $tourisms->pluck('category')->unique()->filter()->values();
         $sources = Source::all();
         return Inertia::render('MemberList', [
-            'programs' => Program::all(),
+            'programs' => $programs,
             'categories' => Category::all(),
             'categoriesTourism' => $categoriesTourism,
             'sources' => $sources,
@@ -94,6 +95,7 @@ class MemberListController extends Controller
     {
         $members = Member::where('slug', '!=', '')->where('status', 'like', '%active%')->where('status', 'not like', "%dummy%");
         $tribe = Program::where('name', 'like', '%embers%')->first();
+        $programs = Program::where('name', 'NOT LIKE', '%NGO%')->get();
 
         if ($request->category && $request->category !== 'all') {
             $members = $members->where('category_id', $request->category);
@@ -149,7 +151,7 @@ class MemberListController extends Controller
         $categoriesTourism = $tourisms->pluck('category')->unique()->filter()->values();
         $sources = Source::all();
         return Inertia::render('MemberList', [
-            'programs' => Program::all(),
+            'programs' => $programs,
             'categories' => Category::all(),
             'categoriesTourism' => $categoriesTourism,
             'sources' => $sources,

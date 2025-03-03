@@ -281,4 +281,10 @@ class MemberController extends Controller
 
         return Redirect::route('member.dashboard')->with('success', 'Proceed to payment');
     }
+
+    public function ngoApproval() {
+        $member = Member::where('user_id', Auth::id())->first();
+        $member->status = 'waiting_approval';
+        $member->save();
+    }
 }

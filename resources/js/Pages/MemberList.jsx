@@ -8,18 +8,17 @@ import Button from '@/Components/Button';
 import { Head, Link, router } from '@inertiajs/react';
 import Pagination from '@/Components/Pagination';
 import queryString from 'query-string';
-import TitlePage from '@/Components/TitlePage';
 import MemberItem from './MemberItem';
 import MemberItemTourism from './MemberItemTourism';
 
 function MemberList({
   programs,
   categories,
-  badges,
   members,
   tribe,
   sources,
   verified_badges,
+  auth,
 }) {
   const sorts = [
     {
@@ -122,7 +121,6 @@ function MemberList({
     setSort(data);
     router.post(route('member.filter'), value);
   };
-
   return (
     <Guest>
       <Head title="Member List" />
@@ -212,39 +210,46 @@ function MemberList({
                 </>
               )}
 
-              {tribe?.id === 2 && (
+              {tribe?.id === 2 &&
+                auth?.user?.member?.status?.includes('active') && (
+                  <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
+                    <InputLabel
+                      className="mr-4 w-1/4 lg:w-auto"
+                      value={t('sources')}
+                    />
+                    <SelectInput
+                      options={sources}
+                      value={source}
+                      labelData="title"
+                      valueData="id"
+                      className="w-full"
+                      onChange={e => setSource(parseInt(e.target.value))}
+                    >
+                      <option value="">{t('select_source')}</option>
+                    </SelectInput>
+                  </div>
+                )}
+              {tribe?.id === 1 ||
+              auth?.user?.member?.status?.includes('active') ? (
                 <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
                   <InputLabel
                     className="mr-4 w-1/4 lg:w-auto"
-                    value={t('sources')}
+                    value={t('keyword')}
                   />
-                  <SelectInput
-                    options={sources}
-                    value={source}
-                    labelData="title"
-                    valueData="id"
+                  <TextInput
                     className="w-full"
-                    onChange={e => setSource(parseInt(e.target.value))}
-                  >
-                    <option value="">{t('select_source')}</option>
-                  </SelectInput>
+                    value={keyword}
+                    onChange={e => setKeyword(e.target.value)}
+                  />
                 </div>
-              )}
-              <div className="flex items-center mr-4 w-full lg:w-auto mb-4 lg:mb-0">
-                <InputLabel
-                  className="mr-4 w-1/4 lg:w-auto"
-                  value={t('keyword')}
-                />
-                <TextInput
-                  className="w-full"
-                  value={keyword}
-                  onChange={e => setKeyword(e.target.value)}
-                />
+              ) : null}
+            </div>
+            {tribe?.id === 1 ||
+            auth?.user?.member?.status?.includes('active') ? (
+              <div className="w-full lg:w-auto">
+                <Button onClick={filterData}>{t('filter')}</Button>
               </div>
-            </div>
-            <div className="w-full lg:w-auto">
-              <Button onClick={filterData}>{t('filter')}</Button>
-            </div>
+            ) : null}
           </div>
         </div>
         <div className="lg:w-1/4 ">
@@ -312,33 +317,56 @@ function MemberList({
             <Pagination class="mt-6" links={members?.links} />
           </div>
         ) : (
-          <div className="w-full">
-            <div
-              className={`grid member-tourism font-bold mb-6 bg-primary text-white py-4 px-4 gap-6`}
-            >
-              <div>Type</div>
-              <div>Business Name</div>
-              <div>Category</div>
-              <div>Directory Source</div>
-              <div>Action</div>
-            </div>
-            {members?.data?.length > 0 ? (
-              members?.data?.map((member, index) => {
-                return (
-                  <MemberItemTourism
-                    member={member}
-                    index={index}
-                    tribe={tribe}
-                  />
-                );
-              })
+          <>
+            {auth?.user?.member?.status?.includes('active') ? (
+              <div className="w-full">
+                <div className="grid member-tourism font-bold mb-6 bg-primary text-white py-4 px-4 gap-6">
+                  <div>Type</div>
+                  <div>Business Name</div>
+                  <div>Category</div>
+                  <div>Directory Source</div>
+                  <div>Action</div>
+                </div>
+                {members?.data?.length > 0 ? (
+                  members?.data?.map((member, index) => (
+                    <MemberItemTourism
+                      key={index}
+                      member={member}
+                      index={index}
+                      tribe={tribe}
+                    />
+                  ))
+                ) : (
+                  <div>
+                    <h3 className="text-primary font-xl">Not Found</h3>
+                  </div>
+                )}
+                <Pagination className="mt-6" links={members?.links} />
+              </div>
+            ) : auth?.user ? (
+              <div className="text-center text-xl w-full">
+                <p className="mb-2">
+                  Become an Active Member to See More Content
+                </p>
+                <div>
+                  <a href="/login" className="text-primary font-bold">
+                    Go to Dashboard
+                  </a>
+                </div>
+              </div>
             ) : (
-              <div className="">
-                <h3 className=" text-primary font-xl ">Not Found</h3>
+              <div className="text-center text-xl w-full">
+                <a href="/login" className="text-primary font-bold">
+                  Login
+                </a>{' '}
+                or{' '}
+                <a href="/register" className="text-primary font-bold">
+                  Register
+                </a>{' '}
+                to See More Content
               </div>
             )}
-            <Pagination class="mt-6" links={members?.links} />
-          </div>
+          </>
         )}
       </div>
     </Guest>

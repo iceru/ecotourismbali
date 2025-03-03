@@ -68,7 +68,10 @@ Route::post('/donation/store', [DonationController::class, 'store'])->name('dona
 Route::post('/donation/pay', [DonationController::class, 'pay'])->name('donation.pay');
 Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
 Route::post('/donation/sendEmail', [DonationController::class, 'sendEmail'])->name('donation.sendEmail');
-
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
 Route::post('/member-payment/notif-handler', [MemberPaymentController::class, 'notif_handler'])->name('member_payment.notif_handler');
 
 Route::middleware(['auth', 'verified', 'role:member|administrator|superadministrator|finance'])->group(function () {
@@ -102,6 +105,7 @@ Route::middleware(['auth', 'role:member', 'verified'])->group(function () {
     Route::post('/member/profile/store/{id}', [MemberController::class, 'storeProfile'])->name('member.profile.store');
     Route::post('/member/greenpal/store', [MemberController::class, 'greenpal'])->name('member.greenpal.store');
     Route::get('/member/update-payment', [MemberController::class, 'updatePayment'])->name('member.update.payment');
+    Route::get('/member/ngo/approval', [MemberController::class, 'ngoApproval'])->name('member.ngo.approval');
 
     Route::get('/member/assessment/tutorial', [MemberAssessmentController::class, 'tutorial'])->name('member.assessment.index');
     Route::get('/member/assessment', [MemberAssessmentController::class, 'index'])->name('member.assessment.data');
