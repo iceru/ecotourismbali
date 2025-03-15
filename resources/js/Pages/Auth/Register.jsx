@@ -5,12 +5,9 @@ import InputLabel from '@/Components/InputLabel';
 import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
-import AuthImage from '@/Components/AuthImage';
 import { useTranslation } from 'react-i18next';
 
 import RegisImage from '../../../images/regisImage.jpg';
-import greenforce from '../../../images/green_force.png';
-import greenpal from '../../../images/greenpal.png';
 import SelectInput from '@/Components/SelectInput';
 import queryString from 'query-string';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
