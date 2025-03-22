@@ -45,7 +45,9 @@ const MemberGreenpal = ({ member, categories, snapToken, pay }) => {
             return prov.name === data?.province;
           });
         }
-        getCity(selectedProvince || dataProvince.id || provinces[0].id);
+        if (provinces?.length > 0 && dataProvince) {
+          getCity(selectedProvince || dataProvince.id || provinces[0].id);
+        }
       });
   }, []);
   useEffect(() => {
@@ -76,6 +78,11 @@ const MemberGreenpal = ({ member, categories, snapToken, pay }) => {
     get(route('member.update.payment'), {
       onSuccess: () => {},
     });
+  };
+
+  const resetPay = () => {
+    sessionStorage.clear('snapToken');
+    location.reload();
   };
 
   return (
