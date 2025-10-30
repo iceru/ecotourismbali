@@ -23,7 +23,7 @@ class StatisticController extends Controller
         $sessionFilter = array();
 
         foreach ($sessions as $session) {
-            if ($session->completion === 'yes') {
+            if ($session->completion === 'yes' || $session->completion === 'expired') {
                 array_push($sessionFilter, $session);
             }
         }
@@ -87,7 +87,9 @@ class StatisticController extends Controller
     public function assessment()
     {
         $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo')->with('business_type')->get();
-        $memberAssess = MemberAssessment::with('member')->where('completion', 'yes')->get();
+        $memberAssess = MemberAssessment::with('member')
+        ->whereIn('completion', ['yes', 'expired'])
+        ->get();
 
         foreach ($assessments as $assess) {
             $members = array();
@@ -107,7 +109,10 @@ class StatisticController extends Controller
     {
         $member = Member::where('id', $id)->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where('member_id', $id)->where('completion', 'yes')->latest()->first();
+        $session = AssessmentSession::where('member_id', $id)->whereIn('completion', ['yes', 'expired'])->latest()
+    ->skip(2) // skip the first
+    ->take(1) // then take one
+    ->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Admin/Statistic/AssessmentDetail', [
             'assessments' => $assessments,
@@ -121,7 +126,7 @@ class StatisticController extends Controller
     {
         $member = Member::where('id', $id)->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where('member_id', $id)->where('completion', 'yes')->latest()->first();
+        $session = AssessmentSession::where('member_id', $id)->whereIn('completion', ['yes', 'expired'])->latest()->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
 
         return Excel::download(new MemberAssessmentsExport($id), $member->business_name.'-assessments.xlsx');

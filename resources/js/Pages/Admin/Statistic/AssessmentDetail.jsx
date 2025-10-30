@@ -87,6 +87,7 @@ function Assessment({ assessments, session, answers, member }) {
       scrollY: -window.scrollY,
     })
       .then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
         const imgWidth = 208;
         const pageHeight = 295;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -95,7 +96,7 @@ function Assessment({ assessments, session, answers, member }) {
         heightLeft -= pageHeight;
         const pdf = new jsPDF('p', 'mm');
         pdf.addImage(
-          canvas,
+          imgData,
           'PNG',
           0,
           position,
@@ -108,7 +109,7 @@ function Assessment({ assessments, session, answers, member }) {
           position = heightLeft - imgHeight;
           pdf.addPage();
           pdf.addImage(
-            canvas,
+            imgData,
             'PNG',
             0,
             position,
