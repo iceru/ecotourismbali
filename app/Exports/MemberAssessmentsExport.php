@@ -33,14 +33,15 @@ class Sheet1Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
         ];
     }
 
-    public function __construct(int $id)
+    public function __construct(int $id, string $sessionId)
     {
         $this->id = $id;
+        $this->sessionId = $sessionId;
     }
 
     public function query()
     {
-        $session = AssessmentSession::where('member_id', $this->id)->where('completion', 'yes')->latest()->first();
+        $session = AssessmentSession::where('id', $this->sessionId)->first();
         $answers = MemberAssessmentAnswer::query()->where(['member_id' => $this->id, 'assessment_session_id' => $session->id])
         ->with(['assessment_question', 'assessment_option', 'assessment_session', 'member'])->orderBy('assessment_question_id');
         return $answers;
@@ -84,14 +85,15 @@ class Sheet2Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
         ];
     }
 
-    public function __construct(int $id)
+    public function __construct(int $id, string $sessionId)
     {
         $this->id = $id;
+        $this->sessionId = $sessionId;
     }
 
     public function query()
     {
-        $session = AssessmentSession::query()->where(['member_id' => $this->id, 'completion' => 'yes'])->with(['member']);
+        $session = AssessmentSession::query()->where('id', $this->sessionId)->with(['member']);
         return $session;
     }
 
@@ -131,14 +133,15 @@ class Sheet3Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
         ];
     }
 
-    public function __construct(int $id)
+    public function __construct(int $id, string $sessionId)
     {
         $this->id = $id;
+        $this->sessionId = $sessionId;
     }
 
     public function query()
     {
-        $session = AssessmentSession::where('member_id', $this->id)->where('completion', 'yes')->latest()->first();
+        $session = AssessmentSession::where('id', $this->sessionId)->first();
         $assessments = MemberAssessment::query()->where(['member_id' => $this->id, 'completion' => 'yes', 'assessment_session_id' => $session->id])->with('assessment');
         return $assessments;
     }
@@ -157,16 +160,17 @@ class Sheet3Export implements FromQuery, WithMapping, WithHeadings, WithTitle, S
 
 class MemberAssessmentsExport implements WithMultipleSheets
 {
-    public function __construct(int $id)
+    public function __construct(int $id, string $sessionId)
     {
         $this->id = $id;
+        $this->sessionId = $sessionId;
     }
     public function sheets(): array
     {
         return [
-            'Member' => new Sheet2Export($this->id),
-            'Assessment' => new Sheet3Export($this->id),
-            'Answers' => new Sheet1Export($this->id),
+            'Member' => new Sheet2Export($this->id, $this->sessionId),
+            'Assessment' => new Sheet3Export($this->id, $this->sessionId),
+            'Answers' => new Sheet1Export($this->id, $this->sessionId),
         ];
     }
 }

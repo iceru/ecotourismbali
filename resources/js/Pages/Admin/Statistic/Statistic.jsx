@@ -66,11 +66,10 @@ function Statistics({ sessions, badges, programs }) {
                   if (item?.member?.status?.includes('active')) {
                     return (
                       <Link
-                        href={route(
-                          'statistic.assessmentDetail',
+                        href={route('statistic.assessmentDetail', [
                           item?.member?.id,
-                          item?.id
-                        )}
+                          item?.id,
+                        ])}
                       >
                         <li className="flex items-center mb-2">
                           <div className="mr-2">{index + 1}.</div>

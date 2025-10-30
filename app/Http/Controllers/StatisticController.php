@@ -76,7 +76,6 @@ class StatisticController extends Controller
                 }
             }
         }
-
         return Inertia::render('Admin/Statistic/Statistic', [
             'sessions' => $sessionFilter,
             'badges' => $memberBadges,
@@ -109,7 +108,7 @@ class StatisticController extends Controller
     {
         $member = Member::where('id', $id)->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where(id, $sessionId)->first();
+        $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Admin/Statistic/AssessmentDetail', [
             'assessments' => $assessments,
@@ -119,13 +118,13 @@ class StatisticController extends Controller
         ]);
     }
 
-    public function assessmentExport($id)
+    public function assessmentExport($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where('member_id', $id)->whereIn('completion', ['yes', 'expired'])->latest()->first();
-        $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
+        $session = AssessmentSession::where('id', $sessionId)->first();
+        $answers = MemberAssessmentAnswer::where(column: ['member_id' => $member->id, 'assessment_session_id' => $sessionId])->with('assessment_question')->get();
 
-        return Excel::download(new MemberAssessmentsExport($id), $member->business_name.'-assessments.xlsx');
+        return Excel::download(new MemberAssessmentsExport($id, $sessionId), $member->business_name.'-assessments.xlsx');
     }
 }
