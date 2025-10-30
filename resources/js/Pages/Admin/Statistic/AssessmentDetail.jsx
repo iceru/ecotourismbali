@@ -74,27 +74,57 @@ function Assessment({ assessments, session, answers, member }) {
       return updatedData;
     });
   };
-  const downloadPDF = () => {
+  const downloadPDF = async () => {
     const container = document.getElementsByClassName('assess_container');
-    for (var i = 0; i < container.length; i++) {
+    for (let i = 0; i < container.length; i++) {
       container.item(i).classList.remove('hidden');
     }
     const button = document.querySelector('#assess_button');
     button.style.display = 'none';
     setLoading(true);
 
-    html2canvas(document.querySelector('#assessments'), {
-      scrollY: -window.scrollY,
-    })
-      .then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const imgWidth = 208;
-        const pageHeight = 295;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
-        let position = 0;
-        heightLeft -= pageHeight;
-        const pdf = new jsPDF('p', 'mm');
+    // Wait for images to load
+    await Promise.all(
+      Array.from(document.querySelectorAll('#assessments img')).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => {
+          img.onload = img.onerror = resolve;
+        });
+      })
+    );
+
+    try {
+      const canvas = await html2canvas(document.querySelector('#assessments'), {
+        scrollY: -window.scrollY,
+        useCORS: true,
+        allowTaint: true,
+      });
+
+      await new Promise(resolve => setTimeout(resolve, 200)); // give time for canvas
+
+      const imgData = canvas.toDataURL('image/png');
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+      heightLeft -= pageHeight;
+
+      const pdf = new jsPDF('p', 'mm');
+      pdf.addImage(
+        imgData,
+        'PNG',
+        0,
+        position,
+        imgWidth,
+        imgHeight,
+        '',
+        'FAST'
+      );
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
         pdf.addImage(
           imgData,
           'PNG',
@@ -105,35 +135,21 @@ function Assessment({ assessments, session, answers, member }) {
           '',
           'FAST'
         );
-        while (heightLeft >= 0) {
-          position = heightLeft - imgHeight;
-          pdf.addPage();
-          pdf.addImage(
-            imgData,
-            'PNG',
-            0,
-            position,
-            imgWidth,
-            imgHeight,
-            '',
-            'FAST'
-          );
-          heightLeft -= pageHeight;
-        }
-        pdf.save(`${member?.business_name}-result`);
-      })
-      .finally(() => {
-        setLoading(false);
-        const container = document.getElementsByClassName('assess_container');
-        for (var i = 0; i < container.length; i++) {
-          if (i !== 0) {
-            container.item(i).classList.add('hidden');
-          }
-        }
-        const button = document.querySelector('#assess_button');
-        button.style.display = 'flex';
-      });
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save(`${member?.business_name}-result`);
+    } catch (error) {
+      console.error('PDF generation failed:', error);
+    } finally {
+      setLoading(false);
+      for (let i = 0; i < container.length; i++) {
+        if (i !== 0) container.item(i).classList.add('hidden');
+      }
+      button.style.display = 'flex';
+    }
   };
+
   return (
     <AdminLayout>
       <AdminSection>

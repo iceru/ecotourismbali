@@ -68,7 +68,8 @@ function Statistics({ sessions, badges, programs }) {
                       <Link
                         href={route(
                           'statistic.assessmentDetail',
-                          item?.member?.id
+                          item?.member?.id,
+                          item?.id
                         )}
                       >
                         <li className="flex items-center mb-2">
