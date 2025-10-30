@@ -252,8 +252,8 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
 
     Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
     Route::get('/assessment/statistic', [StatisticController::class, 'assessment'])->name('statistic.assessment');
-    Route::get('/assessment/statistic/detail/{id}', [StatisticController::class, 'assessmentDetail'])->name('statistic.assessmentDetail');
-    Route::get('/assessment/statistic/export/{id}', [StatisticController::class, 'assessmentExport'])->name('statistic.assessmentExport');
+    Route::get('/assessment/statistic/detail/{id}/{sessionId}', [StatisticController::class, 'assessmentDetail'])->name('statistic.assessmentDetail');
+    Route::get('/assessment/statistic/export/{id}/{sessionId}', [StatisticController::class, 'assessmentExport'])->name('statistic.assessmentExport');
 });
 
 require __DIR__ . '/auth.php';

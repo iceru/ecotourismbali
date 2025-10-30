@@ -105,14 +105,11 @@ class StatisticController extends Controller
         ]);
     }
 
-    public function assessmentDetail($id)
+    public function assessmentDetail($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where('member_id', $id)->whereIn('completion', ['yes', 'expired'])->latest()
-    ->skip(2) // skip the first
-    ->take(1) // then take one
-    ->first();
+        $session = AssessmentSession::where(id, $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Admin/Statistic/AssessmentDetail', [
             'assessments' => $assessments,
