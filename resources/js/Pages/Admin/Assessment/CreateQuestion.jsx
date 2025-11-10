@@ -89,6 +89,10 @@ function CreateQuestion({ assess_question, assessment }) {
       label: 'Checkbox',
       value: 'checkbox',
     },
+    {
+      label: 'Radio Button + Checkbox',
+      value: 'combo',
+    },
   ];
 
   return (

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Assessment2Controller;
 use Inertia\Inertia;
 use Mailjet\Resources;
 use App\Models\MemberPayment;
@@ -140,6 +141,13 @@ Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(f
     Route::get('/assessment/edit/{id}', [AssessmentController::class, 'edit'])->name('assessment.edit');
     Route::post('/assessment/update/{id}', [AssessmentController::class, 'update'])->name('assessment.update');
     Route::delete('/assessment/delete/{id}', [AssessmentController::class, 'destroy'])->name('assessment.destroy');
+
+    Route::get('/assessment-2', [Assessment2Controller::class, 'index'])->name('assessment2.index');
+    Route::post('/assessment-2/store', [Assessment2Controller::class, 'store'])->name('assessment2.store');
+    Route::get('/assessment-2/edit/{id}', [Assessment2Controller::class, 'edit'])->name('assessment2.edit');
+    Route::post('/assessment-2/update/{id}', [Assessment2Controller::class, 'update'])->name('assessment2.update');
+    Route::delete('/assessment-2/delete/{id}', [Assessment2Controller::class, 'destroy'])->name('assessment2.destroy');
+
 
     Route::get('/assessment/{id}/question', [AssessmentQuestionController::class, 'index'])->name('assessment_question.index');
     Route::post('/assessment/{id}/question/store', [AssessmentQuestionController::class, 'store'])->name('assessment_question.store');

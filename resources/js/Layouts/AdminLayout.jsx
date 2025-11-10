@@ -12,6 +12,7 @@ import {
   faHome,
   faListAlt,
   faPencilRuler,
+  faPencilSquare,
   faTasks,
   faTimes,
   faUsers,
@@ -134,7 +135,7 @@ function AdminLayout({ children }) {
                   <Link
                     href={route('assessment.index')}
                     className={
-                      url.startsWith('/admin/assessment') ? 'font-bold' : ''
+                      url.match(/^\/admin\/assessment(\/|$)/) ? 'font-bold' : ''
                     }
                   >
                     <FontAwesomeIcon
@@ -142,6 +143,22 @@ function AdminLayout({ children }) {
                       icon={faPencilRuler}
                     />
                     {t('assessment')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={route('assessment2.index')}
+                    className={
+                      url.match(/^\/admin\/assessment-2(\/|$)/)
+                        ? 'font-bold'
+                        : ''
+                    }
+                  >
+                    <FontAwesomeIcon
+                      className="fa-fw mr-2 text-secondary"
+                      icon={faPencilSquare}
+                    />
+                    {t('assessment_2')}
                   </Link>
                 </li>
               </>
