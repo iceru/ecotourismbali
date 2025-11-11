@@ -29,6 +29,7 @@ class Assessment2Controller extends Controller
             'description' => 'required',
             'description_en' => 'required',
             'business_type' => 'required',
+            'max_points' => 'required',
             'image' => 'required|image',
             'image_en' => 'required|image',
             'logo' => 'required|image',
@@ -63,15 +64,17 @@ class Assessment2Controller extends Controller
         $assessment->image = $filename;
         $assessment->image_en = $imageEn;
         $assessment->logo = $logo;
+        $assessment->max_points = $request->max_points;
         $assessment->business_type_id = $request->business_type;
+        $assessment->version = 2;
         $assessment->save();
 
-        return Redirect::route('assessment.index')->with('success', 'Assessment created successfully.');
+        return Redirect::route('assessment2.index')->with('success', 'Assessment created successfully.');
     }
 
     public function edit($id)
     {
-        return Inertia::render('Admin/Assessment/EditAssessment', [
+        return Inertia::render('Admin/Assessment2/EditAssessment', [
             'assessment' => Assessment::find($id),
             'business_type' => BusinessType::all(),
         ]);
@@ -87,6 +90,7 @@ class Assessment2Controller extends Controller
             'description' => 'required',
             'description_en' => 'required',
             'business_type' => 'required',
+            'max_points' => 'required',
             'image' => 'nullable|image',
             'image_en' => 'nullable|image',
             'logo' => 'nullable|image',
@@ -121,10 +125,12 @@ class Assessment2Controller extends Controller
         $assessment->title = $request->title;
         $assessment->title_en = $request->title_en;
         $assessment->description = $request->description;
+        $assessment->max_points = $request->max_points;
         $assessment->description_en = $request->description_en;
+        $assessment->version = 2;
         $assessment->save();
 
-        return Redirect::route('assessment.index')->with('success', 'Assessment edited successfully.');
+        return Redirect::route('assessment2.index')->with('success', 'Assessment edited successfully.');
     }
 
     public function destroy(Request $request)
@@ -134,6 +140,6 @@ class Assessment2Controller extends Controller
 
         $assessment->delete();
 
-        return Redirect::route('assessment.index');
+        return Redirect::route('assessment2.index');
     }
 }

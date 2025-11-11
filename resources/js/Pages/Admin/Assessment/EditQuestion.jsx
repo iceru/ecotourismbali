@@ -53,6 +53,10 @@ function EditQuestion() {
       label: 'Checkbox',
       value: 'checkbox',
     },
+    {
+      label: 'Radio Button + Checkbox',
+      value: 'combo',
+    },
   ];
 
   return (

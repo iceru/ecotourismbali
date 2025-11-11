@@ -42,6 +42,7 @@ function MemberIndex() {
     badge_certificate: member?.badge_certificate,
     latitude: member?.latitude,
     longitude: member?.longitude,
+    version: member?.version,
   });
 
   const submit = e => {
@@ -76,6 +77,17 @@ function MemberIndex() {
     {
       label: 'Active',
       value: 'active',
+    },
+  ];
+
+  const versions = [
+    {
+      label: 'ECB 1.0',
+      value: 1,
+    },
+    {
+      label: 'ECB 2.0',
+      value: 2,
     },
   ];
 
@@ -237,6 +249,25 @@ function MemberIndex() {
                 </div>
               ) : (
                 items('category', member?.category?.name)
+              )}
+              {edit ? (
+                <div className="flex flex-wrap items-center mb-6">
+                  <div className="font-bold lg:w-1/4">{t('ecb_version')}</div>
+                  <SelectInput
+                    id="version"
+                    name="version"
+                    value={parseInt(data?.version || 1)}
+                    options={versions}
+                    placeholder="select_version"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
+                    onChange={e => setData('version', e.target.value)}
+                  />
+                </div>
+              ) : (
+                items(
+                  'ecb_version',
+                  member?.version === 2 ? 'ECB 2.0' : 'ECB 1.0'
+                )
               )}
               {edit ? (
                 <div className="flex flex-wrap items-center mb-6">

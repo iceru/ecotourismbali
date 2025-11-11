@@ -124,6 +124,7 @@ class AdminMemberController extends Controller
             'badge_certificate' => 'nullable',
             'latitude' => 'nullable',
             'longitude' => 'nullable',
+            'version' => 'nullable',
         ]);
 
         $member = Member::find($request->id);
@@ -137,6 +138,7 @@ class AdminMemberController extends Controller
         $member->badge_certificate = $request->badge_certificate;
         $member->latitude = $request->latitude;
         $member->longitude = $request->longitude;
+        $member->version = $request->version;
 
         if($member->status) {
             $member->status = $request->status;

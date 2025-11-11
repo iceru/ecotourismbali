@@ -20,6 +20,7 @@ function CreateAssessment({ assessment, business_type }) {
     title_en: '',
     description: '',
     description_en: '',
+    max_points: 0,
     image: null,
     image_en: null,
     business_type: null,
@@ -30,12 +31,19 @@ function CreateAssessment({ assessment, business_type }) {
     'Title',
     'Description',
     'Image',
+    'Max Points',
     'Business Type',
     'Question',
     'Action',
   ];
 
-  const selectedData = ['title', 'description', 'image', 'business_type_id'];
+  const selectedData = [
+    'title',
+    'description',
+    'image',
+    'max_points',
+    'business_type_id',
+  ];
 
   const tableButtons = [
     {
@@ -49,7 +57,7 @@ function CreateAssessment({ assessment, business_type }) {
   const tableActions = [
     {
       label: 'edit_button',
-      link: '/admin/assessment/edit',
+      link: '/admin/assessment-2/edit',
       withId: true,
       color: 'info',
     },
@@ -65,7 +73,7 @@ function CreateAssessment({ assessment, business_type }) {
   const submit = e => {
     e.preventDefault();
 
-    post(route('assessment.store'), {
+    post(route('assessment2.store'), {
       onSuccess: () => {
         reset();
         setValue('');
@@ -151,6 +159,26 @@ function CreateAssessment({ assessment, business_type }) {
             <div className="lg:w-4/5">
               <Editor onChange={setValueEn} value={valueEn} />
               <span className="text-red-600">{errors.description_en}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="max_points"
+                value={t('form_label_max_points')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="max_points"
+                name="max_points"
+                type="text"
+                value={data.max_points}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('max_points', e.target.value)}
+              />
+              <span className="text-red-600">{errors.max_points}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">
