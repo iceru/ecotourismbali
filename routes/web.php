@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Assessment2Controller;
+use App\Http\Controllers\ProductCategoryController;
 use Inertia\Inertia;
 use Mailjet\Resources;
 use App\Models\MemberPayment;
@@ -251,6 +252,12 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+    Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('productCategory.index');
+    Route::post('/product-category/store', [ProductCategoryController::class, 'store'])->name('productCategory.store');
+    Route::get('/product-category/edit/{id}', [ProductCategoryController::class, 'edit'])->name('productCategory.edit');
+    Route::post('/product-category/update/{id}', [ProductCategoryController::class, 'update'])->name('productCategory.update');
+    Route::delete('/product-category/delete/{id}', [ProductCategoryController::class, 'destroy'])->name('productCategory.destroy');
 
     Route::get('/program', [ProgramController::class, 'index'])->name('program.index');
     Route::post('/program/store', [ProgramController::class, 'store'])->name('program.store');

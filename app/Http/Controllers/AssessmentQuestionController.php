@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assessment;
 use App\Models\AssessmentQuestion;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -14,7 +15,8 @@ class AssessmentQuestionController extends Controller
     {
         return Inertia::render('Admin/Assessment/CreateQuestion', [
             'assess_question' => AssessmentQuestion::where('assessment_id', $id)->get(),
-            'assessment' => Assessment::find($id),
+            'assessment' => Assessment::with('business_type')->find($id),
+            'product_categories' => ProductCategory::all(),
         ]);
     }
 

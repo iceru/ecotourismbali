@@ -2,34 +2,17 @@ import Button from '@/Components/Button';
 import Logo from '../../images/logo.png';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faAward,
-  faBarChart,
-  faBars,
-  faChartArea,
-  faDollar,
-  faFileClipboard,
-  faHome,
-  faListAlt,
-  faPencilRuler,
-  faPencilSquare,
-  faTasks,
-  faTimes,
-  faUsers,
-  faUsersBetweenLines,
-  faVolumeUp,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import { Head, Link, usePage } from '@inertiajs/react';
 import enImg from '../../images/en.png';
 import idImg from '../../images/id.png';
 import { useMediaQuery } from 'react-responsive';
-import { faSourcetree } from '@fortawesome/free-brands-svg-icons';
+import Sidebar from '@/Components/Sidebar';
 
 function AdminLayout({ children }) {
   const { t, i18n } = useTranslation();
-  const { url } = usePage();
   const { superadmin, auth } = usePage().props;
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)',
@@ -46,7 +29,7 @@ function AdminLayout({ children }) {
     <div className="flex bg-lightSecondary gap-4 p-3 lg:gap-6 lg:p-6 min-h-screen bg-opacity-70">
       <Head title="Administrator" />
       <AdminSection
-        className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-auto ${
+        className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-full ${
           !sideActive
             ? '-translate-x-[120%] hidden p-0 opacity-0'
             : 'translate-x-0 !block lg:block lg:w-1/4 p-4 lg:p-6 opacity-100'
@@ -61,230 +44,7 @@ function AdminLayout({ children }) {
         >
           <FontAwesomeIcon icon={faTimes} />
         </div>
-        <nav className="navigation text-etbGray">
-          <ul className="flex flex-col gap-6">
-            <li>
-              <Link
-                href={route('admin.dashboard')}
-                className={
-                  url.startsWith('/admin/dashboard') ? 'font-bold' : ''
-                }
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faHome}
-                />
-                {t('home')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('admin.member.index')}
-                className={url.startsWith('/admin/member') ? 'font-bold' : ''}
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faUsers}
-                />
-                {t('member')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('admin.member_tourism.index')}
-                className={
-                  url.startsWith('/admin/tourism/member') ? 'font-bold' : ''
-                }
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faUsersBetweenLines}
-                />
-                {t('member_tourism')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('source.index')}
-                className={url.startsWith('/admin/source') ? 'font-bold' : ''}
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faSourcetree}
-                />
-                {t('tourism_source')}
-              </Link>
-            </li>
-            {superadmin && (
-              <>
-                <li>
-                  <Link
-                    href={route('admin.payment.index')}
-                    className={
-                      url.startsWith('/admin/payment') ? 'font-bold' : ''
-                    }
-                  >
-                    <FontAwesomeIcon
-                      className="fa-fw mr-2 text-secondary"
-                      icon={faDollar}
-                    />
-                    {t('payment')}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={route('assessment.index')}
-                    className={
-                      url.match(/^\/admin\/assessment(\/|$)/) ? 'font-bold' : ''
-                    }
-                  >
-                    <FontAwesomeIcon
-                      className="fa-fw mr-2 text-secondary"
-                      icon={faPencilRuler}
-                    />
-                    {t('assessment')}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={route('assessment2.index')}
-                    className={
-                      url.match(/^\/admin\/assessment-2(\/|$)/)
-                        ? 'font-bold'
-                        : ''
-                    }
-                  >
-                    <FontAwesomeIcon
-                      className="fa-fw mr-2 text-secondary"
-                      icon={faPencilSquare}
-                    />
-                    {t('assessment_2')}
-                  </Link>
-                </li>
-              </>
-            )}
-            <li>
-              <Link
-                href={route('module.index')}
-                className={url.startsWith('/admin/module') ? 'font-bold' : ''}
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faFileClipboard}
-                />
-                {t('module_test')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('category.index')}
-                className={url.startsWith('/admin/category') ? 'font-bold' : ''}
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faListAlt}
-                />
-                {t('category')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('program.index')}
-                className={url.startsWith('/admin/program') ? 'font-bold' : ''}
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faTasks}
-                />
-                {t('program')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('badge.index')}
-                className={url.startsWith('/admin/badge') ? 'font-bold' : ''}
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faAward}
-                />
-                {t('badge')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('verified_badge.index')}
-                className={
-                  url.startsWith('/admin/verified-badge') ? 'font-bold' : ''
-                }
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faAward}
-                />
-                {t('verified_badge')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('statistic.index')}
-                className={
-                  url.startsWith('/admin/statistic') ? 'font-bold' : ''
-                }
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faBarChart}
-                />
-                {t('statistic')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('statistic.assessment')}
-                className={
-                  url.match('/admin/assessment/statistic') ? 'font-bold' : ''
-                }
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faChartArea}
-                />
-                {t('statistic_assessment')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={route('announcement.index')}
-                className={
-                  url.startsWith('/admin/announcement') ? 'font-bold' : ''
-                }
-              >
-                <FontAwesomeIcon
-                  className="fa-fw mr-2 text-secondary"
-                  icon={faVolumeUp}
-                />
-                {t('announcements')}
-              </Link>
-            </li>
-            {superadmin && (
-              <li>
-                <Link
-                  href={route('register.admin')}
-                  className={
-                    url.startsWith('/admin/register') ? 'font-bold' : ''
-                  }
-                >
-                  <FontAwesomeIcon
-                    className="fa-fw mr-2 text-secondary"
-                    icon={faUsers}
-                  />
-                  {t('register_admin')}
-                </Link>
-              </li>
-            )}
-          </ul>
-        </nav>
+        <Sidebar />
       </AdminSection>
       <div className={`${!sideActive ? 'w-full' : 'lg:w-3/4'}`}>
         <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
