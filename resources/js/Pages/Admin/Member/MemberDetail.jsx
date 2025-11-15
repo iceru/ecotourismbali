@@ -24,6 +24,7 @@ function MemberIndex() {
     scores,
     lastSession,
     lastPayment,
+    product_categories,
   } = usePage().props;
   const { t } = useTranslation();
 
@@ -43,6 +44,7 @@ function MemberIndex() {
     latitude: member?.latitude,
     longitude: member?.longitude,
     version: member?.version,
+    product_category_id: member?.product_category_id,
   });
 
   const submit = e => {
@@ -268,6 +270,28 @@ function MemberIndex() {
                   'ecb_version',
                   member?.version === 2 ? 'ECB 2.0' : 'ECB 1.0'
                 )
+              )}
+              {edit ? (
+                <div className="flex flex-wrap items-center mb-6">
+                  <div className="font-bold lg:w-1/4">
+                    {t('product_category')}
+                  </div>
+                  <SelectInput
+                    id="product_category_id"
+                    name="product_category_id"
+                    value={data?.product_category_id}
+                    options={product_categories}
+                    labelData="name"
+                    valueData="id"
+                    placeholder="select_product_category"
+                    className="lg:w-3/4 w-full mt-2 lg:mt-0"
+                    onChange={e =>
+                      setData('product_category_id', e.target.value)
+                    }
+                  />
+                </div>
+              ) : (
+                items('product_category', member?.product_category?.name)
               )}
               {edit ? (
                 <div className="flex flex-wrap items-center mb-6">

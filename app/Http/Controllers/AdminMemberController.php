@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductCategory;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Member;
@@ -64,7 +65,7 @@ class AdminMemberController extends Controller
      */
     public function show(string $id)
     {
-        $member = Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->find($id);
+        $member = Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'product_category', 'member_assessment', 'business_type')->find($id);
         $sessions = AssessmentSession::where('member_id', $id)->get();
 
         $attempt = 0;
@@ -91,6 +92,7 @@ class AdminMemberController extends Controller
             'categories' => Category::all(),
             'programs' => Program::all(),
             'verified_badges' => VerifiedBadge::all(),
+            'product_categories' => ProductCategory::all(),
             'remaining' => $remaining,
             'dateAssessment' => $dateAssessment,
             'scores' => $memberAssessments,
@@ -125,6 +127,7 @@ class AdminMemberController extends Controller
             'latitude' => 'nullable',
             'longitude' => 'nullable',
             'version' => 'nullable',
+            'product_category_id' => 'nullable',
         ]);
 
         $member = Member::find($request->id);
@@ -139,6 +142,7 @@ class AdminMemberController extends Controller
         $member->latitude = $request->latitude;
         $member->longitude = $request->longitude;
         $member->version = $request->version;
+        $member->product_category_id = $request->product_category_id;
 
         if($member->status) {
             $member->status = $request->status;

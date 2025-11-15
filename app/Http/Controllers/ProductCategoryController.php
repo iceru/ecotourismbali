@@ -58,7 +58,7 @@ class ProductCategoryController extends Controller
     public function edit($id)
     {
         return Inertia::render('Admin/ProductCategory/Edit', [
-            'category' => ProductCategory::find($id),
+            'productCategory' => ProductCategory::find($id),
         ]);
     }
 

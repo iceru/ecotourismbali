@@ -38,6 +38,11 @@ class Member extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+     public function product_category(): BelongsTo
+    {
+        return $this->belongsTo(ProductCategory::class, 'product_category_id');
+    }
+
     public function business_type(): BelongsTo
     {
         return $this->belongsTo(BusinessType::class, 'business_type_id');

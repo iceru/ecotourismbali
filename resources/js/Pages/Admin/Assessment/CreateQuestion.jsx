@@ -25,7 +25,7 @@ function CreateQuestion({ assess_question, assessment, product_categories }) {
     title: '',
     title_en: '',
     type: 'radio',
-    product_category: null,
+    product_category_id: null,
   });
 
   const headerTable = ['Question No', 'Title', 'Question', 'Option', 'Action'];
@@ -188,25 +188,32 @@ function CreateQuestion({ assess_question, assessment, product_categories }) {
               <span className="text-red-600">{errors.type}</span>
             </div>
           </div>
-          <div className="block lg:flex items-center">
-            <div className="lg:w-1/5 mb-2 lg:mb-0">
-              <InputLabel
-                htmlFor="product_category"
-                value={t('form_label_product_category')}
-              />
+          {assessment?.business_type?.name === 'Supplier' && (
+            <div className="block lg:flex items-center">
+              <div className="lg:w-1/5 mb-2 lg:mb-0">
+                <InputLabel
+                  htmlFor="product_category"
+                  value={t('form_label_product_category')}
+                />
+              </div>
+              <div className="lg:w-4/5">
+                <SelectInput
+                  id="product_category"
+                  name="product_category"
+                  value={data.product_category_id}
+                  options={product_categories}
+                  className="w-full"
+                  labelData="name"
+                  valueData="id"
+                  placeholder="select_product_category"
+                  onChange={e => setData('product_category_id', e.target.value)}
+                />
+                <span className="text-red-600">
+                  {errors.product_category_id}
+                </span>
+              </div>
             </div>
-            <div className="lg:w-4/5">
-              <SelectInput
-                id="product_category"
-                name="product_category"
-                value={data.product_category}
-                options={product_categories}
-                className="w-full"
-                onChange={e => setData('product_category', e.target.value)}
-              />
-              <span className="text-red-600">{errors.product_category}</span>
-            </div>
-          </div>
+          )}
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="question" value={t('form_label_question')} />

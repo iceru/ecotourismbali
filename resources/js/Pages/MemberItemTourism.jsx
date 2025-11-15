@@ -21,11 +21,11 @@ function MemberItemTourism({ member, tribe }) {
         )
       ) : null}
       {member?.image && (
-        <div className="mr-3 rounded-full w-[62px] h-[62px] bg-lightPrimary bg-opacity-30 flex justify-center items-center">
+        <div className="mr-3 rounded-full w-[62px] h-[62px] shrink-0 bg-lightPrimary bg-opacity-30 flex justify-center items-center">
           <img
             src={`/storage/member/images/${member?.image}`}
             alt={member?.bussiness_name}
-            className="w-[62px] max-h-[62px] object-contain rounded-full"
+            className="w-[62px] max-h-[62px] shrink-0 object-contain rounded-full"
           />
         </div>
       )}

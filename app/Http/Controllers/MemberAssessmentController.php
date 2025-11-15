@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ResultMail;
+use App\Models\ProductCategory;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Badge;
@@ -60,7 +60,7 @@ class MemberAssessmentController extends Controller
 
     public function index()
     {
-        $member = Member::where('user_id', Auth::id())->with('user')->first();
+        $member = Member::where('user_id', Auth::id())->with('user', 'business_type')->first();
         $sessions = AssessmentSession::where('member_id', $member->id)->get();
         $categories = Category::all();
 
@@ -86,6 +86,7 @@ class MemberAssessmentController extends Controller
         }
         return Inertia::render('Member/Assessment/AssessmentData', [
             'business_type' => BusinessType::all(),
+            'product_categories' => ProductCategory::all(),
             'member' => $member,
             'remaining' => $remaining,
             'dateAssessment' => $dateAssessment,
@@ -140,6 +141,7 @@ class MemberAssessmentController extends Controller
             'legal_identity' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
+            'product_category_id' => 'nullable',
         ]);
 
         if ($request->sister_company) {

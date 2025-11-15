@@ -10,7 +10,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import SelectInput from '@/Components/SelectInput';
 
-function AssessmentData({ categories }) {
+function AssessmentData({ categories, product_categories }) {
   const { t } = useTranslation();
   const [provinces, setProvinces] = useState();
   const [selectedProvince, setSelectedProvince] = useState();
@@ -33,6 +33,7 @@ function AssessmentData({ categories }) {
     email: member?.user?.email || '',
     business_type_id: member?.business_type_id || '',
     category: member?.category_id || '',
+    product_category_id: member?.product_category_id || '',
     latitude: member?.user?.latitude || '',
     longitude: member?.user?.longitude || '',
   });
@@ -172,6 +173,31 @@ function AssessmentData({ categories }) {
                   <span className="text-red-600">{errors.category}</span>
                 )}
               </div>
+              {member?.business_type?.name === 'Supplier' && (
+                <div className="flex flex-col gap-3">
+                  <InputLabel
+                    htmlFor="product_category"
+                    value={t('product_category')}
+                  />
+                  <SelectInput
+                    options={product_categories}
+                    labelData="name"
+                    valueData="id"
+                    placeholder="select_product_category"
+                    value={data.product_category_id}
+                    onChange={e => {
+                      setData('product_category', e.target.value);
+                    }}
+                    required
+                  />
+                  {errors.product_category_id && (
+                    <span className="text-red-600">
+                      {errors.product_category_id}
+                    </span>
+                  )}
+                </div>
+              )}
+
               <div className="flex flex-col gap-3">
                 <InputLabel htmlFor="category" value={t('category')} />
                 <SelectInput

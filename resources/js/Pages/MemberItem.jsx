@@ -53,7 +53,7 @@ function MemberItem({ member, tribe }) {
               <img
                 src={`/storage/member/images/${member?.image}`}
                 alt={member?.bussiness_name}
-                className="w-[62px] max-h-[62px] object-contain rounded-full"
+                className="w-[62px] max-h-[62px] shrink-0 shrink-0 object-contain rounded-full"
               />
             </div>
           )}

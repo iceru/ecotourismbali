@@ -11,24 +11,27 @@ import BackTo from '../Components/BackTo';
 function Edit() {
   const { t } = useTranslation();
 
-  const { category } = usePage().props;
+  const { productCategory } = usePage().props;
 
-  const { data, setData, post, processing, errors } = useForm({
-    name: category.name || '',
+  const { data, setData, post, processing } = useForm({
+    name: productCategory.name || '',
     image: '',
   });
 
   const submit = e => {
     e.preventDefault();
 
-    post(route('category.update', category.id));
+    post(route('productCategory.update', productCategory.id));
   };
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_category" link="/admin/category" />
+      <BackTo
+        title="back_to_list_product_category"
+        link="/admin/product-category"
+      />
       <AdminSection className="flex flex-col gap-6 mb-6">
-        <TitleSection title="edit_category_title" />
+        <TitleSection title="edit_product_category_title" />
         <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
