@@ -12,8 +12,8 @@ function Assessment({ assessments, session, answers }) {
   const [active, setActive] = useState(0);
   const [dataSaved, setDataSaved] = useState(false);
   const { t, i18n } = useTranslation();
-  const { ziggy } = usePage().props;
-
+  const { ziggy, auth } = usePage().props;
+  const userCategory = auth.user.member?.product_category_id;
   const { data, setData, post, processing, errors } = useForm();
 
   const lang = i18n.language;
@@ -162,6 +162,8 @@ function Assessment({ assessments, session, answers }) {
     }
   };
 
+  console.log(assessments);
+
   return (
     <MemberLayout>
       {dataSaved && (
@@ -207,25 +209,32 @@ function Assessment({ assessments, session, answers }) {
                     className="text-center mb-10"
                   />
                 )}
-                {item.assessment_question.map((question, i) => {
-                  return (
-                    <div>
-                      <div className="font-bold text-lg mb-3">
-                        {lang === 'en' && question.title_en
-                          ? question.title_en
-                          : question.title}
-                      </div>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            lang === 'en' && question.question_en
-                              ? question.question_en
-                              : question.question,
-                        }}
-                      />
-                      <div className="mt-4">
-                        {sortBy(question.assessment_option, ['option_no']).map(
-                          option => {
+                {item.assessment_question
+                  .filter(
+                    q =>
+                      !q.product_category_id ||
+                      q.product_category_id === userCategory
+                  )
+                  .map((question, i) => {
+                    return (
+                      <div>
+                        <div className="font-bold text-lg mb-3">
+                          {lang === 'en' && question.title_en
+                            ? question.title_en
+                            : question.title}
+                        </div>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              lang === 'en' && question.question_en
+                                ? question.question_en
+                                : question.question,
+                          }}
+                        />
+                        <div className="mt-4">
+                          {sortBy(question.assessment_option, [
+                            'option_no',
+                          ]).map(option => {
                             return (
                               <div className="flex items-center px-5 py-3 mb-4 rounded-3xl bg-lightPrimary bg-opacity-60">
                                 {question.type === 'radio' ? (
@@ -274,15 +283,14 @@ function Assessment({ assessments, session, answers }) {
                                 </label>
                               </div>
                             );
-                          }
+                          })}
+                        </div>
+                        {i + 1 !== item.assessment_question.length && (
+                          <div className="h-0.5 w-1/2 my-10 box-border left-1/2 mx-auto -translate-y-1/2 bg-gray-300"></div>
                         )}
                       </div>
-                      {i + 1 !== item.assessment_question.length && (
-                        <div className="h-0.5 w-1/2 my-10 box-border left-1/2 mx-auto -translate-y-1/2 bg-gray-300"></div>
-                      )}
-                    </div>
-                  );
-                })}
+                    );
+                  })}
                 <div className="flex justify-center gap-6 mt-6">
                   <Button
                     type="button"

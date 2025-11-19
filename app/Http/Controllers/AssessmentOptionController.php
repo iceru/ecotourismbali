@@ -28,12 +28,14 @@ class AssessmentOptionController extends Controller
             'option' => 'required',
             'option_en' => 'required',
             'point' => 'required|integer',
+            'weight' => 'nullable|integer',
         ]);
 
         $assessment_option->option_no = $request->option_no;
         $assessment_option->option = $request->option;
         $assessment_option->option_en = $request->option_en;
         $assessment_option->point = $request->point;
+        $assessment_option->weight = $request->weight;
 
         $assessment_question = AssessmentQuestion::find($id);
         $assessment_option->assessment_question_id = $assessment_question->id;
@@ -63,12 +65,14 @@ class AssessmentOptionController extends Controller
             'option' => 'required',
             'option_en' => 'required',
             'point' => 'required|integer',
+            'weight' => 'nullable|integer',
         ]);
 
         $assessment_option->option_no = $request->option_no;
         $assessment_option->option = $request->option;
         $assessment_option->option_en = $request->option_en;
         $assessment_option->point = $request->point;
+        $assessment_option->weight = $request->weight;
 
         $assessment_option->save();
 

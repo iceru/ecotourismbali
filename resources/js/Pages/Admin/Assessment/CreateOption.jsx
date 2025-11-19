@@ -18,11 +18,12 @@ function CreateOption({ assessment_option, assessment_question }) {
     option_en: '',
     point: '',
     option_no: '',
+    weight: '',
   });
 
-  const headerTable = ['Option No', 'Option', 'Point', 'Action'];
+  const headerTable = ['Option No', 'Option', 'Point', 'Weight', 'Action'];
 
-  const selectedData = ['option_no', 'option', 'point'];
+  const selectedData = ['option_no', 'option', 'point', 'weight'];
 
   const tableActions = [
     {
@@ -140,6 +141,23 @@ function CreateOption({ assessment_option, assessment_question }) {
                 onChange={e => setData('point', e.target.value)}
               />
               <span className="text-red-600">{errors.point}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="weight" value={t('form_label_weight')} />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="weight"
+                name="weight"
+                type="number"
+                value={data.weight}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('weight', e.target.value)}
+              />
+              <span className="text-red-600">{errors.weight}</span>
             </div>
           </div>
           <Button color="secondary" className="w-fit" disabled={processing}>

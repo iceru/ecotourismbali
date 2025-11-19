@@ -15,7 +15,7 @@ import SelectInput from '@/Components/SelectInput';
 function EditQuestion() {
   const { t } = useTranslation();
 
-  const { assess_question, assessment } = usePage().props;
+  const { assess_question, assessment, product_categories } = usePage().props;
 
   const { data, setData, post, processing, errors } = useForm({
     question_no: assess_question.question_no || '',
@@ -24,6 +24,7 @@ function EditQuestion() {
     type: assess_question.type || '',
     question: assess_question.question || '',
     question_en: assess_question.question_en || '',
+    product_category_id: assess_question.product_category_id || '1',
   });
 
   const submit = e => {
@@ -136,6 +137,27 @@ function EditQuestion() {
                 onChange={e => setData('type', e.target.value)}
               />
               <span className="text-red-600">{errors.type}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel
+                htmlFor="product_category"
+                value={t('form_label_product_category')}
+              />
+            </div>
+            <div className="lg:w-4/5">
+              <SelectInput
+                id="product_category_id"
+                name="product_category_id"
+                value={data.product_category_id}
+                options={product_categories}
+                className="w-full"
+                labelData="name"
+                valueData="id"
+                onChange={e => setData('product_category_id', e.target.value)}
+              />
+              <span className="text-red-600">{errors.product_category_id}</span>
             </div>
           </div>
           <div className="block lg:flex items-center">

@@ -11,8 +11,10 @@ function Statistics({ sessions, badges, programs }) {
   const [sessionActive, setSessionActive] = useState([]);
 
   useEffect(() => {
-    let filtered = sessions?.filter(session =>
-      session?.member?.status?.includes('active')
+    let filtered = sessions?.filter(
+      session =>
+        session?.member?.status?.includes('active') &&
+        !session?.member?.status?.includes('dummy')
     );
     filtered = filtered.sort(
       (a, b) => parseInt(b.total_score) - parseInt(a.total_score)

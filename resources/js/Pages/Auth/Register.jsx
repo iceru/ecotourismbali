@@ -53,13 +53,9 @@ export default function Register({ programs }) {
             />
           </div>
           <section className="p-8 text-white relative z-10">
-            <button
-              onClick={() => setToggle(!toggle)}
-              className="text-xl lg:text-2xl whitespace-nowrap gap-2 flex items-center font-bold mb-6"
-            >
+            <div className="text-xl lg:text-2xl whitespace-nowrap gap-2 flex items-center font-bold mb-6">
               Why Join ETB Membership?
-              <FontAwesomeIcon icon={faChevronDown} className="text-sm" />
-            </button>
+            </div>
             <div className={`mt-4 ${!toggle ? 'hidden' : 'block'}`}>
               <div className="grid 2 gap-6">
                 <div className="flex gap-2.5">

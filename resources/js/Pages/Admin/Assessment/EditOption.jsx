@@ -18,6 +18,7 @@ function EditQuestion() {
     option: assessment_option.option || '',
     option_en: assessment_option.option_en || '',
     point: assessment_option.point || '',
+    weight: assessment_option.weight || '',
   });
 
   const submit = e => {
@@ -107,6 +108,23 @@ function EditQuestion() {
                 onChange={e => setData('point', e.target.value)}
               />
               <span className="text-red-600">{errors.point}</span>
+            </div>
+          </div>
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="weight" value={t('form_label_weight')} />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="weight"
+                name="weight"
+                type="text"
+                value={data.weight}
+                className="block w-full"
+                isFocused={true}
+                onChange={e => setData('weight', e.target.value)}
+              />
+              <span className="text-red-600">{errors.weight}</span>
             </div>
           </div>
           <Button className="w-fit" disabled={processing}>

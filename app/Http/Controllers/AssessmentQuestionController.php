@@ -31,6 +31,7 @@ class AssessmentQuestionController extends Controller
             'question_en' => 'required',
             'type' => 'required',
             'question_no' => 'required|integer',
+            'product_category_id' => 'nullable',
         ]);
 
         $assessment_question->title = $request->title;
@@ -39,6 +40,7 @@ class AssessmentQuestionController extends Controller
         $assessment_question->question_en = $request->question_en;
         $assessment_question->question_no = $request->question_no;
         $assessment_question->type = $request->type;
+        $assessment_question->product_category_id = $request->product_category_id;
 
         $assessment = Assessment::find($id);
         $assessment_question->assessment_id = $assessment->id;
@@ -56,6 +58,7 @@ class AssessmentQuestionController extends Controller
         return Inertia::render('Admin/Assessment/EditQuestion', [
             'assess_question' => $assessment_question,
             'assessment' => $assessment,
+            'product_categories' => ProductCategory::all(),
         ]);
     }
 
@@ -69,6 +72,7 @@ class AssessmentQuestionController extends Controller
             'question' => 'required',
             'question_en' => 'required',
             'type' => 'required',
+            'product_category_id' => 'nullable',
             'question_no' => 'required|integer',
         ]);
 
@@ -78,6 +82,7 @@ class AssessmentQuestionController extends Controller
         $assessment_question->question_en = $request->question_en;
         $assessment_question->question_no = $request->question_no;
         $assessment_question->type = $request->type;
+        $assessment_question->product_category_id = $request->product_category_id;
 
         $assessment_question->save();
 
