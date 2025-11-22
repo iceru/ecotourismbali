@@ -16,7 +16,6 @@ import SelectInput from '@/Components/SelectInput';
 function CreateQuestion({ assess_question, assessment, product_categories }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
-  console.log(assessment);
 
   const { data, setData, post, processing, errors, reset } = useForm({
     question_no: '',

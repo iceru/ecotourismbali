@@ -98,13 +98,12 @@ class MemberAssessmentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
-        $session = AssessmentSession::where('id', $id)->where('completion', 'no')->first();
-
+        $session = AssessmentSession::where('id', $id)->first();
         if ($session->completion === 'yes') {
             return Redirect::route('member.dashboard');
         }
 
-        if ((int)$member->id !== (int)$session->member_id) {
+        if ((int) $member->id !== (int) $session->member_id) {
             return Redirect::route('member.dashboard');
         }
 
@@ -184,6 +183,22 @@ class MemberAssessmentController extends Controller
         return Redirect::route('member.assessment.start', $session->id);
     }
 
+    private function calculateWeightedScore($weight, $point)
+    {
+        $weight = $weight ?? 1;
+        $scoreMap = [
+            7 => [3 => 20, 2 => 13, 1 => 7],
+            5 => [3 => 16, 2 => 11, 1 => 5],
+            3 => [3 => 10, 2 => 7, 1 => 3],
+        ];
+
+        if (isset($scoreMap[$weight][$point])) {
+            return $scoreMap[$weight][$point];
+        }
+
+        return $weight * $point;
+    }
+
     public function save(Request $request)
     {
         $request->validate([
@@ -214,7 +229,7 @@ class MemberAssessmentController extends Controller
                     $memberAnswer->assessment_session_id = $request->session_id;
                     $memberAnswer->save();
 
-                    $totalPoints = $totalPoints + $optionSelected->point;
+                    $totalPoints = $totalPoints + $this->calculateWeightedScore($optionSelected->weight, $optionSelected->point);
                 } else if (str_contains($questionId, 'checkbox')) {
                     $memberAnswer = MemberAssessmentAnswer::where([
                         'member_id' => $member->id,
@@ -232,7 +247,7 @@ class MemberAssessmentController extends Controller
                             'assessment_option_id' => $checkId,
                             'assessment_session_id' => $request->session_id,
                         ]);
-                        $totalPoints = $totalPoints + $checkSelected->point;
+                        $totalPoints = $totalPoints + $this->calculateWeightedScore($checkSelected->weight, $checkSelected->point);
 
                         $memberAnswer->member_id = $member->id;
                         $memberAnswer->assessment_question_id = $id;
@@ -327,10 +342,11 @@ class MemberAssessmentController extends Controller
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
         $memberAssessments = MemberAssessment::with('assessment')->where('assessment_session_id', $id)->get();
+        $totalMaxPoints = Assessment::where('business_type_id', $member->business_type_id)->sum('max_points');
         if ($session) {
             $dateAssessment = $session->created_at->addYears(1);
 
-            if ((int)$member->id !== (int)$session->member_id) {
+            if ((int) $member->id !== (int) $session->member_id) {
                 return Redirect::route('member.dashboard');
             }
         } else {
@@ -341,6 +357,7 @@ class MemberAssessmentController extends Controller
             'session' => $session,
             'member' => $member,
             'scores' => $memberAssessments,
+            'totalMaxPoints' => $totalMaxPoints,
             'expiredDate' => $dateAssessment,
         ]);
     }

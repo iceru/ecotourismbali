@@ -1,31 +1,19 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Document,
-  Image,
-  PDFDownloadLink,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-  Font,
-  Link,
-} from '@react-pdf/renderer';
 import { usePage } from '@inertiajs/react';
 import Lottie from 'lottie-react';
-import moment from 'moment';
 import { saveAs } from 'file-saver';
 
 import AdminSection from '@/Components/AdminSection';
 import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import Button from '@/Components/Button';
-import { badgeColor } from '@/Helper/BadgeColor';
 
 import confetti from '../../../../images/confetti2.json';
-import Logo from '../../../../images/logo.png';
+import ResultPdf from './ResultPdf';
+import Speedometer from '@/Components/Speedometer';
 
-function AssessmentResult({ session, member, scores, expiredDate }) {
+function AssessmentResult({ session, member, scores, totalMaxPoints }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
@@ -33,262 +21,16 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
     localStorage.clear('assessment');
   }, []);
 
-  Font.register({
-    family: 'Inter',
-    fonts: [
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeMZhrib2Bg-4.ttf',
-        fontWeight: 100,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyfMZhrib2Bg-4.ttf',
-        fontWeight: 200,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuOKfMZhrib2Bg-4.ttf',
-        fontWeight: 300,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf',
-        fontWeight: 400,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZhrib2Bg-4.ttf',
-        fontWeight: 500,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZhrib2Bg-4.ttf',
-        fontWeight: 600,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.ttf',
-        fontWeight: 700,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZhrib2Bg-4.ttf',
-        fontWeight: 800,
-      },
-      {
-        src: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZhrib2Bg-4.ttf',
-        fontWeight: 900,
-      },
-    ],
-  });
-
-  const style = StyleSheet.create({
-    wrapper: {
-      padding: '16px',
-      fontSize: '16px',
-      fontFamily: 'Inter',
-      fontWeight: 300,
-    },
-    header: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: '24px',
-      justifyContent: 'space-between',
-    },
-    logoWrapper: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    date: {
-      fontSize: '14px',
-    },
-    logo: {
-      width: '60px',
-    },
-    textHeader: {
-      marginLeft: '12px',
-    },
-    text1: {
-      fontSize: '14px',
-      fontWeight: 700,
-      color: '#1F656C',
-      marginBottom: '2px',
-    },
-    textInfo: {
-      fontSize: '12px',
-    },
-    info: {
-      fontSize: '12px',
-      padding: '16px',
-      borderRadius: '16px',
-      color: '#1F656C',
-      marginBottom: '16px',
-      backgroundColor: '#D2E0E2',
-    },
-    climate: {
-      marginBottom: '16px',
-      fontSize: '12px',
-    },
-    business: {
-      textAlign: 'center',
-      fontWeight: 700,
-      marginBottom: '16px',
-      fontSize: '24px',
-      paddingBottom: '16px',
-      borderBottom: '1px solid lightgray',
-    },
-    results: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      textAlign: 'center',
-      marginBottom: '32px',
-    },
-    scoreWrapper: {
-      marginRight: '0',
-    },
-    badges: {
-      marginLeft: '0',
-      paddingLeft: '32px',
-    },
-    score: {
-      fontSize: '48px',
-      color: '#1F656C',
-      fontWeight: 700,
-    },
-    resultText: {
-      fontWeight: 600,
-      fontSize: '14px',
-    },
-    badgeWrapper: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginTop: '8px',
-    },
-    badgeName: {
-      fontWeight: 700,
-      fontSize: '20px',
-    },
-    badgeText: {
-      fontSize: '14px',
-    },
-    badgeImage: {
-      height: '60px',
-      width: 'auto',
-      marginRight: '10px',
-    },
-    scoreList: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: '16px',
-    },
-    scoreItem: {
-      width: '45%',
-    },
-
-    titleLogo: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    scoreLogo: {
-      marginRight: '6px',
-      width: '30px',
-      height: '30px',
-      objectFit: 'contain',
-    },
-    scoreTitle: {
-      fontSize: '10px',
-      fontWeight: 500,
-    },
-    scoreListTitle: {
-      marginBottom: '16px',
-    },
-    scoreText: {
-      fontSize: '14px',
-      marginTop: '4px',
-    },
-    scoreNum: {
-      fontWeight: 700,
-      color: '#1F656C',
-    },
-    scoreImage: {
-      width: '100%',
-      height: 'auto',
-      marginBottom: '4px',
-    },
-  });
-
-  const renderResult = () => (
-    <Document>
-      <Page size="A4" orientation="portrait">
-        <View style={style?.wrapper}>
-          <View style={style?.header}>
-            <View style={style?.logoWrapper}>
-              <Image src={Logo} style={style?.logo}></Image>
-              <View style={style?.textHeader}>
-                <Text style={style?.text1}>Self Assessment</Text>
-                <Text>Eco Tourism Bali</Text>
-              </View>
-            </View>
-            <View>
-              <Text style={style?.date}>
-                {moment(session.created_at).format('LL')}
-              </Text>
-            </View>
-          </View>
-          <View style={style?.info}>
-            <Text style={style?.textInfo}>{t('finish_assessment_text')}</Text>
-          </View>
-          <Text style={style?.climate}>
-            Members who have completed the self-assessment on the Eco Tourism
-            Bali platform are eligible to apply for the Climate Friendly Travel
-            Commitment. Please click this link:
-            <Link src="https://climatefriendly.travel/resources/Registration/index.php">
-              https://climatefriendly.travel/resources/Registration/index.php
-            </Link>
-          </Text>
-          <View>
-            <Text style={style?.business}>{member?.business_name}</Text>
-          </View>
-          <View style={style?.results}>
-            <View style={style?.scoreWrapper}>
-              <Text style={style?.resultText}>Total Score:</Text>
-              <Text style={style?.score}>{session?.total_score}</Text>
-            </View>
-          </View>
-          <View style={style?.scoreListTitle}>
-            <Text>Component's Score</Text>
-          </View>
-          <View style={style?.scoreList}>
-            {scores.map(score => {
-              return (
-                <View style={style?.scoreItem}>
-                  <View style={style?.titleLogo}>
-                    <Image
-                      src={'/storage/assessments/' + score?.assessment?.logo}
-                      style={style?.scoreLogo}
-                    ></Image>
-                    <Text style={style?.scoreTitle}>
-                      {score?.assessment?.title_en}
-                    </Text>
-                  </View>
-                  <Text style={style?.scoreText}>
-                    Score:{' '}
-                    <Text style={style?.scoreNum}>{score?.score} Points</Text>
-                  </Text>
-                </View>
-              );
-            })}
-          </View>
-        </View>
-      </Page>
-    </Document>
-  );
-
-  const downloadImage = url => {
-    saveAs(url, 'badge.png');
-  };
-
   return (
     <MemberLayout>
+      {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] z-0 h-[600px]">
+        <Lottie
+          animationData={confetti}
+          loop={3}
+          height={500}
+          className="w-full h-full"
+        />
+      </div> */}
       {flash.success && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl relative mb-3">
           <span className="inline">{flash.success}</span>
@@ -297,7 +39,7 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
       <AdminSection>
         <TitleSection title="assessment" className="mb-6" />
 
-        <div className="mb-6 pb-6 border-b text-center relative z-10">
+        <div className="mb-6 pb-6 border-b text-center relative z-[2]">
           <div className="text-3xl font-bold text-primary mb-4">
             {t('congrats')}
           </div>
@@ -319,39 +61,33 @@ function AssessmentResult({ session, member, scores, expiredDate }) {
         </div>
         {member?.status?.includes('active') ? (
           <div className="relative">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] z-0">
-              <Lottie animationData={confetti} loop={3} className="w-full" />
-            </div>
-            <div className="relative z-[2] mb-12">
+            <div className="relative z-[2] lg:mb-10">
               <div className="grid gap-6 xl:w-[80%] mx-auto">
-                <div className="mb-4 pb-6 lg:pb-0 lg:mb-0 text-center">
-                  <div className="mb-4 font-bold">
-                    {t('your_assessment_scores')}&nbsp;
+                <div className="mb-4 pb-6 lg:pb-0 lg:mb-0 text-center grid lg:grid-cols-2 items-center">
+                  <div className="mb-6 lg:mb-0">
+                    <div className="mb-4 font-bold">
+                      {t('your_assessment_scores')}&nbsp;
+                    </div>
+                    <div className=" text-7xl text-primary font-bold rounded-2xl inline-flex items-end mb-4">
+                      <span>{session?.total_score}</span>&nbsp;
+                      <span className="text-5xl text-gray-500">
+                        / {totalMaxPoints}
+                      </span>
+                    </div>
+
+                    <ResultPdf
+                      scores={scores}
+                      member={member}
+                      session={session}
+                    />
                   </div>
-                  <div className=" text-7xl text-primary font-bold rounded-2xl inline-flex">
-                    {session?.total_score}
-                  </div>
-                  <PDFDownloadLink
-                    document={renderResult()}
-                    fileName={`result_${
-                      member.business_name
-                    }_${Date.now()}.pdf`}
-                    className="flex justify-center rounded-lg bg-lightPrimary lg:w-[60%] mx-auto mt-4 border-2 border-primary text-primary font-bold hover:bg-primary transition hover:text-white fw-bold py-2 px-4"
-                  >
-                    {({ loading }) =>
-                      loading ? t('loading') : t('download_result')
-                    }
-                  </PDFDownloadLink>
+
+                  <Speedometer
+                    score={session?.total_score}
+                    maxScore={totalMaxPoints}
+                  />
                 </div>
               </div>
-              {/* <div className="flex justify-center lg:w-[60%] mx-auto gap-6 mt-12">
-                <div className="bg-lightSecondary text-center p-4 lg:p-6 bg-opacity-50 rounded-lg border-secondary border-dashed border-2">
-                  <h5 className=" font-bold text-lg mb-2">
-                    {t('verify_badge')}
-                  </h5>
-                  <p>{t('verify_badge_text')}</p>
-                </div>
-              </div> */}
             </div>
             <Button
               as="link"

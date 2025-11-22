@@ -162,8 +162,6 @@ function Assessment({ assessments, session, answers }) {
     }
   };
 
-  console.log(assessments);
-
   return (
     <MemberLayout>
       {dataSaved && (

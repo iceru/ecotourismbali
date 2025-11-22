@@ -14,7 +14,7 @@ class AssessmentQuestionController extends Controller
     public function index($id)
     {
         return Inertia::render('Admin/Assessment/CreateQuestion', [
-            'assess_question' => AssessmentQuestion::where('assessment_id', $id)->get(),
+            'assess_question' => AssessmentQuestion::where('assessment_id', $id)->orderBy('question_no')->get(),
             'assessment' => Assessment::with('business_type')->find($id),
             'product_categories' => ProductCategory::all(),
         ]);

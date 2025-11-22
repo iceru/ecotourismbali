@@ -34,8 +34,8 @@ function AssessmentData({ categories, product_categories }) {
     business_type_id: member?.business_type_id || '',
     category: member?.category_id || '',
     product_category_id: member?.product_category_id || '',
-    latitude: member?.user?.latitude || '',
-    longitude: member?.user?.longitude || '',
+    latitude: member?.latitude || '',
+    longitude: member?.longitude || '',
   });
 
   useEffect(() => {

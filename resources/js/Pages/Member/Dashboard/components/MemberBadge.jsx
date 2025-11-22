@@ -5,12 +5,13 @@ import { lowerCase } from 'lodash';
 
 import { faBook, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Chart as ChartJS, registerables } from 'chart.js';
 
 import Button from '@/Components/Button';
-import { badgeColor } from '@/Helper/BadgeColor';
 
-const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
-  const { t, i18n } = useTranslation();
+const MemberBadge = ({ member, lastSession, scores, maxScores }) => {
+  const { t } = useTranslation();
+  ChartJS.register(...registerables);
 
   return (
     <div>
@@ -18,29 +19,41 @@ const MemberBadge = ({ member, expiredDate, lastSession, scores }) => {
         <>
           {member && member.badge ? (
             <>
-              <h2 className={'font-bold text-[20px] mb-4 text-center'}>
+              <h2 className={'font-bold text-lg mb-2 text-center'}>
                 {t('your_assessment')}
               </h2>
-              <div className="flex items-center flex-wrap justify-center">
+              <div className=" items-center flex-wrap justify-center">
                 <div>
                   {lastSession && (
-                    <div className="text-primary text-[70px] leading-tight">
+                    <div className="text-primary text-center text-[70px] leading-tight">
                       <span className="font-bold">
-                        {lastSession.total_score}
+                        {lastSession.total_score}{' '}
+                        <span className="text-[40px] text-gray-500">
+                          / {maxScores()}
+                        </span>
                       </span>
                     </div>
                   )}
                 </div>
                 <div className="ml-6">
-                  <div className="grid lg:grid-cols-2 gap-x-3 text-primary">
+                  <div className="grid lg:grid-cols-2 gap-x-3 gap-y-3 text-primary">
                     {scores?.map(score => {
                       return (
-                        <div className="flex justify-center text-gray-500 text-sm mb-1">
+                        <div className="flex items-center text-black">
+                          <div className="mr-1">
+                            <img
+                              src={`/storage/assessments/${score.assessment.logo}`}
+                              alt=""
+                              className="w-8 rounded-lg"
+                            />
+                          </div>
                           <div className="capitalize">
-                            {lowerCase(score?.assessment?.title).slice(0, 11)}
+                            {member?.business_type_id !== 3
+                              ? lowerCase(score?.assessment?.title).slice(0, 11)
+                              : lowerCase(score?.assessment?.title).slice(0, 8)}
                           </div>
                           <div className="mx-1">-</div>
-                          <div>{score?.score}</div>
+                          <div className="font-bold">{score?.score}</div>
                         </div>
                       );
                     })}

@@ -11,12 +11,13 @@ import Button from '@/Components/Button';
 import MemberLayout from '@/Layouts/MemberLayout';
 import { currency } from '@/Helper/Formatter';
 import TitleSection from '../../Admin/Components/TitleSection';
-import MemberBadge from './MemberBadge';
+import MemberBadge from './components/MemberBadge';
 import MemberDashboardForm from './MemberDashboardForm';
 import MemberGreenpal from './MemberGreenpal';
 
 import Greenpal from '../../../../images/greenpal.png';
 import MemberNGO from './MemberNGO';
+import MemberDashboardActive from './components/MemberDashboardActive';
 
 function MemberDashboard({
   member,
@@ -25,6 +26,7 @@ function MemberDashboard({
   business_type,
   expiredDate,
   categories,
+  assessments,
 }) {
   const { t } = useTranslation();
   const [payComplete, setPayComplete] = useState(false);
@@ -166,43 +168,13 @@ function MemberDashboard({
       )}
       {member?.program?.name.includes('Members') && (
         <>
-          <div className="grid lg:grid-cols-2 gap-6 mb-6">
-            <AdminSection>
-              <TitleSection title="welcome_member" className="mb-4" />
-              <div>
-                <Button
-                  as="link"
-                  href={route('member.profile')}
-                  className="mb-4 !inline-block"
-                  color="lightPrimary"
-                >
-                  {t('edit_profile')}
-                  <FontAwesomeIcon className="ml-2" icon={faUser} />
-                </Button>
-              </div>
-              {member?.status?.includes('active') && (
-                <div>
-                  <Button
-                    className="!inline-block"
-                    as="link"
-                    href={route('member.module.index')}
-                    color="lightSecondary"
-                  >
-                    {t('start_learning')}
-                    <FontAwesomeIcon icon={faPaperclip} className="ml-2" />
-                  </Button>
-                </div>
-              )}
-            </AdminSection>
-            <AdminSection>
-              <MemberBadge
-                member={member}
-                lastSession={lastSession}
-                scores={scores}
-                expiredDate={expiredDate}
-              />
-            </AdminSection>
-          </div>
+          <MemberDashboardActive
+            member={member}
+            lastSession={lastSession}
+            scores={scores}
+            expiredDate={expiredDate}
+            assessments={assessments}
+          />
           {!member?.status?.includes('active') && (
             <AdminSection className="flex flex-col items-center justify-center gap-4">
               <h2 className="font-bold text-xl">{t('member_not_active')}</h2>

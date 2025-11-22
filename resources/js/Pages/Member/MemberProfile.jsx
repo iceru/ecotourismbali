@@ -42,11 +42,6 @@ function MemberProfile({ member, scores, lastSession, expiredDate }) {
     slidesToScroll: 1,
   };
 
-  // const downloadBadge = url => {
-  //   console.log(url);
-  //   saveAs(url, 'badge.png');
-  // };
-
   const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
 

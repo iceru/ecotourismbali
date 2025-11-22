@@ -53,30 +53,30 @@ function MemberLayout({ children, state }) {
   }
 
   return (
-    <div className="flex bg-lightPrimary p-3 gap-4 lg:p-6 lg:gap-6 min-h-screen bg-opacity-70">
+    <div className="flex bg-lightPrimary p-3 gap-4 lg:p-4 lg:gap-6 min-h-screen bg-opacity-70">
       <Head title="Member" />
       <AdminSection
         className={`transition hidden fixed lg:static lg:transform-none left-0 top-0 z-10 h-screen w-screen lg:h-auto ${
           !sideActive
             ? '-translate-x-[120%] hidden p-0 opacity-0'
-            : 'translate-x-0 !block lg:block lg:w-1/4 p-4 lg:p-6 opacity-100'
+            : 'translate-x-0 !block lg:block lg:w-[20%] p-4 lg:p-5 opacity-100'
         }`}
       >
         <div className="logo mb-12">
           <div className="flex items-center mb-10">
-            <div className="w-20 h-20 bg-primary bg-opacity-10 flex justify-center items-center rounded-full mr-2">
+            <div className="w-16 h-16 bg-primary bg-opacity-10 flex justify-center items-center rounded-full mr-2">
               {member?.image ? (
                 <img
-                  className="w-20 h-20 rounded-full  object-contain"
+                  className="w-16 h-16 rounded-full  object-contain"
                   src={`/storage/member/images/${member?.image}`}
                   alt=""
                 />
               ) : (
-                <img className="w-20 h-20 rounded-full " src={noImage} alt="" />
+                <img className="w-16 h-16 rounded-full " src={noImage} alt="" />
               )}
             </div>
             <div>
-              <h3 className="font-bold text-lg">{member?.business_name}</h3>
+              <h3 className="font-bold">{member?.business_name}</h3>
               {member?.status?.includes('active') ? (
                 <p className="text-sm mt-1 font-semibold text-primary">
                   {t('verified_member')}
@@ -180,8 +180,8 @@ function MemberLayout({ children, state }) {
           </ul>
         </nav>
       </AdminSection>
-      <div className={`${!sideActive ? 'w-full' : 'lg:w-3/4'}`}>
-        <AdminSection className="flex items-center justify-between mb-6 px-6 py-4 flex-wrap">
+      <div className={`${!sideActive ? 'w-full' : 'lg:w-[80%]'}`}>
+        <AdminSection className="flex items-center justify-between mb-4 px-6 py-4 flex-wrap">
           <div className="flex items-center w-full justify-between lg:w-auto lg:justify-start mb-4 lg:mb-0">
             <Button
               color="lightPrimary"
