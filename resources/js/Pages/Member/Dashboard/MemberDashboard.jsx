@@ -168,13 +168,15 @@ function MemberDashboard({
       )}
       {member?.program?.name.includes('Members') && (
         <>
-          <MemberDashboardActive
-            member={member}
-            lastSession={lastSession}
-            scores={scores}
-            expiredDate={expiredDate}
-            assessments={assessments}
-          />
+          {member?.status?.includes('active') && (
+            <MemberDashboardActive
+              member={member}
+              lastSession={lastSession}
+              scores={scores}
+              expiredDate={expiredDate}
+              assessments={assessments}
+            />
+          )}
           {!member?.status?.includes('active') && (
             <AdminSection className="flex flex-col items-center justify-center gap-4">
               <h2 className="font-bold text-xl">{t('member_not_active')}</h2>

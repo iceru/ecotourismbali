@@ -53,7 +53,12 @@ const MemberBadge = ({ member, lastSession, scores, maxScores }) => {
                               : lowerCase(score?.assessment?.title).slice(0, 8)}
                           </div>
                           <div className="mx-1">-</div>
-                          <div className="font-bold">{score?.score}</div>
+                          <div className="font-bold">
+                            {score?.score}{' '}
+                            <span className="text-gray-500">
+                              / {score?.assessment?.max_points}
+                            </span>
+                          </div>
                         </div>
                       );
                     })}

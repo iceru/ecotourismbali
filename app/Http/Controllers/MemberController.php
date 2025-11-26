@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assessment;
+use App\Models\MemberAssessmentAnswer;
 use App\Models\MemberPayment;
 use Inertia\Inertia;
 use App\Models\Member;
@@ -30,6 +31,7 @@ class MemberController extends Controller
         $memberAssessments = null;
         $dateAssessment = null;
         $assessments = Assessment::where('business_type_id', $member->business_type_id)->get();
+        // $answers = MemberAssessmentAnswer::where('assessment_session_id', $lastSession->id)->get();
 
         if ($lastSession) {
             $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
