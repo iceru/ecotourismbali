@@ -1,5 +1,5 @@
 export default function Speedometer({ score, maxScore }) {
-  const percentage = (score / maxScore) * 100;
+  const percentage = maxScore > 0 ? (score / maxScore) * 100 : 0;
   const rotation = (percentage / 100) * 180 - 90;
 
   const getColor = () => {
@@ -75,9 +75,6 @@ export default function Speedometer({ score, maxScore }) {
           <div className="text-3xl font-bold" style={{ color: getColor() }}>
             {percentage.toFixed(0)}%
           </div>
-          {/* <div className="text-sm text-gray-600 font-semibold">
-            {getLabel()}
-          </div> */}
         </div>
       </div>
 

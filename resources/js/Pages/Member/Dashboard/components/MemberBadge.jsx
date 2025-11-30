@@ -17,7 +17,7 @@ const MemberBadge = ({ member, lastSession, scores, maxScores }) => {
     <div>
       {member?.status?.includes('active') ? (
         <>
-          {member && member.badge ? (
+          {lastSession ? (
             <>
               <h2 className={'font-bold text-lg mb-2 text-center'}>
                 {t('your_assessment')}
@@ -69,7 +69,7 @@ const MemberBadge = ({ member, lastSession, scores, maxScores }) => {
           ) : (
             <>
               <h2 className="font-bold text-[20px] mb-4">
-                {t('no_assessment')}
+                {t('welcome_member')}
               </h2>
               <div>
                 <Button
