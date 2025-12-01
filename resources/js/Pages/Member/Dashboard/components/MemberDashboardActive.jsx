@@ -13,11 +13,13 @@ export default function MemberDashboardActive({
   const { t } = useTranslation();
 
   const maxScores = () =>
-    scores?.reduce((total, score) => total + score.assessment.max_points, 0) ??
-    0;
+    scores?.reduce(
+      (total, score) => total + parseInt(score.assessment.max_points),
+      0
+    ) ?? 0;
 
   const totalScores = () =>
-    scores?.reduce((total, score) => total + score.score, 0) ?? 0;
+    scores?.reduce((total, score) => total + parseInt(score.score), 0) ?? 0;
 
   console.log(scores);
 
