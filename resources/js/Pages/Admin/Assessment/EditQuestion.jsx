@@ -24,7 +24,7 @@ function EditQuestion() {
     type: assess_question.type || '',
     question: assess_question.question || '',
     question_en: assess_question.question_en || '',
-    product_category_id: assess_question.product_category_id || '1',
+    product_category_id: assess_question.product_category_id || '',
   });
 
   const submit = e => {
