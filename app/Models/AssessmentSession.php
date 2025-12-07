@@ -16,12 +16,12 @@ class AssessmentSession extends Model
 
     protected $fillable = ['member_id'];
 
-    public function member_assessment(): HasMany
+    public function member_assessment()
     {
         return $this->hasMany(MemberAssessment::class, 'assessment_session_id');
     }
 
-    public function member_assessment_answer(): HasMany
+    public function member_assessment_answer()
     {
         return $this->hasMany(MemberAssessmentAnswer::class, 'assessment_session_id');
     }

@@ -35,7 +35,7 @@ const MemberBadge = ({ member, lastSession, scores, maxScores }) => {
                     </div>
                   )}
                 </div>
-                <div className="ml-6">
+                <div>
                   <div className="grid lg:grid-cols-2 gap-x-3 gap-y-3 text-primary">
                     {scores?.map(score => {
                       return (

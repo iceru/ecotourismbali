@@ -34,7 +34,10 @@ class MemberController extends Controller
         // $answers = MemberAssessmentAnswer::where('assessment_session_id', $lastSession->id)->get();
 
         if ($lastSession) {
-            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $member->id)->where('assessment_session_id', $lastSession->id)->get();
+            $memberAssessments = MemberAssessment::with('assessment', 
+            'assessment_session.member_assessment_answer.assessment_question.assessment_option', 
+            'assessment_session.member_assessment_answer.assessment_option')->where('member_id', $member->id)
+            ->where('assessment_session_id', $lastSession->id)->get();
             $dateAssessment = $lastSession->created_at->addYears(1);
         }
 
