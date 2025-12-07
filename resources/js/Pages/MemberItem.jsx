@@ -47,7 +47,7 @@ function MemberItem({ member, tribe }) {
             </div>
           )}
         </>
-        <div className="flex items-center my-4">
+        <div className="flex items-center mb-4 mt-5">
           {member?.image && (
             <div className="mr-3 rounded-full w-[62px] h-[62px] bg-lightPrimary bg-opacity-30 flex justify-center items-center">
               <img
@@ -58,7 +58,7 @@ function MemberItem({ member, tribe }) {
             </div>
           )}
           <Link href={route('member.detail', member?.slug)}>
-            <h4 className="font-bold text-xl leading-[22px] mb-1">
+            <h4 className="font-semibold text-lg leading-[22px] mb-1">
               {member?.business_name}
             </h4>
             {member?.category && (

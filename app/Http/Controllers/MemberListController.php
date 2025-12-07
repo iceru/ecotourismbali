@@ -72,7 +72,7 @@ class MemberListController extends Controller
             $members->orderBy('business_name');
         }
         if($request->program !== 2 && $tribe->id !== 2) {
-            $members = $members->paginate(12)->withQueryString();
+            $members = $members->paginate(15)->withQueryString();
         } else {
             $members = $members->paginate(16)->withQueryString();
         }
@@ -143,7 +143,7 @@ class MemberListController extends Controller
             $members->orderBy('business_name');
         }
         if($request->program !== 2 && $tribe->id !== 2) {
-            $members = $members->with('badge', 'category', 'verified_badge', 'program')->paginate(12)->withQueryString();
+            $members = $members->with('badge', 'category', 'verified_badge', 'program')->paginate(15)->withQueryString();
         } else {
             $members = $members->paginate(16)->withQueryString();
         }

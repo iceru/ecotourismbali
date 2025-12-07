@@ -271,7 +271,7 @@ function MemberList({
 
       <div className="flex flex-wrap">
         {tribe.id === 1 && (
-          <div className="sidebar w-full lg:w-1/6">
+          <div className="sidebar w-full lg:w-1/6 lg:pr-6">
             <ul className="text-gray-600 font-light flex lg:block whitespace-nowrap overflow-auto gap-4 mb-6 lg:mb-0 pb-4">
               <li
                 className={`cursor-pointer lg:mb-6 ${
@@ -298,7 +298,7 @@ function MemberList({
           </div>
         )}
         {tribe?.id === 1 ? (
-          <div className="lg:w-5/6 lg:pl-6">
+          <div className="lg:w-5/6">
             <div
               className={`${
                 tribe?.id === 1 ? 'xl:grid-cols-3' : 'xl:grid-cols-4'
