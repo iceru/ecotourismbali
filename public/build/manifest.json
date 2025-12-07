@@ -1,65 +1,65 @@
 {
-  "_AdminLayout-26717563.js": {
-    "file": "assets/AdminLayout-26717563.js",
+  "_AdminLayout-bb868bae.js": {
+    "file": "assets/AdminLayout-bb868bae.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
+      "_Button-2fd4847c.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
-      "_AdminSection-13b95cd5.js",
+      "_index-b8ebb455.js",
+      "_AdminSection-ec916397.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ]
   },
-  "_AdminSection-13b95cd5.js": {
-    "file": "assets/AdminSection-13b95cd5.js",
+  "_AdminSection-ec916397.js": {
+    "file": "assets/AdminSection-ec916397.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_AuthImage-e6daa5da.js": {
+  "_AuthImage-e5a70384.js": {
     "assets": [
       "assets/authImage-d4c8c53f.jpg"
     ],
-    "file": "assets/AuthImage-e6daa5da.js",
+    "file": "assets/AuthImage-e5a70384.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_BadgeColor-6869562c.js": {
-    "file": "assets/BadgeColor-6869562c.js",
+  "_BadgeColor-d735db62.js": {
+    "file": "assets/BadgeColor-d735db62.js",
     "imports": [
-      "_lodash-ecd4194a.js"
+      "_lodash-8787dbf6.js"
     ]
   },
-  "_Button-1fbab404.js": {
-    "file": "assets/Button-1fbab404.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_Checkbox-d5f54a9f.js": {
-    "file": "assets/Checkbox-d5f54a9f.js",
+  "_Button-2fd4847c.js": {
+    "file": "assets/Button-2fd4847c.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_Dropdown-9da15ab0.js": {
-    "file": "assets/Dropdown-9da15ab0.js",
+  "_Checkbox-f060e7f3.js": {
+    "file": "assets/Checkbox-f060e7f3.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_Dropdown-a7a456ab.js": {
+    "file": "assets/Dropdown-a7a456ab.js",
     "imports": [
       "resources/js/app.jsx",
-      "_transition-ee8b20d5.js"
+      "_transition-1af3ecb3.js"
     ]
   },
-  "_FileSaver.min-9c485f60.js": {
-    "file": "assets/FileSaver.min-9c485f60.js",
+  "_FileSaver.min-aac90f64.js": {
+    "file": "assets/FileSaver.min-aac90f64.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_GuestLayout-8e4e0891.js": {
+  "_GuestLayout-da544b1d.js": {
     "assets": [
       "assets/wave-8ac64120.png",
       "assets/bni-9db2288f.png",
@@ -71,92 +71,92 @@
       "assets/mandiri-19265813.webp",
       "assets/qris-ee72179e.png"
     ],
-    "file": "assets/GuestLayout-8e4e0891.js",
+    "file": "assets/GuestLayout-da544b1d.js",
     "imports": [
       "resources/js/app.jsx",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ]
   },
-  "_InputError-907179e2.js": {
-    "file": "assets/InputError-907179e2.js",
+  "_InputError-50b283fe.js": {
+    "file": "assets/InputError-50b283fe.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_InputLabel-d3a69f15.js": {
-    "file": "assets/InputLabel-d3a69f15.js",
+  "_InputLabel-80313b30.js": {
+    "file": "assets/InputLabel-80313b30.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_MemberGreenpal-c5d33c7c.js": {
-    "file": "assets/MemberGreenpal-c5d33c7c.js",
+  "_MemberGreenpal-b0852442.js": {
+    "file": "assets/MemberGreenpal-b0852442.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
-      "_InputLabel-d3a69f15.js",
-      "_TextInput-5998096c.js",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js"
+      "_Button-2fd4847c.js",
+      "_InputLabel-80313b30.js",
+      "_TextInput-ef286b7e.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true
   },
-  "_MemberLayout-1d89f344.js": {
-    "file": "assets/MemberLayout-1d89f344.js",
+  "_MemberLayout-ef1fbc79.js": {
+    "file": "assets/MemberLayout-ef1fbc79.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
-      "_index-dfc99747.js",
-      "_AdminSection-13b95cd5.js",
+      "_Button-2fd4847c.js",
+      "_index-b8ebb455.js",
+      "_AdminSection-ec916397.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js",
-      "_useTranslation-88ffdeee.js"
+      "_react-responsive-4bec00c2.js",
+      "_useTranslation-d87918d0.js"
     ]
   },
-  "_Pagination-ac73583a.js": {
-    "file": "assets/Pagination-ac73583a.js",
+  "_Pagination-ada2861e.js": {
+    "file": "assets/Pagination-ada2861e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_lodash-ecd4194a.js"
+      "_lodash-8787dbf6.js"
     ]
   },
-  "_SelectInput-19cdb194.js": {
-    "file": "assets/SelectInput-19cdb194.js",
+  "_SelectInput-8eb706bb.js": {
+    "file": "assets/SelectInput-8eb706bb.js",
     "imports": [
       "resources/js/app.jsx",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ]
   },
-  "_Speedometer-a86607d0.js": {
-    "file": "assets/Speedometer-a86607d0.js",
+  "_Speedometer-5791e40b.js": {
+    "file": "assets/Speedometer-5791e40b.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_Table-a40ec203.js": {
-    "file": "assets/Table-a40ec203.js",
+  "_Table-65de3db7.js": {
+    "file": "assets/Table-65de3db7.js",
     "imports": [
       "resources/js/app.jsx",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ]
   },
-  "_TextInput-5998096c.js": {
-    "file": "assets/TextInput-5998096c.js",
+  "_TextInput-ef286b7e.js": {
+    "file": "assets/TextInput-ef286b7e.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_TitlePage-bf5132dc.js": {
-    "file": "assets/TitlePage-bf5132dc.js",
+  "_TitlePage-2cbf765d.js": {
+    "file": "assets/TitlePage-2cbf765d.js",
     "imports": [
       "resources/js/app.jsx",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ]
   },
   "_asyncToGenerator-e43f4a97.js": {
@@ -190,36 +190,36 @@
   "_index-25fc1de7.js": {
     "file": "assets/index-25fc1de7.js"
   },
-  "_index-dfc99747.js": {
-    "file": "assets/index-dfc99747.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_index-e8ef0c8d.js": {
-    "file": "assets/index-e8ef0c8d.js",
+  "_index-3dbd3815.js": {
+    "file": "assets/index-3dbd3815.js",
     "imports": [
       "resources/js/app.jsx",
       "_chart-c0337866.js"
     ]
   },
-  "_index-eed75bca.js": {
+  "_index-50f33023.js": {
+    "file": "assets/index-50f33023.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_index-6c660bc2.js": {
     "css": [
       "assets/index-8e59e50e.css"
     ],
-    "file": "assets/index-eed75bca.js",
+    "file": "assets/index-6c660bc2.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_index-f2b4c12a.js": {
-    "file": "assets/index-f2b4c12a.js",
+  "_index-b8ebb455.js": {
+    "file": "assets/index-b8ebb455.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_lodash-ecd4194a.js": {
-    "file": "assets/lodash-ecd4194a.js",
+  "_lodash-8787dbf6.js": {
+    "file": "assets/lodash-8787dbf6.js",
     "imports": [
       "resources/js/app.jsx"
     ]
@@ -230,8 +230,8 @@
     ],
     "file": "assets/logo-5e7252b7.js"
   },
-  "_moment-d3f19879.js": {
-    "file": "assets/moment-d3f19879.js",
+  "_moment-0df69e7a.js": {
+    "file": "assets/moment-0df69e7a.js",
     "imports": [
       "resources/js/app.jsx"
     ]
@@ -245,20 +245,20 @@
     ],
     "file": "assets/no-image-91387054.js"
   },
-  "_react-responsive-96f93003.js": {
-    "file": "assets/react-responsive-96f93003.js",
+  "_react-responsive-4bec00c2.js": {
+    "file": "assets/react-responsive-4bec00c2.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_transition-ee8b20d5.js": {
-    "file": "assets/transition-ee8b20d5.js",
+  "_transition-1af3ecb3.js": {
+    "file": "assets/transition-1af3ecb3.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_useTranslation-88ffdeee.js": {
-    "file": "assets/useTranslation-88ffdeee.js",
+  "_useTranslation-d87918d0.js": {
+    "file": "assets/useTranslation-d87918d0.js",
     "imports": [
       "resources/js/app.jsx"
     ]
@@ -268,7 +268,7 @@
     "src": "index.css"
   },
   "node_modules/canvg/lib/index.es.js": {
-    "file": "assets/index.es-0fe7076a.js",
+    "file": "assets/index.es-f1cfb966.js",
     "imports": [
       "resources/js/app.jsx",
       "_asyncToGenerator-e43f4a97.js"
@@ -422,926 +422,926 @@
     "src": "resources/images/wave.png"
   },
   "resources/js/Pages/Admin/AdminDashboard.jsx": {
-    "file": "assets/AdminDashboard-3ce10e7c.js",
+    "file": "assets/AdminDashboard-bc7f3fe3.js",
     "imports": [
       "resources/js/app.jsx",
       "_chart-c0337866.js",
-      "_index-e8ef0c8d.js",
+      "_index-3dbd3815.js",
       "_moment-fbc5633a.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_AdminLayout-26717563.js",
-      "_useTranslation-88ffdeee.js",
-      "_Button-1fbab404.js",
+      "_AdminSection-ec916397.js",
+      "_AdminLayout-bb868bae.js",
+      "_useTranslation-d87918d0.js",
+      "_Button-2fd4847c.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/AdminDashboard.jsx"
   },
   "resources/js/Pages/Admin/Announcement/CreateAnnouncement.jsx": {
-    "file": "assets/CreateAnnouncement-90f62b0f.js",
+    "file": "assets/CreateAnnouncement-cf071b4f.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Announcement/CreateAnnouncement.jsx"
   },
   "resources/js/Pages/Admin/Announcement/EditAnnouncement.jsx": {
-    "file": "assets/EditAnnouncement-8bea6f14.js",
+    "file": "assets/EditAnnouncement-c5c39df3.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Announcement/EditAnnouncement.jsx"
   },
   "resources/js/Pages/Admin/Assessment/CreateAssessment.jsx": {
-    "file": "assets/CreateAssessment-ca9408f3.js",
+    "file": "assets/CreateAssessment-67cba837.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_SelectInput-19cdb194.js",
-      "_index-eed75bca.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_SelectInput-8eb706bb.js",
+      "_index-6c660bc2.js",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment/CreateAssessment.jsx"
   },
   "resources/js/Pages/Admin/Assessment/CreateOption.jsx": {
-    "file": "assets/CreateOption-36702f3d.js",
+    "file": "assets/CreateOption-5cebf03f.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment/CreateOption.jsx"
   },
   "resources/js/Pages/Admin/Assessment/CreateQuestion.jsx": {
-    "file": "assets/CreateQuestion-25897629.js",
+    "file": "assets/CreateQuestion-233ec77f.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_index-eed75bca.js",
+      "_index-6c660bc2.js",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment/CreateQuestion.jsx"
   },
   "resources/js/Pages/Admin/Assessment/EditAssessment.jsx": {
-    "file": "assets/EditAssessment-a4957e35.js",
+    "file": "assets/EditAssessment-ff84c272.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
+      "_SelectInput-8eb706bb.js",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_index-eed75bca.js"
+      "_index-6c660bc2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment/EditAssessment.jsx"
   },
   "resources/js/Pages/Admin/Assessment/EditOption.jsx": {
-    "file": "assets/EditOption-aa2e2d0c.js",
+    "file": "assets/EditOption-44cfbfaf.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment/EditOption.jsx"
   },
   "resources/js/Pages/Admin/Assessment/EditQuestion.jsx": {
-    "file": "assets/EditQuestion-2dade4e4.js",
+    "file": "assets/EditQuestion-6148fbb7.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_index-eed75bca.js",
+      "_index-6c660bc2.js",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment/EditQuestion.jsx"
   },
   "resources/js/Pages/Admin/Assessment2/CreateAssessment.jsx": {
-    "file": "assets/CreateAssessment-b0069450.js",
+    "file": "assets/CreateAssessment-31c238c1.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_SelectInput-19cdb194.js",
-      "_index-eed75bca.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_SelectInput-8eb706bb.js",
+      "_index-6c660bc2.js",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment2/CreateAssessment.jsx"
   },
   "resources/js/Pages/Admin/Assessment2/EditAssessment.jsx": {
-    "file": "assets/EditAssessment-fc3d71b0.js",
+    "file": "assets/EditAssessment-50ed8040.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
+      "_SelectInput-8eb706bb.js",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_index-eed75bca.js"
+      "_index-6c660bc2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Assessment2/EditAssessment.jsx"
   },
   "resources/js/Pages/Admin/Badge/CreateBadge.jsx": {
-    "file": "assets/CreateBadge-d650235b.js",
+    "file": "assets/CreateBadge-be82f2db.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Badge/CreateBadge.jsx"
   },
   "resources/js/Pages/Admin/Badge/EditBadge.jsx": {
-    "file": "assets/EditBadge-aa16d5f0.js",
+    "file": "assets/EditBadge-490e2806.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Badge/EditBadge.jsx"
   },
   "resources/js/Pages/Admin/BusinessType/CreateBusinessType.jsx": {
-    "file": "assets/CreateBusinessType-f55672fd.js",
+    "file": "assets/CreateBusinessType-3e23a40e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/BusinessType/CreateBusinessType.jsx"
   },
   "resources/js/Pages/Admin/BusinessType/EditBusinessType.jsx": {
-    "file": "assets/EditBusinessType-33057042.js",
+    "file": "assets/EditBusinessType-f11e225b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/BusinessType/EditBusinessType.jsx"
   },
   "resources/js/Pages/Admin/Category/CreateCategory.jsx": {
-    "file": "assets/CreateCategory-ea9307a5.js",
+    "file": "assets/CreateCategory-1f236df4.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Category/CreateCategory.jsx"
   },
   "resources/js/Pages/Admin/Category/EditCategory.jsx": {
-    "file": "assets/EditCategory-236d0dd8.js",
+    "file": "assets/EditCategory-c4f18b42.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Category/EditCategory.jsx"
   },
   "resources/js/Pages/Admin/Components/BackTo.jsx": {
-    "file": "assets/BackTo-4b3d7e81.js",
+    "file": "assets/BackTo-73ec6f6a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-dfc99747.js",
-      "_useTranslation-88ffdeee.js"
+      "_index-b8ebb455.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Components/BackTo.jsx"
   },
   "resources/js/Pages/Admin/Components/Editor.jsx": {
-    "file": "assets/Editor-8a0140de.js",
+    "file": "assets/Editor-d49283fd.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-eed75bca.js"
+      "_index-6c660bc2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Components/Editor.jsx"
   },
   "resources/js/Pages/Admin/Components/Search.jsx": {
-    "file": "assets/Search-8b99c77d.js",
+    "file": "assets/Search-4e986b29.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js"
+      "_Button-2fd4847c.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Components/Search.jsx"
   },
   "resources/js/Pages/Admin/Components/TitleSection.jsx": {
-    "file": "assets/TitleSection-3007919a.js",
+    "file": "assets/TitleSection-ae6f262c.js",
     "imports": [
       "resources/js/app.jsx",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Components/TitleSection.jsx"
   },
   "resources/js/Pages/Admin/Member/MemberDetail.jsx": {
-    "file": "assets/MemberDetail-7f4df8c0.js",
+    "file": "assets/MemberDetail-e03d3636.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_AdminLayout-26717563.js",
+      "_AdminSection-ec916397.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
-      "_Button-1fbab404.js",
-      "_lodash-ecd4194a.js",
-      "_moment-d3f19879.js",
-      "_BadgeColor-6869562c.js",
-      "_TextInput-5998096c.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_Button-2fd4847c.js",
+      "_lodash-8787dbf6.js",
+      "_moment-0df69e7a.js",
+      "_BadgeColor-d735db62.js",
+      "_TextInput-ef286b7e.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Member/MemberDetail.jsx"
   },
   "resources/js/Pages/Admin/Member/MemberIndex.jsx": {
-    "file": "assets/MemberIndex-3d49be89.js",
+    "file": "assets/MemberIndex-27890a93.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_AdminLayout-26717563.js",
+      "_AdminSection-ec916397.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Table-a40ec203.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/Search.jsx",
-      "_Button-1fbab404.js",
+      "_Button-2fd4847c.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Member/MemberIndex.jsx"
   },
   "resources/js/Pages/Admin/MemberTourism/Edit.jsx": {
-    "file": "assets/Edit-73aed7f6.js",
+    "file": "assets/Edit-ca059482.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/MemberTourism/Edit.jsx"
   },
   "resources/js/Pages/Admin/MemberTourism/Index.jsx": {
-    "file": "assets/Index-6f76b9d1.js",
+    "file": "assets/Index-b02f1e20.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/MemberTourism/Index.jsx"
   },
   "resources/js/Pages/Admin/Module/CreateModule.jsx": {
-    "file": "assets/CreateModule-9143c977.js",
+    "file": "assets/CreateModule-4cb0016b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_index-eed75bca.js",
-      "_useTranslation-88ffdeee.js",
+      "_index-6c660bc2.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Module/CreateModule.jsx"
   },
   "resources/js/Pages/Admin/Module/EditModule.jsx": {
-    "file": "assets/EditModule-c81ce311.js",
+    "file": "assets/EditModule-e82c0b72.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
       "resources/js/Pages/Admin/Components/Editor.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_index-eed75bca.js"
+      "_index-6c660bc2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Module/EditModule.jsx"
   },
   "resources/js/Pages/Admin/Module/ShowModule.jsx": {
-    "file": "assets/ShowModule-cb1b7be4.js",
+    "file": "assets/ShowModule-e706e1e0.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_AdminLayout-26717563.js",
+      "_AdminSection-ec916397.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
-      "_Button-1fbab404.js",
+      "_useTranslation-d87918d0.js",
+      "_Button-2fd4847c.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Module/ShowModule.jsx"
   },
   "resources/js/Pages/Admin/Payment/PaymentIndex.jsx": {
-    "file": "assets/PaymentIndex-a7030185.js",
+    "file": "assets/PaymentIndex-d2844321.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_AdminLayout-26717563.js",
+      "_AdminSection-ec916397.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Table-a40ec203.js",
-      "_Button-1fbab404.js",
+      "_Table-65de3db7.js",
+      "_Button-2fd4847c.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Payment/PaymentIndex.jsx"
   },
   "resources/js/Pages/Admin/Payment/ShowPayment.jsx": {
-    "file": "assets/ShowPayment-1cf182ba.js",
+    "file": "assets/ShowPayment-7ab616e0.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_AdminLayout-26717563.js",
+      "_AdminSection-ec916397.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
-      "_Button-1fbab404.js",
+      "_useTranslation-d87918d0.js",
+      "_Button-2fd4847c.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Payment/ShowPayment.jsx"
   },
   "resources/js/Pages/Admin/PostTest/CreatePostOption.jsx": {
-    "file": "assets/CreatePostOption-23d47ac3.js",
+    "file": "assets/CreatePostOption-6f4ba9ac.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PostTest/CreatePostOption.jsx"
   },
   "resources/js/Pages/Admin/PostTest/CreatePostQuestion.jsx": {
-    "file": "assets/CreatePostQuestion-8368fd56.js",
+    "file": "assets/CreatePostQuestion-63134dad.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PostTest/CreatePostQuestion.jsx"
   },
   "resources/js/Pages/Admin/PostTest/EditPostOption.jsx": {
-    "file": "assets/EditPostOption-bec45ed4.js",
+    "file": "assets/EditPostOption-ace76f0a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PostTest/EditPostOption.jsx"
   },
   "resources/js/Pages/Admin/PostTest/EditPostQuestion.jsx": {
-    "file": "assets/EditPostQuestion-45ca321a.js",
+    "file": "assets/EditPostQuestion-4a8a9631.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PostTest/EditPostQuestion.jsx"
   },
   "resources/js/Pages/Admin/PreTest/CreatePreOption.jsx": {
-    "file": "assets/CreatePreOption-dda344b2.js",
+    "file": "assets/CreatePreOption-49abe102.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PreTest/CreatePreOption.jsx"
   },
   "resources/js/Pages/Admin/PreTest/CreatePreQuestion.jsx": {
-    "file": "assets/CreatePreQuestion-d2c5a82c.js",
+    "file": "assets/CreatePreQuestion-f5e27274.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PreTest/CreatePreQuestion.jsx"
   },
   "resources/js/Pages/Admin/PreTest/EditPreOption.jsx": {
-    "file": "assets/EditPreOption-9ec36cbb.js",
+    "file": "assets/EditPreOption-23ea87f9.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PreTest/EditPreOption.jsx"
   },
   "resources/js/Pages/Admin/PreTest/EditPreQuestion.jsx": {
-    "file": "assets/EditPreQuestion-f845b3b9.js",
+    "file": "assets/EditPreQuestion-7cac9a3b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/PreTest/EditPreQuestion.jsx"
   },
   "resources/js/Pages/Admin/ProductCategory/Create.jsx": {
-    "file": "assets/Create-da99d2fa.js",
+    "file": "assets/Create-6ed619ad.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/ProductCategory/Create.jsx"
   },
   "resources/js/Pages/Admin/ProductCategory/Edit.jsx": {
-    "file": "assets/Edit-cce60d71.js",
+    "file": "assets/Edit-b5d02e80.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/ProductCategory/Edit.jsx"
   },
   "resources/js/Pages/Admin/Program/CreateProgram.jsx": {
-    "file": "assets/CreateProgram-75c8a468.js",
+    "file": "assets/CreateProgram-1303c7b9.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Program/CreateProgram.jsx"
   },
   "resources/js/Pages/Admin/Program/EditProgram.jsx": {
-    "file": "assets/EditProgram-ab8c8781.js",
+    "file": "assets/EditProgram-81c6fc72.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Program/EditProgram.jsx"
   },
   "resources/js/Pages/Admin/Register/CreateAdmin.jsx": {
-    "file": "assets/CreateAdmin-49278658.js",
+    "file": "assets/CreateAdmin-8be7eda5.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Register/CreateAdmin.jsx"
   },
   "resources/js/Pages/Admin/Source/CreateSource.jsx": {
-    "file": "assets/CreateSource-cce07cc9.js",
+    "file": "assets/CreateSource-887f9ec6.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_index-eed75bca.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_index-6c660bc2.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Source/CreateSource.jsx"
   },
   "resources/js/Pages/Admin/Source/EditSource.jsx": {
-    "file": "assets/EditSource-94331cb6.js",
+    "file": "assets/EditSource-9d64c97b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
@@ -1352,182 +1352,182 @@
       "node_modules/dompurify/dist/purify.es.js",
       "node_modules/canvg/lib/index.es.js"
     ],
-    "file": "assets/AssessmentDetail-8ed5f575.js",
+    "file": "assets/AssessmentDetail-673be500.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Button-1fbab404.js",
-      "_lodash-ecd4194a.js",
-      "_AdminLayout-26717563.js",
+      "_Button-2fd4847c.js",
+      "_lodash-8787dbf6.js",
+      "_AdminLayout-bb868bae.js",
       "_no-image-91387054.js",
-      "_index-dfc99747.js",
-      "_useTranslation-88ffdeee.js",
+      "_index-b8ebb455.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Statistic/AssessmentDetail.jsx"
   },
   "resources/js/Pages/Admin/Statistic/Components/AssessmentSection.jsx": {
-    "file": "assets/AssessmentSection-c550be0d.js",
+    "file": "assets/AssessmentSection-52d3a399.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_index-e8ef0c8d.js",
+      "_AdminSection-ec916397.js",
+      "_index-3dbd3815.js",
       "_chart-c0337866.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Statistic/Components/AssessmentSection.jsx"
   },
   "resources/js/Pages/Admin/Statistic/Components/PieChart.jsx": {
-    "file": "assets/PieChart-60b87733.js",
+    "file": "assets/PieChart-cc3d3520.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_index-e8ef0c8d.js",
+      "_AdminSection-ec916397.js",
+      "_index-3dbd3815.js",
       "_chart-c0337866.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Statistic/Components/PieChart.jsx"
   },
   "resources/js/Pages/Admin/Statistic/Statistic.jsx": {
-    "file": "assets/Statistic-4217e914.js",
+    "file": "assets/Statistic-7dce8418.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminLayout-26717563.js",
-      "_AdminSection-13b95cd5.js",
-      "_index-e8ef0c8d.js",
+      "_AdminLayout-bb868bae.js",
+      "_AdminSection-ec916397.js",
+      "_index-3dbd3815.js",
       "_chart-c0337866.js",
       "resources/js/Pages/Admin/Statistic/Components/PieChart.jsx",
-      "_Button-1fbab404.js",
+      "_Button-2fd4847c.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Statistic/Statistic.jsx"
   },
   "resources/js/Pages/Admin/Statistic/StatisticAssessment.jsx": {
-    "file": "assets/StatisticAssessment-41fe24a5.js",
+    "file": "assets/StatisticAssessment-0ddb3d26.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminLayout-26717563.js",
-      "_AdminSection-13b95cd5.js",
+      "_AdminLayout-bb868bae.js",
+      "_AdminSection-ec916397.js",
       "_chart-c0337866.js",
-      "_lodash-ecd4194a.js",
-      "_Button-1fbab404.js",
+      "_lodash-8787dbf6.js",
+      "_Button-2fd4847c.js",
       "resources/js/Pages/Admin/Statistic/Components/AssessmentSection.jsx",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-e8ef0c8d.js"
+      "_useTranslation-d87918d0.js",
+      "_index-3dbd3815.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Statistic/StatisticAssessment.jsx"
   },
   "resources/js/Pages/Admin/VerifiedBadge/CreateVerifiedBadge.jsx": {
-    "file": "assets/CreateVerifiedBadge-08f6aed2.js",
+    "file": "assets/CreateVerifiedBadge-1801450a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Table-a40ec203.js",
-      "_useTranslation-88ffdeee.js",
+      "_AdminSection-ec916397.js",
+      "_Table-65de3db7.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/VerifiedBadge/CreateVerifiedBadge.jsx"
   },
   "resources/js/Pages/Admin/VerifiedBadge/EditVerifiedBadge.jsx": {
-    "file": "assets/EditVerifiedBadge-b731d0df.js",
+    "file": "assets/EditVerifiedBadge-4c4a09bd.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AdminLayout-26717563.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AdminLayout-bb868bae.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_index-25fc1de7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/VerifiedBadge/EditVerifiedBadge.jsx"
   },
   "resources/js/Pages/Auth/ConfirmPassword.jsx": {
-    "file": "assets/ConfirmPassword-6cb7a4c5.js",
+    "file": "assets/ConfirmPassword-58061c7a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ConfirmPassword.jsx"
   },
   "resources/js/Pages/Auth/ForgotPassword.jsx": {
-    "file": "assets/ForgotPassword-272f3489.js",
+    "file": "assets/ForgotPassword-080ae8d9.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_InputError-907179e2.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputError-50b283fe.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ForgotPassword.jsx"
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-38b65092.js",
+    "file": "assets/Login-3b4b62d7.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Checkbox-d5f54a9f.js",
-      "_GuestLayout-8e4e0891.js",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AuthImage-e6daa5da.js",
-      "_useTranslation-88ffdeee.js",
+      "_Checkbox-f060e7f3.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AuthImage-e5a70384.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js"
     ],
@@ -1535,19 +1535,19 @@
     "src": "resources/js/Pages/Auth/Login.jsx"
   },
   "resources/js/Pages/Auth/LoginAdmin.jsx": {
-    "file": "assets/LoginAdmin-0badc5fd.js",
+    "file": "assets/LoginAdmin-3635a3ac.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Checkbox-d5f54a9f.js",
-      "_GuestLayout-8e4e0891.js",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
+      "_Checkbox-f060e7f3.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
       "_logo-5e7252b7.js",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js"
     ],
@@ -1558,18 +1558,18 @@
     "assets": [
       "assets/regisImage-648e4d7b.jpg"
     ],
-    "file": "assets/Register-79234ab3.js",
+    "file": "assets/Register-056f1109.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_SelectInput-19cdb194.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_SelectInput-8eb706bb.js",
       "_base-e8aaf39e.js",
-      "_index-dfc99747.js",
-      "_useTranslation-88ffdeee.js",
+      "_index-b8ebb455.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
       "_index-25fc1de7.js",
@@ -1579,19 +1579,19 @@
     "src": "resources/js/Pages/Auth/Register.jsx"
   },
   "resources/js/Pages/Auth/RegisterAdmin.jsx": {
-    "file": "assets/RegisterAdmin-0bd6838c.js",
+    "file": "assets/RegisterAdmin-fd7118a4.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_AuthImage-e6daa5da.js",
-      "_useTranslation-88ffdeee.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_AuthImage-e5a70384.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js"
     ],
@@ -1599,48 +1599,48 @@
     "src": "resources/js/Pages/Auth/RegisterAdmin.jsx"
   },
   "resources/js/Pages/Auth/ResetPassword.jsx": {
-    "file": "assets/ResetPassword-f2ecd34e.js",
+    "file": "assets/ResetPassword-342f3407.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/ResetPassword.jsx"
   },
   "resources/js/Pages/Auth/VerifyEmail.jsx": {
-    "file": "assets/VerifyEmail-753cf0ea.js",
+    "file": "assets/VerifyEmail-051c6858.js",
     "imports": [
       "resources/js/app.jsx",
       "_moment-fbc5633a.js",
-      "_index-dfc99747.js",
-      "_Button-1fbab404.js",
-      "_MemberLayout-1d89f344.js",
-      "_AdminSection-13b95cd5.js",
-      "_useTranslation-88ffdeee.js",
+      "_index-b8ebb455.js",
+      "_Button-2fd4847c.js",
+      "_MemberLayout-ef1fbc79.js",
+      "_AdminSection-ec916397.js",
+      "_useTranslation-d87918d0.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/VerifyEmail.jsx"
   },
   "resources/js/Pages/Booking/Components/Filter.jsx": {
-    "file": "assets/Filter-2d184f64.js",
+    "file": "assets/Filter-0dfc9b2a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_TextInput-5998096c.js",
-      "_index-dfc99747.js",
-      "_useTranslation-88ffdeee.js"
+      "_TextInput-ef286b7e.js",
+      "_index-b8ebb455.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Booking/Components/Filter.jsx"
@@ -1649,12 +1649,12 @@
     "assets": [
       "assets/hotel_example-99fcecf6.png"
     ],
-    "file": "assets/ProductItem-ab420e83.js",
+    "file": "assets/ProductItem-cfa42a26.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
-      "_index-dfc99747.js",
-      "_useTranslation-88ffdeee.js"
+      "_Button-2fd4847c.js",
+      "_index-b8ebb455.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Booking/Components/ProductItem.jsx"
@@ -1663,20 +1663,20 @@
     "assets": [
       "assets/icon-res-d70e25b0.svg"
     ],
-    "file": "assets/Products-4ebb7ee8.js",
+    "file": "assets/Products-21c9ecad.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_SelectInput-19cdb194.js",
-      "_TextInput-5998096c.js",
-      "_Button-1fbab404.js",
-      "_lodash-ecd4194a.js",
-      "_Pagination-ac73583a.js",
-      "_TitlePage-bf5132dc.js",
+      "_GuestLayout-da544b1d.js",
+      "_SelectInput-8eb706bb.js",
+      "_TextInput-ef286b7e.js",
+      "_Button-2fd4847c.js",
+      "_lodash-8787dbf6.js",
+      "_Pagination-ada2861e.js",
+      "_TitlePage-2cbf765d.js",
       "resources/js/Pages/Booking/Components/Filter.jsx",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "resources/js/Pages/Booking/Components/ProductItem.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
       "_index-25fc1de7.js",
@@ -1686,27 +1686,27 @@
     "src": "resources/js/Pages/Booking/Products.jsx"
   },
   "resources/js/Pages/Dashboard.jsx": {
-    "file": "assets/Dashboard-45fb7279.js",
+    "file": "assets/Dashboard-0851eeee.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Dropdown-9da15ab0.js",
-      "_transition-ee8b20d5.js"
+      "_Dropdown-a7a456ab.js",
+      "_transition-1af3ecb3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Dashboard.jsx"
   },
   "resources/js/Pages/Donation.jsx": {
-    "file": "assets/Donation-4b3835ef.js",
+    "file": "assets/Donation-1b49954f.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_GuestLayout-8e4e0891.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_GuestLayout-da544b1d.js",
       "_donation-0fbbedea.js",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js"
     ],
@@ -1714,16 +1714,16 @@
     "src": "resources/js/Pages/Donation.jsx"
   },
   "resources/js/Pages/DonationSuccess.jsx": {
-    "file": "assets/DonationSuccess-d2790936.js",
+    "file": "assets/DonationSuccess-615a435d.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
-      "_GuestLayout-8e4e0891.js",
+      "_Button-2fd4847c.js",
+      "_GuestLayout-da544b1d.js",
       "_donation-0fbbedea.js",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js"
     ],
@@ -1731,7 +1731,7 @@
     "src": "resources/js/Pages/DonationSuccess.jsx"
   },
   "resources/js/Pages/ErrorPage.jsx": {
-    "file": "assets/ErrorPage-ab35b013.js",
+    "file": "assets/ErrorPage-6cb457fb.js",
     "imports": [
       "resources/js/app.jsx"
     ],
@@ -1739,7 +1739,7 @@
     "src": "resources/js/Pages/ErrorPage.jsx"
   },
   "resources/js/Pages/ErrorPage403.jsx": {
-    "file": "assets/ErrorPage403-04aa908e.js",
+    "file": "assets/ErrorPage403-eb9b2b08.js",
     "imports": [
       "resources/js/app.jsx"
     ],
@@ -1747,148 +1747,148 @@
     "src": "resources/js/Pages/ErrorPage403.jsx"
   },
   "resources/js/Pages/Forum/AddThread.jsx": {
-    "file": "assets/AddThread-ece7213c.js",
+    "file": "assets/AddThread-1d0fea14.js",
     "imports": [
       "resources/js/app.jsx",
       "_moment-fbc5633a.js",
-      "_TextInput-5998096c.js",
-      "_GuestLayout-8e4e0891.js",
-      "_Button-1fbab404.js",
-      "_BadgeColor-6869562c.js",
-      "_index-dfc99747.js",
-      "_useTranslation-88ffdeee.js",
+      "_TextInput-ef286b7e.js",
+      "_GuestLayout-da544b1d.js",
+      "_Button-2fd4847c.js",
+      "_BadgeColor-d735db62.js",
+      "_index-b8ebb455.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_lodash-ecd4194a.js"
+      "_lodash-8787dbf6.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Forum/AddThread.jsx"
   },
   "resources/js/Pages/Forum/Components/Comment.jsx": {
-    "file": "assets/Comment-9e4e2822.js",
+    "file": "assets/Comment-74eb89c7.js",
     "imports": [
       "resources/js/app.jsx",
       "_moment-fbc5633a.js",
-      "_TextInput-5998096c.js",
-      "_Button-1fbab404.js",
-      "_BadgeColor-6869562c.js",
-      "_lodash-ecd4194a.js",
-      "_index-dfc99747.js",
-      "_FileSaver.min-9c485f60.js",
-      "_useTranslation-88ffdeee.js"
+      "_TextInput-ef286b7e.js",
+      "_Button-2fd4847c.js",
+      "_BadgeColor-d735db62.js",
+      "_lodash-8787dbf6.js",
+      "_index-b8ebb455.js",
+      "_FileSaver.min-aac90f64.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Forum/Components/Comment.jsx"
   },
   "resources/js/Pages/Forum/Components/ForumCard.jsx": {
-    "file": "assets/ForumCard-5a719893.js",
+    "file": "assets/ForumCard-1dc3e439.js",
     "imports": [
       "resources/js/app.jsx",
       "_moment-fbc5633a.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Forum/Components/ForumCard.jsx"
   },
   "resources/js/Pages/Forum/ForumIndex.jsx": {
-    "file": "assets/ForumIndex-8518997f.js",
+    "file": "assets/ForumIndex-d0cdf23e.js",
     "imports": [
       "resources/js/app.jsx",
       "_base-e8aaf39e.js",
-      "_Button-1fbab404.js",
-      "_TitlePage-bf5132dc.js",
-      "_TextInput-5998096c.js",
-      "_SelectInput-19cdb194.js",
-      "_index-dfc99747.js",
+      "_Button-2fd4847c.js",
+      "_TitlePage-2cbf765d.js",
+      "_TextInput-ef286b7e.js",
+      "_SelectInput-8eb706bb.js",
+      "_index-b8ebb455.js",
       "resources/js/Pages/Forum/Components/ForumCard.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_Pagination-ac73583a.js",
-      "_useTranslation-88ffdeee.js",
+      "_GuestLayout-da544b1d.js",
+      "_Pagination-ada2861e.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_lodash-ecd4194a.js"
+      "_lodash-8787dbf6.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Forum/ForumIndex.jsx"
   },
   "resources/js/Pages/Forum/Thread.jsx": {
-    "file": "assets/Thread-f42b324e.js",
+    "file": "assets/Thread-b3188b6b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
-      "_GuestLayout-8e4e0891.js",
+      "_Button-2fd4847c.js",
+      "_GuestLayout-da544b1d.js",
       "resources/js/Pages/Forum/Components/Comment.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_TextInput-5998096c.js",
-      "_BadgeColor-6869562c.js",
-      "_lodash-ecd4194a.js",
-      "_FileSaver.min-9c485f60.js"
+      "_TextInput-ef286b7e.js",
+      "_BadgeColor-d735db62.js",
+      "_lodash-8787dbf6.js",
+      "_FileSaver.min-aac90f64.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Forum/Thread.jsx"
   },
   "resources/js/Pages/Member/Assessment/Assessment.jsx": {
-    "file": "assets/Assessment-dcded44d.js",
+    "file": "assets/Assessment-65a9f6a6.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Button-1fbab404.js",
-      "_lodash-ecd4194a.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_Button-2fd4847c.js",
+      "_lodash-8787dbf6.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Assessment/Assessment.jsx"
   },
   "resources/js/Pages/Member/Assessment/AssessmentData.jsx": {
-    "file": "assets/AssessmentData-b9bd9691.js",
+    "file": "assets/AssessmentData-625482b4.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_InputLabel-d3a69f15.js",
-      "_MemberLayout-1d89f344.js",
-      "_TextInput-5998096c.js",
-      "_Button-1fbab404.js",
+      "_AdminSection-ec916397.js",
+      "_InputLabel-80313b30.js",
+      "_MemberLayout-ef1fbc79.js",
+      "_TextInput-ef286b7e.js",
+      "_Button-2fd4847c.js",
       "_moment-fbc5633a.js",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Assessment/AssessmentData.jsx"
   },
   "resources/js/Pages/Member/Assessment/AssessmentResult.jsx": {
-    "file": "assets/AssessmentResult-4157c746.js",
+    "file": "assets/AssessmentResult-e0131793.js",
     "imports": [
       "resources/js/app.jsx",
-      "_FileSaver.min-9c485f60.js",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
+      "_FileSaver.min-aac90f64.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Button-1fbab404.js",
+      "_Button-2fd4847c.js",
       "resources/js/Pages/Member/Assessment/ResultPdf.jsx",
-      "_Speedometer-a86607d0.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_Speedometer-5791e40b.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js",
+      "_react-responsive-4bec00c2.js",
       "_logo-5e7252b7.js",
       "_asyncToGenerator-e43f4a97.js",
       "_moment-fbc5633a.js"
@@ -1904,265 +1904,265 @@
       "assets/kontenId-d2a94cbb.png",
       "assets/tutorial-634e7345.mp4"
     ],
-    "file": "assets/AssessmentStep-35b31e13.js",
+    "file": "assets/AssessmentStep-67e5bf98.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Button-1fbab404.js",
+      "_Button-2fd4847c.js",
       "_moment-fbc5633a.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Assessment/AssessmentStep.jsx"
   },
   "resources/js/Pages/Member/Assessment/ResultPdf.jsx": {
-    "file": "assets/ResultPdf-d3960268.js",
+    "file": "assets/ResultPdf-11d133a5.js",
     "imports": [
       "resources/js/app.jsx",
       "_logo-5e7252b7.js",
       "_asyncToGenerator-e43f4a97.js",
       "_moment-fbc5633a.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Assessment/ResultPdf.jsx"
   },
   "resources/js/Pages/Member/Dashboard/MemberDashboard.jsx": {
-    "file": "assets/MemberDashboard-62562d4b.js",
+    "file": "assets/MemberDashboard-6503ee6c.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_base-e8aaf39e.js",
-      "_moment-d3f19879.js",
-      "_AdminSection-13b95cd5.js",
-      "_Button-1fbab404.js",
-      "_MemberLayout-1d89f344.js",
-      "_MemberGreenpal-c5d33c7c.js",
+      "_moment-0df69e7a.js",
+      "_AdminSection-ec916397.js",
+      "_Button-2fd4847c.js",
+      "_MemberLayout-ef1fbc79.js",
+      "_MemberGreenpal-b0852442.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
       "resources/js/Pages/Member/Dashboard/components/MemberBadge.jsx",
       "resources/js/Pages/Member/Dashboard/MemberDashboardForm.jsx",
       "_greenpal-f0e012ed.js",
       "resources/js/Pages/Member/Dashboard/MemberNGO.jsx",
       "resources/js/Pages/Member/Dashboard/components/MemberDashboardActive.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js",
-      "_InputLabel-d3a69f15.js",
-      "_TextInput-5998096c.js",
-      "_SelectInput-19cdb194.js",
+      "_react-responsive-4bec00c2.js",
+      "_InputLabel-80313b30.js",
+      "_TextInput-ef286b7e.js",
+      "_SelectInput-8eb706bb.js",
       "_moment-fbc5633a.js",
-      "_lodash-ecd4194a.js",
+      "_lodash-8787dbf6.js",
       "_chart-c0337866.js",
-      "_index-e8ef0c8d.js",
-      "_Speedometer-a86607d0.js"
+      "_index-3dbd3815.js",
+      "_Speedometer-5791e40b.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Dashboard/MemberDashboard.jsx"
   },
   "resources/js/Pages/Member/Dashboard/MemberDashboardForm.jsx": {
-    "file": "assets/MemberDashboardForm-841a7bbc.js",
+    "file": "assets/MemberDashboardForm-9a0075ee.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputLabel-d3a69f15.js",
-      "_SelectInput-19cdb194.js",
-      "_TextInput-5998096c.js",
-      "_Button-1fbab404.js",
-      "_useTranslation-88ffdeee.js"
+      "_InputLabel-80313b30.js",
+      "_SelectInput-8eb706bb.js",
+      "_TextInput-ef286b7e.js",
+      "_Button-2fd4847c.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Dashboard/MemberDashboardForm.jsx"
   },
   "resources/js/Pages/Member/Dashboard/MemberNGO.jsx": {
-    "file": "assets/MemberNGO-60cd1968.js",
+    "file": "assets/MemberNGO-575ddf12.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-1fbab404.js",
-      "_InputLabel-d3a69f15.js",
-      "_TextInput-5998096c.js",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js"
+      "_Button-2fd4847c.js",
+      "_InputLabel-80313b30.js",
+      "_TextInput-ef286b7e.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Dashboard/MemberNGO.jsx"
   },
   "resources/js/Pages/Member/Dashboard/components/MemberBadge.jsx": {
-    "file": "assets/MemberBadge-f72f16f2.js",
+    "file": "assets/MemberBadge-19340baa.js",
     "imports": [
       "resources/js/app.jsx",
       "_moment-fbc5633a.js",
-      "_lodash-ecd4194a.js",
-      "_index-dfc99747.js",
+      "_lodash-8787dbf6.js",
+      "_index-b8ebb455.js",
       "_chart-c0337866.js",
-      "_Button-1fbab404.js",
-      "_useTranslation-88ffdeee.js"
+      "_Button-2fd4847c.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Dashboard/components/MemberBadge.jsx"
   },
   "resources/js/Pages/Member/Dashboard/components/MemberDashboardActive.jsx": {
-    "file": "assets/MemberDashboardActive-f3ba6faa.js",
+    "file": "assets/MemberDashboardActive-c3607dc6.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
+      "_AdminSection-ec916397.js",
       "resources/js/Pages/Member/Dashboard/components/MemberBadge.jsx",
-      "_index-e8ef0c8d.js",
-      "_Speedometer-a86607d0.js",
-      "_useTranslation-88ffdeee.js",
+      "_index-3dbd3815.js",
+      "_Speedometer-5791e40b.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
-      "_lodash-ecd4194a.js",
-      "_index-dfc99747.js",
+      "_lodash-8787dbf6.js",
+      "_index-b8ebb455.js",
       "_chart-c0337866.js",
-      "_Button-1fbab404.js"
+      "_Button-2fd4847c.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Dashboard/components/MemberDashboardActive.jsx"
   },
   "resources/js/Pages/Member/MemberEditProfile.jsx": {
-    "file": "assets/MemberEditProfile-c954f204.js",
+    "file": "assets/MemberEditProfile-cbd9a257.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-dfc99747.js",
-      "_index-f2b4c12a.js",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
+      "_index-b8ebb455.js",
+      "_index-50f33023.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
       "_no-image-91387054.js",
       "_index-25fc1de7.js",
-      "_SelectInput-19cdb194.js",
-      "_useTranslation-88ffdeee.js",
+      "_SelectInput-8eb706bb.js",
+      "_useTranslation-d87918d0.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/MemberEditProfile.jsx"
   },
   "resources/js/Pages/Member/MemberLocked.jsx": {
-    "file": "assets/MemberLocked-9c5bc59c.js",
+    "file": "assets/MemberLocked-9b71de22.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Button-1fbab404.js",
-      "_MemberLayout-1d89f344.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_AdminSection-ec916397.js",
+      "_Button-2fd4847c.js",
+      "_MemberLayout-ef1fbc79.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/MemberLocked.jsx"
   },
   "resources/js/Pages/Member/MemberProfile.jsx": {
-    "file": "assets/MemberProfile-d8b5ea5b.js",
+    "file": "assets/MemberProfile-1b696f77.js",
     "imports": [
       "resources/js/app.jsx",
-      "_index-dfc99747.js",
-      "_index-f2b4c12a.js",
-      "_FileSaver.min-9c485f60.js",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
-      "_Button-1fbab404.js",
+      "_index-b8ebb455.js",
+      "_index-50f33023.js",
+      "_FileSaver.min-aac90f64.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
+      "_Button-2fd4847c.js",
       "_no-image-91387054.js",
-      "_lodash-ecd4194a.js",
+      "_lodash-8787dbf6.js",
       "_index-25fc1de7.js",
       "_moment-fbc5633a.js",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_id-410e5203.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/MemberProfile.jsx"
   },
   "resources/js/Pages/Member/Module/ModuleDetail.jsx": {
-    "file": "assets/ModuleDetail-b7d983a3.js",
+    "file": "assets/ModuleDetail-c25efd4a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
-      "_Button-1fbab404.js",
-      "_index-dfc99747.js",
+      "_useTranslation-d87918d0.js",
+      "_Button-2fd4847c.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Module/ModuleDetail.jsx"
   },
   "resources/js/Pages/Member/Module/ModuleList.jsx": {
-    "file": "assets/ModuleList-c04fd172.js",
+    "file": "assets/ModuleList-534bd7eb.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Button-1fbab404.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_Button-2fd4847c.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Module/ModuleList.jsx"
   },
   "resources/js/Pages/Member/Module/ModulePostTest.jsx": {
-    "file": "assets/ModulePostTest-c6086aeb.js",
+    "file": "assets/ModulePostTest-0dfef42a.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Button-1fbab404.js",
-      "_MemberLayout-1d89f344.js",
+      "_AdminSection-ec916397.js",
+      "_Button-2fd4847c.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Module/ModulePostTest.jsx"
   },
   "resources/js/Pages/Member/Module/ModulePreTest.jsx": {
-    "file": "assets/ModulePreTest-426f33af.js",
+    "file": "assets/ModulePreTest-c61c856d.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_Button-1fbab404.js",
-      "_MemberLayout-1d89f344.js",
+      "_AdminSection-ec916397.js",
+      "_Button-2fd4847c.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Module/ModulePreTest.jsx"
   },
   "resources/js/Pages/Member/Module/ModuleResult.jsx": {
-    "file": "assets/ModuleResult-73a5cb73.js",
+    "file": "assets/ModuleResult-ada151ee.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AdminSection-13b95cd5.js",
-      "_MemberLayout-1d89f344.js",
+      "_AdminSection-ec916397.js",
+      "_MemberLayout-ef1fbc79.js",
       "resources/js/Pages/Admin/Components/TitleSection.jsx",
-      "_Button-1fbab404.js",
-      "_useTranslation-88ffdeee.js",
-      "_index-dfc99747.js",
+      "_Button-2fd4847c.js",
+      "_useTranslation-d87918d0.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js"
+      "_react-responsive-4bec00c2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Member/Module/ModuleResult.jsx"
@@ -2181,20 +2181,20 @@
       "assets/14-b6146c11.png",
       "assets/15-89c7121a.png"
     ],
-    "file": "assets/MemberDetail-8a9b652f.js",
+    "file": "assets/MemberDetail-a60d98f8.js",
     "imports": [
       "resources/js/app.jsx",
-      "_react-responsive-96f93003.js",
-      "_GuestLayout-8e4e0891.js",
-      "_index-f2b4c12a.js",
-      "_index-dfc99747.js",
+      "_react-responsive-4bec00c2.js",
+      "_GuestLayout-da544b1d.js",
+      "_index-50f33023.js",
+      "_index-b8ebb455.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_lodash-ecd4194a.js",
-      "_BadgeColor-6869562c.js",
+      "_lodash-8787dbf6.js",
+      "_BadgeColor-d735db62.js",
       "_index-25fc1de7.js",
       "_greenpal-f0e012ed.js",
       "_moment-fbc5633a.js",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_logo-5e7252b7.js",
       "_id-410e5203.js"
     ],
@@ -2202,13 +2202,13 @@
     "src": "resources/js/Pages/MemberDetail.jsx"
   },
   "resources/js/Pages/MemberDetailTourism.jsx": {
-    "file": "assets/MemberDetailTourism-2677806e.js",
+    "file": "assets/MemberDetailTourism-ee8c4d0f.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_index-dfc99747.js",
+      "_GuestLayout-da544b1d.js",
+      "_index-b8ebb455.js",
       "resources/js/Pages/Admin/Components/BackTo.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
       "_index-25fc1de7.js",
@@ -2218,114 +2218,114 @@
     "src": "resources/js/Pages/MemberDetailTourism.jsx"
   },
   "resources/js/Pages/MemberItem.jsx": {
-    "file": "assets/MemberItem-524a0c8b.js",
+    "file": "assets/MemberItem-9edfa392.js",
     "imports": [
       "resources/js/app.jsx",
-      "_BadgeColor-6869562c.js",
-      "_lodash-ecd4194a.js",
+      "_BadgeColor-d735db62.js",
+      "_lodash-8787dbf6.js",
       "_moment-fbc5633a.js",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/MemberItem.jsx"
   },
   "resources/js/Pages/MemberItemTourism.jsx": {
-    "file": "assets/MemberItemTourism-1bdc411f.js",
+    "file": "assets/MemberItemTourism-352c2a37.js",
     "imports": [
       "resources/js/app.jsx",
-      "_useTranslation-88ffdeee.js"
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/MemberItemTourism.jsx"
   },
   "resources/js/Pages/MemberList.jsx": {
-    "file": "assets/MemberList-879abc24.js",
+    "file": "assets/MemberList-ebe034d3.js",
     "imports": [
       "resources/js/app.jsx",
-      "_GuestLayout-8e4e0891.js",
-      "_InputLabel-d3a69f15.js",
-      "_SelectInput-19cdb194.js",
-      "_TextInput-5998096c.js",
-      "_Button-1fbab404.js",
-      "_Pagination-ac73583a.js",
+      "_GuestLayout-da544b1d.js",
+      "_InputLabel-80313b30.js",
+      "_SelectInput-8eb706bb.js",
+      "_TextInput-ef286b7e.js",
+      "_Button-2fd4847c.js",
+      "_Pagination-ada2861e.js",
       "_base-e8aaf39e.js",
       "resources/js/Pages/MemberItem.jsx",
       "resources/js/Pages/MemberItemTourism.jsx",
-      "_useTranslation-88ffdeee.js",
+      "_useTranslation-d87918d0.js",
       "_moment-fbc5633a.js",
       "_logo-5e7252b7.js",
-      "_index-dfc99747.js",
+      "_index-b8ebb455.js",
       "_index-25fc1de7.js",
       "_id-410e5203.js",
-      "_lodash-ecd4194a.js",
-      "_BadgeColor-6869562c.js"
+      "_lodash-8787dbf6.js",
+      "_BadgeColor-d735db62.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/MemberList.jsx"
   },
   "resources/js/Pages/Profile/Edit.jsx": {
-    "file": "assets/Edit-a7ee506f.js",
+    "file": "assets/Edit-8a6a3cbb.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Dropdown-9da15ab0.js",
-      "_TextInput-5998096c.js",
+      "_Dropdown-a7a456ab.js",
+      "_TextInput-ef286b7e.js",
       "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
       "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
-      "_MemberLayout-1d89f344.js",
-      "_AdminSection-13b95cd5.js",
-      "_transition-ee8b20d5.js",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_index-dfc99747.js",
+      "_MemberLayout-ef1fbc79.js",
+      "_AdminSection-ec916397.js",
+      "_transition-1af3ecb3.js",
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_index-b8ebb455.js",
       "_id-410e5203.js",
       "_no-image-91387054.js",
-      "_react-responsive-96f93003.js",
-      "_useTranslation-88ffdeee.js"
+      "_react-responsive-4bec00c2.js",
+      "_useTranslation-d87918d0.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Edit.jsx"
   },
   "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx": {
-    "file": "assets/DeleteUserForm-6eb56a68.js",
+    "file": "assets/DeleteUserForm-d6436569.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_transition-ee8b20d5.js",
-      "_TextInput-5998096c.js"
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_transition-1af3ecb3.js",
+      "_TextInput-ef286b7e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx"
   },
   "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx": {
-    "file": "assets/UpdatePasswordForm-15997334.js",
+    "file": "assets/UpdatePasswordForm-bb654719.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_transition-ee8b20d5.js"
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_transition-1af3ecb3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx"
   },
   "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx": {
-    "file": "assets/UpdateProfileInformationForm-f28744d1.js",
+    "file": "assets/UpdateProfileInformationForm-12c621a0.js",
     "imports": [
       "resources/js/app.jsx",
-      "_InputError-907179e2.js",
-      "_InputLabel-d3a69f15.js",
-      "_Button-1fbab404.js",
-      "_TextInput-5998096c.js",
-      "_transition-ee8b20d5.js"
+      "_InputError-50b283fe.js",
+      "_InputLabel-80313b30.js",
+      "_Button-2fd4847c.js",
+      "_TextInput-ef286b7e.js",
+      "_transition-1af3ecb3.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx"
   },
   "resources/js/Pages/Welcome.jsx": {
-    "file": "assets/Welcome-0ba27e36.js",
+    "file": "assets/Welcome-1967cff1.js",
     "imports": [
       "resources/js/app.jsx"
     ],
@@ -2421,7 +2421,7 @@
       "resources/js/Pages/Member/Assessment/ResultPdf.jsx",
       "resources/js/Pages/Member/Dashboard/MemberDashboard.jsx",
       "resources/js/Pages/Member/Dashboard/MemberDashboardForm.jsx",
-      "_MemberGreenpal-c5d33c7c.js",
+      "_MemberGreenpal-b0852442.js",
       "resources/js/Pages/Member/Dashboard/MemberNGO.jsx",
       "resources/js/Pages/Member/Dashboard/components/MemberBadge.jsx",
       "resources/js/Pages/Member/Dashboard/components/MemberDashboardActive.jsx",
@@ -2444,7 +2444,7 @@
       "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
       "resources/js/Pages/Welcome.jsx"
     ],
-    "file": "assets/app-92e9c6ba.js",
+    "file": "assets/app-00dfe646.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }

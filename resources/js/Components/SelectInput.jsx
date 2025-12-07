@@ -45,7 +45,7 @@ export default forwardRef(function SelectInput(
       value={value || labelSelected}
     >
       {children}
-      {placeholder && <option>{t(placeholder)}</option>}
+      {placeholder && <option value="">{t(placeholder)}</option>}
       {options?.map(option => (
         <option value={option[valueData]}>{option[labelData]}</option>
       ))}

@@ -155,6 +155,7 @@ function EditQuestion() {
                 className="w-full"
                 labelData="name"
                 valueData="id"
+                placeholder="select_product_category"
                 onChange={e => setData('product_category_id', e.target.value)}
               />
               <span className="text-red-600">{errors.product_category_id}</span>
