@@ -335,6 +335,10 @@ function AssessmentData({ categories, product_categories }) {
                     labelData="name"
                     valueData="id"
                     placeholder="select_province"
+                    value={
+                      selectedProvince ??
+                      provinces?.find(p => p.name === data.province)?.id
+                    }
                     selectedLabel={data.province}
                     onChange={e => {
                       const index = e.nativeEvent.target.selectedIndex;
@@ -355,6 +359,7 @@ function AssessmentData({ categories, product_categories }) {
                     valueData="id"
                     placeholder="select_city"
                     selectedLabel={data.city}
+                    value={city?.find(c => c.name === data.city)?.id}
                     onChange={e => {
                       const index = e.nativeEvent.target.selectedIndex;
                       const text = e.nativeEvent.target[index].text;

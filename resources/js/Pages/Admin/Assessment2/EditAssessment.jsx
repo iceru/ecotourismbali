@@ -46,7 +46,7 @@ function EditAssessment() {
 
   return (
     <AdminLayout>
-      <BackTo title="back_to_list_assessment" link="/admin/assessment" />
+      <BackTo title="back_to_list_assessment" link="/admin/assessment-2" />
       <AdminSection className="flex flex-col gap-6 mb-6">
         <TitleSection title="edit_assessment_title" />
         <form className="flex flex-col gap-6" onSubmit={submit}>

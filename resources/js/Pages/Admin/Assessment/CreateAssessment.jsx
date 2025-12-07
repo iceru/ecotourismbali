@@ -69,6 +69,7 @@ function CreateAssessment({ assessment, business_type }) {
       onSuccess: () => {
         reset();
         setValue('');
+        setValueEn('');
       },
     });
   };

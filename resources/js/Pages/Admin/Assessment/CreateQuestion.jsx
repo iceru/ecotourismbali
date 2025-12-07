@@ -62,6 +62,7 @@ function CreateQuestion({ assess_question, assessment, product_categories }) {
       onSuccess: () => {
         reset();
         setValue('');
+        setValueEn('');
       },
     });
   };
