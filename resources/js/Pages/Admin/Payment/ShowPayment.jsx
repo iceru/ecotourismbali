@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import AdminSection from '@/Components/AdminSection';
 import AdminLayout from '@/Layouts/AdminLayout';
 import BackTo from '../Components/BackTo';
+import moment from 'moment';
 
 function ShowPayment() {
   const { payment } = usePage().props;
@@ -16,6 +17,10 @@ function ShowPayment() {
         style: 'currency',
         currency: 'IDR',
       }).format(data);
+    }
+    if (label === 'date' && data) {
+      const date = new Date(data);
+      data = moment(date).format('LLL');
     }
     return (
       <div className="flex flex-wrap mb-4">
