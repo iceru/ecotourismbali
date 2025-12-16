@@ -11,12 +11,18 @@ function ShowPayment() {
   const { t } = useTranslation();
 
   const items = (label, data) => {
+    if (label === 'amount' && data) {
+      data = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+      }).format(data);
+    }
     return (
       <div className="flex flex-wrap mb-4">
         <div className="w-full lg:w-1/4 mb-3 lg:mb-0">
           <div className="font-bold">{t(label)}</div>
         </div>
-        <div className="w-full lg:w-3/4">{data || '-'}</div>
+        <div className="w-full lg:w-3/4 capitalize">{data || '-'}</div>
       </div>
     );
   };
@@ -26,11 +32,12 @@ function ShowPayment() {
       <AdminSection>
         {items('payment_no', payment?.payment_no)}
         {items('payment_status', payment?.payment_status)}
-        {items('name', payment?.member.business_name)}
+        {items('business_name', payment?.member.business_name)}
         {items('payment_type', payment?.payment_type)}
         {items('invoice_number', payment?.status_code)}
         {items('amount', payment?.amount)}
         {items('bank', payment?.bank)}
+        {items('date', payment?.created_at)}
       </AdminSection>
     </AdminLayout>
   );
