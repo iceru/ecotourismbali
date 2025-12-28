@@ -188,8 +188,9 @@ export default function MemberDashboardActive({
                       const questionType = item.question.type;
 
                       // Calculate the sum of points from selected options
+                      // Convert to number explicitly using Number() or parseFloat()
                       const totalSelectedPoints = item.selectedOptions.reduce(
-                        (sum, option) => sum + (option.point || 0),
+                        (sum, option) => sum + (Number(option.point) || 0),
                         0
                       );
 
@@ -199,13 +200,13 @@ export default function MemberDashboardActive({
                       // For radio: get the maximum point value
                       if (questionType === 'checkbox') {
                         maxPoints = item.question.assessment_option.reduce(
-                          (sum, opt) => sum + (opt.point || 0),
+                          (sum, opt) => sum + (Number(opt.point) || 0),
                           0
                         );
                       } else {
                         maxPoints = Math.max(
                           ...item.question.assessment_option.map(
-                            opt => opt.point || 0
+                            opt => Number(opt.point) || 0
                           )
                         );
                       }
