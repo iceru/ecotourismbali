@@ -30,14 +30,17 @@ class MemberController extends Controller
         $lastSession = AssessmentSession::where('member_id', $member->id)->where('completion', 'yes')->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
         $dateAssessment = null;
-        $assessments = Assessment::where('business_type_id', $member->business_type_id)->get();
+        $assessments = Assessment::where('business_type_id', $member->business_type_id)->where('version', $member->version)
+            ->get();
         // $answers = MemberAssessmentAnswer::where('assessment_session_id', $lastSession->id)->get();
 
         if ($lastSession) {
-            $memberAssessments = MemberAssessment::with('assessment', 
-            'assessment_session.member_assessment_answer.assessment_question.assessment_option', 
-            'assessment_session.member_assessment_answer.assessment_option')->where('member_id', $member->id)
-            ->where('assessment_session_id', $lastSession->id)->get();
+            $memberAssessments = MemberAssessment::with(
+                'assessment',
+                'assessment_session.member_assessment_answer.assessment_question.assessment_option',
+                'assessment_session.member_assessment_answer.assessment_option'
+            )->where('member_id', $member->id)
+                ->where('assessment_session_id', $lastSession->id)->get();
             $dateAssessment = $lastSession->created_at->addYears(1);
         }
 
@@ -270,15 +273,16 @@ class MemberController extends Controller
         return Redirect::route('member.dashboard')->with('success', 'Data added successfully.');
     }
 
-    public function updatePayment() {
+    public function updatePayment()
+    {
         $member = Member::where('user_id', Auth::id())->first();
         $member->status = 'payment';
         $member->total_payment = 1000000;
         $member->save();
-        
+
         $business_name = str_replace(' ', '_', $member->business_name);
         $timestamp = time();
-        
+
         $payment = new MemberPayment();
         $payment->status_code = $business_name . '_' . $timestamp;
         $payment->payment_no = $business_name . '_' . $timestamp;
@@ -290,7 +294,8 @@ class MemberController extends Controller
         return Redirect::route('member.dashboard')->with('success', 'Proceed to payment');
     }
 
-    public function ngoApproval() {
+    public function ngoApproval()
+    {
         $member = Member::where('user_id', Auth::id())->first();
         $member->status = 'waiting_approval';
         $member->save();

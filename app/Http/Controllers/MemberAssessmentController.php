@@ -343,7 +343,8 @@ class MemberAssessmentController extends Controller
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
         $memberAssessments = MemberAssessment::with('assessment')->where('assessment_session_id', $id)->get();
-        $totalMaxPoints = Assessment::where('business_type_id', $member->business_type_id)->sum('max_points');
+        $totalMaxPoints = Assessment::where('business_type_id', $member->business_type_id)->
+            where('version', $member->version)->sum('max_points');
         if ($session) {
             $dateAssessment = $session->created_at->addYears(1);
 

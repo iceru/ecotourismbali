@@ -5,6 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import PieChart from './Components/PieChart';
 import { Link } from '@inertiajs/react';
+import moment from 'moment';
 
 function Statistics({ sessions, badges, programs }) {
   ChartJS.register(...registerables);
@@ -21,6 +22,18 @@ function Statistics({ sessions, badges, programs }) {
     );
     setSessionActive(filtered);
   }, []);
+
+  console.log(sessionActive);
+
+  const completion = completion => {
+    if (completion === 'yes') {
+      return 'Completed';
+    } else if (completion === 'no') {
+      return 'Not Completed';
+    } else {
+      return 'Expired';
+    }
+  };
 
   return (
     <AdminLayout>
@@ -73,20 +86,34 @@ function Statistics({ sessions, badges, programs }) {
                           item?.id,
                         ])}
                       >
-                        <li className="flex items-center mb-2">
-                          <div className="mr-2">{index + 1}.</div>
-                          {item?.member?.image && (
-                            <div>
-                              <img
-                                className="w-8 h-8 object-contain rounded-full mr-2"
-                                src={`/storage/member/images/${item?.member?.image}`}
-                                alt=""
-                              />
+                        <li className="mb-2">
+                          <div className="flex items-center">
+                            <div className="mr-2">{index + 1}.</div>
+                            {item?.member?.image && (
+                              <div>
+                                <img
+                                  className="w-8 h-8 object-contain rounded-full mr-2"
+                                  src={`/storage/member/images/${item?.member?.image}`}
+                                  alt=""
+                                />
+                              </div>
+                            )}
+                            <div className="">
+                              {item?.member?.business_name}
                             </div>
-                          )}
-                          <div className="">{item?.member?.business_name}</div>
-                          <div className="font-bold text-primary">
-                            - {item?.total_score}
+                            <div className="font-bold text-primary">
+                              {' '}
+                              - {item?.total_score}
+                            </div>
+                          </div>
+                          <div className="flex items-center text-sm mt-1">
+                            <div className="font-semibold capitalize">
+                              {completion(item.completion)}
+                            </div>
+                            <div>
+                              {' '}
+                              - {moment(item.created_at).format('LLL')}
+                            </div>
                           </div>
                         </li>
                       </Link>

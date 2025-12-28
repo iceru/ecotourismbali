@@ -87,13 +87,13 @@ class StatisticController extends Controller
     {
         $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo')->with('business_type')->get();
         $memberAssess = MemberAssessment::with('member')
-        ->whereIn('completion', ['yes', 'expired'])
-        ->get();
+            ->whereIn('completion', ['yes', 'expired'])
+            ->get();
 
         foreach ($assessments as $assess) {
             $members = array();
             foreach ($memberAssess as $memberAs) {
-                if ((int)$assess->id === (int)$memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
+                if ((int) $assess->id === (int) $memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
                     array_push($members, $memberAs);
                     $assess->members = $members;
                 }
@@ -107,7 +107,8 @@ class StatisticController extends Controller
     public function assessmentDetail($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
-        $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
+        $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)
+            ->where('version', $member->version)->get();
         $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Admin/Statistic/AssessmentDetail', [
@@ -125,6 +126,6 @@ class StatisticController extends Controller
         $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(column: ['member_id' => $member->id, 'assessment_session_id' => $sessionId])->with('assessment_question')->get();
 
-        return Excel::download(new MemberAssessmentsExport($id, $sessionId), $member->business_name.'-assessments.xlsx');
+        return Excel::download(new MemberAssessmentsExport($id, $sessionId), $member->business_name . '-assessments.xlsx');
     }
 }
