@@ -23,8 +23,6 @@ function Statistics({ sessions, badges, programs }) {
     setSessionActive(filtered);
   }, []);
 
-  console.log(sessionActive);
-
   const completion = completion => {
     if (completion === 'yes') {
       return 'Completed';

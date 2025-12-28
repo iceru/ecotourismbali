@@ -185,10 +185,36 @@ export default function MemberDashboardActive({
 
                   <div className="flex gap-2 flex-wrap">
                     {Object.values(answersGrouped).map((item, qIndex) => {
-                      const totalOptions =
-                        item.question.assessment_option.length;
-                      const selectedCount = item.selectedOptions.length;
-                      const percentage = (selectedCount / totalOptions) * 100;
+                      const questionType = item.question.type;
+
+                      // Calculate the sum of points from selected options
+                      const totalSelectedPoints = item.selectedOptions.reduce(
+                        (sum, option) => sum + (option.point || 0),
+                        0
+                      );
+
+                      let maxPoints;
+
+                      // For checkbox: sum all available option points
+                      // For radio: get the maximum point value
+                      if (questionType === 'checkbox') {
+                        maxPoints = item.question.assessment_option.reduce(
+                          (sum, opt) => sum + (opt.point || 0),
+                          0
+                        );
+                      } else {
+                        maxPoints = Math.max(
+                          ...item.question.assessment_option.map(
+                            opt => opt.point || 0
+                          )
+                        );
+                      }
+
+                      // Calculate percentage: (selected points / max points) * 100
+                      const percentage =
+                        maxPoints > 0
+                          ? (totalSelectedPoints / maxPoints) * 100
+                          : 0;
 
                       const getColorClass = pct => {
                         if (pct === 0) return 'bg-gray-100';
@@ -207,7 +233,7 @@ export default function MemberDashboardActive({
                           )} rounded-lg p-3 flex-shrink-0 w-14 h-14 flex flex-col justify-between`}
                           title={`${
                             item.question.title
-                          }: ${selectedCount}/${totalOptions} (${percentage.toFixed(
+                          }: ${totalSelectedPoints}/${maxPoints} points (${percentage.toFixed(
                             0
                           )}%)`}
                         >
@@ -233,7 +259,7 @@ export default function MemberDashboardActive({
                                   : 'text-gray-600'
                               }`}
                             >
-                              {selectedCount}/{totalOptions}
+                              {totalSelectedPoints}/{maxPoints}
                             </div>
                           </div>
                         </div>

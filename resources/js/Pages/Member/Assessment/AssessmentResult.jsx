@@ -18,9 +18,8 @@ function AssessmentResult({ session, member, scores, totalMaxPoints }) {
   const { flash } = usePage().props;
 
   useEffect(() => {
-    localStorage.clear('assessment');
+    localStorage.removeItem('assessment');
   }, []);
-  console.log(session);
   return (
     <MemberLayout>
       {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] z-0 h-[600px]">
