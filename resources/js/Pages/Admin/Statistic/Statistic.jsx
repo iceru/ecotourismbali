@@ -42,7 +42,7 @@ function Statistics({ sessions, badges, programs }) {
           <h3 className="mb-4 font-bold text-xl">
             Highest Score on Assessment:
           </h3>
-          <div className="grid lg:grid-cols-2 gap-6">
+          <div className="grid gap-6">
             <div>
               <Bar
                 datasetIdKey="id"
@@ -75,10 +75,13 @@ function Statistics({ sessions, badges, programs }) {
                 }}
               />
             </div>
-            <div>
-              <ol>
+            <div className="">
+              <ol className="grid lg:grid-cols-3 gap-2">
                 {sessionActive?.map((item, index) => {
-                  if (item?.member?.status?.includes('active')) {
+                  if (
+                    item?.member?.status?.includes('active') &&
+                    item.total_score
+                  ) {
                     return (
                       <Link
                         href={route('statistic.assessmentDetail', [
@@ -86,7 +89,7 @@ function Statistics({ sessions, badges, programs }) {
                           item?.id,
                         ])}
                       >
-                        <li className="mb-2">
+                        <li className="border rounded p-3">
                           <div className="flex items-center">
                             <div className="mr-2">{index + 1}.</div>
                             {item?.member?.image && (
@@ -98,11 +101,10 @@ function Statistics({ sessions, badges, programs }) {
                                 />
                               </div>
                             )}
-                            <div className="">
+                            <div className="mr-1">
                               {item?.member?.business_name}
                             </div>
                             <div className="font-bold text-primary">
-                              {' '}
                               - {item?.total_score}
                             </div>
                           </div>
@@ -112,7 +114,7 @@ function Statistics({ sessions, badges, programs }) {
                             </div>
                             <div>
                               {' '}
-                              - {moment(item.created_at).format('LLL')}
+                              - {moment(item.created_at).format('DD MMM YYYY')}
                             </div>
                           </div>
                         </li>
