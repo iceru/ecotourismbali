@@ -2,23 +2,24 @@ import InputLabel from '@/Components/InputLabel';
 import Button from '@/Components/Button';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import TitleSection from '../Components/TitleSection';
 import AdminSection from '@/Components/AdminSection';
 import Table from '@/Components/Table';
-
 function CreateCategory({ category }) {
   const { t } = useTranslation();
   const { flash } = usePage().props;
 
+  // 1. Added name_en to the form state
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
+    name_en: '',
   });
 
-  const headerTable = ['Name', 'Action'];
-
-  const selectedData = ['name'];
+  // 2. Added 'Name (EN)' to the table header and data selection
+  const headerTable = ['Name', 'Name (EN)', 'Action'];
+  const selectedData = ['name', 'name_en'];
 
   const tableActions = [
     {
@@ -27,13 +28,6 @@ function CreateCategory({ category }) {
       withId: true,
       color: 'info',
     },
-    // {
-    //   label: 'delete_button',
-    //   route: 'category.destroy',
-    //   withId: true,
-    //   color: 'danger',
-    //   type: 'delete',
-    // },
   ];
 
   const submit = e => {
@@ -57,6 +51,7 @@ function CreateCategory({ category }) {
           </div>
         )}
         <form className="flex flex-col gap-6" onSubmit={submit}>
+          {/* Default Name Input */}
           <div className="block lg:flex items-center">
             <div className="lg:w-1/5 mb-2 lg:mb-0">
               <InputLabel htmlFor="name" value={t('form_label_name')} />
@@ -74,11 +69,31 @@ function CreateCategory({ category }) {
               <span className="text-red-600">{errors.name}</span>
             </div>
           </div>
+
+          {/* 3. Added English Name Input */}
+          <div className="block lg:flex items-center">
+            <div className="lg:w-1/5 mb-2 lg:mb-0">
+              <InputLabel htmlFor="name_en" value={t('form_label_name_en')} />
+            </div>
+            <div className="lg:w-4/5">
+              <TextInput
+                id="name_en"
+                name="name_en"
+                type="text"
+                value={data.name_en}
+                className="block w-full"
+                onChange={e => setData('name_en', e.target.value)}
+              />
+              <span className="text-red-600">{errors.name_en}</span>
+            </div>
+          </div>
+
           <Button color="secondary" className="w-fit" disabled={processing}>
             {t('submit')}
           </Button>
         </form>
       </AdminSection>
+
       <AdminSection className="flex flex-col gap-6">
         <TitleSection title="list_category_title" />
         <Table

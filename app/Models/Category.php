@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     protected $table = 'categories';
+    protected $fillable = ['name', 'name_en', 'image'];
 
     public function members(): HasMany
     {

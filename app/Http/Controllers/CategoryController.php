@@ -20,36 +20,22 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $category = new Category;
-
+        // 1. Validate both fields
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
         ]);
 
+        $category = new Category;
         $category->name = $request->name;
+        $category->name_en = $request->name_en; // 2. Assign English name
         $category->save();
 
         return Redirect::route('category.index')->with('success', 'Category created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -67,16 +53,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = Category::find($request->id);
+        $category = Category::findOrFail($id);
 
+        // 3. Validate both fields for update
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
         ]);
 
         $category->name = $request->name;
+        $category->name_en = $request->name_en; // 4. Update English name
         $category->save();
 
-        return Redirect::route('category.index');
+        return Redirect::route('category.index')->with('success', 'Category updated successfully.');
     }
 
     /**
@@ -84,8 +73,7 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request)
     {
-        $category = Category::find($request->id);
-
+        $category = Category::findOrFail($request->id);
         $category->delete();
 
         return Redirect::route('category.index');

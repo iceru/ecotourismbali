@@ -6,7 +6,7 @@ import { toLower } from 'lodash';
 import moment from 'moment';
 
 function MemberItem({ member, tribe }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div>
@@ -63,7 +63,9 @@ function MemberItem({ member, tribe }) {
             </h4>
             {member?.category && (
               <h6 className="text-xs uppercase text-primary">
-                {member?.category?.name}
+                {i18n.language === 'en'
+                  ? member?.category?.name_en
+                  : member?.category?.name}
               </h6>
             )}{' '}
             {tribe?.id === 2 && (

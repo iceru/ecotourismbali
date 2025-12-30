@@ -30,7 +30,7 @@ function MemberList({
       value: 'name-descending',
     },
   ];
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [category, setCategory] = useState('all');
   const [program, setProgram] = useState();
   const [badge, setBadge] = useState();
@@ -39,6 +39,7 @@ function MemberList({
   const [source, setSource] = useState();
   const [sort, setSort] = useState(sorts[0].value);
   const [payload, setPayload] = useState({});
+  const lang = i18n.language;
 
   const filterData = ({ programData }) => {
     let value = {
@@ -290,7 +291,7 @@ function MemberList({
                       category === cat.id ? 'font-bold text-primary' : ''
                     }`}
                   >
-                    {t(cat.name)}
+                    {lang === 'en' ? cat.name_en : cat.name}
                   </li>
                 );
               })}
