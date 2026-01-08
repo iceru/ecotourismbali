@@ -38,17 +38,15 @@ class PublicController extends Controller
     {
         $impacts = new \stdClass();
 
-        // 1. Fetch assessments with business type
-        $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo', 'max_points')
+        // 1. Fetch assessments, ensuring we check the business_type relation
+        $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo', 'max_points', 'version')
             ->with(['business_type'])
             ->get();
 
-        // 2. Fetch completed assessments and filter by member status in one go
         $memberAssess = MemberAssessment::with('member')
             ->where('completion', 'yes')
             ->get()
             ->filter(function ($ma) {
-                // Ensure member exists and check for active/dummy status
                 $status = optional($ma->member)->status ?? '';
                 return str_contains($status, 'active') && !str_contains($status, 'dummy');
             });
@@ -57,34 +55,34 @@ class PublicController extends Controller
         $restosAvgs = [];
 
         foreach ($assessments as $assess) {
-            // 3. Get all scores for this specific assessment
+            $typeName = optional($assess->business_type)->name;
+            if ($typeName === 'Supplier') {
+                continue;
+            }
+            // --- NEW LOGIC: Skip Hotels if version is 2 ---
+            if ($typeName === 'Hotel' && (int) $assess->version === 2) {
+                continue; // Skip this iteration
+            }
+
+            // 2. Calculate average (with safety guards)
             $scores = $memberAssess->where('assessment_id', $assess->id)->pluck('score');
-
             $count = $scores->count();
-
-            /** * 4. Safety Guard: Check if max_points is a valid numeric string/int 
-             * and ensure count is greater than zero to avoid Division by Zero.
-             */
             $maxPoints = is_numeric($assess->max_points) ? (float) $assess->max_points : 0;
 
             $avg = 0;
             if ($count > 0 && $maxPoints > 0) {
-                // Formula: ((Sum / Count) * 100) / Max
                 $avg = (($scores->sum() / $count) * 100) / $maxPoints;
             }
 
-            // 5. Prepare the data object
             $assessDatas = new \stdClass();
-            $assessDatas->avg = (int) round($avg); // Rounding ensures 75.8 becomes 76 instead of 75
+            $assessDatas->avg = (int) round($avg);
             $assessDatas->title = $assess->title;
             $assessDatas->logo = $assess->logo;
 
-            // 6. Sort into Hotels or Restaurants
-            $typeName = optional($assess->business_type)->name;
+            // 3. Sort into result arrays
             if ($typeName === 'Hotel') {
                 $hotelsAvgs[] = $assessDatas;
             } else {
-                // Defaults to restaurants if not 'Hotel'
                 $restosAvgs[] = $assessDatas;
             }
         }
