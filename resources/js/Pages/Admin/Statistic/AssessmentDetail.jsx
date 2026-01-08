@@ -47,9 +47,7 @@ function Assessment({ assessments, session, answers, member }) {
 
     setData(prevData => {
       const newData = { ...prevData, ...updatedData };
-      if (!noStore) {
-        localStorage.setItem('assessment', JSON.stringify(newData)); // Store in localStorage
-      }
+
       return newData;
     });
   };
@@ -68,9 +66,6 @@ function Assessment({ assessments, session, answers, member }) {
             [`checkbox.${questionId}`]: [...updatedOptions, optionId],
           };
 
-      if (!noStore) {
-        localStorage.setItem('assessment', JSON.stringify(updatedData)); // Store in localStorage
-      }
       return updatedData;
     });
   };

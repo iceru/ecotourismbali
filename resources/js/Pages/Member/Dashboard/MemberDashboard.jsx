@@ -81,7 +81,7 @@ function MemberDashboard({
       setPayComplete(true);
     }
   }, []);
-
+  console.log(member);
   return (
     <MemberLayout>
       {payComplete || payCompleteStorage ? (
@@ -124,7 +124,7 @@ function MemberDashboard({
             </AdminSection>
           </div>
 
-          {!member?.company_name && !member?.description && (
+          {member?.status !== 'active' && (
             <AdminSection>
               <MemberGreenpal
                 member={member}
