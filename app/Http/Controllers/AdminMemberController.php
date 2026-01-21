@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use PDF;
+use App\Models\MemberSlider;
+use Illuminate\Support\Facades\Storage;
 
 class AdminMemberController extends Controller
 {
@@ -32,13 +34,13 @@ class AdminMemberController extends Controller
         ]);
     }
 
-        /**
+    /**
      * Display a listing of the resource.
      */
     public function search(Request $request)
     {
-        $members =  Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')
-        ->where('business_name', 'like', "%$request->search%")->get();
+        $members = Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')
+            ->where('business_name', 'like', "%$request->search%")->get();
         return Inertia::render('Admin/Member/MemberIndex', [
             'members' => $members,
         ]);
@@ -65,13 +67,13 @@ class AdminMemberController extends Controller
      */
     public function show(string $id)
     {
-        $member = Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'product_category', 'member_assessment', 'business_type')->find($id);
+        $member = Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'product_category', 'member_assessment', 'business_type', 'member_slider')->find($id);
         $sessions = AssessmentSession::where('member_id', $id)->get();
 
         $attempt = 0;
         $dateAssessment = null;
         foreach ($sessions as $session) {
-            if($session->completion === 'yes' && $session->total_score > 0) {
+            if ($session->completion === 'yes' && $session->total_score > 0) {
                 $attempt = $attempt + 1;
             }
         }
@@ -81,14 +83,14 @@ class AdminMemberController extends Controller
         $lastSession = AssessmentSession::where('member_id', $id)->orderBy('created_at', 'desc')->first();
         $memberAssessments = null;
         $dateAssessment = null;
-        if($lastSession) {
-            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();    
+        if ($lastSession) {
+            $memberAssessments = MemberAssessment::with('assessment')->where('member_id', $id)->where('assessment_session_id', $lastSession->id)->get();
             $dateAssessment = $lastSession->created_at->addYears(1);
         }
 
         $lastPayment = MemberPayment::where('member_id', $id)->where('status_code', '!=', '')->orderBy('created_at', 'desc')->first();
         return Inertia::render('Admin/Member/MemberDetail', [
-            'member' =>$member,
+            'member' => $member,
             'categories' => Category::all(),
             'programs' => Program::all(),
             'verified_badges' => VerifiedBadge::all(),
@@ -144,7 +146,7 @@ class AdminMemberController extends Controller
         $member->version = $request->version;
         $member->product_category_id = $request->product_category_id;
 
-        if($member->status) {
+        if ($member->status) {
             $member->status = $request->status;
         }
         $member->save();
@@ -156,7 +158,7 @@ class AdminMemberController extends Controller
         $payment->member_id = $id;
         $payment->save();
 
-        if($request->status === 'payment') {
+        if ($request->status === 'payment') {
             Mail::to($member->user->email)->send(new MemberPaymentMail($payment));
         }
 
@@ -171,7 +173,7 @@ class AdminMemberController extends Controller
             'payment' => $payment
         ];
         $pdf = PDF::loadView('invoice-pdf', $data);
-        return $pdf->stream('invoice '.$payment->member->name.'.pdf');
+        return $pdf->stream('invoice ' . $payment->member->name . '.pdf');
     }
 
     /**
@@ -189,7 +191,38 @@ class AdminMemberController extends Controller
     {
         return Inertia::render('Admin/Member/Import', [
             'members' => Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->
-            where('program_id', 2)->get(),
+                where('program_id', 2)->get(),
         ]);
+    }
+
+    public function uploadSlider(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'title' => 'required|string|max:255',
+        ]);
+
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('member/sliders', $imageName, 'public');
+
+        $slider = new MemberSlider();
+        $slider->member_id = $id;
+        $slider->title = $request->title;
+        $slider->image = $imageName;
+        $slider->save();
+
+        return Redirect::route('admin.member.detail', $id);
+    }
+
+    public function deleteSlider($id)
+    {
+        $slider = MemberSlider::find($id);
+        $memberId = $slider->member_id;
+        if (Storage::disk('public')->exists('member/sliders/' . $slider->image)) {
+            Storage::disk('public')->delete('member/sliders/' . $slider->image);
+        }
+        $slider->delete();
+
+        return Redirect::route('admin.member.detail', $memberId);
     }
 }

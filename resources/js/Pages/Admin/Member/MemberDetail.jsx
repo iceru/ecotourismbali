@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm, usePage } from '@inertiajs/react';
+import { useForm, usePage, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 import AdminSection from '@/Components/AdminSection';
@@ -58,6 +58,32 @@ function MemberIndex() {
     });
   };
 
+  const {
+    data: dataSlider,
+    setData: setDataSlider,
+    post: postSlider,
+    processing: processingSlider,
+    errors: errorsSlider,
+    reset: resetSlider,
+  } = useForm({
+    title: '',
+    image: '',
+  });
+
+  const submitSlider = e => {
+    e.preventDefault();
+    postSlider(route('admin.member.slider.upload', member?.id), {
+      onSuccess: () => {
+        resetSlider();
+      },
+    });
+  };
+
+  const deleteSlider = id => {
+    if (confirm('Are you sure want to delete this slider?')) {
+      router.delete(route('admin.member.slider.delete', id));
+    }
+  };
   let currency = new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
@@ -406,6 +432,76 @@ function MemberIndex() {
                 </Button>
               )}
             </form>
+
+            <div className="mt-8 border-t pt-6">
+              <div className="font-bold text-xl mb-4">Member Sliders</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                {member?.member_slider?.map(slider => (
+                  <div key={slider.id} className="relative group">
+                    <img
+                      src={`/storage/member/sliders/${slider.image}`}
+                      alt={slider.title}
+                      className="w-full h-48 object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg">
+                      <button
+                        onClick={() => deleteSlider(slider.id)}
+                        className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div className="mt-2 font-medium">{slider.title}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="font-bold mb-4">Add New Slider</div>
+                <form onSubmit={submitSlider}>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Title
+                    </label>
+                    <TextInput
+                      type="text"
+                      value={dataSlider.title}
+                      onChange={e => setDataSlider('title', e.target.value)}
+                      className="w-full"
+                      placeholder="Slider Title"
+                    />
+                    {errorsSlider.title && (
+                      <div className="text-red-500 text-sm mt-1">
+                        {errorsSlider.title}
+                      </div>
+                    )}
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Image
+                    </label>
+                    <input
+                      type="file"
+                      onChange={e => setDataSlider('image', e.target.files[0])}
+                      className="w-full"
+                      accept="image/*"
+                    />
+                    {errorsSlider.image && (
+                      <div className="text-red-500 text-sm mt-1">
+                        {errorsSlider.image}
+                      </div>
+                    )}
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={processingSlider}
+                    color="primary"
+                  >
+                    Upload Slider
+                  </Button>
+                </form>
+              </div>
+            </div>
           </div>
           <div className="lg:w-1/5 mx-auto flex lg:block gap-12 sticky top-0 lg:border-l pl-4 mt-10 lg:mt-0">
             {member?.verified_badge &&
