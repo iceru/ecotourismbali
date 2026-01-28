@@ -149,23 +149,23 @@ export default function MemberDashboardActive({
           </div>
           <div>
             {scores?.map((score, index) => {
-              const answersGrouped =
-                score.assessment_session.member_assessment_answer.reduce(
-                  (acc, answer) => {
-                    const questionId = answer.assessment_question_id;
-                    if (!acc[questionId]) {
-                      acc[questionId] = {
-                        question: answer.assessment_question,
-                        selectedOptions: [],
-                      };
-                    }
-                    acc[questionId].selectedOptions.push(
-                      answer.assessment_option
-                    );
-                    return acc;
-                  },
-                  {}
-                );
+              const answersGrouped = (lastSession?.member_assessment_answer || [])
+                .filter(
+                  answer =>
+                    answer.assessment_question.assessment_id ===
+                    score.assessment_id
+                )
+                .reduce((acc, answer) => {
+                  const questionId = answer.assessment_question_id;
+                  if (!acc[questionId]) {
+                    acc[questionId] = {
+                      question: answer.assessment_question,
+                      selectedOptions: [],
+                    };
+                  }
+                  acc[questionId].selectedOptions.push(answer.assessment_option);
+                  return acc;
+                }, {});
 
               return (
                 <div

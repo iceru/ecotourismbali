@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyPayment;
 use App\Models\Assessment;
+use App\Models\AssessmentSession;
+use App\Models\BusinessType;
+use App\Models\Category;
+use App\Models\Member;
+use App\Models\MemberAssessment;
 use App\Models\MemberAssessmentAnswer;
 use App\Models\MemberPayment;
-use Inertia\Inertia;
-use App\Models\Member;
-use App\Models\Category;
-use App\Mail\NotifyPayment;
-use App\Models\BusinessType;
 use App\Models\MemberSlider;
-use Illuminate\Http\Request;
-use App\Models\MemberAssessment;
-use App\Models\AssessmentSession;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class MemberController extends Controller
 {
@@ -35,11 +35,13 @@ class MemberController extends Controller
         // $answers = MemberAssessmentAnswer::where('assessment_session_id', $lastSession->id)->get();
 
         if ($lastSession) {
-            $memberAssessments = MemberAssessment::with(
-                'assessment',
-                'assessment_session.member_assessment_answer.assessment_question.assessment_option',
-                'assessment_session.member_assessment_answer.assessment_option'
-            )->where('member_id', $member->id)
+            $lastSession->load([
+                'member_assessment_answer.assessment_question.assessment_option',
+                'member_assessment_answer.assessment_option',
+            ]);
+
+            $memberAssessments = MemberAssessment::with('assessment')
+                ->where('member_id', $member->id)
                 ->where('assessment_session_id', $lastSession->id)->get();
             $dateAssessment = $lastSession->created_at->addYears(1);
         }
@@ -52,7 +54,7 @@ class MemberController extends Controller
             'business_type' => $business_type,
             'expiredDate' => $dateAssessment,
             'categories' => $categories,
-            'assessments' => $assessments
+            'assessments' => $assessments,
         ]);
     }
 
@@ -148,17 +150,16 @@ class MemberController extends Controller
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->extension();
-            $filename = $request->business_name . '_' . time() . '.' . $extension;
+            $filename = $request->business_name.'_'.time().'.'.$extension;
             $request->file('image')->storeAs('public/member/images', $filename);
             $member->image = $filename;
         }
-
 
         if ($request->hasFile('sliders')) {
             foreach ($request->file('sliders') as $file) {
                 $sliderName = null;
                 $name = $file->getClientOriginalName();
-                $sliderName = $request->business_name . '_' . $name;
+                $sliderName = $request->business_name.'_'.$name;
                 $file->storeAs('public/member/sliders', $sliderName);
 
                 $slider = new MemberSlider;
@@ -188,8 +189,8 @@ class MemberController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $slider = MemberSlider::find($id);
-        if (Storage::disk('public')->exists('/member/sliders/' . $slider->image)) {
-            Storage::disk('public')->delete('/member/sliders/' . $slider->image);
+        if (Storage::disk('public')->exists('/member/sliders/'.$slider->image)) {
+            Storage::disk('public')->delete('/member/sliders/'.$slider->image);
         }
         $slider->delete();
 
@@ -229,17 +230,16 @@ class MemberController extends Controller
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->extension();
-            $filename = $request->business_name . '_' . time() . '.' . $extension;
+            $filename = $request->business_name.'_'.time().'.'.$extension;
             $request->file('image')->storeAs('public/member/images', $filename);
             $member->image = $filename;
         }
-
 
         if ($request->hasFile('sliders')) {
             foreach ($request->file('sliders') as $file) {
                 $sliderName = null;
                 $name = $file->getClientOriginalName();
-                $sliderName = $request->business_name . '_' . $name;
+                $sliderName = $request->business_name.'_'.$name;
                 $file->storeAs('public/member/sliders', $sliderName);
 
                 $slider = new MemberSlider;
@@ -265,7 +265,6 @@ class MemberController extends Controller
         $member->status = 'active';
         $member->save();
 
-
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
@@ -283,9 +282,9 @@ class MemberController extends Controller
         $business_name = str_replace(' ', '_', $member->business_name);
         $timestamp = time();
 
-        $payment = new MemberPayment();
-        $payment->status_code = $business_name . '_' . $timestamp;
-        $payment->payment_no = $business_name . '_' . $timestamp;
+        $payment = new MemberPayment;
+        $payment->status_code = $business_name.'_'.$timestamp;
+        $payment->payment_no = $business_name.'_'.$timestamp;
         $payment->invoice_item_text = 'Greenpal Payment';
         $payment->payment_status = 'pending';
         $payment->member_id = $member->id;
