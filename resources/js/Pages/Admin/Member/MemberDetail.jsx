@@ -45,6 +45,8 @@ function MemberIndex() {
     longitude: member?.longitude,
     version: member?.version,
     product_category_id: member?.product_category_id,
+    image: '',
+    description: member?.description || '',
   });
 
   const submit = e => {
@@ -425,7 +427,55 @@ function MemberIndex() {
               ) : (
                 items('longitude', member?.longitude)
               )}
-              {items('description', member?.description)}
+              {edit ? (
+                <div className="flex flex-wrap items-center mb-6">
+                  <div className="font-bold lg:w-1/4">Image</div>
+                  <div className="lg:w-3/4 w-full mt-2 lg:mt-0">
+                    {member?.image && (
+                      <img
+                        className="mb-2 w-[120px] rounded"
+                        src={`/storage/member/images/${member?.image}`}
+                      />
+                    )}
+                    <input
+                      type="file"
+                      onChange={e => setData('image', e.target.files[0])}
+                      className="w-full"
+                      accept="image/*"
+                    />
+                    {errors.image && (
+                      <div className="text-red-500 text-sm mt-1">
+                        {errors.image}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                items('image', member?.image)
+              )}
+              {edit ? (
+                <>
+                  <div className="flex flex-wrap items-center mb-6">
+                    <div className="font-bold lg:w-1/4">{t('description')}</div>
+                    <div className="lg:w-3/4 w-full mt-2 lg:mt-0">
+                      <textarea
+                        value={data.description}
+                        onChange={e => setData('description', e.target.value)}
+                        className="w-full p-2 border rounded"
+                        rows={4}
+                      />
+                      {errors.description && (
+                        <div className="text-red-500 text-sm mt-1">
+                          {errors.description}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                items('description', member?.description)
+              )}
+
               {edit && (
                 <Button type="submit" className="mt-4" disabled={processing}>
                   {t('submit')}

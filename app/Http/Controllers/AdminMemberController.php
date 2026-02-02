@@ -130,6 +130,8 @@ class AdminMemberController extends Controller
             'longitude' => 'nullable',
             'version' => 'nullable',
             'product_category_id' => 'nullable',
+            'image' => 'nullable|file|image|max:1024',
+            'description' => 'nullable|string',
         ]);
 
         $member = Member::find($request->id);
@@ -145,6 +147,22 @@ class AdminMemberController extends Controller
         $member->longitude = $request->longitude;
         $member->version = $request->version;
         $member->product_category_id = $request->product_category_id;
+
+        // handle image upload if provided
+        if ($request->hasFile('image')) {
+            // delete old image if exists
+            if ($member->image && Storage::disk('public')->exists('member/images/' . $member->image)) {
+                Storage::disk('public')->delete('member/images/' . $member->image);
+            }
+
+            $extension = $request->file('image')->extension();
+            $filename = ($member->business_name ?: 'member') . '_' . time() . '.' . $extension;
+            $request->file('image')->storeAs('member/images', $filename, 'public');
+            $member->image = $filename;
+        }
+
+        // description
+        $member->description = $request->description;
 
         if ($member->status) {
             $member->status = $request->status;
