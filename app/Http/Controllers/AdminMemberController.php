@@ -186,6 +186,12 @@ class AdminMemberController extends Controller
     public function invoice(Request $request, string $id)
     {
         $payment = MemberPayment::where('member_id', $id)->first();
+        if (!$payment) {
+            $payment->member = Member::find($id);
+            $payment->status_code = '-';
+            $payment->created_at = $payment->member->created_at;
+            $payment->invoice_item_text = 'Membership Payment';
+        }
 
         $data = [
             'payment' => $payment
