@@ -187,13 +187,30 @@ class AdminMemberController extends Controller
     {
         $payment = MemberPayment::where('member_id', $id)->first();
 
+        // If no payment record exists, create a dummy object to pass to the view
+        if (!$payment) {
+            $member = Member::findOrFail($id);
+            
+            // We use (object) to create a generic class so the view doesn't break
+            $payment = (object) [
+                'member'            => $member,
+                'status_code'       => '-',
+                'created_at'        => $member->created_at,
+                'invoice_item_text' => 'Membership Payment',
+            ];
+        }
+
         $data = [
             'payment' => $payment
         ];
-        $pdf = PDF::loadView('invoice-pdf', $data);
-        return $pdf->stream('invoice ' . $payment->member->name . '.pdf');
-    }
 
+        $pdf = PDF::loadView('invoice-pdf', $data);
+        
+        // Using optional() or null coalescing prevents errors if name is missing
+        $filename = 'invoice ' . ($payment->member->name ?? 'Customer') . '.pdf';
+        
+        return $pdf->stream($filename);
+    }
     /**
      * Remove the specified resource from storage.
      */
