@@ -296,7 +296,7 @@ function MemberIndex() {
               ) : (
                 items(
                   'ecb_version',
-                  member?.version === 2 ? 'ECB 2.0' : 'ECB 1.0'
+                  parseInt(member?.version || 1) === 2 ? 'ECB 2.0' : 'ECB 1.0'
                 )
               )}
               {edit ? (
