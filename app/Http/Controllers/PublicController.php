@@ -59,8 +59,7 @@ class PublicController extends Controller
             if ($typeName === 'Supplier') {
                 continue;
             }
-            // --- NEW LOGIC: Skip Hotels if version is 2 ---
-            if ($typeName === 'Hotel' && (int) $assess->version === 2) {
+            if ($typeName === 'Hotel' && (int) $assess->version !== 2) {
                 continue; // Skip this iteration
             }
 
