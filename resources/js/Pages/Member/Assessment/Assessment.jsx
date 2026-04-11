@@ -217,6 +217,7 @@ function Assessment({ assessments, session, answers }) {
                       !q.product_category_id ||
                       q.product_category_id === userCategory
                   )
+                  .sort((a, b) => a.question_no - b.question_no)
                   .map((question, i) => {
                     return (
                       <div key={question?.id || i}>
