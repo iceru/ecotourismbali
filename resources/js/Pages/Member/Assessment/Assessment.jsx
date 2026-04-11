@@ -98,7 +98,9 @@ function Assessment({ assessments, session, answers }) {
         }
       });
     } else {
-      answers.forEach(ans => {
+      (answers || []).forEach(ans => {
+        if (!ans?.assessment_question || !ans?.assessment_question_id) return;
+
         if (ans.assessment_question.type === 'checkbox') {
           handleCheckboxChange(
             ans.assessment_question_id,
@@ -117,7 +119,7 @@ function Assessment({ assessments, session, answers }) {
   const handleOptionChange = (questionId, optionId, noStore) => {
     const updatedData = {
       [`radio.${questionId}`]: optionId,
-      assessment_id: assessments[ziggy?.query?.question || 0].id,
+      assessment_id: assessments[ziggy?.query?.question || 0]?.id,
       session_id: session.id,
     };
 
@@ -177,9 +179,10 @@ function Assessment({ assessments, session, answers }) {
           onSelectStart={handleSelectStart}
           style={{ userSelect: 'none' }}
         >
-          {assessments.map((item, i) => {
+          {(assessments || []).filter(Boolean).map((item, i) => {
             return (
               <form
+                key={item?.id || i}
                 onSubmit={submit}
                 className={`${active === i ? '' : 'hidden'}`}
               >
@@ -207,7 +210,8 @@ function Assessment({ assessments, session, answers }) {
                     className="text-center mb-10"
                   />
                 )}
-                {item.assessment_question
+                {(item.assessment_question || [])
+                  .filter(Boolean)
                   .filter(
                     q =>
                       !q.product_category_id ||
@@ -215,7 +219,7 @@ function Assessment({ assessments, session, answers }) {
                   )
                   .map((question, i) => {
                     return (
-                      <div>
+                      <div key={question?.id || i}>
                         <div className="font-bold text-lg mb-3">
                           {lang === 'en' && question.title_en
                             ? question.title_en
@@ -230,11 +234,17 @@ function Assessment({ assessments, session, answers }) {
                           }}
                         />
                         <div className="mt-4">
-                          {sortBy(question.assessment_option, [
-                            'option_no',
-                          ]).map(option => {
+                          {sortBy(
+                            (question.assessment_option || []).filter(Boolean),
+                            ['option_no']
+                          ).map(option => {
+                            if (!option?.id || !question?.id) return null;
+
                             return (
-                              <div className="flex items-center px-5 py-3 mb-4 rounded-3xl bg-lightPrimary bg-opacity-60">
+                              <div
+                                key={option.id}
+                                className="flex items-center px-5 py-3 mb-4 rounded-3xl bg-lightPrimary bg-opacity-60"
+                              >
                                 {question.type === 'radio' ? (
                                   <input
                                     type="radio"
@@ -283,7 +293,7 @@ function Assessment({ assessments, session, answers }) {
                             );
                           })}
                         </div>
-                        {i + 1 !== item.assessment_question.length && (
+                        {i + 1 !== (item.assessment_question || []).length && (
                           <div className="h-0.5 w-1/2 my-10 box-border left-1/2 mx-auto -translate-y-1/2 bg-gray-300"></div>
                         )}
                       </div>

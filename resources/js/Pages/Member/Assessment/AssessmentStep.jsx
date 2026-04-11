@@ -6,8 +6,8 @@ import MemberLayout from '@/Layouts/MemberLayout';
 import TitleSection from '@/Pages/Admin/Components/TitleSection';
 import Button from '@/Components/Button';
 
-import konten from '../../../../images/hotel/konten.png';
-import kontenId from '../../../../images/hotel/kontenId.png';
+import konten from '../../../../images/hotel/konten2.jpg';
+import kontenId from '../../../../images/hotel/konten2.jpg';
 
 import kontenRes from '../../../../images/restaurant/konten.png';
 import kontenResId from '../../../../images/restaurant/kontenId.png';
