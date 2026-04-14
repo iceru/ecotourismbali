@@ -21,13 +21,20 @@ function Assessment({ assessments, session, answers }) {
   const submit = e => {
     e.preventDefault();
 
+    const nextActive = active + 1;
+
     post(route('member.assessment.save'), {
+      onStart: () => {
+        if (assessments.length > active + 1) {
+          setActive(nextActive);
+        }
+      },
       onSuccess: () => {
         if (assessments.length > active + 1) {
           router.visit(
             route('member.assessment.start', [
               session.id,
-              { question: active + 1 },
+              { question: nextActive },
             ])
           );
           setData({});
@@ -43,8 +50,10 @@ function Assessment({ assessments, session, answers }) {
     e.preventDefault();
 
     post(route('member.assessment.save'), {
-      onSuccess: () => {
+      onStart: () => {
         window.scrollTo(0, 0);
+      },
+      onSuccess: () => {
         setData({});
         setDataSaved(true);
       },
