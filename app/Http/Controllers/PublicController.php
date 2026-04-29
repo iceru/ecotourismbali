@@ -30,7 +30,7 @@ class PublicController extends Controller
     {
         $members = Member::where('status', 'LIKE', '%active%')
             ->where('status', 'not like', "%dummy%")
-            ->select(['business_name', 'longitude', 'latitude', 'image', 'description', 'program_id'])->get();
+            ->select(['business_name', 'longitude', 'latitude', 'image', 'description', 'program_id', 'business_type_id'])->get();
         return response()->json($members, 200);
     }
 
