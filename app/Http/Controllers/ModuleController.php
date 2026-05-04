@@ -88,7 +88,7 @@ class ModuleController extends Controller
             'description' => 'required',
             'content' => 'required',
             'content_en' => 'required',
-            'video' => 'nullable',            
+            'video' => 'nullable',
             'attachment' => 'nullable|file',
             'author' => 'required',
         ]);
@@ -122,7 +122,8 @@ class ModuleController extends Controller
         $module->author = $request->author;
         $module->save();
 
-        return Redirect::route('module.index')->with('success', 'Module updated successfully.');;
+        return Redirect::route('module.index')->with('success', 'Module updated successfully.');
+        ;
     }
 
     public function destroy(Request $request)
@@ -134,5 +135,20 @@ class ModuleController extends Controller
         $module->delete();
 
         return Redirect::route('module.index');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:2048',
+        ]);
+
+        $extension = $request->file('image')->extension();
+        $filename = 'content_' . time() . '_' . uniqid() . '.' . $extension;
+        $request->file('image')->storeAs('public/modules/content', $filename);
+
+        return response()->json([
+            'url' => Storage::url('modules/content/' . $filename),
+        ]);
     }
 }

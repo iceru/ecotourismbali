@@ -198,6 +198,7 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::get('/module/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
     Route::post('/module/update/{id}', [ModuleController::class, 'update'])->name('module.update');
     Route::delete('/module/delete/{id}', [ModuleController::class, 'destroy'])->name('module.destroy');
+    Route::post('/module/upload-image', [ModuleController::class, 'uploadImage'])->name('module.uploadImage');
 
     Route::get('/source', [SourceController::class, 'index'])->name('source.index');
     Route::post('/source/store', [SourceController::class, 'store'])->name('source.store');

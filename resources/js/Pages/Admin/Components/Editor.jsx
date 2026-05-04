@@ -1,12 +1,50 @@
 import React from 'react';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useCallback, useEffect } from 'react';
+import axios from 'axios';
+import ImageResize from 'quill-image-resize-module-react';
+
+Quill.register('modules/imageResize', ImageResize);
 
 function Editor({ onChange, value }) {
   const quillRef = useRef();
+
+  const imageHandler = useCallback(() => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const response = await axios.post('/admin/upload-image', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+
+        const url = response.data.url;
+        const quill = quillRef.current.getEditor();
+        const range = quill.getSelection(true);
+        quill.insertEmbed(range.index, 'image', url);
+        quill.setSelection(range.index + 1);
+      } catch (error) {
+        console.error('Image upload failed:', error);
+      }
+    };
+  }, []);
+
   const modules = useMemo(
     () => ({
+      imageResize: {
+        parchment: Quill.import('parchment'),
+        modules: ['Resize', 'DisplaySize', 'Toolbar'],
+      },
       toolbar: {
         container: [
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -61,21 +99,22 @@ function Editor({ onChange, value }) {
             },
           ],
         ],
+        handlers: {
+          image: imageHandler,
+        },
       },
     }),
-    []
+    [imageHandler]
   );
 
   return (
-    <>
-      <ReactQuill
-        theme="snow"
-        value={value}
-        modules={modules}
-        onChange={onChange}
-        ref={quillRef}
-      />
-    </>
+    <ReactQuill
+      theme="snow"
+      value={value}
+      modules={modules}
+      onChange={onChange}
+      ref={quillRef}
+    />
   );
 }
 
