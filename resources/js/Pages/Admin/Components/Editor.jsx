@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useRef, useMemo, useCallback, useEffect } from 'react';
+import { useRef, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ImageResize from 'quill-image-resize-module-react';
 
+const Parchment = Quill.import('parchment');
 Quill.register('modules/imageResize', ImageResize);
 
 function Editor({ onChange, value }) {
@@ -46,7 +47,7 @@ function Editor({ onChange, value }) {
   const modules = useMemo(
     () => ({
       imageResize: {
-        parchment: Quill.import('parchment'),
+        parchment: Parchment,
         modules: ['Resize', 'DisplaySize', 'Toolbar'],
       },
       toolbar: {
