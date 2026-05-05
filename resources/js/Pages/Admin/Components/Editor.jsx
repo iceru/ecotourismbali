@@ -24,9 +24,13 @@ function Editor({ onChange, value }) {
       formData.append('image', file);
 
       try {
-        const response = await axios.post('/admin/upload-image', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        const response = await axios.post(
+          '/admin/module/upload-image',
+          formData,
+          {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          }
+        );
 
         const url = response.data.url;
         const quill = quillRef.current.getEditor();
