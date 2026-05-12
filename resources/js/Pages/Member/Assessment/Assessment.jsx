@@ -331,7 +331,9 @@ function Assessment({ assessments, session, answers }) {
                     disabled={processing}
                     className="min-w-[160px] flex justify-center"
                   >
-                    {t('next')}
+                    {assessments.length > active + 1
+                      ? t('next')
+                      : t('submit')}
                   </Button>
                 </div>
               </form>
