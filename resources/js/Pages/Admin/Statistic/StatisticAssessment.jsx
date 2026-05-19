@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import AdminSection from '@/Components/AdminSection';
-import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { toLower } from 'lodash';
 import Button from '@/Components/Button';

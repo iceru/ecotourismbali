@@ -128,13 +128,13 @@ class AdminMemberController extends Controller
             'badge_certificate' => 'nullable',
             'latitude' => 'nullable',
             'longitude' => 'nullable',
-            'version' => 'nullable',
+            'version' => 'nullable|in:1,2',
             'product_category_id' => 'nullable',
             'image' => 'nullable|file|image|max:1024',
             'description' => 'nullable|string',
         ]);
 
-        $member = Member::find($request->id);
+        $member = Member::findOrFail($id);
         $payment = MemberPayment::firstOrNew(['status_code' => $request->invoice_no]);
 
         $member->category_id = $request->category;
@@ -145,7 +145,9 @@ class AdminMemberController extends Controller
         $member->badge_certificate = $request->badge_certificate;
         $member->latitude = $request->latitude;
         $member->longitude = $request->longitude;
-        $member->version = $request->version;
+        if (!is_null($request->version) && $request->version !== '') {
+            $member->version = (int) $request->version;
+        }
         $member->product_category_id = $request->product_category_id;
 
         // handle image upload if provided

@@ -21,9 +21,6 @@ class StatisticController extends Controller
         // Highest Score (only completed sessions with valid ECB version)
         $sessionFilter = AssessmentSession::with('member')
             ->whereIn('completion', ['yes', 'expired'])
-            ->whereHas('member', function ($query) {
-                $query->whereIn('version', [1, 2]);
-            })
             ->get();
 
         // Badges
@@ -86,9 +83,6 @@ class StatisticController extends Controller
         $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo', 'version')->with('business_type')->get();
         $memberAssess = MemberAssessment::with('member')
             ->whereIn('completion', ['yes', 'expired'])
-            ->whereHas('member', function ($query) {
-                $query->whereIn('version', [1, 2]);
-            })
             ->get();
 
         foreach ($assessments as $assess) {
