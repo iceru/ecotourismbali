@@ -122,7 +122,10 @@ class StatisticController extends Controller
     public function assessmentExport($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
-        $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->get();
+        $assessments = Assessment::with('assessment_question')
+            ->where('business_type_id', $member->business_type_id)
+            ->where('version', $member->version)
+            ->get();
         $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(column: ['member_id' => $member->id, 'assessment_session_id' => $sessionId])->with('assessment_question')->get();
 
