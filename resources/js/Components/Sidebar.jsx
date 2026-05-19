@@ -54,6 +54,18 @@ export default function Sidebar() {
         </li>
         <li>
           <Link
+            href={route('admin.user.index')}
+            className={url.startsWith('/admin/user') ? 'font-bold' : ''}
+          >
+            <FontAwesomeIcon
+              className="fa-fw mr-2 text-secondary"
+              icon={faUsers}
+            />
+            Users
+          </Link>
+        </li>
+        <li>
+          <Link
             href={route('admin.member_tourism.index')}
             className={
               url.startsWith('/admin/tourism/member') ? 'font-bold' : ''

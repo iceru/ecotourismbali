@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use PDF;
 use App\Models\MemberSlider;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AdminMemberController extends Controller
@@ -29,8 +30,16 @@ class AdminMemberController extends Controller
      */
     public function index()
     {
+        $members = Member::with('user.roles', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')
+            ->get()
+            ->map(function ($member) {
+                $isAdminUser = $member->user && ($member->user->hasRole('administrator') || $member->user->hasRole('superadministrator'));
+                $member->can_delete = !$isAdminUser;
+                return $member;
+            });
+
         return Inertia::render('Admin/Member/MemberIndex', [
-            'members' => Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')->get(),
+            'members' => $members,
         ]);
     }
 
@@ -39,8 +48,15 @@ class AdminMemberController extends Controller
      */
     public function search(Request $request)
     {
-        $members = Member::with('user', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')
-            ->where('business_name', 'like', "%$request->search%")->get();
+        $members = Member::with('user.roles', 'category', 'program', 'verified_badge', 'badge', 'member_assessment', 'business_type')
+            ->where('business_name', 'like', "%$request->search%")
+            ->get()
+            ->map(function ($member) {
+                $isAdminUser = $member->user && ($member->user->hasRole('administrator') || $member->user->hasRole('superadministrator'));
+                $member->can_delete = !$isAdminUser;
+                return $member;
+            });
+
         return Inertia::render('Admin/Member/MemberIndex', [
             'members' => $members,
         ]);
@@ -218,7 +234,21 @@ class AdminMemberController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = Member::with('user')->findOrFail($id);
+
+        if ($member->user && ($member->user->hasRole('administrator') || $member->user->hasRole('superadministrator'))) {
+            abort(403);
+        }
+
+        DB::transaction(function () use ($member) {
+            $member->delete();
+
+            if ($member->user) {
+                $member->user->delete();
+            }
+        });
+
+        return Redirect::route('admin.member.index');
     }
 
     /**

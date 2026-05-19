@@ -10,11 +10,13 @@ use App\Models\Member;
 use App\Models\Program;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
@@ -42,9 +44,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:' . User::class,
+            'email' => 'required|string|email|max:255',
             'password' => ['required', 'confirmed', Rules\Password::min(8)->letters()],
-            'business_name' => 'required|unique:members',
+            'business_name' => 'required|string|max:255',
             'program' => 'required',
         ]);
 
@@ -52,28 +54,58 @@ class RegisteredUserController extends Controller
             Newsletter::subscribe($request->email);
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-        
-        event(new Registered($user));
+        $user = null;
 
-        $member = Member::where('id', $user->id)->first();
+        DB::transaction(function () use ($request, &$user) {
+            $user = User::withTrashed()->where('email', $request->email)->first();
 
-        if (!$member) {
-            $member = new Member;
+            if ($user) {
+                if (is_null($user->deleted_at)) {
+                    throw ValidationException::withMessages([
+                        'email' => 'The email has already been taken.',
+                    ]);
+                }
+
+                $user->restore();
+                $user->name = $request->name;
+                $user->password = Hash::make($request->password);
+                $user->email_verified_at = null;
+                $user->save();
+            } else {
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+            }
+
+            $member = Member::withTrashed()
+                ->where('user_id', $user->id)
+                ->orWhere('business_name', $request->business_name)
+                ->first();
+
+            if ($member) {
+                if (!is_null($member->deleted_at)) {
+                    $member->restore();
+                }
+            } else {
+                $member = new Member();
+            }
+
             $member->user_id = $user->id;
             $member->business_name = $request->business_name;
             $member->slug = Str::slug($request->business_name);
             $member->subscribed = $request->subscribed;
             $member->program_id = $request->program;
             $member->save();
-        }
+        });
+
+        event(new Registered($user));
         
         Auth::login($user);
-        $user->addRole('member');
+        if (!$user->hasRole('member')) {
+            $user->addRole('member');
+        }
 
         return redirect(route('member.dashboard'));
     }

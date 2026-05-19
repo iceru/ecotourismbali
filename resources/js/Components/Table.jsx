@@ -160,6 +160,13 @@ export default function Table({
                       {tableActions && (
                         <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                           {tableActions.map((action, index) => {
+                            if (
+                              action.type === 'delete' &&
+                              item?.can_delete === false
+                            ) {
+                              return null;
+                            }
+
                             return action.type === 'delete' ? (
                               <form
                                 onSubmit={e =>

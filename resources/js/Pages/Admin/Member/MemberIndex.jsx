@@ -26,6 +26,12 @@ function MemberIndex({ members }) {
       withId: true,
       color: 'info',
     },
+    {
+      label: 'delete_button',
+      route: 'admin.member.destroy',
+      color: 'danger',
+      type: 'delete',
+    },
   ];
 
   return (

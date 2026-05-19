@@ -22,6 +22,7 @@ use App\Http\Controllers\MemberListController;
 use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\ForumThreadController;
 use App\Http\Controllers\AdminPaymentController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BusinessTypeController;
 use App\Http\Controllers\ForumCommentController;
@@ -175,9 +176,15 @@ Route::middleware(['auth', 'role:superadministrator|administrator|finance'])->pr
     Route::post('/member/search', [AdminMemberController::class, 'search'])->name('admin.member.search');
     Route::get('/member/detail/{id}', [AdminMemberController::class, 'show'])->name('admin.member.detail');
     Route::post('/member/update/{id}', [AdminMemberController::class, 'update'])->name('admin.member.update');
+    Route::delete('/member/delete/{id}', [AdminMemberController::class, 'destroy'])->name('admin.member.destroy');
     Route::post('/member/invoice/{id}', [AdminMemberController::class, 'invoice'])->name('admin.member.invoice');
     Route::post('/member/slider/upload/{id}', [AdminMemberController::class, 'uploadSlider'])->name('admin.member.slider.upload');
     Route::delete('/member/slider/delete/{id}', [AdminMemberController::class, 'deleteSlider'])->name('admin.member.slider.delete');
+
+    Route::get('/user/index', [AdminUserController::class, 'index'])->name('admin.user.index');
+    Route::get('/user/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
+    Route::post('/user/update/{id}', [AdminUserController::class, 'update'])->name('admin.user.update');
+    Route::delete('/user/delete/{id}', [AdminUserController::class, 'destroy'])->name('admin.user.destroy');
 
     Route::get('/tourism/member/index', [MemberTourismController::class, 'index'])->name('admin.member_tourism.index');
     Route::post('/tourism/member/import', [MemberTourismController::class, 'import'])->name('admin.member_tourism.import');
