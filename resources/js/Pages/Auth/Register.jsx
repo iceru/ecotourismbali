@@ -10,8 +10,6 @@ import { useTranslation } from 'react-i18next';
 import RegisImage from '../../../images/regisImage.jpg';
 import SelectInput from '@/Components/SelectInput';
 import queryString from 'query-string';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function Register({ programs }) {
   const parsed = queryString.parse(location.search);
@@ -23,7 +21,7 @@ export default function Register({ programs }) {
     business_name: '',
     password_confirmation: '',
     subscribed: true,
-    program: programs[parsed?.tribe === 'greenpal' ? 1 : 0].id,
+    program: 1,
   });
   const { t } = useTranslation();
 
@@ -198,7 +196,7 @@ export default function Register({ programs }) {
 
               <InputError message={errors.business_name} className="mt-2" />
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <InputLabel htmlFor="program" value={t('program')} />
 
               <SelectInput
@@ -214,7 +212,7 @@ export default function Register({ programs }) {
               />
 
               <InputError message={errors.program} className="mt-2" />
-            </div>
+            </div> */}
 
             {/* <div className="text-sm text-gray-500 mt-3">
               {data.program == 1 ? (
