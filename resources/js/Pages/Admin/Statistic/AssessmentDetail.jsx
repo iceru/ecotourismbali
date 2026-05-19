@@ -21,9 +21,15 @@ function Assessment({ assessments, session, answers, member }) {
   const { data, setData, processing } = useForm();
   const [loading, setLoading] = useState(false);
   const lang = i18n.language;
+  const selectedAssessmentIndex = parseInt(ziggy?.query?.question || 0, 10);
+  const selectedAssessment = assessments?.[selectedAssessmentIndex];
 
   useEffect(() => {
+    if (!Array.isArray(answers)) return;
+
     answers.forEach(ans => {
+      if (!ans?.assessment_question) return;
+
       if (ans.assessment_question.type === 'checkbox') {
         handleCheckboxChange(
           parseInt(ans.assessment_question_id),
@@ -39,9 +45,11 @@ function Assessment({ assessments, session, answers, member }) {
   }, [answers]);
 
   const handleOptionChange = (questionId, optionId, noStore) => {
+    if (!selectedAssessment?.id || !session?.id) return;
+
     const updatedData = {
       [`radio.${questionId}`]: optionId,
-      assessment_id: assessments[ziggy?.query?.question || 0].id,
+      assessment_id: selectedAssessment.id,
       session_id: session.id,
     };
 
@@ -75,7 +83,7 @@ function Assessment({ assessments, session, answers, member }) {
       container.item(i).classList.remove('hidden');
     }
     const button = document.querySelector('#assess_button');
-    button.style.display = 'none';
+    if (button) button.style.display = 'none';
     setLoading(true);
 
     // Wait for images to load
@@ -141,7 +149,7 @@ function Assessment({ assessments, session, answers, member }) {
       for (let i = 0; i < container.length; i++) {
         if (i !== 0) container.item(i).classList.add('hidden');
       }
-      button.style.display = 'flex';
+      if (button) button.style.display = 'flex';
     }
   };
 
