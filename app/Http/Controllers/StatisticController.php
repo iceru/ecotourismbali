@@ -18,15 +18,13 @@ class StatisticController extends Controller
 {
     public function index()
     {
-        // Highest Score
-        $sessions = AssessmentSession::with('member')->get();
-        $sessionFilter = array();
-
-        foreach ($sessions as $session) {
-            if ($session->completion === 'yes' || $session->completion === 'expired') {
-                array_push($sessionFilter, $session);
-            }
-        }
+        // Highest Score (only completed sessions with valid ECB version)
+        $sessionFilter = AssessmentSession::with('member')
+            ->whereIn('completion', ['yes', 'expired'])
+            ->whereHas('member', function ($query) {
+                $query->whereIn('version', [1, 2]);
+            })
+            ->get();
 
         // Badges
         $countBadges = DB::table('members')
@@ -85,15 +83,23 @@ class StatisticController extends Controller
 
     public function assessment()
     {
-        $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo')->with('business_type')->get();
+        $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo', 'version')->with('business_type')->get();
         $memberAssess = MemberAssessment::with('member')
             ->whereIn('completion', ['yes', 'expired'])
+            ->whereHas('member', function ($query) {
+                $query->whereIn('version', [1, 2]);
+            })
             ->get();
 
         foreach ($assessments as $assess) {
             $members = array();
             foreach ($memberAssess as $memberAs) {
-                if ((int) $assess->id === (int) $memberAs->assessment_id && str_contains($memberAs->member->status, 'active') && !str_contains($memberAs->member->status, 'dummy')) {
+                if (
+                    (int) $assess->id === (int) $memberAs->assessment_id &&
+                    (int) ($memberAs->member->version ?? 1) === (int) $assess->version &&
+                    str_contains($memberAs->member->status, 'active') &&
+                    !str_contains($memberAs->member->status, 'dummy')
+                ) {
                     array_push($members, $memberAs);
                     $assess->members = $members;
                 }
@@ -107,8 +113,9 @@ class StatisticController extends Controller
     public function assessmentDetail($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
+        $memberVersion = (int) ($member->version ?? 1);
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)
-            ->where('version', $member->version)->get();
+            ->where('version', $memberVersion)->get();
         $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Admin/Statistic/AssessmentDetail', [
@@ -122,9 +129,10 @@ class StatisticController extends Controller
     public function assessmentExport($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
+        $memberVersion = (int) ($member->version ?? 1);
         $assessments = Assessment::with('assessment_question')
             ->where('business_type_id', $member->business_type_id)
-            ->where('version', $member->version)
+            ->where('version', $memberVersion)
             ->get();
         $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(column: ['member_id' => $member->id, 'assessment_session_id' => $sessionId])->with('assessment_question')->get();
