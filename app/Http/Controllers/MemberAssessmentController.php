@@ -141,7 +141,7 @@ class MemberAssessmentController extends Controller
             'legal_identity' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
-            'product_category_id' => 'nullable',
+            'product_category_id' => 'nullable|exists:product_categories,id',
         ]);
 
         if ($request->sister_company) {
@@ -164,6 +164,7 @@ class MemberAssessmentController extends Controller
         $member->legal_identity = $request->legal_identity;
         $member->latitude = $request->latitude;
         $member->longitude = $request->longitude;
+        $member->product_category_id = $request->product_category_id;
         $member->save();
 
         $user->name = $request->name;
