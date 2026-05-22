@@ -12,8 +12,10 @@ function Assessment({ assessments, session, answers }) {
   const [active, setActive] = useState(0);
   const [dataSaved, setDataSaved] = useState(false);
   const { t, i18n } = useTranslation();
-  const { ziggy, auth } = usePage().props;
-  const userCategory = auth.user.member?.product_category_id;
+  const { ziggy, member } = usePage().props;
+  const userCategory = member?.product_category_id
+    ? Number(member.product_category_id)
+    : null;
   const { data, setData, post, processing, errors } = useForm();
 
   const lang = i18n.language;
@@ -173,6 +175,12 @@ function Assessment({ assessments, session, answers }) {
     }
   };
 
+  const matchesProductCategory = question => {
+    if (!question.product_category_id) return true;
+
+    return Number(question.product_category_id) === userCategory;
+  };
+
   return (
     <MemberLayout>
       {dataSaved && (
@@ -221,11 +229,7 @@ function Assessment({ assessments, session, answers }) {
                 )}
                 {(item.assessment_question || [])
                   .filter(Boolean)
-                  .filter(
-                    q =>
-                      !q.product_category_id ||
-                      q.product_category_id === userCategory
-                  )
+                  .filter(matchesProductCategory)
                   .sort((a, b) => a.question_no - b.question_no)
                   .map((question, i) => {
                     return (

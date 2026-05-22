@@ -97,7 +97,18 @@ class MemberAssessmentController extends Controller
     public function start($id)
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $assessments = Assessment::with('assessment_question')
+        $productCategoryId = $member->product_category_id;
+        $assessmentQuestions = function ($query) use ($productCategoryId) {
+            $query->where(function ($query) use ($productCategoryId) {
+                $query->whereNull('product_category_id');
+
+                if ($productCategoryId) {
+                    $query->orWhere('product_category_id', $productCategoryId);
+                }
+            });
+        };
+
+        $assessments = Assessment::with(['assessment_question' => $assessmentQuestions])
             ->where('business_type_id', $member->business_type_id)
             ->when((int) $member->business_type_id === 1, function ($query) use ($member) {
                 $query->where('version', $member->version ?? 1);
@@ -113,7 +124,7 @@ class MemberAssessmentController extends Controller
         }
 
         if (!str_contains($member->status, 'active')) {
-            $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->take(1)->get();
+            $assessments = Assessment::with(['assessment_question' => $assessmentQuestions])->where('business_type_id', $member->business_type_id)->take(1)->get();
         }
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Member/Assessment/Assessment', [
