@@ -98,7 +98,11 @@ class MemberAssessmentController extends Controller
     {
         $member = Member::where('user_id', Auth::id())->first();
         $assessments = Assessment::with('assessment_question')
-            ->where(['business_type_id' => $member->business_type_id, 'version' => $member->version])->get();
+            ->where('business_type_id', $member->business_type_id)
+            ->when((int) $member->business_type_id === 1, function ($query) use ($member) {
+                $query->where('version', $member->version ?? 1);
+            })
+            ->get();
         $session = AssessmentSession::where('id', $id)->first();
         if ($session->completion === 'yes') {
             return Redirect::route('member.dashboard');
@@ -344,8 +348,11 @@ class MemberAssessmentController extends Controller
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
         $memberAssessments = MemberAssessment::with('assessment')->where('assessment_session_id', $id)->get();
-        $totalMaxPoints = Assessment::where('business_type_id', $member->business_type_id)->
-            where('version', $member->version)->sum('max_points');
+        $totalMaxPoints = Assessment::where('business_type_id', $member->business_type_id)
+            ->when((int) $member->business_type_id === 1, function ($query) use ($member) {
+                $query->where('version', $member->version ?? 1);
+            })
+            ->sum('max_points');
         if ($session) {
             $dateAssessment = $session->created_at->addYears(1);
 
