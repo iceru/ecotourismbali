@@ -1,0 +1,1 @@
+import{a as e}from"./app-076450c1.js";import{u as l}from"./useTranslation-306620d6.js";function n({title:t,className:o}){const{t:a}=l();return e("h1",{className:"font-bold text-2xl lg:text-3xl mb-6 lg:mb-10 "+o,children:a(t)})}export{n as T};

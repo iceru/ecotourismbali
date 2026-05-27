@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/Search-6b4f5ab8.js
-import{j as l,a as r}from"./app-6864bc36.js";import{B as o}from"./Button-ced82570.js";function i({buttonClick:n,setData:s,data:e}){return l("div",{className:"flex items-center mb-4",children:[r("input",{type:"text",value:e==null?void 0:e.search,className:"rounded outline-none w-56 px-2 h-full mr-2 py-[7.5px]",onChange:t=>s("search",t.target.value)}),r(o,{onClick:n,children:"Search"})]})}export{i as default};
-========
-import{j as l,a as r}from"./app-945b5006.js";import{B as o}from"./Button-6822c393.js";function i({buttonClick:n,setData:s,data:e}){return l("div",{className:"flex items-center mb-4",children:[r("input",{type:"text",value:e==null?void 0:e.search,className:"rounded outline-none w-56 px-2 h-full mr-2 py-[7.5px]",onChange:t=>s("search",t.target.value)}),r(o,{onClick:n,children:"Search"})]})}export{i as default};
->>>>>>>> 95869f565d653a41603ebff6e8fe2fa99623b951:public/build/assets/Search-def05001.js
