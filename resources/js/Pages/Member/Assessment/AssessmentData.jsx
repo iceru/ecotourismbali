@@ -186,7 +186,7 @@ function AssessmentData({ categories, product_categories }) {
                     placeholder="select_product_category"
                     value={data.product_category_id}
                     onChange={e => {
-                      setData('product_category', e.target.value);
+                      setData('product_category_id', e.target.value);
                     }}
                     required
                   />

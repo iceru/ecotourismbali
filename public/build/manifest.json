@@ -15,49 +15,32 @@
   },
   "_AdminSection-9ae442ab.js": {
     "file": "assets/AdminSection-9ae442ab.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_AuthImage-2cf4d2c1.js": {
-    "assets": [
-      "assets/authImage-d4c8c53f.jpg"
-    ],
+    "assets": ["assets/authImage-d4c8c53f.jpg"],
     "file": "assets/AuthImage-2cf4d2c1.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_BadgeColor-fb3f17ef.js": {
     "file": "assets/BadgeColor-fb3f17ef.js",
-    "imports": [
-      "_lodash-c843c37b.js"
-    ]
+    "imports": ["_lodash-c843c37b.js"]
   },
   "_Button-ced82570.js": {
     "file": "assets/Button-ced82570.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_Checkbox-ef0e6f6e.js": {
     "file": "assets/Checkbox-ef0e6f6e.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_Dropdown-064904ce.js": {
     "file": "assets/Dropdown-064904ce.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_transition-5f157fad.js"
-    ]
+    "imports": ["resources/js/app.jsx", "_transition-5f157fad.js"]
   },
   "_FileSaver.min-496ad83e.js": {
     "file": "assets/FileSaver.min-496ad83e.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_GuestLayout-8db4a8ef.js": {
     "assets": [
@@ -84,15 +67,11 @@
   },
   "_InputError-5aed67dc.js": {
     "file": "assets/InputError-5aed67dc.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_InputLabel-54e7241f.js": {
     "file": "assets/InputLabel-54e7241f.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_MemberGreenpal-bf0d95c1.js": {
     "file": "assets/MemberGreenpal-bf0d95c1.js",
@@ -121,43 +100,27 @@
   },
   "_Pagination-ea93d56a.js": {
     "file": "assets/Pagination-ea93d56a.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_lodash-c843c37b.js"
-    ]
+    "imports": ["resources/js/app.jsx", "_lodash-c843c37b.js"]
   },
   "_SelectInput-ee5237e7.js": {
     "file": "assets/SelectInput-ee5237e7.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_useTranslation-ec6e6e45.js"
-    ]
+    "imports": ["resources/js/app.jsx", "_useTranslation-ec6e6e45.js"]
   },
   "_Speedometer-700b37fd.js": {
     "file": "assets/Speedometer-700b37fd.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_Table-ae945ed9.js": {
     "file": "assets/Table-ae945ed9.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_useTranslation-ec6e6e45.js"
-    ]
+    "imports": ["resources/js/app.jsx", "_useTranslation-ec6e6e45.js"]
   },
   "_TextInput-747a6d62.js": {
     "file": "assets/TextInput-747a6d62.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_TitlePage-e3b2ed90.js": {
     "file": "assets/TitlePage-e3b2ed90.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_useTranslation-ec6e6e45.js"
-    ]
+    "imports": ["resources/js/app.jsx", "_useTranslation-ec6e6e45.js"]
   },
   "_asyncToGenerator-e43f4a97.js": {
     "file": "assets/asyncToGenerator-e43f4a97.js"
@@ -169,22 +132,15 @@
     "file": "assets/chart-c0337866.js"
   },
   "_donation-0fbbedea.js": {
-    "assets": [
-      "assets/donation-ab06515c.png"
-    ],
+    "assets": ["assets/donation-ab06515c.png"],
     "file": "assets/donation-0fbbedea.js"
   },
   "_greenpal-f0e012ed.js": {
-    "assets": [
-      "assets/greenpal-f14bbc2c.png"
-    ],
+    "assets": ["assets/greenpal-f14bbc2c.png"],
     "file": "assets/greenpal-f0e012ed.js"
   },
   "_id-410e5203.js": {
-    "assets": [
-      "assets/en-a5b1a8df.png",
-      "assets/id-f9148931.png"
-    ],
+    "assets": ["assets/en-a5b1a8df.png", "assets/id-f9148931.png"],
     "file": "assets/id-410e5203.js"
   },
   "_index-25fc1de7.js": {
@@ -192,74 +148,50 @@
   },
   "_index-4103cd9d.js": {
     "file": "assets/index-4103cd9d.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_chart-c0337866.js"
-    ]
+    "imports": ["resources/js/app.jsx", "_chart-c0337866.js"]
   },
   "_index-dbc1705c.js": {
     "file": "assets/index-dbc1705c.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_index-ffaba6f7.js": {
     "file": "assets/index-ffaba6f7.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_lodash-c843c37b.js": {
     "file": "assets/lodash-c843c37b.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_logo-5e7252b7.js": {
-    "assets": [
-      "assets/logo-75264bdc.png"
-    ],
+    "assets": ["assets/logo-75264bdc.png"],
     "file": "assets/logo-5e7252b7.js"
   },
   "_moment-7b763ff4.js": {
     "file": "assets/moment-7b763ff4.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_moment-fbc5633a.js": {
     "file": "assets/moment-fbc5633a.js"
   },
   "_no-image-91387054.js": {
-    "assets": [
-      "assets/no-image-8d923bfe.jpg"
-    ],
+    "assets": ["assets/no-image-8d923bfe.jpg"],
     "file": "assets/no-image-91387054.js"
   },
   "_react-responsive-c86752a4.js": {
     "file": "assets/react-responsive-c86752a4.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_transition-5f157fad.js": {
     "file": "assets/transition-5f157fad.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "_useTranslation-ec6e6e45.js": {
     "file": "assets/useTranslation-ec6e6e45.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
+    "imports": ["resources/js/app.jsx"]
   },
   "node_modules/canvg/lib/index.es.js": {
     "file": "assets/index.es-3017f71f.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_asyncToGenerator-e43f4a97.js"
-    ],
+    "imports": ["resources/js/app.jsx", "_asyncToGenerator-e43f4a97.js"],
     "isDynamicEntry": true,
     "src": "node_modules/canvg/lib/index.es.js"
   },
@@ -799,31 +731,21 @@
     "src": "resources/js/Pages/Admin/Components/Editor.css"
   },
   "resources/js/Pages/Admin/Components/Editor.jsx": {
-    "css": [
-      "assets/Editor-8e59e50e.css"
-    ],
+    "css": ["assets/Editor-8e59e50e.css"],
     "file": "assets/Editor-e58c6563.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ],
+    "imports": ["resources/js/app.jsx"],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Components/Editor.jsx"
   },
   "resources/js/Pages/Admin/Components/Search.jsx": {
     "file": "assets/Search-6b4f5ab8.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_Button-ced82570.js"
-    ],
+    "imports": ["resources/js/app.jsx", "_Button-ced82570.js"],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Components/Search.jsx"
   },
   "resources/js/Pages/Admin/Components/TitleSection.jsx": {
     "file": "assets/TitleSection-679cdb12.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_useTranslation-ec6e6e45.js"
-    ],
+    "imports": ["resources/js/app.jsx", "_useTranslation-ec6e6e45.js"],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Admin/Components/TitleSection.jsx"
   },
@@ -1586,9 +1508,7 @@
     "src": "resources/js/Pages/Auth/LoginAdmin.jsx"
   },
   "resources/js/Pages/Auth/Register.jsx": {
-    "assets": [
-      "assets/regisImage-648e4d7b.jpg"
-    ],
+    "assets": ["assets/regisImage-648e4d7b.jpg"],
     "file": "assets/Register-9f908d49.js",
     "imports": [
       "resources/js/app.jsx",
@@ -1677,9 +1597,7 @@
     "src": "resources/js/Pages/Booking/Components/Filter.jsx"
   },
   "resources/js/Pages/Booking/Components/ProductItem.jsx": {
-    "assets": [
-      "assets/hotel_example-99fcecf6.png"
-    ],
+    "assets": ["assets/hotel_example-99fcecf6.png"],
     "file": "assets/ProductItem-6678f95f.js",
     "imports": [
       "resources/js/app.jsx",
@@ -1691,9 +1609,7 @@
     "src": "resources/js/Pages/Booking/Components/ProductItem.jsx"
   },
   "resources/js/Pages/Booking/Products.jsx": {
-    "assets": [
-      "assets/icon-res-d70e25b0.svg"
-    ],
+    "assets": ["assets/icon-res-d70e25b0.svg"],
     "file": "assets/Products-4a19cbca.js",
     "imports": [
       "resources/js/app.jsx",
@@ -1763,17 +1679,13 @@
   },
   "resources/js/Pages/ErrorPage.jsx": {
     "file": "assets/ErrorPage-305a1d84.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ],
+    "imports": ["resources/js/app.jsx"],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/ErrorPage.jsx"
   },
   "resources/js/Pages/ErrorPage403.jsx": {
     "file": "assets/ErrorPage403-e4278075.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ],
+    "imports": ["resources/js/app.jsx"],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/ErrorPage403.jsx"
   },
@@ -2263,10 +2175,7 @@
   },
   "resources/js/Pages/MemberItemTourism.jsx": {
     "file": "assets/MemberItemTourism-b521a62e.js",
-    "imports": [
-      "resources/js/app.jsx",
-      "_useTranslation-ec6e6e45.js"
-    ],
+    "imports": ["resources/js/app.jsx", "_useTranslation-ec6e6e45.js"],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/MemberItemTourism.jsx"
   },
@@ -2358,20 +2267,16 @@
   },
   "resources/js/Pages/Welcome.jsx": {
     "file": "assets/Welcome-32671011.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ],
+    "imports": ["resources/js/app.jsx"],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Welcome.jsx"
   },
   "resources/js/app.css": {
-    "file": "assets/app-1b6004c8.css",
+    "file": "assets/app-8988ad0f.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.jsx": {
-    "css": [
-      "assets/app-1b6004c8.css"
-    ],
+    "css": ["assets/app-8988ad0f.css"],
     "dynamicImports": [
       "resources/js/Pages/Admin/AdminDashboard.jsx",
       "resources/js/Pages/Admin/Announcement/CreateAnnouncement.jsx",

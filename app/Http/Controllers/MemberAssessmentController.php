@@ -97,8 +97,23 @@ class MemberAssessmentController extends Controller
     public function start($id)
     {
         $member = Member::where('user_id', Auth::id())->first();
-        $assessments = Assessment::with('assessment_question')
-            ->where(['business_type_id' => $member->business_type_id, 'version' => $member->version])->get();
+        $productCategoryId = $member->product_category_id;
+        $assessmentQuestions = function ($query) use ($productCategoryId) {
+            $query->where(function ($query) use ($productCategoryId) {
+                $query->whereNull('product_category_id');
+
+                if ($productCategoryId) {
+                    $query->orWhere('product_category_id', $productCategoryId);
+                }
+            });
+        };
+
+        $assessments = Assessment::with(['assessment_question' => $assessmentQuestions])
+            ->where('business_type_id', $member->business_type_id)
+            ->when((int) $member->business_type_id === 1, function ($query) use ($member) {
+                $query->where('version', $member->version ?? 1);
+            })
+            ->get();
         $session = AssessmentSession::where('id', $id)->first();
         if ($session->completion === 'yes') {
             return Redirect::route('member.dashboard');
@@ -109,7 +124,7 @@ class MemberAssessmentController extends Controller
         }
 
         if (!str_contains($member->status, 'active')) {
-            $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)->take(1)->get();
+            $assessments = Assessment::with(['assessment_question' => $assessmentQuestions])->where('business_type_id', $member->business_type_id)->take(1)->get();
         }
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Member/Assessment/Assessment', [
@@ -141,7 +156,7 @@ class MemberAssessmentController extends Controller
             'legal_identity' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
-            'product_category_id' => 'nullable',
+            'product_category_id' => 'nullable|exists:product_categories,id',
         ]);
 
         if ($request->sister_company) {
@@ -164,6 +179,7 @@ class MemberAssessmentController extends Controller
         $member->legal_identity = $request->legal_identity;
         $member->latitude = $request->latitude;
         $member->longitude = $request->longitude;
+        $member->product_category_id = $request->product_category_id;
         $member->save();
 
         $user->name = $request->name;
@@ -343,8 +359,11 @@ class MemberAssessmentController extends Controller
         $member = Member::where('user_id', Auth::id())->with('badge')->first();
         $session = AssessmentSession::where('id', $id)->first();
         $memberAssessments = MemberAssessment::with('assessment')->where('assessment_session_id', $id)->get();
-        $totalMaxPoints = Assessment::where('business_type_id', $member->business_type_id)->
-            where('version', $member->version)->sum('max_points');
+        $totalMaxPoints = Assessment::where('business_type_id', $member->business_type_id)
+            ->when((int) $member->business_type_id === 1, function ($query) use ($member) {
+                $query->where('version', $member->version ?? 1);
+            })
+            ->sum('max_points');
         if ($session) {
             $dateAssessment = $session->created_at->addYears(1);
 
