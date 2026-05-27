@@ -2,9 +2,7 @@ import AdminSection from '@/Components/AdminSection';
 import AdminLayout from '@/Layouts/AdminLayout';
 import TitleSection from '../Components/TitleSection';
 import Table from '@/Components/Table';
-import Button from '@/Components/Button';
 import { useForm } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
 import Search from '../Components/Search';
 
 function MemberIndex({ members }) {

@@ -11,6 +11,9 @@ import kontenId from '../../../../images/hotel/konten2.jpg';
 
 import kontenRes from '../../../../images/restaurant/konten.png';
 import kontenResId from '../../../../images/restaurant/kontenId.png';
+
+import kontenSpg from '../../../../images/spg/konten.jpg';
+import kontenSpgId from '../../../../images/spg/kontenId.jpg';
 import tutorial from '../../../../images/tutorial.mp4';
 
 import moment from 'moment';
@@ -20,6 +23,7 @@ function AssessmentStep({ member, remaining, dateAssessment }) {
   const { t, i18n } = useTranslation();
   const [kontenHotel, setKontenHotel] = useState(konten);
   const [kontenResto, setKontenResto] = useState(kontenRes);
+  const [kontenSupplier, setKontenSupplier] = useState(kontenSpg);
 
   useEffect(() => {
     if (!member?.status?.includes('active')) {
@@ -31,6 +35,11 @@ function AssessmentStep({ member, remaining, dateAssessment }) {
     if (i18n?.language === 'id') {
       setKontenHotel(kontenId);
       setKontenResto(kontenResId);
+      setKontenSupplier(kontenSpgId);
+    } else {
+      setKontenHotel(konten);
+      setKontenResto(kontenRes);
+      setKontenSupplier(kontenSpg);
     }
   }, [i18n?.language]);
   const business = member?.business_type?.name;
@@ -58,7 +67,15 @@ function AssessmentStep({ member, remaining, dateAssessment }) {
           <div className="lg:w-[80%] m-auto">
             {/* <h4 className="mb-4 text-xl font-bold">{t('content_tutorial')}</h4> */}
             <div>
-              <img src={business === 'Hotel' ? kontenHotel : kontenResto} />
+              <img
+                src={
+                  business === 'Hotel'
+                    ? kontenHotel
+                    : business === 'Supplier'
+                      ? kontenSupplier
+                      : kontenResto
+                }
+              />
             </div>
           </div>
           <Button
