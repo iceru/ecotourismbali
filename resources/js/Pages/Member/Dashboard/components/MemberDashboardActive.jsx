@@ -11,24 +11,38 @@ export default function MemberDashboardActive({
   expiredDate,
 }) {
   const { t } = useTranslation();
+  const scoreItems = Array.isArray(scores) ? scores : [];
+  const answers = Array.isArray(lastSession?.member_assessment_answer)
+    ? lastSession.member_assessment_answer
+    : [];
+  const toNumber = value => Number(value) || 0;
+  const getAssessmentMaxPoints = assessment => toNumber(assessment?.max_points);
+  const getAssessmentPercentage = item => {
+    const maxPoints = getAssessmentMaxPoints(item?.assessment);
+
+    return maxPoints > 0
+      ? Math.round((toNumber(item?.score) / maxPoints) * 100)
+      : 0;
+  };
 
   const maxScores = () =>
-    scores?.reduce(
-      (total, score) => total + parseInt(score.assessment.max_points),
+    scoreItems.reduce(
+      (total, score) => total + getAssessmentMaxPoints(score?.assessment),
       0
-    ) ?? 0;
+    );
 
   const totalScores = () =>
-    scores?.reduce((total, score) => total + parseInt(score.score), 0) ?? 0;
+    scoreItems.reduce((total, score) => total + toNumber(score?.score), 0);
 
-  const lowestAssessment = scores
-    ?.map(item => ({
+  const lowestAssessment = scoreItems
+    .filter(item => item?.assessment)
+    .map(item => ({
       ...item,
-      percentage: Math.round((item.score / item.assessment.max_points) * 100),
+      percentage: getAssessmentPercentage(item),
     }))
     .sort((a, b) => a.percentage - b.percentage)[0];
 
-  const isScoresEmpty = !scores || scores.length === 0;
+  const isScoresEmpty = scoreItems.length === 0;
 
   return (
     <>
@@ -68,8 +82,8 @@ export default function MemberDashboardActive({
           <Bar
             datasetIdKey="id"
             data={{
-              labels: scores?.map(item =>
-                item?.assessment.title.slice(
+              labels: scoreItems.map(item =>
+                (item?.assessment?.title ?? '').slice(
                   0,
                   item?.assessment?.business_type?.name === 'Supplier' ? 9 : 11
                 )
@@ -77,9 +91,7 @@ export default function MemberDashboardActive({
               datasets: [
                 {
                   label: 'Assessment Scores',
-                  data: scores?.map(item =>
-                    Math.round((item.score / item.assessment.max_points) * 100)
-                  ),
+                  data: scoreItems.map(item => getAssessmentPercentage(item)),
                   backgroundColor: ['#1F656C', '#7BB052', '#D8E8CC', '#D2E0E2'],
                   maxBarThickness: 30,
                 },
@@ -148,11 +160,12 @@ export default function MemberDashboardActive({
             {t('assessment_coverage')}
           </div>
           <div>
-            {scores?.map((score, index) => {
-              const answersGrouped = (lastSession?.member_assessment_answer || [])
+            {scoreItems.length > 0 ? (
+              scoreItems.map((score, index) => {
+                const answersGrouped = answers
                 .filter(
                   answer =>
-                    answer.assessment_question.assessment_id ===
+                    answer?.assessment_question?.assessment_id ===
                     score.assessment_id
                 )
                 .reduce((acc, answer) => {
@@ -163,7 +176,11 @@ export default function MemberDashboardActive({
                       selectedOptions: [],
                     };
                   }
-                  acc[questionId].selectedOptions.push(answer.assessment_option);
+                  if (answer?.assessment_option) {
+                    acc[questionId].selectedOptions.push(
+                      answer.assessment_option
+                    );
+                  }
                   return acc;
                 }, {});
 
@@ -174,23 +191,28 @@ export default function MemberDashboardActive({
                 >
                   <div className="flex mb-4 space-x-2 items-center">
                     <img
-                      src={`/storage/assessments/${score.assessment.logo}`}
+                      src={`/storage/assessments/${score?.assessment?.logo ?? ''}`}
                       alt=""
                       className="w-8 shrink-0 rounded-lg"
                     />
                     <div className="font-semibold">
-                      {score.assessment.title}
+                      {score?.assessment?.title ?? '-'}
                     </div>
                   </div>
 
                   <div className="flex gap-2 flex-wrap">
                     {Object.values(answersGrouped).map((item, qIndex) => {
-                      const questionType = item.question.type;
+                      const questionType = item?.question?.type;
+                      const options = Array.isArray(
+                        item?.question?.assessment_option
+                      )
+                        ? item.question.assessment_option
+                        : [];
 
                       // Calculate the sum of points from selected options
                       // Convert to number explicitly using Number() or parseFloat()
                       const totalSelectedPoints = item.selectedOptions.reduce(
-                        (sum, option) => sum + (Number(option.point) || 0),
+                        (sum, option) => sum + toNumber(option?.point),
                         0
                       );
 
@@ -199,15 +221,14 @@ export default function MemberDashboardActive({
                       // For checkbox: sum all available option points
                       // For radio: get the maximum point value
                       if (questionType === 'checkbox') {
-                        maxPoints = item.question.assessment_option.reduce(
-                          (sum, opt) => sum + (Number(opt.point) || 0),
+                        maxPoints = options.reduce(
+                          (sum, opt) => sum + toNumber(opt?.point),
                           0
                         );
                       } else {
                         maxPoints = Math.max(
-                          ...item.question.assessment_option.map(
-                            opt => Number(opt.point) || 0
-                          )
+                          0,
+                          ...options.map(opt => toNumber(opt?.point))
                         );
                       }
 
@@ -233,7 +254,7 @@ export default function MemberDashboardActive({
                             percentage
                           )} rounded-lg p-3 flex-shrink-0 w-14 h-14 flex flex-col justify-between`}
                           title={`${
-                            item.question.title
+                            item?.question?.title ?? `Q${qIndex + 1}`
                           }: ${totalSelectedPoints}/${maxPoints} points (${percentage.toFixed(
                             0
                           )}%)`}
@@ -269,7 +290,10 @@ export default function MemberDashboardActive({
                   </div>
                 </div>
               );
-            }) || <div>{t('no_heatmap_available')}</div>}
+              })
+            ) : (
+              <div>{t('no_heatmap_available')}</div>
+            )}
           </div>
         </AdminSection>
       </div>
