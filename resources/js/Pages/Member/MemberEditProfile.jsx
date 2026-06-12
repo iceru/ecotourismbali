@@ -19,9 +19,72 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import SelectInput from '@/Components/SelectInput';
 
+const MAX_PROFILE_IMAGE_SIZE = 1024 * 1024;
+const MAX_GALLERY_IMAGE_SIZE = 2 * 1024 * 1024;
+
+const resizeImage = (file, maxSize, maxDimension) =>
+  new Promise(resolve => {
+    if (!file?.type?.startsWith('image/') || file.size <= maxSize) {
+      resolve(file);
+      return;
+    }
+
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+
+      const scale = Math.min(
+        1,
+        maxDimension / Math.max(image.width, image.height)
+      );
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(image.width * scale);
+      canvas.height = Math.round(image.height * scale);
+
+      const context = canvas.getContext('2d');
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      const createBlob = quality => {
+        canvas.toBlob(
+          blob => {
+            if (!blob) {
+              resolve(file);
+              return;
+            }
+
+            if (blob.size <= maxSize || quality <= 0.5) {
+              const resizedFile = new File([blob], file.name, {
+                type: 'image/jpeg',
+                lastModified: Date.now(),
+              });
+              resolve(resizedFile);
+              return;
+            }
+
+            createBlob(quality - 0.1);
+          },
+          'image/jpeg',
+          quality
+        );
+      };
+
+      createBlob(0.85);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(file);
+    };
+
+    image.src = objectUrl;
+  });
+
 function MemberEditProfile({ categories }) {
   const { t } = useTranslation();
   const [editImage, setEditImage] = useState(false);
+  const [fileErrors, setFileErrors] = useState({});
   const { user, member, flash } = usePage().props;
 
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -42,9 +105,15 @@ function MemberEditProfile({ categories }) {
   const submit = e => {
     e.preventDefault();
 
+    if (Object.keys(fileErrors).length > 0) {
+      return;
+    }
+
     post(route('member.profile.store', member.id), {
+      forceFormData: true,
       onSuccess: () => {
         reset();
+        setFileErrors({});
       },
     });
   };
@@ -53,12 +122,70 @@ function MemberEditProfile({ categories }) {
     post(route('member.profile.deleteImage', id));
   };
 
+  const handleProfileImageChange = async e => {
+    const file = e.target.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    const resizedFile = await resizeImage(file, MAX_PROFILE_IMAGE_SIZE, 1024);
+
+    if (resizedFile.size > MAX_PROFILE_IMAGE_SIZE) {
+      setData('image', null);
+      e.target.value = '';
+      setFileErrors(current => ({
+        ...current,
+        image: 'Profile image must be 1MB or smaller.',
+      }));
+      return;
+    }
+
+    setFileErrors(current => {
+      const { image, ...rest } = current;
+      return rest;
+    });
+    setData('image', resizedFile);
+  };
+
+  const handleGalleryChange = async e => {
+    const files = Array.from(e.target.files);
+
+    if (files.length === 0) {
+      return;
+    }
+
+    const resizedFiles = await Promise.all(
+      files.map(file => resizeImage(file, MAX_GALLERY_IMAGE_SIZE, 1920))
+    );
+    const oversizedFiles = resizedFiles.filter(
+      file => file.size > MAX_GALLERY_IMAGE_SIZE
+    );
+
+    if (oversizedFiles.length > 0) {
+      setData('sliders', null);
+      e.target.value = '';
+      setFileErrors(current => ({
+        ...current,
+        sliders: 'Each gallery image must be 2MB or smaller.',
+      }));
+      return;
+    }
+
+    setFileErrors(current => {
+      const { sliders, ...rest } = current;
+      return rest;
+    });
+    setData('sliders', resizedFiles);
+  };
+
+  const sliderCount = member.member_slider?.length || 0;
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow:
-      member.member_slider.length > 1 ? 2 : member.member_slider.length,
+    slidesToShow: sliderCount > 1 ? 2 : sliderCount,
     slidesToScroll: 1,
   };
 
@@ -115,9 +242,11 @@ function MemberEditProfile({ categories }) {
                       name="image"
                       id="image"
                       accept="image/*"
-                      onChange={e => setData('image', e.target.files[0])}
+                      onChange={handleProfileImageChange}
                     />
-                    <div className="text-red-600 mb-2">{errors.image}</div>
+                    <div className="text-red-600 mb-2">
+                      {fileErrors.image || errors.image}
+                    </div>
                   </div>
                 )}
                 <TextInput
@@ -144,12 +273,12 @@ function MemberEditProfile({ categories }) {
             </div>
           </div>
           <div className="mb-10">
-            {member.member_slider && (
+            {sliderCount > 0 && (
               <div className="mb-8 -mx-2">
                 <Slider {...settings}>
                   {member.member_slider.map(slider => {
                     return (
-                      <div className="px-2">
+                      <div key={slider.id} className="px-2">
                         <button
                           type="button"
                           onClick={() => onDelete(slider.id)}
@@ -158,11 +287,11 @@ function MemberEditProfile({ categories }) {
                           <FontAwesomeIcon icon={faTrash} />
                           Delete
                         </button>
-                        <div class="relative overflow-hidden pb-2/3 z-0">
+                        <div className="relative overflow-hidden pb-2/3 z-0">
                           <img
                             src={`/storage/member/sliders/${slider.image}`}
                             alt=""
-                            class="absolute h-full w-full object-cover p-2"
+                            className="absolute h-full w-full object-cover p-2"
                           />
                         </div>
                       </div>
@@ -185,10 +314,11 @@ function MemberEditProfile({ categories }) {
                 type="file"
                 name="sliders"
                 accept="image/*"
-                onChange={e => {
-                  setData('sliders', e.target.files);
-                }}
+                onChange={handleGalleryChange}
               />
+              {fileErrors.sliders && (
+                <div className="text-red-600 mb-2">{fileErrors.sliders}</div>
+              )}
               {Object.keys(errors).map((errorKey, index) => {
                 // Check if the error key starts with "sliders."
                 if (errorKey.startsWith('sliders.')) {

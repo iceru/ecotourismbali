@@ -133,17 +133,24 @@ class MemberController extends Controller
         $request->validate([
             'business_name' => 'nullable',
             'sliders' => 'nullable',
-            'sliders.*' => 'file|max:2048', // Validate each file in sliders, max 1MB
+            'sliders.*' => 'image|max:2048',
             'address' => 'nullable',
             'website' => 'nullable',
             'description' => 'nullable',
-            'image' => 'nullable|file|max:1024', // Validate image, max 1MB
+            'image' => 'nullable|image|max:1024',
             'facebook' => 'nullable',
             'instagram' => 'nullable',
             'twitter' => 'nullable',
             'whatsapp' => 'nullable',
             'merchant_promo' => 'nullable',
             'category' => 'nullable',
+        ], [
+            'image.image' => 'The profile image must be a valid image file.',
+            'image.max' => 'The profile image must be 1MB or smaller.',
+            'image.uploaded' => 'The profile image could not be uploaded. Please use an image smaller than 1MB.',
+            'sliders.*.image' => 'Each gallery file must be a valid image.',
+            'sliders.*.max' => 'Each gallery image must be 2MB or smaller.',
+            'sliders.*.uploaded' => 'One of the gallery images could not be uploaded. Please use images smaller than 2MB.',
         ]);
 
         $filename = null;
@@ -158,7 +165,7 @@ class MemberController extends Controller
         if ($request->hasFile('sliders')) {
             foreach ($request->file('sliders') as $file) {
                 $sliderName = null;
-                $name = $file->getClientOriginalName();
+                $name = str_replace(' ', '_', $file->getClientOriginalName());
                 $sliderName = $request->business_name.'_'.$name;
                 $file->storeAs('public/member/sliders', $sliderName);
 
