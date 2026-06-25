@@ -182,7 +182,7 @@ class AdminMemberController extends Controller
         // description
         $member->description = $request->description;
 
-        if ($member->status) {
+        if ($request->has('status')) {
             $member->status = $request->status;
         }
         $member->save();
@@ -244,7 +244,7 @@ class AdminMemberController extends Controller
             $member->delete();
 
             if ($member->user) {
-                $member->user->delete();
+                $member->user->forceDelete();
             }
         });
 
