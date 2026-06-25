@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, usePage, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
@@ -31,7 +31,7 @@ function MemberIndex() {
   const [edit, setEdit] = useState(false);
   const [statusMember, setStatusMember] = useState(member?.status);
 
-  const { data, setData, post, processing, errors, reset } = useForm({
+  const { data, setData, post, processing, errors } = useForm({
     category: member?.category_id || '',
     program: member?.program_id || '',
     verified_badge: member?.verified_badge_id || '',
@@ -49,12 +49,16 @@ function MemberIndex() {
     description: member?.description || '',
   });
 
+  useEffect(() => {
+    setData('status', member?.status || '');
+    setStatusMember(member?.status || '');
+  }, [member?.status]);
+
   const submit = e => {
     e.preventDefault();
 
     post(route('admin.member.update', member?.id), {
       onSuccess: () => {
-        reset();
         setEdit(false);
       },
     });
