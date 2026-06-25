@@ -90,7 +90,10 @@ class StatisticController extends Controller
             foreach ($memberAssess as $memberAs) {
                 if (
                     (int) $assess->id === (int) $memberAs->assessment_id &&
-                    (int) ($memberAs->member->version ?? 1) === (int) $assess->version &&
+                    (
+                        (int) $assess->business_type_id !== 1 ||
+                        (int) ($memberAs->member->version ?? 1) === (int) $assess->version
+                    ) &&
                     str_contains($memberAs->member->status, 'active') &&
                     !str_contains($memberAs->member->status, 'dummy')
                 ) {
@@ -107,9 +110,11 @@ class StatisticController extends Controller
     public function assessmentDetail($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
-        $memberVersion = (int) ($member->version ?? 1);
         $assessments = Assessment::with('assessment_question')->where('business_type_id', $member->business_type_id)
-            ->where('version', $memberVersion)->get();
+            ->when((int) $member->business_type_id === 1, function ($query) use ($member) {
+                $query->where('version', $member->version ?? 1);
+            })
+            ->get();
         $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(['member_id' => $member->id, 'assessment_session_id' => $session->id])->with('assessment_question')->get();
         return Inertia::render('Admin/Statistic/AssessmentDetail', [
@@ -123,10 +128,11 @@ class StatisticController extends Controller
     public function assessmentExport($id, $sessionId)
     {
         $member = Member::where('id', $id)->first();
-        $memberVersion = (int) ($member->version ?? 1);
         $assessments = Assessment::with('assessment_question')
             ->where('business_type_id', $member->business_type_id)
-            ->where('version', $memberVersion)
+            ->when((int) $member->business_type_id === 1, function ($query) use ($member) {
+                $query->where('version', $member->version ?? 1);
+            })
             ->get();
         $session = AssessmentSession::where('id', $sessionId)->first();
         $answers = MemberAssessmentAnswer::where(column: ['member_id' => $member->id, 'assessment_session_id' => $sessionId])->with('assessment_question')->get();
