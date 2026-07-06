@@ -92,8 +92,8 @@ function MemberEditProfile({ categories }) {
     address: member.address || '',
     website: member.website || '',
     description: member.description || '',
-    image: member.image || null,
-    sliders: member.sliders || null,
+    image: null,
+    sliders: null,
     facebook: member.facebook || null,
     whatsapp: member.whatsapp || null,
     twitter: member.twitter || null,
@@ -112,7 +112,7 @@ function MemberEditProfile({ categories }) {
     post(route('member.profile.store', member.id), {
       forceFormData: true,
       onSuccess: () => {
-        reset();
+        reset('image', 'sliders');
         setFileErrors({});
       },
     });
