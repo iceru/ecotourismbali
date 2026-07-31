@@ -3,8 +3,11 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import TitleSection from '../Components/TitleSection';
 import Table from '@/Components/Table';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 function PaymentIndex({ payments }) {
+  const { t } = useTranslation();
+
   const currency = new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
@@ -56,7 +59,15 @@ function PaymentIndex({ payments }) {
   return (
     <AdminLayout>
       <AdminSection>
-        <TitleSection title="list_of_payments" className="mb-4" />
+        <div className="flex flex-col gap-3 mb-4 lg:flex-row lg:items-center lg:justify-between">
+          <TitleSection title="list_of_payments" />
+          <a
+            href="/admin/payment/export"
+            className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition bg-secondary border border-transparent rounded-md hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+          >
+            {t('export_excel')}
+          </a>
+        </div>
         <Table
           header={header}
           data={tablePayments}

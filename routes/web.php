@@ -166,6 +166,7 @@ Route::middleware(['auth', 'role:superadministrator'])->prefix('admin')->group(f
 
 Route::middleware(['auth', 'role:superadministrator|finance'])->prefix('admin')->group(function () {
     Route::get('/payment/index', [AdminPaymentController::class, 'index'])->name('admin.payment.index');
+    Route::get('/payment/export', [AdminPaymentController::class, 'export'])->name('admin.payment.export');
     Route::get('/payment/show/{id}', [AdminPaymentController::class, 'show'])->name('admin.payment.show');
 });
 

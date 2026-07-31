@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PaymentsExport;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Models\MemberPayment;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminPaymentController extends Controller
 {
@@ -26,6 +27,11 @@ class AdminPaymentController extends Controller
         return Inertia::render('Admin/Payment/ShowPayment', [
             'payment' => $this->paymentData($payment),
         ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new PaymentsExport, 'payments.xlsx');
     }
 
     private function paymentData(MemberPayment $payment): array
