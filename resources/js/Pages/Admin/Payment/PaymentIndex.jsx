@@ -2,11 +2,48 @@ import AdminSection from '@/Components/AdminSection';
 import AdminLayout from '@/Layouts/AdminLayout';
 import TitleSection from '../Components/TitleSection';
 import Table from '@/Components/Table';
+import moment from 'moment';
 
 function PaymentIndex({ payments }) {
-  const header = ['Order Id', 'Status', 'Amount', 'Business Name', 'Action'];
-  const selectedData = ['payment_no', 'payment_status', 'amount'];
-  const selectedSecondaryData = ['business_name'];
+  const currency = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  });
+
+  const tablePayments = payments?.map(payment => ({
+    ...payment,
+    business_name: payment?.member?.business_name,
+    customer_name: payment?.member?.name,
+    payment_method: [payment?.payment_type, payment?.bank]
+      .filter(Boolean)
+      .join(' - '),
+    amount_display: payment?.amount ? currency.format(payment.amount) : null,
+    payment_date: payment?.updated_at
+      ? moment(payment.updated_at).format('LLL')
+      : null,
+  }));
+
+  const header = [
+    'Payment No.',
+    'Invoice No.',
+    'Business Name',
+    'Customer',
+    'Status',
+    'Method',
+    'Amount',
+    'Payment Date',
+    'Action',
+  ];
+  const selectedData = [
+    'payment_no',
+    'invoice_number',
+    'business_name',
+    'customer_name',
+    'payment_status',
+    'payment_method',
+    'amount_display',
+    'payment_date',
+  ];
 
   const tableActions = [
     {
@@ -22,11 +59,8 @@ function PaymentIndex({ payments }) {
         <TitleSection title="list_of_payments" className="mb-4" />
         <Table
           header={header}
-          data={payments}
-          secondaryData={'member'}
+          data={tablePayments}
           selectedData={selectedData}
-          selectedSecondaryData={selectedSecondaryData}
-          pathImage={'member/images/'}
           tableActions={tableActions}
         />
       </AdminSection>
