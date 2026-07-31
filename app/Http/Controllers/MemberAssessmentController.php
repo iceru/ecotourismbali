@@ -222,56 +222,63 @@ class MemberAssessmentController extends Controller
             'radio.*' => 'required|exists:options,id',
             'checkbox.*' => 'required|exists:options,id',
         ]);
+
         $member = Member::where('user_id', Auth::id())->first();
         $totalPoints = 0;
+
         foreach ($request->input() as $questionId => $optionId) {
-            $optionSelected = AssessmentOption::where('id', $optionId)->first();
-            if (str_contains($questionId, 'radio') || str_contains($questionId, 'checkbox')) {
-                $id = explode('.', $questionId);
-                $id = $id[1];
+            $isRadio = str_contains($questionId, 'radio');
+            $isCheckbox = str_contains($questionId, 'checkbox');
+
+            if (!$isRadio && !$isCheckbox) {
+                continue;
             }
+
+            $id = explode('.', $questionId)[1];
             $questionSelected = AssessmentQuestion::where('id', $id)->with('assessment')->first();
 
-            if ($questionSelected->assessment->id === $request->assessment_id) {
-                if (str_contains($questionId, 'radio')) {
+            if (!$questionSelected || $questionSelected->assessment->id !== $request->assessment_id) {
+                continue;
+            }
+
+            if ($isRadio) {
+                $optionSelected = AssessmentOption::where('id', $optionId)->first();
+
+                $memberAnswer = MemberAssessmentAnswer::firstOrNew([
+                    'member_id' => $member->id,
+                    'assessment_question_id' => $id,
+                    'assessment_session_id' => $request->session_id,
+                ]);
+
+                $memberAnswer->member_id = $member->id;
+                $memberAnswer->assessment_question_id = $id;
+                $memberAnswer->assessment_option_id = $optionId;
+                $memberAnswer->assessment_session_id = $request->session_id;
+                $memberAnswer->save();
+
+                $totalPoints += $this->calculateWeightedScore($optionSelected->weight, $optionSelected->point);
+            } elseif ($isCheckbox) {
+                MemberAssessmentAnswer::where([
+                    'member_id' => $member->id,
+                    'assessment_session_id' => $request->session_id,
+                    'assessment_question_id' => $id,
+                ])->delete();
+
+                foreach ($optionId as $checkId) {
+                    $checkSelected = AssessmentOption::where('id', $checkId)->first();
+                    $totalPoints += $this->calculateWeightedScore($checkSelected->weight, $checkSelected->point);
+
                     $memberAnswer = MemberAssessmentAnswer::firstOrNew([
                         'member_id' => $member->id,
-                        'assessment_question_id' => $id,
+                        'assessment_option_id' => $checkId,
                         'assessment_session_id' => $request->session_id,
                     ]);
 
                     $memberAnswer->member_id = $member->id;
                     $memberAnswer->assessment_question_id = $id;
-                    $memberAnswer->assessment_option_id = $optionId;
+                    $memberAnswer->assessment_option_id = $checkId;
                     $memberAnswer->assessment_session_id = $request->session_id;
                     $memberAnswer->save();
-
-                    $totalPoints = $totalPoints + $this->calculateWeightedScore($optionSelected->weight, $optionSelected->point);
-                } else if (str_contains($questionId, 'checkbox')) {
-                    $memberAnswer = MemberAssessmentAnswer::where([
-                        'member_id' => $member->id,
-                        'assessment_session_id' => $request->session_id,
-                        'assessment_question_id' => $id
-                    ])->get();
-
-                    foreach ($memberAnswer as $answer) {
-                        $answer->delete();
-                    }
-                    foreach ($optionId as $checkId) {
-                        $checkSelected = AssessmentOption::where('id', $checkId)->first();
-                        $memberAnswer = MemberAssessmentAnswer::firstOrNew([
-                            'member_id' => $member->id,
-                            'assessment_option_id' => $checkId,
-                            'assessment_session_id' => $request->session_id,
-                        ]);
-                        $totalPoints = $totalPoints + $this->calculateWeightedScore($checkSelected->weight, $checkSelected->point);
-
-                        $memberAnswer->member_id = $member->id;
-                        $memberAnswer->assessment_question_id = $id;
-                        $memberAnswer->assessment_option_id = $checkId;
-                        $memberAnswer->assessment_session_id = $request->session_id;
-                        $memberAnswer->save();
-                    }
                 }
             }
         }
@@ -290,7 +297,6 @@ class MemberAssessmentController extends Controller
         $memberAssessment->completion = 'no';
         $memberAssessment->save();
     }
-
     public function complete($id)
     {
         $memberAssessment = MemberAssessment::where('assessment_session_id', $id)->get();
