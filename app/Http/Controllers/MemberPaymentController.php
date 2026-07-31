@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Midtrans;
 use Carbon\Carbon;
 use Midtrans\Snap;
 use Inertia\Inertia;
 use Midtrans\Config;
 use App\Models\Member;
-use Midtrans\Notification;
 use Illuminate\Http\Request;
 use App\Models\MemberPayment;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Log;
 
 class MemberPaymentController extends Controller
 {
@@ -56,61 +54,77 @@ class MemberPaymentController extends Controller
         return $snapToken;
     }
 
-    public function notif_handler()
+    public function notif_handler(Request $request)
     {
-        Config::$serverKey = config('services.midtrans.server_key');
-        Config::$isProduction = config('services.midtrans.is_production');
-        $notif = new Notification();
+        $notif = $request->all();
 
-        $notif = $notif->getResponse();
-        $transaction = $notif->transaction_status;
-        $type = $notif->payment_type;
-        $order_id = $notif->order_id;
-        $fraud = $notif->fraud_status;
+        $transaction = data_get($notif, 'transaction_status');
+        $type = data_get($notif, 'payment_type');
+        $orderId = data_get($notif, 'order_id');
+        $fraud = data_get($notif, 'fraud_status');
 
-        $memberPayment = MemberPayment::where('payment_no', $order_id);
-        $memberPaymentFirst = MemberPayment::where('payment_no', $order_id)->first();
-        $member = Member::where('id', $memberPaymentFirst->member_id)->first();
-
-        if ($transaction == 'capture') {
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    $memberPayment->update(['payment_status' => 'challenge by FDS']);
-                } else {
-                    $memberPayment->update(['payment_status' => 'success']);
-                    $member->update(['status' => 'active']);
-                }
-            }
-        } else if ($transaction == 'settlement') {
-            $memberPayment->update(['payment_status' => 'success']);
-            $member->update(['status' => 'active']);
-        } else if ($transaction == 'pending') {
-            $memberPayment->update(['payment_status' => 'pending']);
-        } else if ($transaction == 'deny') {
-            $memberPayment->update(['payment_status' => 'denied']);
-        } else if ($transaction == 'expire') {
-            $memberPayment->update(['payment_status' => 'expire']);
-        } else if ($transaction == 'cancel') {
-            $memberPayment->update(['payment_status' => 'denied']);
-        }
-
-        if ($transaction) {
-            $bankName = "-";
-            if (isset($notif->va_numbers)) {
-                $bankName = $notif->va_numbers[0]->bank;
-            } else if(isset($notif->bank)) {
-                $bankName = $notif->bank;
-            } else if(isset($notif->issuer)) {
-                $bankName = $notif->issuer;
-            }
-            $memberPayment->update([
-                'payment_type' => $type,
-                'status_code' => $notif->status_code,
-                'amount' => $notif->gross_amount,
-                'bank' => $bankName,
+        if (!$transaction || !$orderId) {
+            Log::warning('Invalid Midtrans notification payload.', [
+                'payload' => $notif,
             ]);
+
+            return response()->json(['message' => 'Invalid notification payload'], 400);
         }
+
+        $memberPayment = MemberPayment::where('payment_no', $orderId)->first();
+
+        if (!$memberPayment) {
+            Log::warning('Midtrans notification payment not found.', [
+                'order_id' => $orderId,
+                'transaction_status' => $transaction,
+            ]);
+
+            return response()->json(['message' => 'Payment not found'], 404);
+        }
+
+        $member = Member::find($memberPayment->member_id);
+        $paymentStatus = $this->paymentStatus($transaction, $type, $fraud);
+
+        $memberPayment->forceFill([
+            'payment_status' => $paymentStatus,
+            'payment_type' => $type,
+            'status_code' => data_get($notif, 'status_code'),
+            'amount' => data_get($notif, 'gross_amount'),
+            'bank' => $this->bankName($notif),
+        ])->save();
+
+        if ($paymentStatus === 'success' && $member) {
+            $member->update(['status' => 'active']);
+        }
+
+        return response()->json(['message' => 'Notification processed']);
+    }
+
+    private function paymentStatus(?string $transaction, ?string $type, ?string $fraud): string
+    {
+        if ($transaction === 'capture') {
+            return $type === 'credit_card' && $fraud === 'challenge'
+                ? 'challenge by FDS'
+                : 'success';
+        }
+
+        return match ($transaction) {
+            'settlement' => 'success',
+            'pending' => 'pending',
+            'deny', 'cancel', 'failure' => 'denied',
+            'expire' => 'expire',
+            default => $transaction,
+        };
+    }
+
+    private function bankName(array $notif): string
+    {
+        return data_get($notif, 'va_numbers.0.bank')
+            ?: data_get($notif, 'permata_va_number')
+            ?: data_get($notif, 'bill_key')
+            ?: data_get($notif, 'bank')
+            ?: data_get($notif, 'issuer')
+            ?: '-';
     }
 
     public function finish()
