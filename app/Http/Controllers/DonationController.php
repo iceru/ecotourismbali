@@ -40,7 +40,7 @@ class DonationController extends Controller
             'email' => 'required',
             'company' => 'nullable',
             'amount' => 'required|integer',
-        ]);        
+        ]);
 
         try {
             $donation = new Donation;
@@ -52,8 +52,7 @@ class DonationController extends Controller
             $donation->status = 'pending';
 
             $donation->save();
-
-        } catch(Error) {
+        } catch (Error) {
             return Redirect::route('donation.index')->with('failed', 'There is something wrong');
         }
     }
@@ -62,15 +61,15 @@ class DonationController extends Controller
     {
         $email = $request->input('email');
         $amount = $request->input('amount');
-        
-        $order_id = 'DNT-'. date('YmdHis');
 
-        $params = array(
-            'transaction_details' => array(
+        $order_id = 'DNT-' . date('YmdHis');
+
+        $params = [
+            'transaction_details' => [
                 'order_id' => $order_id,
                 'gross_amount' => $amount,
-            )
-        );
+            ]
+        ];
 
         Config::$serverKey = config('services.midtrans.server_key');
         Config::$isProduction = config('services.midtrans.is_production');
@@ -79,17 +78,21 @@ class DonationController extends Controller
 
         $snapToken = Snap::getSnapToken($params);
 
+        Donation::where('email', $email)->latest()->first()?->update([
+            'payment_no' => $order_id,
+        ]);
+
         return $snapToken;
     }
 
     public function sendEmail(Request $request)
     {
-       try {
-        Mail::to($request->email)->send(new DonationMail($request));
-        return response()->json('Success', 200);
-       } catch(Error) {
-        return response()->json('Error', status: 500);
-       }
+        try {
+            Mail::to($request->email)->send(new DonationMail($request));
+            return response()->json('Success', 200);
+        } catch (Error) {
+            return response()->json('Error', status: 500);
+        }
     }
 
     /**

@@ -64,26 +64,57 @@ class MemberPaymentController extends Controller
         $fraud = data_get($notif, 'fraud_status');
 
         if (!$transaction || !$orderId) {
-            Log::warning('Invalid Midtrans notification payload.', [
-                'payload' => $notif,
-            ]);
-
-            return response()->json(['message' => 'Invalid notification payload'], 400);
+            Log::warning('Invalid Midtrans notification payload.', ['payload' => $notif]);
+            return response()->json(['message' => 'Invalid notification payload'], 200);
         }
 
+        $expectedSignature = hash(
+            'sha512',
+            $orderId .
+                data_get($notif, 'status_code') .
+                data_get($notif, 'gross_amount') .
+                config('services.midtrans.server_key')
+        );
+
+        if ($expectedSignature !== data_get($notif, 'signature_key')) {
+            Log::warning('Midtrans invalid signature.', ['order_id' => $orderId]);
+            return response()->json(['message' => 'Invalid signature'], 200);
+        }
+
+        $paymentStatus = $this->paymentStatus($transaction, $type, $fraud);
+
+        if (str_starts_with($orderId, 'DNT-')) {
+            return $this->handleDonationNotif($orderId, $type, $paymentStatus);
+        }
+
+        return $this->handleMemberNotif($notif, $orderId, $type, $paymentStatus);
+    }
+
+    private function handleDonationNotif(string $orderId, ?string $type, string $paymentStatus): \Illuminate\Http\JsonResponse
+    {
+        $donation = \App\Models\Donation::where('payment_no', $orderId)->first();
+
+        if (!$donation) {
+            Log::warning('Midtrans donation not found.', ['order_id' => $orderId]);
+            return response()->json(['message' => 'Donation not found'], 200);
+        }
+
+        $donation->update([
+            'status' => $paymentStatus,
+            'payment_type' => $type,
+        ]);
+
+        return response()->json(['message' => 'Notification processed'], 200);
+    }
+
+    private function handleMemberNotif(array $notif, string $orderId, ?string $type, string $paymentStatus): \Illuminate\Http\JsonResponse
+    {
         $memberPayment = MemberPayment::where('payment_no', $orderId)->first();
 
         if (!$memberPayment) {
-            Log::warning('Midtrans notification payment not found.', [
-                'order_id' => $orderId,
-                'transaction_status' => $transaction,
-            ]);
-
-            return response()->json(['message' => 'Payment not found'], 404);
+            Log::warning('Midtrans member payment not found.', ['order_id' => $orderId]);
+            return response()->json(['message' => 'Payment not found'], 200);
         }
-
-        $member = Member::find($memberPayment->member_id);
-        $paymentStatus = $this->paymentStatus($transaction, $type, $fraud);
 
         $memberPayment->forceFill([
             'payment_status' => $paymentStatus,
@@ -93,11 +124,12 @@ class MemberPaymentController extends Controller
             'bank' => $this->bankName($notif),
         ])->save();
 
-        if ($paymentStatus === 'success' && $member) {
-            $member->update(['status' => 'active']);
+        if ($paymentStatus === 'success') {
+            $member = Member::find($memberPayment->member_id);
+            $member?->update(['status' => 'active']);
         }
 
-        return response()->json(['message' => 'Notification processed']);
+        return response()->json(['message' => 'Notification processed'], 200);
     }
 
     private function paymentStatus(?string $transaction, ?string $type, ?string $fraud): string
