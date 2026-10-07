@@ -83,6 +83,7 @@ class StatisticController extends Controller
         $assessments = Assessment::select('id', 'title', 'business_type_id', 'logo', 'version')->with('business_type')->get();
         $memberAssess = MemberAssessment::with('member')
             ->whereIn('completion', ['yes', 'expired'])
+            ->whereHas('member')
             ->get();
 
         foreach ($assessments as $assess) {
@@ -94,8 +95,8 @@ class StatisticController extends Controller
                         (int) $assess->business_type_id !== 1 ||
                         (int) ($memberAs->member->version ?? 1) === (int) $assess->version
                     ) &&
-                    str_contains($memberAs->member->status, 'active') &&
-                    !str_contains($memberAs->member->status, 'dummy')
+                    str_contains($memberAs->member->status ?? '', 'active') &&
+                    !str_contains($memberAs->member->status ?? '', 'dummy')
                 ) {
                     array_push($members, $memberAs);
                     $assess->members = $members;
