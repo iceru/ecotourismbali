@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import AdminSection from '@/Components/AdminSection';
 import { Chart as ChartJS, registerables } from 'chart.js';
@@ -8,20 +8,19 @@ import AssessmentSection from './Components/AssessmentSection';
 
 function Statistics({ assessments }) {
   ChartJS.register(...registerables);
-  const [hotel, setHotel] = useState([]);
-  const [restaurant, setRestaurant] = useState([]);
   const [tab, setTab] = useState('hotel');
-
-  useEffect(() => {
-    assessments?.forEach(assess => {
-      assess?.members?.sort((a, b) => b.score - a.score);
-      if (toLower(assess?.business_type?.name) === 'hotel') {
-        setHotel(prevData => [...prevData, assess]);
-      } else {
-        setRestaurant(prevData => [...prevData, assess]);
-      }
-    });
-  }, []);
+  const [version, setVersion] = useState('1');
+  const filteredAssessments = (assessments ?? [])
+    .filter(assess =>
+      tab === 'hotel'
+        ? toLower(assess?.business_type?.name) === 'hotel'
+        : toLower(assess?.business_type?.name) !== 'hotel'
+    )
+    .filter(assess => String(assess?.version ?? 1) === version)
+    .map(assess => ({
+      ...assess,
+      members: [...(assess?.members ?? [])].sort((a, b) => b.score - a.score),
+    }));
 
   return (
     <AdminLayout>
@@ -40,16 +39,23 @@ function Statistics({ assessments }) {
             F&B Assessment
           </Button>
         </div>
+        <div className="grid grid-cols-2 gap-6 mb-6">
+          {[1, 2].map(itemVersion => (
+            <Button
+              key={itemVersion}
+              onClick={() => setVersion(String(itemVersion))}
+              color={version === String(itemVersion) ? 'primary' : 'lightPrimary'}
+            >
+              Version {itemVersion}
+            </Button>
+          ))}
+        </div>
         <AdminSection className="mb-6">
           <h3 className="font-bold text-primary text-xl ">
-            {tab === 'hotel' ? 'Accommodation' : 'F&B'} Assessment
+            {tab === 'hotel' ? 'Accommodation' : 'F&B'} Assessment — Version {version}
           </h3>
         </AdminSection>
-        {tab === 'hotel' ? (
-          <AssessmentSection assessments={hotel} tab={tab} />
-        ) : (
-          <AssessmentSection assessments={restaurant} tab={tab} />
-        )}
+        <AssessmentSection assessments={filteredAssessments} tab={tab} />
       </main>
     </AdminLayout>
   );
